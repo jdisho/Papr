@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0900"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DCBB1AFF1FA79187004E95F0"
-               BuildableName = "Papr.app"
-               BlueprintName = "Papr"
-               ReferencedContainer = "container:Papr.xcodeproj">
+               BlueprintIdentifier = "562D82125E4874A49D6A1F89496C765B"
+               BuildableName = "RxOptional.framework"
+               BlueprintName = "RxOptional"
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -30,15 +30,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DCBB1AFF1FA79187004E95F0"
-            BuildableName = "Papr.app"
-            BlueprintName = "Papr"
-            ReferencedContainer = "container:Papr.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -53,16 +44,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DCBB1AFF1FA79187004E95F0"
-            BuildableName = "Papr.app"
-            BlueprintName = "Papr"
-            ReferencedContainer = "container:Papr.xcodeproj">
+            BlueprintIdentifier = "562D82125E4874A49D6A1F89496C765B"
+            BuildableName = "RxOptional.framework"
+            BlueprintName = "RxOptional"
+            ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -72,16 +62,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DCBB1AFF1FA79187004E95F0"
-            BuildableName = "Papr.app"
-            BlueprintName = "Papr"
-            ReferencedContainer = "container:Papr.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
