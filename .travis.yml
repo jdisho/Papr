@@ -3,3 +3,6 @@ osx_image: xcode9.0
 xcode_project: Papr.xcodeproj
 xcode_scheme: Papr
 xcode_sdk: iphonesimulator9.3
+script:
+    xctool -project Papr.xcodeproj -scheme Papr build -sdk iphonesimulator
+
