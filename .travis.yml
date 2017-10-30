@@ -1,4 +1,4 @@
 language: objective-c
 osx_image: xcode9.0
-xcode_project: Papr.xcodepro
+xcode_project: Papr.xcodeproj
 xcode_scheme: Papr
