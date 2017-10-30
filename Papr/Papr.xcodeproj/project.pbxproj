@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD486922F4D32099864894C0 /* Pods_Papr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90E6BC091ECC0E060F218047 /* Pods_Papr.framework */; };
 		DCBB1B041FA79187004E95F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B031FA79187004E95F0 /* AppDelegate.swift */; };
 		DCBB1B061FA79187004E95F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B051FA79187004E95F0 /* ViewController.swift */; };
 		DCBB1B091FA79187004E95F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCBB1B071FA79187004E95F0 /* Main.storyboard */; };
@@ -15,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		43D71173F17CF0E04EB2BCF0 /* Pods-Papr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Papr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Papr/Pods-Papr.release.xcconfig"; sourceTree = "<group>"; };
+		8FF3467728528051CFCC7DEB /* Pods-Papr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Papr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Papr/Pods-Papr.debug.xcconfig"; sourceTree = "<group>"; };
+		90E6BC091ECC0E060F218047 /* Pods_Papr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Papr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCBB1B001FA79187004E95F0 /* Papr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Papr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCBB1B031FA79187004E95F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCBB1B051FA79187004E95F0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD486922F4D32099864894C0 /* Pods_Papr.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		750210F3E09C1C9F943F1D99 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8FF3467728528051CFCC7DEB /* Pods-Papr.debug.xcconfig */,
+				43D71173F17CF0E04EB2BCF0 /* Pods-Papr.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C7076B96CFBF0F69478B8FC3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				90E6BC091ECC0E060F218047 /* Pods_Papr.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DCBB1AF71FA79187004E95F0 = {
 			isa = PBXGroup;
 			children = (
 				DCBB1B021FA79187004E95F0 /* Papr */,
 				DCBB1B011FA79187004E95F0 /* Products */,
+				750210F3E09C1C9F943F1D99 /* Pods */,
+				C7076B96CFBF0F69478B8FC3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DCBB1B121FA79187004E95F0 /* Build configuration list for PBXNativeTarget "Papr" */;
 			buildPhases = (
+				5FDC4A4895DCBA7F3720C538 /* [CP] Check Pods Manifest.lock */,
 				DCBB1AFC1FA79187004E95F0 /* Sources */,
 				DCBB1AFD1FA79187004E95F0 /* Frameworks */,
 				DCBB1AFE1FA79187004E95F0 /* Resources */,
+				E5092AF63EF10E471080478D /* [CP] Embed Pods Frameworks */,
+				E3CA2CCE63A054827EC1B5B6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +157,74 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5FDC4A4895DCBA7F3720C538 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Papr-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3CA2CCE63A054827EC1B5B6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Papr/Pods-Papr-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5092AF63EF10E471080478D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Papr/Pods-Papr-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/ModelMapper/Mapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/p2.OAuth2/p2_OAuth2.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/p2_OAuth2.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Papr/Pods-Papr-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DCBB1AFC1FA79187004E95F0 /* Sources */ = {
@@ -272,6 +367,7 @@
 		};
 		DCBB1B131FA79187004E95F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8FF3467728528051CFCC7DEB /* Pods-Papr.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -287,6 +383,7 @@
 		};
 		DCBB1B141FA79187004E95F0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43D71173F17CF0E04EB2BCF0 /* Pods-Papr.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

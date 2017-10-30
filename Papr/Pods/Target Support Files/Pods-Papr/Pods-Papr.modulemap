@@ -1,0 +1,6 @@
+framework module Pods_Papr {
+  umbrella header "Pods-Papr-umbrella.h"
+
+  export *
+  module * { export * }
+}
