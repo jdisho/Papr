@@ -1,0 +1,6 @@
+framework module Pods_PaprTests {
+  umbrella header "Pods-PaprTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
