@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import Moya
+import Alamofire
+import p2_OAuth2
 
 class InitialViewController: UIViewController, BindableType {
     
     var viewModel: InitialViewModel!
-    
+    var provider: MoyaProvider<Unsplash>!
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -19,4 +23,5 @@ class InitialViewController: UIViewController, BindableType {
     func bindViewModel() {
         print("Welcome to Papr! Btw, ViewModel is binded.")
     }
+    
 }
