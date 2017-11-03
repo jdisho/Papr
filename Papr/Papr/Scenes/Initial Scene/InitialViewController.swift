@@ -39,17 +39,17 @@ class InitialViewController: UIViewController, BindableType {
          
         provider = MoyaProvider<Unsplash>(manager: sessionManager)
         
-        provider.request(.photo("cpLsWmMEa1Q")) { result in
-            if case let .success(response) = result {
+        provider.request(.searchCollections("tech", 1, 10)) { (result) in
+            if case .success(let response) = result {
                 do {
-                    let photo = try response.map(to: Photo.self)
-                    print(photo)
-                    print(try! JSONSerialization.jsonObject(with: response.data, options: []))
+                    let a = try response.map(to: [Collection].self)
+                    print(a)
                 } catch let error {
                     print("There was something wrong with the request! Error: \(error)")
                 }
             }
         }
+
     }
 
 }

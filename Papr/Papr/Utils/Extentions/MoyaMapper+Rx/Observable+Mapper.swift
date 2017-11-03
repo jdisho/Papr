@@ -19,7 +19,7 @@ public extension ObservableType where E == Response {
         }
     }
     
-    public func map<T: Mappable>(to type: [T], keyPath: String? = nil) -> Observable<[T]> {
+    public func map<T: Mappable>(to type: [T].Type, keyPath: String? = nil) -> Observable<[T]> {
         return flatMap { response -> Observable<[T]> in
             return Observable.just(try response.map(to: type, keyPath: keyPath))
         }
@@ -36,7 +36,7 @@ public extension ObservableType where E == Response {
         }
     }
     
-    public func mapOptional<T: Mappable>(to type: [T], keyPath: String? = nil) -> Observable<[T]?> {
+    public func mapOptional<T: Mappable>(to type: [T].Type, keyPath: String? = nil) -> Observable<[T]?> {
         return flatMap { response -> Observable<[T]?> in
             do {
                 let object = try response.map(to: type, keyPath: keyPath)

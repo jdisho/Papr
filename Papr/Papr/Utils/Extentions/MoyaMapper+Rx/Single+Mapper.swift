@@ -20,7 +20,7 @@ extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Respo
             .observeOn(MainScheduler.instance)
     }
     
-    func map<T: Mappable>(to type: [T], keyPath: String? = nil) -> Single<[T]> {
+    func map<T: Mappable>(to type: [T].Type, keyPath: String? = nil) -> Single<[T]> {
         return observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .flatMap { response -> Single<[T]> in 
                 return Single.just(try response.map(to: type, keyPath: keyPath))
@@ -41,7 +41,7 @@ extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Respo
             .observeOn(MainScheduler.instance)
     }
     
-    func mapOptional<T: Mappable>(to type: [T], keyPath: String? = nil) -> Single<[T]?> {
+    func mapOptional<T: Mappable>(to type: [T].Type, keyPath: String? = nil) -> Single<[T]?> {
         return observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .flatMap { response -> Single<[T]?> in 
                 do {

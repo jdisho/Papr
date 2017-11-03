@@ -36,7 +36,7 @@ extension Response {
         }
     }
     
-    func map<T: Mappable>(to type: [T]) throws -> [T] {
+    func map<T: Mappable>(to type: [T].Type) throws -> [T] {
         guard let jsonArray = try mapJSON() as? [NSDictionary] else { 
             throw MoyaError.jsonMapping(self) 
         }
@@ -48,7 +48,7 @@ extension Response {
         }
     }
     
-    func map<T: Mappable>(to type: [T], keyPath: String? = nil) throws -> [T] {
+    func map<T: Mappable>(to type: [T].Type, keyPath: String? = nil) throws -> [T] {
         guard let keyPath = keyPath else { return try map(to: type) }
         guard let jsonDict = try mapJSON() as? NSDictionary, 
             let objectArray = jsonDict.value(forKeyPath: keyPath) as? [NSDictionary] else {
