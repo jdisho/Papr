@@ -37,7 +37,19 @@ class InitialViewController: UIViewController, BindableType {
         sessionManager.adapter = oauthHandler
         sessionManager.retrier = oauthHandler
          
-        provider = MoyaProvider<Unsplash>(manager: sessionManager, plugins: [NetworkLoggerPlugin(verbose: true)])
+        provider = MoyaProvider<Unsplash>(manager: sessionManager)
+        
+        provider.request(.photo("cpLsWmMEa1Q")) { result in
+            if case let .success(response) = result {
+                do {
+                    let photo = try response.map(to: Photo.self)
+                    print(photo)
+                    print(try! JSONSerialization.jsonObject(with: response.data, options: []))
+                } catch let error {
+                    print("There was something wrong with the request! Error: \(error)")
+                }
+            }
+        }
     }
 
 }
