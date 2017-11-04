@@ -52,6 +52,9 @@
 		DC5AF7591FAD2F1E00ADA2BB /* OrderBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */; };
 		DC5AF75A1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */; };
 		DC5AF75B1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */; };
+		DC7F20931FADD3400017C14A /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F20921FADD3400017C14A /* SearchResults.swift */; };
+		DC7F20941FADD3400017C14A /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F20921FADD3400017C14A /* SearchResults.swift */; };
+		DC7F20951FADD3400017C14A /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F20921FADD3400017C14A /* SearchResults.swift */; };
 		DCBB1B221FA7B1BD004E95F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B211FA7B1BD004E95F0 /* AppDelegate.swift */; };
 		DCBB1B241FA7B1BD004E95F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B231FA7B1BD004E95F0 /* ViewController.swift */; };
 		DCBB1B271FA7B1BD004E95F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCBB1B251FA7B1BD004E95F0 /* Main.storyboard */; };
@@ -122,6 +125,7 @@
 		DC5AF74F1FAD027F00ADA2BB /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		DC5AF7541FAD2EF900ADA2BB /* UnsplashScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashScope.swift; sourceTree = "<group>"; };
 		DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBy.swift; sourceTree = "<group>"; };
+		DC7F20921FADD3400017C14A /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		DCBB1B1E1FA7B1BD004E95F0 /* Papr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Papr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCBB1B211FA7B1BD004E95F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCBB1B231FA7B1BD004E95F0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -299,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				DC5AF72A1FACCBF300ADA2BB /* User.swift */,
+				DC7F20921FADD3400017C14A /* SearchResults.swift */,
 				DC5AF74F1FAD027F00ADA2BB /* Collection.swift */,
 				DC5AF73F1FACE6A300ADA2BB /* Photo.swift */,
 				DC5AF74B1FACF18600ADA2BB /* Exif.swift */,
@@ -679,6 +684,7 @@
 				DC5AF72B1FACCBF300ADA2BB /* User.swift in Sources */,
 				DC5AF74C1FACF18600ADA2BB /* Exif.swift in Sources */,
 				DCBB1B571FA8B823004E95F0 /* SceneCoodinatorType.swift in Sources */,
+				DC7F20931FADD3400017C14A /* SearchResults.swift in Sources */,
 				DCBB1B551FA8B814004E95F0 /* Scene.swift in Sources */,
 				DC5AF7271FAB989400ADA2BB /* OAuth2Settings.swift in Sources */,
 				DC5AF7361FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift in Sources */,
@@ -702,6 +708,7 @@
 				DC5AF74D1FACF18600ADA2BB /* Exif.swift in Sources */,
 				DC5AF7411FACE6A300ADA2BB /* Photo.swift in Sources */,
 				DCBB1B371FA7B1BD004E95F0 /* PaprTests.swift in Sources */,
+				DC7F20941FADD3400017C14A /* SearchResults.swift in Sources */,
 				DC5AF7371FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift in Sources */,
 				DCBB1B6D1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF73A1FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */,
@@ -729,6 +736,7 @@
 				DC5AF74E1FACF18600ADA2BB /* Exif.swift in Sources */,
 				DC5AF7421FACE6A300ADA2BB /* Photo.swift in Sources */,
 				DCBB1B421FA7B1BD004E95F0 /* PaprUITests.swift in Sources */,
+				DC7F20951FADD3400017C14A /* SearchResults.swift in Sources */,
 				DC5AF7381FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift in Sources */,
 				DCBB1B6E1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF73B1FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */,
