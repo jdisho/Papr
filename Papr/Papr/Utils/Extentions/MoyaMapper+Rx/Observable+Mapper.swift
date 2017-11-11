@@ -10,7 +10,6 @@ import RxSwift
 import Moya
 import Mapper
 
-
 public extension ObservableType where E == Response {
           
     public func map<T: Mappable>(to type: T.Type, keyPath: String? = nil) -> Observable<T> {
