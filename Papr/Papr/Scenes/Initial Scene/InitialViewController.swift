@@ -38,18 +38,6 @@ class InitialViewController: UIViewController, BindableType {
         sessionManager.retrier = oauthHandler
          
         provider = MoyaProvider<Unsplash>(manager: sessionManager)
-        
-        provider.request(.searchCollections("tech", 1, 10)) { (result) in
-            if case .success(let response) = result {
-                do {
-                    let a = try response.map(to: CollectionsResult.self)
-                    print(a)
-                } catch let error {
-                    print("There was something wrong with the request! Error: \(error)")
-                }
-            }
-        }
-
     }
 
 }
