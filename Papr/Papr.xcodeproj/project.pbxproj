@@ -10,9 +10,6 @@
 		1090D75275C09BAE87BE25BD /* Pods_Papr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D778F2E1EFA76CEB59A377CB /* Pods_Papr.framework */; };
 		63CC2B27C8EE9499B1D6C702 /* Pods_PaprTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3D8A956FB1C8A8D3B456A7 /* Pods_PaprTests.framework */; };
 		CBEDD29778BCF9269C6CDB95 /* Pods_PaprUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D59E6B0C5E02E5657E3FA6EA /* Pods_PaprUITests.framework */; };
-		DC46AE621FA9D82D0037CDF0 /* OAuth2Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC46AE611FA9D82D0037CDF0 /* OAuth2Handler.swift */; };
-		DC46AE631FA9D82D0037CDF0 /* OAuth2Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC46AE611FA9D82D0037CDF0 /* OAuth2Handler.swift */; };
-		DC46AE641FA9D82D0037CDF0 /* OAuth2Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC46AE611FA9D82D0037CDF0 /* OAuth2Handler.swift */; };
 		DC5AF7271FAB989400ADA2BB /* OAuth2Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* OAuth2Settings.swift */; };
 		DC5AF7281FAB989400ADA2BB /* OAuth2Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* OAuth2Settings.swift */; };
 		DC5AF7291FAB989400ADA2BB /* OAuth2Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* OAuth2Settings.swift */; };
@@ -61,6 +58,12 @@
 		DC5F61261FB65A9F00A60D19 /* Single+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F611F1FB65A9F00A60D19 /* Single+Response.swift */; };
 		DC5F61271FB65A9F00A60D19 /* Single+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F611F1FB65A9F00A60D19 /* Single+Response.swift */; };
 		DC5F61281FB65A9F00A60D19 /* Single+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F611F1FB65A9F00A60D19 /* Single+Response.swift */; };
+		DC71C3021FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */; };
+		DC71C3031FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */; };
+		DC71C3041FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */; };
+		DC71C30A1FBDA57B00C8E41A /* UnsplashWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3091FBDA57B00C8E41A /* UnsplashWebViewController.swift */; };
+		DC71C30B1FBDA57B00C8E41A /* UnsplashWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3091FBDA57B00C8E41A /* UnsplashWebViewController.swift */; };
+		DC71C30C1FBDA57B00C8E41A /* UnsplashWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3091FBDA57B00C8E41A /* UnsplashWebViewController.swift */; };
 		DC7F20931FADD3400017C14A /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F20921FADD3400017C14A /* SearchResults.swift */; };
 		DC7F20941FADD3400017C14A /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F20921FADD3400017C14A /* SearchResults.swift */; };
 		DC7F20951FADD3400017C14A /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F20921FADD3400017C14A /* SearchResults.swift */; };
@@ -120,7 +123,6 @@
 		CB61BD2759AC178641433994 /* Pods-PaprTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaprTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PaprTests/Pods-PaprTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D59E6B0C5E02E5657E3FA6EA /* Pods_PaprUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaprUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D778F2E1EFA76CEB59A377CB /* Pods_Papr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Papr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC46AE611FA9D82D0037CDF0 /* OAuth2Handler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Handler.swift; sourceTree = "<group>"; };
 		DC5AF7261FAB989400ADA2BB /* OAuth2Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Settings.swift; sourceTree = "<group>"; };
 		DC5AF72A1FACCBF300ADA2BB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
@@ -137,6 +139,8 @@
 		DC5F611D1FB65A9F00A60D19 /* MoyaProvider+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+Rx.swift"; sourceTree = "<group>"; };
 		DC5F611E1FB65A9F00A60D19 /* Observable+Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Response.swift"; sourceTree = "<group>"; };
 		DC5F611F1FB65A9F00A60D19 /* Single+Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Single+Response.swift"; sourceTree = "<group>"; };
+		DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthManager.swift; sourceTree = "<group>"; };
+		DC71C3091FBDA57B00C8E41A /* UnsplashWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashWebViewController.swift; sourceTree = "<group>"; };
 		DC7F20921FADD3400017C14A /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		DCBB1B1E1FA7B1BD004E95F0 /* Papr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Papr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCBB1B211FA7B1BD004E95F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -234,6 +238,15 @@
 			path = "Moya+Rx";
 			sourceTree = "<group>";
 		};
+		DC71C30D1FBDA58300C8E41A /* Unsplash Web View */ = {
+			isa = PBXGroup;
+			children = (
+				DC71C3091FBDA57B00C8E41A /* UnsplashWebViewController.swift */,
+			);
+			name = "Unsplash Web View";
+			path = "Unsplash Wb View";
+			sourceTree = "<group>";
+		};
 		DCBB1B151FA7B1BD004E95F0 = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +308,7 @@
 		DCBB1B4F1FA8B774004E95F0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DC71C30D1FBDA58300C8E41A /* Unsplash Web View */,
 				DCBB1B5D1FA8B9B9004E95F0 /* Initial Scene */,
 			);
 			path = Scenes;
@@ -316,7 +330,7 @@
 			children = (
 				DC5AF7531FAD2EE400ADA2BB /* Enums */,
 				DCBB1B6A1FA8BA5D004E95F0 /* Extentions */,
-				DC46AE611FA9D82D0037CDF0 /* OAuth2Handler.swift */,
+				DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -705,6 +719,7 @@
 				DCBB1B591FA8B82F004E95F0 /* SceneCoodinator.swift in Sources */,
 				DCBB1B701FA8BAC2004E95F0 /* BindableType.swift in Sources */,
 				DC5AF72B1FACCBF300ADA2BB /* User.swift in Sources */,
+				DC71C3021FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				DC5AF74C1FACF18600ADA2BB /* Exif.swift in Sources */,
 				DCBB1B571FA8B823004E95F0 /* SceneCoodinatorType.swift in Sources */,
 				DC7F20931FADD3400017C14A /* SearchResults.swift in Sources */,
@@ -715,13 +730,13 @@
 				DCBB1B6C1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */,
 				DC5F61231FB65A9F00A60D19 /* Observable+Response.swift in Sources */,
+				DC71C30A1FBDA57B00C8E41A /* UnsplashWebViewController.swift in Sources */,
 				DC5AF73C1FACD1CE00ADA2BB /* Single+Mapper.swift in Sources */,
 				DCBB1B5B1FA8B840004E95F0 /* SceneTransitionType.swift in Sources */,
 				DC5AF7591FAD2F1E00ADA2BB /* OrderBy.swift in Sources */,
 				DC5F61261FB65A9F00A60D19 /* Single+Response.swift in Sources */,
 				DCBB1B671FA8BA39004E95F0 /* InitialViewModel.swift in Sources */,
 				DC5AF7501FAD027F00ADA2BB /* Collection.swift in Sources */,
-				DC46AE621FA9D82D0037CDF0 /* OAuth2Handler.swift in Sources */,
 				DC5AF72F1FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DCBB1B741FA8D597004E95F0 /* UnsplashEndpoint.swift in Sources */,
 			);
@@ -738,6 +753,7 @@
 				DC5AF7371FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift in Sources */,
 				DCBB1B6D1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF73A1FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */,
+				DC71C3031FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				DC5AF72C1FACCBF300ADA2BB /* User.swift in Sources */,
 				DC5AF7301FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DC5AF7451FACEF2700ADA2BB /* Location.swift in Sources */,
@@ -746,7 +762,7 @@
 				DC5F61271FB65A9F00A60D19 /* Single+Response.swift in Sources */,
 				DCBB1B751FA8D597004E95F0 /* UnsplashEndpoint.swift in Sources */,
 				DC5AF7281FAB989400ADA2BB /* OAuth2Settings.swift in Sources */,
-				DC46AE631FA9D82D0037CDF0 /* OAuth2Handler.swift in Sources */,
+				DC71C30B1FBDA57B00C8E41A /* UnsplashWebViewController.swift in Sources */,
 				DC5AF7491FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DCBB1B611FA8BA22004E95F0 /* InitialViewController.swift in Sources */,
 				DC5F61211FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */,
@@ -769,6 +785,7 @@
 				DC5AF7381FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift in Sources */,
 				DCBB1B6E1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF73B1FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */,
+				DC71C3041FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				DC5AF72D1FACCBF300ADA2BB /* User.swift in Sources */,
 				DC5AF7311FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DC5AF7461FACEF2700ADA2BB /* Location.swift in Sources */,
@@ -777,7 +794,7 @@
 				DC5F61281FB65A9F00A60D19 /* Single+Response.swift in Sources */,
 				DCBB1B761FA8D597004E95F0 /* UnsplashEndpoint.swift in Sources */,
 				DC5AF7291FAB989400ADA2BB /* OAuth2Settings.swift in Sources */,
-				DC46AE641FA9D82D0037CDF0 /* OAuth2Handler.swift in Sources */,
+				DC71C30C1FBDA57B00C8E41A /* UnsplashWebViewController.swift in Sources */,
 				DC5AF74A1FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DCBB1B621FA8BA22004E95F0 /* InitialViewController.swift in Sources */,
 				DC5F61221FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */,
