@@ -64,6 +64,9 @@
 		DC71C30A1FBDA57B00C8E41A /* UnsplashWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3091FBDA57B00C8E41A /* UnsplashWebViewController.swift */; };
 		DC71C30B1FBDA57B00C8E41A /* UnsplashWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3091FBDA57B00C8E41A /* UnsplashWebViewController.swift */; };
 		DC71C30C1FBDA57B00C8E41A /* UnsplashWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3091FBDA57B00C8E41A /* UnsplashWebViewController.swift */; };
+		DC71C30F1FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C30E1FBDE00A00C8E41A /* UnsplashAuthError.swift */; };
+		DC71C3101FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C30E1FBDE00A00C8E41A /* UnsplashAuthError.swift */; };
+		DC71C3111FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C30E1FBDE00A00C8E41A /* UnsplashAuthError.swift */; };
 		DC7F20931FADD3400017C14A /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F20921FADD3400017C14A /* SearchResults.swift */; };
 		DC7F20941FADD3400017C14A /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F20921FADD3400017C14A /* SearchResults.swift */; };
 		DC7F20951FADD3400017C14A /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F20921FADD3400017C14A /* SearchResults.swift */; };
@@ -141,6 +144,7 @@
 		DC5F611F1FB65A9F00A60D19 /* Single+Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Single+Response.swift"; sourceTree = "<group>"; };
 		DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthManager.swift; sourceTree = "<group>"; };
 		DC71C3091FBDA57B00C8E41A /* UnsplashWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashWebViewController.swift; sourceTree = "<group>"; };
+		DC71C30E1FBDE00A00C8E41A /* UnsplashAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthError.swift; sourceTree = "<group>"; };
 		DC7F20921FADD3400017C14A /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		DCBB1B1E1FA7B1BD004E95F0 /* Papr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Papr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCBB1B211FA7B1BD004E95F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -331,6 +335,7 @@
 				DC5AF7531FAD2EE400ADA2BB /* Enums */,
 				DCBB1B6A1FA8BA5D004E95F0 /* Extentions */,
 				DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */,
+				DC71C30E1FBDE00A00C8E41A /* UnsplashAuthError.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -729,6 +734,7 @@
 				DC5F61201FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */,
 				DCBB1B6C1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */,
+				DC71C30F1FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
 				DC5F61231FB65A9F00A60D19 /* Observable+Response.swift in Sources */,
 				DC71C30A1FBDA57B00C8E41A /* UnsplashWebViewController.swift in Sources */,
 				DC5AF73C1FACD1CE00ADA2BB /* Single+Mapper.swift in Sources */,
@@ -746,6 +752,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC71C3101FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
 				DC5AF74D1FACF18600ADA2BB /* Exif.swift in Sources */,
 				DC5AF7411FACE6A300ADA2BB /* Photo.swift in Sources */,
 				DCBB1B371FA7B1BD004E95F0 /* PaprTests.swift in Sources */,
@@ -778,6 +785,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC71C3111FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
 				DC5AF74E1FACF18600ADA2BB /* Exif.swift in Sources */,
 				DC5AF7421FACE6A300ADA2BB /* Photo.swift in Sources */,
 				DCBB1B421FA7B1BD004E95F0 /* PaprUITests.swift in Sources */,
