@@ -188,10 +188,10 @@ extension UnsplashAPI: TargetType {
         case .userProfile(_, let width, let height):
             
             guard let width = width, let height = height else { 
-                return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.value as! String], 
+                return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string], 
                                           encoding: URLEncoding.default) 
             }
-            return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.value as! String,
+            return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string,
                                                    "w": width, 
                                                    "h": height], 
                                       encoding: URLEncoding.default) 
@@ -202,10 +202,10 @@ extension UnsplashAPI: TargetType {
              .curatedPhotos(let pageNumber, let photosPerPage, let orderBy):
             
             guard let pageNumber = pageNumber, let photosPerPage = photosPerPage, let orderBy = orderBy else { 
-                return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.value as! String], 
+                return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string], 
                                                  encoding: URLEncoding.default) 
             }
-            return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.value as! String, 
+            return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string, 
                                                    "page": pageNumber, 
                                                    "per_page": photosPerPage, 
                                                    "order_by": orderBy], 
@@ -219,10 +219,10 @@ extension UnsplashAPI: TargetType {
              .curatedCollectionPhotos(_, let pageNumber, let photosPerPage):
             
             guard let pageNumber = pageNumber, let photosPerPage = photosPerPage else { 
-                return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.value as! String], 
+                return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string], 
                                           encoding: URLEncoding.default) 
             }
-            return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.value as! String, 
+            return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string, 
                                                    "page": pageNumber, 
                                                    "per_page": photosPerPage], 
                                       encoding: URLEncoding.default)
@@ -231,11 +231,11 @@ extension UnsplashAPI: TargetType {
              .searchUsers(let query, let pageNumber, let photosPerPage):
            
             guard let pageNumber = pageNumber, let photosPerPage = photosPerPage else { 
-                return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.value as! String, 
+                return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string, 
                                                        "query": query], 
                                           encoding: URLEncoding.default) 
             }
-            return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.value as! String, 
+            return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string, 
                                                    "page": pageNumber, 
                                                    "per_page": photosPerPage, 
                                                    "query": query], 
@@ -244,11 +244,11 @@ extension UnsplashAPI: TargetType {
         case .searchPhotos(let query, let pageNumber, let photosPerPage, let collections):
             
             guard let pageNumber = pageNumber, let photosPerPage = photosPerPage, let collections =  collections else { 
-                return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.value as! String, 
+                return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string, 
                                                        "query": query], 
                                           encoding: URLEncoding.default) 
             }
-            return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.value as! String, 
+            return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string, 
                                                    "page": pageNumber, 
                                                    "per_page": photosPerPage, 
                                                    "query": query, 

@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import Moya
-import Alamofire
-import p2_OAuth2
+import SafariServices
 
 class InitialViewController: UIViewController, BindableType {
     
@@ -22,4 +20,5 @@ class InitialViewController: UIViewController, BindableType {
     func bindViewModel() {
         print("Welcome to Papr! Btw, ViewModel is binded.")
     }
+
 }

@@ -9,5 +9,5 @@
 import Foundation
 
 struct InitialViewModel {
-    
+
 }

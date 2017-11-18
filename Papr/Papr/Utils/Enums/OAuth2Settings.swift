@@ -17,7 +17,7 @@ enum OAuth2Config {
     case scope
     case redirectURL
     
-    var value: Any {
+    var string: String {
         switch self {
         case .host:
             return "unsplash.com"
@@ -32,7 +32,7 @@ enum OAuth2Config {
         case .scope:
             return UnsplashScope.fullScope.value
         case .redirectURL:
-            return "paprapp://oauth/callback"
+            return "papr://unsplash"
         }
     }
 }
