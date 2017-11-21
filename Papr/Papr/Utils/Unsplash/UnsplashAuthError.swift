@@ -47,13 +47,13 @@ public enum Code: Int {
     
     /// The authorization server does not support obtaining an access token using this method.
     case unsupportedResponseType
-    
-    /// The requested scope is invalid, unknown, or malformed.
-    case invalidScope
-    
+
     /// The authorization server encountered an unexpected condition that prevented it from
     /// fulfilling the request.
     case serverError
+    
+    /// The requested scope is invalid, unknown, or malformed.
+    case invalidScope
     
     /// Client authentication failed due to unknown client, no client authentication included,
     /// or unsupported authentication method.
@@ -76,4 +76,32 @@ public enum Code: Int {
     
     /// Some other error.
     case unknown
+    
+    var string: String {
+        switch self {
+        case .unauthorizedClient:
+            return "The client is not authorized to request an access token using this method."
+        case .accessDenied:
+            return "The resource owner or authorization server denied the request."
+        case .unsupportedResponseType:
+            return "The authorization server does not support obtaining an access token using this method."
+        case .serverError:
+            return "The authorization server encountered an unexpected condition that prevented it from fulfilling the request."
+        case .invalidScope:
+            return "The requested scope is invalid, unknown, or malformed."
+        case .invalidClient:
+            return "Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method."
+        case .invalidRequest:
+            return "The request is missing a required parameter, includes an unsupported parameter value, or is otherwise malformed."
+        case .invalidGrant:
+            return "The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."
+        case .temporarilyUnavailable:
+            return "The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server."
+        case .userCanceledAuth:
+            return "The user canceled the authorization process."
+        case .unknown:
+            return "Unknown error"
+        
+        }
+    }
 }

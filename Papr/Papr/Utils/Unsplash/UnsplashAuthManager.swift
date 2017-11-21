@@ -9,22 +9,18 @@
 import Foundation
 import Alamofire
 
-extension URL {
-    var queryPairs: [String: String] {
-
-        var results = [String: String]()
-        let pairs = self.query?.components(separatedBy: "&") ?? []
-        
-        for pair in pairs {
-            let kv = pair.components(separatedBy: "=")
-            results.updateValue(kv[1], forKey: kv[0])
-        }
-        
-        return results
-    }
+protocol UnsplashSessionListener {
+     func didReceiveRedirect(code: String)
 }
 
-class UnsplashAuthProvider {
+private class ListenerWrapper {
+    var listener: UnsplashSessionListener?
+}
+
+class UnsplashAuthManager {
+    
+    var delegate: UnsplashSessionListener!
+    
     
     private let clientID: String
     private let clientSecret: String
@@ -38,36 +34,29 @@ class UnsplashAuthProvider {
         self.scopes = scopes
     }
     
-    public func accessToken(from url: URL, completion: @escaping (UnsplashAccessToken?, NSError?) -> Void) {
-        let (c, e) = extractCode(from: url)
-        guard let code = c else { return }
-        
-        if let error = e {
-            completion(nil, error)
-            return
-        }
-        
+    public func receivedCodeRedirect(url: URL) {
+        guard let code = extractCode(from: url).0 else { return }
+        delegate.didReceiveRedirect(code: code)
+    }
+    
+    public func accessToken(with code: String, completion: @escaping (UnsplashAccessToken?, NSError?) -> Void) {
         let urlString = accessTokenURL(with: code).absoluteString
         Alamofire.request(urlString, method: .post).validate().responseJSON { response in
             switch response.result {
             case .success(_):
-                if let json = response.result.value as? [String : String] {
-                    if let accessToken = json["access_token"] {
-                        let token = UnsplashAccessToken(clientID: self.clientID, accessToken: accessToken)
-                        completion(token, nil)
-                    }
+                if let json = response.value as? [String : Any], 
+                    let accessToken = json["access_token"] as? String {
+                    let token = UnsplashAccessToken(clientID: self.clientID, accessToken: accessToken)
+                    completion(token, nil)
                 }
             case .failure(_):
                 let error = self.extractError(from: response.data!)
                 completion(nil, error)
             }
         }
-        
     } 
     
-    // MARK: Private
-    
-    private func authURL() -> URL {
+    public var authURL: URL {
         var components = URLComponents()
         components.scheme = "https"
         components.host = OAuth2Config.host.string
@@ -82,6 +71,8 @@ class UnsplashAuthProvider {
         
         return components.url!
     }
+    
+    // MARK: Private
     
     private func accessTokenURL(with code: String) -> URL {
         var components = URLComponents()
@@ -101,12 +92,13 @@ class UnsplashAuthProvider {
     }
     
     private func extractCode(from url: URL) -> (String?, NSError?) {
-        let pairs = url.queryPairs
-        if let error = pairs["error"] {
-            let desc = pairs["error_description"]?.replacingOccurrences(of: "+", with: " ").removingPercentEncoding
+        if let error = url.value(for: "error"), 
+            let desc = url.value(for: "error_description")?.replacingOccurrences(of: "+", with: " ").removingPercentEncoding {
             return (nil, UnsplashAuthError.error(with: error, description: desc))
         } else {
-            guard let code = pairs["code"] else { return (nil, nil) }
+            guard let code = url.value(for: "code") else {
+                return (nil, UnsplashAuthError.error(with: .invalidGrant, description: Code.invalidGrant.string))
+            }
             return (code, nil)
         }
     }

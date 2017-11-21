@@ -7,16 +7,16 @@
 //
 
 import UIKit
-import SafariServices
 
 class InitialViewController: UIViewController, BindableType {
-    
+
+    // MARK: ViewModel
     var viewModel: InitialViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     func bindViewModel() {
         print("Welcome to Papr! Btw, ViewModel is binded.")
     }

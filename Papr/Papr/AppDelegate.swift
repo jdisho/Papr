@@ -13,6 +13,7 @@ import p2_OAuth2
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var authProvider: UnsplashAuthProvider!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -20,6 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SceneCoordinator.shared = sceneCoordinator
         let rootScene = Scene.initialView(InitialViewModel())
         sceneCoordinator.transition(to: rootScene, type: .root)
+        
+        authProvider = UnsplashAuthProvider(
+            clientID: OAuth2Config.clientID.string,
+            clientSecret: OAuth2Config.clientSecret.string
+        )
         
         return true
     }
