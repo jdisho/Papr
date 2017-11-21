@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Moya
+import SafariServices
 
 class InitialViewController: UIViewController, BindableType {
 
@@ -20,5 +22,9 @@ class InitialViewController: UIViewController, BindableType {
     func bindViewModel() {
         print("Welcome to Papr! Btw, ViewModel is binded.")
     }
+    
+
+    
+    
 
 }

@@ -71,7 +71,7 @@ public enum Code: Int {
     /// overloading or maintenance of the server.
     case temporarilyUnavailable
     
-    // The user canceled the authorization process.
+    /// The user canceled the authorization process.
     case userCanceledAuth
     
     /// Some other error.

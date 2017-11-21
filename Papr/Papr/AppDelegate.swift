@@ -7,14 +7,12 @@
 //
 
 import UIKit
-import p2_OAuth2
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var authProvider: UnsplashAuthProvider!
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         let sceneCoordinator = SceneCoordinator(window: window!)
@@ -22,10 +20,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rootScene = Scene.initialView(InitialViewModel())
         sceneCoordinator.transition(to: rootScene, type: .root)
         
-        authProvider = UnsplashAuthProvider(
-            clientID: OAuth2Config.clientID.string,
-            clientSecret: OAuth2Config.clientSecret.string
-        )
+        Unsplash.config(
+            id: OAuth2Config.clientID.string, 
+            secret: OAuth2Config.clientSecret.string, 
+            scopes: [UnsplashScope.pub.string,
+                     UnsplashScope.readUser.string,
+                     UnsplashScope.writeUser.string,
+                     UnsplashScope.readPhotos.string,
+                     UnsplashScope.writePhotos.string,
+                     UnsplashScope.writeLikes.string,
+                     UnsplashScope.writeFollowers.string,
+                     UnsplashScope.readCollections.string,
+                     UnsplashScope.writeCollections.string 
+            ])
         
         return true
     }

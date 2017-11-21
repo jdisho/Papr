@@ -1,5 +1,5 @@
 //
-//  UnsplashEndpoint.swift
+//  UnsplashAPI.swift
 //  Papr
 //
 //  Created by Joan Disho on 31.10.17.
@@ -8,6 +8,7 @@
 
 import Foundation
 import Moya
+import KeychainSwift
 
 enum UnsplashAPI {
 
@@ -188,11 +189,9 @@ extension UnsplashAPI: TargetType {
         case .userProfile(_, let width, let height):
             
             guard let width = width, let height = height else { 
-                return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string], 
-                                          encoding: URLEncoding.default) 
+                return .requestPlain
             }
-            return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string,
-                                                   "w": width, 
+            return .requestParameters(parameters: ["w": width, 
                                                    "h": height], 
                                       encoding: URLEncoding.default) 
         
@@ -202,11 +201,9 @@ extension UnsplashAPI: TargetType {
              .curatedPhotos(let pageNumber, let photosPerPage, let orderBy):
             
             guard let pageNumber = pageNumber, let photosPerPage = photosPerPage, let orderBy = orderBy else { 
-                return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string], 
-                                                 encoding: URLEncoding.default) 
+                return .requestPlain
             }
-            return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string, 
-                                                   "page": pageNumber, 
+            return .requestParameters(parameters: [ "page": pageNumber, 
                                                    "per_page": photosPerPage, 
                                                    "order_by": orderBy], 
                                       encoding: URLEncoding.default)
@@ -219,11 +216,9 @@ extension UnsplashAPI: TargetType {
              .curatedCollectionPhotos(_, let pageNumber, let photosPerPage):
             
             guard let pageNumber = pageNumber, let photosPerPage = photosPerPage else { 
-                return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string], 
-                                          encoding: URLEncoding.default) 
+                return .requestPlain
             }
-            return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string, 
-                                                   "page": pageNumber, 
+            return .requestParameters(parameters: [ "page": pageNumber, 
                                                    "per_page": photosPerPage], 
                                       encoding: URLEncoding.default)
        
@@ -231,12 +226,10 @@ extension UnsplashAPI: TargetType {
              .searchUsers(let query, let pageNumber, let photosPerPage):
            
             guard let pageNumber = pageNumber, let photosPerPage = photosPerPage else { 
-                return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string, 
-                                                       "query": query], 
+                return .requestParameters(parameters: ["query": query], 
                                           encoding: URLEncoding.default) 
             }
-            return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string, 
-                                                   "page": pageNumber, 
+            return .requestParameters(parameters: ["page": pageNumber, 
                                                    "per_page": photosPerPage, 
                                                    "query": query], 
                                       encoding: URLEncoding.default)
@@ -244,12 +237,10 @@ extension UnsplashAPI: TargetType {
         case .searchPhotos(let query, let pageNumber, let photosPerPage, let collections):
             
             guard let pageNumber = pageNumber, let photosPerPage = photosPerPage, let collections =  collections else { 
-                return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string, 
-                                                       "query": query], 
+                return .requestParameters(parameters: ["query": query], 
                                           encoding: URLEncoding.default) 
             }
-            return .requestParameters(parameters: ["client_id": OAuth2Config.clientID.string, 
-                                                   "page": pageNumber, 
+            return .requestParameters(parameters: ["page": pageNumber, 
                                                    "per_page": photosPerPage, 
                                                    "query": query, 
                                                    "collections": collections], 
@@ -260,7 +251,10 @@ extension UnsplashAPI: TargetType {
     }
     
     var headers: [String : String]? {
-        return nil
+        guard let accessToken = KeychainSwift().get(OAuth2Config.clientID.string) else { 
+            return ["Authorization": "Client-ID " + OAuth2Config.clientID.string] 
+        }
+        return ["Authorization": "Bearer " + accessToken]
     }
     
     var validate: Bool {

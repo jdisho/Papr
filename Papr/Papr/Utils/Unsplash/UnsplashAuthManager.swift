@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import KeychainSwift
 
 protocol UnsplashSessionListener {
      func didReceiveRedirect(code: String)
@@ -20,18 +21,20 @@ private class ListenerWrapper {
 class UnsplashAuthManager {
     
     var delegate: UnsplashSessionListener!
-    
+    static var sharedAuthManager: UnsplashAuthManager!
     
     private let clientID: String
     private let clientSecret: String
     private let redirectURL: URL
     private let scopes: [String]
+    private let keychain: KeychainSwift
     
-    init(clientID: String, clientSecret: String, scopes: [String] = [UnsplashScope.pub.value]) {
+    init(clientID: String, clientSecret: String, scopes: [String] = [UnsplashScope.pub.string]) {
         self.clientID = clientID
         self.clientSecret = clientSecret
         self.redirectURL = URL(string: OAuth2Config.redirectURL.string)!
         self.scopes = scopes
+        keychain = KeychainSwift()
     }
     
     public func receivedCodeRedirect(url: URL) {
@@ -47,6 +50,7 @@ class UnsplashAuthManager {
                 if let json = response.value as? [String : Any], 
                     let accessToken = json["access_token"] as? String {
                     let token = UnsplashAccessToken(clientID: self.clientID, accessToken: accessToken)
+                    self.keychain.set(token.accessToken, forKey: self.clientID)
                     completion(token, nil)
                 }
             case .failure(_):
@@ -70,6 +74,17 @@ class UnsplashAuthManager {
         ]
         
         return components.url!
+    }
+    
+    public var accessToken: UnsplashAccessToken? {
+        guard let token = keychain.get(self.clientID) else {
+            return nil
+        }
+        return UnsplashAccessToken(clientID: clientID, accessToken: token)
+    }
+    
+    public func clearAccessToken() {
+        keychain.clear()
     }
     
     // MARK: Private

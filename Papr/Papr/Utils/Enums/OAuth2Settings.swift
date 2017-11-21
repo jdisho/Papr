@@ -14,7 +14,6 @@ enum OAuth2Config {
     case clientSecret
     case authorizeURL
     case tokenURL
-    case scope
     case redirectURL
     
     var string: String {
@@ -29,8 +28,6 @@ enum OAuth2Config {
             return "https://unsplash.com/oauth/authorize"
         case .tokenURL:
             return "https://unsplash.com/oauth/token"
-        case .scope:
-            return UnsplashScope.fullScope.value
         case .redirectURL:
             return "papr://unsplash"
         }
