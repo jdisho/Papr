@@ -19,9 +19,8 @@ enum UnsplashScope {
     case writeFollowers
     case readCollections
     case writeCollections
-    case fullScope
     
-    var value: String {
+    var string: String {
         switch self {
         case .pub:
             return "public"
@@ -41,8 +40,6 @@ enum UnsplashScope {
             return "read_collections"
         case .writeCollections:
             return "write_collections"
-        case .fullScope:
-            return "public read_user write_user read_photos write_photos write_likes write_followers read_collections write_collections"
         }
     }
 }

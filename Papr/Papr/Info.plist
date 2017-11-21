@@ -20,12 +20,12 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
+			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>paprapp</string>
+			<string>com.whoisjoandisho.freetime</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>paprapp</string>
+				<string>papr</string>
 			</array>
 		</dict>
 	</array>

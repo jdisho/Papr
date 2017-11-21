@@ -1,6 +1,0 @@
-framework module p2_OAuth2 {
-  umbrella header "p2.OAuth2-umbrella.h"
-
-  export *
-  module * { export * }
-}

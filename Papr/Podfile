@@ -16,7 +16,8 @@ target 'Papr' do
   # Network
   pod 'Moya'
   pod 'ModelMapper'
-  pod 'p2.OAuth2'
+
+  pod 'KeychainSwift'
 
   # Pods for Papr
 
