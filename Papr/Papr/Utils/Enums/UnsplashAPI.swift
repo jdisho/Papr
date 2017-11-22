@@ -251,9 +251,11 @@ extension UnsplashAPI: TargetType {
     }
     
     var headers: [String : String]? {
-        guard let accessToken = KeychainSwift().get(OAuth2Config.clientID.string) else { 
+        guard let accessToken = Unsplash.accessToken else { 
+            print("I dont have the access token")
             return ["Authorization": "Client-ID " + OAuth2Config.clientID.string] 
         }
+        print("There is a token")
         return ["Authorization": "Bearer " + accessToken]
     }
     

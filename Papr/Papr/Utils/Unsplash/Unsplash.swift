@@ -31,4 +31,8 @@ class Unsplash {
         return UnsplashAuthManager.sharedAuthManager.authURL
     }
     
+    static var accessToken: String? {
+        return UnsplashAuthManager.sharedAuthManager.accessToken
+    }
+    
 }

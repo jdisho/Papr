@@ -76,11 +76,11 @@ class UnsplashAuthManager {
         return components.url!
     }
     
-    public var accessToken: UnsplashAccessToken? {
+    public var accessToken: String? {
         guard let token = keychain.get(self.clientID) else {
             return nil
         }
-        return UnsplashAccessToken(clientID: clientID, accessToken: token)
+        return UnsplashAccessToken(clientID: clientID, accessToken: token).accessToken
     }
     
     public func clearAccessToken() {
