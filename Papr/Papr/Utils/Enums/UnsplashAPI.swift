@@ -251,7 +251,7 @@ extension UnsplashAPI: TargetType {
     }
     
     var headers: [String : String]? {
-        guard let accessToken = Unsplash.accessToken else { 
+        guard let accessToken = UnsplashAuthManager.sharedAuthManager.accessToken else { 
             print("I dont have the access token")
             return ["Authorization": "Client-ID " + OAuth2Config.clientID.string] 
         }

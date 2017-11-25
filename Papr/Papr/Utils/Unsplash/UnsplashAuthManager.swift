@@ -14,14 +14,24 @@ protocol UnsplashSessionListener {
      func didReceiveRedirect(code: String)
 }
 
-private class ListenerWrapper {
-    var listener: UnsplashSessionListener?
-}
-
 class UnsplashAuthManager {
     
     var delegate: UnsplashSessionListener!
-    static var sharedAuthManager: UnsplashAuthManager!
+    static var sharedAuthManager: UnsplashAuthManager {
+        return UnsplashAuthManager(
+            clientID: OAuth2Config.clientID.string, 
+            clientSecret: OAuth2Config.clientSecret.string, 
+            scopes: [UnsplashScope.pub.string,
+                     UnsplashScope.readUser.string,
+                     UnsplashScope.writeUser.string,
+                     UnsplashScope.readPhotos.string,
+                     UnsplashScope.writePhotos.string,
+                     UnsplashScope.writeLikes.string,
+                     UnsplashScope.writeFollowers.string,
+                     UnsplashScope.readCollections.string,
+                     UnsplashScope.writeCollections.string 
+            ])
+    }
     
     private let clientID: String
     private let clientSecret: String

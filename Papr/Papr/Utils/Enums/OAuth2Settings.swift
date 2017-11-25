@@ -10,6 +10,7 @@ import Foundation
 
 enum OAuth2Config {
     case host
+    case callbackURLScheme
     case clientID
     case clientSecret
     case authorizeURL
@@ -20,6 +21,8 @@ enum OAuth2Config {
         switch self {
         case .host:
             return "unsplash.com"
+        case .callbackURLScheme:
+            return "papr://"
         case .clientID:
             return "0dd1dc721b7672e96f4bdf71af623fb68ea7b1d4829681744a4a08e0a8ef68c8"
         case .clientSecret:

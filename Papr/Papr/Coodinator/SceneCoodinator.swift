@@ -99,6 +99,5 @@ class SceneCoordinator: SceneCoordinatorType {
             .asObservable()
             .take(1)
     }
-    
 }
 

@@ -17,23 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let sceneCoordinator = SceneCoordinator(window: window!)
         SceneCoordinator.shared = sceneCoordinator
-        let rootScene = Scene.initialView(InitialViewModel())
+        let rootScene = Scene.login(LoginViewModel())
         sceneCoordinator.transition(to: rootScene, type: .root)
-        
-        Unsplash.config(
-            id: OAuth2Config.clientID.string, 
-            secret: OAuth2Config.clientSecret.string, 
-            scopes: [UnsplashScope.pub.string,
-                     UnsplashScope.readUser.string,
-                     UnsplashScope.writeUser.string,
-                     UnsplashScope.readPhotos.string,
-                     UnsplashScope.writePhotos.string,
-                     UnsplashScope.writeLikes.string,
-                     UnsplashScope.writeFollowers.string,
-                     UnsplashScope.readCollections.string,
-                     UnsplashScope.writeCollections.string 
-            ])
-        
+
         return true
     }
 
