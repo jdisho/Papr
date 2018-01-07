@@ -5,6 +5,7 @@ PODS:
   - Alamofire (4.5.1)
   - Differentiator (3.0.1)
   - KeychainSwift (9.0.2)
+  - Kingfisher (4.2.0)
   - ModelMapper (7.2.0)
   - Moya (10.0.0):
     - Moya/Core (= 10.0.0)
@@ -28,6 +29,7 @@ PODS:
 DEPENDENCIES:
   - Action
   - KeychainSwift
+  - Kingfisher (~> 4.0)
   - ModelMapper
   - Moya
   - NSObject+Rx
@@ -41,6 +43,7 @@ SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Differentiator: ffe513ce1ea4e7198b89fac94d6e281c673055a9
   KeychainSwift: 3ab1d428d0dbff59cd056f1d0bfc640b36c2b081
+  Kingfisher: 9ee7e788d8ba07c3f21ce0d43f33cec310a4f781
   ModelMapper: bef729f9c7095cadffc3c2ef9432fc5e21d8fc60
   Moya: adb58b0f4e58430db43cc6e2f6ebab1836501186
   NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
@@ -50,6 +53,6 @@ SPEC CHECKSUMS:
   RxOptional: e5448d3e21024489e07c31f6a262f2b50c975367
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
 
-PODFILE CHECKSUM: 4af7ec07a0d31e46c621cce056cedbf89779b2d4
+PODFILE CHECKSUM: 485e4c86ec51929ee91d3a9fe0b9693b4c119852
 
 COCOAPODS: 1.3.1

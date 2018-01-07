@@ -17,7 +17,11 @@ target 'Papr' do
   pod 'Moya'
   pod 'ModelMapper'
 
+  # Keychain
   pod 'KeychainSwift'
+  
+  # Image
+  pod 'Kingfisher', '~> 4.0'
 
   # Pods for Papr
 

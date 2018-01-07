@@ -102,6 +102,27 @@
 		DCBB1B741FA8D597004E95F0 /* UnsplashAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B731FA8D597004E95F0 /* UnsplashAPI.swift */; };
 		DCBB1B751FA8D597004E95F0 /* UnsplashAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B731FA8D597004E95F0 /* UnsplashAPI.swift */; };
 		DCBB1B761FA8D597004E95F0 /* UnsplashAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B731FA8D597004E95F0 /* UnsplashAPI.swift */; };
+		DCC8CA072002BEE300F6C540 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA052002BEE300F6C540 /* HomeViewController.swift */; };
+		DCC8CA082002BEE300F6C540 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA052002BEE300F6C540 /* HomeViewController.swift */; };
+		DCC8CA092002BEE300F6C540 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA052002BEE300F6C540 /* HomeViewController.swift */; };
+		DCC8CA0A2002BEE300F6C540 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC8CA062002BEE300F6C540 /* HomeViewController.xib */; };
+		DCC8CA0B2002BEE300F6C540 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC8CA062002BEE300F6C540 /* HomeViewController.xib */; };
+		DCC8CA0C2002BEE300F6C540 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC8CA062002BEE300F6C540 /* HomeViewController.xib */; };
+		DCC8CA0E2002BEF100F6C540 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA0D2002BEF100F6C540 /* HomeViewModel.swift */; };
+		DCC8CA0F2002BEF100F6C540 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA0D2002BEF100F6C540 /* HomeViewModel.swift */; };
+		DCC8CA102002BEF100F6C540 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA0D2002BEF100F6C540 /* HomeViewModel.swift */; };
+		DCC8CA132002CC2700F6C540 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */; };
+		DCC8CA142002CC2700F6C540 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */; };
+		DCC8CA152002CC2700F6C540 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */; };
+		DCC8CA162002CC2700F6C540 /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */; };
+		DCC8CA172002CC2700F6C540 /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */; };
+		DCC8CA182002CC2700F6C540 /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */; };
+		DCC8CA1A2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */; };
+		DCC8CA1B2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */; };
+		DCC8CA1C2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */; };
+		DCC8CA1E2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */; };
+		DCC8CA1F2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */; };
+		DCC8CA202002D4C900F6C540 /* ObservableType+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */; };
 		DCEE1F0B1FC97CDC0010BADE /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F0A1FC97CDC0010BADE /* AlertViewController.swift */; };
 		DCEE1F0C1FC97CDC0010BADE /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F0A1FC97CDC0010BADE /* AlertViewController.swift */; };
 		DCEE1F0D1FC97CDC0010BADE /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F0A1FC97CDC0010BADE /* AlertViewController.swift */; };
@@ -182,6 +203,13 @@
 		DCBB1B6B1FA8BA8E004E95F0 /* NibIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibIdentifiable.swift; sourceTree = "<group>"; };
 		DCBB1B6F1FA8BAC2004E95F0 /* BindableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindableType.swift; sourceTree = "<group>"; };
 		DCBB1B731FA8D597004E95F0 /* UnsplashAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPI.swift; sourceTree = "<group>"; };
+		DCC8CA052002BEE300F6C540 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		DCC8CA062002BEE300F6C540 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		DCC8CA0D2002BEF100F6C540 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
+		DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewCell.xib; sourceTree = "<group>"; };
+		DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellModel.swift; sourceTree = "<group>"; };
+		DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Extras.swift"; sourceTree = "<group>"; };
 		DCEE1F0A1FC97CDC0010BADE /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		DCEE1F0E1FC97CE80010BADE /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Rx.swift"; sourceTree = "<group>"; };
@@ -329,6 +357,7 @@
 		DCBB1B4F1FA8B774004E95F0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DCC8CA032002BEC200F6C540 /* Home */,
 				DCEE1F091FC97CB80010BADE /* Alert */,
 				DCBB1B5D1FA8B9B9004E95F0 /* Login */,
 			);
@@ -401,6 +430,27 @@
 			path = Extentions;
 			sourceTree = "<group>";
 		};
+		DCC8CA032002BEC200F6C540 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				DCC8CA042002BECB00F6C540 /* Cell */,
+				DCC8CA052002BEE300F6C540 /* HomeViewController.swift */,
+				DCC8CA0D2002BEF100F6C540 /* HomeViewModel.swift */,
+				DCC8CA062002BEE300F6C540 /* HomeViewController.xib */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		DCC8CA042002BECB00F6C540 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */,
+				DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */,
+				DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		DCEE1F091FC97CB80010BADE /* Alert */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +464,7 @@
 			isa = PBXGroup;
 			children = (
 				DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */,
+				DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -549,6 +600,8 @@
 			files = (
 				DCBB1B2C1FA7B1BD004E95F0 /* LaunchScreen.storyboard in Resources */,
 				DCBB1B291FA7B1BD004E95F0 /* Assets.xcassets in Resources */,
+				DCC8CA0A2002BEE300F6C540 /* HomeViewController.xib in Resources */,
+				DCC8CA162002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DCBB1B271FA7B1BD004E95F0 /* Main.storyboard in Resources */,
 				DCBB1B631FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 			);
@@ -558,7 +611,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCC8CA172002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DCBB1B641FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
+				DCC8CA0B2002BEE300F6C540 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,7 +621,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCC8CA182002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DCBB1B651FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
+				DCC8CA0C2002BEE300F6C540 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +659,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/ModelMapper/Mapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
@@ -617,6 +675,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
@@ -756,9 +815,11 @@
 				DC5AF7481FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DCBB1B221FA7B1BD004E95F0 /* AppDelegate.swift in Sources */,
 				DC5AF7391FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */,
+				DCC8CA1E2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DC5AF7551FAD2EF900ADA2BB /* UnsplashScope.swift in Sources */,
 				DCEE1F0B1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCBB1B591FA8B82F004E95F0 /* SceneCoodinator.swift in Sources */,
+				DCC8CA0E2002BEF100F6C540 /* HomeViewModel.swift in Sources */,
 				DCBB1B701FA8BAC2004E95F0 /* BindableType.swift in Sources */,
 				DC5AF72B1FACCBF300ADA2BB /* User.swift in Sources */,
 				DCEE1F0F1FC97CE80010BADE /* AlertViewModel.swift in Sources */,
@@ -772,6 +833,8 @@
 				DC5F61201FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */,
 				DCBB1B6C1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */,
+				DCC8CA072002BEE300F6C540 /* HomeViewController.swift in Sources */,
+				DCC8CA132002CC2700F6C540 /* HomeViewCell.swift in Sources */,
 				DC71C30F1FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
 				DC71C3DB1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
 				DC5F61231FB65A9F00A60D19 /* Observable+Response.swift in Sources */,
@@ -781,6 +844,7 @@
 				DC5AF7591FAD2F1E00ADA2BB /* OrderBy.swift in Sources */,
 				DC5F61261FB65A9F00A60D19 /* Single+Response.swift in Sources */,
 				DCBB1B671FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
+				DCC8CA1A2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
 				DC5AF7501FAD027F00ADA2BB /* Collection.swift in Sources */,
 				DC5AF72F1FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DCBB1B741FA8D597004E95F0 /* UnsplashAPI.swift in Sources */,
@@ -793,10 +857,14 @@
 			files = (
 				DC71C3101FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
 				DC5AF74D1FACF18600ADA2BB /* Exif.swift in Sources */,
+				DCC8CA082002BEE300F6C540 /* HomeViewController.swift in Sources */,
+				DCC8CA0F2002BEF100F6C540 /* HomeViewModel.swift in Sources */,
 				DC71C3DC1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
+				DCC8CA142002CC2700F6C540 /* HomeViewCell.swift in Sources */,
 				DC5AF7411FACE6A300ADA2BB /* Photo.swift in Sources */,
 				DCBB1B371FA7B1BD004E95F0 /* PaprTests.swift in Sources */,
 				DC7F20941FADD3400017C14A /* SearchResults.swift in Sources */,
+				DCC8CA1B2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
 				DC5AF7371FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift in Sources */,
 				DCBB1B6D1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF73A1FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */,
@@ -804,6 +872,7 @@
 				DC5AF72C1FACCBF300ADA2BB /* User.swift in Sources */,
 				DC7CF5831FC464BF006E0A39 /* URL.swift in Sources */,
 				DC5AF7301FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
+				DCC8CA1F2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DC5AF7451FACEF2700ADA2BB /* Location.swift in Sources */,
 				DC5F61241FB65A9F00A60D19 /* Observable+Response.swift in Sources */,
 				DCEE1F0C1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
@@ -830,10 +899,14 @@
 			files = (
 				DC71C3111FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
 				DC5AF74E1FACF18600ADA2BB /* Exif.swift in Sources */,
+				DCC8CA092002BEE300F6C540 /* HomeViewController.swift in Sources */,
+				DCC8CA102002BEF100F6C540 /* HomeViewModel.swift in Sources */,
 				DC71C3DD1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
+				DCC8CA152002CC2700F6C540 /* HomeViewCell.swift in Sources */,
 				DC5AF7421FACE6A300ADA2BB /* Photo.swift in Sources */,
 				DCBB1B421FA7B1BD004E95F0 /* PaprUITests.swift in Sources */,
 				DC7F20951FADD3400017C14A /* SearchResults.swift in Sources */,
+				DCC8CA1C2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
 				DC5AF7381FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift in Sources */,
 				DCBB1B6E1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF73B1FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */,
@@ -841,6 +914,7 @@
 				DC5AF72D1FACCBF300ADA2BB /* User.swift in Sources */,
 				DC7CF5841FC464BF006E0A39 /* URL.swift in Sources */,
 				DC5AF7311FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
+				DCC8CA202002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DC5AF7461FACEF2700ADA2BB /* Location.swift in Sources */,
 				DC5F61251FB65A9F00A60D19 /* Observable+Response.swift in Sources */,
 				DCEE1F0D1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
