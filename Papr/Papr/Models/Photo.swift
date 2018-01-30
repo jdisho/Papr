@@ -7,6 +7,7 @@
 //
 
 import Mapper
+import RxDataSources
 
 struct Photo: Mappable {
     
@@ -41,6 +42,23 @@ struct Photo: Mappable {
         imageURLs = try? map.from("urls")
         location = try? map.from("location")
         exif = try? map.from("exif")
+    }
+}
+
+extension Photo: IdentifiableType {
+    typealias Identity = String
+    
+    var identity: Identity {
+        guard id == nil else { return String(-999) }
+        return id!
+    }
+}
+
+extension Photo: Equatable {
+    static func ==(lhs: Photo, rhs: Photo) -> Bool {
+        return lhs.id == rhs.id && 
+                lhs.created == rhs.created && 
+                lhs.user?.id == rhs.user?.id
     }
 }
 

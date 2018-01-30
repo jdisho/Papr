@@ -1,5 +1,5 @@
 //
-//  UnsplashScope.swift
+//  Scope.swift
 //  Papr
 //
 //  Created by Joan Disho on 04.11.17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum UnsplashScope {
+enum Scope {
     
     case pub
     case readUser

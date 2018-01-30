@@ -17,6 +17,7 @@ import UIKit
 
 enum Scene {
     case login(LoginViewModel)
+    case home(HomeViewModel)
 }
 
 extension Scene {
@@ -24,6 +25,10 @@ extension Scene {
         switch self {
         case let .login(viewModel):
             var vc = LoginViewController.instantiateFromNib()
+            vc.bind(to: viewModel)
+            return vc
+        case let .home(viewModel):
+            var vc = HomeViewController.instantiateFromNib()
             vc.bind(to: viewModel)
             return vc
         }

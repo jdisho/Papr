@@ -19,6 +19,7 @@ class HomeViewCell: UITableViewCell, BindableType {
     @IBOutlet var userImageView: UIImageView!
     @IBOutlet var usernameButton: UIButton!
     @IBOutlet var photoImageView: UIImageView!
+    @IBOutlet var photoHeightConstraint: NSLayoutConstraint!
     
     // MARK: BindableType
     func bindViewModel() {
@@ -30,7 +31,7 @@ class HomeViewCell: UITableViewCell, BindableType {
                 self.userImageView.kf.setImage(with: resource)
             }.disposed(by: rx.disposeBag)
         
-        viewModel.username
+        viewModel.fullname
             .bind(to: self.usernameButton.rx.title())
             .disposed(by: rx.disposeBag)
         
@@ -40,10 +41,17 @@ class HomeViewCell: UITableViewCell, BindableType {
                 guard let resource = imageResource.element else { return }
                 self.photoImageView.kf.setImage(with: resource)
             }.disposed(by: rx.disposeBag)
+        
+        viewModel.photoSize
+            .map { [unowned self] width, height in
+                CGFloat(height) * self.bounds.width / CGFloat(width)
+            }
+            .bind(to: photoHeightConstraint.rx.constant)
+            .disposed(by: rx.disposeBag)
+        
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 }

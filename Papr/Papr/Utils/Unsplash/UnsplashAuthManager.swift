@@ -21,15 +21,15 @@ class UnsplashAuthManager {
         return UnsplashAuthManager(
             clientID: OAuth2Config.clientID.string, 
             clientSecret: OAuth2Config.clientSecret.string, 
-            scopes: [UnsplashScope.pub.string,
-                     UnsplashScope.readUser.string,
-                     UnsplashScope.writeUser.string,
-                     UnsplashScope.readPhotos.string,
-                     UnsplashScope.writePhotos.string,
-                     UnsplashScope.writeLikes.string,
-                     UnsplashScope.writeFollowers.string,
-                     UnsplashScope.readCollections.string,
-                     UnsplashScope.writeCollections.string 
+            scopes: [Scope.pub.string,
+                     Scope.readUser.string,
+                     Scope.writeUser.string,
+                     Scope.readPhotos.string,
+                     Scope.writePhotos.string,
+                     Scope.writeLikes.string,
+                     Scope.writeFollowers.string,
+                     Scope.readCollections.string,
+                     Scope.writeCollections.string 
             ])
     }
     
@@ -39,7 +39,7 @@ class UnsplashAuthManager {
     private let scopes: [String]
     private let keychain: KeychainSwift
     
-    init(clientID: String, clientSecret: String, scopes: [String] = [UnsplashScope.pub.string]) {
+    init(clientID: String, clientSecret: String, scopes: [String] = [Scope.pub.string]) {
         self.clientID = clientID
         self.clientSecret = clientSecret
         self.redirectURL = URL(string: OAuth2Config.redirectURL.string)!
