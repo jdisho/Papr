@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 import Kingfisher
 import NSObject_Rx
 
@@ -26,7 +27,7 @@ class HomeViewCell: UITableViewCell, BindableType {
         
         viewModel.userPicImageURLString
             .mapResource
-            .subscribe { imageResource in
+            .subscribe { [unowned self] imageResource in
                 guard let resource = imageResource.element else { return }
                 self.userImageView.kf.setImage(with: resource)
             }.disposed(by: rx.disposeBag)
@@ -37,14 +38,14 @@ class HomeViewCell: UITableViewCell, BindableType {
         
         viewModel.photoURLString
             .mapResource
-            .subscribe { imageResource in
+            .subscribe {[unowned self] imageResource in
                 guard let resource = imageResource.element else { return }
-                self.photoImageView.kf.setImage(with: resource)
+               self.photoImageView.kf.setImage(with: resource)
             }.disposed(by: rx.disposeBag)
         
         viewModel.photoSize
-            .map { [unowned self] width, height in
-                CGFloat(height) * self.bounds.width / CGFloat(width)
+            .map { width, height in
+                CGFloat(height) * UIScreen.main.bounds.width / CGFloat(width)
             }
             .bind(to: photoHeightConstraint.rx.constant)
             .disposed(by: rx.disposeBag)

@@ -55,7 +55,7 @@ class HomeViewController: UIViewController, BindableType {
 
         self.tableView.rx
             .contentOffset
-            .flatMap { _ in 
+            .flatMap { [unowned self] _ in 
                 Observable
                     .just(self.tableView.isNearTheBottomEdge())
             }
@@ -67,7 +67,7 @@ class HomeViewController: UIViewController, BindableType {
 
 extension UIScrollView {
 
-    func isNearTheBottomEdge(offset: CGFloat = 50) -> Bool {
+    func isNearTheBottomEdge(offset: CGFloat = 20) -> Bool {
         return self.contentOffset.y + self.frame.size.height + offset >= self.contentSize.height
     }
 
