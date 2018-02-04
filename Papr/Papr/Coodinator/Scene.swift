@@ -29,8 +29,9 @@ extension Scene {
             return vc
         case let .home(viewModel):
             var vc = HomeViewController.instantiateFromNib()
+            let navController = UINavigationController(rootViewController: vc)
             vc.bind(to: viewModel)
-            return vc
+            return navController
         }
     }
 }

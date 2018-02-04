@@ -27,10 +27,16 @@ class HomeViewController: UIViewController, BindableType {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        configureNavigationController()
         configureTableView()
     }
 
     // MARK: UI
+    
+    private func configureNavigationController() {
+        self.title = "Home 🏡"
+    }
+    
     private func configureTableView() {
         tableView.estimatedRowHeight = 300
         tableView.registerCell(type: HomeViewCell.self)

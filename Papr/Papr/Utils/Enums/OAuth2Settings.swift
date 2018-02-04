@@ -24,9 +24,9 @@ enum OAuth2Config {
         case .callbackURLScheme:
             return "papr://"
         case .clientID:
-            return "0dd1dc721b7672e96f4bdf71af623fb68ea7b1d4829681744a4a08e0a8ef68c8"
+            return "8e6b2ead64a72c5b4e549058959af5924c6ad3140888a6fd24ada746d047212a"
         case .clientSecret:
-            return "550dfea297d53e54b05f0a59458a3bddce6217f8f44e34d30524a3b0d2425eca"
+            return "2e8d1495c35a3be19235ae97747b83073f368c45c401476fc86e94d316283d87"
         case .authorizeURL:
             return "https://unsplash.com/oauth/authorize"
         case .tokenURL:
