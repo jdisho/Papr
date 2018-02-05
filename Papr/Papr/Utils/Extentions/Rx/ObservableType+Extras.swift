@@ -9,7 +9,6 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import Kingfisher
 
 extension ObservableType {
     
@@ -30,16 +29,3 @@ extension Observable where E == Bool {
     }
 
 }
-
-
-extension Observable where E == String {
-    
-    var mapResource: Observable<ImageResource> {
-        return self
-            .map { URL(string: $0) }
-            .unwrap()
-            .map { ImageResource(downloadURL: $0) }
-    }
-    
-}
-

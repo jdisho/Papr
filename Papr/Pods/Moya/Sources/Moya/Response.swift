@@ -2,12 +2,19 @@ import Foundation
 
 /// Represents a response to a `MoyaProvider.request`.
 public final class Response: CustomDebugStringConvertible, Equatable {
+
+    /// The status code of the response.
     public let statusCode: Int
+
+    /// The response data.
     public let data: Data
+
+    /// The original URLRequest for the response.
     public let request: URLRequest?
+
+    /// The HTTPURLResponse object.
     public let response: HTTPURLResponse?
 
-    /// Initialize a new `Response`.
     public init(statusCode: Int, data: Data, request: URLRequest? = nil, response: HTTPURLResponse? = nil) {
         self.statusCode = statusCode
         self.data = data
@@ -86,6 +93,9 @@ public extension Response {
     }
 
     /// Maps data received from the signal into a JSON object.
+    ///
+    /// - parameter failsOnEmptyData: A Boolean value determining
+    /// whether the mapping should fail if the data is empty.
     func mapJSON(failsOnEmptyData: Bool = true) throws -> Any {
         do {
             return try JSONSerialization.jsonObject(with: data, options: .allowFragments)
@@ -122,15 +132,37 @@ public extension Response {
     /// - parameter atKeyPath: Optional key path at which to parse object.
     /// - parameter using: A `JSONDecoder` instance which is used to decode data to an object.
     func map<D: Decodable>(_ type: D.Type, atKeyPath keyPath: String? = nil, using decoder: JSONDecoder = JSONDecoder()) throws -> D {
+        let serializeToData: (Any) throws -> Data? = { (jsonObject) in
+            guard JSONSerialization.isValidJSONObject(jsonObject) else {
+                return nil
+            }
+            do {
+                return try JSONSerialization.data(withJSONObject: jsonObject)
+            } catch {
+                throw MoyaError.jsonMapping(self)
+            }
+        }
         let jsonData: Data
         if let keyPath = keyPath {
             guard let jsonObject = (try mapJSON() as? NSDictionary)?.value(forKeyPath: keyPath) else {
                 throw MoyaError.jsonMapping(self)
             }
-            do {
-                jsonData = try JSONSerialization.data(withJSONObject: jsonObject)
-            } catch {
-                throw MoyaError.jsonMapping(self)
+
+            if let data = try serializeToData(jsonObject) {
+                jsonData = data
+            } else {
+                let wrappedJsonObject = ["value": jsonObject]
+                let wrappedJsonData: Data
+                if let data = try serializeToData(wrappedJsonObject) {
+                    wrappedJsonData = data
+                } else {
+                    throw MoyaError.jsonMapping(self)
+                }
+                do {
+                    return try decoder.decode(DecodableWrapper<D>.self, from: wrappedJsonData).value
+                } catch let error {
+                    throw MoyaError.objectMapping(error, self)
+                }
             }
         } else {
             jsonData = data
@@ -141,4 +173,8 @@ public extension Response {
             throw MoyaError.objectMapping(error, self)
         }
     }
+}
+
+private struct DecodableWrapper<T: Decodable>: Decodable {
+    let value: T
 }

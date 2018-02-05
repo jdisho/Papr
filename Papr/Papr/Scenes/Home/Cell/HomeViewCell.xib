@@ -20,21 +20,22 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ymt-LD-VV5">
-                        <rect key="frame" x="0.0" y="0.0" width="513" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="513" height="52"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="esP-U7-fDU">
-                                <rect key="frame" x="16" y="8" width="34" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="34" id="wfU-Im-tiG"/>
-                                    <constraint firstAttribute="height" constant="34" id="xXJ-q4-hgR"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rgj-Rm-V0U">
-                                <rect key="frame" x="66" y="10" width="439" height="30"/>
+                                <rect key="frame" x="60" y="10" width="445" height="32"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <state key="normal" title="Username">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="esP-U7-fDU">
+                                <rect key="frame" x="8" y="8" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="36" id="wfU-Im-tiG"/>
+                                    <constraint firstAttribute="height" constant="36" id="xXJ-q4-hgR"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -43,7 +44,7 @@
                             <constraint firstAttribute="bottom" secondItem="Rgj-Rm-V0U" secondAttribute="bottom" constant="10" id="CAT-FY-y9d"/>
                             <constraint firstItem="esP-U7-fDU" firstAttribute="top" secondItem="Ymt-LD-VV5" secondAttribute="top" constant="8" id="SQ2-iC-cmN"/>
                             <constraint firstAttribute="trailing" secondItem="Rgj-Rm-V0U" secondAttribute="trailing" constant="8" id="VGP-Dq-8gZ"/>
-                            <constraint firstItem="esP-U7-fDU" firstAttribute="leading" secondItem="Ymt-LD-VV5" secondAttribute="leading" constant="16" id="eEs-KN-XRj"/>
+                            <constraint firstItem="esP-U7-fDU" firstAttribute="leading" secondItem="Ymt-LD-VV5" secondAttribute="leading" constant="8" id="eEs-KN-XRj"/>
                             <constraint firstAttribute="bottom" secondItem="esP-U7-fDU" secondAttribute="bottom" constant="8" id="rj7-b7-dru"/>
                         </constraints>
                     </view>
@@ -55,7 +56,7 @@
                         </constraints>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="A0d-dS-WNl">
-                        <rect key="frame" x="0.0" y="50" width="513" height="234"/>
+                        <rect key="frame" x="0.0" y="52" width="513" height="234"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="234" id="Joy-WG-ITM"/>
                         </constraints>

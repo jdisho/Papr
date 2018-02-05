@@ -134,6 +134,12 @@
 		DCC8CA1E2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */; };
 		DCC8CA1F2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */; };
 		DCC8CA202002D4C900F6C540 /* ObservableType+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */; };
+		DCDDF3262027A6B700E1EB81 /* Nuke+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */; };
+		DCDDF3272027A6B700E1EB81 /* Nuke+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */; };
+		DCDDF3282027A6B700E1EB81 /* Nuke+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */; };
+		DCDDF32A2027DA5F00E1EB81 /* UIImageView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3292027DA5F00E1EB81 /* UIImageView+Extentions.swift */; };
+		DCDDF32B2027DA5F00E1EB81 /* UIImageView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3292027DA5F00E1EB81 /* UIImageView+Extentions.swift */; };
+		DCDDF32C2027DA5F00E1EB81 /* UIImageView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3292027DA5F00E1EB81 /* UIImageView+Extentions.swift */; };
 		DCEE1F0B1FC97CDC0010BADE /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F0A1FC97CDC0010BADE /* AlertViewController.swift */; };
 		DCEE1F0C1FC97CDC0010BADE /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F0A1FC97CDC0010BADE /* AlertViewController.swift */; };
 		DCEE1F0D1FC97CDC0010BADE /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F0A1FC97CDC0010BADE /* AlertViewController.swift */; };
@@ -225,6 +231,8 @@
 		DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewCell.xib; sourceTree = "<group>"; };
 		DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellModel.swift; sourceTree = "<group>"; };
 		DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Extras.swift"; sourceTree = "<group>"; };
+		DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nuke+Rx.swift"; sourceTree = "<group>"; };
+		DCDDF3292027DA5F00E1EB81 /* UIImageView+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extentions.swift"; sourceTree = "<group>"; };
 		DCEE1F0A1FC97CDC0010BADE /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		DCEE1F0E1FC97CE80010BADE /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Rx.swift"; sourceTree = "<group>"; };
@@ -447,12 +455,14 @@
 			isa = PBXGroup;
 			children = (
 				DCEE1F121FC9837E0010BADE /* Rx */,
+				DCDDF3242027A69C00E1EB81 /* Nuke+Rx */,
 				DC5F611C1FB65A9F00A60D19 /* Moya+Rx */,
 				DC5AF7321FACD1CE00ADA2BB /* MoyaMapper+Rx */,
 				DCBB1B6B1FA8BA8E004E95F0 /* NibIdentifiable.swift */,
 				DCBB1B6F1FA8BAC2004E95F0 /* BindableType.swift */,
 				DCA09D022015F6F100E6EBB7 /* ViewModelType.swift */,
 				DC7CF5811FC464BF006E0A39 /* URL.swift */,
+				DCDDF3292027DA5F00E1EB81 /* UIImageView+Extentions.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -476,6 +486,14 @@
 				DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		DCDDF3242027A69C00E1EB81 /* Nuke+Rx */ = {
+			isa = PBXGroup;
+			children = (
+				DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */,
+			);
+			path = "Nuke+Rx";
 			sourceTree = "<group>";
 		};
 		DCEE1F091FC97CB80010BADE /* Alert */ = {
@@ -686,10 +704,10 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/ModelMapper/Mapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
@@ -702,10 +720,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
@@ -838,6 +856,7 @@
 				DCA09D032015F6F100E6EBB7 /* ViewModelType.swift in Sources */,
 				DCBB1B241FA7B1BD004E95F0 /* ViewController.swift in Sources */,
 				DCBB1B601FA8BA22004E95F0 /* LoginViewController.swift in Sources */,
+				DCDDF32A2027DA5F00E1EB81 /* UIImageView+Extentions.swift in Sources */,
 				DC5AF7441FACEF2700ADA2BB /* Location.swift in Sources */,
 				DCEE1F141FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
 				DC5AF7481FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
@@ -845,6 +864,7 @@
 				DC5AF7391FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */,
 				DCC8CA1E2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DCA09D002015F68200E6EBB7 /* Constants.swift in Sources */,
+				DCDDF3262027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
 				DC5AF7551FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DCEE1F0B1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCBB1B591FA8B82F004E95F0 /* SceneCoodinator.swift in Sources */,
@@ -886,6 +906,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCDDF3272027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
 				DC71C3101FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
 				DCA09D012015F68200E6EBB7 /* Constants.swift in Sources */,
 				DC5AF74D1FACF18600ADA2BB /* Exif.swift in Sources */,
@@ -897,6 +918,7 @@
 				DCBB1B371FA7B1BD004E95F0 /* PaprTests.swift in Sources */,
 				DC7F20941FADD3400017C14A /* SearchResults.swift in Sources */,
 				DCC8CA1B2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
+				DCDDF32B2027DA5F00E1EB81 /* UIImageView+Extentions.swift in Sources */,
 				DC5AF7371FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift in Sources */,
 				DCBB1B6D1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF73A1FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */,
@@ -945,6 +967,7 @@
 				DC5AF7381FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift in Sources */,
 				DCBB1B6E1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF73B1FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */,
+				DCDDF3282027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
 				DC71C3041FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				DC99FB902003A7CC001195FD /* PhotoServiceType.swift in Sources */,
 				DC5AF72D1FACCBF300ADA2BB /* User.swift in Sources */,
@@ -970,6 +993,7 @@
 				DC5AF7571FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DCEE1F161FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
 				DC5AF75B1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */,
+				DCDDF32C2027DA5F00E1EB81 /* UIImageView+Extentions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -68,6 +68,24 @@ public struct Mapper {
         return nil
     }
 
+    /// Get a RawRepresentable value from the specified list of fields. This returns the first value produced
+    /// in order based on the array of fields.
+    ///
+    /// - parameter fields: The array of fields to check from the source data.
+    ///
+    /// - throws: MapperError.missingFieldError if none of the fields have an acceptable value.
+    ///
+    /// - returns: The first non-nil value to be produced from the array of fields.
+    public func from<T: RawRepresentable>(_ fields: [String]) throws -> T {
+        for field in fields {
+            if let value: T = try? self.from(field) {
+                return value
+            }
+        }
+
+        throw MapperError.missingFieldError(field: fields.joined(separator: ", "))
+    }
+
     /// Get an array of RawRepresentable values from a field in the the source data.
     ///
     /// - note: If T.init(rawValue:) fails given the T.RawValue from the array of source data, that value will
@@ -93,6 +111,24 @@ public struct Mapper {
 
         let rawValues = try array.map { try T.RawValue.fromMap($0) }
         return rawValues.flatMap { T(rawValue: $0) ?? defaultValue }
+    }
+
+    /// Get an optional array of RawRepresentable values from a field in the the source data.
+    ///
+    /// - note: If T.init(rawValue:) fails given the T.RawValue from the array of source data, that value will
+    ///         be replaced by the passed defaultValue, which defaults to nil. The resulting array is
+    ///         flatMapped and all nils are removed. This means that any unrecognized values will be removed
+    ///         or replaced with the default. This ensures backwards compatibility if your source data has
+    ///         keys that your mapping layer doesn't know about yet.
+    ///
+    /// - parameter field:        The field to use from the source data
+    /// - parameter defaultValue: The value to use if the rawValue initializer fails
+    ///
+    /// - returns: An array of the RawRepresentable value, with all nils removed or nil if anything throws
+    public func optionalFrom<T: RawRepresentable>(_ field: String, defaultValue: T? = nil) ->
+        [T]? where T.RawValue: Convertible, T.RawValue == T.RawValue.ConvertedType
+    {
+        return try? self.from(field, defaultValue: defaultValue)
     }
 
     // MARK: - T: Mappable
@@ -180,6 +216,24 @@ public struct Mapper {
         }
 
         return nil
+    }
+
+    /// Get a value from the specified list of fields. This returns the first value produced in order based on
+    /// the array of fields.
+    ///
+    /// - parameter fields: The array of fields to check from the source data.
+    ///
+    /// - throws: MapperError.missingFieldError if none of the fields have an acceptable value.
+    ///
+    /// - returns: The first non-nil value to be produced from the array of fields.
+    public func from<T: Mappable>(_ fields: [String]) throws -> T {
+        for field in fields {
+            if let value: T = try? self.from(field) {
+                return value
+            }
+        }
+
+        throw MapperError.missingFieldError(field: fields.joined(separator: ", "))
     }
 
     // MARK: - T: Convertible
@@ -315,6 +369,45 @@ public struct Mapper {
         }
 
         return nil
+    }
+
+    /// Get a Convertible value from the specified list of fields. This returns the first value produced in
+    /// order based on the array of fields.
+    ///
+    /// - parameter fields: The array of fields to check from the source data.
+    ///
+    /// - throws: MapperError.missingFieldError if none of the fields have an acceptable value.
+    ///
+    /// - returns: The first non-nil value to be produced from the array of fields.
+    public func from<T: Convertible>(_ fields: [String]) throws -> T where T == T.ConvertedType {
+        for field in fields {
+            if let value: T = try? self.from(field, transformation: T.fromMap) {
+                return value
+            }
+        }
+
+        throw MapperError.missingFieldError(field: fields.joined(separator: ", "))
+    }
+
+    /// Get a Convertible value from the specified list of fields. This returns the first value produced in
+    /// order based on the array of fields.
+    ///
+    /// - parameter fields:         The array of fields to retrieve from the source data
+    /// - parameter transformation: The transformation function used to create the expected value
+    ///
+    /// - throws: MapperError.missingFieldError if none of the fields have an acceptable value.
+    ///
+    /// - returns: The value of type T for the given field
+    public func from<T: Convertible>(_ fields: [String], transformation: (Any) throws -> T)
+        throws -> T where T == T.ConvertedType
+    {
+        for field in fields {
+            if let value: T = try? self.from(field, transformation: transformation) {
+                return value
+            }
+        }
+
+        throw MapperError.missingFieldError(field: fields.joined(separator: ", "))
     }
 
     // MARK: - Custom Transformation

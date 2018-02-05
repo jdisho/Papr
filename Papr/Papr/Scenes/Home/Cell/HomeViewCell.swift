@@ -8,51 +8,56 @@
 
 import UIKit
 import RxSwift
-import Kingfisher
-import NSObject_Rx
+import Nuke
 
 class HomeViewCell: UITableViewCell, BindableType {
 
     // MARK: ViewModel
     var viewModel: HomeViewCellModel!
-    
+
     // MARK: IBOutlets
     @IBOutlet var userImageView: UIImageView!
     @IBOutlet var usernameButton: UIButton!
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var photoHeightConstraint: NSLayoutConstraint!
-    
+
+    // MARK: Private
+    private let nukeManager = Nuke.Manager.shared
+    private var disposeBag = DisposeBag()
+
+    // MARK: Overrides
+    override func awakeFromNib() {
+        self.userImageView.rounded
+    }
+
+    override func prepareForReuse() {
+        userImageView.image = nil
+        photoImageView.image = nil
+        disposeBag = DisposeBag()
+    }
+
     // MARK: BindableType
     func bindViewModel() {
+
+        nukeManager.loadImage(with: viewModel.userProfileImage)
+            .asObservable()
+            .bind(to: userImageView.rx.image)
+            .disposed(by: disposeBag)
         
-        viewModel.userPicImageURLString
-            .mapResource
-            .subscribe { [unowned self] imageResource in
-                guard let resource = imageResource.element else { return }
-                self.userImageView.kf.setImage(with: resource)
-            }.disposed(by: rx.disposeBag)
-        
-        viewModel.fullname
-            .bind(to: self.usernameButton.rx.title())
-            .disposed(by: rx.disposeBag)
-        
-        viewModel.photoURLString
-            .mapResource
-            .subscribe {[unowned self] imageResource in
-                guard let resource = imageResource.element else { return }
-               self.photoImageView.kf.setImage(with: resource)
-            }.disposed(by: rx.disposeBag)
-        
-        viewModel.photoSize
+        Observable.concat(nukeManager.loadImage(with: viewModel.smallPhoto).asObservable(),
+                          nukeManager.loadImage(with: viewModel.regularPhoto).asObservable())
+            .bind(to: photoImageView.rx.image)
+            .disposed(by: disposeBag)
+
+        Observable.just(viewModel.fullname)
+            .bind(to: usernameButton.rx.title())
+            .disposed(by: disposeBag)
+
+        Observable.just(viewModel.photoSize)
             .map { width, height in
                 CGFloat(height) * UIScreen.main.bounds.width / CGFloat(width)
             }
             .bind(to: photoHeightConstraint.rx.constant)
-            .disposed(by: rx.disposeBag)
-        
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
+            .disposed(by: disposeBag)
     }
 }

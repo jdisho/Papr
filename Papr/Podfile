@@ -21,7 +21,7 @@ target 'Papr' do
   pod 'KeychainSwift'
   
   # Image
-  pod 'Kingfisher', '~> 4.0'
+  pod 'Nuke', '~> 6.0' 
 
   # Pods for Papr
 

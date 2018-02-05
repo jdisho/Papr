@@ -7,21 +7,21 @@
 //
 
 import Foundation
-import RxSwift
 
 struct HomeViewCellModel {
 
-    let userPicImageURLString: Observable<String>
-    let fullname: Observable<String>
-    let photoURLString: Observable<String>
-    let photoSize: Observable<(Int, Int)>
+    let userProfileImage: String
+    let fullname: String
+    let smallPhoto: String
+    let regularPhoto: String
+    let photoSize: (width: Int, height: Int)
 
     init(photo: Photo) {
-
-        let asyncPhoto = Observable.just(photo)
-        userPicImageURLString = asyncPhoto.map { $0.user?.profileImage?.medium ?? "" }
-        fullname = asyncPhoto.map { $0.user?.fullName ?? "" }
-        photoURLString = asyncPhoto.map { $0.imageURLs?.regular ?? "" }
-        photoSize = asyncPhoto.map { ($0.width ?? 0, $0.height ?? 0)}
+        
+        userProfileImage = photo.user?.profileImage?.medium ?? ""
+        fullname = photo.user?.fullName ?? ""
+        smallPhoto = photo.imageURLs?.small ?? ""
+        regularPhoto = photo.imageURLs?.full ?? ""
+        photoSize = (width: photo.width ?? 0, height: photo.height ?? 0)
     }
 }

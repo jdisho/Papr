@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxDataSources
+import NSObject_Rx
 
 class HomeViewController: UIViewController, BindableType {
     
@@ -74,7 +75,7 @@ class HomeViewController: UIViewController, BindableType {
 
 extension UIScrollView {
 
-    func isNearTheBottomEdge(offset: CGFloat = 20) -> Bool {
+    func isNearTheBottomEdge(offset: CGFloat = 100) -> Bool {
         return self.contentOffset.y + self.frame.size.height + offset >= self.contentSize.height
     }
 
