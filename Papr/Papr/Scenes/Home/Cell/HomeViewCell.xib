@@ -24,7 +24,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="513" height="52"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rgj-Rm-V0U">
-                                <rect key="frame" x="60" y="10" width="445" height="32"/>
+                                <rect key="frame" x="60" y="10" width="349" height="32"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <state key="normal" title="Username">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -37,15 +37,27 @@
                                     <constraint firstAttribute="height" constant="36" id="xXJ-q4-hgR"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7h ago" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMX-RG-bBR">
+                                <rect key="frame" x="447" y="16" width="50" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="Lj3-4d-Pha"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.32244555913704498" green="0.32810687018823453" blue="0.35448680263096444" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Rgj-Rm-V0U" firstAttribute="top" secondItem="Ymt-LD-VV5" secondAttribute="top" constant="10" id="1Ey-vd-gUL"/>
                             <constraint firstItem="Rgj-Rm-V0U" firstAttribute="leading" secondItem="esP-U7-fDU" secondAttribute="trailing" constant="16" id="8XG-wW-QCy"/>
                             <constraint firstAttribute="bottom" secondItem="Rgj-Rm-V0U" secondAttribute="bottom" constant="10" id="CAT-FY-y9d"/>
+                            <constraint firstAttribute="trailing" secondItem="oMX-RG-bBR" secondAttribute="trailing" constant="16" id="Jhw-Ni-nBe"/>
+                            <constraint firstAttribute="bottom" secondItem="oMX-RG-bBR" secondAttribute="bottom" constant="16" id="LZL-Ua-u10"/>
                             <constraint firstItem="esP-U7-fDU" firstAttribute="top" secondItem="Ymt-LD-VV5" secondAttribute="top" constant="8" id="SQ2-iC-cmN"/>
-                            <constraint firstAttribute="trailing" secondItem="Rgj-Rm-V0U" secondAttribute="trailing" constant="8" id="VGP-Dq-8gZ"/>
+                            <constraint firstAttribute="trailing" secondItem="Rgj-Rm-V0U" secondAttribute="trailing" constant="104" id="VGP-Dq-8gZ"/>
                             <constraint firstItem="esP-U7-fDU" firstAttribute="leading" secondItem="Ymt-LD-VV5" secondAttribute="leading" constant="8" id="eEs-KN-XRj"/>
+                            <constraint firstItem="oMX-RG-bBR" firstAttribute="top" secondItem="Ymt-LD-VV5" secondAttribute="top" constant="16" id="qNw-1v-Ysa"/>
                             <constraint firstAttribute="bottom" secondItem="esP-U7-fDU" secondAttribute="bottom" constant="8" id="rj7-b7-dru"/>
                         </constraints>
                     </view>
@@ -92,6 +104,7 @@
                 <outlet property="circularLoaderContainerView" destination="4ey-YS-4W9" id="qDa-cH-Sbg"/>
                 <outlet property="photoHeightConstraint" destination="Joy-WG-ITM" id="wnP-29-xsZ"/>
                 <outlet property="photoImageView" destination="A0d-dS-WNl" id="bCb-yB-hQX"/>
+                <outlet property="postedTimeLabel" destination="oMX-RG-bBR" id="AmV-jd-0Pb"/>
                 <outlet property="userImageView" destination="esP-U7-fDU" id="tTj-is-LNh"/>
                 <outlet property="usernameButton" destination="Rgj-Rm-V0U" id="p7I-T4-l5t"/>
             </connections>

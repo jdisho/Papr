@@ -23,7 +23,8 @@ class HomeViewCell: UITableViewCell, BindableType {
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var photoHeightConstraint: NSLayoutConstraint!
     @IBOutlet var circularLoaderContainerView: UIView!
-
+    @IBOutlet var postedTimeLabel: UILabel!
+    
     // MARK: Private
     private let nukeManager = Nuke.Manager.shared
     private var disposeBag = DisposeBag()
@@ -32,8 +33,8 @@ class HomeViewCell: UITableViewCell, BindableType {
     // MARK: Overrides
 
     override func awakeFromNib() {
-        self.userImageView.rounded
-        self.circularLoaderContainerView.layer.addSublayer(circularLoader)
+        userImageView.rounded
+        circularLoaderContainerView.layer.addSublayer(circularLoader)
     }
 
     override func prepareForReuse() {
@@ -45,9 +46,8 @@ class HomeViewCell: UITableViewCell, BindableType {
     // MARK: BindableType
 
     func bindViewModel() {
-
-        guard let smallPhotoURL = URL(string: viewModel.smallPhoto), 
-            let regularPhotoURL = URL(string: viewModel.regularPhoto) else { return }
+        guard let smallPhotoURL = URL(string: viewModel.smallPhoto.value), 
+            let regularPhotoURL = URL(string: viewModel.regularPhoto.value) else { return }
         
         var regularPhotoRequest = Request(url: regularPhotoURL)
 
@@ -57,25 +57,30 @@ class HomeViewCell: UITableViewCell, BindableType {
             self.downloadProgress = completed / total
         }
 
-        nukeManager.loadImage(with: viewModel.userProfileImage)
+        nukeManager.loadImage(with: viewModel.userProfileImage.value)
             .orEmpty
             .bind(to: userImageView.rx.image)
             .disposed(by: disposeBag)
-        
+
         Observable.concat(nukeManager.loadImage(with: smallPhotoURL).orEmpty,
                           nukeManager.loadImage(with: regularPhotoRequest).orEmpty)
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
 
-        Observable.just(viewModel.fullname)
+        viewModel.fullname
+            .asObservable()
             .bind(to: usernameButton.rx.title())
             .disposed(by: disposeBag)
 
-        Observable.just(viewModel.photoSize)
-            .map { width, height in
-                CGFloat(height) * UIScreen.main.bounds.width / CGFloat(width)
-            }
+        viewModel.photoSizeCoef
+            .asObservable()
+            .map { CGFloat($0) }
             .bind(to: photoHeightConstraint.rx.constant)
+            .disposed(by: disposeBag)
+
+        viewModel.created
+            .asObservable()
+            .bind(to: postedTimeLabel.rx.text)
             .disposed(by: disposeBag)
     }
     
