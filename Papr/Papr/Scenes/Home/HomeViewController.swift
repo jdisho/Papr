@@ -19,17 +19,17 @@ class HomeViewController: UIViewController, BindableType {
 
     // MARK: IBOutlets
 
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var collectionView: UICollectionView!
     
     // MARK: Private
 
-    private var dataSource: RxTableViewSectionedReloadDataSource<SectionModel<String, Photo>>!
+    private var dataSource: RxCollectionViewSectionedReloadDataSource<SectionModel<String, Photo>>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
     
         configureNavigationController()
-        configureTableView()
+        configureCollectionView()
     }
 
     // MARK: UI
@@ -38,9 +38,12 @@ class HomeViewController: UIViewController, BindableType {
         self.title = "Home 🏡"
     }
     
-    private func configureTableView() {
-        tableView.estimatedRowHeight = 300
-        tableView.registerCell(type: HomeViewCell.self)
+    private func configureCollectionView() {
+        collectionView.registerCell(type: HomeViewCell.self)
+        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+
+        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
     }
 
     // MARK: BindableType
@@ -49,23 +52,24 @@ class HomeViewController: UIViewController, BindableType {
         guard let input = viewModel.input else { return }
         let output = viewModel.transform(input: input)
 
-        dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Photo>>(
-            configureCell: { [unowned self] (dataSource, tableView, indexPath, item) in 
-            var cell = tableView.dequeueResuableCell(type: HomeViewCell.self, forIndexPath: indexPath)
+        dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, Photo>>(
+            configureCell: { [unowned self] (dataSource, collectionView, indexPath, item) in 
+            var cell = collectionView.dequeueReusableCell(type: HomeViewCell.self, forIndexPath: indexPath)
             cell.bind(to: self.viewModel.createHomeViewCellModel(for: item))
             return cell
         })
+        
 
         output.asyncPhotos
             .map { [SectionModel(model: "", items: Array($0))] }
-            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
 
-        self.tableView.rx
+        self.collectionView.rx
             .contentOffset
             .flatMap { [unowned self] _ in 
                 Observable
-                    .just(self.tableView.isNearTheBottomEdge())
+                    .just(self.collectionView.isNearTheBottomEdge())
             }
             .distinctUntilChanged()
             .bind(to: input.loadMore)

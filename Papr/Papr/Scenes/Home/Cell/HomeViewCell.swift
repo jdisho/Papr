@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import Nuke
 
-class HomeViewCell: UITableViewCell, BindableType {
+class HomeViewCell: UICollectionViewCell, BindableType {
 
     // MARK: ViewModel
 
@@ -22,6 +22,7 @@ class HomeViewCell: UITableViewCell, BindableType {
     @IBOutlet var usernameButton: UIButton!
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var photoHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var photoWidthConstraint: NSLayoutConstraint!
     @IBOutlet var circularLoaderContainerView: UIView!
     @IBOutlet var postedTimeLabel: UILabel!
     
@@ -33,13 +34,18 @@ class HomeViewCell: UITableViewCell, BindableType {
     // MARK: Overrides
 
     override func awakeFromNib() {
+        super.awakeFromNib()
+        
         userImageView.rounded
         circularLoaderContainerView.layer.addSublayer(circularLoader)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        photoWidthConstraint.constant = UIScreen.main.bounds.width
     }
 
     override func prepareForReuse() {
         userImageView.image = nil
         photoImageView.image = nil
+        downloadProgress = 0
         disposeBag = DisposeBag()
     }
 

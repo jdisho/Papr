@@ -29,19 +29,20 @@ struct HomeViewCellModel {
             .bind(to: userProfileImage)
             .disposed(by: disposeBag)
         
-        asyncPhoto.map {$0.user?.fullName ?? ""}
+        asyncPhoto.map { $0.user?.fullName ?? "" }
             .bind(to: fullname)
             .disposed(by: disposeBag)
         
-        asyncPhoto.map {$0.imageURLs?.small ?? ""}
+        asyncPhoto.map { $0.imageURLs?.small ?? "" }
             .bind(to: smallPhoto)
             .disposed(by: disposeBag)
         
-        asyncPhoto.map {$0.imageURLs?.full ?? ""}
+        asyncPhoto.map { $0.imageURLs?.regular ?? "" }
             .bind(to: regularPhoto)
             .disposed(by: disposeBag)
     
-        asyncPhoto.map { (width: $0.width ?? 0, height: $0.height ?? 0) }
+        asyncPhoto
+            .map { (width: $0.width ?? 0, height: $0.height ?? 0) }
             .map { (width, height) -> Double in
                 return Double(height * Int(UIScreen.main.bounds.width) / width)
             }
