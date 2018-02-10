@@ -13,90 +13,43 @@ import KeychainSwift
 enum UnsplashAPI {
 
     case me
-
-    // username(required), [width, height] (optional)
-    case userProfile(String, Int?, Int?)
-
-    // username(required)
-    case userPortfolio(String)
-
-    // username(required), [page, per_page, order_by](optional)
-    case userPhotos(String, Int?, Int?, OrderBy?)
-
-    // username(required), [page, per_page, order_by](optional)
-    case userLikedPhotos(String, Int?, Int?, OrderBy?)
-
-    // username(required), [page, per_page](optional)
-    case userCollections(String, Int?, Int?)
-
-    // username(required)
-    case userStatistics(String)
-
-    // [page, per_page, order_by](optional)
-    case photos(Int?, Int?, OrderBy?)
-
-    // [page, per_page, order_by](optional)
-    case curatedPhotos(Int?, Int?, OrderBy?)
-
-    // id(required)
-    case photo(String)
-
+    case userProfile(username: String, width: Int?, height: Int?)
+    case userPortfolio(username: String)
+    case userPhotos(username: String, page: Int?, perPage: Int?, orderBy: OrderBy?)
+    case userLikedPhotos(username: String, page: Int?, perPage: Int?, orderBy: OrderBy?)
+    case userCollections(username:String, page: Int?, perPage: Int?)
+    case userStatistics(username: String)
+    case photos(page: Int?, perPage: Int?, orderBy: OrderBy?)
+    case curatedPhotos(page: Int?, perPage: Int?, orderBy: OrderBy?)
+    case photo(id: String)
     case randomPhoto
+    case photoStatistics(id: String)
+    case photoDownloadLink(id: String)
+    case likePhoto(id: String)
+    case unLikePhoto(id: String)
+    case searchPhotos(query: String, page: Int?, perPage: Int?, collectionID: String?)
+    case searchCollections(query: String, page: Int?, perPage: Int?)
+    case searchUsers(query: String, page: Int?, perPage: Int?)
+    case collections(page: Int?, perPage: Int?)
+    case featuresCollections(page: Int?, perPage: Int?)
+    case curatedCollections(page: Int?, perPage: Int?)
+    case collection(id: String)
+    case curatedCollection(id: String)
+    case collectionPhotos(id: String, page: Int?, perPage: Int?)
+    case curatedCollectionPhotos(id: String, page: Int?, perPage: Int?)
+    case relatedCollections(id: String)
 
-    // id(required)
-    case photoStatistics(String)
-
-    // id(required)
-    case photoDownloadLink(String)
+    // MARK: - TODO: Support these cases
 
     // id(required)
     // case updatePhoto(String)
-
-    // id(required)
-    case likePhoto(String)
-    
-    // id(required)
-    case unLikePhoto(String)
-
-    // query(required) [page, per_page, collection/s id](optional)
-    case searchPhotos(String, Int?, Int?, String?)
-
-    // query(required) [page, per_page](optional)
-    case searchCollections(String, Int?, Int?)
-
-    // query(required) [page, per_page](optional)
-    case searchUsers(String, Int?, Int?)
-
-    // [page, per_page](optional)
-    case collections(Int?, Int?)
-
-    // [page, per_page](optional)
-    case featuresCollections(Int?, Int?)
-
-    // [page, per_page](optional)
-    case curatedCollections(Int?, Int?)
-
-    // id(required)
-    case collection(String)
-    
-    // id(required)
-    case curatedCollection(String)
-
-    // id(required) [page, per_page](optional)
-    case collectionPhotos(String, Int?, Int?)
-
-    // id(required) [page, per_page](optional)
-    case curatedCollectionPhotos(String, Int?, Int?)
-
-    // id(required)
-    case relatedCollections(String)
 
     // title(required) [description, private/public](optional)
     // case createCollection(String, String?, Bool?)
 
     // id(required) [title, description, private/public](optional)
     // case updateCollection(String, String?, String?, Bool?)
-    
+
 }
 
 extension UnsplashAPI: TargetType {
@@ -252,10 +205,8 @@ extension UnsplashAPI: TargetType {
     
     var headers: [String : String]? {
         guard let accessToken = UnsplashAuthManager.sharedAuthManager.accessToken else { 
-            print("I dont have the access token")
             return ["Authorization": "Client-ID " + OAuth2Config.clientID.string] 
         }
-        print("There is a token")
         return ["Authorization": "Bearer " + accessToken]
     }
     

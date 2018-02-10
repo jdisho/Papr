@@ -52,7 +52,7 @@ extension User: Decodable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: UserCodingKeys.self)
-        
+
         id = try? container.decode(String.self, forKey: .id)
         username = try? container.decode(String.self, forKey: .username)
         firstName = try? container.decode(String.self, forKey: .firstName)
