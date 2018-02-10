@@ -41,7 +41,6 @@ class HomeViewController: UIViewController, BindableType {
     private func configureCollectionView() {
         collectionView.registerCell(type: HomeViewCell.self)
         guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-
         flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
     }

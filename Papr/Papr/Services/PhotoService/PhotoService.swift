@@ -21,7 +21,7 @@ struct PhotoService: PhotoServiceType {
     func photos(by pageNumber: Int?, orderBy: OrderBy?) -> Observable<[Photo]?> {
         return provider.rx
             .request(.photos(pageNumber, Constants.photosPerPage, orderBy))
-            .mapOptional(to: [Photo].self)
+            .mapOptional([Photo].self)
             .asObservable()
     }
     

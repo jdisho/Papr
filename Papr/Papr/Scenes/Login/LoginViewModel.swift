@@ -77,7 +77,7 @@ class LoginViewModel {
         let user = moyaProvider.rx
             .request(.me)
             .asObservable()
-            .map(to: User.self)
+            .map(User.self)
         
         return user
     }

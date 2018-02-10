@@ -19,15 +19,6 @@
 		DC5AF72F1FACCE5200ADA2BB /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */; };
 		DC5AF7301FACCE5200ADA2BB /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */; };
 		DC5AF7311FACCE5200ADA2BB /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */; };
-		DC5AF7361FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7331FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift */; };
-		DC5AF7371FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7331FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift */; };
-		DC5AF7381FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7331FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift */; };
-		DC5AF7391FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7341FACD1CE00ADA2BB /* Observable+Mapper.swift */; };
-		DC5AF73A1FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7341FACD1CE00ADA2BB /* Observable+Mapper.swift */; };
-		DC5AF73B1FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7341FACD1CE00ADA2BB /* Observable+Mapper.swift */; };
-		DC5AF73C1FACD1CE00ADA2BB /* Single+Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7351FACD1CE00ADA2BB /* Single+Mapper.swift */; };
-		DC5AF73D1FACD1CE00ADA2BB /* Single+Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7351FACD1CE00ADA2BB /* Single+Mapper.swift */; };
-		DC5AF73E1FACD1CE00ADA2BB /* Single+Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7351FACD1CE00ADA2BB /* Single+Mapper.swift */; };
 		DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF73F1FACE6A300ADA2BB /* Photo.swift */; };
 		DC5AF7411FACE6A300ADA2BB /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF73F1FACE6A300ADA2BB /* Photo.swift */; };
 		DC5AF7421FACE6A300ADA2BB /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF73F1FACE6A300ADA2BB /* Photo.swift */; };
@@ -185,9 +176,6 @@
 		DC5AF7261FAB989400ADA2BB /* OAuth2Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Settings.swift; sourceTree = "<group>"; };
 		DC5AF72A1FACCBF300ADA2BB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
-		DC5AF7331FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MoyaResponse+Mapper.swift"; sourceTree = "<group>"; };
-		DC5AF7341FACD1CE00ADA2BB /* Observable+Mapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Mapper.swift"; sourceTree = "<group>"; };
-		DC5AF7351FACD1CE00ADA2BB /* Single+Mapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Single+Mapper.swift"; sourceTree = "<group>"; };
 		DC5AF73F1FACE6A300ADA2BB /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		DC5AF7431FACEF2700ADA2BB /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		DC5AF7471FACEF5500ADA2BB /* ImageURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageURLs.swift; sourceTree = "<group>"; };
@@ -284,16 +272,6 @@
 				D59E6B0C5E02E5657E3FA6EA /* Pods_PaprUITests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DC5AF7321FACD1CE00ADA2BB /* MoyaMapper+Rx */ = {
-			isa = PBXGroup;
-			children = (
-				DC5AF7331FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift */,
-				DC5AF7341FACD1CE00ADA2BB /* Observable+Mapper.swift */,
-				DC5AF7351FACD1CE00ADA2BB /* Single+Mapper.swift */,
-			);
-			path = "MoyaMapper+Rx";
 			sourceTree = "<group>";
 		};
 		DC5AF7531FAD2EE400ADA2BB /* Enums */ = {
@@ -465,7 +443,6 @@
 				DCEE1F121FC9837E0010BADE /* Rx */,
 				DCDDF3242027A69C00E1EB81 /* Nuke+Rx */,
 				DC5F611C1FB65A9F00A60D19 /* Moya+Rx */,
-				DC5AF7321FACD1CE00ADA2BB /* MoyaMapper+Rx */,
 				DCBB1B6B1FA8BA8E004E95F0 /* NibIdentifiable.swift */,
 				DCBB1B6F1FA8BAC2004E95F0 /* BindableType.swift */,
 				DCA09D022015F6F100E6EBB7 /* ViewModelType.swift */,
@@ -714,7 +691,6 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/ModelMapper/Mapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
@@ -730,7 +706,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
@@ -872,7 +847,6 @@
 				DCEE1F141FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
 				DC5AF7481FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DCBB1B221FA7B1BD004E95F0 /* AppDelegate.swift in Sources */,
-				DC5AF7391FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */,
 				DCC8CA1E2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DCA09D002015F68200E6EBB7 /* Constants.swift in Sources */,
 				DCDDF3262027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
@@ -890,7 +864,6 @@
 				DCBB1B551FA8B814004E95F0 /* Scene.swift in Sources */,
 				DC99FB922003A7DB001195FD /* PhotoService.swift in Sources */,
 				DC5AF7271FAB989400ADA2BB /* OAuth2Settings.swift in Sources */,
-				DC5AF7361FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift in Sources */,
 				DC5F61201FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */,
 				DCBB1B6C1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */,
@@ -902,7 +875,6 @@
 				DC5F61231FB65A9F00A60D19 /* Observable+Response.swift in Sources */,
 				DCBE008E202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
 				DC7CF5821FC464BF006E0A39 /* URL.swift in Sources */,
-				DC5AF73C1FACD1CE00ADA2BB /* Single+Mapper.swift in Sources */,
 				DCBB1B5B1FA8B840004E95F0 /* SceneTransitionType.swift in Sources */,
 				DC5AF7591FAD2F1E00ADA2BB /* OrderBy.swift in Sources */,
 				DC5F61261FB65A9F00A60D19 /* Single+Response.swift in Sources */,
@@ -931,9 +903,7 @@
 				DC7F20941FADD3400017C14A /* SearchResults.swift in Sources */,
 				DCC8CA1B2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
 				DCDDF32B2027DA5F00E1EB81 /* UIImageView+Extentions.swift in Sources */,
-				DC5AF7371FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift in Sources */,
 				DCBB1B6D1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
-				DC5AF73A1FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */,
 				DCBE008F202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
 				DC71C3031FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				DC99FB8F2003A7CC001195FD /* PhotoServiceType.swift in Sources */,
@@ -953,7 +923,6 @@
 				DCBB1B611FA8BA22004E95F0 /* LoginViewController.swift in Sources */,
 				DCEE1F101FC97CE80010BADE /* AlertViewModel.swift in Sources */,
 				DC5F61211FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */,
-				DC5AF73D1FACD1CE00ADA2BB /* Single+Mapper.swift in Sources */,
 				DCBB1B681FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
 				DCBB1B711FA8BAC2004E95F0 /* BindableType.swift in Sources */,
 				DC5AF7561FAD2EF900ADA2BB /* Scope.swift in Sources */,
@@ -978,9 +947,7 @@
 				DCBB1B421FA7B1BD004E95F0 /* PaprUITests.swift in Sources */,
 				DC7F20951FADD3400017C14A /* SearchResults.swift in Sources */,
 				DCC8CA1C2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
-				DC5AF7381FACD1CE00ADA2BB /* MoyaResponse+Mapper.swift in Sources */,
 				DCBB1B6E1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
-				DC5AF73B1FACD1CE00ADA2BB /* Observable+Mapper.swift in Sources */,
 				DCDDF3282027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
 				DC71C3041FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				DC99FB902003A7CC001195FD /* PhotoServiceType.swift in Sources */,
@@ -1003,7 +970,6 @@
 				DCEE1F111FC97CE80010BADE /* AlertViewModel.swift in Sources */,
 				DC5F61221FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */,
 				DCBE008C202A1A980065BEF3 /* Date+Extentions.swift in Sources */,
-				DC5AF73E1FACD1CE00ADA2BB /* Single+Mapper.swift in Sources */,
 				DCBB1B691FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
 				DCBB1B721FA8BAC2004E95F0 /* BindableType.swift in Sources */,
 				DC5AF7571FAD2EF900ADA2BB /* Scope.swift in Sources */,

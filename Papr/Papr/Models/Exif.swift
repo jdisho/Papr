@@ -6,24 +6,34 @@
 //  Copyright © 2017 Joan Disho. All rights reserved.
 //
 
-import Mapper
-
-struct Exif: Mappable {
-    
+struct Exif {
     let aperture: String?
     let exposureTime: String?
     let focalLength: String?
     let iso: String?
     let make: String?
     let model: String?
+}
+
+extension Exif: Decodable {
     
-    init(map: Mapper) throws {
+    private enum ExifCodingKeys: String, CodingKey {
+        case aperture
+        case exposureTime = "exposure_time"
+        case focalLength = "focal_length"
+        case iso
+        case make
+        case model
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: ExifCodingKeys.self)
         
-        aperture = try? map.from("aperture")
-        exposureTime = try? map.from("exposure_time")
-        focalLength = try? map.from("focal_length")
-        iso = try? map.from("iso")
-        make = try? map.from("make")
-        model = try? map.from("model")
+        aperture = try? container.decode(String.self, forKey: .aperture)
+        exposureTime = try? container.decode(String.self, forKey: .exposureTime)
+        focalLength = try? container.decode(String.self, forKey: .focalLength)
+        iso = try? container.decode(String.self, forKey: .iso)
+        make = try? container.decode(String.self, forKey: .make)
+        model = try? container.decode(String.self, forKey: .model) 
     }
 }

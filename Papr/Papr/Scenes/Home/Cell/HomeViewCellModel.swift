@@ -33,11 +33,11 @@ struct HomeViewCellModel {
             .bind(to: fullname)
             .disposed(by: disposeBag)
         
-        asyncPhoto.map { $0.imageURLs?.small ?? "" }
+        asyncPhoto.map { $0.urls?.small ?? "" }
             .bind(to: smallPhoto)
             .disposed(by: disposeBag)
         
-        asyncPhoto.map { $0.imageURLs?.regular ?? "" }
+        asyncPhoto.map { $0.urls?.regular ?? "" }
             .bind(to: regularPhoto)
             .disposed(by: disposeBag)
     
