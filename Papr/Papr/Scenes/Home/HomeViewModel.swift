@@ -11,62 +11,72 @@ import RxSwift
 import RxCocoa
 import Action
 
-class HomeViewModel {
+protocol HomeViewModelInput {
+    var loadMore: BehaviorSubject<Bool> { get }
+    var orderBy: BehaviorSubject<OrderBy> { get }
+}
 
-    var input: Input!
+protocol HomeViewModelOutput {
+    var asyncPhotos: Observable<[Photo]>! { get }
+}
 
+protocol HomeViewModelType {
+    var input: HomeViewModelInput { get }
+    var output: HomeViewModelOutput { get }
+    func createHomeViewCellModel(for photo: Photo) -> HomeViewCellModel
+}
+
+class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelOutput{
+
+    // MARK: Input & Output
+    var input: HomeViewModelInput { return self }
+    var output: HomeViewModelOutput { return self }
+
+    // MARK: Input
+    let loadMore = BehaviorSubject<Bool>(value: false)
+    let orderBy = BehaviorSubject<OrderBy>(value: .latest)
+    
+    // MARK: Output
+    var asyncPhotos: Observable<[Photo]>!
+    
+    // MARK: Private
     private let service: PhotoServiceType
     private let sceneCoordinator: SceneCoordinatorType
     private let disposeBag = DisposeBag()
 
+    // MARK: Init
     init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared, 
-         service: PhotoServiceType = PhotoService(), 
-         input: Input = Input()) {
+         service: PhotoServiceType = PhotoService()) {
         self.sceneCoordinator = sceneCoordinator
         self.service = service
-        self.input = input
-    }
 
-    func createHomeViewCellModel(for photo: Photo) -> HomeViewCellModel {
-        return HomeViewCellModel(photo: photo)
-    }
-}
-
-extension HomeViewModel: ViewModelType {
-
-    struct Input {
-        let loadMore = BehaviorSubject<Bool>(value: false)
-        let orderBy = BehaviorSubject<OrderBy>(value: .latest)
-    }
-
-    struct Output {
-        var asyncPhotos: Observable<[Photo]>!
-    }
-
-    func transform(input: Input) -> Output {
-        
         var currentPageNumber = 0
         var photoArray = [Photo]([])
         
         let photosFromService = Observable
-            .combineLatest(input.loadMore, input.orderBy)
+            .combineLatest(loadMore, orderBy)
             .flatMap { loadMore, orderBy -> Observable<[Photo]?> in 
                 if loadMore {
                     currentPageNumber += 1
-                    return self.service.photos(by: currentPageNumber, orderBy: orderBy)
+                    print("loadMore")
+                    return self.service.photos(byPageNumber: currentPageNumber, orderBy: orderBy)
                 }
                 return .empty()
             }
-        
-        let asyncPhotos = photosFromService
+
+        asyncPhotos = photosFromService
             .map { photos -> [Photo] in
                 photos?.forEach { photo in 
                     photoArray.append(photo)
                 }
             return photoArray
             }
-
-        return Output(asyncPhotos: asyncPhotos)
     }
 
+    // MARK: HomeViewCellModel
+    func createHomeViewCellModel(for photo: Photo) -> HomeViewCellModel {
+        return HomeViewCellModel(photo: photo)
+    }
 }
+
+

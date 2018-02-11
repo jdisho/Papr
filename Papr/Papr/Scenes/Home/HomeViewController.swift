@@ -11,25 +11,28 @@ import RxSwift
 import RxDataSources
 import NSObject_Rx
 
+typealias HomeSectionModel = SectionModel<String, Photo>
+
 class HomeViewController: UIViewController, BindableType {
     
     // MARK: ViewModel
 
-    var viewModel: HomeViewModel!
+    var viewModel: HomeViewModelType!
 
     // MARK: IBOutlets
 
     @IBOutlet var collectionView: UICollectionView!
     
     // MARK: Private
-
-    private var dataSource: RxCollectionViewSectionedReloadDataSource<SectionModel<String, Photo>>!
+    private var dataSource: RxCollectionViewSectionedReloadDataSource<HomeSectionModel>!
+    private var refreshControl: UIRefreshControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
     
         configureNavigationController()
         configureCollectionView()
+        configureRefreshControl()
     }
 
     // MARK: UI
@@ -44,27 +47,35 @@ class HomeViewController: UIViewController, BindableType {
         flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
     }
+    
+    private func configureRefreshControl() {
+        refreshControl = UIRefreshControl()
+        collectionView.addSubview(refreshControl)
+    }
+    
+    @objc func refresh() {
+        print("Refresh")
+    }
 
     // MARK: BindableType
 
     func bindViewModel() {
-        guard let input = viewModel.input else { return }
-        let output = viewModel.transform(input: input)
+        let input = viewModel.input
+        let output = viewModel.output
 
-        dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, Photo>>(
+        dataSource = RxCollectionViewSectionedReloadDataSource<HomeSectionModel>(
             configureCell: { [unowned self] (dataSource, collectionView, indexPath, item) in 
             var cell = collectionView.dequeueReusableCell(type: HomeViewCell.self, forIndexPath: indexPath)
             cell.bind(to: self.viewModel.createHomeViewCellModel(for: item))
             return cell
         })
-        
 
         output.asyncPhotos
             .map { [SectionModel(model: "", items: Array($0))] }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
 
-        self.collectionView.rx
+        collectionView.rx
             .contentOffset
             .flatMap { [unowned self] _ in 
                 Observable

@@ -73,12 +73,8 @@ public extension ObservableType where E == Response {
     /// If the conversion fails, the nil is returned instead of error signal.
     public func mapOptional<D: Decodable>(_ type: D.Type, atKeyPath keyPath: String? = nil, using decoder: JSONDecoder = JSONDecoder()) -> Observable<D?> {
         return flatMap { response -> Observable<D?> in
-            do {
-                let object = try response.map(type, atKeyPath: keyPath, using: decoder)
-                return .just(object)
-            } catch {
-                return .just(nil)
-            }   
+            let object = try? response.map(type, atKeyPath: keyPath, using: decoder)
+            return .just(object)
         }
     }
     

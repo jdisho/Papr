@@ -10,5 +10,5 @@ import Foundation
 import RxSwift
 
 protocol PhotoServiceType {
-    func photos(by pageNumber: Int?, orderBy: OrderBy?) -> Observable<[Photo]?>
+    func photos(byPageNumber pageNumber: Int?, orderBy: OrderBy?) -> Observable<[Photo]?>
 }
