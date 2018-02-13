@@ -24,15 +24,46 @@ class HomeViewController: UIViewController, BindableType {
     @IBOutlet var collectionView: UICollectionView!
     
     // MARK: Private
+
     private var dataSource: RxCollectionViewSectionedReloadDataSource<HomeSectionModel>!
     private var refreshControl: UIRefreshControl!
+
+    // MARK: Override
 
     override func viewDidLoad() {
         super.viewDidLoad()
     
         configureNavigationController()
-        configureCollectionView()
         configureRefreshControl()
+        configureCollectionView()
+        refresh()
+    }
+
+    // MARK: BindableType
+    
+    func bindViewModel() {
+        dataSource = RxCollectionViewSectionedReloadDataSource<HomeSectionModel>(
+            configureCell:  collectionViewDataSource()
+        )
+        
+        viewModel.outputs.isRefreshing
+            .bind(to: refreshControl.rx.isRefreshing)
+            .disposed(by: rx.disposeBag)
+        
+        viewModel.outputs.photos
+            .map { [SectionModel(model: "", items: Array($0))] }
+            .bind(to: collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: rx.disposeBag)
+        
+        collectionView.rx
+            .contentOffset
+            .flatMap { [unowned self] _ in 
+                Observable.just(self.collectionView.isNearTheBottomEdge())
+            }
+            .distinctUntilChanged()
+            .skipUntil(viewModel.outputs.isRefreshing)
+            .bind(to: viewModel.inputs.loadMore)
+            .disposed(by: rx.disposeBag)
     }
 
     // MARK: UI
@@ -50,47 +81,20 @@ class HomeViewController: UIViewController, BindableType {
     
     private func configureRefreshControl() {
         refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         collectionView.addSubview(refreshControl)
     }
     
-    @objc func refresh() {
-        print("Refresh")
+    @objc private func refresh() {
+        viewModel.inputs.refresh()
     }
-
-    // MARK: BindableType
-
-    func bindViewModel() {
-        let input = viewModel.input
-        let output = viewModel.output
-
-        dataSource = RxCollectionViewSectionedReloadDataSource<HomeSectionModel>(
-            configureCell: { [unowned self] (dataSource, collectionView, indexPath, item) in 
-            var cell = collectionView.dequeueReusableCell(type: HomeViewCell.self, forIndexPath: indexPath)
-            cell.bind(to: self.viewModel.createHomeViewCellModel(for: item))
-            return cell
-        })
-
-        output.asyncPhotos
-            .map { [SectionModel(model: "", items: Array($0))] }
-            .bind(to: collectionView.rx.items(dataSource: dataSource))
-            .disposed(by: rx.disposeBag)
-
-        collectionView.rx
-            .contentOffset
-            .flatMap { [unowned self] _ in 
-                Observable
-                    .just(self.collectionView.isNearTheBottomEdge())
+    
+    func collectionViewDataSource() -> CollectionViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
+        return 
+            { [unowned self] _, cv, ip, i in
+                var cell = cv.dequeueReusableCell(type: HomeViewCell.self, forIndexPath: ip)
+                cell.bind(to: self.viewModel.createHomeViewCellModel(for: i))
+                return cell
             }
-            .distinctUntilChanged()
-            .bind(to: input.loadMore)
-            .disposed(by: rx.disposeBag)
     }
-}
-
-extension UIScrollView {
-
-    func isNearTheBottomEdge(offset: CGFloat = 100) -> Bool {
-        return self.contentOffset.y + self.frame.size.height + offset >= self.contentSize.height
-    }
-
 }

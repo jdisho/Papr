@@ -12,33 +12,53 @@ import RxCocoa
 import Action
 
 protocol HomeViewModelInput {
-    var loadMore: BehaviorSubject<Bool> { get }
-    var orderBy: BehaviorSubject<OrderBy> { get }
+    /// Call when pull-to-refresh is invoked
+    func refresh()
+    
+    /// Call when the bottom of the list is reached
+    var loadMore: BehaviorRelay<Bool> { get }
+    
+    /// Call when an option of OrderBy is chosen
+    var orderBy: BehaviorRelay<OrderBy> { get }
 }
 
 protocol HomeViewModelOutput {
-    var asyncPhotos: Observable<[Photo]>! { get }
+    /// Emits an array of photos for the collectionView
+    var photos: Observable<[Photo]>! { get }
+    
+    /// Emits when the pull-to-refresh control is refreshing or not.
+    var isRefreshing: Observable<Bool>! { get }
 }
 
 protocol HomeViewModelType {
-    var input: HomeViewModelInput { get }
-    var output: HomeViewModelOutput { get }
+    var inputs: HomeViewModelInput { get }
+    var outputs: HomeViewModelOutput { get }
     func createHomeViewCellModel(for photo: Photo) -> HomeViewCellModel
 }
 
-class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelOutput{
+class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelOutput {
 
-    // MARK: Input & Output
-    var input: HomeViewModelInput { return self }
-    var output: HomeViewModelOutput { return self }
+    // MARK: Inputs & Outputs
+    var inputs: HomeViewModelInput { return self }
+    var outputs: HomeViewModelOutput { return self }
 
     // MARK: Input
-    let loadMore = BehaviorSubject<Bool>(value: false)
-    let orderBy = BehaviorSubject<OrderBy>(value: .latest)
-    
+    let loadMore = BehaviorRelay<Bool>(value: false)
+    let orderBy = BehaviorRelay<OrderBy>(value: .latest)
+    let refreshProperty = BehaviorRelay<Bool>(value: true)
+
+    func refresh() {
+        refreshProperty.accept(true)
+    }
+
     // MARK: Output
-    var asyncPhotos: Observable<[Photo]>!
-    
+    var photos: Observable<[Photo]>!
+    var isRefreshing: Observable<Bool>!
+
+    func createHomeViewCellModel(for photo: Photo) -> HomeViewCellModel {
+        return HomeViewCellModel(photo: photo)
+    }
+
     // MARK: Private
     private let service: PhotoServiceType
     private let sceneCoordinator: SceneCoordinatorType
@@ -50,32 +70,40 @@ class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelOutput{
         self.sceneCoordinator = sceneCoordinator
         self.service = service
 
-        var currentPageNumber = 0
+        var currentPageNumber = 1
         var photoArray = [Photo]([])
-        
-        let photosFromService = Observable
+    
+        isRefreshing = refreshProperty.asObservable()
+
+        let requestFirst = Observable
+            .combineLatest(refreshProperty, orderBy)
+            .flatMap { isRefreshing, orderBy -> Observable<[Photo]?> in
+                guard isRefreshing else { 
+                    return .empty()
+                }
+                return service.photos(byPageNumber: 1, orderBy: orderBy)
+            }
+            .do (onNext: { [unowned self] _ in 
+                photoArray = []
+                self.refreshProperty.accept(false) 
+            })
+
+        let requestNext = Observable
             .combineLatest(loadMore, orderBy)
             .flatMap { loadMore, orderBy -> Observable<[Photo]?> in 
-                if loadMore {
-                    currentPageNumber += 1
-                    print("loadMore")
-                    return self.service.photos(byPageNumber: currentPageNumber, orderBy: orderBy)
-                }
-                return .empty()
+                guard loadMore else { return .empty() }
+                currentPageNumber += 1
+                return service.photos(byPageNumber: currentPageNumber, orderBy: orderBy)
             }
 
-        asyncPhotos = photosFromService
+         photos = Observable
+            .merge(requestFirst, requestNext)
             .map { photos -> [Photo] in
                 photos?.forEach { photo in 
                     photoArray.append(photo)
                 }
-            return photoArray
+                return photoArray
             }
-    }
-
-    // MARK: HomeViewCellModel
-    func createHomeViewCellModel(for photo: Photo) -> HomeViewCellModel {
-        return HomeViewCellModel(photo: photo)
     }
 }
 

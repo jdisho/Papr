@@ -35,7 +35,7 @@ class HomeViewCell: UICollectionViewCell, BindableType {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+    
         userImageView.rounded
         circularLoaderContainerView.layer.addSublayer(circularLoader)
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +45,8 @@ class HomeViewCell: UICollectionViewCell, BindableType {
     override func prepareForReuse() {
         userImageView.image = nil
         photoImageView.image = nil
-        downloadProgress = 0
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
         disposeBag = DisposeBag()
     }
 
@@ -119,7 +120,7 @@ class HomeViewCell: UICollectionViewCell, BindableType {
             return Double(circularLoader.strokeEnd)
         }
         set {
-            if newValue >= 1 || newValue <= 0{
+            if newValue >= 1 || newValue <= 0 {
                 circularLoader.strokeEnd = 0
                 circularLoader.isHidden = true
             } else {

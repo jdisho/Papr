@@ -7,49 +7,43 @@
 //
 
 import UIKit
-import Moya
-import SafariServices
 import RxSwift
-import KeychainSwift
+import NSObject_Rx
 
 class LoginViewController: UIViewController, BindableType {
 
     // MARK: ViewModel
-    var viewModel: LoginViewModel!
+    var viewModel: LoginViewModelType!
 
     // MARK: IBOutlets
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
     
-    // MARK: Private
-    private let disposeBag = DisposeBag()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        KeychainSwift().clear()
-        print("LoginViewController")
     }
 
     func bindViewModel() {
-        loginButton.rx.action = viewModel.loginAction
-        
-        viewModel.buttonName
-            .asObservable()
+        loginButton.rx.action = viewModel.inputs.loginAction
+
+        viewModel.outputs.buttonName
             .bind(to: loginButton.rx.title())
-            .disposed(by: disposeBag)
-        
-        viewModel.loginState
-            .asObservable()
+            .disposed(by: rx.disposeBag)
+
+        viewModel.outputs.loginState
             .map { $0 == .idle }
             .bind(to: activityIndicatorView.rx.isHidden)
-            .disposed(by: disposeBag)
-        
-        viewModel.loginState
-            .asObservable()
+            .disposed(by: rx.disposeBag)
+
+        viewModel.outputs.loginState
             .map { $0 == .idle }
             .bind(to: loginButton.rx.isEnabled)
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
         
+        viewModel.outputs.loginState
+            .map { $0 == .idle ? 1.0 : 0.7 }
+            .bind(to: loginButton.rx.alpha)
+            .disposed(by: rx.disposeBag)
     }
 
 }

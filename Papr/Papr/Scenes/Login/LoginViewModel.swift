@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 import Action
 import SafariServices
 import Moya
@@ -18,14 +19,33 @@ enum LoginState {
     case tokenIsFetched
 }
 
-class LoginViewModel {
+protocol LoginViewModelInput {
+    var loginAction: CocoaAction { get }
+}
 
-    // MARK: Input
-    let loginState = Variable<LoginState>(.idle)
-    let buttonName = Variable("Login with Unsplash")
+protocol LoginViewModelOuput {
+    var buttonName: BehaviorRelay<String>! { get }
+    var loginState: BehaviorRelay<LoginState>! { get }
+}
+
+protocol LoginViewModelType {
+    var inputs: LoginViewModelInput { get }
+    var outputs: LoginViewModelOuput { get }
+}
+
+class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelType   {
+
+    // MARK: Inputs & Outputs
+    var inputs: LoginViewModelInput { return self }
+    var outputs: LoginViewModelOuput { return self }
+  
+    // MARK: Output
+    var buttonName: BehaviorRelay<String>!
+    var loginState: BehaviorRelay<LoginState>!
     
     // MARK: Private
     fileprivate let authManager: UnsplashAuthManager 
+    private let sceneCoordinator: SceneCoordinatorType
     private let moyaProvider: MoyaProvider<UnsplashAPI>
     private var _authSession: Any?
     @available(iOS 11.0, *)
@@ -37,26 +57,42 @@ class LoginViewModel {
             _authSession = newValue
         }
     }
-    private let sceneCoordinator: SceneCoordinatorType
     
+    // MARK: Init
     init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared, 
          authManager: UnsplashAuthManager = UnsplashAuthManager.sharedAuthManager) {
         self.sceneCoordinator = sceneCoordinator
         self.moyaProvider = MoyaProvider<UnsplashAPI>()
         self.authManager = authManager
         self.authManager.delegate = self
+        
+        loginState = BehaviorRelay(value: .idle)
+        buttonName = BehaviorRelay(value: "Login with Unsplash")
     }
 
     // MARK: Action
     lazy var loginAction: CocoaAction = {
-        return CocoaAction { _ in 
+        return CocoaAction { [unowned self] _ in 
             self.authenticate()
+        }
+    }()
+    
+    private lazy var navigateToHomeAction: CocoaAction = {
+        return CocoaAction { [unowned self] _ in 
+            let viewModel = HomeViewModel()
+            return self.finishLogin()
+                .toVoidObservable()
+                .flatMap { _ in
+                    self.sceneCoordinator.transition(to: .home(viewModel), type: .root)
+                }
         }
     }()
     
     private func authenticate() -> Observable<Void> {
         if #available(iOS 11.0, *) {
-            self.authSession = SFAuthenticationSession(url: authManager.authURL, callbackURLScheme: OAuth2Config.callbackURLScheme.string, completionHandler: { [weak self] (callbackUrl, error) in
+            self.authSession = SFAuthenticationSession(url: authManager.authURL, 
+                                                       callbackURLScheme: OAuth2Config.callbackURLScheme.string, 
+                                                       completionHandler: { [weak self] (callbackUrl, error) in
                 guard error == nil, let callbackUrl = callbackUrl else {
                     switch error! {
                     case SFAuthenticationError.canceledLogin: break
@@ -72,23 +108,23 @@ class LoginViewModel {
     }
     
     @discardableResult
-    private func finishLogin() -> Observable<User> {
-        loginState.value = .tokenIsFetched
-        let user = moyaProvider.rx
+    private func finishLogin() -> Observable<User?> {
+       loginState.accept(.fetchingToken)
+        return moyaProvider.rx
             .request(.me)
             .asObservable()
-            .map(User.self)
-        
-        return user
+            .mapOptional(User.self)
     }
 }
 
 extension LoginViewModel: UnsplashSessionListener {
 
     func didReceiveRedirect(code: String) {
-        loginState.value = .fetchingToken
-        buttonName.value = "Please wait ..."
-        self.authManager.accessToken(with: code) { _,_ in self.finishLogin() }
+        loginState.accept(.tokenIsFetched)
+        buttonName.accept("Please wait ...")
+        self.authManager.accessToken(with: code) { [unowned self] _,_ in 
+            self.navigateToHomeAction.execute(())
+        }
     }
 
 }
