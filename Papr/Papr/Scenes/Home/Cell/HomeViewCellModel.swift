@@ -12,44 +12,41 @@ import RxCocoa
 
 struct HomeViewCellModel {
 
-    let userProfileImage = BehaviorRelay<String>(value: "")
-    let fullname = BehaviorRelay<String>(value: "")
-    let smallPhoto = BehaviorRelay<String>(value: "")
-    let regularPhoto = BehaviorRelay<String>(value: "")
-    let photoSizeCoef = BehaviorRelay<Double>(value: 0.0)
-    let created = BehaviorRelay<String>(value: "")
-    
-    private let disposeBag = DisposeBag()
+    let userProfileImage: Observable<String>
+    let fullname: Observable<String>
+    let username: Observable<String>
+    let smallPhoto: Observable<String>
+    let regularPhoto: Observable<String>
+    let photoSizeCoef: Observable<Double>
+    let created: Observable<String>
 
     init(photo: Photo) {
+        
+        let aPhoto = Observable.just(photo)
+        
+        userProfileImage = aPhoto
+            .map { $0.user?.profileImage?.medium ?? "" }
+        
+        fullname = aPhoto
+            .map { $0.user?.fullName ?? "" }
 
-        let asyncPhoto = Observable.just(photo)
+        username = aPhoto
+            .map { "@\($0.user?.username ?? "")" }
+
+        smallPhoto = aPhoto
+            .map { $0.urls?.small ?? "" }
+
+        regularPhoto = aPhoto
+            .map { $0.urls?.regular ?? "" }
         
-        asyncPhoto.map { $0.user?.profileImage?.medium ?? "" }
-            .bind(to: userProfileImage)
-            .disposed(by: disposeBag)
-        
-        asyncPhoto.map { $0.user?.fullName ?? "" }
-            .bind(to: fullname)
-            .disposed(by: disposeBag)
-        
-        asyncPhoto.map { $0.urls?.small ?? "" }
-            .bind(to: smallPhoto)
-            .disposed(by: disposeBag)
-        
-        asyncPhoto.map { $0.urls?.regular ?? "" }
-            .bind(to: regularPhoto)
-            .disposed(by: disposeBag)
-    
-        asyncPhoto
+       photoSizeCoef = aPhoto
             .map { (width: $0.width ?? 0, height: $0.height ?? 0) }
             .map { (width, height) -> Double in
                 return Double(height * Int(UIScreen.main.bounds.width) / width)
             }
-            .bind(to: photoSizeCoef)
-            .disposed(by: disposeBag)
 
-        asyncPhoto.map { $0.created ?? "" }
+        created = aPhoto
+            .map { $0.created ?? "" }
             .map { $0.toDate }
             .map { date -> String in
                 guard let roundedDate = date?.since(Date(), in: .minute).rounded() else { return "" }
@@ -60,7 +57,5 @@ struct HomeViewCellModel {
                 }
                 return "\(Int(roundedDate))m"
             }
-            .bind(to: created)
-            .disposed(by: disposeBag)
     }
 }

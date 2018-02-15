@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let sceneCoordinator = SceneCoordinator(window: window!)
         SceneCoordinator.shared = sceneCoordinator
-        let rootScene = Scene.login(LoginViewModel())
+        let rootScene = Scene.home(HomeViewModel())
         sceneCoordinator.transition(to: rootScene, type: .root)
 
         return true

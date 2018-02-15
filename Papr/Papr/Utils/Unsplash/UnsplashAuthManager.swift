@@ -15,8 +15,9 @@ protocol UnsplashSessionListener {
 }
 
 class UnsplashAuthManager {
-    
+
     var delegate: UnsplashSessionListener!
+
     static var sharedAuthManager: UnsplashAuthManager {
         return UnsplashAuthManager(
             clientID: OAuth2Config.clientID.string, 
@@ -48,7 +49,7 @@ class UnsplashAuthManager {
     }
     
     public func receivedCodeRedirect(url: URL) {
-        guard let code = extractCode(from: url).0 else { return }
+        guard let code = extractCode(from: url).code else { return }
         delegate.didReceiveRedirect(code: code)
     }
     
@@ -116,25 +117,27 @@ class UnsplashAuthManager {
         return components.url!
     }
     
-    private func extractCode(from url: URL) -> (String?, NSError?) {
+    private func extractCode(from url: URL) -> (code: String?, error: NSError?) {
         if let error = url.value(for: "error"), 
             let desc = url.value(for: "error_description")?.replacingOccurrences(of: "+", with: " ").removingPercentEncoding {
-            return (nil, UnsplashAuthError.error(with: error, description: desc))
+            return (code: nil, error: UnsplashAuthError.error(with: error, description: desc))
         } else {
             guard let code = url.value(for: "code") else {
-                return (nil, UnsplashAuthError.error(with: .invalidGrant, description: Code.invalidGrant.string))
+                return (code: nil, error: UnsplashAuthError.error(with: .invalidGrant, description: Code.invalidGrant.string))
             }
-            return (code, nil)
+            return (code: code, error: nil)
         }
     }
     
     private func extractError(from data: Data) -> NSError? {
-        do {
-            let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:String]
-            return UnsplashAuthError.error(with: json!["error"]!, description: json!["error_description"])
-        } catch {
-            return nil
-        }
+        let anyJSON = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+        let stringJSON = anyJSON as? [String:String]
+        guard let json = stringJSON, 
+            let error = json["error"], 
+            let errorDescription = json["error_description"] 
+            else { return nil }
+
+        return UnsplashAuthError.error(with: error, description: errorDescription)
     }
     
 }

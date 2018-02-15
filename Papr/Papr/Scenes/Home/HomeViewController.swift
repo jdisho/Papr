@@ -21,11 +21,11 @@ class HomeViewController: UIViewController, BindableType {
 
     // MARK: IBOutlets
 
-    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var tableView: UITableView!
     
     // MARK: Private
 
-    private var dataSource: RxCollectionViewSectionedReloadDataSource<HomeSectionModel>!
+    private var dataSource: RxTableViewSectionedReloadDataSource<HomeSectionModel>!
     private var refreshControl: UIRefreshControl!
 
     // MARK: Override
@@ -35,15 +35,15 @@ class HomeViewController: UIViewController, BindableType {
     
         configureNavigationController()
         configureRefreshControl()
-        configureCollectionView()
+        configureTableView()
         refresh()
     }
 
     // MARK: BindableType
     
     func bindViewModel() {
-        dataSource = RxCollectionViewSectionedReloadDataSource<HomeSectionModel>(
-            configureCell:  collectionViewDataSource()
+        dataSource = RxTableViewSectionedReloadDataSource<HomeSectionModel>(
+            configureCell:  tableViewDataSource
         )
         
         viewModel.outputs.isRefreshing
@@ -51,14 +51,14 @@ class HomeViewController: UIViewController, BindableType {
             .disposed(by: rx.disposeBag)
         
         viewModel.outputs.photos
-            .map { [SectionModel(model: "", items: Array($0))] }
-            .bind(to: collectionView.rx.items(dataSource: dataSource))
+            .map { [SectionModel(model: "", items: $0)] }
+            .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: rx.disposeBag)
         
-        collectionView.rx
+        tableView.rx
             .contentOffset
             .flatMap { [unowned self] _ in 
-                Observable.just(self.collectionView.isNearTheBottomEdge())
+                Observable.just(self.tableView.isNearTheBottomEdge())
             }
             .distinctUntilChanged()
             .skipUntil(viewModel.outputs.isRefreshing)
@@ -72,27 +72,24 @@ class HomeViewController: UIViewController, BindableType {
         self.title = "Home 🏡"
     }
     
-    private func configureCollectionView() {
-        collectionView.registerCell(type: HomeViewCell.self)
-        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
-        flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
+    private func configureTableView() {
+        tableView.registerCell(type: HomeViewCell.self)
+        tableView.estimatedRowHeight = 400
     }
     
     private func configureRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        collectionView.addSubview(refreshControl)
+        tableView.addSubview(refreshControl)
     }
     
     @objc private func refresh() {
         viewModel.inputs.refresh()
     }
     
-    func collectionViewDataSource() -> CollectionViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
-        return 
-            { [unowned self] _, cv, ip, i in
-                var cell = cv.dequeueReusableCell(type: HomeViewCell.self, forIndexPath: ip)
+    var tableViewDataSource: TableViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
+        return { [unowned self] _, tv, ip, i in
+                var cell = tv.dequeueResuableCell(type: HomeViewCell.self, forIndexPath: ip)
                 cell.bind(to: self.viewModel.createHomeViewCellModel(for: i))
                 return cell
             }

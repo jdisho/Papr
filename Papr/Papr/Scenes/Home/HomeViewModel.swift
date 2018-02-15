@@ -62,7 +62,6 @@ class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelOutput 
     // MARK: Private
     private let service: PhotoServiceType
     private let sceneCoordinator: SceneCoordinatorType
-    private let disposeBag = DisposeBag()
 
     // MARK: Init
     init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared, 
