@@ -12,43 +12,98 @@ import KeychainSwift
 
 enum UnsplashAPI {
 
-    case me
+    /// Get the user's profile
+    case getMe
+
+    /// Update the current user’s profile
+    case updateMe(username: String?, firstName: String?, lastName: String?, email: String?, 
+        url: String?, location: String?, bio: String?, instagramUsername: String?)
+
+    /// Get a user’s public profile
     case userProfile(username: String, width: Int?, height: Int?)
+
+    /// Get a user’s portfolio link
     case userPortfolio(username: String)
+
+    /// List a user’s photos
     case userPhotos(username: String, page: Int?, perPage: Int?, orderBy: OrderBy?)
+
+    /// List a user’s liked photos
     case userLikedPhotos(username: String, page: Int?, perPage: Int?, orderBy: OrderBy?)
+
+    /// List a user’s collections
     case userCollections(username:String, page: Int?, perPage: Int?)
+
+    /// Get a user’s statistics
     case userStatistics(username: String)
+
+    /// Get the list of all photos
     case photos(page: Int?, perPage: Int?, orderBy: OrderBy?)
+
+    /// Get the list of the curated photos
     case curatedPhotos(page: Int?, perPage: Int?, orderBy: OrderBy?)
+
+    /// Retrieve a single photo.
     case photo(id: String)
+
+    /// Get a random photo
     case randomPhoto
+
+    /// Get a photo’s statistics
     case photoStatistics(id: String)
+
+    /// Retrieve a single photo’s download link
     case photoDownloadLink(id: String)
+
+    /// Like a photo on behalf of the logged-in user
     case likePhoto(id: String)
-    case unLikePhoto(id: String)
-    case searchPhotos(query: String, page: Int?, perPage: Int?, collectionID: String?)
+
+    /// Remove a user’s like of a photo.
+    case unlikePhoto(id: String)
+
+    /// Get photo results for a query
+    case searchPhotos(query: String, page: Int?, perPage: Int?, collectionID: String?, orientation: Orientation?)
+
+    /// Get collection results for a query
     case searchCollections(query: String, page: Int?, perPage: Int?)
+
+    /// Get user results for a query
     case searchUsers(query: String, page: Int?, perPage: Int?)
+
+    /// Get a list of all collections
     case collections(page: Int?, perPage: Int?)
+
+    /// Get a list of featured collections
     case featuresCollections(page: Int?, perPage: Int?)
+
+    /// Get a list of curated collections
     case curatedCollections(page: Int?, perPage: Int?)
+
+    /// Retrieve a collection
     case collection(id: String)
+    
+    /// Retrieve a curated collection
     case curatedCollection(id: String)
-    case collectionPhotos(id: String, page: Int?, perPage: Int?)
-    case curatedCollectionPhotos(id: String, page: Int?, perPage: Int?)
+    
+    /// Retrieve a related collection
     case relatedCollections(id: String)
+    
+    /// Retrieve a collection’s photos
+    case collectionPhotos(id: String, page: Int?, perPage: Int?)
+    
+    /// Retrieve a curated collection’s photos
+    case curatedCollectionPhotos(id: String, page: Int?, perPage: Int?)
+    
+    /// Create a new collection
+    case createCollection(title: String, description: String?, isPrivate: Bool?)
+    
+    /// Update an existing collection
+    case updateCollection(id: String, title: String?, description: String?, isPrivate: Bool?)
 
     // MARK: - TODO: Support these cases
 
     // id(required)
     // case updatePhoto(String)
-
-    // title(required) [description, private/public](optional)
-    // case createCollection(String, String?, Bool?)
-
-    // id(required) [title, description, private/public](optional)
-    // case updateCollection(String, String?, String?, Bool?)
 
 }
 
@@ -60,35 +115,35 @@ extension UnsplashAPI: TargetType {
     
     var path: String {
         switch self {
-        case .me:
+        case .getMe, .updateMe:
             return "/me"
-        case .userProfile(let username):
+        case let .userProfile(username):
             return "/users/\(username)"
-        case .userPortfolio(let username):
+        case let .userPortfolio(username):
             return "/users/\(username)/portfolio"
-        case .userPhotos(let username):
+        case let .userPhotos(username):
             return "/users/\(username)/photos"
-        case .userLikedPhotos(let username):
+        case let .userLikedPhotos(username):
             return "/users/\(username)/likes"
-        case .userCollections(let username):
+        case let .userCollections(username):
             return "/users/\(username)/collections"
-        case .userStatistics(let username):
+        case let .userStatistics(username):
             return "/users/\(username)/statistics"
         case .photos:
            return "/photos"
         case .curatedPhotos:
             return "/photos/curated"
-        case .photo(let id):
+        case let .photo(id):
             return "/photos/\(id)"
         case .randomPhoto:
             return "/photos/random"
-        case .photoStatistics(let id):
+        case let .photoStatistics(id):
             return "/photos/\(id)/statistics" 
-        case .photoDownloadLink(let id):
+        case let .photoDownloadLink(id):
             return "/photos/\(id)/download"
-        case .likePhoto(let id):
+        case let .likePhoto(id):
             return "/photos/\(id)/like"
-        case .unLikePhoto(let id):
+        case let .unlikePhoto(id):
             return "/photos/\(id)/like"
         case .searchPhotos:
           return "/search/photos"
@@ -96,28 +151,30 @@ extension UnsplashAPI: TargetType {
             return "/search/collections"
         case .searchUsers:
             return "/search/users"
-        case .collections:
+        case .collections, .createCollection:
             return "/collections"
         case .featuresCollections:
             return "/collections/featured"
         case .curatedCollections:
             return "/collections/curated"
-        case .collection(let id):
+        case let .collection(id):
             return "/collections/\(id)"
-        case .curatedCollection(let id):
+        case let .curatedCollection(id):
             return "/collections/curated\(id)"
-        case .collectionPhotos(let id):
+        case let .collectionPhotos(id):
            return "/collections/\(id)/photos"
-        case .curatedCollectionPhotos(let id):
+        case let .curatedCollectionPhotos(id):
             return "/collections/curated/\(id)/photos"
-        case .relatedCollections(let id):
+        case let .relatedCollections(id):
             return "/collections/\(id)/related"
+        case let .updateCollection(id):
+            return "/collections\(id)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .me, .userProfile, .userPortfolio,
+        case .getMe, .userProfile, .userPortfolio,
              .userPhotos, .userLikedPhotos, .userCollections,
              .userStatistics, .photos, .curatedPhotos,
              .photo, .randomPhoto, .photoStatistics,
@@ -126,9 +183,11 @@ extension UnsplashAPI: TargetType {
              .curatedCollections, .collection, .curatedCollection,
              .collectionPhotos, .curatedCollectionPhotos, .relatedCollections:
             return .get
-        case .likePhoto:
+        case .likePhoto, .createCollection:
             return .post
-        case .unLikePhoto:
+        case .updateCollection, .updateMe:
+            return .put
+        case .unlikePhoto:
             return .delete
         }
     }
@@ -136,73 +195,93 @@ extension UnsplashAPI: TargetType {
     var sampleData: Data {
         return Data()
     }
-    
+
     var task: Task {
         switch self {
-        case .userProfile(_, let width, let height):
-            
-            guard let width = width, let height = height else { 
-                return .requestPlain
-            }
-            return .requestParameters(parameters: ["w": width, 
-                                                   "h": height], 
-                                      encoding: URLEncoding.default) 
-        
-        case .userPhotos(_, let pageNumber, let photosPerPage, let orderBy),
-             .userLikedPhotos(_, let pageNumber, let photosPerPage, let orderBy),
-             .photos(let pageNumber, let photosPerPage, let orderBy),
-             .curatedPhotos(let pageNumber, let photosPerPage, let orderBy):
-            
-            guard let pageNumber = pageNumber, let photosPerPage = photosPerPage, let orderBy = orderBy else { 
-                return .requestPlain
-            }
-            return .requestParameters(parameters: [ "page": pageNumber, 
-                                                   "per_page": photosPerPage, 
-                                                   "order_by": orderBy], 
-                                      encoding: URLEncoding.default)
-        
-        case .userCollections(_, let pageNumber, let photosPerPage),
-             .collections(let pageNumber, let photosPerPage),
-             .featuresCollections(let pageNumber, let photosPerPage),
-             .curatedCollections(let pageNumber, let photosPerPage),
-             .collectionPhotos(_, let pageNumber, let photosPerPage),
-             .curatedCollectionPhotos(_, let pageNumber, let photosPerPage):
-            
-            guard let pageNumber = pageNumber, let photosPerPage = photosPerPage else { 
-                return .requestPlain
-            }
-            return .requestParameters(parameters: [ "page": pageNumber, 
-                                                   "per_page": photosPerPage], 
-                                      encoding: URLEncoding.default)
-       
-        case .searchCollections(let query, let pageNumber, let photosPerPage), 
-             .searchUsers(let query, let pageNumber, let photosPerPage):
-           
-            guard let pageNumber = pageNumber, let photosPerPage = photosPerPage else { 
-                return .requestParameters(parameters: ["query": query], 
-                                          encoding: URLEncoding.default) 
-            }
-            return .requestParameters(parameters: ["page": pageNumber, 
-                                                   "per_page": photosPerPage, 
-                                                   "query": query], 
-                                      encoding: URLEncoding.default)
-       
-        case .searchPhotos(let query, let pageNumber, let photosPerPage, let collections):
-            
-            guard let pageNumber = pageNumber, let photosPerPage = photosPerPage, let collections =  collections else { 
-                return .requestParameters(parameters: ["query": query], 
-                                          encoding: URLEncoding.default) 
-            }
-            return .requestParameters(parameters: ["page": pageNumber, 
-                                                   "per_page": photosPerPage, 
-                                                   "query": query, 
-                                                   "collections": collections], 
-                                      encoding: URLEncoding.default)
+        case let .updateMe(username, firstName, lastName, email, 
+                           url, location, bio, instagramUsername):
+
+            var params: [String: Any] = [:]
+            params["username"] = username
+            params["first_name"] = firstName
+            params["last_name"] = lastName
+            params["email"] = email
+            params["url"] = url
+            params["location"] = location
+            params["bio"] = bio
+            params["instagram_username"] = instagramUsername
+            return .requestParameters(parameters: params, encoding: URLEncoding.default) 
+
+        case let .userProfile(_, width, height):
+
+            var params: [String: Any] = [:]
+            params["w"] = width
+            params["h"] = height
+            return .requestParameters(parameters: params, encoding: URLEncoding.default) 
+
+        case let .userPhotos(_, pageNumber, photosPerPage, orderBy),
+             let .userLikedPhotos(_, pageNumber, photosPerPage, orderBy),
+             let .photos(pageNumber, photosPerPage, orderBy),
+             let .curatedPhotos(pageNumber, photosPerPage, orderBy):
+
+            var params: [String: Any] = [:]
+            params["page"] = pageNumber
+            params["per_page"] = photosPerPage
+            params["order_by"] = orderBy
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+
+        case let .userCollections(_, pageNumber, photosPerPage),
+             let .collections(pageNumber, photosPerPage),
+             let .featuresCollections(pageNumber, photosPerPage),
+             let .curatedCollections(pageNumber, photosPerPage),
+             let .collectionPhotos(_, pageNumber, photosPerPage),
+             let .curatedCollectionPhotos(_, pageNumber, photosPerPage):
+
+            var params: [String: Any] = [:]
+            params["page"] = pageNumber
+            params["per_page"] = photosPerPage
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+
+        case let .searchCollections(query, pageNumber, photosPerPage), 
+             let .searchUsers(query, pageNumber, photosPerPage):
+
+            var params: [String: Any] = [:]
+            params["query"] = query
+            params["page"] = pageNumber
+            params["per_page"] = photosPerPage
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+
+        case let .searchPhotos(query, pageNumber, photosPerPage, collections, orientation):
+
+            var params: [String: Any] = [:]
+            params["query"] = query
+            params["page"] = pageNumber
+            params["per_page"] = photosPerPage
+            params["collections"] = collections
+            params["orientation"] = orientation
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+
+        case let .createCollection(title, description, isPrivate):
+
+            var params: [String: Any] = [:]
+            params["title"] = title
+            params["description"] = description
+            params["private"] = isPrivate
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+
+        case let .updateCollection(_, title, description, isPrivate):
+
+            var params: [String: Any] = [:]
+            params["title"] = title
+            params["description"] = description
+            params["private"] = isPrivate
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+
         default:
             return .requestPlain
         }
     }
-    
+
     var headers: [String : String]? {
         guard let accessToken = UnsplashAuthManager.sharedAuthManager.accessToken else { 
             return ["Authorization": "Client-ID " + OAuth2Config.clientID.string] 

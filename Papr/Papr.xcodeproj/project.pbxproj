@@ -75,6 +75,9 @@
 		DC99FB942003A7DB001195FD /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC99FB912003A7DB001195FD /* PhotoService.swift */; };
 		DCA09D002015F68200E6EBB7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA09CFF2015F68200E6EBB7 /* Constants.swift */; };
 		DCA09D012015F68200E6EBB7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA09CFF2015F68200E6EBB7 /* Constants.swift */; };
+		DCBAEE6320363CD600561CBA /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAEE6220363CD600561CBA /* Orientation.swift */; };
+		DCBAEE6420363CD600561CBA /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAEE6220363CD600561CBA /* Orientation.swift */; };
+		DCBAEE6520363CD600561CBA /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAEE6220363CD600561CBA /* Orientation.swift */; };
 		DCBB1B221FA7B1BD004E95F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B211FA7B1BD004E95F0 /* AppDelegate.swift */; };
 		DCBB1B241FA7B1BD004E95F0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B231FA7B1BD004E95F0 /* ViewController.swift */; };
 		DCBB1B271FA7B1BD004E95F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCBB1B251FA7B1BD004E95F0 /* Main.storyboard */; };
@@ -195,6 +198,7 @@
 		DC99FB8D2003A7CC001195FD /* PhotoServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoServiceType.swift; sourceTree = "<group>"; };
 		DC99FB912003A7DB001195FD /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		DCA09CFF2015F68200E6EBB7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		DCBAEE6220363CD600561CBA /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		DCBB1B1E1FA7B1BD004E95F0 /* Papr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Papr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCBB1B211FA7B1BD004E95F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCBB1B231FA7B1BD004E95F0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 				DC5AF7541FAD2EF900ADA2BB /* Scope.swift */,
 				DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */,
 				DC5AF7261FAB989400ADA2BB /* OAuth2Settings.swift */,
+				DCBAEE6220363CD600561CBA /* Orientation.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -872,6 +877,7 @@
 				DC71C30F1FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
 				DC71C3DB1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
 				DC1F1504203195410025F70B /* UIScrollView+Extentions.swift in Sources */,
+				DCBAEE6320363CD600561CBA /* Orientation.swift in Sources */,
 				DC5F61231FB65A9F00A60D19 /* Observable+Response.swift in Sources */,
 				DCBE008E202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
 				DC7CF5821FC464BF006E0A39 /* URL.swift in Sources */,
@@ -916,6 +922,7 @@
 				DC5F61241FB65A9F00A60D19 /* Observable+Response.swift in Sources */,
 				DCEE1F0C1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DC5AF7511FAD027F00ADA2BB /* Collection.swift in Sources */,
+				DCBAEE6420363CD600561CBA /* Orientation.swift in Sources */,
 				DC5F61271FB65A9F00A60D19 /* Single+Response.swift in Sources */,
 				DCBB1B751FA8D597004E95F0 /* UnsplashAPI.swift in Sources */,
 				DC5AF7281FAB989400ADA2BB /* OAuth2Settings.swift in Sources */,
@@ -953,6 +960,7 @@
 				DC99FB902003A7CC001195FD /* PhotoServiceType.swift in Sources */,
 				DC5AF72D1FACCBF300ADA2BB /* User.swift in Sources */,
 				DC7CF5841FC464BF006E0A39 /* URL.swift in Sources */,
+				DCBAEE6520363CD600561CBA /* Orientation.swift in Sources */,
 				DC5AF7311FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DCC8CA202002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DC5AF7461FACEF2700ADA2BB /* Location.swift in Sources */,
