@@ -91,7 +91,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     private func authenticate() -> Observable<Void> {        
         if #available(iOS 11.0, *) {
             self.authSession = SFAuthenticationSession(url: authManager.authURL, 
-                                                       callbackURLScheme: OAuth2Config.callbackURLScheme.string, 
+                                                       callbackURLScheme: UnsplashSettings.callbackURLScheme.string, 
                                                        completionHandler: { [weak self] (callbackUrl, error) in
                 guard error == nil, let callbackUrl = callbackUrl else {
                     switch error! {

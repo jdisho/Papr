@@ -20,8 +20,8 @@ class UnsplashAuthManager {
 
     static var sharedAuthManager: UnsplashAuthManager {
         return UnsplashAuthManager(
-            clientID: OAuth2Config.clientID.string, 
-            clientSecret: OAuth2Config.clientSecret.string, 
+            clientID: UnsplashSettings.clientID.string, 
+            clientSecret: UnsplashSettings.clientSecret.string, 
             scopes: [Scope.pub.string,
                      Scope.readUser.string,
                      Scope.writeUser.string,
@@ -43,7 +43,7 @@ class UnsplashAuthManager {
     init(clientID: String, clientSecret: String, scopes: [String] = [Scope.pub.string]) {
         self.clientID = clientID
         self.clientSecret = clientSecret
-        self.redirectURL = URL(string: OAuth2Config.redirectURL.string)!
+        self.redirectURL = URL(string: UnsplashSettings.redirectURL.string)!
         self.scopes = scopes
         keychain = KeychainSwift()
     }
@@ -74,7 +74,7 @@ class UnsplashAuthManager {
     public var authURL: URL {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = OAuth2Config.host.string
+        components.host = UnsplashSettings.host.string
         components.path = "/oauth/authorize"
         
         components.queryItems = [
@@ -103,7 +103,7 @@ class UnsplashAuthManager {
     private func accessTokenURL(with code: String) -> URL {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = OAuth2Config.host.string
+        components.host = UnsplashSettings.host.string
         components.path = "/oauth/token"
         
         components.queryItems = [

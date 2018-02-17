@@ -284,7 +284,7 @@ extension UnsplashAPI: TargetType {
 
     var headers: [String : String]? {
         guard let accessToken = UnsplashAuthManager.sharedAuthManager.accessToken else { 
-            return ["Authorization": "Client-ID " + OAuth2Config.clientID.string] 
+            return ["Authorization": "Client-ID " + UnsplashSettings.clientID.string] 
         }
         return ["Authorization": "Bearer " + accessToken]
     }
