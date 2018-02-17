@@ -13,9 +13,9 @@
 		DC1F1504203195410025F70B /* UIScrollView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */; };
 		DC1F1505203195410025F70B /* UIScrollView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */; };
 		DC1F1506203195410025F70B /* UIScrollView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */; };
-		DC5AF7271FAB989400ADA2BB /* OAuth2Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* OAuth2Settings.swift */; };
-		DC5AF7281FAB989400ADA2BB /* OAuth2Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* OAuth2Settings.swift */; };
-		DC5AF7291FAB989400ADA2BB /* OAuth2Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* OAuth2Settings.swift */; };
+		DC5AF7271FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
+		DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
+		DC5AF7291FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
 		DC5AF72B1FACCBF300ADA2BB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF72A1FACCBF300ADA2BB /* User.swift */; };
 		DC5AF72C1FACCBF300ADA2BB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF72A1FACCBF300ADA2BB /* User.swift */; };
 		DC5AF72D1FACCBF300ADA2BB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF72A1FACCBF300ADA2BB /* User.swift */; };
@@ -177,7 +177,7 @@
 		D59E6B0C5E02E5657E3FA6EA /* Pods_PaprUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaprUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D778F2E1EFA76CEB59A377CB /* Pods_Papr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Papr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extentions.swift"; sourceTree = "<group>"; };
-		DC5AF7261FAB989400ADA2BB /* OAuth2Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Settings.swift; sourceTree = "<group>"; };
+		DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashSettings.swift; sourceTree = "<group>"; };
 		DC5AF72A1FACCBF300ADA2BB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		DC5AF73F1FACE6A300ADA2BB /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -278,14 +278,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DC5AF7531FAD2EE400ADA2BB /* Enums */ = {
+		DC4191352038E3EA0012A29C /* Unsplash */ = {
 			isa = PBXGroup;
 			children = (
 				DCBB1B731FA8D597004E95F0 /* UnsplashAPI.swift */,
 				DC5AF7541FAD2EF900ADA2BB /* Scope.swift */,
 				DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */,
-				DC5AF7261FAB989400ADA2BB /* OAuth2Settings.swift */,
+				DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */,
 				DCBAEE6220363CD600561CBA /* Orientation.swift */,
+			);
+			path = Unsplash;
+			sourceTree = "<group>";
+		};
+		DC5AF7531FAD2EE400ADA2BB /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				DC4191352038E3EA0012A29C /* Unsplash */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -300,14 +308,14 @@
 			path = "Moya+Rx";
 			sourceTree = "<group>";
 		};
-		DC7CF5851FC468C6006E0A39 /* Unsplash */ = {
+		DC7CF5851FC468C6006E0A39 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
 				DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */,
 				DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */,
 				DC71C30E1FBDE00A00C8E41A /* UnsplashAuthError.swift */,
 			);
-			path = Unsplash;
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		DC99FB8C2003A7AD001195FD /* PhotoService */ = {
@@ -403,7 +411,7 @@
 			children = (
 				DCA09CFF2015F68200E6EBB7 /* Constants.swift */,
 				DC5AF7531FAD2EE400ADA2BB /* Enums */,
-				DC7CF5851FC468C6006E0A39 /* Unsplash */,
+				DC7CF5851FC468C6006E0A39 /* Authentication */,
 				DCBB1B6A1FA8BA5D004E95F0 /* Extentions */,
 			);
 			path = Utils;
@@ -867,7 +875,7 @@
 				DC7F20931FADD3400017C14A /* SearchResults.swift in Sources */,
 				DCBB1B551FA8B814004E95F0 /* Scene.swift in Sources */,
 				DC99FB922003A7DB001195FD /* PhotoService.swift in Sources */,
-				DC5AF7271FAB989400ADA2BB /* OAuth2Settings.swift in Sources */,
+				DC5AF7271FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC5F61201FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */,
 				DCBB1B6C1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */,
@@ -925,7 +933,7 @@
 				DCBAEE6420363CD600561CBA /* Orientation.swift in Sources */,
 				DC5F61271FB65A9F00A60D19 /* Single+Response.swift in Sources */,
 				DCBB1B751FA8D597004E95F0 /* UnsplashAPI.swift in Sources */,
-				DC5AF7281FAB989400ADA2BB /* OAuth2Settings.swift in Sources */,
+				DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC5AF7491FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DCBB1B611FA8BA22004E95F0 /* LoginViewController.swift in Sources */,
 				DCEE1F101FC97CE80010BADE /* AlertViewModel.swift in Sources */,
@@ -971,7 +979,7 @@
 				DC5AF7521FAD027F00ADA2BB /* Collection.swift in Sources */,
 				DC5F61281FB65A9F00A60D19 /* Single+Response.swift in Sources */,
 				DCBB1B761FA8D597004E95F0 /* UnsplashAPI.swift in Sources */,
-				DC5AF7291FAB989400ADA2BB /* OAuth2Settings.swift in Sources */,
+				DC5AF7291FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC1F1506203195410025F70B /* UIScrollView+Extentions.swift in Sources */,
 				DC5AF74A1FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DCBB1B621FA8BA22004E95F0 /* LoginViewController.swift in Sources */,

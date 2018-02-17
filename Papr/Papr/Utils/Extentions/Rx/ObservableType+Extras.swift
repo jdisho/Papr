@@ -12,7 +12,7 @@ import RxCocoa
 
 extension ObservableType {
     
-    func toVoidObservable() -> Observable<Void> {
+    func ignoreAll() -> Observable<Void> {
         return self.map { _ in }
     }
     
@@ -28,4 +28,21 @@ extension Observable where E == Bool {
         return self.map { !$0 }
     }
 
+}
+
+extension Observable where E: Sequence, E.Iterator.Element: Comparable {
+    
+    /**
+     Transforms an observable of sequences into an observable of ordered arrays by using the sequence element's
+     natural comparator.
+     */
+    
+    func sorted<T>() -> Observable<[T]> where E.Iterator.Element == T {
+        return self.map { $0.sorted() }
+    }
+    
+    func sorted<T>(_ areInIncreasingOrder: @escaping (T, T) -> Bool) -> Observable<[T]> 
+        where E.Iterator.Element == T {
+            return self.map { $0.sorted(by: areInIncreasingOrder) }
+    }
 }

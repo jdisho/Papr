@@ -81,14 +81,14 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
         return CocoaAction { [unowned self] _ in 
             let viewModel = HomeViewModel()
             return self.finishLogin()
-                .toVoidObservable()
+                .ignoreAll()
                 .flatMap { _ in
                     self.sceneCoordinator.transition(to: .home(viewModel), type: .root)
                 }
         }
     }()
     
-    private func authenticate() -> Observable<Void> {
+    private func authenticate() -> Observable<Void> {        
         if #available(iOS 11.0, *) {
             self.authSession = SFAuthenticationSession(url: authManager.authURL, 
                                                        callbackURLScheme: OAuth2Config.callbackURLScheme.string, 
@@ -111,7 +111,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     private func finishLogin() -> Observable<User?> {
        loginState.accept(.fetchingToken)
         return moyaProvider.rx
-            .request(.me)
+            .request(.getMe)
             .asObservable()
             .mapOptional(User.self)
     }

@@ -1,5 +1,5 @@
 //
-//  OAuth2Settings.swift
+//  UnsplashSettings.swift
 //  Papr
 //
 //  Created by Joan Disho on 02.11.17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum OAuth2Config {
+enum UnsplashSettings {
     case host
     case callbackURLScheme
     case clientID
