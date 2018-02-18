@@ -45,34 +45,36 @@ class HomeViewCell: UITableViewCell, BindableType {
     // MARK: BindableType
 
     func bindViewModel() {
-        
-        viewModel.userProfileImage
+        let inputs = viewModel.inputs
+        let outputs = viewModel.outputs
+
+        outputs.userProfileImage
             .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }
             .bind(to: userImageView.rx.image)
             .disposed(by: disposeBag)
         
-        Observable.concat(viewModel.smallPhoto, viewModel.regularPhoto)
+        Observable.concat(outputs.smallPhoto, outputs.regularPhoto)
             .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
     
 
-        viewModel.fullname
+        outputs.fullname
             .asObservable()
             .bind(to: fullNameLabel.rx.text)
             .disposed(by: disposeBag)
         
-        viewModel.username
+        outputs.username
             .bind(to: usernameLabel.rx.text)
             .disposed(by: disposeBag)
 
-        viewModel.photoSizeCoef
+        outputs.photoSizeCoef
             .asObservable()
             .map { CGFloat($0) }
             .bind(to: photoHeightConstraint.rx.constant)
             .disposed(by: disposeBag)
 
-        viewModel.created
+        outputs.created
             .asObservable()
             .bind(to: postedTimeLabel.rx.text)
             .disposed(by: disposeBag)

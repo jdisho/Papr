@@ -8,10 +8,34 @@
 
 import Foundation
 import RxSwift
-import RxCocoa
+import Action
 
-struct HomeViewCellModel {
+protocol HomeViewCellModelInput {}
 
+protocol HomeViewCellModelOutput {
+    var userProfileImage: Observable<String> { get }
+    var fullname: Observable<String> { get }
+    var username: Observable<String> { get }
+    var smallPhoto: Observable<String> { get }
+    var regularPhoto: Observable<String> { get }
+    var photoSizeCoef: Observable<Double> { get }
+    var created: Observable<String> { get }
+}
+
+protocol HomeViewCellModelType {
+    var inputs: HomeViewCellModelInput { get }
+    var outputs: HomeViewCellModelOutput { get }
+}
+
+class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeViewCellModelOutput {
+
+    // MARK: Inputs & Outputs
+    var inputs: HomeViewCellModelInput { return self }
+    var outputs: HomeViewCellModelOutput { return self }
+    
+    // MARK: Input
+    
+    // MARK: Output
     let userProfileImage: Observable<String>
     let fullname: Observable<String>
     let username: Observable<String>
@@ -19,9 +43,17 @@ struct HomeViewCellModel {
     let regularPhoto: Observable<String>
     let photoSizeCoef: Observable<Double>
     let created: Observable<String>
-
-    init(photo: Photo) {
+    
+    // MARK: Private
+    private let service: PhotoServiceType
+    private let photo: Photo
+    
+    // MARK: Init
+    init(photo: Photo,
+        service: PhotoServiceType = PhotoService()) {
         
+        self.photo = photo
+        self.service = service
         let aPhoto = Observable.just(photo)
         
         userProfileImage = aPhoto

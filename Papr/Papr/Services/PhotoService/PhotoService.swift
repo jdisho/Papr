@@ -27,4 +27,18 @@ struct PhotoService: PhotoServiceType {
             .mapOptional([Photo].self)
     }
     
+    func like(photoWithId id: String) -> Observable<Photo?> {
+        return provider.rx
+            .request(.likePhoto(id: id))
+            .asObservable()
+            .mapOptional(Photo.self)
+    }
+    
+    func unlike(photoWithId id: String) -> Observable<Photo?> {
+        return provider.rx
+            .request(.unlikePhoto(id: id))
+            .asObservable()
+            .mapOptional(Photo.self)
+    }
+    
 }
