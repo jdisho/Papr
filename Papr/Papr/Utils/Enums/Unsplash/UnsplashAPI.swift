@@ -35,7 +35,7 @@ enum UnsplashAPI {
     case userCollections(username:String, page: Int?, perPage: Int?)
 
     /// Get a user’s statistics
-    case userStatistics(username: String)
+    case userStatistics(username: String, resolution: Resolution?, quantity: Int?)
 
     /// Get the list of all photos
     case photos(page: Int?, perPage: Int?, orderBy: OrderBy?)
@@ -47,10 +47,12 @@ enum UnsplashAPI {
     case photo(id: String)
 
     /// Get a random photo
-    case randomPhoto
+    case randomPhoto(collectionsID: [String]?, isFeatured: Bool?, username: String?,
+                     query: String?, width: Int?, height: Int?, 
+                     orientation: Orientation?, count: Int?)
 
     /// Get a photo’s statistics
-    case photoStatistics(id: String)
+    case photoStatistics(id: String, resolution: Resolution?, quantity: Int?)
 
     /// Retrieve a single photo’s download link
     case photoDownloadLink(id: String)
@@ -100,6 +102,15 @@ enum UnsplashAPI {
     /// Update an existing collection
     case updateCollection(id: String, title: String?, description: String?, isPrivate: Bool?)
 
+    /// Delete an existing collection
+    case deleteCollection(id: String)
+    
+    /// Add a photo to a collection
+    case addPhotoToCollection(collectionID: String, photoID: String)
+    
+    /// Remove a photo from a collection
+    case removePhotoFromCollection(collectionID: String, photoID: String)
+    
     // MARK: - TODO: Support these cases
 
     // id(required)
@@ -169,25 +180,52 @@ extension UnsplashAPI: TargetType {
             return "/collections/\(id)/related"
         case let .updateCollection(id):
             return "/collections\(id)"
+        case let .deleteCollection(id):
+            return "/collections/\(id)"
+        case let .addPhotoToCollection(collectionID):
+            return "/collections/\(collectionID)/add"
+        case let .removePhotoFromCollection(collectionID):
+            return "/collections/\(collectionID)/remove"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getMe, .userProfile, .userPortfolio,
-             .userPhotos, .userLikedPhotos, .userCollections,
-             .userStatistics, .photos, .curatedPhotos,
-             .photo, .randomPhoto, .photoStatistics,
-             .photoDownloadLink, .searchPhotos, .searchCollections, 
-             .searchUsers, .collections, .featuresCollections,
-             .curatedCollections, .collection, .curatedCollection,
-             .collectionPhotos, .curatedCollectionPhotos, .relatedCollections:
+        case .getMe, 
+             .userProfile, 
+             .userPortfolio,
+             .userPhotos, 
+             .userLikedPhotos, 
+             .userCollections,
+             .userStatistics, 
+             .photos, 
+             .curatedPhotos,
+             .photo, 
+             .randomPhoto, 
+             .photoStatistics,
+             .photoDownloadLink, 
+             .searchPhotos, 
+             .searchCollections, 
+             .searchUsers, 
+             .collections, 
+             .featuresCollections,
+             .curatedCollections, 
+             .collection, 
+             .curatedCollection,
+             .collectionPhotos, 
+             .curatedCollectionPhotos, 
+             .relatedCollections:
             return .get
-        case .likePhoto, .createCollection:
+        case .likePhoto, 
+             .createCollection, 
+             .addPhotoToCollection:
             return .post
-        case .updateCollection, .updateMe:
+        case .updateCollection, 
+             .updateMe:
             return .put
-        case .unlikePhoto:
+        case .unlikePhoto, 
+             .removePhotoFromCollection, 
+             .deleteCollection:
             return .delete
         }
     }
@@ -230,6 +268,28 @@ extension UnsplashAPI: TargetType {
             params["order_by"] = orderBy
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
 
+        case let .userStatistics(_, resolution, quantity),
+             let .photoStatistics(_, resolution, quantity):
+            
+            var params: [String: Any] = [:]
+            params["resolution"] = resolution?.value
+            params["quantity"] = quantity
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+
+        case let .randomPhoto(collectionsID, isFeatured, username, 
+                          query, width, height, orientation, count): 
+            
+            var params: [String: Any] = [:]
+            params["collections"] = collectionsID
+            params["featured"] = isFeatured
+            params["username"] = username
+            params["query"] = query
+            params["w"] = width
+            params["h"] = height
+            params["orientation"] = orientation?.value
+            params["count"] = count
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+            
         case let .userCollections(_, pageNumber, photosPerPage),
              let .collections(pageNumber, photosPerPage),
              let .featuresCollections(pageNumber, photosPerPage),
@@ -258,7 +318,7 @@ extension UnsplashAPI: TargetType {
             params["page"] = pageNumber
             params["per_page"] = photosPerPage
             params["collections"] = collections
-            params["orientation"] = orientation
+            params["orientation"] = orientation?.value
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
 
         case let .createCollection(title, description, isPrivate):
@@ -275,6 +335,12 @@ extension UnsplashAPI: TargetType {
             params["title"] = title
             params["description"] = description
             params["private"] = isPrivate
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
+
+        case let .addPhotoToCollection(_, photoID),
+             let .removePhotoFromCollection(_, photoID):
+            var params: [String: Any] = [:]
+            params["photo_id"] = photoID
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
 
         default:

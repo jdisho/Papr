@@ -26,6 +26,7 @@ extension ImageURLs: Decodable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: URLCodingKeys.self)
+
         full = try? container.decode(String.self, forKey: .full)
         raw = try? container.decode(String.self, forKey: .raw)
         regular = try? container.decode(String.self, forKey: .regular)

@@ -15,6 +15,7 @@ struct User {
     let email: String?
     let bio: String?
     let location: String?
+    let followedByUser: Bool?
     let portfolioURL: String?
     let profileImage: ProfileImage?
     let followersCount: Int?
@@ -25,6 +26,7 @@ struct User {
     let totalCollections: Int?
     let uploadsRemaining: Int?
     let downloads: Int?
+    let links: Links?
 }  
 
 extension User: Decodable {
@@ -38,6 +40,7 @@ extension User: Decodable {
         case email
         case bio
         case location
+        case followedByUser = "followed_by_user"
         case portfolioURL = "portfolio_url"
         case profileImage = "profile_image"
         case followersCount = "followers_count"
@@ -48,6 +51,7 @@ extension User: Decodable {
         case totalCollections = "total_collections"
         case uploadsRemaining = "uploads_remaining"
         case downloads
+        case links
     }
     
     init(from decoder: Decoder) throws {
@@ -61,6 +65,7 @@ extension User: Decodable {
         email = try? container.decode(String.self, forKey: .email)
         bio = try? container.decode(String.self, forKey: .bio)
         location = try? container.decode(String.self, forKey: .location)
+        followedByUser = try? container.decode(Bool.self, forKey: .followedByUser)
         portfolioURL = try? container.decode(String.self, forKey: .portfolioURL)
         profileImage = try? container.decode(ProfileImage.self, forKey: .profileImage)
         followersCount = try? container.decode(Int.self, forKey: .followersCount)
@@ -71,7 +76,7 @@ extension User: Decodable {
         totalCollections = try? container.decode(Int.self, forKey: .totalCollections)
         uploadsRemaining = try? container.decode(Int.self, forKey: .uploadsRemaining)
         downloads = try? container.decode(Int.self, forKey: .downloads)
-    
+        links = try? container.decode(Links.self, forKey: .links)
     }
 }
 

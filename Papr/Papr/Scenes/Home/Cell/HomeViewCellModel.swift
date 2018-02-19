@@ -10,7 +10,10 @@ import Foundation
 import RxSwift
 import Action
 
-protocol HomeViewCellModelInput {}
+protocol HomeViewCellModelInput {
+    var likePhotoAction: CocoaAction { get }
+    var unlikePhotoAction: CocoaAction { get }
+}
 
 protocol HomeViewCellModelOutput {
     var userProfileImage: Observable<String> { get }
@@ -34,6 +37,21 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
     var outputs: HomeViewCellModelOutput { return self }
     
     // MARK: Input
+    lazy var likePhotoAction: CocoaAction = {
+        return CocoaAction { [unowned self] in
+            return self.service
+                .like(photoWithId: self.photo.id ?? "")
+                .ignoreAll()
+        }
+    }()
+    
+    lazy var unlikePhotoAction: CocoaAction = {
+        return CocoaAction { [unowned self] in
+            return self.service
+                .unlike(photoWithId: self.photo.id ?? "")
+                .ignoreAll()
+        }
+    }()
     
     // MARK: Output
     let userProfileImage: Observable<String>
@@ -55,7 +73,7 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
         self.photo = photo
         self.service = service
         let aPhoto = Observable.just(photo)
-        
+
         userProfileImage = aPhoto
             .map { $0.user?.profileImage?.medium ?? "" }
         

@@ -24,7 +24,7 @@ class HomeViewCell: UITableViewCell, BindableType {
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var photoHeightConstraint: NSLayoutConstraint!
     @IBOutlet var postedTimeLabel: UILabel!
-    
+
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
     private var disposeBag = DisposeBag()

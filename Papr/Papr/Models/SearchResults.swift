@@ -10,7 +10,7 @@
 fileprivate enum ResultCodingKeys: String, CodingKey {
     case total
     case totalPages = "total_pages"
-    case results = "results"
+    case results
 }
 
 //MARK: CollectionsResult
@@ -24,6 +24,7 @@ struct CollectionsResult {
 extension CollectionsResult: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ResultCodingKeys.self)
+
         total = try? container.decode(Int.self, forKey: .total)
         totalPages = try? container.decode(Int.self, forKey: .totalPages)
         collections = try? container.decode([Collection].self, forKey: .results)
@@ -41,6 +42,7 @@ struct PhotosResult {
 extension PhotosResult: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ResultCodingKeys.self)
+
         total = try? container.decode(Int.self, forKey: .total)
         totalPages = try? container.decode(Int.self, forKey: .totalPages)
         photos = try? container.decode([Photo].self, forKey: .results)
@@ -58,6 +60,7 @@ struct UsersResult {
 extension UsersResult: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ResultCodingKeys.self)
+
         total = try? container.decode(Int.self, forKey: .total)
         totalPages = try? container.decode(Int.self, forKey: .totalPages)
         users = try? container.decode([User].self, forKey: .results)

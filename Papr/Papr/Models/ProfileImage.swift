@@ -7,9 +7,9 @@
 //
 
 struct ProfileImage {
-    let small: String
-    let medium: String
-    let large: String
+    let small: String?
+    let medium: String?
+    let large: String?
 }
 
 extension ProfileImage: Decodable {
@@ -23,8 +23,8 @@ extension ProfileImage: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ProfileImageCodingKeys.self)
 
-        small = try container.decode(String.self, forKey: .small)
-        medium = try container.decode(String.self, forKey: .medium)
-        large = try container.decode(String.self, forKey: .large)
+        small = try? container.decode(String.self, forKey: .small)
+        medium = try? container.decode(String.self, forKey: .medium)
+        large = try? container.decode(String.self, forKey: .large)
     }
 }

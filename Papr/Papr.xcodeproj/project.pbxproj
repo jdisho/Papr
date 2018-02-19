@@ -134,6 +134,15 @@
 		DCC8CA1E2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */; };
 		DCC8CA1F2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */; };
 		DCC8CA202002D4C900F6C540 /* ObservableType+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */; };
+		DCCCFCBD203A45DE0024D417 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCCFCBC203A45DE0024D417 /* Links.swift */; };
+		DCCCFCBE203A45DE0024D417 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCCFCBC203A45DE0024D417 /* Links.swift */; };
+		DCCCFCBF203A45DE0024D417 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCCFCBC203A45DE0024D417 /* Links.swift */; };
+		DCCCFCC1203A4A530024D417 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCCFCC0203A4A530024D417 /* Category.swift */; };
+		DCCCFCC2203A4A530024D417 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCCFCC0203A4A530024D417 /* Category.swift */; };
+		DCCCFCC3203A4A530024D417 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCCFCC0203A4A530024D417 /* Category.swift */; };
+		DCCCFCC5203A52410024D417 /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCCFCC4203A52410024D417 /* Resolution.swift */; };
+		DCCCFCC6203A52410024D417 /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCCFCC4203A52410024D417 /* Resolution.swift */; };
+		DCCCFCC7203A52410024D417 /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCCFCC4203A52410024D417 /* Resolution.swift */; };
 		DCDDF3262027A6B700E1EB81 /* Nuke+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */; };
 		DCDDF3272027A6B700E1EB81 /* Nuke+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */; };
 		DCDDF3282027A6B700E1EB81 /* Nuke+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */; };
@@ -231,6 +240,9 @@
 		DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewCell.xib; sourceTree = "<group>"; };
 		DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellModel.swift; sourceTree = "<group>"; };
 		DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Extras.swift"; sourceTree = "<group>"; };
+		DCCCFCBC203A45DE0024D417 /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
+		DCCCFCC0203A4A530024D417 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		DCCCFCC4203A52410024D417 /* Resolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolution.swift; sourceTree = "<group>"; };
 		DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nuke+Rx.swift"; sourceTree = "<group>"; };
 		DCDDF3292027DA5F00E1EB81 /* UIImageView+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extentions.swift"; sourceTree = "<group>"; };
 		DCEE1F0A1FC97CDC0010BADE /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -285,6 +297,7 @@
 				DC5AF7541FAD2EF900ADA2BB /* Scope.swift */,
 				DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */,
 				DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */,
+				DCCCFCC4203A52410024D417 /* Resolution.swift */,
 				DCBAEE6220363CD600561CBA /* Orientation.swift */,
 			);
 			path = Unsplash;
@@ -421,6 +434,7 @@
 			isa = PBXGroup;
 			children = (
 				DC5AF72A1FACCBF300ADA2BB /* User.swift */,
+				DCCCFCC0203A4A530024D417 /* Category.swift */,
 				DC7F20921FADD3400017C14A /* SearchResults.swift */,
 				DC5AF74F1FAD027F00ADA2BB /* Collection.swift */,
 				DC5AF73F1FACE6A300ADA2BB /* Photo.swift */,
@@ -428,6 +442,7 @@
 				DC5AF7431FACEF2700ADA2BB /* Location.swift */,
 				DC5AF7471FACEF5500ADA2BB /* ImageURLs.swift */,
 				DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */,
+				DCCCFCBC203A45DE0024D417 /* Links.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -873,6 +888,8 @@
 				DC5AF74C1FACF18600ADA2BB /* Exif.swift in Sources */,
 				DCBB1B571FA8B823004E95F0 /* SceneCoodinatorType.swift in Sources */,
 				DC7F20931FADD3400017C14A /* SearchResults.swift in Sources */,
+				DCCCFCBD203A45DE0024D417 /* Links.swift in Sources */,
+				DCCCFCC1203A4A530024D417 /* Category.swift in Sources */,
 				DCBB1B551FA8B814004E95F0 /* Scene.swift in Sources */,
 				DC99FB922003A7DB001195FD /* PhotoService.swift in Sources */,
 				DC5AF7271FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
@@ -887,6 +904,7 @@
 				DC1F1504203195410025F70B /* UIScrollView+Extentions.swift in Sources */,
 				DCBAEE6320363CD600561CBA /* Orientation.swift in Sources */,
 				DC5F61231FB65A9F00A60D19 /* Observable+Response.swift in Sources */,
+				DCCCFCC5203A52410024D417 /* Resolution.swift in Sources */,
 				DCBE008E202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
 				DC7CF5821FC464BF006E0A39 /* URL.swift in Sources */,
 				DCBB1B5B1FA8B840004E95F0 /* SceneTransitionType.swift in Sources */,
@@ -919,6 +937,7 @@
 				DCDDF32B2027DA5F00E1EB81 /* UIImageView+Extentions.swift in Sources */,
 				DCBB1B6D1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DCBE008F202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
+				DCCCFCC6203A52410024D417 /* Resolution.swift in Sources */,
 				DC71C3031FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				DC99FB8F2003A7CC001195FD /* PhotoServiceType.swift in Sources */,
 				DC5AF72C1FACCBF300ADA2BB /* User.swift in Sources */,
@@ -929,6 +948,7 @@
 				DC99FB932003A7DB001195FD /* PhotoService.swift in Sources */,
 				DC5F61241FB65A9F00A60D19 /* Observable+Response.swift in Sources */,
 				DCEE1F0C1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
+				DCCCFCBE203A45DE0024D417 /* Links.swift in Sources */,
 				DC5AF7511FAD027F00ADA2BB /* Collection.swift in Sources */,
 				DCBAEE6420363CD600561CBA /* Orientation.swift in Sources */,
 				DC5F61271FB65A9F00A60D19 /* Single+Response.swift in Sources */,
@@ -945,6 +965,7 @@
 				DCEE1F151FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
 				DC5AF75A1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */,
 				DCBE008B202A1A980065BEF3 /* Date+Extentions.swift in Sources */,
+				DCCCFCC2203A4A530024D417 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -973,6 +994,7 @@
 				DCC8CA202002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DC5AF7461FACEF2700ADA2BB /* Location.swift in Sources */,
 				DC99FB942003A7DB001195FD /* PhotoService.swift in Sources */,
+				DCCCFCC7203A52410024D417 /* Resolution.swift in Sources */,
 				DC5F61251FB65A9F00A60D19 /* Observable+Response.swift in Sources */,
 				DCEE1F0D1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCBE0090202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
@@ -982,6 +1004,7 @@
 				DC5AF7291FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC1F1506203195410025F70B /* UIScrollView+Extentions.swift in Sources */,
 				DC5AF74A1FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
+				DCCCFCBF203A45DE0024D417 /* Links.swift in Sources */,
 				DCBB1B621FA8BA22004E95F0 /* LoginViewController.swift in Sources */,
 				DCEE1F111FC97CE80010BADE /* AlertViewModel.swift in Sources */,
 				DC5F61221FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */,
@@ -992,6 +1015,7 @@
 				DCEE1F161FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
 				DC5AF75B1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */,
 				DCDDF32C2027DA5F00E1EB81 /* UIImageView+Extentions.swift in Sources */,
+				DCCCFCC3203A4A530024D417 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
