@@ -13,6 +13,9 @@
 		DC1F1504203195410025F70B /* UIScrollView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */; };
 		DC1F1505203195410025F70B /* UIScrollView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */; };
 		DC1F1506203195410025F70B /* UIScrollView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */; };
+		DC2E76F8203B6DB90023A173 /* LikeUnlike.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */; };
+		DC2E76F9203B6DB90023A173 /* LikeUnlike.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */; };
+		DC2E76FA203B6DB90023A173 /* LikeUnlike.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */; };
 		DC5AF7271FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
 		DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
 		DC5AF7291FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
@@ -186,6 +189,7 @@
 		D59E6B0C5E02E5657E3FA6EA /* Pods_PaprUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaprUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D778F2E1EFA76CEB59A377CB /* Pods_Papr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Papr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extentions.swift"; sourceTree = "<group>"; };
+		DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeUnlike.swift; sourceTree = "<group>"; };
 		DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashSettings.swift; sourceTree = "<group>"; };
 		DC5AF72A1FACCBF300ADA2BB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
@@ -434,6 +438,7 @@
 			isa = PBXGroup;
 			children = (
 				DC5AF72A1FACCBF300ADA2BB /* User.swift */,
+				DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */,
 				DCCCFCC0203A4A530024D417 /* Category.swift */,
 				DC7F20921FADD3400017C14A /* SearchResults.swift */,
 				DC5AF74F1FAD027F00ADA2BB /* Collection.swift */,
@@ -902,6 +907,7 @@
 				DC71C30F1FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
 				DC71C3DB1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
 				DC1F1504203195410025F70B /* UIScrollView+Extentions.swift in Sources */,
+				DC2E76F8203B6DB90023A173 /* LikeUnlike.swift in Sources */,
 				DCBAEE6320363CD600561CBA /* Orientation.swift in Sources */,
 				DC5F61231FB65A9F00A60D19 /* Observable+Response.swift in Sources */,
 				DCCCFCC5203A52410024D417 /* Resolution.swift in Sources */,
@@ -923,6 +929,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCDDF3272027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
+				DC2E76F9203B6DB90023A173 /* LikeUnlike.swift in Sources */,
 				DC71C3101FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
 				DCA09D012015F68200E6EBB7 /* Constants.swift in Sources */,
 				DC5AF74D1FACF18600ADA2BB /* Exif.swift in Sources */,
@@ -1013,6 +1020,7 @@
 				DCBB1B721FA8BAC2004E95F0 /* BindableType.swift in Sources */,
 				DC5AF7571FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DCEE1F161FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
+				DC2E76FA203B6DB90023A173 /* LikeUnlike.swift in Sources */,
 				DC5AF75B1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */,
 				DCDDF32C2027DA5F00E1EB81 /* UIImageView+Extentions.swift in Sources */,
 				DCCCFCC3203A4A530024D417 /* Category.swift in Sources */,

@@ -24,7 +24,10 @@ class HomeViewCell: UITableViewCell, BindableType {
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var photoHeightConstraint: NSLayoutConstraint!
     @IBOutlet var postedTimeLabel: UILabel!
-
+    @IBOutlet var likeButton: UIButton!
+    @IBOutlet var likesNumberLabel: UILabel!
+    @IBOutlet var collectPhotoButton: UIButton!
+    
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
     private var disposeBag = DisposeBag()
@@ -48,19 +51,19 @@ class HomeViewCell: UITableViewCell, BindableType {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
 
+        likeButton.rx.action = inputs.likePhotoAction
+
         outputs.userProfileImage
             .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }
             .bind(to: userImageView.rx.image)
             .disposed(by: disposeBag)
-        
+
         Observable.concat(outputs.smallPhoto, outputs.regularPhoto)
             .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
-    
 
         outputs.fullname
-            .asObservable()
             .bind(to: fullNameLabel.rx.text)
             .disposed(by: disposeBag)
         
@@ -69,14 +72,16 @@ class HomeViewCell: UITableViewCell, BindableType {
             .disposed(by: disposeBag)
 
         outputs.photoSizeCoef
-            .asObservable()
             .map { CGFloat($0) }
             .bind(to: photoHeightConstraint.rx.constant)
             .disposed(by: disposeBag)
 
         outputs.created
-            .asObservable()
             .bind(to: postedTimeLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        outputs.likesNumber
+            .bind(to: likesNumberLabel.rx.text)
             .disposed(by: disposeBag)
     }
 }

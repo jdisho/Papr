@@ -17,6 +17,29 @@ struct PhotoService: PhotoServiceType {
     init(provider: MoyaProvider<UnsplashAPI> = MoyaProvider<UnsplashAPI>()) {
         self.provider = provider
     }
+
+    func like(photoWithId id: String) -> Observable<Photo?> {
+        return provider.rx
+            .request(.likePhoto(id: id))
+            .asObservable()
+            .mapOptional(LikeUnlike.self)
+            .map { $0?.photo }
+    }
+    
+    func unlike(photoWithId id: String) -> Observable<Photo?> {
+        return provider.rx
+            .request(.unlikePhoto(id: id))
+            .asObservable()
+            .mapOptional(LikeUnlike.self)
+            .map { $0?.photo }
+    }
+    
+    func photo(withId id: String) -> Observable<Photo?> {
+        return provider.rx
+            .request(.photo(id: id))
+            .asObservable()
+            .mapOptional(Photo.self)
+    }
     
     func photos(byPageNumber pageNumber: Int?, orderBy: OrderBy?) -> Observable<[Photo]?> {
         return provider.rx
@@ -25,20 +48,6 @@ struct PhotoService: PhotoServiceType {
                              orderBy: orderBy))
             .asObservable()
             .mapOptional([Photo].self)
-    }
-    
-    func like(photoWithId id: String) -> Observable<Photo?> {
-        return provider.rx
-            .request(.likePhoto(id: id))
-            .asObservable()
-            .mapOptional(Photo.self)
-    }
-    
-    func unlike(photoWithId id: String) -> Observable<Photo?> {
-        return provider.rx
-            .request(.unlikePhoto(id: id))
-            .asObservable()
-            .mapOptional(Photo.self)
     }
     
 }

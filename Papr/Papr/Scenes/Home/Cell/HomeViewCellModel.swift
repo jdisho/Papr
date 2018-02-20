@@ -9,10 +9,12 @@
 import Foundation
 import RxSwift
 import Action
+import RxCocoa
 
 protocol HomeViewCellModelInput {
     var likePhotoAction: CocoaAction { get }
     var unlikePhotoAction: CocoaAction { get }
+    func update(photo: Photo) -> Observable<Void>
 }
 
 protocol HomeViewCellModelOutput {
@@ -23,6 +25,7 @@ protocol HomeViewCellModelOutput {
     var regularPhoto: Observable<String> { get }
     var photoSizeCoef: Observable<Double> { get }
     var created: Observable<String> { get }
+    var likesNumber: Observable<String> { get }
 }
 
 protocol HomeViewCellModelType {
@@ -37,22 +40,29 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
     var outputs: HomeViewCellModelOutput { return self }
     
     // MARK: Input
-    lazy var likePhotoAction: CocoaAction = {
+    lazy var likePhotoAction: CocoaAction = { 
         return CocoaAction { [unowned self] in
-            return self.service
+            self.service
                 .like(photoWithId: self.photo.id ?? "")
+                .unwrap()
+                .flatMap { photo in self.update(photo: photo)}
                 .ignoreAll()
         }
     }()
-    
+
     lazy var unlikePhotoAction: CocoaAction = {
         return CocoaAction { [unowned self] in
-            return self.service
+            self.service
                 .unlike(photoWithId: self.photo.id ?? "")
                 .ignoreAll()
         }
     }()
-    
+
+    func update(photo: Photo) -> Observable<Void> {
+        initialPhotoLike.onNext(photo.likes ?? 0)
+        return .empty()
+    }
+
     // MARK: Output
     let userProfileImage: Observable<String>
     let fullname: Observable<String>
@@ -61,41 +71,43 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
     let regularPhoto: Observable<String>
     let photoSizeCoef: Observable<Double>
     let created: Observable<String>
-    
+    let likesNumber: Observable<String>
+
     // MARK: Private
     private let service: PhotoServiceType
     private let photo: Photo
-    
+    private let initialPhotoLike = BehaviorSubject<Int>(value: 0)
+
     // MARK: Init
     init(photo: Photo,
         service: PhotoServiceType = PhotoService()) {
-        
+
         self.photo = photo
         self.service = service
-        let aPhoto = Observable.just(photo)
+        let photoStream = Observable.just(photo)
 
-        userProfileImage = aPhoto
+        userProfileImage = photoStream
             .map { $0.user?.profileImage?.medium ?? "" }
-        
-        fullname = aPhoto
+
+        fullname = photoStream
             .map { $0.user?.fullName ?? "" }
 
-        username = aPhoto
+        username = photoStream
             .map { "@\($0.user?.username ?? "")" }
 
-        smallPhoto = aPhoto
+        smallPhoto = photoStream
             .map { $0.urls?.small ?? "" }
 
-        regularPhoto = aPhoto
+        regularPhoto = photoStream
             .map { $0.urls?.regular ?? "" }
-        
-       photoSizeCoef = aPhoto
+
+       photoSizeCoef = photoStream
             .map { (width: $0.width ?? 0, height: $0.height ?? 0) }
             .map { (width, height) -> Double in
                 return Double(height * Int(UIScreen.main.bounds.width) / width)
             }
 
-        created = aPhoto
+        created = photoStream
             .map { $0.created ?? "" }
             .map { $0.toDate }
             .map { date -> String in
@@ -106,6 +118,14 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
                     return "\(Int(date!.since(Date(), in: .day).rounded()))d"
                 }
                 return "\(Int(roundedDate))m"
+            }
+
+        initialPhotoLike.onNext(photo.likes ?? 0)
+        likesNumber = initialPhotoLike
+            .map { likes in
+                guard likes != 0 else { return "" }
+                guard likes != 1 else { return "\(likes) like"}
+                return "\(likes) likes"
             }
     }
 }
