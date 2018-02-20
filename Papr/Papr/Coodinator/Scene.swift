@@ -16,16 +16,22 @@ import UIKit
 
 
 enum Scene {
-    case initialView(InitialViewModel)
+    case login(LoginViewModel)
+    case home(HomeViewModel)
 }
 
 extension Scene {
     func viewController() -> UIViewController {
         switch self {
-        case .initialView(let viewModel):
-            var vc = InitialViewController.instantiateFromNib()
+        case let .login(viewModel):
+            var vc = LoginViewController.instantiateFromNib()
             vc.bind(to: viewModel)
             return vc
+        case let .home(viewModel):
+            var vc = HomeViewController.instantiateFromNib()
+            let navController = UINavigationController(rootViewController: vc)
+            vc.bind(to: viewModel)
+            return navController
         }
     }
 }

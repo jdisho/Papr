@@ -1,55 +1,55 @@
 PODS:
-  - Action (3.4.0):
+  - Action (3.5.0):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - Alamofire (4.5.1)
-  - Differentiator (3.0.1)
-  - KeychainSwift (9.0.2)
-  - ModelMapper (7.2.0)
-  - Moya (10.0.0):
-    - Moya/Core (= 10.0.0)
-  - Moya/Core (10.0.0):
+  - Alamofire (4.6.0)
+  - Differentiator (3.0.2)
+  - KeychainSwift (10.0.0)
+  - Moya (10.0.2):
+    - Moya/Core (= 10.0.2)
+  - Moya/Core (10.0.2):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
   - NSObject+Rx (4.2.0):
     - RxSwift (~> 4.0)
+  - Nuke (6.0)
   - Result (3.2.4)
-  - RxCocoa (4.0.0):
+  - RxCocoa (4.1.2):
     - RxSwift (~> 4.0)
-  - RxDataSources (3.0.1):
+  - RxDataSources (3.0.2):
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
   - RxOptional (3.3.0):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxSwift (4.0.0)
+  - RxSwift (4.1.2)
 
 DEPENDENCIES:
-  - Action
-  - KeychainSwift
-  - ModelMapper
-  - Moya
-  - NSObject+Rx
-  - RxCocoa
-  - RxDataSources
-  - RxOptional
-  - RxSwift
+  - Action (= 3.5.0)
+  - KeychainSwift (= 10.0.0)
+  - Moya (= 10.0.2)
+  - NSObject+Rx (= 4.2.0)
+  - Nuke (= 6.0)
+  - RxCocoa (= 4.1.2)
+  - RxDataSources (= 3.0.2)
+  - RxOptional (= 3.3.0)
+  - RxSwift (= 4.1.2)
 
 SPEC CHECKSUMS:
-  Action: a9b4a15708233c73a0beee92bb677262ccbd8a96
-  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  Differentiator: ffe513ce1ea4e7198b89fac94d6e281c673055a9
-  KeychainSwift: 3ab1d428d0dbff59cd056f1d0bfc640b36c2b081
-  ModelMapper: bef729f9c7095cadffc3c2ef9432fc5e21d8fc60
-  Moya: adb58b0f4e58430db43cc6e2f6ebab1836501186
+  Action: d60087ebce41b969d1afdad01e2fa1372a82f26e
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
+  KeychainSwift: f9f7910449a0c0fd2cabc889121530dd2c477c33
+  Moya: 2b0531a9fef318e0bc484030c3db1e6f279ccb66
   NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
+  Nuke: d83812262734dad51e3c498cb1c4f7923f2b78c6
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
-  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
-  RxDataSources: 098b7e62b6316313b14d6bf594e3f4f4f62a238a
+  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
+  RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
   RxOptional: e5448d3e21024489e07c31f6a262f2b50c975367
-  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
+  RxSwift: e49536837d9901277638493ea537394d4b55f570
 
-PODFILE CHECKSUM: 4af7ec07a0d31e46c621cce056cedbf89779b2d4
+PODFILE CHECKSUM: 357df61edb16f2c57c21c3a5cc56e20f401b2b0b
 
 COCOAPODS: 1.3.1

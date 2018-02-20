@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/RxSwiftCommunity/Action.svg)](https://travis-ci.org/RxSwiftCommunity/Action)
+[![CircleCI](https://circleci.com/gh/RxSwiftCommunity/Action.svg?style=svg)](https://circleci.com/gh/RxSwiftCommunity/Action)
 
 Action
 ======

@@ -6,22 +6,32 @@
 //  Copyright © 2017 Joan Disho. All rights reserved.
 //
 
-import Mapper
-
-struct ImageURLs: Mappable {
-
+struct ImageURLs {
     let full: String?
     let raw: String?
     let regular: String?
     let small: String?
     let thumb: String?
+}
+
+extension ImageURLs: Decodable {
     
-    init(map: Mapper) throws {
-        
-        full = try? map.from("full")
-        raw = try? map.from("raw")
-        regular = try? map.from("regular")
-        small = try? map.from("small")
-        thumb = try? map.from("thumb")
+    private enum URLCodingKeys: String, CodingKey {
+        case full
+        case raw
+        case regular
+        case small
+        case thumb
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: URLCodingKeys.self)
+
+        full = try? container.decode(String.self, forKey: .full)
+        raw = try? container.decode(String.self, forKey: .raw)
+        regular = try? container.decode(String.self, forKey: .regular)
+        small = try? container.decode(String.self, forKey: .small)
+        thumb = try? container.decode(String.self, forKey: .thumb)
     }
 }
+

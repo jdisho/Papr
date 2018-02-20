@@ -6,10 +6,7 @@
 //  Copyright © 2017 Joan Disho. All rights reserved.
 //
 
-import Mapper
-
-struct Collection: Mappable {
-    
+struct Collection {
     let id: Int?
     let coverPhoto: Photo?
     let isCurated: Bool?
@@ -17,26 +14,44 @@ struct Collection: Mappable {
     let title: String?
     let description: String?
     let totalPhotos: Int?
-    let isPrivateCollection: Bool?
-    let previewPhotos: [Photo]?
+    let isPrivate: Bool?
     let publishedAt: String?
     let updatedAt: String?
     let user: User?
-    
-    init(map: Mapper) throws {
+    let links: Links?
+}
 
-        id = try? map.from("id")
-        coverPhoto = try? map.from("cover_photo")
-        isCurated = try? Bool(map.from("curated"))
-        isFeatured = try? Bool(map.from("featured"))
-        title = try? map.from("title")
-        description = try? map.from("description")
-        totalPhotos = try? map.from("total_photos")
-        isPrivateCollection = try? Bool(map.from("private"))
-        previewPhotos = try? map.from("preview_photos")
-        publishedAt = try? map.from("published_at")
-        updatedAt = try? map.from("updated_at")
-        user = try? map.from("user")
+extension Collection: Decodable {
+    
+    private enum CollectionCodingKeys: String, CodingKey {
+        case id
+        case coverPhoto = "cover_photo"
+        case isCurated = "curated"
+        case isFeatured = "featured"
+        case title
+        case description
+        case totalPhotos = "total_photos"
+        case isPrivate = "private"
+        case publishedAt = "published_at"
+        case updatedAt = "updated_at"
+        case user
+        case links
     }
 
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CollectionCodingKeys.self)
+
+        id = try? container.decode(Int.self, forKey: .id)
+        coverPhoto = try? container.decode(Photo.self, forKey: .coverPhoto)
+        isCurated = try? container.decode(Bool.self, forKey: .isCurated)
+        isFeatured = try? container.decode(Bool.self, forKey: .isFeatured)
+        title = try? container.decode(String.self, forKey: .title)
+        description = try? container.decode(String.self, forKey: .description)
+        totalPhotos = try? container.decode(Int.self, forKey: .totalPhotos)
+        isPrivate = try? container.decode(Bool.self, forKey: .isPrivate)
+        publishedAt = try? container.decode(String.self, forKey: .publishedAt)
+        updatedAt = try? container.decode(String.self, forKey: .updatedAt)
+        user = try? container.decode(User.self, forKey: .user)
+        links = try? container.decode(Links.self, forKey: .links)
+    }
 }

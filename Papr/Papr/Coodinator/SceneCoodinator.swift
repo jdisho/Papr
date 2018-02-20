@@ -62,6 +62,10 @@ class SceneCoordinator: SceneCoordinatorType {
                 subject.onCompleted()
             }
             currentViewController = actualViewController(for: viewController)
+        case .alert:
+            currentViewController.present(viewController, animated: true) {
+                subject.onCompleted()
+            }
         }
         
         return subject
@@ -99,6 +103,5 @@ class SceneCoordinator: SceneCoordinatorType {
             .asObservable()
             .take(1)
     }
-    
 }
 

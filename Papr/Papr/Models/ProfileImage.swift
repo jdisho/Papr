@@ -6,19 +6,25 @@
 //  Copyright © 2017 Joan Disho. All rights reserved.
 //
 
-import Mapper
+struct ProfileImage {
+    let small: String?
+    let medium: String?
+    let large: String?
+}
 
-struct ProfileImage: Mappable {
-    
-    let small: String
-    let medium: String
-    let large: String
-    
-    init(map: Mapper) throws {
-        
-        small = try! map.from("small")
-        medium = try! map.from("medium")
-        large = try! map.from("large")
+extension ProfileImage: Decodable {
+
+    private enum ProfileImageCodingKeys: String, CodingKey {
+        case small
+        case medium
+        case large
     }
-    
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: ProfileImageCodingKeys.self)
+
+        small = try? container.decode(String.self, forKey: .small)
+        medium = try? container.decode(String.self, forKey: .medium)
+        large = try? container.decode(String.self, forKey: .large)
+    }
 }

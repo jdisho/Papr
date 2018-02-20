@@ -9,6 +9,7 @@
 import Foundation
 
 extension URL {
+    
     func value(for queryKey: String) -> String? {
         let stringURL = self.absoluteString
         guard let items = URLComponents(string: stringURL)?.queryItems else { return nil }

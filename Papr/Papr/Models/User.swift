@@ -6,10 +6,7 @@
 //  Copyright © 2017 Joan Disho. All rights reserved.
 //
 
-import Mapper
-
-struct User: Mappable {
-    
+struct User {
     let id: String?
     let username: String?
     let firstName: String?
@@ -18,6 +15,7 @@ struct User: Mappable {
     let email: String?
     let bio: String?
     let location: String?
+    let followedByUser: Bool?
     let portfolioURL: String?
     let profileImage: ProfileImage?
     let followersCount: Int?
@@ -28,27 +26,57 @@ struct User: Mappable {
     let totalCollections: Int?
     let uploadsRemaining: Int?
     let downloads: Int?
-    
-    init(map: Mapper) throws {
-    
-        id = try? map.from("id")
-        username = try? map.from("username")
-        firstName = try? map.from("first_name")
-        lastName = try? map.from("last_name")
-        fullName = try? map.from("name")
-        email = try? map.from("email")
-        bio = try? map.from("bio")
-        location = try? map.from("location")
-        portfolioURL = try? map.from("portfolio_url")
-        profileImage = try? map.from("profile_image")
-        followersCount = try? map.from("followers_count")
-        photos = try? map.from("photos")
-        followingCount = try? map.from("following_count")
-        totalLikes = try? map.from("total_likes")
-        totalPhotos = try? map.from("total_photos")
-        totalCollections = try? map.from("total_collections")
-        uploadsRemaining = try? map.from("uploads_remaining")
-        downloads = try? map.from("downloads")
-    }
+    let links: Links?
+}  
 
+extension User: Decodable {
+    
+    enum UserCodingKeys: String, CodingKey {
+        case id
+        case username
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case fullName = "name"
+        case email
+        case bio
+        case location
+        case followedByUser = "followed_by_user"
+        case portfolioURL = "portfolio_url"
+        case profileImage = "profile_image"
+        case followersCount = "followers_count"
+        case followingCount = "following_count"
+        case photos
+        case totalLikes = "total_likes"
+        case totalPhotos = "total_photos"
+        case totalCollections = "total_collections"
+        case uploadsRemaining = "uploads_remaining"
+        case downloads
+        case links
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: UserCodingKeys.self)
+
+        id = try? container.decode(String.self, forKey: .id)
+        username = try? container.decode(String.self, forKey: .username)
+        firstName = try? container.decode(String.self, forKey: .firstName)
+        lastName = try? container.decode(String.self, forKey: .lastName)
+        fullName = try? container.decode(String.self, forKey: .fullName)
+        email = try? container.decode(String.self, forKey: .email)
+        bio = try? container.decode(String.self, forKey: .bio)
+        location = try? container.decode(String.self, forKey: .location)
+        followedByUser = try? container.decode(Bool.self, forKey: .followedByUser)
+        portfolioURL = try? container.decode(String.self, forKey: .portfolioURL)
+        profileImage = try? container.decode(ProfileImage.self, forKey: .profileImage)
+        followersCount = try? container.decode(Int.self, forKey: .followersCount)
+        followingCount = try? container.decode(Int.self, forKey: .followingCount)
+        photos = try? container.decode([Photo].self, forKey: .photos)
+        totalLikes = try? container.decode(Int.self, forKey: .totalLikes)
+        totalPhotos = try? container.decode(Int.self, forKey: .totalPhotos)
+        totalCollections = try? container.decode(Int.self, forKey: .totalCollections)
+        uploadsRemaining = try? container.decode(Int.self, forKey: .uploadsRemaining)
+        downloads = try? container.decode(Int.self, forKey: .downloads)
+        links = try? container.decode(Links.self, forKey: .links)
+    }
 }
+

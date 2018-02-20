@@ -6,22 +6,50 @@
 //  Copyright © 2017 Joan Disho. All rights reserved.
 //
 
-import Mapper
+// MARK: Possition
 
-struct Location: Mappable {
+struct Possition {
+    let latitude: Double?
+    let longitude: Double?
+}
+
+extension Possition: Decodable {
     
+    private enum PossitionCodingKeys: String, CodingKey {
+        case latitude
+        case longitude
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: PossitionCodingKeys.self)
+
+        latitude = try? container.decode(Double.self, forKey: .latitude)
+        longitude = try? container.decode(Double.self, forKey: .longitude)
+    }
+}
+
+
+// MARK: Location
+
+struct Location {
     let city: String?
     let country: String?
-    let name: String?
-    let position: String?
-    let title: String?
+    let position: Possition?
+}
+
+extension Location: Decodable {
     
-    init(map: Mapper) throws {
-        
-        city = try? map.from("city")
-        country = try? map.from("country")
-        name = try? map.from("name")
-        position = try? map.from("position")
-        title = try? map.from("title")
+    private enum LocationCodingKeys: String, CodingKey {
+        case city
+        case country
+        case position
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: LocationCodingKeys.self)
+
+        city = try? container.decode(String.self, forKey: .city)
+        country = try? container.decode(String.self, forKey: .country)
+        position = try? container.decode(Possition.self, forKey: .position)
     }
 }
