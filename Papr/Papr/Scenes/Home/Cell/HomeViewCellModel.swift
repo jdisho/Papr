@@ -26,6 +26,7 @@ protocol HomeViewCellModelOutput {
     var photoSizeCoef: Observable<Double> { get }
     var created: Observable<String> { get }
     var likesNumber: Observable<String> { get }
+    var likedByUser:  Observable<Bool> { get }
 }
 
 protocol HomeViewCellModelType {
@@ -33,7 +34,9 @@ protocol HomeViewCellModelType {
     var outputs: HomeViewCellModelOutput { get }
 }
 
-class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeViewCellModelOutput {
+class HomeViewCellModel: HomeViewCellModelType, 
+                         HomeViewCellModelInput, 
+                         HomeViewCellModelOutput {
 
     // MARK: Inputs & Outputs
     var inputs: HomeViewCellModelInput { return self }
@@ -59,7 +62,8 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
     }()
 
     func update(photo: Photo) -> Observable<Void> {
-        initialPhotoLike.onNext(photo.likes ?? 0)
+        initialPhotoLikeNumber.onNext(photo.likes ?? 0)
+        isPhotoLiked.onNext(photo.likedByUser ?? false)
         return .empty()
     }
 
@@ -72,11 +76,13 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
     let photoSizeCoef: Observable<Double>
     let created: Observable<String>
     let likesNumber: Observable<String>
+    let likedByUser: Observable<Bool>
 
     // MARK: Private
     private let service: PhotoServiceType
     private let photo: Photo
-    private let initialPhotoLike = BehaviorSubject<Int>(value: 0)
+    private let initialPhotoLikeNumber = BehaviorSubject<Int>(value: 0)
+    private let isPhotoLiked = BehaviorSubject<Bool>(value: false)
 
     // MARK: Init
     init(photo: Photo,
@@ -120,12 +126,15 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
                 return "\(Int(roundedDate))m"
             }
 
-        initialPhotoLike.onNext(photo.likes ?? 0)
-        likesNumber = initialPhotoLike
+        initialPhotoLikeNumber.onNext(photo.likes ?? 0)
+        likesNumber = initialPhotoLikeNumber
             .map { likes in
                 guard likes != 0 else { return "" }
                 guard likes != 1 else { return "\(likes) like"}
                 return "\(likes) likes"
             }
+        
+        isPhotoLiked.onNext(photo.likedByUser ?? false)
+        likedByUser = isPhotoLiked.asObservable()
     }
 }
