@@ -42,6 +42,7 @@ class HomeViewCell: UITableViewCell, BindableType {
     override func prepareForReuse() {
         userImageView.image = nil
         photoImageView.image = nil
+        likeButton.rx.action = nil
         disposeBag = DisposeBag()
     }
 
@@ -51,7 +52,16 @@ class HomeViewCell: UITableViewCell, BindableType {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
 
-        likeButton.rx.action = inputs.likePhotoAction
+        outputs.likedByUser
+            .subscribe { [unowned self] likedByUser in
+                guard let likedByUser = likedByUser.element else { return }
+                if likedByUser {
+                    self.likeButton.rx.action = inputs.unlikePhotoAction
+                } else {
+                    self.likeButton.rx.action = inputs.likePhotoAction
+                }
+            }
+            .disposed(by: disposeBag)
 
         outputs.userProfileImage
             .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }

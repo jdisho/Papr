@@ -57,6 +57,8 @@ class HomeViewCellModel: HomeViewCellModelType,
         return CocoaAction { [unowned self] in
             self.service
                 .unlike(photoWithId: self.photo.id ?? "")
+                .unwrap()
+                .flatMap { photo in self.update(photo: photo)}
                 .ignoreAll()
         }
     }()
