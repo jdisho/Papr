@@ -36,7 +36,7 @@ class HomeViewCell: UITableViewCell, BindableType {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        userImageView.rounded
+        userImageView.rounded()
     }
 
     override func prepareForReuse() {
