@@ -27,6 +27,7 @@ protocol HomeViewCellModelOutput {
     var created: Observable<String> { get }
     var likesNumber: Observable<String> { get }
     var likedByUser:  Observable<Bool> { get }
+    var photoDescription: Observable<String> { get }
 }
 
 protocol HomeViewCellModelType {
@@ -79,6 +80,7 @@ class HomeViewCellModel: HomeViewCellModelType,
     let created: Observable<String>
     let likesNumber: Observable<String>
     let likedByUser: Observable<Bool>
+    let photoDescription: Observable<String>
 
     // MARK: Private
     private let service: PhotoServiceType
@@ -138,5 +140,8 @@ class HomeViewCellModel: HomeViewCellModelType,
         
         isPhotoLiked.onNext(photo.likedByUser ?? false)
         likedByUser = isPhotoLiked.asObservable()
+        
+        photoDescription = photoStream
+            .map { $0.description ?? "" }
     }
 }

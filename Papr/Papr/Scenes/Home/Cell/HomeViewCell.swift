@@ -27,6 +27,7 @@ class HomeViewCell: UITableViewCell, BindableType {
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var likesNumberLabel: UILabel!
     @IBOutlet var collectPhotoButton: UIButton!
+    @IBOutlet var descriptionLabel: UILabel!
     
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
@@ -97,6 +98,10 @@ class HomeViewCell: UITableViewCell, BindableType {
         outputs.likedByUser
             .map { $0 ? #imageLiteral(resourceName: "favorite") : #imageLiteral(resourceName: "unfavorite") }
             .bind(to: likeButton.rx.image())
+            .disposed(by: disposeBag)
+        
+        outputs.photoDescription
+            .bind(to: descriptionLabel.rx.text)
             .disposed(by: disposeBag)
     }
 }
