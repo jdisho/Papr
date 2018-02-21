@@ -36,7 +36,9 @@ protocol HomeViewModelType {
     func createHomeViewCellModel(for photo: Photo) -> HomeViewCellModel
 }
 
-class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelOutput {
+class HomeViewModel: HomeViewModelType, 
+                     HomeViewModelInput, 
+                     HomeViewModelOutput {
 
     // MARK: Inputs & Outputs
     var inputs: HomeViewModelInput { return self }
@@ -84,6 +86,7 @@ class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelOutput 
             }
             .do (onNext: { [unowned self] _ in 
                 photoArray = []
+                currentPageNumber = 1
                 self.refreshProperty.accept(false) 
             })
 
@@ -92,6 +95,7 @@ class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelOutput 
             .flatMap { loadMore, orderBy -> Observable<[Photo]?> in 
                 guard loadMore else { return .empty() }
                 currentPageNumber += 1
+                print(currentPageNumber)
                 return service.photos(byPageNumber: currentPageNumber, orderBy: orderBy)
             }
 
