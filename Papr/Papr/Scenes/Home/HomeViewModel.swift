@@ -151,7 +151,12 @@ class HomeViewModel: HomeViewModelType,
             .combineLatest(isRefreshing, orderBy, curated)
             .flatMapLatest { isRefreshing, orderBy, curated -> Observable<[Photo]?> in
                 guard isRefreshing else { return .empty() }
-                return service.photos(byPageNumber: 1, orderBy: orderBy, curated: curated)
+                return service
+                    .photos(byPageNumber: 1, orderBy: orderBy, curated: curated)
+                    .map { [unowned self] photos in 
+                        self.navBarButtonNameProperty.onNext(curated ? .curated : .new)
+                        return photos
+                    }
             }
             .do (onNext: { _ in
                 photoArray = []
