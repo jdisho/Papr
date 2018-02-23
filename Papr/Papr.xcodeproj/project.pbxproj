@@ -70,6 +70,9 @@
 		DC7F20931FADD3400017C14A /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F20921FADD3400017C14A /* SearchResults.swift */; };
 		DC7F20941FADD3400017C14A /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F20921FADD3400017C14A /* SearchResults.swift */; };
 		DC7F20951FADD3400017C14A /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F20921FADD3400017C14A /* SearchResults.swift */; };
+		DC922309203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC922308203F95C300C9D14F /* UIBarButtonItem+Rx.swift */; };
+		DC92230A203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC922308203F95C300C9D14F /* UIBarButtonItem+Rx.swift */; };
+		DC92230B203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC922308203F95C300C9D14F /* UIBarButtonItem+Rx.swift */; };
 		DC99FB8E2003A7CC001195FD /* PhotoServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC99FB8D2003A7CC001195FD /* PhotoServiceType.swift */; };
 		DC99FB8F2003A7CC001195FD /* PhotoServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC99FB8D2003A7CC001195FD /* PhotoServiceType.swift */; };
 		DC99FB902003A7CC001195FD /* PhotoServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC99FB8D2003A7CC001195FD /* PhotoServiceType.swift */; };
@@ -208,6 +211,7 @@
 		DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAccessToken.swift; sourceTree = "<group>"; };
 		DC7CF5811FC464BF006E0A39 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		DC7F20921FADD3400017C14A /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
+		DC922308203F95C300C9D14F /* UIBarButtonItem+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Rx.swift"; sourceTree = "<group>"; };
 		DC99FB8D2003A7CC001195FD /* PhotoServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoServiceType.swift; sourceTree = "<group>"; };
 		DC99FB912003A7DB001195FD /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		DCA09CFF2015F68200E6EBB7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -530,6 +534,7 @@
 			children = (
 				DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */,
 				DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */,
+				DC922308203F95C300C9D14F /* UIBarButtonItem+Rx.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -902,6 +907,7 @@
 				DCBB1B6C1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */,
 				DCC8CA072002BEE300F6C540 /* HomeViewController.swift in Sources */,
+				DC922309203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DC99FB8E2003A7CC001195FD /* PhotoServiceType.swift in Sources */,
 				DCC8CA132002CC2700F6C540 /* HomeViewCell.swift in Sources */,
 				DC71C30F1FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
@@ -966,6 +972,7 @@
 				DCEE1F101FC97CE80010BADE /* AlertViewModel.swift in Sources */,
 				DC5F61211FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */,
 				DCBB1B681FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
+				DC92230A203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DCBB1B711FA8BAC2004E95F0 /* BindableType.swift in Sources */,
 				DC5AF7561FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DC1F1505203195410025F70B /* UIScrollView+Extentions.swift in Sources */,
@@ -984,6 +991,7 @@
 				DC5AF74E1FACF18600ADA2BB /* Exif.swift in Sources */,
 				DCC8CA092002BEE300F6C540 /* HomeViewController.swift in Sources */,
 				DCC8CA102002BEF100F6C540 /* HomeViewModel.swift in Sources */,
+				DC92230B203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DC71C3DD1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
 				DCC8CA152002CC2700F6C540 /* HomeViewCell.swift in Sources */,
 				DC5AF7421FACE6A300ADA2BB /* Photo.swift in Sources */,
