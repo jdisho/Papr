@@ -41,13 +41,20 @@ struct PhotoService: PhotoServiceType {
             .mapOptional(Photo.self)
     }
     
-    func photos(byPageNumber pageNumber: Int?, orderBy: OrderBy?) -> Observable<[Photo]?> {
+    func photos(byPageNumber pageNumber: Int?, orderBy: OrderBy?, curated: Bool = false) -> Observable<[Photo]?> {
+        var photosEnpoint = UnsplashAPI
+            .photos(page: pageNumber, 
+                    perPage: Constants.photosPerPage, 
+                    orderBy: orderBy)
+        if curated {
+            photosEnpoint = UnsplashAPI
+                .curatedPhotos(page: pageNumber, 
+                               perPage: Constants.photosPerPage, 
+                               orderBy: orderBy)
+        }
         return provider.rx
-            .request(.photos(page: pageNumber, 
-                             perPage: Constants.photosPerPage, 
-                             orderBy: orderBy))
+            .request(photosEnpoint)
             .asObservable()
             .mapOptional([Photo].self)
     }
-    
 }
