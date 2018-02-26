@@ -14,7 +14,7 @@ class HomeViewCell: UITableViewCell, BindableType {
 
     // MARK: ViewModel
 
-    var viewModel: HomeViewCellModel!
+    var viewModel: HomeViewCellModelType!
 
     // MARK: IBOutlets
 
@@ -57,12 +57,30 @@ class HomeViewCell: UITableViewCell, BindableType {
             .subscribe { [unowned self] likedByUser in
                 guard let likedByUser = likedByUser.element else { return }
                 if likedByUser {
-                    self.likeButton.rx.action = inputs.unlikePhotoAction
+                    self.likeButton.rx
+                        .bind(to: inputs.unlikePhotoAction, input: ())
                 } else {
-                    self.likeButton.rx.action = inputs.likePhotoAction
+                    self.likeButton.rx
+                        .bind(to: inputs.likePhotoAction, input: ())
                 }
             }
             .disposed(by: disposeBag)
+
+        Observable
+            .merge(inputs.likePhotoAction.errors, 
+                   inputs.unlikePhotoAction.errors)
+            .map { error in
+                switch error {
+                case let .underlyingError(error):
+                    return error.localizedDescription
+                case .notEnabled:
+                    return error.localizedDescription
+                }
+            }
+            .observeOn(MainScheduler.instance)
+            .subscribeOn(MainScheduler.instance)
+            .bind(to: inputs.alertAction.inputs)
+            .disposed(by: rx.disposeBag)
 
         outputs.userProfileImage
             .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }
@@ -87,7 +105,7 @@ class HomeViewCell: UITableViewCell, BindableType {
             .bind(to: photoHeightConstraint.rx.constant)
             .disposed(by: disposeBag)
 
-        outputs.created
+        outputs.updated
             .bind(to: postedTimeLabel.rx.text)
             .disposed(by: disposeBag)
         

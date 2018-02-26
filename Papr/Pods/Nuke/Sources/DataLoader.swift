@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2017 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2015-2018 Alexander Grebenyuk (github.com/kean).
 
 import Foundation
 
@@ -39,12 +39,25 @@ public final class DataLoader: DataLoading {
         return (200..<300).contains(response.statusCode) ? nil : Error.statusCodeUnacceptable(response.statusCode)
     }
 
+#if os(macOS)
+    private static let cachePath: String = {
+        let cachePaths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)
+        if let cachePath = cachePaths.first, let identifier = Bundle.main.bundleIdentifier {
+            return cachePath.appending("/" + identifier)
+        }
+
+        return ""
+    }()
+#else
+    private static let cachePath = "com.github.kean.Nuke.Cache"
+#endif
+
     /// Shared url cached used by a default `DataLoader`. The cache is
     /// initialized with 0 MB memory capacity and 150 MB disk capacity.
     public static let sharedUrlCache = URLCache(
         memoryCapacity: 0,
         diskCapacity: 150 * 1024 * 1024, // 150 MB
-        diskPath: "com.github.kean.Nuke.Cache"
+        diskPath: cachePath
     )
 
     /// Loads data with the given request.
@@ -53,20 +66,25 @@ public final class DataLoader: DataLoading {
         let validate = self.validate
         let handler = SessionTaskHandler(progress: progress) { (data, response, error) in
             // Check if request failed with error
-            if let error = error { completion(.failure(error)); return }
-
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
             // Check if response & data non empty
             guard let response = response, !data.isEmpty else {
-                completion(.failure(Error.responseEmpty)); return
+                completion(.failure(Error.responseEmpty))
+                return
             }
-
             // Validate response
-            if let error = validate(data, response) { completion(.failure(error)); return }
+            if let error = validate(data, response) {
+                completion(.failure(error))
+                return
+            }
             completion(.success((data, response)))
         }
         delegate.register(handler, for: task)
 
-        token?.register { task.cancel() }
+        token?.register { [weak task] in task?.cancel() }
         task.resume()
     }
 
@@ -87,7 +105,7 @@ public final class DataLoader: DataLoading {
 }
 
 private final class SessionDelegate: NSObject, URLSessionDataDelegate {
-    private let lock = Lock()
+    private let lock = NSLock()
     let queue = OperationQueue()
     private var handlers = [URLSessionTask: SessionTaskHandler]()
 

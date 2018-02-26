@@ -9,12 +9,12 @@
 import Foundation
 import RxSwift
 import Action
-import RxCocoa
 
 protocol HomeViewCellModelInput {
-    var likePhotoAction: CocoaAction { get }
-    var unlikePhotoAction: CocoaAction { get }
-    func update(photo: Photo) -> Observable<Void>
+    var likePhotoAction: Action<Void, Photo> { get }
+    var unlikePhotoAction: Action<Void, Photo> { get }
+    var alertAction: Action<String, Void> { get }
+    func update(photo: Photo) -> Photo
 }
 
 protocol HomeViewCellModelOutput {
@@ -24,7 +24,7 @@ protocol HomeViewCellModelOutput {
     var smallPhoto: Observable<String> { get }
     var regularPhoto: Observable<String> { get }
     var photoSizeCoef: Observable<Double> { get }
-    var created: Observable<String> { get }
+    var updated: Observable<String> { get }
     var likesNumber: Observable<String> { get }
     var likedByUser:  Observable<Bool> { get }
     var photoDescription: Observable<String> { get }
@@ -42,32 +42,42 @@ class HomeViewCellModel: HomeViewCellModelType,
     // MARK: Inputs & Outputs
     var inputs: HomeViewCellModelInput { return self }
     var outputs: HomeViewCellModelOutput { return self }
-    
+
     // MARK: Input
-    lazy var likePhotoAction: CocoaAction = { 
-        return CocoaAction { [unowned self] in
+    lazy var likePhotoAction: Action<Void, Photo>  = { 
+        return Action<Void, Photo>  { [unowned self] in
             self.service
                 .like(photoWithId: self.photo.id ?? "")
+                .map { $0.photo }
                 .unwrap()
-                .flatMap { photo in self.update(photo: photo)}
-                .ignoreAll()
+                .map { photo in self.update(photo: photo)}
         }
     }()
 
-    lazy var unlikePhotoAction: CocoaAction = {
-        return CocoaAction { [unowned self] in
+    lazy var unlikePhotoAction: Action<Void, Photo>  = {
+        return Action<Void, Photo>  { [unowned self] in
             self.service
                 .unlike(photoWithId: self.photo.id ?? "")
+                .map { $0.photo }
                 .unwrap()
-                .flatMap { photo in self.update(photo: photo)}
-                .ignoreAll()
+                .map { photo in self.update(photo: photo)}
         }
     }()
 
-    func update(photo: Photo) -> Observable<Void> {
+    lazy var alertAction: Action<String, Void> = {
+        return Action<String, Void> { [unowned self] message in
+            let alertViewModel = AlertViewModel(title: "Upsss...", 
+                                                message: message, 
+                                                mode: .ok)
+            return self.sceneCoordinator.transition(to: .alert(alertViewModel), 
+                                                    type: .alert)
+        }
+    }()
+
+    func update(photo: Photo) -> Photo {
         initialPhotoLikeNumber.onNext(photo.likes ?? 0)
         isPhotoLiked.onNext(photo.likedByUser ?? false)
-        return .empty()
+        return photo
     }
 
     // MARK: Output
@@ -77,23 +87,26 @@ class HomeViewCellModel: HomeViewCellModelType,
     let smallPhoto: Observable<String>
     let regularPhoto: Observable<String>
     let photoSizeCoef: Observable<Double>
-    let created: Observable<String>
+    let updated: Observable<String>
     let likesNumber: Observable<String>
     let likedByUser: Observable<Bool>
     let photoDescription: Observable<String>
 
     // MARK: Private
-    private let service: PhotoServiceType
     private let photo: Photo
+    private let service: PhotoServiceType
+    private let sceneCoordinator: SceneCoordinatorType
     private let initialPhotoLikeNumber = BehaviorSubject<Int>(value: 0)
     private let isPhotoLiked = BehaviorSubject<Bool>(value: false)
 
     // MARK: Init
     init(photo: Photo,
-        service: PhotoServiceType = PhotoService()) {
+        service: PhotoServiceType = PhotoService(),
+        sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
         self.photo = photo
         self.service = service
+        self.sceneCoordinator = sceneCoordinator
         let photoStream = Observable.just(photo)
 
         userProfileImage = photoStream
@@ -117,8 +130,8 @@ class HomeViewCellModel: HomeViewCellModelType,
                 return Double(height * Int(UIScreen.main.bounds.width) / width)
             }
 
-        created = photoStream
-            .map { $0.created ?? "" }
+        updated = photoStream
+            .map { $0.updated ?? "" }
             .map { $0.toDate }
             .map { date -> String in
                 guard let roundedDate = date?.since(Date(), in: .minute).rounded() else { return "" }

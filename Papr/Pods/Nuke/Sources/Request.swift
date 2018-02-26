@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2017 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2015-2018 Alexander Grebenyuk (github.com/kean).
 
 import Foundation
 
@@ -49,6 +49,32 @@ public struct Request {
     public var memoryCacheOptions: MemoryCacheOptions {
         get { return _ref.memoryCacheOptions }
         set { _mutate { $0.memoryCacheOptions = newValue } }
+    }
+
+    /// The execution priority of the request.
+    public enum Priority: Int, Comparable {
+        case veryLow = 0, low, normal, high, veryHigh
+
+        internal var queuePriority: Operation.QueuePriority {
+            switch self {
+            case .veryLow: return .veryLow
+            case .low: return .low
+            case .normal: return .normal
+            case .high: return .high
+            case .veryHigh: return .veryHigh
+            }
+        }
+
+        public static func <(lhs: Priority, rhs: Priority) -> Bool {
+            return lhs.rawValue < rhs.rawValue
+        }
+    }
+
+    /// The relative priority of the operation. This value is used to influence
+    /// the order in which requests are executed. `.normal` by default.
+    public var priority: Priority {
+        get { return _ref.priority }
+        set { _mutate { $0.priority = newValue }}
     }
 
     /// Returns a key that compares requests with regards to caching images.
@@ -148,6 +174,7 @@ public struct Request {
         }
         private var _isUsingDefaultProcessor = true
         var memoryCacheOptions = MemoryCacheOptions()
+        var priority: Request.Priority = .normal
         var cacheKey: AnyHashable?
         var loadKey: AnyHashable?
         var progress: ProgressHandler?
@@ -170,6 +197,7 @@ public struct Request {
             self.processor = ref.processor
             self._isUsingDefaultProcessor = ref._isUsingDefaultProcessor // order is important here
             self.memoryCacheOptions = ref.memoryCacheOptions
+            self.priority = ref.priority
             self.cacheKey = ref.cacheKey
             self.loadKey = ref.loadKey
             self.progress = ref.progress
@@ -221,13 +249,13 @@ public extension Request {
     /// Appends a processor to the request. You can append arbitrary number of
     /// processors to the request.
     public mutating func process<Key: Hashable>(key: Key, _ closure: @escaping (Image) -> Image?) {
-        process(with: AnonymousProcessor(key, closure))
+        process(with: AnonymousProcessor<Key>(key, closure))
     }
 
     /// Appends a processor to the request. You can append arbitrary number of
     /// processors to the request.
     public func processed<Key: Hashable>(key: Key, _ closure: @escaping (Image) -> Image?) -> Request {
-        return processed(with: AnonymousProcessor(key, closure))
+        return processed(with: AnonymousProcessor<Key>(key, closure))
     }
 }
 
@@ -235,7 +263,9 @@ public extension Request {
     private struct CacheKey: Hashable {
         let request: Request
 
-        var hashValue: Int { return request._ref._urlString?.hashValue ?? 0 }
+        var hashValue: Int {
+            return request._ref._urlString?.hashValue ?? 0
+        }
 
         static func ==(lhs: CacheKey, rhs: CacheKey) -> Bool {
             let lhs = lhs.request, rhs = rhs.request
@@ -247,7 +277,9 @@ public extension Request {
     private struct LoadKey: Hashable {
         let request: Request
 
-        var hashValue: Int { return request._ref._urlString?.hashValue ?? 0 }
+        var hashValue: Int {
+            return request._ref._urlString?.hashValue ?? 0
+        }
 
         static func ==(lhs: LoadKey, rhs: LoadKey) -> Bool {
             func isEqual(_ a: URLRequest, _ b: URLRequest) -> Bool {

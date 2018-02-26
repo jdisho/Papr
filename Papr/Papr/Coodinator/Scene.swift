@@ -18,6 +18,7 @@ import UIKit
 enum Scene {
     case login(LoginViewModel)
     case home(HomeViewModel)
+    case alert(AlertViewModel)
 }
 
 extension Scene {
@@ -32,6 +33,10 @@ extension Scene {
             let navController = UINavigationController(rootViewController: vc)
             vc.bind(to: viewModel)
             return navController
+        case let .alert(viewModel):
+            var vc = AlertViewController(title: nil, message: nil, preferredStyle: .alert)
+            vc.bind(to: viewModel)
+            return vc
         }
     }
 }

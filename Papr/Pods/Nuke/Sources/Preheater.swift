@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2017 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2015-2018 Alexander Grebenyuk (github.com/kean).
 
 import Foundation
 
@@ -15,7 +15,7 @@ import Foundation
 public final class Preheater {
     private let manager: Manager
     private let queue = DispatchQueue(label: "com.github.kean.Nuke.Preheater")
-    private let preheatQueue: TaskQueue
+    private let preheatQueue = OperationQueue()
     private var tasks = [AnyHashable: Task]()
 
     /// Initializes the `Preheater` instance.
@@ -23,7 +23,7 @@ public final class Preheater {
     /// - parameter `maxConcurrentRequestCount`: 2 by default.
     public init(manager: Manager = Manager.shared, maxConcurrentRequestCount: Int = 2) {
         self.manager = manager
-        self.preheatQueue = TaskQueue(maxConcurrentTaskCount: maxConcurrentRequestCount)
+        self.preheatQueue.maxConcurrentOperationCount = maxConcurrentRequestCount
     }
 
     /// Preheats images for the given requests.
@@ -32,7 +32,9 @@ public final class Preheater {
     /// for the given requests. At any time afterward, you can create tasks
     /// for individual images with equivalent requests.
     public func startPreheating(with requests: [Request]) {
-        queue.async { requests.forEach(self._startPreheating) }
+        queue.async {
+            requests.forEach(self._startPreheating)
+        }
     }
 
     private func _startPreheating(with request: Request) {
@@ -41,13 +43,17 @@ public final class Preheater {
 
         let task = Task(request: request, key: key)
         let token = task.cts.token
-        preheatQueue.execute(token: token) { [weak self] finish in
+
+        let operation = Operation(starter: { [weak self] finish in
             self?.manager.loadImage(with: request, token: token) { _ in
                 self?._remove(task)
                 finish()
             }
             token.register(finish)
-        }
+        })
+        preheatQueue.addOperation(operation)
+        token.register { [weak operation] in operation?.cancel() }
+
         tasks[key] = task
     }
 
@@ -61,7 +67,9 @@ public final class Preheater {
     /// Stops preheating images for the given requests and cancels outstanding
     /// requests.
     public func stopPreheating(with requests: [Request]) {
-        queue.async { requests.forEach(self._stopPreheating) }
+        queue.async {
+            requests.forEach(self._stopPreheating)
+        }
     }
 
     private func _stopPreheating(with request: Request) {

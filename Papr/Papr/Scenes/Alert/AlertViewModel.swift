@@ -11,46 +11,80 @@ import RxSwift
 import Action
 
 enum AlertMode {
-    case cancel
-    case yesOrNo
+    case ok
+    case yesNo
 }
-class AlertViewModel {
 
-    let title = Variable("")
-    let message = Variable("")
-    let mode = Variable<AlertMode>(.cancel)
+protocol AlertViewModelInput {
+    var closeAction: CocoaAction { get }
+    var yesAction: CocoaAction { get }
+    var noAction: CocoaAction { get }
+}
+
+protocol AlertViewModelOutput {
+    var title: Observable<String> { get }
+    var message: Observable<String> { get }
+    var mode: Observable<AlertMode> { get }
     
-    let yesPublisher = PublishSubject<Void>()
-    let noPublisher = PublishSubject<Void>()
-    let cancelPublisher = PublishSubject<Void>()
+    var yesObservable: Observable<Void> { get }
+    var noObservable: Observable<Void> { get }
+    var okObservable: Observable<Void> { get }
+}
+
+protocol AlertViewModelType {
+    var inputs: AlertViewModelInput { get }
+    var outputs: AlertViewModelOutput { get }
+}
+
+class AlertViewModel: AlertViewModelType, AlertViewModelInput, AlertViewModelOutput {
     
-    private let sceneCoordinator: SceneCoordinatorType
+    // MARK: Inputs & Outputs
+    var inputs: AlertViewModelInput { return self }
+    var outputs: AlertViewModelOutput { return self }
     
-    init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
-        self.sceneCoordinator = sceneCoordinator
-    }
-    
-    // MARK: Actions
-    
-    lazy var cancelAction: CocoaAction = {
-        return CocoaAction {
-            self.cancelPublisher.onNext(())
-            return .empty()
+    // MARK: Inputs
+    lazy var closeAction: CocoaAction = {
+        return CocoaAction { [unowned self] in
+            self.okPublisher.onNext(())
+            return Observable.empty()
         }
     }()
     
     lazy var yesAction: CocoaAction = {
-        return CocoaAction {
-            self.yesPublisher.onNext(())
-            return .empty()
+        return CocoaAction { [unowned self] in
+            self.okPublisher.onNext(())
+            return Observable.empty()
         }
     }()
     
     lazy var noAction: CocoaAction = {
-        return CocoaAction {
+        return CocoaAction { [unowned self] in
             self.noPublisher.onNext(())
-            return .empty()
+            return Observable.empty()
         }
     }()
-
+    
+    // MARK: Outputs
+    let title: Observable<String>
+    let message: Observable<String>
+    let mode: Observable<AlertMode>
+    let yesObservable: Observable<Void>
+    let noObservable: Observable<Void>
+    let okObservable: Observable<Void>
+    
+    private let yesPublisher = PublishSubject<Void>()
+    private let noPublisher = PublishSubject<Void>()
+    private let okPublisher = PublishSubject<Void>()
+    
+    init(title: String, message: String, mode: AlertMode) {
+        
+        self.title = Observable.just(title)
+        self.message = Observable.just(message)
+        self.mode = Observable.just(mode)
+        
+        yesObservable = yesPublisher.asObservable()
+        noObservable = noPublisher.asObservable()
+        okObservable = okPublisher.asObservable()
+    }
 }
+

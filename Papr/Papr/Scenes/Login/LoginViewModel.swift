@@ -108,12 +108,12 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     }
     
     @discardableResult
-    private func finishLogin() -> Observable<User?> {
+    private func finishLogin() -> Observable<User> {
        loginState.accept(.fetchingToken)
         return moyaProvider.rx
             .request(.getMe)
             .asObservable()
-            .mapOptional(User.self)
+            .map(User.self)
     }
 }
 

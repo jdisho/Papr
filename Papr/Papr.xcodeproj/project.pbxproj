@@ -46,15 +46,6 @@
 		DC5AF7591FAD2F1E00ADA2BB /* OrderBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */; };
 		DC5AF75A1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */; };
 		DC5AF75B1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */; };
-		DC5F61201FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F611D1FB65A9F00A60D19 /* MoyaProvider+Rx.swift */; };
-		DC5F61211FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F611D1FB65A9F00A60D19 /* MoyaProvider+Rx.swift */; };
-		DC5F61221FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F611D1FB65A9F00A60D19 /* MoyaProvider+Rx.swift */; };
-		DC5F61231FB65A9F00A60D19 /* Observable+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F611E1FB65A9F00A60D19 /* Observable+Response.swift */; };
-		DC5F61241FB65A9F00A60D19 /* Observable+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F611E1FB65A9F00A60D19 /* Observable+Response.swift */; };
-		DC5F61251FB65A9F00A60D19 /* Observable+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F611E1FB65A9F00A60D19 /* Observable+Response.swift */; };
-		DC5F61261FB65A9F00A60D19 /* Single+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F611F1FB65A9F00A60D19 /* Single+Response.swift */; };
-		DC5F61271FB65A9F00A60D19 /* Single+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F611F1FB65A9F00A60D19 /* Single+Response.swift */; };
-		DC5F61281FB65A9F00A60D19 /* Single+Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5F611F1FB65A9F00A60D19 /* Single+Response.swift */; };
 		DC71C3021FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */; };
 		DC71C3031FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */; };
 		DC71C3041FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */; };
@@ -203,9 +194,6 @@
 		DC5AF74F1FAD027F00ADA2BB /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		DC5AF7541FAD2EF900ADA2BB /* Scope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scope.swift; sourceTree = "<group>"; };
 		DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBy.swift; sourceTree = "<group>"; };
-		DC5F611D1FB65A9F00A60D19 /* MoyaProvider+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+Rx.swift"; sourceTree = "<group>"; };
-		DC5F611E1FB65A9F00A60D19 /* Observable+Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Response.swift"; sourceTree = "<group>"; };
-		DC5F611F1FB65A9F00A60D19 /* Single+Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Single+Response.swift"; sourceTree = "<group>"; };
 		DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthManager.swift; sourceTree = "<group>"; };
 		DC71C30E1FBDE00A00C8E41A /* UnsplashAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthError.swift; sourceTree = "<group>"; };
 		DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAccessToken.swift; sourceTree = "<group>"; };
@@ -317,16 +305,6 @@
 				DC4191352038E3EA0012A29C /* Unsplash */,
 			);
 			path = Enums;
-			sourceTree = "<group>";
-		};
-		DC5F611C1FB65A9F00A60D19 /* Moya+Rx */ = {
-			isa = PBXGroup;
-			children = (
-				DC5F611D1FB65A9F00A60D19 /* MoyaProvider+Rx.swift */,
-				DC5F611E1FB65A9F00A60D19 /* Observable+Response.swift */,
-				DC5F611F1FB65A9F00A60D19 /* Single+Response.swift */,
-			);
-			path = "Moya+Rx";
 			sourceTree = "<group>";
 		};
 		DC7CF5851FC468C6006E0A39 /* Authentication */ = {
@@ -479,7 +457,6 @@
 			children = (
 				DCEE1F121FC9837E0010BADE /* Rx */,
 				DCDDF3242027A69C00E1EB81 /* Nuke+Rx */,
-				DC5F611C1FB65A9F00A60D19 /* Moya+Rx */,
 				DCBB1B6B1FA8BA8E004E95F0 /* NibIdentifiable.swift */,
 				DCBB1B6F1FA8BAC2004E95F0 /* BindableType.swift */,
 				DC7CF5811FC464BF006E0A39 /* URL.swift */,
@@ -903,7 +880,6 @@
 				DCBB1B551FA8B814004E95F0 /* Scene.swift in Sources */,
 				DC99FB922003A7DB001195FD /* PhotoService.swift in Sources */,
 				DC5AF7271FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
-				DC5F61201FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */,
 				DCBB1B6C1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */,
 				DCC8CA072002BEE300F6C540 /* HomeViewController.swift in Sources */,
@@ -915,13 +891,11 @@
 				DC1F1504203195410025F70B /* UIScrollView+Extentions.swift in Sources */,
 				DC2E76F8203B6DB90023A173 /* LikeUnlike.swift in Sources */,
 				DCBAEE6320363CD600561CBA /* Orientation.swift in Sources */,
-				DC5F61231FB65A9F00A60D19 /* Observable+Response.swift in Sources */,
 				DCCCFCC5203A52410024D417 /* Resolution.swift in Sources */,
 				DCBE008E202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
 				DC7CF5821FC464BF006E0A39 /* URL.swift in Sources */,
 				DCBB1B5B1FA8B840004E95F0 /* SceneTransitionType.swift in Sources */,
 				DC5AF7591FAD2F1E00ADA2BB /* OrderBy.swift in Sources */,
-				DC5F61261FB65A9F00A60D19 /* Single+Response.swift in Sources */,
 				DCBB1B671FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
 				DCC8CA1A2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
 				DC5AF7501FAD027F00ADA2BB /* Collection.swift in Sources */,
@@ -959,18 +933,15 @@
 				DCC8CA1F2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DC5AF7451FACEF2700ADA2BB /* Location.swift in Sources */,
 				DC99FB932003A7DB001195FD /* PhotoService.swift in Sources */,
-				DC5F61241FB65A9F00A60D19 /* Observable+Response.swift in Sources */,
 				DCEE1F0C1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCCCFCBE203A45DE0024D417 /* Links.swift in Sources */,
 				DC5AF7511FAD027F00ADA2BB /* Collection.swift in Sources */,
 				DCBAEE6420363CD600561CBA /* Orientation.swift in Sources */,
-				DC5F61271FB65A9F00A60D19 /* Single+Response.swift in Sources */,
 				DCBB1B751FA8D597004E95F0 /* UnsplashAPI.swift in Sources */,
 				DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC5AF7491FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DCBB1B611FA8BA22004E95F0 /* LoginViewController.swift in Sources */,
 				DCEE1F101FC97CE80010BADE /* AlertViewModel.swift in Sources */,
-				DC5F61211FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */,
 				DCBB1B681FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
 				DC92230A203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DCBB1B711FA8BAC2004E95F0 /* BindableType.swift in Sources */,
@@ -1010,11 +981,9 @@
 				DC5AF7461FACEF2700ADA2BB /* Location.swift in Sources */,
 				DC99FB942003A7DB001195FD /* PhotoService.swift in Sources */,
 				DCCCFCC7203A52410024D417 /* Resolution.swift in Sources */,
-				DC5F61251FB65A9F00A60D19 /* Observable+Response.swift in Sources */,
 				DCEE1F0D1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCBE0090202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
 				DC5AF7521FAD027F00ADA2BB /* Collection.swift in Sources */,
-				DC5F61281FB65A9F00A60D19 /* Single+Response.swift in Sources */,
 				DCBB1B761FA8D597004E95F0 /* UnsplashAPI.swift in Sources */,
 				DC5AF7291FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC1F1506203195410025F70B /* UIScrollView+Extentions.swift in Sources */,
@@ -1022,7 +991,6 @@
 				DCCCFCBF203A45DE0024D417 /* Links.swift in Sources */,
 				DCBB1B621FA8BA22004E95F0 /* LoginViewController.swift in Sources */,
 				DCEE1F111FC97CE80010BADE /* AlertViewModel.swift in Sources */,
-				DC5F61221FB65A9F00A60D19 /* MoyaProvider+Rx.swift in Sources */,
 				DCBE008C202A1A980065BEF3 /* Date+Extentions.swift in Sources */,
 				DCBB1B691FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
 				DCBB1B721FA8BAC2004E95F0 /* BindableType.swift in Sources */,

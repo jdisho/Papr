@@ -52,18 +52,16 @@ class HomeViewController: UIViewController, BindableType {
 
         outputs.curated.subscribe { [unowned self] curated in
             guard let curated = curated.element else { return }
-            self.resetTableViewPosition()
             if curated {
-                 self.navBarButton.rx.action = inputs.showLatestPhotosAction
+                 self.navBarButton.rx.action = inputs.showLatestPhotosAction 
             } else {
-                 self.navBarButton.rx.action = inputs.showCuratedPhotosAction
+                self.navBarButton.rx.action  = inputs.showCuratedPhotosAction
             }
         }
         .disposed(by: rx.disposeBag)
         
         outputs.orderBy.subscribe { [unowned self] orderBy in
             guard let orderBy = orderBy.element else { return }
-            self.resetTableViewPosition()
             switch orderBy {
             case .latest:
                 self.rightBarButtonItem.rx.action = inputs.orderByPopularityAction
@@ -121,21 +119,17 @@ class HomeViewController: UIViewController, BindableType {
         tableView.registerCell(type: HomeViewCell.self)
         tableView.estimatedRowHeight = 400
     }
-    
+
     private func configureRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
     }
-    
-    private func resetTableViewPosition() {
-        tableView.setContentOffset(CGPoint(x: 0, y: -150), animated: true)
-    }
-    
+
     @objc private func refresh() {
         viewModel.inputs.refresh()
     }
-    
+
     var tableViewDataSource: TableViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
         return { [unowned self] _, tv, ip, i in
                 var cell = tv.dequeueResuableCell(type: HomeViewCell.self, forIndexPath: ip)

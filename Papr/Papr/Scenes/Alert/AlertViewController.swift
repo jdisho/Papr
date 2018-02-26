@@ -8,56 +8,51 @@
 
 import UIKit
 import RxSwift
-import RxCocoa
+import NSObject_Rx
 
 class AlertViewController: UIAlertController, BindableType {
     
-    // MARK: ViewModel
     var viewModel: AlertViewModel!
-    
-    // MARK: Private
-    private var cancelAction: UIAlertAction!
-    private var yesAction: UIAlertAction!
-    private var noAction: UIAlertAction!
-    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureUI()
-    }
-
-    // MARK: BindableType
-    func bindViewModel() {
-
-        viewModel.title
-            .asObservable()
-            .bind(to: self.rx.title)
-            .disposed(by: disposeBag)
-        
-        viewModel.message
-            .asObservable()
-            .bind(to: self.rx.message)
-            .disposed(by: disposeBag)
-        
-        switch viewModel.mode.value {
-        case .cancel:
-            cancelAction.rx.action = viewModel.cancelAction
-            addAction(cancelAction)
-        case .yesOrNo:
-            yesAction.rx.action = viewModel.yesAction
-            noAction.rx.action = viewModel.noAction
-            addAction(yesAction)
-            addAction(noAction)
-        }
     }
     
-    // MARK: UI
-    private func configureUI() {
-        cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        yesAction = UIAlertAction(title: "Yes", style: .default)
-        noAction = UIAlertAction(title: "No", style: .cancel)
+    // MARK: BindableType
+    
+    func bindViewModel() {
+        let inputs = viewModel.inputs
+        let outputs = viewModel.outputs
+        
+        outputs.title
+            .bind(to: self.rx.title)
+            .disposed(by: rx.disposeBag)
+        
+        outputs.message
+            .bind(to: self.rx.message)
+            .disposed(by: rx.disposeBag)
+        
+        outputs.mode.subscribe { mode in
+            guard let mode = mode.element else { return }
+            switch mode {
+            case .ok:
+                let alertAction = UIAlertAction(title: "Ok",
+                                                style: .cancel,
+                                                handler: { _ in  inputs.closeAction.execute(()) })
+                self.addAction(alertAction)
+            case .yesNo:
+                let yesAction = UIAlertAction(title: "Yes",
+                                              style: .default,
+                                              handler: { _ in inputs.yesAction.execute(())})
+                self.addAction(yesAction)
+                
+                let noAction = UIAlertAction(title: "No",
+                                             style: .cancel,
+                                             handler: { _ in inputs.noAction.execute(())})
+                self.addAction(noAction)
+            }
+        }
+        .disposed(by: rx.disposeBag)
+        
     }
-
-
 }

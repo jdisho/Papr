@@ -6,21 +6,21 @@ target 'Papr' do
   use_frameworks!
   # RxSwift
   
-  pod 'RxSwift', '4.1.2'
-  pod 'RxCocoa', '4.1.2'
-  pod 'RxDataSources', '3.0.2'
-  pod 'RxOptional', '3.3.0'
-  pod 'Action', '3.5.0'
-  pod 'NSObject+Rx', '4.2.0'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RxDataSources'
+  pod 'RxOptional'
+  pod 'Action'
+  pod 'NSObject+Rx'
   
   # Network
-  pod 'Moya', '10.0.2'
+  pod 'Moya/RxSwift'
 
   # Keychain
-  pod 'KeychainSwift', '10.0.0'
+  pod 'KeychainSwift'
   
   # Image
-  pod 'Nuke', '6.0' 
+  pod 'Nuke'
 
   # Pods for Papr
 

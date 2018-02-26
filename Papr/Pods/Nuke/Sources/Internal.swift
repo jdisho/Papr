@@ -1,31 +1,16 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2017 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2015-2018 Alexander Grebenyuk (github.com/kean).
 
 import Foundation
 
 // MARK: - Lock
 
-internal final class Lock {
-    var mutex = UnsafeMutablePointer<pthread_mutex_t>.allocate(capacity: 1)
-
-    init() { pthread_mutex_init(mutex, nil) }
-
-    deinit {
-        pthread_mutex_destroy(mutex)
-        mutex.deinitialize()
-        mutex.deallocate(capacity: 1)
-    }
-
+extension NSLock {
     func sync<T>(_ closure: () -> T) -> T {
-        pthread_mutex_lock(mutex)
-        defer { pthread_mutex_unlock(mutex) }
+        lock(); defer { unlock() }
         return closure()
     }
-
-    func lock() { pthread_mutex_lock(mutex) }
-
-    func unlock() { pthread_mutex_unlock(mutex) }
 }
 
 // MARK: - RateLimiter
@@ -48,10 +33,10 @@ internal final class RateLimiter {
     private typealias Task = (CancellationToken, () -> Void)
 
     /// Initializes the `RateLimiter` with the given configuration.
-    /// - parameter rate: Maximum number of requests per second. 100 by default.
+    /// - parameter rate: Maximum number of requests per second. 80 by default.
     /// - parameter burst: Maximum number of requests which can be executed without
-    /// any delays when "bucket is full". 30 by default.
-    internal init(rate: Int = 100, burst: Int = 30) {
+    /// any delays when "bucket is full". 25 by default.
+    internal init(rate: Int = 80, burst: Int = 25) {
         self.bucket = TokenBucket(rate: Double(rate), burst: Double(burst))
     }
 
@@ -66,7 +51,9 @@ internal final class RateLimiter {
     }
 
     private func _execute(_ task: Task) -> Bool {
-        guard !task.0.isCancelling else { return true } // no need to execute
+        guard !task.0.isCancelling else {
+            return true // No need to execute
+        }
         return bucket.execute(task.1)
     }
 
@@ -81,7 +68,7 @@ internal final class RateLimiter {
             pending.remove(node)
         }
         isExecutingPendingTasks = false
-        if !pending.isEmpty { // not all pending items were executed
+        if !pending.isEmpty { // Not all pending items were executed
             _setNeedsExecutePendingTasks()
         }
     }
@@ -123,55 +110,60 @@ internal final class RateLimiter {
     }
 }
 
-// MARK: - TaskQueue
+// MARK: - Operation
 
-/// Limits number of maximum concurrent tasks. By default tasks are executed on
-/// the underlying concurrent dispatch queue (with default options).
-internal final class TaskQueue {
-    // An alternative of using custom Foundation.Operation requires more code,
-    // less performant and even harder to get right https://github.com/kean/Nuke/issues/141.
-    private var executingTaskCount: Int = 0
-    private var pendingTasks = LinkedList<Task>() // fast append, fast remove first
-    private let maxConcurrentTaskCount: Int
-    private let executionQueue = DispatchQueue(label: "com.github.kean.Nuke.TaskQueue.Execution", attributes: .concurrent)
-    private let syncQueue = DispatchQueue(label: "com.github.kean.Nuke.TaskQueue.Sync")
+internal final class Operation: Foundation.Operation {
+    enum State { case executing, finished }
 
-    internal typealias Work = (_ finish: @escaping () -> Void) -> Void
-    private typealias Task = (CancellationToken, Work)
-
-    internal init(maxConcurrentTaskCount: Int) {
-        self.maxConcurrentTaskCount = maxConcurrentTaskCount
-    }
-
-    internal func execute(token: CancellationToken, _ closure: @escaping Work) {
-        syncQueue.async {
-            guard !token.isCancelling else { return } // fast preflight check
-            self.pendingTasks.append((token, closure))
-            self._executeTasksIfNecessary()
+    // `queue` here is basically to make TSan happy. In reality the calls to
+    // `_setState` are guaranteed to never run concurrently in different ways.
+    private var _state: State?
+    private func _setState(_ newState: State) {
+        willChangeValue(forKey: "isExecuting")
+        if newState == .finished {
+            willChangeValue(forKey: "isFinished")
+        }
+        queue.sync(flags: .barrier) {
+            _state = newState
+        }
+        didChangeValue(forKey: "isExecuting")
+        if newState == .finished {
+            didChangeValue(forKey: "isFinished")
         }
     }
 
-    private func _executeTasksIfNecessary() {
-        while executingTaskCount < maxConcurrentTaskCount, let node = pendingTasks.first {
-            pendingTasks.remove(node)
-            let task = node.value
-            if !task.0.isCancelling { // check if still not cancelled
-                executingTaskCount += 1 // only then execute
-                executionQueue.async { self._executeTask(task) }
-            }
+    override var isExecuting: Bool {
+        return queue.sync { _state == .executing }
+    }
+    override var isFinished: Bool {
+        return queue.sync { _state == .finished }
+    }
+
+    typealias Starter = (_ fulfill: @escaping () -> Void) -> Void
+    private let starter: Starter
+    private let queue = DispatchQueue(label: "com.github.kean.Nuke.Operation", attributes: .concurrent)
+
+    init(starter: @escaping Starter) {
+        self.starter = starter
+    }
+
+    override func start() {
+        guard !isCancelled else {
+            _setState(.finished)
+            return
+        }
+        _setState(.executing)
+        starter { [weak self] in
+            DispatchQueue.main.async { self?._finish() }
         }
     }
 
-    private func _executeTask(_ task: Task) {
-        var isFinished = false
-        task.1 { [weak self] in
-            self?.syncQueue.async {
-                guard !isFinished else { return } // finish called twice
-                isFinished = true
-                self?.executingTaskCount -= 1
-                self?._executeTasksIfNecessary()
-            }
-        }
+    // Calls to _finish() are syncrhonized on the main thread. This way we
+    // guarantee that `starter` doesn't finish operation more than once.
+    // Other paths are also guaranteed to be safe.
+    private func _finish() {
+        guard _state != .finished else { return }
+        _setState(.finished)
     }
 }
 
@@ -183,9 +175,13 @@ internal final class LinkedList<Element> {
     private(set) var first: Node?
     private(set) var last: Node?
 
-    deinit { removeAll() } // only available on classes
+    deinit {
+        removeAll()
+    }
 
-    var isEmpty: Bool { return last == nil }
+    var isEmpty: Bool {
+        return last == nil
+    }
 
     /// Adds an element to the end of the list.
     @discardableResult func append(_ element: Element) -> Node {
@@ -209,8 +205,12 @@ internal final class LinkedList<Element> {
     func remove(_ node: Node) {
         node.next?.previous = node.previous // node.previous is nil if node=first
         node.previous?.next = node.next // node.next is nil if node=last
-        if node === last { last = node.previous }
-        if node === first { first = node.next }
+        if node === last {
+            last = node.previous
+        }
+        if node === first {
+            first = node.next
+        }
         node.next = nil
         node.previous = nil
     }
@@ -232,6 +232,8 @@ internal final class LinkedList<Element> {
         fileprivate var next: Node?
         fileprivate var previous: Node?
 
-        init(value: Element) { self.value = value }
+        init(value: Element) {
+            self.value = value
+        }
     }
 }

@@ -1,6 +1,6 @@
 // The MIT License (MIT)
 //
-// Copyright (c) 2017 Alexander Grebenyuk (github.com/kean).
+// Copyright (c) 2015-2018 Alexander Grebenyuk (github.com/kean).
 
 import Foundation
 
@@ -127,7 +127,9 @@ public final class Manager: Loading {
     private func getContext(for target: AnyObject) -> Context {
         // Associated objects is a simplest way to bind Context and Target lifetimes
         // The implementation might change in the future.
-        if let ctx = objc_getAssociatedObject(target, &Manager.contextAK) as? Context { return ctx }
+        if let ctx = objc_getAssociatedObject(target, &Manager.contextAK) as? Context {
+            return ctx
+        }
         let ctx = Context()
         objc_setAssociatedObject(target, &Manager.contextAK, ctx, .OBJC_ASSOCIATION_RETAIN)
         return ctx
