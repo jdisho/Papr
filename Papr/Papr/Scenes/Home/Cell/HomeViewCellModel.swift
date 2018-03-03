@@ -14,6 +14,7 @@ protocol HomeViewCellModelInput {
     var likePhotoAction: Action<Void, Photo> { get }
     var unlikePhotoAction: Action<Void, Photo> { get }
     var alertAction: Action<String, Void> { get }
+    var photoDetailsAction: CocoaAction { get }
     func update(photo: Photo) -> Photo
 }
 
@@ -71,6 +72,13 @@ class HomeViewCellModel: HomeViewCellModelType,
                                                 mode: .ok)
             return self.sceneCoordinator.transition(to: .alert(alertViewModel), 
                                                     type: .alert)
+        }
+    }()
+
+    lazy var photoDetailsAction: CocoaAction = {
+        return CocoaAction { [unowned self] in
+            let viewModel = PhotoDetailsViewModel()
+            return self.sceneCoordinator.transition(to: .photoDetails(viewModel), type: .modal)
         }
     }()
 

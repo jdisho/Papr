@@ -19,6 +19,7 @@ enum Scene {
     case login(LoginViewModel)
     case home(HomeViewModel)
     case alert(AlertViewModel)
+    case photoDetails(PhotoDetailsViewModel)
 }
 
 extension Scene {
@@ -35,6 +36,10 @@ extension Scene {
             return navController
         case let .alert(viewModel):
             var vc = AlertViewController(title: nil, message: nil, preferredStyle: .alert)
+            vc.bind(to: viewModel)
+            return vc
+        case let .photoDetails(viewModel):
+            var vc = PhotoDetailsViewController.instantiateFromNib()
             vc.bind(to: viewModel)
             return vc
         }

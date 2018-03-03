@@ -83,6 +83,8 @@ class HomeViewCell: UITableViewCell, BindableType {
             .bind(to: inputs.alertAction.inputs)
             .disposed(by: rx.disposeBag)
 
+        photoButton.rx.action = inputs.photoDetailsAction
+
         outputs.userProfileImage
             .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }
             .bind(to: userImageView.rx.image)
