@@ -6,25 +6,14 @@
 //  Copyright © 2017 Joan Disho. All rights reserved.
 //
 
-struct ProfileImage {
+struct ProfileImage: Decodable {
     let small: String?
     let medium: String?
     let large: String?
-}
 
-extension ProfileImage: Decodable {
-
-    private enum ProfileImageCodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case small
         case medium
         case large
-    }
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: ProfileImageCodingKeys.self)
-
-        small = try? container.decode(String.self, forKey: .small)
-        medium = try? container.decode(String.self, forKey: .medium)
-        large = try? container.decode(String.self, forKey: .large)
     }
 }

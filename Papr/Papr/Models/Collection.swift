@@ -6,7 +6,7 @@
 //  Copyright © 2017 Joan Disho. All rights reserved.
 //
 
-struct Collection {
+struct Collection: Decodable {
     let id: Int?
     let coverPhoto: Photo?
     let isCurated: Bool?
@@ -19,11 +19,8 @@ struct Collection {
     let updatedAt: String?
     let user: User?
     let links: Links?
-}
 
-extension Collection: Decodable {
-    
-    private enum CollectionCodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case id
         case coverPhoto = "cover_photo"
         case isCurated = "curated"
@@ -36,22 +33,5 @@ extension Collection: Decodable {
         case updatedAt = "updated_at"
         case user
         case links
-    }
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CollectionCodingKeys.self)
-
-        id = try? container.decode(Int.self, forKey: .id)
-        coverPhoto = try? container.decode(Photo.self, forKey: .coverPhoto)
-        isCurated = try? container.decode(Bool.self, forKey: .isCurated)
-        isFeatured = try? container.decode(Bool.self, forKey: .isFeatured)
-        title = try? container.decode(String.self, forKey: .title)
-        description = try? container.decode(String.self, forKey: .description)
-        totalPhotos = try? container.decode(Int.self, forKey: .totalPhotos)
-        isPrivate = try? container.decode(Bool.self, forKey: .isPrivate)
-        publishedAt = try? container.decode(String.self, forKey: .publishedAt)
-        updatedAt = try? container.decode(String.self, forKey: .updatedAt)
-        user = try? container.decode(User.self, forKey: .user)
-        links = try? container.decode(Links.self, forKey: .links)
     }
 }

@@ -8,29 +8,17 @@
 
 import Foundation
 
-struct Category {
+struct Category: Decodable {
     let id: Int?
     let title: String?
     let photoCount: Int?
     let links: Links?
-}
 
-extension Category: Decodable {
-    
-    private enum CategoryCodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case id
         case title = "exposure_time"
         case photoCount = "photo_count"
         case links
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CategoryCodingKeys.self)
-        
-        id = try? container.decode(Int.self, forKey: .id)
-        title = try? container.decode(String.self, forKey: .title)
-        photoCount = try? container.decode(Int.self, forKey: .photoCount)
-        links = try? container.decode(Links.self, forKey: .links)
     }
 }
 

@@ -8,7 +8,7 @@
 
 import RxDataSources
 
-struct Photo {
+struct Photo: Decodable {
     let id: String?
     let created: String?
     let updated: String?
@@ -27,11 +27,8 @@ struct Photo {
     let collectionsItBelongs: [Collection]?
     let links: Links?
     let categories: [Category]?
-}
 
-extension Photo: Decodable {
-    
-    private enum PhotoCodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case id
         case created = "created_at"
         case updated = "updated_at"
@@ -51,30 +48,6 @@ extension Photo: Decodable {
         case links
         case categories
     }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: PhotoCodingKeys.self)
-
-        id = try? container.decode(String.self, forKey: .id)
-        created = try? container.decode(String.self, forKey: .created)
-        updated = try? container.decode(String.self, forKey: .updated)
-        description = try? container.decode(String.self, forKey: .description)
-        color = try? container.decode(String.self, forKey: .color)
-        likes = try? container.decode(Int.self, forKey: .likes)
-        likedByUser = try? container.decode(Bool.self, forKey: .likedByUser)
-        downloads = try? container.decode(Int.self, forKey: .downloads)
-        views = try? container.decode(Int.self, forKey: .views)
-        width = try? container.decode(Int.self, forKey: .width)
-        height = try? container.decode(Int.self, forKey: .height)
-        user = try? container.decode(User.self, forKey: .user)
-        urls = try? container.decode(ImageURLs.self, forKey: .urls)
-        location = try? container.decode(Location.self, forKey: .location)
-        exif = try? container.decode(Exif.self, forKey: .exif)
-        collectionsItBelongs = try? container.decode([Collection].self, forKey: .collectionsItBelongs)
-        links = try? container.decode(Links.self, forKey: .links)
-        categories = try? container.decode([Category].self, forKey: .categories)
-    }
-
 }
 
 extension Photo: IdentifiableType {

@@ -29,7 +29,7 @@ struct PhotoService: PhotoServiceType {
         return provider.rx
             .request(.unlikePhoto(id: id))
             .asObservable()
-            .map(LikeUnlike.self).debug()
+            .map(LikeUnlike.self)
     }
     
     func photo(withId id: String) -> Observable<Photo> {
@@ -39,7 +39,9 @@ struct PhotoService: PhotoServiceType {
             .map(Photo.self)
     }
     
-    func photos(byPageNumber pageNumber: Int?, orderBy: OrderBy?, curated: Bool = false) -> Observable<[Photo]> {
+    func photos(byPageNumber pageNumber: Int?,
+                orderBy: OrderBy?,
+                curated: Bool = false) -> Observable<[Photo]> {
         var photosEnpoint = UnsplashAPI
             .photos(page: pageNumber, 
                     perPage: Constants.photosPerPage, 
@@ -53,6 +55,6 @@ struct PhotoService: PhotoServiceType {
         return provider.rx
             .request(photosEnpoint)
             .asObservable()
-            .map([Photo].self).debug()
+            .map([Photo].self)
     }
 }

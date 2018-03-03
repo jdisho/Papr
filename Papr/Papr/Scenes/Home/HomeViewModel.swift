@@ -17,7 +17,7 @@ enum NavBarTitle {
     var string: String {
         switch self {
         case .new:
-            return "New 🎉"
+            return "Newest 🎉"
         case .curated:
             return "Curated 👌"
         }

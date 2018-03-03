@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Links {
+struct Links: Decodable {
     let selfLink: String?
     let html: String?
     let photos: String?
@@ -17,11 +17,7 @@ struct Links {
     let download: String?
     let downloadLocation: String?
 
-}  
-
-extension Links: Decodable {
-    
-    enum LinksCodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case selfLink = "self"
         case html
         case photos
@@ -29,17 +25,5 @@ extension Links: Decodable {
         case portfolio
         case download
         case downloadLocation = "download_location"
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: LinksCodingKeys.self)
-
-        selfLink = try container.decode(String.self, forKey: .selfLink)
-        html = try? container.decode(String.self, forKey: .html)
-        photos = try? container.decode(String.self, forKey: .photos)
-        likes = try? container.decode(String.self, forKey: .likes)
-        portfolio = try? container.decode(String.self, forKey: .portfolio)
-        download = try? container.decode(String.self, forKey: .download)
-        downloadLocation = try? container.decode(String.self, forKey: .downloadLocation)
     }
 }

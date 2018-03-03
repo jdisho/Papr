@@ -8,48 +8,26 @@
 
 // MARK: Possition
 
-struct Possition {
+struct Possition: Decodable {
     let latitude: Double?
     let longitude: Double?
-}
 
-extension Possition: Decodable {
-    
-    private enum PossitionCodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case latitude
         case longitude
     }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: PossitionCodingKeys.self)
-
-        latitude = try? container.decode(Double.self, forKey: .latitude)
-        longitude = try? container.decode(Double.self, forKey: .longitude)
-    }
 }
-
 
 // MARK: Location
 
-struct Location {
+struct Location: Decodable {
     let city: String?
     let country: String?
     let position: Possition?
-}
 
-extension Location: Decodable {
-    
-    private enum LocationCodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case city
         case country
         case position
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: LocationCodingKeys.self)
-
-        city = try? container.decode(String.self, forKey: .city)
-        country = try? container.decode(String.self, forKey: .country)
-        position = try? container.decode(Possition.self, forKey: .position)
     }
 }
