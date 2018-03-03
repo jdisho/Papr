@@ -22,6 +22,7 @@ class HomeViewCell: UITableViewCell, BindableType {
     @IBOutlet var fullNameLabel: UILabel!
     @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var photoImageView: UIImageView!
+    @IBOutlet var photoButton: UIButton!
     @IBOutlet var photoHeightConstraint: NSLayoutConstraint!
     @IBOutlet var postedTimeLabel: UILabel!
     @IBOutlet var likeButton: UIButton!
