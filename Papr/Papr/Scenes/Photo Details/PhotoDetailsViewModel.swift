@@ -44,11 +44,14 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType,
     let photoSizeCoef: Observable<Double>
 
     // MARK: Private
+    private let service: PhotoServiceType
     private let sceneCoordinator: SceneCoordinatorType
 
     init(photo: Photo,
-        sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+         service: PhotoServiceType = PhotoService(),
+         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
+        self.service = service
         self.sceneCoordinator = sceneCoordinator
         let photoStream = Observable.just(photo)
 

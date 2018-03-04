@@ -57,4 +57,13 @@ struct PhotoService: PhotoServiceType {
             .asObservable()
             .map([Photo].self)
     }
+
+    func photoStatistics(withId id: String) -> Observable<PhotoStatistics> {
+        return provider.rx
+            .request(.photoStatistics(id: id,
+                                      resolution: .days,
+                                      quantity: nil))
+            .asObservable()
+            .map(PhotoStatistics.self)
+    }
 }

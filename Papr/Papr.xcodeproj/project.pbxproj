@@ -46,6 +46,9 @@
 		DC5AF7591FAD2F1E00ADA2BB /* OrderBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */; };
 		DC5AF75A1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */; };
 		DC5AF75B1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */; };
+		DC6CC644204CBD5300050589 /* PhotoStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6CC643204CBD5300050589 /* PhotoStatistics.swift */; };
+		DC6CC645204CBD5300050589 /* PhotoStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6CC643204CBD5300050589 /* PhotoStatistics.swift */; };
+		DC6CC646204CBD5300050589 /* PhotoStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6CC643204CBD5300050589 /* PhotoStatistics.swift */; };
 		DC71C3021FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */; };
 		DC71C3031FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */; };
 		DC71C3041FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */; };
@@ -203,6 +206,7 @@
 		DC5AF74F1FAD027F00ADA2BB /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		DC5AF7541FAD2EF900ADA2BB /* Scope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scope.swift; sourceTree = "<group>"; };
 		DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBy.swift; sourceTree = "<group>"; };
+		DC6CC643204CBD5300050589 /* PhotoStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStatistics.swift; sourceTree = "<group>"; };
 		DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthManager.swift; sourceTree = "<group>"; };
 		DC71C30E1FBDE00A00C8E41A /* UnsplashAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthError.swift; sourceTree = "<group>"; };
 		DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAccessToken.swift; sourceTree = "<group>"; };
@@ -453,6 +457,7 @@
 				DC5AF7471FACEF5500ADA2BB /* ImageURLs.swift */,
 				DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */,
 				DCCCFCBC203A45DE0024D417 /* Links.swift */,
+				DC6CC643204CBD5300050589 /* PhotoStatistics.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -888,6 +893,7 @@
 				DC5AF7481FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DCBB1B221FA7B1BD004E95F0 /* AppDelegate.swift in Sources */,
 				DCC8CA1E2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
+				DC6CC644204CBD5300050589 /* PhotoStatistics.swift in Sources */,
 				DCA09D002015F68200E6EBB7 /* Constants.swift in Sources */,
 				DCDDF3262027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
 				DC5AF7551FAD2EF900ADA2BB /* Scope.swift in Sources */,
@@ -945,6 +951,7 @@
 				DCB433D0204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */,
 				DCC8CA082002BEE300F6C540 /* HomeViewController.swift in Sources */,
 				DCC8CA0F2002BEF100F6C540 /* HomeViewModel.swift in Sources */,
+				DC6CC645204CBD5300050589 /* PhotoStatistics.swift in Sources */,
 				DC71C3DC1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
 				DCC8CA142002CC2700F6C540 /* HomeViewCell.swift in Sources */,
 				DC5AF7411FACE6A300ADA2BB /* Photo.swift in Sources */,
@@ -1003,6 +1010,7 @@
 				DCDDF3282027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
 				DC71C3041FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				DCB433D1204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */,
+				DC6CC646204CBD5300050589 /* PhotoStatistics.swift in Sources */,
 				DC99FB902003A7CC001195FD /* PhotoServiceType.swift in Sources */,
 				DC5AF72D1FACCBF300ADA2BB /* User.swift in Sources */,
 				DC7CF5841FC464BF006E0A39 /* URL.swift in Sources */,

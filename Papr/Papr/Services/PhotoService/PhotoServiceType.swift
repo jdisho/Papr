@@ -16,4 +16,5 @@ protocol PhotoServiceType {
     func photos(byPageNumber pageNumber: Int?,
                 orderBy: OrderBy?,
                 curated: Bool) -> Observable<[Photo]>
+    func photoStatistics(withId id: String) -> Observable<PhotoStatistics>
 }
