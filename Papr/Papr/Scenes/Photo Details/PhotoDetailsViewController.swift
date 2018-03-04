@@ -16,6 +16,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
     var viewModel: PhotoDetailsViewModelType!
 
     // MARK: IBOutlets
+    @IBOutlet var dismissButton: UIButton!
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var photoHeightConstraint: NSLayoutConstraint!
 
@@ -31,6 +32,8 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
         let this = PhotoDetailsViewController.self
+
+        dismissButton.rx.action = inputs.dismissAction
 
         outputs.photo
             .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
