@@ -77,7 +77,7 @@ class HomeViewCellModel: HomeViewCellModelType,
 
     lazy var photoDetailsAction: CocoaAction = {
         return CocoaAction { [unowned self] in
-            let viewModel = PhotoDetailsViewModel()
+            let viewModel = PhotoDetailsViewModel(photo: self.photo)
             return self.sceneCoordinator.transition(to: .photoDetails(viewModel), type: .modal)
         }
     }()

@@ -7,9 +7,13 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol PhotoDetailsViewModelInput {}
-protocol PhotoDetailsViewModelOutput {}
+protocol PhotoDetailsViewModelOutput {
+    var photo: Observable<String> { get }
+    var photoSizeCoef: Observable<Double> { get }
+}
 
 protocol PhotoDetailsViewModelType {
     var inputs: PhotoDetailsViewModelInput { get }
@@ -23,4 +27,23 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType,
     // MARK: Inputs & Outputs
     var inputs: PhotoDetailsViewModelInput { return self }
     var outputs: PhotoDetailsViewModelOutput { return self }
+
+    // MARK: Inputs
+
+    // MARK: Outputs
+    let photo: Observable<String>
+    let photoSizeCoef: Observable<Double>
+
+    init(photo: Photo) {
+        let photoStream = Observable.just(photo)
+
+        self.photo = photoStream
+            .map { $0.urls?.regular ?? "" }
+
+        photoSizeCoef = photoStream
+            .map { (width: $0.width ?? 0, height: $0.height ?? 0) }
+            .map { (width, height) -> Double in
+                return Double(height * Int(UIScreen.main.bounds.width) / width)
+        }
+    }
 }

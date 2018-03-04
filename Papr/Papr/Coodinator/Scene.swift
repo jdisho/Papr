@@ -31,9 +31,9 @@ extension Scene {
             return vc
         case let .home(viewModel):
             var vc = HomeViewController.instantiateFromNib()
-            let navController = UINavigationController(rootViewController: vc)
+            let rootViewController = UINavigationController(rootViewController: vc)
             vc.bind(to: viewModel)
-            return navController
+            return rootViewController
         case let .alert(viewModel):
             var vc = AlertViewController(title: nil, message: nil, preferredStyle: .alert)
             vc.bind(to: viewModel)
