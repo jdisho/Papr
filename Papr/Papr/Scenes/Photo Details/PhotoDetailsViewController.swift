@@ -52,17 +52,14 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             .disposed(by: rx.disposeBag)
 
         outputs.totalViews
-            .map { "\($0)" }
             .bind(to: totalViewsLabel.rx.text)
             .disposed(by: rx.disposeBag)
 
         outputs.totalLikes
-            .map { "\($0)" }
             .bind(to: totalLikesLabel.rx.text)
             .disposed(by: rx.disposeBag)
 
         outputs.totalDownloads
-            .map { "\($0)" }
             .bind(to: totalDownloadsLabel.rx.text)
             .disposed(by: rx.disposeBag)
     }

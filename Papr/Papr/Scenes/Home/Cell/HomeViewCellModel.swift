@@ -145,18 +145,22 @@ class HomeViewCellModel: HomeViewCellModelType,
                 guard let roundedDate = date?.since(Date(), in: .minute).rounded() else { return "" }
                 if roundedDate >= 60.0 && roundedDate <= 24 * 60.0 {
                     return "\(Int(date!.since(Date(), in: .hour).rounded()))h"
-                } else if roundedDate >= 24 * 60.0 {
-                    return "\(Int(date!.since(Date(), in: .day).rounded()))d"
+                } else if roundedDate >= 24 * 60.0 && roundedDate <= 30 * 24 * 60 {
+                    return "\(Int(date!.since(Date(), in: .week).rounded()))w"
+                } else if roundedDate >= 30 * 24 * 60 && roundedDate <= 365 * 24 * 60 {
+                    return "\(Int(date!.since(Date(), in: .month).rounded()))m"
+                } else if roundedDate >= 365 * 24 * 60 {
+                    return "\(Int(date!.since(Date(), in: .year).rounded()))y"
                 }
-                return "\(Int(roundedDate))m"
+                return "\(Int(roundedDate))min"
             }
 
         initialPhotoLikeNumber.onNext(photo.likes ?? 0)
         likesNumber = initialPhotoLikeNumber
             .map { likes in
                 guard likes != 0 else { return "" }
-                guard likes != 1 else { return "\(likes) like"}
-                return "\(likes) likes"
+                guard likes != 1 else { return likes.abbreviated + " like"}
+                return likes.abbreviated + " likes"
             }
         
         isPhotoLiked.onNext(photo.likedByUser ?? false)
