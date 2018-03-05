@@ -52,6 +52,7 @@ struct PhotoService: PhotoServiceType {
                                perPage: Constants.photosPerPage, 
                                orderBy: orderBy)
         }
+
         return provider.rx
             .request(photosEnpoint)
             .asObservable()
@@ -62,7 +63,7 @@ struct PhotoService: PhotoServiceType {
         return provider.rx
             .request(.photoStatistics(id: id,
                                       resolution: .days,
-                                      quantity: nil))
+                                      quantity: 30))
             .asObservable()
             .map(PhotoStatistics.self)
     }

@@ -148,7 +148,7 @@ extension UnsplashAPI: TargetType {
             return "/photos/\(id)"
         case .randomPhoto:
             return "/photos/random"
-        case let .photoStatistics(id):
+        case let .photoStatistics(id, _, _):
             return "/photos/\(id)/statistics" 
         case let .photoDownloadLink(id):
             return "/photos/\(id)/download"
@@ -172,13 +172,13 @@ extension UnsplashAPI: TargetType {
             return "/collections/\(id)"
         case let .curatedCollection(id):
             return "/collections/curated\(id)"
-        case let .collectionPhotos(id):
+        case let .collectionPhotos(id, _, _):
            return "/collections/\(id)/photos"
-        case let .curatedCollectionPhotos(id):
+        case let .curatedCollectionPhotos(id, _, _):
             return "/collections/curated/\(id)/photos"
         case let .relatedCollections(id):
             return "/collections/\(id)/related"
-        case let .updateCollection(id):
+        case let .updateCollection(id, _, _, _):
             return "/collections\(id)"
         case let .deleteCollection(id):
             return "/collections/\(id)"

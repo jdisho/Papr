@@ -17,6 +17,9 @@ protocol PhotoDetailsViewModelInput {
 protocol PhotoDetailsViewModelOutput {
     var photo: Observable<String> { get }
     var photoSizeCoef: Observable<Double> { get }
+    var totalViews: Observable<Int> { get }
+    var totalLikes: Observable<Int> { get }
+    var totalDownloads: Observable<Int> { get }
 }
 
 protocol PhotoDetailsViewModelType {
@@ -42,6 +45,9 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType,
     // MARK: Outputs
     let photo: Observable<String>
     let photoSizeCoef: Observable<Double>
+    let totalViews: Observable<Int>
+    let totalLikes: Observable<Int>
+    let totalDownloads: Observable<Int>
 
     // MARK: Private
     private let service: PhotoServiceType
@@ -63,5 +69,17 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType,
             .map { (width, height) -> Double in
                 return Double(height * Int(UIScreen.main.bounds.width) / width)
         }
+
+        let photoStatistics = service
+            .photoStatistics(withId: photo.id ?? "")
+
+        totalViews = photoStatistics
+            .map { $0.views?.total ?? 0 }
+
+        totalLikes = photoStream
+            .map { $0.likes ?? 0 }
+
+        totalDownloads = photoStatistics
+            .map { $0.downloads?.total ?? 0 }
     }
 }

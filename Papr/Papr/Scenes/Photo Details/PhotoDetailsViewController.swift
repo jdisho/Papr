@@ -19,6 +19,12 @@ class PhotoDetailsViewController: UIViewController, BindableType {
     @IBOutlet var dismissButton: UIButton!
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var photoHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var totalViewsLabel: UILabel!
+    @IBOutlet var totalLikesLabel: UILabel!
+    @IBOutlet var likeButton: UIButton!
+    @IBOutlet var totalDownloadsLabel: UILabel!
+    @IBOutlet var downloadButton: UIButton!
+    @IBOutlet var moreButton: UIButton!
 
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
@@ -43,6 +49,21 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         outputs.photoSizeCoef
             .map { CGFloat($0) }
             .bind(to: photoHeightConstraint.rx.constant)
+            .disposed(by: rx.disposeBag)
+
+        outputs.totalViews
+            .map { "\($0)" }
+            .bind(to: totalViewsLabel.rx.text)
+            .disposed(by: rx.disposeBag)
+
+        outputs.totalLikes
+            .map { "\($0)" }
+            .bind(to: totalLikesLabel.rx.text)
+            .disposed(by: rx.disposeBag)
+
+        outputs.totalDownloads
+            .map { "\($0)" }
+            .bind(to: totalDownloadsLabel.rx.text)
             .disposed(by: rx.disposeBag)
     }
 }

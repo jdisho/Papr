@@ -10,7 +10,7 @@ struct Exif: Decodable {
     let aperture: String?
     let exposureTime: String?
     let focalLength: String?
-    let iso: String?
+    let iso: Int?
     let make: String?
     let model: String?
 
