@@ -25,13 +25,19 @@ class PhotoDetailsViewController: UIViewController, BindableType {
     @IBOutlet var totalDownloadsLabel: UILabel!
     @IBOutlet var downloadButton: UIButton!
     @IBOutlet var moreButton: UIButton!
+    @IBOutlet var dismissButtonTopConstraint: NSLayoutConstraint!
+    @IBOutlet var statsContainerViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var touchableViewContainer: UIView!
 
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
+    private var isTouched = false
 
     // MARK: Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        configureUI()
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -68,4 +74,26 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             .bind(to: totalDownloadsLabel.rx.text)
             .disposed(by: rx.disposeBag)
     }
+
+    // MARK: UI
+    private func configureUI() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(onTouchAction))
+        touchableViewContainer.addGestureRecognizer(gesture)
+    }
+
+    @objc private func onTouchAction() {
+        UIView.animate(withDuration: 0.5, animations: {
+            if self.isTouched {
+                self.statsContainerViewBottomConstraint.constant = 0
+                self.dismissButtonTopConstraint.constant = 32
+                self.isTouched = false
+            } else {
+                self.statsContainerViewBottomConstraint.constant = -100
+                self.dismissButtonTopConstraint.constant = -68
+                self.isTouched = true
+            }
+            self.view.layoutIfNeeded()
+        })
+    }
+
 }
