@@ -29,8 +29,13 @@ class PhotoDetailsViewController: UIViewController, BindableType {
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
 
+    // MARK: Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 
      // MARK: BindableType
