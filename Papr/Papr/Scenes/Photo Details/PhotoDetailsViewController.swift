@@ -54,7 +54,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
 
         dismissButton.rx.action = inputs.dismissAction
 
-        outputs.photo
+        outputs.regularPhoto
             .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
             .bind(to: photoImageView.rx.image)
             .disposed(by: rx.disposeBag)

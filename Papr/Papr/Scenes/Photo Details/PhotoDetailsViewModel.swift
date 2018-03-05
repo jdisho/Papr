@@ -15,7 +15,7 @@ protocol PhotoDetailsViewModelInput {
 }
 
 protocol PhotoDetailsViewModelOutput {
-    var photo: Observable<String> { get }
+    var regularPhoto: Observable<String> { get }
     var photoSizeCoef: Observable<Double> { get }
     var totalViews: Observable<String> { get }
     var totalLikes: Observable<String> { get }
@@ -44,7 +44,7 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType,
     }()
 
     // MARK: Outputs
-    let photo: Observable<String>
+    let regularPhoto: Observable<String>
     let photoSizeCoef: Observable<Double>
     let totalViews: Observable<String>
     let totalLikes: Observable<String>
@@ -52,6 +52,7 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType,
     let likedByUser: Observable<Bool>
 
     // MARK: Private
+    private let photo: Photo
     private let service: PhotoServiceType
     private let sceneCoordinator: SceneCoordinatorType
 
@@ -59,12 +60,14 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType,
          service: PhotoServiceType = PhotoService(),
          sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
+        self.photo = photo
         self.service = service
         self.sceneCoordinator = sceneCoordinator
+
         let photoStream = service
             .photo(withId: photo.id ?? "")
 
-        self.photo = photoStream
+        self.regularPhoto = photoStream
             .map { $0.urls?.regular ?? "" }
 
         photoSizeCoef = photoStream

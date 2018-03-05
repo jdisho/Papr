@@ -164,11 +164,11 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="036-LZ-mB5">
-                            <rect key="frame" x="24" y="-68" width="25" height="25"/>
+                            <rect key="frame" x="24" y="-68" width="40" height="40"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="25" id="mwJ-bq-Bo0"/>
-                                <constraint firstAttribute="height" constant="25" id="vlc-3e-Ayt"/>
+                                <constraint firstAttribute="width" constant="40" id="mwJ-bq-Bo0"/>
+                                <constraint firstAttribute="height" constant="40" id="vlc-3e-Ayt"/>
                             </constraints>
                             <state key="normal" image="close">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
