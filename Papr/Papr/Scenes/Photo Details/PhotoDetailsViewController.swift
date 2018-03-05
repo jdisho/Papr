@@ -27,7 +27,6 @@ class PhotoDetailsViewController: UIViewController, BindableType {
     @IBOutlet var moreButton: UIButton!
     @IBOutlet var dismissButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet var statsContainerViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet var touchableViewContainer: UIView!
     @IBOutlet var favoriteImageView: UIImageView!
 
     // MARK: Private
@@ -39,7 +38,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         super.viewDidLoad()
 
         configureUI()
-        showHideOverlays(withDelay: 0.7)
+        showHideOverlays(withDelay: 1.0)
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -84,8 +83,8 @@ class PhotoDetailsViewController: UIViewController, BindableType {
 
     // MARK: UI
     private func configureUI() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(showHideOverlays))
-        touchableViewContainer.addGestureRecognizer(gesture)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showHideOverlays))
+        self.view.addGestureRecognizer(tapGesture)
     }
 
     @objc private func showHideOverlays(withDelay delay: Double = 0.0) {
@@ -97,8 +96,8 @@ class PhotoDetailsViewController: UIViewController, BindableType {
                     self.dismissButtonTopConstraint.constant = 32
                     self.isTouched = false
                 } else {
-                    self.statsContainerViewBottomConstraint.constant = -100
-                    self.dismissButtonTopConstraint.constant = -68
+                    self.statsContainerViewBottomConstraint.constant = 132
+                    self.dismissButtonTopConstraint.constant = -100
                     self.isTouched = true
                 }
                 self.view.layoutIfNeeded()
