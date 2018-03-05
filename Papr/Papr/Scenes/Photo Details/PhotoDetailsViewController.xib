@@ -15,6 +15,7 @@
                 <outlet property="dismissButton" destination="036-LZ-mB5" id="zZI-W2-iI9"/>
                 <outlet property="dismissButtonTopConstraint" destination="y2p-hY-jeZ" id="75l-AW-HDq"/>
                 <outlet property="downloadButton" destination="IUR-J7-ENG" id="IQX-KR-HQN"/>
+                <outlet property="favoriteImageView" destination="IHk-Oy-cma" id="6ak-0Q-nEr"/>
                 <outlet property="likeButton" destination="qQT-pE-GIf" id="gSM-EF-uDE"/>
                 <outlet property="moreButton" destination="jzD-v3-8tc" id="HCw-za-ZNT"/>
                 <outlet property="photoHeightConstraint" destination="opO-3w-Pi3" id="fdG-6B-h3I"/>
@@ -43,7 +44,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jct-D0-8BW">
-                            <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                            <rect key="frame" x="0.0" y="685" width="375" height="50"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ufh-7m-2YQ">
                                     <rect key="frame" x="24" y="8" width="61" height="34"/>
@@ -163,7 +164,7 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="036-LZ-mB5">
-                            <rect key="frame" x="24" y="32" width="25" height="25"/>
+                            <rect key="frame" x="24" y="-68" width="25" height="25"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="25" id="mwJ-bq-Bo0"/>
@@ -177,10 +178,10 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="036-LZ-mB5" firstAttribute="leading" secondItem="Uxu-a5-4EW" secondAttribute="leading" constant="24" id="28i-RZ-Bnk"/>
-                        <constraint firstAttribute="bottom" secondItem="Jct-D0-8BW" secondAttribute="bottom" id="4EA-Py-SVh"/>
+                        <constraint firstAttribute="bottom" secondItem="Jct-D0-8BW" secondAttribute="bottom" constant="-68" id="4EA-Py-SVh"/>
                         <constraint firstItem="Jct-D0-8BW" firstAttribute="leading" secondItem="Uxu-a5-4EW" secondAttribute="leading" id="IvB-vQ-6gD"/>
                         <constraint firstAttribute="trailing" secondItem="Jct-D0-8BW" secondAttribute="trailing" id="ruK-Ou-NNh"/>
-                        <constraint firstItem="036-LZ-mB5" firstAttribute="top" secondItem="Uxu-a5-4EW" secondAttribute="top" constant="32" id="y2p-hY-jeZ"/>
+                        <constraint firstItem="036-LZ-mB5" firstAttribute="top" secondItem="Uxu-a5-4EW" secondAttribute="top" constant="-68" id="y2p-hY-jeZ"/>
                     </constraints>
                 </view>
             </subviews>

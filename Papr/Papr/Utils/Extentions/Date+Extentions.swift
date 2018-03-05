@@ -21,15 +21,14 @@ enum DateRepresentation {
 extension Date {
     
     func since(_ anotherTime: Date, in representation: DateRepresentation) -> Double {
-        let timeIntervalSinceTime = -timeIntervalSince(anotherTime)
         switch representation {
-        case .second:   return timeIntervalSinceTime
-        case .minute:   return timeIntervalSinceTime / 60
-        case .hour:     return timeIntervalSinceTime / 60 * 60
-        case .day:      return timeIntervalSinceTime / 24 * 60 * 60
-        case .week:     return timeIntervalSinceTime / 7 * 24 * 60 * 60
-        case .month:    return timeIntervalSinceTime / 30 * 24 * 60 * 60
-        case .year:     return timeIntervalSinceTime / 365 * 24 * 60 * 60
+        case .second:   return -timeIntervalSince(anotherTime)
+        case .minute:   return -timeIntervalSince(anotherTime) / 60
+        case .hour:     return -timeIntervalSince(anotherTime) / 60 * 60
+        case .day:      return -timeIntervalSince(anotherTime) / 24 * 60 * 60
+        case .week:     return -timeIntervalSince(anotherTime) / 7 * 24 * 60 * 60
+        case .month:    return -timeIntervalSince(anotherTime) / 30 * 24 * 60 * 60
+        case .year:     return -timeIntervalSince(anotherTime) / 365 * 24 * 60 * 60
         }
     }
 }

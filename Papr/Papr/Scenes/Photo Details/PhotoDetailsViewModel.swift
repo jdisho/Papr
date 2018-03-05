@@ -20,6 +20,7 @@ protocol PhotoDetailsViewModelOutput {
     var totalViews: Observable<String> { get }
     var totalLikes: Observable<String> { get }
     var totalDownloads: Observable<String> { get }
+    var likedByUser: Observable<Bool> { get }
 }
 
 protocol PhotoDetailsViewModelType {
@@ -48,6 +49,7 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType,
     let totalViews: Observable<String>
     let totalLikes: Observable<String>
     let totalDownloads: Observable<String>
+    let likedByUser: Observable<Bool>
 
     // MARK: Private
     private let service: PhotoServiceType
@@ -59,7 +61,8 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType,
 
         self.service = service
         self.sceneCoordinator = sceneCoordinator
-        let photoStream = Observable.just(photo)
+        let photoStream = service
+            .photo(withId: photo.id ?? "")
 
         self.photo = photoStream
             .map { $0.urls?.regular ?? "" }
@@ -70,16 +73,16 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType,
                 return Double(height * Int(UIScreen.main.bounds.width) / width)
         }
 
-        let photoStatistics = service
-            .photoStatistics(withId: photo.id ?? "")
-
-        totalViews = photoStatistics
-            .map { $0.views?.total?.abbreviated ?? "0" }
+        totalViews = photoStream
+            .map { $0.views?.abbreviated ?? "0" }
 
         totalLikes = photoStream
             .map { $0.likes?.abbreviated ?? "0" }
 
-        totalDownloads = photoStatistics
-            .map { $0.downloads?.total?.abbreviated ?? "0" }
+        totalDownloads = photoStream
+            .map { $0.downloads?.abbreviated ?? "0" }
+
+        likedByUser = photoStream
+            .map { $0.likedByUser ?? false }
     }
 }

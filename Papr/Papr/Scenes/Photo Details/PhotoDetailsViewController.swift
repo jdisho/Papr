@@ -28,16 +28,18 @@ class PhotoDetailsViewController: UIViewController, BindableType {
     @IBOutlet var dismissButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet var statsContainerViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var touchableViewContainer: UIView!
+    @IBOutlet var favoriteImageView: UIImageView!
 
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
-    private var isTouched = false
+    private var isTouched = true
 
     // MARK: Overrides
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureUI()
+        showHideOverlays(withDelay: 0.7)
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -62,6 +64,11 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             .bind(to: photoHeightConstraint.rx.constant)
             .disposed(by: rx.disposeBag)
 
+        outputs.likedByUser
+            .map { $0 ? #imageLiteral(resourceName: "favorite-white") : #imageLiteral(resourceName: "favorite-border-white") }
+            .bind(to: favoriteImageView.rx.image)
+            .disposed(by: rx.disposeBag)
+
         outputs.totalViews
             .bind(to: totalViewsLabel.rx.text)
             .disposed(by: rx.disposeBag)
@@ -77,23 +84,26 @@ class PhotoDetailsViewController: UIViewController, BindableType {
 
     // MARK: UI
     private func configureUI() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(onTouchAction))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(showHideOverlays))
         touchableViewContainer.addGestureRecognizer(gesture)
     }
 
-    @objc private func onTouchAction() {
-        UIView.animate(withDuration: 0.5, animations: {
-            if self.isTouched {
-                self.statsContainerViewBottomConstraint.constant = 0
-                self.dismissButtonTopConstraint.constant = 32
-                self.isTouched = false
-            } else {
-                self.statsContainerViewBottomConstraint.constant = -100
-                self.dismissButtonTopConstraint.constant = -68
-                self.isTouched = true
-            }
-            self.view.layoutIfNeeded()
-        })
+    @objc private func showHideOverlays(withDelay delay: Double = 0.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            UIView.animate(withDuration: 0.5,
+                           animations: {
+                if self.isTouched {
+                    self.statsContainerViewBottomConstraint.constant = 0
+                    self.dismissButtonTopConstraint.constant = 32
+                    self.isTouched = false
+                } else {
+                    self.statsContainerViewBottomConstraint.constant = -100
+                    self.dismissButtonTopConstraint.constant = -68
+                    self.isTouched = true
+                }
+                self.view.layoutIfNeeded()
+            })
+        }
     }
 
 }
