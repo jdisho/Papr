@@ -10,82 +10,56 @@ import Foundation
 import RxSwift
 import Action
 
-protocol PhotoDetailsViewModelInput {
+protocol PhotoDetailsViewModelInput: PhotoViewModelInput {
     var dismissAction: CocoaAction { get }
 }
 
-protocol PhotoDetailsViewModelOutput {
-    var regularPhoto: Observable<String> { get }
-    var photoSizeCoef: Observable<Double> { get }
+protocol PhotoDetailsViewModelOutput: PhotoViewModelOutput {
     var totalViews: Observable<String> { get }
-    var totalLikes: Observable<String> { get }
     var totalDownloads: Observable<String> { get }
-    var likedByUser: Observable<Bool> { get }
 }
 
-protocol PhotoDetailsViewModelType {
+protocol PhotoDetailsViewModelType: PhotoViewModelType {
     var inputs: PhotoDetailsViewModelInput { get }
     var outputs: PhotoDetailsViewModelOutput { get }
 }
 
-class PhotoDetailsViewModel: PhotoDetailsViewModelType,
+class PhotoDetailsViewModel: PhotoViewModel,
+                             PhotoDetailsViewModelType,
                              PhotoDetailsViewModelInput,
                              PhotoDetailsViewModelOutput {
 
     // MARK: Inputs & Outputs
     var inputs: PhotoDetailsViewModelInput { return self }
+    override var photoViewModelInputs: PhotoViewModelInput { return inputs }
+
     var outputs: PhotoDetailsViewModelOutput { return self }
+    override var photoViewModelOutputs: PhotoViewModelOutput { return outputs }
 
     // MARK: Inputs
     lazy var dismissAction: CocoaAction = {
         return CocoaAction { [unowned self] _ in
-            self.sceneCoordinator.pop(animated: true)
+            return self.sceneCoordinator.pop(animated: true)
         }
     }()
 
     // MARK: Outputs
-    let regularPhoto: Observable<String>
-    let photoSizeCoef: Observable<Double>
     let totalViews: Observable<String>
-    let totalLikes: Observable<String>
     let totalDownloads: Observable<String>
-    let likedByUser: Observable<Bool>
 
-    // MARK: Private
-    private let photo: Photo
-    private let service: PhotoServiceType
-    private let sceneCoordinator: SceneCoordinatorType
-
-    init(photo: Photo,
-         service: PhotoServiceType = PhotoService(),
-         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
-
-        self.photo = photo
-        self.service = service
-        self.sceneCoordinator = sceneCoordinator
+    override init(photo: Photo,
+                  service: PhotoServiceType = PhotoService(),
+                  sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
         let photoStream = service
             .photo(withId: photo.id ?? "")
 
-        self.regularPhoto = photoStream
-            .map { $0.urls?.regular ?? "" }
-
-        photoSizeCoef = photoStream
-            .map { (width: $0.width ?? 0, height: $0.height ?? 0) }
-            .map { (width, height) -> Double in
-                return Double(height * Int(UIScreen.main.bounds.width) / width)
-        }
-
         totalViews = photoStream
             .map { $0.views?.abbreviated ?? "0" }
-
-        totalLikes = photoStream
-            .map { $0.likes?.abbreviated ?? "0" }
 
         totalDownloads = photoStream
             .map { $0.downloads?.abbreviated ?? "0" }
 
-        likedByUser = photoStream
-            .map { $0.likedByUser ?? false }
+        super.init(photo: photo, service: service)
     }
 }

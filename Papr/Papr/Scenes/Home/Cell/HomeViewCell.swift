@@ -13,11 +13,9 @@ import Nuke
 class HomeViewCell: UITableViewCell, BindableType {
 
     // MARK: ViewModel
-
     var viewModel: HomeViewCellModelType!
 
     // MARK: IBOutlets
-
     @IBOutlet var userImageView: UIImageView!
     @IBOutlet var fullNameLabel: UILabel!
     @IBOutlet var usernameLabel: UILabel!
@@ -28,7 +26,6 @@ class HomeViewCell: UITableViewCell, BindableType {
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var likesNumberLabel: UILabel!
     @IBOutlet var collectPhotoButton: UIButton!
-    @IBOutlet var descriptionLabel: UILabel!
     
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
@@ -59,10 +56,10 @@ class HomeViewCell: UITableViewCell, BindableType {
                 guard let likedByUser = likedByUser.element else { return }
                 if likedByUser {
                     self.likeButton.rx
-                        .bind(to: inputs.unlikePhotoAction, input: ())
+                        .bind(to: inputs.unlikePhotoAction, input: self.viewModel.photo)
                 } else {
                     self.likeButton.rx
-                        .bind(to: inputs.likePhotoAction, input: ())
+                        .bind(to: inputs.likePhotoAction, input: self.viewModel.photo)
                 }
             }
             .disposed(by: disposeBag)
@@ -112,17 +109,13 @@ class HomeViewCell: UITableViewCell, BindableType {
             .bind(to: postedTimeLabel.rx.text)
             .disposed(by: disposeBag)
         
-        outputs.likesNumber
+        outputs.totalLikes
             .bind(to: likesNumberLabel.rx.text)
             .disposed(by: disposeBag)
         
         outputs.likedByUser
             .map { $0 ? #imageLiteral(resourceName: "favorite") : #imageLiteral(resourceName: "unfavorite") }
             .bind(to: likeButton.rx.image())
-            .disposed(by: disposeBag)
-        
-        outputs.photoDescription
-            .bind(to: descriptionLabel.rx.text)
             .disposed(by: disposeBag)
     }
 }

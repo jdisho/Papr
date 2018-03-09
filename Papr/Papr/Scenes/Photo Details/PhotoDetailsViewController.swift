@@ -8,6 +8,7 @@
 
 import UIKit
 import Nuke
+import RxSwift
 import NSObject_Rx
 
 class PhotoDetailsViewController: UIViewController, BindableType {
@@ -27,7 +28,6 @@ class PhotoDetailsViewController: UIViewController, BindableType {
     @IBOutlet var moreButton: UIButton!
     @IBOutlet var dismissButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet var statsContainerViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet var favoriteImageView: UIImageView!
 
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
@@ -65,7 +65,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
 
         outputs.likedByUser
             .map { $0 ? #imageLiteral(resourceName: "favorite-white") : #imageLiteral(resourceName: "favorite-border-white") }
-            .bind(to: favoriteImageView.rx.image)
+            .bind(to: likeButton.rx.image())
             .disposed(by: rx.disposeBag)
 
         outputs.totalViews
@@ -78,6 +78,34 @@ class PhotoDetailsViewController: UIViewController, BindableType {
 
         outputs.totalDownloads
             .bind(to: totalDownloadsLabel.rx.text)
+            .disposed(by: rx.disposeBag)
+
+        outputs.likedByUser
+            .subscribe { [unowned self] likedByUser in
+                guard let likedByUser = likedByUser.element else { return }
+                if likedByUser {
+                    self.likeButton.rx
+                        .bind(to: inputs.unlikePhotoAction, input: self.viewModel.photo)
+                } else {
+                    self.likeButton.rx
+                        .bind(to: inputs.likePhotoAction, input: self.viewModel.photo)
+                }
+            }
+            .disposed(by: rx.disposeBag)
+
+        Observable
+            .merge(inputs.likePhotoAction.errors,
+                   inputs.unlikePhotoAction.errors)
+            .map { error in
+                switch error {
+                case let .underlyingError(error):
+                    return error.localizedDescription
+                case .notEnabled:
+                    return error.localizedDescription
+                }
+            }
+            .observeOn(MainScheduler.instance)
+            .bind(to: inputs.alertAction.inputs)
             .disposed(by: rx.disposeBag)
     }
 
@@ -104,5 +132,4 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             })
         }
     }
-
 }

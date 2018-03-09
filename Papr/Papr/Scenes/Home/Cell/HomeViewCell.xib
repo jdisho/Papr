@@ -50,23 +50,15 @@
                                 </constraints>
                                 <state key="normal" image="unsave"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wf2-9x-jtd">
-                                <rect key="frame" x="8" y="41" width="61" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="S44-8j-rMA" firstAttribute="top" secondItem="ahR-2h-H6P" secondAttribute="top" constant="11" id="6Ai-5D-p2h"/>
-                            <constraint firstItem="wf2-9x-jtd" firstAttribute="leading" secondItem="ahR-2h-H6P" secondAttribute="leading" constant="8" id="ASp-Cx-OpQ"/>
                             <constraint firstItem="XTH-qU-Wqu" firstAttribute="top" secondItem="ahR-2h-H6P" secondAttribute="top" constant="8" id="Ga8-DT-ypk"/>
                             <constraint firstItem="XTH-qU-Wqu" firstAttribute="leading" secondItem="ahR-2h-H6P" secondAttribute="leading" constant="8" id="HBF-9A-3s0"/>
                             <constraint firstItem="GcZ-GX-p05" firstAttribute="top" secondItem="ahR-2h-H6P" secondAttribute="top" constant="8" id="Isr-ry-Us9"/>
                             <constraint firstItem="S44-8j-rMA" firstAttribute="leading" secondItem="XTH-qU-Wqu" secondAttribute="trailing" constant="8" id="LB8-Wv-ndZ"/>
                             <constraint firstAttribute="height" constant="70" id="RQ9-35-Bpj"/>
-                            <constraint firstItem="wf2-9x-jtd" firstAttribute="top" secondItem="XTH-qU-Wqu" secondAttribute="bottom" constant="8" id="iQO-GB-sin"/>
                             <constraint firstAttribute="trailing" secondItem="GcZ-GX-p05" secondAttribute="trailing" constant="8" id="rlG-De-Mba"/>
                         </constraints>
                     </view>
@@ -139,7 +131,6 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="collectPhotoButton" destination="GcZ-GX-p05" id="O29-Tf-otw"/>
-                <outlet property="descriptionLabel" destination="wf2-9x-jtd" id="uGV-qS-KoU"/>
                 <outlet property="fullNameLabel" destination="ha0-QO-K7A" id="cy0-pj-OaN"/>
                 <outlet property="likeButton" destination="XTH-qU-Wqu" id="fdB-In-rkC"/>
                 <outlet property="likesNumberLabel" destination="S44-8j-rMA" id="Lbn-Lx-Rou"/>
