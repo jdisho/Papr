@@ -86,7 +86,7 @@ class HomeViewModel: HomeViewModelType,
     }
     
     lazy var showCuratedPhotosAction: CocoaAction = {
-        return CocoaAction { [unowned self] in
+        CocoaAction { [unowned self] in
             self.curatedProperty.onNext(true)
             self.refresh()
             return .empty()
@@ -94,7 +94,7 @@ class HomeViewModel: HomeViewModelType,
     }()
     
     lazy var showLatestPhotosAction: CocoaAction = {
-        return CocoaAction { [unowned self] in
+        CocoaAction { [unowned self] in
             self.curatedProperty.onNext(false)
             self.refresh()
             return .empty()
@@ -102,7 +102,7 @@ class HomeViewModel: HomeViewModelType,
     }()
     
     lazy var orderByPopularityAction: CocoaAction = {
-        return CocoaAction { [unowned self] in
+        CocoaAction { [unowned self] in
             self.orderByProperty.onNext(.popular)
             self.refresh()
             return .empty()
@@ -110,7 +110,7 @@ class HomeViewModel: HomeViewModelType,
     }()
 
     lazy var orderByFrequencyAction: CocoaAction = {
-        return CocoaAction { [unowned self] in
+        CocoaAction { [unowned self] in
             self.orderByProperty.onNext(.latest)
             self.refresh()
             return .empty()
@@ -118,7 +118,7 @@ class HomeViewModel: HomeViewModelType,
     }()
     
     lazy var alertAction: Action<String, Void> = {
-        return Action<String, Void> { [unowned self] message in
+        Action<String, Void> { [unowned self] message in
             let alertViewModel = AlertViewModel(title: "Upsss...", 
                                                 message: message, 
                                                 mode: .ok)

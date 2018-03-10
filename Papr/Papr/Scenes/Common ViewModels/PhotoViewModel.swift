@@ -17,16 +17,16 @@ protocol PhotoViewModelInput {
 }
 
 protocol PhotoViewModelOutput {
-    var regularPhoto: Observable<String> { get }
-    var photoSizeCoef: Observable<Double> { get }
-    var totalLikes: Observable<String> { get }
-    var likedByUser:  Observable<Bool> { get }
+    var photoStream: Observable<Photo>! { get }
+    var regularPhoto: Observable<String>! { get }
+    var photoSizeCoef: Observable<Double>! { get }
+    var totalLikes: Observable<String>! { get }
+    var likedByUser:  Observable<Bool>! { get }
 }
 
 protocol PhotoViewModelType {
     var photoViewModelInputs: PhotoViewModelInput { get }
     var photoViewModelOutputs: PhotoViewModelOutput { get }
-    var photo: Photo { get set }
 }
 
 class PhotoViewModel: PhotoViewModelType,
@@ -39,56 +39,52 @@ class PhotoViewModel: PhotoViewModelType,
 
     // MARK: Input
     lazy var likePhotoAction: Action<Photo, Photo>  = {
-        return Action<Photo, Photo> { photo in
+        Action<Photo, Photo> { photo in
             self.service
                 .like(photoWithId: photo.id ?? "")
                 .map { $0.photo }
                 .unwrap()
-                .map { [unowned self] photo in
-                    return self.update(photo: photo)
-                }
+                .do(onNext: { [unowned self] photo in
+                    self.update(photo: photo)
+                })
         }
     }()
 
     lazy var unlikePhotoAction: Action<Photo, Photo>  = {
-        return Action<Photo, Photo> { photo in
+        Action<Photo, Photo> { photo in
             self.service
                 .unlike(photoWithId: photo.id ?? "")
                 .map { $0.photo }
                 .unwrap()
-                .map { [unowned self] photo in
-                     return self.update(photo: photo)
-                }
+                .do(onNext: { [unowned self] photo in
+                    self.update(photo: photo)
+                })
         }
     }()
 
     lazy var alertAction: Action<String, Void> = {
-        return Action<String, Void> { [unowned self] message in
+        Action<String, Void> { [unowned self] message in
             let alertViewModel = AlertViewModel(title: "Upsss...",
                                                 message: message,
                                                 mode: .ok)
             return self.sceneCoordinator.transition(to: .alert(alertViewModel),
-                                                    type: .alert)
+                                                       type: .alert)
         }
     }()
 
     // MARK: Output
-    let regularPhoto: Observable<String>
-    let photoSizeCoef: Observable<Double>
-    let totalLikes: Observable<String>
-    let likedByUser: Observable<Bool>
+    var regularPhoto: Observable<String>!
+    var photoSizeCoef: Observable<Double>!
+    var totalLikes: Observable<String>!
+    var likedByUser: Observable<Bool>!
+    var photoStream: Observable<Photo>!
 
-    var photo: Photo
     let service: PhotoServiceType
     let sceneCoordinator: SceneCoordinatorType
-    let photoTotalLikesProperty = BehaviorSubject<Int>(value: 0)
-    let isPhotoLikedProperty = BehaviorSubject<Bool>(value: false)
+    private let photoStreamProperty = PublishSubject<Photo>()
 
-    func update(photo: Photo) -> Photo {
-        self.photo = photo
-        photoTotalLikesProperty.onNext(photo.likes ?? 0)
-        isPhotoLikedProperty.onNext(photo.likedByUser ?? false)
-        return photo
+    func update(photo: Photo) {
+        photoStreamProperty.onNext(photo)
     }
 
     // MARK: Init
@@ -96,11 +92,9 @@ class PhotoViewModel: PhotoViewModelType,
          service: PhotoServiceType = PhotoService(),
          sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
-        self.photo = photo
         self.service = service
         self.sceneCoordinator = sceneCoordinator
-
-        let photoStream = Observable.just(photo)
+        photoStream = Observable.just(photo)
 
         regularPhoto = photoStream
             .map { $0.urls?.regular ?? "" }
@@ -108,17 +102,17 @@ class PhotoViewModel: PhotoViewModelType,
         photoSizeCoef = photoStream
             .map { (width: $0.width ?? 0, height: $0.height ?? 0) }
             .map { (width, height) -> Double in
-                return Double(height * Int(UIScreen.main.bounds.width) / width)
+                Double(height * Int(UIScreen.main.bounds.width) / width)
         }
 
-        photoTotalLikesProperty.onNext(photo.likes ?? 0)
-        totalLikes = photoTotalLikesProperty
+        totalLikes = Observable.merge(photoStream, photoStreamProperty)
+            .map { $0.likes ?? 0 }
             .map { likes in
                 guard likes != 0 else { return "" }
                 return likes.abbreviated
         }
 
-        isPhotoLikedProperty.onNext(photo.likedByUser ?? false)
-        likedByUser = isPhotoLikedProperty.asObservable()
+        likedByUser = Observable.merge(photoStream, photoStreamProperty)
+            .map { $0.likedByUser ?? false }
     }
 }

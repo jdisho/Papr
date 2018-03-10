@@ -80,18 +80,20 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             .bind(to: totalDownloadsLabel.rx.text)
             .disposed(by: rx.disposeBag)
 
-        outputs.likedByUser
-            .subscribe { [unowned self] likedByUser in
-                guard let likedByUser = likedByUser.element else { return }
+        Observable.combineLatest(outputs.likedByUser, outputs.photoStream)
+            .subscribe { result in
+                guard let result = result.element else { return }
+                let (likedByUser, photo) = result
                 if likedByUser {
                     self.likeButton.rx
-                        .bind(to: inputs.unlikePhotoAction, input: self.viewModel.photo)
+                        .bind(to: inputs.unlikePhotoAction, input: photo)
                 } else {
                     self.likeButton.rx
-                        .bind(to: inputs.likePhotoAction, input: self.viewModel.photo)
+                        .bind(to: inputs.likePhotoAction, input: photo)
                 }
             }
             .disposed(by: rx.disposeBag)
+
 
         Observable
             .merge(inputs.likePhotoAction.errors,

@@ -51,18 +51,19 @@ class HomeViewCell: UITableViewCell, BindableType {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
 
-        outputs.likedByUser
-            .subscribe { [unowned self] likedByUser in
-                guard let likedByUser = likedByUser.element else { return }
+        Observable.combineLatest(outputs.likedByUser, outputs.photoStream)
+            .subscribe { result in
+                guard let result = result.element else { return }
+                let (likedByUser, photo) = result
                 if likedByUser {
                     self.likeButton.rx
-                        .bind(to: inputs.unlikePhotoAction, input: self.viewModel.photo)
+                        .bind(to: inputs.unlikePhotoAction, input: photo)
                 } else {
                     self.likeButton.rx
-                        .bind(to: inputs.likePhotoAction, input: self.viewModel.photo)
+                        .bind(to: inputs.likePhotoAction, input: photo)
                 }
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         Observable
             .merge(inputs.likePhotoAction.errors, 
@@ -75,12 +76,17 @@ class HomeViewCell: UITableViewCell, BindableType {
                     return error.localizedDescription
                 }
             }
-            .observeOn(MainScheduler.instance)
             .subscribeOn(MainScheduler.instance)
             .bind(to: inputs.alertAction.inputs)
             .disposed(by: rx.disposeBag)
 
-        photoButton.rx.action = inputs.photoDetailsAction
+        outputs.photoStream
+            .subscribe { photo in
+                guard let photo = photo.element else { return }
+                self.photoButton.rx
+                    .bind(to: inputs.photoDetailsAction, input: photo)
+            }
+            .disposed(by: rx.disposeBag)
 
         outputs.userProfileImage
             .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }

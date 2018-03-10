@@ -38,8 +38,8 @@ class PhotoDetailsViewModel: PhotoViewModel,
 
     // MARK: Inputs
     lazy var dismissAction: CocoaAction = {
-        return CocoaAction { [unowned self] _ in
-            return self.sceneCoordinator.pop(animated: true)
+        CocoaAction { [unowned self] _ in
+            self.sceneCoordinator.pop(animated: true)
         }
     }()
 

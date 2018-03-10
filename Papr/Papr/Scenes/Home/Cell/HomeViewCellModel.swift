@@ -11,15 +11,15 @@ import RxSwift
 import Action
 
 protocol HomeViewCellModelInput: PhotoViewModelInput {
-    var photoDetailsAction: CocoaAction { get }
+    var photoDetailsAction: Action<Photo, Void> { get }
 }
 
 protocol HomeViewCellModelOutput: PhotoViewModelOutput {
-    var userProfileImage: Observable<String> { get }
-    var fullname: Observable<String> { get }
-    var username: Observable<String> { get }
-    var smallPhoto: Observable<String> { get }
-    var updated: Observable<String> { get }
+    var userProfileImage: Observable<String>! { get }
+    var fullname: Observable<String>! { get }
+    var username: Observable<String>! { get }
+    var smallPhoto: Observable<String>! { get }
+    var updated: Observable<String>! { get }
 }
 
 protocol HomeViewCellModelType: PhotoViewModelType {
@@ -40,26 +40,26 @@ class HomeViewCellModel: PhotoViewModel,
     override var photoViewModelOutputs: PhotoViewModelOutput { return outputs }
 
     // MARK: Input
-    lazy var photoDetailsAction: CocoaAction = {
-        return CocoaAction { [unowned self] in
-            let viewModel = PhotoDetailsViewModel(photo: self.photo)
+    lazy var photoDetailsAction: Action<Photo, Void> = {
+        return Action<Photo, Void> { photo in
+            let viewModel = PhotoDetailsViewModel(photo: photo)
             return self.sceneCoordinator.transition(to: .photoDetails(viewModel), type: .modal)
         }
     }()
 
     // MARK: Output
-    let userProfileImage: Observable<String>
-    let fullname: Observable<String>
-    let username: Observable<String>
-    let smallPhoto: Observable<String>
-    let updated: Observable<String>
+    var userProfileImage: Observable<String>!
+    var fullname: Observable<String>!
+    var username: Observable<String>!
+    var smallPhoto: Observable<String>!
+    var updated: Observable<String>!
 
     // MARK: Init
     override init(photo: Photo,
         service: PhotoServiceType = PhotoService(),
         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
-        let photoStream = Observable.just(photo)
+        super.init(photo: photo, service: service)
 
         userProfileImage = photoStream
             .map { $0.user?.profileImage?.medium ?? "" }
@@ -77,19 +77,8 @@ class HomeViewCellModel: PhotoViewModel,
             .map { $0.updated ?? "" }
             .map { $0.toDate }
             .map { date -> String in
-                guard let roundedDate = date?.since(Date(), in: .minute).rounded() else { return "" }
-                if roundedDate >= 60.0 && roundedDate <= 24 * 60.0 {
-                    return "\(Int(date!.since(Date(), in: .hour).rounded()))h"
-                } else if roundedDate >= 24 * 60.0 && roundedDate <= 30 * 24 * 60 {
-                    return "\(Int(date!.since(Date(), in: .week).rounded()))w"
-                } else if roundedDate >= 30 * 24 * 60 && roundedDate <= 365 * 24 * 60 {
-                    return "\(Int(date!.since(Date(), in: .month).rounded()))m"
-                } else if roundedDate >= 365 * 24 * 60 {
-                    return "\(Int(date!.since(Date(), in: .year).rounded()))y"
-                }
-                return "\(Int(roundedDate))min"
+                guard let date = date else { return "" }
+                return date.abbreviated
             }
-
-        super.init(photo: photo, service: service)
     }
 }

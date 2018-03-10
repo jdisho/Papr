@@ -44,23 +44,23 @@ class AlertViewModel: AlertViewModelType, AlertViewModelInput, AlertViewModelOut
     
     // MARK: Inputs
     lazy var closeAction: CocoaAction = {
-        return CocoaAction { [unowned self] in
+        CocoaAction { [unowned self] in
             self.okPublisher.onNext(())
-            return Observable.empty()
+            return .empty()
         }
     }()
     
     lazy var yesAction: CocoaAction = {
-        return CocoaAction { [unowned self] in
+        CocoaAction { [unowned self] in
             self.okPublisher.onNext(())
-            return Observable.empty()
+            return .empty()
         }
     }()
     
     lazy var noAction: CocoaAction = {
-        return CocoaAction { [unowned self] in
+        CocoaAction { [unowned self] in
             self.noPublisher.onNext(())
-            return Observable.empty()
+            return .empty()
         }
     }()
     
