@@ -16,11 +16,9 @@ typealias HomeSectionModel = SectionModel<String, Photo>
 class HomeViewController: UIViewController, BindableType {
     
     // MARK: ViewModel
-
     var viewModel: HomeViewModelType!
 
     // MARK: IBOutlets
-
     @IBOutlet var tableView: UITableView!
     
     // MARK: Private
@@ -74,7 +72,7 @@ class HomeViewController: UIViewController, BindableType {
         .disposed(by: rx.disposeBag)
 
         outputs.orderBy
-            .map { $0 == .popular ? #imageLiteral(resourceName: "hot") : #imageLiteral(resourceName: "new")}
+            .map { $0 == .popular ? #imageLiteral(resourceName: "hot") : #imageLiteral(resourceName: "up")}
             .bind(to: rightBarButtonItem.rx.image)
             .disposed(by: rx.disposeBag)
 
@@ -104,7 +102,7 @@ class HomeViewController: UIViewController, BindableType {
     }
 
     // MARK: UI
-    
+
     private func configureNavigationController() {
         navBarButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
         navBarButton.setTitleColor(.black, for: .normal)
@@ -112,7 +110,6 @@ class HomeViewController: UIViewController, BindableType {
         rightBarButtonItem = UIBarButtonItem()
         navigationItem.titleView = navBarButton
         navigationItem.rightBarButtonItem = rightBarButtonItem
-        
     }
 
     private func configureTableView() {

@@ -50,23 +50,15 @@
                                 </constraints>
                                 <state key="normal" image="unsave"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wf2-9x-jtd">
-                                <rect key="frame" x="8" y="41" width="61" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="S44-8j-rMA" firstAttribute="top" secondItem="ahR-2h-H6P" secondAttribute="top" constant="11" id="6Ai-5D-p2h"/>
-                            <constraint firstItem="wf2-9x-jtd" firstAttribute="leading" secondItem="ahR-2h-H6P" secondAttribute="leading" constant="8" id="ASp-Cx-OpQ"/>
                             <constraint firstItem="XTH-qU-Wqu" firstAttribute="top" secondItem="ahR-2h-H6P" secondAttribute="top" constant="8" id="Ga8-DT-ypk"/>
                             <constraint firstItem="XTH-qU-Wqu" firstAttribute="leading" secondItem="ahR-2h-H6P" secondAttribute="leading" constant="8" id="HBF-9A-3s0"/>
                             <constraint firstItem="GcZ-GX-p05" firstAttribute="top" secondItem="ahR-2h-H6P" secondAttribute="top" constant="8" id="Isr-ry-Us9"/>
                             <constraint firstItem="S44-8j-rMA" firstAttribute="leading" secondItem="XTH-qU-Wqu" secondAttribute="trailing" constant="8" id="LB8-Wv-ndZ"/>
                             <constraint firstAttribute="height" constant="70" id="RQ9-35-Bpj"/>
-                            <constraint firstItem="wf2-9x-jtd" firstAttribute="top" secondItem="XTH-qU-Wqu" secondAttribute="bottom" constant="8" id="iQO-GB-sin"/>
                             <constraint firstAttribute="trailing" secondItem="GcZ-GX-p05" secondAttribute="trailing" constant="8" id="rlG-De-Mba"/>
                         </constraints>
                     </view>
@@ -116,15 +108,22 @@
                             <constraint firstItem="yF7-8m-xcd" firstAttribute="top" secondItem="Aw7-R9-3pK" secondAttribute="top" constant="8" id="yJn-iu-FmA"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Pj-Lu-Gqd">
+                        <rect key="frame" x="0.0" y="56" width="514" height="577.5"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Aw7-R9-3pK" firstAttribute="leading" secondItem="urP-22-aFd" secondAttribute="leading" id="2S3-nL-6t2"/>
                     <constraint firstItem="Aw7-R9-3pK" firstAttribute="top" secondItem="urP-22-aFd" secondAttribute="top" id="2a3-xU-hSt"/>
+                    <constraint firstAttribute="trailing" secondItem="9Pj-Lu-Gqd" secondAttribute="trailing" id="6XI-rX-guh"/>
+                    <constraint firstItem="9Pj-Lu-Gqd" firstAttribute="top" secondItem="Aw7-R9-3pK" secondAttribute="bottom" id="DZR-NK-VLc"/>
+                    <constraint firstItem="9Pj-Lu-Gqd" firstAttribute="leading" secondItem="urP-22-aFd" secondAttribute="leading" id="KFB-gV-z27"/>
                     <constraint firstItem="ahR-2h-H6P" firstAttribute="top" secondItem="vBN-zZ-HnH" secondAttribute="bottom" id="NUs-Wg-eQt"/>
                     <constraint firstItem="vBN-zZ-HnH" firstAttribute="top" secondItem="Aw7-R9-3pK" secondAttribute="bottom" id="NiD-cx-pEj"/>
                     <constraint firstAttribute="bottom" secondItem="ahR-2h-H6P" secondAttribute="bottom" id="Ru3-xl-pvz"/>
                     <constraint firstItem="vBN-zZ-HnH" firstAttribute="leading" secondItem="urP-22-aFd" secondAttribute="leading" id="Sn0-Yj-yXI"/>
                     <constraint firstItem="ahR-2h-H6P" firstAttribute="leading" secondItem="urP-22-aFd" secondAttribute="leading" id="WUb-FD-KcT"/>
+                    <constraint firstItem="ahR-2h-H6P" firstAttribute="top" secondItem="9Pj-Lu-Gqd" secondAttribute="bottom" id="l1g-sQ-BcD"/>
                     <constraint firstAttribute="trailing" secondItem="ahR-2h-H6P" secondAttribute="trailing" id="tUR-1t-Cbk"/>
                     <constraint firstAttribute="trailing" secondItem="Aw7-R9-3pK" secondAttribute="trailing" id="vpR-6O-25w"/>
                     <constraint firstAttribute="trailing" secondItem="vBN-zZ-HnH" secondAttribute="trailing" id="ybK-ST-zub"/>
@@ -132,10 +131,10 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="collectPhotoButton" destination="GcZ-GX-p05" id="O29-Tf-otw"/>
-                <outlet property="descriptionLabel" destination="wf2-9x-jtd" id="uGV-qS-KoU"/>
                 <outlet property="fullNameLabel" destination="ha0-QO-K7A" id="cy0-pj-OaN"/>
                 <outlet property="likeButton" destination="XTH-qU-Wqu" id="fdB-In-rkC"/>
                 <outlet property="likesNumberLabel" destination="S44-8j-rMA" id="Lbn-Lx-Rou"/>
+                <outlet property="photoButton" destination="9Pj-Lu-Gqd" id="kKM-D6-dV9"/>
                 <outlet property="photoHeightConstraint" destination="SfD-xN-G2q" id="7ii-Se-fx8"/>
                 <outlet property="photoImageView" destination="vBN-zZ-HnH" id="Slk-VU-Rdf"/>
                 <outlet property="postedTimeLabel" destination="JbZ-jf-R1T" id="Hgd-PO-1ko"/>

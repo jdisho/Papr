@@ -13,21 +13,19 @@ import Nuke
 class HomeViewCell: UITableViewCell, BindableType {
 
     // MARK: ViewModel
-
     var viewModel: HomeViewCellModelType!
 
     // MARK: IBOutlets
-
     @IBOutlet var userImageView: UIImageView!
     @IBOutlet var fullNameLabel: UILabel!
     @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var photoImageView: UIImageView!
+    @IBOutlet var photoButton: UIButton!
     @IBOutlet var photoHeightConstraint: NSLayoutConstraint!
     @IBOutlet var postedTimeLabel: UILabel!
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var likesNumberLabel: UILabel!
     @IBOutlet var collectPhotoButton: UIButton!
-    @IBOutlet var descriptionLabel: UILabel!
     
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
@@ -53,18 +51,19 @@ class HomeViewCell: UITableViewCell, BindableType {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
 
-        outputs.likedByUser
-            .subscribe { [unowned self] likedByUser in
-                guard let likedByUser = likedByUser.element else { return }
+        Observable.combineLatest(outputs.likedByUser, outputs.photoStream)
+            .subscribe { result in
+                guard let result = result.element else { return }
+                let (likedByUser, photo) = result
                 if likedByUser {
                     self.likeButton.rx
-                        .bind(to: inputs.unlikePhotoAction, input: ())
+                        .bind(to: inputs.unlikePhotoAction, input: photo)
                 } else {
                     self.likeButton.rx
-                        .bind(to: inputs.likePhotoAction, input: ())
+                        .bind(to: inputs.likePhotoAction, input: photo)
                 }
             }
-            .disposed(by: disposeBag)
+            .disposed(by: rx.disposeBag)
 
         Observable
             .merge(inputs.likePhotoAction.errors, 
@@ -77,9 +76,16 @@ class HomeViewCell: UITableViewCell, BindableType {
                     return error.localizedDescription
                 }
             }
-            .observeOn(MainScheduler.instance)
             .subscribeOn(MainScheduler.instance)
             .bind(to: inputs.alertAction.inputs)
+            .disposed(by: rx.disposeBag)
+
+        outputs.photoStream
+            .subscribe { photo in
+                guard let photo = photo.element else { return }
+                self.photoButton.rx
+                    .bind(to: inputs.photoDetailsAction, input: photo)
+            }
             .disposed(by: rx.disposeBag)
 
         outputs.userProfileImage
@@ -109,17 +115,13 @@ class HomeViewCell: UITableViewCell, BindableType {
             .bind(to: postedTimeLabel.rx.text)
             .disposed(by: disposeBag)
         
-        outputs.likesNumber
+        outputs.totalLikes
             .bind(to: likesNumberLabel.rx.text)
             .disposed(by: disposeBag)
         
         outputs.likedByUser
             .map { $0 ? #imageLiteral(resourceName: "favorite") : #imageLiteral(resourceName: "unfavorite") }
             .bind(to: likeButton.rx.image())
-            .disposed(by: disposeBag)
-        
-        outputs.photoDescription
-            .bind(to: descriptionLabel.rx.text)
             .disposed(by: disposeBag)
     }
 }

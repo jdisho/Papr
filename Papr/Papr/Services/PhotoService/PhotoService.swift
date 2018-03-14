@@ -52,9 +52,19 @@ struct PhotoService: PhotoServiceType {
                                perPage: Constants.photosPerPage, 
                                orderBy: orderBy)
         }
+
         return provider.rx
             .request(photosEnpoint)
             .asObservable()
             .map([Photo].self)
+    }
+
+    func photoStatistics(withId id: String) -> Observable<PhotoStatistics> {
+        return provider.rx
+            .request(.photoStatistics(id: id,
+                                      resolution: .days,
+                                      quantity: 30))
+            .asObservable()
+            .map(PhotoStatistics.self)
     }
 }
