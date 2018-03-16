@@ -8,10 +8,8 @@
 
 import Foundation
 import RxSwift
-import RxCocoa
 import Action
 import SafariServices
-import Moya
 
 enum LoginState {
     case idle
@@ -24,8 +22,8 @@ protocol LoginViewModelInput {
 }
 
 protocol LoginViewModelOuput {
-    var buttonName: BehaviorRelay<String>! { get }
-    var loginState: BehaviorRelay<LoginState>! { get }
+    var buttonName: Observable<String> { get }
+    var loginState: Observable<LoginState> { get }
 }
 
 protocol LoginViewModelType {
@@ -40,13 +38,13 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     var outputs: LoginViewModelOuput { return self }
   
     // MARK: Output
-    var buttonName: BehaviorRelay<String>!
-    var loginState: BehaviorRelay<LoginState>!
+    var buttonName: Observable<String>
+    var loginState: Observable<LoginState>
     
     // MARK: Private
-    fileprivate let authManager: UnsplashAuthManager 
+    fileprivate let authManager: UnsplashAuthManager
+    private let service: UserServiceType
     private let sceneCoordinator: SceneCoordinatorType
-    private let moyaProvider: MoyaProvider<UnsplashAPI>
     private var _authSession: Any?
     @available(iOS 11.0, *)
     private var authSession: SFAuthenticationSession? {
@@ -57,17 +55,23 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
             _authSession = newValue
         }
     }
-    
+
+    private let buttonNameProperty = BehaviorSubject<String>(value: "Login with Unsplash")
+    private let loginStateProperty = BehaviorSubject<LoginState>(value: .idle)
+
     // MARK: Init
-    init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared, 
+    init(service: UserServiceType = UserService(),
+         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared,
          authManager: UnsplashAuthManager = UnsplashAuthManager.sharedAuthManager) {
+
+        self.service = service
         self.sceneCoordinator = sceneCoordinator
-        self.moyaProvider = MoyaProvider<UnsplashAPI>()
         self.authManager = authManager
+
+        loginState = loginStateProperty.asObservable()
+        buttonName = buttonNameProperty.asObservable()
+
         self.authManager.delegate = self
-        
-        loginState = BehaviorRelay(value: .idle)
-        buttonName = BehaviorRelay(value: "Login with Unsplash")
     }
 
     // MARK: Action
@@ -80,19 +84,18 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     private lazy var navigateToHomeAction: CocoaAction = {
         return CocoaAction { [unowned self] _ in 
             let viewModel = HomeViewModel()
-            return self.finishLogin()
-                .ignoreAll()
-                .flatMap { _ in
-                    self.sceneCoordinator.transition(to: .home(viewModel), type: .root)
-                }
-        }
+            return self.sceneCoordinator.transition(
+                to: .home(viewModel),
+                type: .root)
+            }
     }()
     
     private func authenticate() -> Observable<Void> {        
         if #available(iOS 11.0, *) {
-            self.authSession = SFAuthenticationSession(url: authManager.authURL, 
-                                                       callbackURLScheme: UnsplashSettings.callbackURLScheme.string, 
-                                                       completionHandler: { [weak self] (callbackUrl, error) in
+            self.authSession = SFAuthenticationSession(
+                url: authManager.authURL,
+                callbackURLScheme: UnsplashSettings.callbackURLScheme.string,
+                completionHandler: { [weak self] (callbackUrl, error) in
                 guard error == nil, let callbackUrl = callbackUrl else {
                     switch error! {
                     case SFAuthenticationError.canceledLogin: break
@@ -106,22 +109,13 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
         }
         return .empty()
     }
-    
-    @discardableResult
-    private func finishLogin() -> Observable<User> {
-       loginState.accept(.fetchingToken)
-        return moyaProvider.rx
-            .request(.getMe)
-            .asObservable()
-            .map(User.self)
-    }
 }
 
 extension LoginViewModel: UnsplashSessionListener {
 
     func didReceiveRedirect(code: String) {
-        loginState.accept(.tokenIsFetched)
-        buttonName.accept("Please wait ...")
+        loginStateProperty.onNext(.tokenIsFetched)
+        buttonNameProperty.onNext("Please wait ...")
         self.authManager.accessToken(with: code) { [unowned self] _,_ in 
             self.navigateToHomeAction.execute(())
         }

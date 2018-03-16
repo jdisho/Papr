@@ -10,6 +10,9 @@
 		1090D75275C09BAE87BE25BD /* Pods_Papr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D778F2E1EFA76CEB59A377CB /* Pods_Papr.framework */; };
 		63CC2B27C8EE9499B1D6C702 /* Pods_PaprTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3D8A956FB1C8A8D3B456A7 /* Pods_PaprTests.framework */; };
 		CBEDD29778BCF9269C6CDB95 /* Pods_PaprUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D59E6B0C5E02E5657E3FA6EA /* Pods_PaprUITests.framework */; };
+		DC05F4F62059892200A43548 /* Unsplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05F4F52059892200A43548 /* Unsplash.swift */; };
+		DC05F4F72059892200A43548 /* Unsplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05F4F52059892200A43548 /* Unsplash.swift */; };
+		DC05F4F82059892200A43548 /* Unsplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05F4F52059892200A43548 /* Unsplash.swift */; };
 		DC1F1504203195410025F70B /* UIScrollView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */; };
 		DC1F1505203195410025F70B /* UIScrollView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */; };
 		DC1F1506203195410025F70B /* UIScrollView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */; };
@@ -160,6 +163,12 @@
 		DCCCFCC5203A52410024D417 /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCCFCC4203A52410024D417 /* Resolution.swift */; };
 		DCCCFCC6203A52410024D417 /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCCFCC4203A52410024D417 /* Resolution.swift */; };
 		DCCCFCC7203A52410024D417 /* Resolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCCFCC4203A52410024D417 /* Resolution.swift */; };
+		DCCD04142059C19D00670B70 /* UserServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD04132059C19D00670B70 /* UserServiceType.swift */; };
+		DCCD04152059C19D00670B70 /* UserServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD04132059C19D00670B70 /* UserServiceType.swift */; };
+		DCCD04162059C19D00670B70 /* UserServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD04132059C19D00670B70 /* UserServiceType.swift */; };
+		DCCD04182059C25900670B70 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD04172059C25900670B70 /* UserService.swift */; };
+		DCCD04192059C25900670B70 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD04172059C25900670B70 /* UserService.swift */; };
+		DCCD041A2059C25900670B70 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD04172059C25900670B70 /* UserService.swift */; };
 		DCDDF3262027A6B700E1EB81 /* Nuke+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */; };
 		DCDDF3272027A6B700E1EB81 /* Nuke+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */; };
 		DCDDF3282027A6B700E1EB81 /* Nuke+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */; };
@@ -202,6 +211,7 @@
 		CB61BD2759AC178641433994 /* Pods-PaprTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaprTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PaprTests/Pods-PaprTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D59E6B0C5E02E5657E3FA6EA /* Pods_PaprUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaprUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D778F2E1EFA76CEB59A377CB /* Pods_Papr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Papr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC05F4F52059892200A43548 /* Unsplash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unsplash.swift; sourceTree = "<group>"; };
 		DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extentions.swift"; sourceTree = "<group>"; };
 		DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeUnlike.swift; sourceTree = "<group>"; };
 		DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashSettings.swift; sourceTree = "<group>"; };
@@ -265,6 +275,8 @@
 		DCCCFCBC203A45DE0024D417 /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
 		DCCCFCC0203A4A530024D417 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		DCCCFCC4203A52410024D417 /* Resolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolution.swift; sourceTree = "<group>"; };
+		DCCD04132059C19D00670B70 /* UserServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceType.swift; sourceTree = "<group>"; };
+		DCCD04172059C25900670B70 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nuke+Rx.swift"; sourceTree = "<group>"; };
 		DCDDF3292027DA5F00E1EB81 /* UIImageView+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extentions.swift"; sourceTree = "<group>"; };
 		DCEE1F0A1FC97CDC0010BADE /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -312,6 +324,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DC0EDE95205B20B2004CD808 /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				DC05F4F52059892200A43548 /* Unsplash.swift */,
+				DCA09CFF2015F68200E6EBB7 /* Constants.swift */,
+				DCBB1B211FA7B1BD004E95F0 /* AppDelegate.swift */,
+			);
+			path = Commons;
+			sourceTree = "<group>";
+		};
 		DC4191352038E3EA0012A29C /* Unsplash */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,7 +367,6 @@
 			isa = PBXGroup;
 			children = (
 				DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */,
-				DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */,
 				DC71C30E1FBDE00A00C8E41A /* UnsplashAuthError.swift */,
 			);
 			path = Authentication;
@@ -395,7 +416,7 @@
 		DCBB1B201FA7B1BD004E95F0 /* Papr */ = {
 			isa = PBXGroup;
 			children = (
-				DCBB1B211FA7B1BD004E95F0 /* AppDelegate.swift */,
+				DC0EDE95205B20B2004CD808 /* Commons */,
 				DCBB1B501FA8B7B2004E95F0 /* Coodinator */,
 				DCBB1B4F1FA8B774004E95F0 /* Scenes */,
 				DCBB1B521FA8B7D6004E95F0 /* Models */,
@@ -454,7 +475,6 @@
 		DCBB1B511FA8B7BA004E95F0 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				DCA09CFF2015F68200E6EBB7 /* Constants.swift */,
 				DC5AF7531FAD2EE400ADA2BB /* Enums */,
 				DC7CF5851FC468C6006E0A39 /* Authentication */,
 				DCBB1B6A1FA8BA5D004E95F0 /* Extentions */,
@@ -477,6 +497,7 @@
 				DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */,
 				DCCCFCBC203A45DE0024D417 /* Links.swift */,
 				DC6CC643204CBD5300050589 /* PhotoStatistics.swift */,
+				DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -484,6 +505,7 @@
 		DCBB1B531FA8B7EC004E95F0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				DCCD04122059C17700670B70 /* UserService */,
 				DC99FB8C2003A7AD001195FD /* PhotoService */,
 			);
 			path = Services;
@@ -535,6 +557,15 @@
 				DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		DCCD04122059C17700670B70 /* UserService */ = {
+			isa = PBXGroup;
+			children = (
+				DCCD04132059C19D00670B70 /* UserServiceType.swift */,
+				DCCD04172059C25900670B70 /* UserService.swift */,
+			);
+			path = UserService;
 			sourceTree = "<group>";
 		};
 		DCDDF3242027A69C00E1EB81 /* Nuke+Rx */ = {
@@ -756,32 +787,22 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Papr/Pods-Papr-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Action/Action.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/NSObject+Rx/NSObject_Rx.framework",
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
-				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/TinyNetworking/TinyNetworking.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Action.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSObject_Rx.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TinyNetworking.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -929,16 +950,19 @@
 				DCEE1F0F1FC97CE80010BADE /* AlertViewModel.swift in Sources */,
 				DC71C3021FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				DC5AF74C1FACF18600ADA2BB /* Exif.swift in Sources */,
+				DCCD04142059C19D00670B70 /* UserServiceType.swift in Sources */,
 				DCBB1B571FA8B823004E95F0 /* SceneCoodinatorType.swift in Sources */,
 				DCB433C8204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */,
 				DC7F20931FADD3400017C14A /* SearchResults.swift in Sources */,
 				DCCCFCBD203A45DE0024D417 /* Links.swift in Sources */,
+				DCCD04182059C25900670B70 /* UserService.swift in Sources */,
 				DCCCFCC1203A4A530024D417 /* Category.swift in Sources */,
 				DCBB1B551FA8B814004E95F0 /* Scene.swift in Sources */,
 				DC99FB922003A7DB001195FD /* PhotoService.swift in Sources */,
 				DC5AF7271FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DCBB1B6C1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */,
+				DC05F4F62059892200A43548 /* Unsplash.swift in Sources */,
 				DCC8CA072002BEE300F6C540 /* HomeViewController.swift in Sources */,
 				DC922309203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DC99FB8E2003A7CC001195FD /* PhotoServiceType.swift in Sources */,
@@ -989,6 +1013,7 @@
 				DCBE008F202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
 				DCCCFCC6203A52410024D417 /* Resolution.swift in Sources */,
 				DC71C3031FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
+				DCCD04192059C25900670B70 /* UserService.swift in Sources */,
 				DC99FB8F2003A7CC001195FD /* PhotoServiceType.swift in Sources */,
 				DC5AF72C1FACCBF300ADA2BB /* User.swift in Sources */,
 				DC7CF5831FC464BF006E0A39 /* URL.swift in Sources */,
@@ -999,6 +1024,7 @@
 				DCEE1F0C1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCCCFCBE203A45DE0024D417 /* Links.swift in Sources */,
 				DC5AF7511FAD027F00ADA2BB /* Collection.swift in Sources */,
+				DCCD04152059C19D00670B70 /* UserServiceType.swift in Sources */,
 				DCBAEE6420363CD600561CBA /* Orientation.swift in Sources */,
 				DCBB1B751FA8D597004E95F0 /* UnsplashAPI.swift in Sources */,
 				DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
@@ -1008,6 +1034,7 @@
 				DCBB1B681FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
 				DC92230A203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DCBB1B711FA8BAC2004E95F0 /* BindableType.swift in Sources */,
+				DC05F4F72059892200A43548 /* Unsplash.swift in Sources */,
 				DC5AF7561FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DC1F1505203195410025F70B /* UIScrollView+Extentions.swift in Sources */,
 				DCEE1F151FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
@@ -1044,8 +1071,10 @@
 				DC5AF7311FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DCC8CA202002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DCB433CA204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */,
+				DCCD04162059C19D00670B70 /* UserServiceType.swift in Sources */,
 				DC5AF7461FACEF2700ADA2BB /* Location.swift in Sources */,
 				DC99FB942003A7DB001195FD /* PhotoService.swift in Sources */,
+				DCCD041A2059C25900670B70 /* UserService.swift in Sources */,
 				DCCCFCC7203A52410024D417 /* Resolution.swift in Sources */,
 				DCEE1F0D1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCBE0090202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
@@ -1060,6 +1089,7 @@
 				DCBE008C202A1A980065BEF3 /* Date+Extentions.swift in Sources */,
 				DCBB1B691FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
 				DCBB1B721FA8BAC2004E95F0 /* BindableType.swift in Sources */,
+				DC05F4F82059892200A43548 /* Unsplash.swift in Sources */,
 				DC5AF7571FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DCEE1F161FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
 				DC2E76FA203B6DB90023A173 /* LikeUnlike.swift in Sources */,

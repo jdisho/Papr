@@ -8,7 +8,6 @@
 
 import UIKit
 import RxSwift
-import NSObject_Rx
 
 class AlertViewController: UIAlertController, BindableType {
     
@@ -17,7 +16,8 @@ class AlertViewController: UIAlertController, BindableType {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
+    private let disposeBag = DisposeBag()
     // MARK: BindableType
     
     func bindViewModel() {
@@ -26,11 +26,11 @@ class AlertViewController: UIAlertController, BindableType {
         
         outputs.title
             .bind(to: self.rx.title)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         outputs.message
             .bind(to: self.rx.message)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         outputs.mode.subscribe { mode in
             guard let mode = mode.element else { return }
@@ -52,7 +52,7 @@ class AlertViewController: UIAlertController, BindableType {
                 self.addAction(noAction)
             }
         }
-        .disposed(by: rx.disposeBag)
+        .disposed(by: disposeBag)
         
     }
 }

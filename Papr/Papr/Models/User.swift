@@ -6,7 +6,7 @@
 //  Copyright © 2017 Joan Disho. All rights reserved.
 //
 
-struct User: Decodable {
+struct User: Codable {
     let id: String?
     let username: String?
     let firstName: String?
@@ -50,6 +50,6 @@ struct User: Decodable {
         case downloads
         case links
     }
-}  
+}
 
 

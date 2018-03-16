@@ -63,7 +63,7 @@ class HomeViewCell: UITableViewCell, BindableType {
                         .bind(to: inputs.likePhotoAction, input: photo)
                 }
             }
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
         Observable
             .merge(inputs.likePhotoAction.errors, 
@@ -78,7 +78,7 @@ class HomeViewCell: UITableViewCell, BindableType {
             }
             .subscribeOn(MainScheduler.instance)
             .bind(to: inputs.alertAction.inputs)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
         outputs.photoStream
             .subscribe { photo in
@@ -86,8 +86,7 @@ class HomeViewCell: UITableViewCell, BindableType {
                 self.photoButton.rx
                     .bind(to: inputs.photoDetailsAction, input: photo)
             }
-            .disposed(by: rx.disposeBag)
-
+            .disposed(by: disposeBag)
         outputs.userProfileImage
             .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }
             .bind(to: userImageView.rx.image)

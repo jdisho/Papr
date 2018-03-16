@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Links: Decodable {
+struct Links: Codable {
     let selfLink: String?
     let html: String?
     let photos: String?

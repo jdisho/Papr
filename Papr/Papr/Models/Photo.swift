@@ -8,7 +8,7 @@
 
 import RxDataSources
 
-struct Photo: Decodable {
+struct Photo: Codable {
     let id: String?
     let created: String?
     let updated: String?

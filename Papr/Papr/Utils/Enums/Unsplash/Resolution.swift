@@ -14,7 +14,7 @@ import Foundation
 enum Resolution {
     case days
 
-    var value: String {
+    var string: String {
         switch self {
         case .days:
             return "days"

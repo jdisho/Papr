@@ -41,7 +41,7 @@ class PhotoViewModel: PhotoViewModelType,
     lazy var likePhotoAction: Action<Photo, Photo>  = {
         Action<Photo, Photo> { photo in
             self.service
-                .like(photoWithId: photo.id ?? "")
+                .like(photo: photo)
                 .map { $0.photo }
                 .unwrap()
                 .do(onNext: { [unowned self] photo in
@@ -53,7 +53,7 @@ class PhotoViewModel: PhotoViewModelType,
     lazy var unlikePhotoAction: Action<Photo, Photo>  = {
         Action<Photo, Photo> { photo in
             self.service
-                .unlike(photoWithId: photo.id ?? "")
+                .unlike(photo: photo)
                 .map { $0.photo }
                 .unwrap()
                 .do(onNext: { [unowned self] photo in

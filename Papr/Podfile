@@ -9,15 +9,10 @@ target 'Papr' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'RxDataSources'
-  pod 'RxOptional'
   pod 'Action'
-  pod 'NSObject+Rx'
   
   # Network
-  pod 'Moya/RxSwift'
-
-  # Keychain
-  pod 'KeychainSwift'
+  pod 'TinyNetworking/RxSwift'
   
   # Image
   pod 'Nuke'

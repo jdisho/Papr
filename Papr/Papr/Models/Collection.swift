@@ -6,7 +6,7 @@
 //  Copyright © 2017 Joan Disho. All rights reserved.
 //
 
-struct Collection: Decodable {
+struct Collection: Codable {
     let id: Int?
     let coverPhoto: Photo?
     let isCurated: Bool?

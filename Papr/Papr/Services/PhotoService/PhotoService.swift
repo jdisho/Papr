@@ -7,64 +7,74 @@
 //
 
 import Foundation
-import Moya
 import RxSwift
+import TinyNetworking
 
 struct PhotoService: PhotoServiceType {
 
-    private var provider: MoyaProvider<UnsplashAPI>
+    private var unsplash: Unsplash
     
-    init(provider: MoyaProvider<UnsplashAPI> = MoyaProvider<UnsplashAPI>()) {
-        self.provider = provider
+    init(unsplash: Unsplash = Unsplash()) {
+        self.unsplash = unsplash
     }
 
-    func like(photoWithId id: String) -> Observable<LikeUnlike> {
-        return provider.rx
-            .request(.likePhoto(id: id))
-            .asObservable()
-            .map(LikeUnlike.self)
+    func like(photo: Photo) -> Observable<LikeUnlike> {
+        let resource = Resource<Photo, LikeUnlike>(
+            url: UnsplashAPI.likePhoto(id: photo.id ?? "").path,
+            method: .post(photo))
+
+        return unsplash.request(resource).asObservable()
     }
     
-    func unlike(photoWithId id: String) -> Observable<LikeUnlike> {
-        return provider.rx
-            .request(.unlikePhoto(id: id))
-            .asObservable()
-            .map(LikeUnlike.self)
+    func unlike(photo: Photo) -> Observable<LikeUnlike> {
+        let resource = SimpleResource<LikeUnlike>(
+            url: UnsplashAPI.unlikePhoto(id: photo.id ?? "").path,
+            method: .delete)
+
+        return unsplash.request(resource).asObservable()
     }
     
     func photo(withId id: String) -> Observable<Photo> {
-        return provider.rx
-            .request(.photo(id: id))
-            .asObservable()
-            .map(Photo.self)
+        let resource = SimpleResource<Photo>(url: UnsplashAPI.photo(id: id).path)
+        return unsplash.request(resource).asObservable()
     }
     
-    func photos(byPageNumber pageNumber: Int?,
-                orderBy: OrderBy?,
-                curated: Bool = false) -> Observable<[Photo]> {
-        var photosEnpoint = UnsplashAPI
-            .photos(page: pageNumber, 
-                    perPage: Constants.photosPerPage, 
-                    orderBy: orderBy)
+    func photos(
+        byPageNumber pageNumber: Int = 1,
+        orderBy: OrderBy = OrderBy.latest,
+        curated: Bool = false
+        ) -> Observable<[Photo]> {
+
+        var endPoint = UnsplashAPI.photos(
+            page: pageNumber,
+            perPage: Constants.photosPerPage,
+            orderBy: orderBy
+            ).path
+
         if curated {
-            photosEnpoint = UnsplashAPI
-                .curatedPhotos(page: pageNumber, 
-                               perPage: Constants.photosPerPage, 
-                               orderBy: orderBy)
+            endPoint = UnsplashAPI.curatedPhotos(
+                page: pageNumber,
+                perPage: Constants.photosPerPage,
+                orderBy: orderBy
+                ).path
         }
 
-        return provider.rx
-            .request(photosEnpoint)
-            .asObservable()
-            .map([Photo].self)
+        var params: [String: String] = [:]
+        params["page"] = "\(pageNumber)"
+        params["per_page"] = "\(Constants.photosPerPage)"
+        params["order_by"] = orderBy.string
+
+        let resource = SimpleResource<[Photo]>(url: endPoint, parameters: params)
+        return unsplash.request(resource).asObservable()
     }
 
-    func photoStatistics(withId id: String) -> Observable<PhotoStatistics> {
-        return provider.rx
-            .request(.photoStatistics(id: id,
-                                      resolution: .days,
-                                      quantity: 30))
-            .asObservable()
-            .map(PhotoStatistics.self)
+    func statistics(of photo: Photo) -> Observable<PhotoStatistics> {
+        let endPoint = UnsplashAPI.photoStatistics(
+            id: photo.id ?? "",
+            resolution: .days,
+            quantity: 30
+            ).path
+        let resource = SimpleResource<PhotoStatistics>(url: endPoint)
+        return unsplash.request(resource).asObservable()
     }
 }

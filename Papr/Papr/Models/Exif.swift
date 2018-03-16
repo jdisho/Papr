@@ -6,7 +6,7 @@
 //  Copyright © 2017 Joan Disho. All rights reserved.
 //
 
-struct Exif: Decodable {
+struct Exif: Codable {
     let aperture: String?
     let exposureTime: String?
     let focalLength: String?

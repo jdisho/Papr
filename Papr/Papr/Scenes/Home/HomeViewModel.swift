@@ -173,7 +173,7 @@ class HomeViewModel: HomeViewModelType,
                         self.navBarButtonNameProperty.onNext(curated ? .curated : .new)
                         return photos
                     }
-            }
+            }.observeOn(MainScheduler.instance)
             .do (onNext: { _ in
                 photoArray = []
                 currentPageNumber = 1
@@ -187,7 +187,7 @@ class HomeViewModel: HomeViewModelType,
                 return service.photos(byPageNumber: currentPageNumber, 
                                       orderBy: orderBy, 
                                       curated: curated)
-            }
+            }.observeOn(MainScheduler.instance)
 
          photos = Observable
             .merge(requestFirst, requestNext)

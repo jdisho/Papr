@@ -6,7 +6,7 @@
 //  Copyright © 2017 Joan Disho. All rights reserved.
 //
 
-struct ProfileImage: Decodable {
+struct ProfileImage: Codable {
     let small: String?
     let medium: String?
     let large: String?
