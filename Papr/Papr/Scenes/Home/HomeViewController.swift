@@ -9,7 +9,6 @@
 import UIKit
 import RxSwift
 import RxDataSources
-import NSObject_Rx
 
 typealias HomeSectionModel = SectionModel<String, Photo>
 
@@ -22,6 +21,7 @@ class HomeViewController: UIViewController, BindableType {
     @IBOutlet var tableView: UITableView!
     
     // MARK: Private
+    private let disposeBag = DisposeBag()
     private var dataSource: RxTableViewSectionedReloadDataSource<HomeSectionModel>!
     private var refreshControl: UIRefreshControl!
     private var navBarButton: UIButton!
@@ -56,7 +56,7 @@ class HomeViewController: UIViewController, BindableType {
                 self.navBarButton.rx.action  = inputs.showCuratedPhotosAction
             }
         }
-        .disposed(by: rx.disposeBag)
+        .disposed(by: disposeBag)
         
         outputs.orderBy.subscribe { [unowned self] orderBy in
             guard let orderBy = orderBy.element else { return }
@@ -69,26 +69,26 @@ class HomeViewController: UIViewController, BindableType {
                 self.rightBarButtonItem.rx.action = nil
             }
         }
-        .disposed(by: rx.disposeBag)
+        .disposed(by: disposeBag)
 
         outputs.orderBy
             .map { $0 == .popular ? #imageLiteral(resourceName: "hot") : #imageLiteral(resourceName: "up")}
             .bind(to: rightBarButtonItem.rx.image)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
         outputs.isRefreshing
             .bind(to: refreshControl.rx.isRefreshing)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
         outputs.navBarButtonName
             .map { $0.string }
             .bind(to: navBarButton.rx.title())
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
         outputs.photos
             .map { [SectionModel(model: "", items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
         
         tableView.rx
             .contentOffset
@@ -98,7 +98,7 @@ class HomeViewController: UIViewController, BindableType {
             .distinctUntilChanged()
             .skipUntil(outputs.isRefreshing)
             .bind(to: inputs.loadMore)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     // MARK: UI

@@ -9,7 +9,6 @@
 import UIKit
 import Nuke
 import RxSwift
-import NSObject_Rx
 
 class PhotoDetailsViewController: UIViewController, BindableType {
 
@@ -31,6 +30,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
 
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
+    private let disposeBag = DisposeBag()
     private var isTouched = true
 
     // MARK: Overrides
@@ -56,29 +56,29 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         outputs.regularPhoto
             .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
             .bind(to: photoImageView.rx.image)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
         outputs.photoSizeCoef
             .map { CGFloat($0) }
             .bind(to: photoHeightConstraint.rx.constant)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
         outputs.likedByUser
             .map { $0 ? #imageLiteral(resourceName: "favorite-white") : #imageLiteral(resourceName: "favorite-border-white") }
             .bind(to: likeButton.rx.image())
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
         outputs.totalViews
             .bind(to: totalViewsLabel.rx.text)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
         outputs.totalLikes
             .bind(to: totalLikesLabel.rx.text)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
         outputs.totalDownloads
             .bind(to: totalDownloadsLabel.rx.text)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
         Observable.combineLatest(outputs.likedByUser, outputs.photoStream)
             .subscribe { result in
@@ -92,7 +92,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
                         .bind(to: inputs.likePhotoAction, input: photo)
                 }
             }
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
 
         Observable
@@ -108,7 +108,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             }
             .observeOn(MainScheduler.instance)
             .bind(to: inputs.alertAction.inputs)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 
     // MARK: UI

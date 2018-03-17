@@ -6,7 +6,7 @@
 //  Copyright © 2017 Joan Disho. All rights reserved.
 //
 
-struct ImageURLs: Decodable {
+struct ImageURLs: Codable {
     let full: String?
     let raw: String?
     let regular: String?

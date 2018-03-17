@@ -8,7 +8,7 @@
 
 // MARK: Possition
 
-struct Possition: Decodable {
+struct Possition: Codable {
     let latitude: Double?
     let longitude: Double?
 
@@ -20,7 +20,7 @@ struct Possition: Decodable {
 
 // MARK: Location
 
-struct Location: Decodable {
+struct Location: Codable {
     let city: String?
     let country: String?
     let position: Possition?

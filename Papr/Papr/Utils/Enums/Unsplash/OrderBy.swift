@@ -13,7 +13,7 @@ enum OrderBy {
     case oldest
     case popular
     
-    var value: String {
+    var string: String {
         switch self {
         case .latest:
             return "latest"

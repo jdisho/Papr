@@ -13,7 +13,7 @@ enum Orientation {
     case portrait
     case squarish
     
-    var value: String {
+    var string: String {
         switch self {
         case .landscape:
             return "landscape"

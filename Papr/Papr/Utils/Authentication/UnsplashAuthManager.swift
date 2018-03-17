@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import Alamofire
-import KeychainSwift
+import TinyNetworking
 
 protocol UnsplashSessionListener {
      func didReceiveRedirect(code: String)
@@ -38,14 +37,12 @@ class UnsplashAuthManager {
     private let clientSecret: String
     private let redirectURL: URL
     private let scopes: [String]
-    private let keychain: KeychainSwift
     
     init(clientID: String, clientSecret: String, scopes: [String] = [Scope.pub.string]) {
         self.clientID = clientID
         self.clientSecret = clientSecret
         self.redirectURL = URL(string: UnsplashSettings.redirectURL.string)!
         self.scopes = scopes
-        keychain = KeychainSwift()
     }
     
     public func receivedCodeRedirect(url: URL) {
@@ -53,20 +50,20 @@ class UnsplashAuthManager {
         delegate.didReceiveRedirect(code: code)
     }
     
-    public func accessToken(with code: String, completion: @escaping (UnsplashAccessToken?, NSError?) -> Void) {
-        let urlString = accessTokenURL(with: code).absoluteString
-        Alamofire.request(urlString, method: .post).validate().responseJSON { response in
-            switch response.result {
-            case .success(_):
-                if let json = response.value as? [String : Any], 
-                    let accessToken = json["access_token"] as? String {
-                    let token = UnsplashAccessToken(clientID: self.clientID, accessToken: accessToken)
-                    self.keychain.set(token.accessToken, forKey: self.clientID)
-                    completion(token, nil)
+    public func accessToken(with code: String, completion: @escaping (String?, Error?) -> Void) {
+        let resource = Resource<String, UnsplashAccessToken>(
+            url: accessTokenURL(with: code),
+            method: .post(code))
+
+        Unsplash().request(resource) { response in
+            DispatchQueue.main.async { [unowned self] in
+                switch response {
+                case let .success(result):
+                    UserDefaults.standard.set(result.accessToken, forKey: self.clientID)
+                    completion(result.accessToken, nil)
+                case let .error(error):
+                    completion(nil, error as Error)
                 }
-            case .failure(_):
-                let error = self.extractError(from: response.data!)
-                completion(nil, error)
             }
         }
     } 
@@ -76,26 +73,28 @@ class UnsplashAuthManager {
         components.scheme = "https"
         components.host = UnsplashSettings.host.string
         components.path = "/oauth/authorize"
-        
-        components.queryItems = [
-            URLQueryItem(name: "response_type", value: "code"),
-            URLQueryItem(name: "client_id", value: self.clientID),
-            URLQueryItem(name: "redirect_uri", value: self.redirectURL.absoluteString),
-            URLQueryItem(name: "scope", value: self.scopes.joined(separator: "+"))
-        ]
-        
-        return components.url!
+
+
+        var params: [String: String] = [:]
+        params["response_type"] = "code"
+        params["client_id"] = clientID
+        params["redirect_uri"] = redirectURL.absoluteString
+        params["scope"] = scopes.joined(separator: "+")
+
+        let url = components.url?.appendingQueryParameters(params)
+
+        return url!
     }
     
     public var accessToken: String? {
-        guard let token = keychain.get(self.clientID) else {
+        guard let token = UserDefaults.standard.string(forKey: clientID) else {
             return nil
         }
-        return UnsplashAccessToken(clientID: clientID, accessToken: token).accessToken
+        return token
     }
     
     public func clearAccessToken() {
-        keychain.clear()
+        UserDefaults.standard.removeObject(forKey: clientID)
     }
     
     // MARK: Private
@@ -105,16 +104,17 @@ class UnsplashAuthManager {
         components.scheme = "https"
         components.host = UnsplashSettings.host.string
         components.path = "/oauth/token"
+
+        var params: [String: String] = [:]
+        params["grant_type"] = "authorization_code"
+        params["client_id"] = clientID
+        params["client_secret"] = clientSecret
+        params["redirect_uri"] = redirectURL.absoluteString
+        params["code"] = code
+
+        let url = components.url?.appendingQueryParameters(params)
         
-        components.queryItems = [
-            URLQueryItem(name: "grant_type", value: "authorization_code"),
-            URLQueryItem(name: "client_id", value: self.clientID),
-            URLQueryItem(name: "client_secret", value: self.clientSecret),
-            URLQueryItem(name: "redirect_uri", value: self.redirectURL.absoluteString),
-            URLQueryItem(name: "code", value: code)
-        ]
-        
-        return components.url!
+        return url!
     }
     
     private func extractCode(from url: URL) -> (code: String?, error: NSError?) {

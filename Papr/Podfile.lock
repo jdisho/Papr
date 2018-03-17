@@ -2,55 +2,37 @@ PODS:
   - Action (3.5.0):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - Alamofire (4.6.0)
   - Differentiator (3.0.2)
-  - KeychainSwift (10.0.0)
-  - Moya/Core (11.0.0):
-    - Alamofire (~> 4.1)
-    - Result (~> 3.0)
-  - Moya/RxSwift (11.0.0):
-    - Moya/Core
-    - RxSwift (~> 4.0)
-  - NSObject+Rx (4.2.0):
-    - RxSwift (~> 4.0)
   - Nuke (6.1)
-  - Result (3.2.4)
   - RxCocoa (4.1.2):
     - RxSwift (~> 4.0)
   - RxDataSources (3.0.2):
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxOptional (3.3.0):
-    - RxCocoa (~> 4.0)
-    - RxSwift (~> 4.0)
   - RxSwift (4.1.2)
+  - TinyNetworking/Core (0.3.0)
+  - TinyNetworking/RxSwift (0.3.0):
+    - RxSwift (~> 4.0)
+    - TinyNetworking/Core
 
 DEPENDENCIES:
   - Action
-  - KeychainSwift
-  - Moya/RxSwift
-  - NSObject+Rx
   - Nuke
   - RxCocoa
   - RxDataSources
-  - RxOptional
   - RxSwift
+  - TinyNetworking/RxSwift
 
 SPEC CHECKSUMS:
   Action: d60087ebce41b969d1afdad01e2fa1372a82f26e
-  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
-  KeychainSwift: f9f7910449a0c0fd2cabc889121530dd2c477c33
-  Moya: be29766339783963a70d1279d69c891ab3a1393c
-  NSObject+Rx: cbbc05e3cb3ad446cdbced3e00e39c9efaf02925
   Nuke: 0513c8d156bd9a2adb15db70622c3527f44542c5
-  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
-  RxOptional: e5448d3e21024489e07c31f6a262f2b50c975367
   RxSwift: e49536837d9901277638493ea537394d4b55f570
+  TinyNetworking: c07c58c2c8cd8bfc9d56ea9b10fb42d94c0a5fe7
 
-PODFILE CHECKSUM: 3a2629930b7db44c86e1d2a2470d007ed6c81709
+PODFILE CHECKSUM: 62b65e21ac0520480679f619931da68fc20fded1
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0

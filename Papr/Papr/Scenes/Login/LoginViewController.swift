@@ -8,7 +8,6 @@
 
 import UIKit
 import RxSwift
-import NSObject_Rx
 
 class LoginViewController: UIViewController, BindableType {
 
@@ -18,32 +17,38 @@ class LoginViewController: UIViewController, BindableType {
     // MARK: IBOutlets
     @IBOutlet var loginButton: UIButton!
     @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
+
+    // MARK: Private
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     func bindViewModel() {
-        loginButton.rx.action = viewModel.inputs.loginAction
+        let inputs = viewModel.inputs
+        let outputs = viewModel.outputs
 
-        viewModel.outputs.buttonName
+        loginButton.rx.action = inputs.loginAction
+
+        outputs.buttonName
             .bind(to: loginButton.rx.title())
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
-        viewModel.outputs.loginState
+        outputs.loginState
             .map { $0 == .idle }
             .bind(to: activityIndicatorView.rx.isHidden)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
 
-        viewModel.outputs.loginState
+        outputs.loginState
             .map { $0 == .idle }
             .bind(to: loginButton.rx.isEnabled)
-            .disposed(by: rx.disposeBag)
+             .disposed(by: disposeBag)
         
-        viewModel.outputs.loginState
+        outputs.loginState
             .map { $0 == .idle ? 1.0 : 0.7 }
             .bind(to: loginButton.rx.alpha)
-            .disposed(by: rx.disposeBag)
+            .disposed(by: disposeBag)
     }
 
 }

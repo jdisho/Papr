@@ -10,11 +10,9 @@ import Foundation
 import RxSwift
 
 protocol PhotoServiceType {
-    func like(photoWithId id: String) -> Observable<LikeUnlike>
-    func unlike(photoWithId id: String) -> Observable<LikeUnlike>
+    func like(photo: Photo) -> Observable<LikeUnlike>
+    func unlike(photo: Photo) -> Observable<LikeUnlike>
     func photo(withId id: String) -> Observable<Photo>
-    func photos(byPageNumber pageNumber: Int?,
-                orderBy: OrderBy?,
-                curated: Bool) -> Observable<[Photo]>
-    func photoStatistics(withId id: String) -> Observable<PhotoStatistics>
+    func photos(byPageNumber pageNumber: Int, orderBy: OrderBy, curated: Bool) -> Observable<[Photo]>
+    func statistics(of photo: Photo) -> Observable<PhotoStatistics>
 }

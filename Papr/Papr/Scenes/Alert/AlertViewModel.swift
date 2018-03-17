@@ -71,11 +71,13 @@ class AlertViewModel: AlertViewModelType, AlertViewModelInput, AlertViewModelOut
     let yesObservable: Observable<Void>
     let noObservable: Observable<Void>
     let okObservable: Observable<Void>
-    
+
+    // MARK: Private
     private let yesPublisher = PublishSubject<Void>()
     private let noPublisher = PublishSubject<Void>()
     private let okPublisher = PublishSubject<Void>()
-    
+
+    // MARK: Init
     init(title: String, message: String, mode: AlertMode) {
         
         self.title = Observable.just(title)

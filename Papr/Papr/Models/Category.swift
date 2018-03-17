@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Category: Decodable {
+struct Category: Codable {
     let id: Int?
     let title: String?
     let photoCount: Int?
