@@ -18,20 +18,30 @@ struct PhotoService: PhotoServiceType {
         self.unsplash = unsplash
     }
 
-    func like(photo: Photo) -> Observable<LikeUnlike> {
+    func like(photo: Photo) -> Observable<LikeUnlikePhotoResult> {
         let resource = Resource<Photo, LikeUnlike>(
             url: UnsplashAPI.likePhoto(id: photo.id ?? "").path,
             method: .post(photo))
 
-        return unsplash.request(resource).asObservable()
+        return unsplash.request(resource)
+            .asObservable()
+            .map { $0.photo }
+            .unwrap()
+            .map(LikeUnlikePhotoResult.success)
+            .catchError { _ in .just(.error(withMessage: "Failed to like the photo")) }
     }
     
-    func unlike(photo: Photo) -> Observable<LikeUnlike> {
+    func unlike(photo: Photo) -> Observable<LikeUnlikePhotoResult> {
         let resource = SimpleResource<LikeUnlike>(
             url: UnsplashAPI.unlikePhoto(id: photo.id ?? "").path,
             method: .delete)
 
-        return unsplash.request(resource).asObservable()
+        return unsplash.request(resource)
+            .asObservable()
+            .map { $0.photo }
+            .unwrap()
+            .map(LikeUnlikePhotoResult.success)
+            .catchError { _ in .just(.error(withMessage: "Failed to unlike the photo")) }
     }
     
     func photo(withId id: String) -> Observable<Photo> {

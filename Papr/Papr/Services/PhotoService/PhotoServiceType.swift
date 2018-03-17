@@ -9,9 +9,14 @@
 import Foundation
 import RxSwift
 
+enum LikeUnlikePhotoResult {
+    case success(Photo)
+    case error(withMessage: String)
+}
+
 protocol PhotoServiceType {
-    func like(photo: Photo) -> Observable<LikeUnlike>
-    func unlike(photo: Photo) -> Observable<LikeUnlike>
+    func like(photo: Photo) -> Observable<LikeUnlikePhotoResult>
+    func unlike(photo: Photo) -> Observable<LikeUnlikePhotoResult>
     func photo(withId id: String) -> Observable<Photo>
     func photos(byPageNumber pageNumber: Int, orderBy: OrderBy, curated: Bool) -> Observable<[Photo]>
     func statistics(of photo: Photo) -> Observable<PhotoStatistics>

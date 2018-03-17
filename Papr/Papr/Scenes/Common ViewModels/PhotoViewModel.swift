@@ -11,9 +11,8 @@ import RxSwift
 import Action
 
 protocol PhotoViewModelInput {
-    var likePhotoAction: Action<Photo, Photo> { get }
-    var unlikePhotoAction: Action<Photo, Photo> { get }
-    var alertAction: Action<String, Void> { get }
+    var likePhotoAction: Action<Photo, LikeUnlikePhotoResult> { get }
+    var unlikePhotoAction: Action<Photo, LikeUnlikePhotoResult> { get }
 }
 
 protocol PhotoViewModelOutput {
@@ -37,38 +36,33 @@ class PhotoViewModel: PhotoViewModelType,
     var photoViewModelInputs: PhotoViewModelInput { return self }
     var photoViewModelOutputs: PhotoViewModelOutput { return self }
 
+
     // MARK: Input
-    lazy var likePhotoAction: Action<Photo, Photo>  = {
-        Action<Photo, Photo> { photo in
-            self.service
-                .like(photo: photo)
-                .map { $0.photo }
-                .unwrap()
-                .do(onNext: { [unowned self] photo in
-                    self.update(photo: photo)
+    lazy var likePhotoAction: Action<Photo, LikeUnlikePhotoResult>  = {
+        Action<Photo, LikeUnlikePhotoResult> { photo in
+            self.service.like(photo: photo)
+                .do(onNext: { [unowned self] result in
+                    switch result {
+                    case let .success(photo):
+                        self.update(photo: photo)
+                    case let .error(errorMessage):
+                        self.alertAction.execute(errorMessage)
+                    }
                 })
         }
     }()
 
-    lazy var unlikePhotoAction: Action<Photo, Photo>  = {
-        Action<Photo, Photo> { photo in
-            self.service
-                .unlike(photo: photo)
-                .map { $0.photo }
-                .unwrap()
-                .do(onNext: { [unowned self] photo in
-                    self.update(photo: photo)
+    lazy var unlikePhotoAction: Action<Photo, LikeUnlikePhotoResult>  = {
+        Action<Photo, LikeUnlikePhotoResult> { photo in
+            self.service.unlike(photo: photo)
+                .do(onNext: { [unowned self] result in
+                    switch result {
+                    case let .success(photo):
+                        self.update(photo: photo)
+                    case let .error(errorMessage):
+                        self.alertAction.execute(errorMessage)
+                    }
                 })
-        }
-    }()
-
-    lazy var alertAction: Action<String, Void> = {
-        Action<String, Void> { [unowned self] message in
-            let alertViewModel = AlertViewModel(title: "Upsss...",
-                                                message: message,
-                                                mode: .ok)
-            return self.sceneCoordinator.transition(to: .alert(alertViewModel),
-                                                       type: .alert)
         }
     }()
 
@@ -81,9 +75,23 @@ class PhotoViewModel: PhotoViewModelType,
 
     let service: PhotoServiceType
     let sceneCoordinator: SceneCoordinatorType
+
+    // MARK: Private
     private let photoStreamProperty = PublishSubject<Photo>()
 
-    func update(photo: Photo) {
+    private lazy var alertAction: Action<String, Void> = {
+        Action<String, Void> { [unowned self] message in
+            let alertViewModel = AlertViewModel(
+                title: "Upsss...",
+                message: message,
+                mode: .ok)
+            return self.sceneCoordinator.transition(
+                to: .alert(alertViewModel),
+                type: .alert)
+        }
+    }()
+
+    private func update(photo: Photo) {
         photoStreamProperty.onNext(photo)
     }
 

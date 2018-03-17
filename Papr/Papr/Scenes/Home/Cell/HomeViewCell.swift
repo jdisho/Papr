@@ -65,21 +65,6 @@ class HomeViewCell: UITableViewCell, BindableType {
             }
             .disposed(by: disposeBag)
 
-        Observable
-            .merge(inputs.likePhotoAction.errors, 
-                   inputs.unlikePhotoAction.errors)
-            .map { error in
-                switch error {
-                case let .underlyingError(error):
-                    return error.localizedDescription
-                case .notEnabled:
-                    return error.localizedDescription
-                }
-            }
-            .subscribeOn(MainScheduler.instance)
-            .bind(to: inputs.alertAction.inputs)
-            .disposed(by: disposeBag)
-
         outputs.photoStream
             .subscribe { photo in
                 guard let photo = photo.element else { return }
@@ -87,6 +72,7 @@ class HomeViewCell: UITableViewCell, BindableType {
                     .bind(to: inputs.photoDetailsAction, input: photo)
             }
             .disposed(by: disposeBag)
+        
         outputs.userProfileImage
             .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }
             .bind(to: userImageView.rx.image)

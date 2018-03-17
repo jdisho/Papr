@@ -93,22 +93,6 @@ class PhotoDetailsViewController: UIViewController, BindableType {
                 }
             }
             .disposed(by: disposeBag)
-
-
-        Observable
-            .merge(inputs.likePhotoAction.errors,
-                   inputs.unlikePhotoAction.errors)
-            .map { error in
-                switch error {
-                case let .underlyingError(error):
-                    return error.localizedDescription
-                case .notEnabled:
-                    return error.localizedDescription
-                }
-            }
-            .observeOn(MainScheduler.instance)
-            .bind(to: inputs.alertAction.inputs)
-            .disposed(by: disposeBag)
     }
 
     // MARK: UI
