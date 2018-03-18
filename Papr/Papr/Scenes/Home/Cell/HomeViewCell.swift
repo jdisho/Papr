@@ -35,7 +35,8 @@ class HomeViewCell: UITableViewCell, BindableType {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        userImageView.rounded()
+        let radius = Double(self.userImageView.frame.height / 2)
+        userImageView.rounded(withRadius: radius)
     }
 
     override func prepareForReuse() {

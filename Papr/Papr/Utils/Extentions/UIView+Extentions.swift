@@ -1,5 +1,5 @@
 //
-//  UIImageView+Extentions.swift
+//  UIView+Extentions.swift
 //  Papr
 //
 //  Created by Joan Disho on 05.02.18.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-extension UIImageView {
+extension UIView {
 
-    func rounded() {
+    func rounded(withRadius radius: Double) {
         self.layer.masksToBounds = false
-        self.layer.cornerRadius = self.frame.height / 2
+        self.layer.cornerRadius = CGFloat(radius)
         self.clipsToBounds = true
     }
 }

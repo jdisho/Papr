@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="AvenirNext.ttc">
-            <string>AvenirNext-DemiBold</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Papr" customModuleProvider="target">
             <connections>
@@ -28,10 +23,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZyJ-aA-ow8">
-                    <rect key="frame" x="16" y="571" width="343" height="56"/>
-                    <color key="backgroundColor" red="0.180392161" green="0.45490196350000001" blue="0.70980393890000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="32" y="579" width="311" height="48"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="56" id="dqq-LE-B20"/>
+                        <constraint firstAttribute="height" constant="48" id="dqq-LE-B20"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="Login with Unsplash">
@@ -39,41 +34,63 @@
                     </state>
                 </button>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="csh-Q1-UGg">
-                    <rect key="frame" x="31" y="590" width="20" height="20"/>
+                    <rect key="frame" x="48" y="593" width="20" height="20"/>
                 </activityIndicatorView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photos" translatesAutoresizingMaskIntoConstraints="NO" id="Ftc-ji-Ozi">
-                    <rect key="frame" x="100" y="211" width="175" height="170"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D7O-BZ-cnU">
+                    <rect key="frame" x="24" y="52" width="40" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="170" id="Nuf-66-WGH"/>
+                        <constraint firstAttribute="width" constant="40" id="Wid-HX-PLk"/>
+                        <constraint firstAttribute="height" constant="40" id="cbX-Bj-2uL"/>
+                    </constraints>
+                    <state key="normal" image="close">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Papr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ils-uD-r30">
+                    <rect key="frame" x="16" y="371.5" width="343" height="38.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="ShO-Hb-jPG">
+                    <rect key="frame" x="64" y="219" width="247" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="128" id="u0y-Kb-PyL"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Papr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uc0-SP-twc">
-                    <rect key="frame" x="16" y="421" width="343" height="38"/>
-                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="28"/>
-                    <nil key="textColor"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beautiful Free Images" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dv4-FF-IQh">
+                    <rect key="frame" x="94" y="426" width="187" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="csh-Q1-UGg" firstAttribute="top" secondItem="ZyJ-aA-ow8" secondAttribute="bottom" constant="-37" id="90k-iW-8T4"/>
-                <constraint firstItem="Uc0-SP-twc" firstAttribute="top" secondItem="Ftc-ji-Ozi" secondAttribute="bottom" constant="40" id="A7v-zx-f2H"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Uc0-SP-twc" secondAttribute="trailing" constant="16" id="M8e-bh-bcQ"/>
-                <constraint firstItem="csh-Q1-UGg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="31" id="Nf7-nK-rJC"/>
+                <constraint firstItem="csh-Q1-UGg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="48" id="6H4-s6-zQP"/>
+                <constraint firstItem="csh-Q1-UGg" firstAttribute="centerY" secondItem="ZyJ-aA-ow8" secondAttribute="centerY" id="F8U-nB-ULt"/>
+                <constraint firstItem="ShO-Hb-jPG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="64" id="FCX-P1-I0c"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ZyJ-aA-ow8" secondAttribute="bottom" constant="40" id="OzF-IU-GUX"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ftc-ji-Ozi" secondAttribute="trailing" constant="100" id="UpL-UH-9kp"/>
-                <constraint firstItem="ZyJ-aA-ow8" firstAttribute="leading" secondItem="csh-Q1-UGg" secondAttribute="trailing" constant="-35" id="cRK-hA-P5Y"/>
-                <constraint firstItem="Uc0-SP-twc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="cch-SH-3O8"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZyJ-aA-ow8" secondAttribute="trailing" constant="16" id="ckE-as-PdZ"/>
-                <constraint firstItem="ZyJ-aA-ow8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="eRj-s0-pC7"/>
-                <constraint firstItem="Ftc-ji-Ozi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="100" id="iw4-uz-N2m"/>
-                <constraint firstItem="ZyJ-aA-ow8" firstAttribute="top" secondItem="Uc0-SP-twc" secondAttribute="bottom" constant="112" id="nca-BU-4HU"/>
+                <constraint firstItem="Ils-uD-r30" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="RJk-Pr-1ZE"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ils-uD-r30" secondAttribute="trailing" constant="16" id="YiB-2I-9Xa"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZyJ-aA-ow8" secondAttribute="trailing" constant="32" id="ckE-as-PdZ"/>
+                <constraint firstItem="ZyJ-aA-ow8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="eRj-s0-pC7"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dv4-FF-IQh" secondAttribute="trailing" constant="94" id="eUc-0Z-654"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ShO-Hb-jPG" secondAttribute="trailing" constant="64" id="f6X-Je-QSJ"/>
+                <constraint firstItem="D7O-BZ-cnU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="jad-QI-9Vo"/>
+                <constraint firstItem="D7O-BZ-cnU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="kjP-K5-jeP"/>
+                <constraint firstItem="Ils-uD-r30" firstAttribute="top" secondItem="ShO-Hb-jPG" secondAttribute="bottom" constant="24" id="pbd-gu-SiM"/>
+                <constraint firstItem="ZyJ-aA-ow8" firstAttribute="top" secondItem="dv4-FF-IQh" secondAttribute="bottom" constant="132" id="roL-Hc-xUs"/>
+                <constraint firstItem="dv4-FF-IQh" firstAttribute="top" secondItem="Ils-uD-r30" secondAttribute="bottom" constant="16" id="z5u-0I-uBl"/>
+                <constraint firstItem="dv4-FF-IQh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="94" id="zj4-9M-DIn"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="24.5" y="52.5"/>
         </view>
     </objects>
     <resources>
-        <image name="photos" width="256" height="256"/>
+        <image name="camera" width="512" height="512"/>
+        <image name="close" width="24" height="24"/>
     </resources>
 </document>

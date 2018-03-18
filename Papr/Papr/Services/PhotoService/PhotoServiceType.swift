@@ -11,6 +11,11 @@ import RxSwift
 
 enum LikeUnlikePhotoResult {
     case success(Photo)
+    case error(LikeUnlikePhotoError)
+}
+
+enum LikeUnlikePhotoError: Error {
+    case noAccessToken
     case error(withMessage: String)
 }
 

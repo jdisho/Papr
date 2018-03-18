@@ -23,6 +23,11 @@ class LoginViewController: UIViewController, BindableType {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginButton.rounded(withRadius: 10)
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
     func bindViewModel() {

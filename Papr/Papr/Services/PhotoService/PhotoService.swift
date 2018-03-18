@@ -28,7 +28,13 @@ struct PhotoService: PhotoServiceType {
             .map { $0.photo }
             .unwrap()
             .map(LikeUnlikePhotoResult.success)
-            .catchError { _ in .just(.error(withMessage: "Failed to like the photo")) }
+            .catchError { error in
+                let accessToken = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
+                guard accessToken == nil else {
+                    return .just(.error(.error(withMessage: "Failed to like")))
+                }
+                return .just(.error(.noAccessToken))
+            }
     }
     
     func unlike(photo: Photo) -> Observable<LikeUnlikePhotoResult> {
@@ -41,7 +47,13 @@ struct PhotoService: PhotoServiceType {
             .map { $0.photo }
             .unwrap()
             .map(LikeUnlikePhotoResult.success)
-            .catchError { _ in .just(.error(withMessage: "Failed to unlike the photo")) }
+            .catchError { error in
+                let accessToken = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
+                guard accessToken == nil else {
+                    return .just(.error(.error(withMessage: "Failed to unlike")))
+                }
+                return .just(.error(.noAccessToken))
+        }
     }
     
     func photo(withId id: String) -> Observable<Photo> {

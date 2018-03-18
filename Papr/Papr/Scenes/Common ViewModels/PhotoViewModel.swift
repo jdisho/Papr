@@ -45,8 +45,13 @@ class PhotoViewModel: PhotoViewModelType,
                     switch result {
                     case let .success(photo):
                         self.update(photo: photo)
-                    case let .error(errorMessage):
-                        self.alertAction.execute(errorMessage)
+                    case .error(let error):
+                        switch error {
+                        case .noAccessToken:
+                            self.navigateToLogin.execute(())
+                        case let .error(message):
+                            self.alertAction.execute(message)
+                        }
                     }
                 })
         }
@@ -59,8 +64,13 @@ class PhotoViewModel: PhotoViewModelType,
                     switch result {
                     case let .success(photo):
                         self.update(photo: photo)
-                    case let .error(errorMessage):
-                        self.alertAction.execute(errorMessage)
+                    case .error(let error):
+                        switch error {
+                        case .noAccessToken:
+                            self.navigateToLogin.execute(())
+                        case let .error(message):
+                            self.alertAction.execute(message)
+                        }
                     }
                 })
         }
@@ -88,6 +98,15 @@ class PhotoViewModel: PhotoViewModelType,
             return self.sceneCoordinator.transition(
                 to: .alert(alertViewModel),
                 type: .alert)
+        }
+    }()
+
+    private lazy var navigateToLogin: CocoaAction = {
+        CocoaAction { [unowned self] message in
+            let viewModel = LoginViewModel()
+            return self.sceneCoordinator.transition(
+                to: Scene.login(viewModel),
+                type: .modal)
         }
     }()
 

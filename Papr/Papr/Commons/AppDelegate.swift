@@ -21,13 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sceneCoordinator = SceneCoordinator(window: window!)
         SceneCoordinator.shared = sceneCoordinator
 
-        if UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string) != nil {
-            let homeScene = Scene.home(HomeViewModel())
-            sceneCoordinator.transition(to: homeScene, type: .root)
-        } else {
-            let loginScene = Scene.login(LoginViewModel())
-            sceneCoordinator.transition(to: loginScene, type: .root)
-        }
+        let homeScene = Scene.home(HomeViewModel())
+        sceneCoordinator.transition(to: homeScene, type: .root)
 
         return true
     }
