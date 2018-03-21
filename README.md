@@ -15,8 +15,10 @@ Papr is an unofficial Unsplash app for iOS.
 
 ## ⚙️ Setup
 To be able to log in during development, you'll need a Client ID and Client Secret.
+
 To get these, [register](https://unsplash.com/oauth/applications) a new OAuth application on Unsplash.
-Make sure the Authorization callback URL is set to `freetime://`. The others can be filled in as you wish.
+
+Make sure the Authorization callback URL is set to `papr://unsplash`. The others can be filled in as you wish.
 
 To add the Client ID and Client Secret to the App, follow these steps:
 ###
