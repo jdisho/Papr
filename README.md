@@ -12,7 +12,19 @@ Papr is an unofficial Unsplash app for iOS.
 ## 🏃‍♂️ Getting Started
 1. Clone the repository.
 1. Run `pod install` to install dependencies.
-1. Happy to go.
+
+## ⚙️ Setup
+To be able to log in during development, you'll need a Client ID and Client Secret.
+To get these, [register](https://unsplash.com/oauth/applications) a new OAuth application on Unsplash.
+Make sure the Authorization callback URL is set to `freetime://`. The others can be filled in as you wish.
+
+To add the Client ID and Client Secret to the App, follow these steps:
+###
+1. In Xcode, go to `Product`> `Scheme` > `Manage Schemes...`
+2. Select `Papr` and click `Edit...`
+3. Go to `Run` > `Arguments`
+4. Add your Client ID (`UNSPLASH_CLIENT_ID` as key) and Client Secret (`UNSPLASH_CLIENT_SECRET`) to the Environment Variables.
+
 
 ## 🎉 Why am I building this?
 1. Pushing [`RxSwift`](https://github.com/ReactiveX/RxSwift) to its limits. 🔥
@@ -37,5 +49,8 @@ Papr is an unofficial Unsplash app for iOS.
 1. **Write tests**.
 1. ... more
 
+## Contributing
+I intend for this project to be more as an educational resource, learn by open sourcing. 
 
+I very open for feedback and contribution. ❤️🤙
 
