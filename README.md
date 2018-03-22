@@ -54,5 +54,5 @@ To add the Client ID and Client Secret to the App, follow these steps:
 ## ❤️ Contributing
 I intend for this project to be more as an educational resource, learn by open sourcing. 
 
-I very open for feedback and contribution. 🤙
+I am very open for feedback and contribution. 🤙
 
