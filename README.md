@@ -37,20 +37,6 @@ To add the Client ID and Client Secret to the App, follow these steps:
 1. Using as little dependecies as possible.
 1. Fun thing! 🤙
 
-## 🧘‍♂️ Current state
-1. Login with Unsplash
-1. Explore New/Curated photos
-1. Photo details
-1. Like/Unlike photos
-
-## 🧗‍♂️ ToDos
-1. Download photos.
-1. Search photos/users/collections.
-1. User profile.
-1. Add/edit/remove photos to a collection.
-1. **Write tests**.
-1. ... more
-
 ## ❤️ Contributing
 I intend for this project to be more as an educational resource, learn by open sourcing. 
 
