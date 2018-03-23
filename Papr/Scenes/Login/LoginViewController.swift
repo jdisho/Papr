@@ -16,6 +16,7 @@ class LoginViewController: UIViewController, BindableType {
 
     // MARK: IBOutlets
     @IBOutlet var loginButton: UIButton!
+    @IBOutlet var closeButton: UIButton!
     @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
 
     // MARK: Private
@@ -35,6 +36,8 @@ class LoginViewController: UIViewController, BindableType {
         let outputs = viewModel.outputs
 
         loginButton.rx.action = inputs.loginAction
+        
+        closeButton.rx.action = inputs.closeAction
 
         outputs.buttonName
             .bind(to: loginButton.rx.title())

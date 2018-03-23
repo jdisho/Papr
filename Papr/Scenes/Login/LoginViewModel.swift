@@ -19,6 +19,7 @@ enum LoginState {
 
 protocol LoginViewModelInput {
     var loginAction: CocoaAction { get }
+    var closeAction: CocoaAction { get }
 }
 
 protocol LoginViewModelOuput {
@@ -81,6 +82,14 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
         }
     }()
     
+    // MARK: Action
+    lazy var closeAction: CocoaAction = {
+        return CocoaAction { [unowned self] _ in
+//            self.authenticate()
+            self.close()
+        }
+    }()
+    
     private lazy var navigateToHomeAction: CocoaAction = {
         return CocoaAction { [unowned self] _ in 
             let viewModel = HomeViewModel()
@@ -107,6 +116,12 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
             })
             self.authSession?.start()
         }
+        return .empty()
+    }
+    
+    private func close() -> Observable<Void> {
+        
+        self.sceneCoordinator.pop(animated: true)
         return .empty()
     }
 }
