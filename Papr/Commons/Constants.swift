@@ -9,5 +9,5 @@
 import Foundation
 
 struct Constants {
-    static let photosPerPage = 20
+    static let photosPerPage = 10
 }
