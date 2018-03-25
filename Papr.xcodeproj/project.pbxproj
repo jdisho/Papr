@@ -367,7 +367,6 @@
 			isa = PBXGroup;
 			children = (
 				DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */,
-				DC71C30E1FBDE00A00C8E41A /* UnsplashAuthError.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -498,6 +497,7 @@
 				DCCCFCBC203A45DE0024D417 /* Links.swift */,
 				DC6CC643204CBD5300050589 /* PhotoStatistics.swift */,
 				DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */,
+				DC71C30E1FBDE00A00C8E41A /* UnsplashAuthError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

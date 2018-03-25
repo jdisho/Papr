@@ -119,11 +119,13 @@ class HomeViewModel: HomeViewModelType,
     
     lazy var alertAction: Action<String, Void> = {
         Action<String, Void> { [unowned self] message in
-            let alertViewModel = AlertViewModel(title: "Upsss...", 
-                                                message: message, 
-                                                mode: .ok)
-            return self.sceneCoordinator.transition(to: .alert(alertViewModel), 
-                                                    type: .alert)
+            let alertViewModel = AlertViewModel(
+                title: "Upsss...",
+                message: message,
+                mode: .ok)
+            return self.sceneCoordinator.transition(
+                to: .alert(alertViewModel),
+                type: .alert)
         }
     }()
 
@@ -166,14 +168,14 @@ class HomeViewModel: HomeViewModelType,
             .flatMapLatest { isRefreshing, orderBy, curated -> Observable<[Photo]> in
                 guard isRefreshing else { return .empty() }
                 return service
-                    .photos(byPageNumber: 1, 
+                    .photos(byPageNumber: 1,
                             orderBy: orderBy, 
                             curated: curated)
                     .map { [unowned self] photos in 
                         self.navBarButtonNameProperty.onNext(curated ? .curated : .new)
                         return photos
                     }
-            }.observeOn(MainScheduler.instance)
+            }
             .do (onNext: { _ in
                 photoArray = []
                 currentPageNumber = 1
@@ -184,10 +186,11 @@ class HomeViewModel: HomeViewModelType,
             .flatMapLatest { loadMore, orderBy, curated -> Observable<[Photo]> in 
                 guard loadMore else { return .empty() }
                 currentPageNumber += 1
-                return service.photos(byPageNumber: currentPageNumber, 
-                                      orderBy: orderBy, 
-                                      curated: curated)
-            }.observeOn(MainScheduler.instance)
+                return service.photos(
+                    byPageNumber: currentPageNumber,
+                    orderBy: orderBy,
+                    curated: curated)
+            }
 
          photos = Observable
             .merge(requestFirst, requestNext)

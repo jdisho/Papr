@@ -36,7 +36,14 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     // MARK: Inputs & Outputs
     var inputs: LoginViewModelInput { return self }
     var outputs: LoginViewModelOuput { return self }
-  
+
+    // MARK: Input
+    lazy var loginAction: CocoaAction = {
+        return CocoaAction { [unowned self] _ in
+            self.authenticate()
+        }
+    }()
+
     // MARK: Output
     var buttonName: Observable<String>
     var loginState: Observable<LoginState>
@@ -73,22 +80,27 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
 
         self.authManager.delegate = self
     }
-
-    // MARK: Action
-    lazy var loginAction: CocoaAction = {
-        return CocoaAction { [unowned self] _ in 
-            self.authenticate()
-        }
-    }()
     
     private lazy var navigateToHomeAction: CocoaAction = {
-        return CocoaAction { [unowned self] _ in 
-            let viewModel = HomeViewModel()
+        return CocoaAction { [unowned self] _ in
             return self.sceneCoordinator.transition(
-                to: .home(viewModel),
+                to: .home(HomeViewModel()),
                 type: .root)
             }
     }()
+
+    private lazy var alertAction: Action<String, Void> = {
+        Action<String, Void> { [unowned self] message in
+            let alertViewModel = AlertViewModel(
+                title: "Upsss...",
+                message: message,
+                mode: .ok)
+            return self.sceneCoordinator.transition(
+                to: .alert(alertViewModel),
+                type: .alert)
+        }
+    }()
+
     
     private func authenticate() -> Observable<Void> {        
         if #available(iOS 11.0, *) {
@@ -116,8 +128,12 @@ extension LoginViewModel: UnsplashSessionListener {
     func didReceiveRedirect(code: String) {
         loginStateProperty.onNext(.tokenIsFetched)
         buttonNameProperty.onNext("Please wait ...")
-        self.authManager.accessToken(with: code) { [unowned self] _,_ in 
-            self.navigateToHomeAction.execute(())
+        self.authManager.accessToken(with: code) { [unowned self] _, error in
+            if let error = error {
+                self.alertAction.execute(error.localizedDescription)
+            } else {
+                self.navigateToHomeAction.execute(())
+            }
         }
     }
 

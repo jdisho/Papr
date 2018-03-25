@@ -18,7 +18,7 @@ public enum NetworkError: Error {
     case emptyResult
     case decodingFailed(Error?)
     case noHttpResponse
-    case requestFailed(with: URLResponse)
+    case requestFailed(Data)
 }
 
 public class TinyNetworking {
@@ -46,7 +46,7 @@ public class TinyNetworking {
                 return
             }
             guard 200..<300 ~= response.statusCode else {
-                completion(.error(NetworkError.requestFailed(with: response)))
+                completion(.error(NetworkError.requestFailed(data)))
                 return
             }
             do {

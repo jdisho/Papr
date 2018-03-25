@@ -32,21 +32,25 @@ class UnsplashAuthManager {
                      Scope.writeCollections.string 
             ])
     }
-    
+
+    // MARK: Private
     private let clientID: String
     private let clientSecret: String
     private let redirectURL: URL
     private let scopes: [String]
-    
+
+    // MARK: Init
     init(clientID: String, clientSecret: String, scopes: [String] = [Scope.pub.string]) {
         self.clientID = clientID
         self.clientSecret = clientSecret
         self.redirectURL = URL(string: UnsplashSettings.redirectURL.string)!
         self.scopes = scopes
     }
-    
+
+    // MARK: Public
+
     public func receivedCodeRedirect(url: URL) {
-        guard let code = extractCode(from: url).code else { return }
+        guard let code = extractCode(from: url) else { return }
         delegate.didReceiveRedirect(code: code)
     }
     
@@ -62,7 +66,18 @@ class UnsplashAuthManager {
                     UserDefaults.standard.set(result.accessToken, forKey: self.clientID)
                     completion(result.accessToken, nil)
                 case let .error(error):
-                    completion(nil, error as Error)
+                    switch error {
+                    case let .requestFailed(data):
+                        let errorDesc = self.extractErrorDescription(from: data)
+                        let error = NSError(
+                            domain: "com.unsplash.error",
+                            code: 1,
+                            userInfo: [NSLocalizedDescriptionKey: errorDesc ?? "undefined error"]
+                        )
+                        completion(nil, error)
+                    default:
+                        completion(nil, error)
+                    }
                 }
             }
         }
@@ -117,27 +132,14 @@ class UnsplashAuthManager {
         return url!
     }
     
-    private func extractCode(from url: URL) -> (code: String?, error: NSError?) {
-        if let error = url.value(for: "error"), 
-            let desc = url.value(for: "error_description")?.replacingOccurrences(of: "+", with: " ").removingPercentEncoding {
-            return (code: nil, error: UnsplashAuthError.error(with: error, description: desc))
-        } else {
-            guard let code = url.value(for: "code") else {
-                return (code: nil, error: UnsplashAuthError.error(with: .invalidGrant, description: Code.invalidGrant.string))
-            }
-            return (code: code, error: nil)
-        }
+    private func extractCode(from url: URL) -> String? {
+        guard let code = url.value(for: "code") else { return nil }
+        return code
     }
     
-    private func extractError(from data: Data) -> NSError? {
-        let anyJSON = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-        let stringJSON = anyJSON as? [String:String]
-        guard let json = stringJSON, 
-            let error = json["error"], 
-            let errorDescription = json["error_description"] 
-            else { return nil }
-
-        return UnsplashAuthError.error(with: error, description: errorDescription)
+    private func extractErrorDescription(from data: Data) -> String? {
+        let error = try? JSONDecoder().decode(UnsplashAuthError.self, from: data)
+        guard let authError = error else { return nil }
+        return authError.errorDescription
     }
-    
 }
