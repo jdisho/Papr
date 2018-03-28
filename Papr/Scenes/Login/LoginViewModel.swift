@@ -85,8 +85,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     // MARK: Action
     lazy var closeAction: CocoaAction = {
         return CocoaAction { [unowned self] _ in
-//            self.authenticate()
-            self.close()
+            self.sceneCoordinator.pop(animated: true)
         }
     }()
     
@@ -116,12 +115,6 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
             })
             self.authSession?.start()
         }
-        return .empty()
-    }
-    
-    private func close() -> Observable<Void> {
-        
-        self.sceneCoordinator.pop(animated: true)
         return .empty()
     }
 }

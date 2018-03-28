@@ -36,7 +36,6 @@ class LoginViewController: UIViewController, BindableType {
         let outputs = viewModel.outputs
 
         loginButton.rx.action = inputs.loginAction
-        
         closeButton.rx.action = inputs.closeAction
 
         outputs.buttonName
