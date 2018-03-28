@@ -10,19 +10,19 @@ import Foundation
 
 public extension URLRequest {
 
-    init<Body, Response>(resource: Resource<Body, Response>) {
-        let url = resource.url
-        let parameters = resource.parameters
+    init(target: TargetType) {
+        let url = target.baseURL.appendingPathComponent(target.endpoint)
+        let parameters = target.parameters
 
         self.init(url: url.appendingQueryParameters(parameters))
 
-        httpMethod = resource.method.value
+        httpMethod = target.resource.method.value
 
-        for (key, value) in resource.headers {
+        for (key, value) in target.headers {
             addValue(value, forHTTPHeaderField: key)
         }
 
-        if case let .post(data) = resource.method {
+        if case let .post(data) = target.resource.method {
             httpBody = data
         }
     }

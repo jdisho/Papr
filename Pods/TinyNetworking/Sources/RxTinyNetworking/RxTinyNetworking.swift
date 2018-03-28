@@ -8,18 +8,17 @@
 
 import Foundation
 import RxSwift
-import TinyNetworking
 
 extension TinyNetworking: ReactiveCompatible {}
 
-public extension Reactive where Base: TinyNetworking {
+public extension Reactive where Base: TinyNetworkingType {
 
-    public func request<Body, Response>(
-        _ resource: Resource<Body, Response>,
+    func request(
+        target: Base.Target,
         session: URLSession = URLSession.shared
-        ) -> Single<Response> {
+        ) -> Single<Decodable> {
         return Single.create { single in
-            let task = self.base.performRequest(resource, session: session){ result in
+            let task = self.base.request(target: target, session: session) { result in
                 switch result {
                 case .error(let apiError):
                     single(.error(apiError))

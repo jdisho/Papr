@@ -8,60 +8,28 @@
 
 import Foundation
 
-public struct Resource<Body, Response> {
-    let url: URL
-    let method: HttpMethod<Data?>
-    let decode: (Data) throws -> Response?
-    let parameters: [String: String]
-    let headers: [String: String]
-
-    public func addHeader(
-        key: String,
-        value: String
-        ) -> Resource<Body, Response> {
-        var headers = self.headers
-        headers[key] = value
-        return Resource<Body, Response>(
-            url: url,
-            method: method,
-            decode: decode,
-            parameters: parameters,
-            headers: headers
-        )
-    }
-
+public protocol ResourceType {
+    var method: HttpMethod<Data?> { get }
+    var decode: (Data) throws -> Decodable? { get }
 }
 
-public extension Resource where Body: Encodable,
-                                Response: Decodable {
-    init(
-        url: URL,
-        method: HttpMethod<Body> = .get,
-        parameters: [String: String] = [:],
-        headers: [String: String] = [:]
-        ) {
-        self.url = url
+public struct Resource<Body, Response>: ResourceType {
+    public let method: HttpMethod<Data?>
+    public let decode: (Data) throws -> Decodable?
+}
+
+public extension Resource where Body: Encodable, Response: Decodable {
+    init(_ method: HttpMethod<Body> = .get) {
         self.method =  method.map { try? JSONEncoder().encode($0) }
         self.decode = { try JSONDecoder().decode(Response.self,from: $0) }
-        self.parameters = parameters
-        self.headers = headers
     }
 
 }
 
-public extension Resource where Body == Void,
-                                Response: Decodable {
-    init(
-        url: URL,
-        method: HttpMethod<Body> = .get,
-        parameters: [String: String] = [:],
-        headers: [String: String] = [:]
-        ) {
-        self.url = url
+public extension Resource where Body == Void, Response: Decodable {
+    init(_ method: HttpMethod<Body> = .get) {
         self.method =  method.map { _ in return nil }
         self.decode = { try JSONDecoder().decode(Response.self, from: $0) }
-        self.parameters = parameters
-        self.headers = headers
     }
 
 }

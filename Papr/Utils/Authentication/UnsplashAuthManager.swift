@@ -55,32 +55,32 @@ class UnsplashAuthManager {
     }
     
     public func accessToken(with code: String, completion: @escaping (String?, Error?) -> Void) {
-        let resource = Resource<String, UnsplashAccessToken>(
-            url: accessTokenURL(with: code),
-            method: .post(code))
-
-        Unsplash().request(resource) { response in
-            DispatchQueue.main.async { [unowned self] in
-                switch response {
-                case let .success(result):
-                    UserDefaults.standard.set(result.accessToken, forKey: self.clientID)
-                    completion(result.accessToken, nil)
-                case let .error(error):
-                    switch error {
-                    case let .requestFailed(data):
-                        let errorDesc = self.extractErrorDescription(from: data)
-                        let error = NSError(
-                            domain: "com.unsplash.error",
-                            code: 1,
-                            userInfo: [NSLocalizedDescriptionKey: errorDesc ?? "undefined error"]
-                        )
-                        completion(nil, error)
-                    default:
-                        completion(nil, error)
-                    }
-                }
-            }
-        }
+//        let resource = Resource<String, UnsplashAccessToken>(
+//            url: accessTokenURL(with: code),
+//            method: .post(code))
+//
+//        Unsplash().request(resource) { response in
+//            DispatchQueue.main.async { [unowned self] in
+//                switch response {
+//                case let .success(result):
+//                    UserDefaults.standard.set(result.accessToken, forKey: self.clientID)
+//                    completion(result.accessToken, nil)
+//                case let .error(error):
+//                    switch error {
+//                    case let .requestFailed(data):
+//                        let errorDesc = self.extractErrorDescription(from: data)
+//                        let error = NSError(
+//                            domain: "com.unsplash.error",
+//                            code: 1,
+//                            userInfo: [NSLocalizedDescriptionKey: errorDesc ?? "undefined error"]
+//                        )
+//                        completion(nil, error)
+//                    default:
+//                        completion(nil, error)
+//                    }
+//                }
+//            }
+//        }
     } 
     
     public var authURL: URL {
