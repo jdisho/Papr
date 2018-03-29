@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Papr" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicatorView" destination="csh-Q1-UGg" id="2Qj-j8-AN6"/>
+                <outlet property="closeButton" destination="D7O-BZ-cnU" id="x8Q-Wa-fiC"/>
                 <outlet property="loginButton" destination="ZyJ-aA-ow8" id="0HR-sL-ldU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

@@ -19,6 +19,7 @@ enum LoginState {
 
 protocol LoginViewModelInput {
     var loginAction: CocoaAction { get }
+    var closeAction: CocoaAction { get }
 }
 
 protocol LoginViewModelOuput {
@@ -80,6 +81,13 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
 
         self.authManager.delegate = self
     }
+    
+    // MARK: Action
+    lazy var closeAction: CocoaAction = {
+        return CocoaAction { [unowned self] _ in
+            self.sceneCoordinator.pop(animated: true)
+        }
+    }()
     
     private lazy var navigateToHomeAction: CocoaAction = {
         return CocoaAction { [unowned self] _ in
