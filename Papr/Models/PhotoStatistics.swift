@@ -29,3 +29,17 @@ struct PhotoStatistics: Decodable {
         case likes
     }
 }
+
+struct UserStatistics: Decodable {
+    let username: String?
+    let downloads: Stats?
+    let views: Stats?
+    let likes: Stats?
+
+    enum CodingKeys: String, CodingKey {
+        case username
+        case downloads
+        case views
+        case likes
+    }
+}

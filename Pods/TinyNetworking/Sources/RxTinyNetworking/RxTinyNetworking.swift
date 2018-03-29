@@ -8,11 +8,11 @@
 
 import Foundation
 import RxSwift
+import TinyNetworking
 
 extension TinyNetworking: ReactiveCompatible {}
 
 public extension Reactive where Base: TinyNetworkingType {
-
     func request(
         target: Base.Target,
         session: URLSession = URLSession.shared
@@ -20,9 +20,9 @@ public extension Reactive where Base: TinyNetworkingType {
         return Single.create { single in
             let task = self.base.request(target: target, session: session) { result in
                 switch result {
-                case .error(let apiError):
+                case let .error(apiError):
                     single(.error(apiError))
-                case .success(let response):
+                case let .success(response):
                     single(.success(response))
                 }
             }

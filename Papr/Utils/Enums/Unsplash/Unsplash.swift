@@ -40,7 +40,10 @@ enum Unsplash {
         username: String,
         page: Int?,
         perPage: Int?,
-        orderBy: OrderBy?)
+        orderBy: OrderBy?,
+        showStats: Bool?,
+        resolution: Resolution?,
+        quantity: Int?)
 
     /// List a user’s liked photos
     case userLikedPhotos(
@@ -74,11 +77,14 @@ enum Unsplash {
         orderBy: OrderBy?)
 
     /// Retrieve a single photo.
-    case photo(id: String)
+    case photo(
+        id: String,
+        width: Int?,
+        height: Int?,
+        rect: [Int]?)
 
     /// Get a random photo
     case randomPhoto(
-        collectionsID: [String]?,
         isFeatured: Bool?,
         username: String?,
         query: String?,
@@ -107,7 +113,6 @@ enum Unsplash {
         query: String,
         page: Int?,
         perPage: Int?,
-        collectionID: String?,
         orientation: Orientation?)
 
     /// Get collection results for a query
@@ -128,7 +133,7 @@ enum Unsplash {
         perPage: Int?)
 
     /// Get a list of featured collections
-    case featuresCollections(
+    case featuredCollections(
         page: Int?,
         perPage: Int?)
 
@@ -139,31 +144,31 @@ enum Unsplash {
 
     /// Retrieve a collection
     case collection(id: String)
-    
+
     /// Retrieve a curated collection
     case curatedCollection(id: String)
-    
+
     /// Retrieve a related collection
     case relatedCollections(id: String)
-    
+
     /// Retrieve a collection’s photos
     case collectionPhotos(
         id: String,
         page: Int?,
         perPage: Int?)
-    
+
     /// Retrieve a curated collection’s photos
     case curatedCollectionPhotos(
         id: String,
         page: Int?,
         perPage: Int?)
-    
+
     /// Create a new collection
     case createCollection(
         title: String,
         description: String?,
         isPrivate: Bool?)
-    
+
     /// Update an existing collection
     case updateCollection(
         id: String,
@@ -173,22 +178,20 @@ enum Unsplash {
 
     /// Delete an existing collection
     case deleteCollection(id: String)
-    
+
     /// Add a photo to a collection
     case addPhotoToCollection(
         collectionID: String,
         photoID: String)
-    
+
     /// Remove a photo from a collection
     case removePhotoFromCollection(
         collectionID: String,
         photoID: String)
-    
-    // MARK: - TODO: Support these cases
 
+    // MARK: - TODO: Support these cases
     // id(required)
     // case updatePhoto(String)
-
 }
 
 extension Unsplash: TargetType  {
@@ -201,18 +204,18 @@ extension Unsplash: TargetType  {
         switch self {
         case .getMe, .updateMe:
             return "/me"
-        case let .userProfile(username):
-            return "/users/\(username)"
+        case let .userProfile(param):
+            return "/users/\(param.username)"
         case let .userPortfolio(username):
             return "/users/\(username)/portfolio"
-        case let .userPhotos(username):
-            return "/users/\(username)/photos"
-        case let .userLikedPhotos(username):
-            return "/users/\(username)/likes"
-        case let .userCollections(username):
-            return "/users/\(username)/collections"
-        case let .userStatistics(username):
-            return "/users/\(username)/statistics"
+        case let .userPhotos(param):
+            return "/users/\(param.username)/photos"
+        case let .userLikedPhotos(param):
+            return "/users/\(param.username)/likes"
+        case let .userCollections(param):
+            return "/users/\(param.username)/collections"
+        case let .userStatistics(param):
+            return "/users/\(param.username)/statistics"
         case .photos:
            return "/photos"
         case .curatedPhotos:
@@ -221,8 +224,8 @@ extension Unsplash: TargetType  {
             return "/photos/\(id)"
         case .randomPhoto:
             return "/photos/random"
-        case let .photoStatistics(id, _, _):
-            return "/photos/\(id)/statistics"
+        case let .photoStatistics(param):
+            return "/photos/\(param.id)/statistics"
         case let .photoDownloadLink(id):
             return "/photos/\(id)/download"
         case let .likePhoto(id):
@@ -237,7 +240,7 @@ extension Unsplash: TargetType  {
             return "/search/users"
         case .collections, .createCollection:
             return "/collections"
-        case .featuresCollections:
+        case .featuredCollections:
             return "/collections/featured"
         case .curatedCollections:
             return "/collections/curated"
@@ -245,39 +248,303 @@ extension Unsplash: TargetType  {
             return "/collections/\(id)"
         case let .curatedCollection(id):
             return "/collections/curated\(id)"
-        case let .collectionPhotos(id, _, _):
-           return "/collections/\(id)/photos"
-        case let .curatedCollectionPhotos(id, _, _):
-            return "/collections/curated/\(id)/photos"
+        case let .collectionPhotos(params):
+           return "/collections/\(params.id)/photos"
+        case let .curatedCollectionPhotos(params):
+            return "/collections/curated/\(params.id)/photos"
         case let .relatedCollections(id):
             return "/collections/\(id)/related"
-        case let .updateCollection(id, _, _, _):
-            return "/collections\(id)"
+        case let .updateCollection(params):
+            return "/collections\(params.id)"
         case let .deleteCollection(id):
             return "/collections/\(id)"
-        case let .addPhotoToCollection(collectionID, _):
-            return "/collections/\(collectionID)/add"
-        case let .removePhotoFromCollection(collectionID, _):
-            return "/collections/\(collectionID)/remove"
+        case let .addPhotoToCollection(params):
+            return "/collections/\(params.collectionID)/add"
+        case let .removePhotoFromCollection(params):
+            return "/collections/\(params.collectionID)/remove"
         }
     }
 
-    var parameters: [String : String] {
-        return [:]
+    var parameters: [String: String] {
+        switch self {
+        case let .updateMe(value):
+            var params: [String: String] = [:]
+
+            if let username = value.username {
+                params["username"] = username
+            }
+            if let firstName = value.firstName {
+                params["first_name"] = firstName
+            }
+            if let lastName = value.lastName {
+                params["last_name"] = lastName
+            }
+            if let email = value.email {
+                params["email"] = email
+            }
+            if let url = value.url {
+                params["url"] = url
+            }
+            if let location = value.location {
+                params["location"] = location
+            }
+            if let bio = value.bio {
+                params["bio"] = bio
+            }
+            if let instagramUsername = value.instagramUsername {
+                params["instagram_username"] = instagramUsername
+            }
+
+            return params
+
+        case let .userProfile(value):
+            var params: [String: String] = [:]
+
+            if let width = value.width {
+                params["w"] = "\(width)"
+
+            }
+            if let height = value.width {
+                params["h"] = "\(height)"
+            }
+
+            return params
+
+        case let .userPhotos(value):
+            var params: [String: String] = [:]
+
+            if let pageNumber = value.page {
+                params["page"] = "\(pageNumber)"
+            }
+            if let photosPerPage = value.perPage {
+                params["per_page"] = "\(photosPerPage)"
+            }
+            if let orderBy = value.orderBy {
+                params["order_by"] = "\(orderBy)"
+            }
+            if let showStats = value.showStats {
+                 params["stats"] = showStats.description
+            }
+            if let resolution = value.resolution {
+                params["resolution"] = resolution.string
+            }
+            if let quantity = value.quantity {
+                 params["quantity"] = "\(quantity)"
+            }
+
+            return params
+
+        case let .userLikedPhotos(_, pageNumber, photosPerPage, orderBy),
+             let .photos(pageNumber, photosPerPage, orderBy),
+             let .curatedPhotos(pageNumber, photosPerPage, orderBy):
+
+            var params: [String: String] = [:]
+
+            if let pageNumber = pageNumber {
+                params["page"] = "\(pageNumber)"
+            }
+            if let photosPerPage = photosPerPage {
+                params["per_page"] = "\(photosPerPage)"
+            }
+            if let orderBy = orderBy {
+                params["order_by"] = "\(orderBy)"
+            }
+
+            return params
+
+        case let .userStatistics(_, resolution, quantity),
+             let .photoStatistics(_, resolution, quantity):
+
+            var params: [String: String] = [:]
+
+            if let resolution = resolution {
+                params["resolution"] = resolution.string
+            }
+
+            if let quantity = quantity {
+                params["quantity"] = "\(quantity)"
+            }
+
+            return params
+
+        case let .randomPhoto(value):
+            var params: [String: String] = [:]
+
+            if let isFeatured = value.isFeatured {
+                params["featured"] = isFeatured.description
+            }
+            if let username = value.username {
+                params["username"] = username
+            }
+            if let query = value.query {
+                params["query"] = query
+            }
+            if let width = value.width {
+                params["w"] = "\(width)"
+            }
+            if let height = value.height {
+                params["h"] = "\(height)"
+            }
+            if let orientation = value.orientation {
+                params["orientation"] = orientation.string
+            }
+            if let count = value.count {
+                params["count"] = "\(count)"
+            }
+
+            return params
+
+        case let .userCollections(_, pageNumber, photosPerPage),
+             let .collections(pageNumber, photosPerPage),
+             let .featuredCollections(pageNumber, photosPerPage),
+             let .curatedCollections(pageNumber, photosPerPage),
+             let .collectionPhotos(_, pageNumber, photosPerPage),
+             let .curatedCollectionPhotos(_, pageNumber, photosPerPage):
+
+            var params: [String: String] = [:]
+
+            if let pageNumber = pageNumber {
+                 params["page"] = "\(pageNumber)"
+            }
+            if let photosPerPage = photosPerPage {
+                params["per_page"] = "\(photosPerPage)"
+            }
+
+            return params
+
+        case let .searchCollections(value),
+             let .searchUsers(value):
+
+            var params: [String: String] = [:]
+            params["query"] = value.query
+
+            if let pageNumber = value.page {
+                params["page"] = "\(pageNumber)"
+            }
+
+            if let photosPerPage = value.perPage {
+                params["per_page"] = "\(photosPerPage)"
+            }
+
+            return params
+
+        case let .searchPhotos(value):
+            var params: [String: String] = [:]
+            params["query"] = value.query
+
+            if let pageNumber = value.page {
+                params["page"] = "\(pageNumber)"
+            }
+            if let photosPerPage = value.perPage {
+                params["per_page"] = "\(photosPerPage)"
+            }
+            if let orientation = value.orientation {
+                params["orientation"] = orientation.string
+            }
+
+            return params
+
+        case let .createCollection(value):
+
+            var params: [String: String] = [:]
+            params["title"] = value.title
+
+            if let description = value.description {
+                params["description"] = description
+            }
+            if let isPrivate = value.isPrivate {
+                params["description"] = isPrivate.description
+            }
+
+            return params
+
+        case let .updateCollection(value):
+            var params: [String: String] = [:]
+
+            if let title = value.title {
+                params["title"] = title
+            }
+            if let description = value.description {
+                params["description"] = description
+            }
+            if let isPrivate = value.isPrivate {
+                params["description"] = isPrivate.description
+            }
+
+            return params
+
+        case let .addPhotoToCollection(value),
+             let .removePhotoFromCollection(value):
+
+            var params: [String: String] = [:]
+            params["photo_id"] = value.photoID
+
+            return params
+
+        default:
+            return [:]
+        }
     }
 
     var resource: ResourceType {
         switch self {
+        case .getMe,
+             .userProfile:
+            return SimpleResource<User>()
+        case .updateMe:
+            return SimpleResource<User>(.put(()))
+        case .userPortfolio,
+             .photoDownloadLink:
+            return SimpleResource<Link>()
+        case .userPhotos,
+             .userLikedPhotos,
+             .photos,
+             .curatedPhotos,
+             .searchPhotos,
+             .collectionPhotos,
+             .curatedCollectionPhotos:
+            return SimpleResource<[Photo]>()
+        case .userCollections,
+             .searchCollections,
+             .collections,
+             .featuredCollections,
+             .curatedCollections,
+             .relatedCollections:
+            return SimpleResource<[Collection]>()
+        case .userStatistics:
+            return SimpleResource<[UserStatistics]>()
+        case .photo,
+             .randomPhoto:
+            return SimpleResource<Photo>()
+        case .photoStatistics:
+            return SimpleResource<PhotoStatistics>()
         case .likePhoto:
             return SimpleResource<LikeUnlike>(.post(()))
-        default:
-            return SimpleResource<[Photo]>()
+        case .unlikePhoto:
+            return SimpleResource<LikeUnlike>(.delete)
+        case .searchUsers:
+            return SimpleResource<[User]>()
+        case .collection,
+             .curatedCollection:
+            return SimpleResource<Collection>()
+        case .createCollection:
+            return SimpleResource<Collection>(.post(()))
+        case .updateCollection:
+            return SimpleResource<Collection>(.put(()))
+        case .deleteCollection:
+            return SimpleResource<Collection>(.delete)
+        case .addPhotoToCollection:
+            return SimpleResource<Photo>(.post(()))
+        case .removePhotoFromCollection:
+            return SimpleResource<Photo>(.delete)
         }
     }
 
     var headers: [String : String] {
-        let token = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
-
-        return ["Authorization": "Bearer \(token!)"]
+        let clientID = UnsplashSettings.clientID.string
+        guard let token = UserDefaults.standard.string(forKey: clientID) else {
+            return ["Authorization": "Client-ID \(UnsplashSettings.clientID.string)"]
+        }
+        return ["Authorization": "Bearer \(token)"]
     }
 }

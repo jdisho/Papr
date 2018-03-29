@@ -9,12 +9,12 @@
 import Foundation
 
 public extension URLRequest {
-
     init(target: TargetType) {
         let url = target.baseURL.appendingPathComponent(target.endpoint)
         let parameters = target.parameters
 
         self.init(url: url.appendingQueryParameters(parameters))
+        print(url.appendingQueryParameters(parameters))
 
         httpMethod = target.resource.method.value
 
@@ -28,3 +28,4 @@ public extension URLRequest {
     }
 
 }
+

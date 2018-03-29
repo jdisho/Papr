@@ -65,3 +65,4 @@ public class TinyNetworking<Target: TargetType>: TinyNetworkingType {
         return dataTask
     }
 }
+

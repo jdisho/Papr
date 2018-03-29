@@ -21,20 +21,14 @@ TinyNetworking is a simple network layer written in Swift.
 
 ### CocoaPods
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
-
-```bash
-$ gem install cocoapods
-```
-
 To integrate TinyNetworking into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-pod 'TinyNetworking', '~> 0.2'
+pod 'TinyNetworking', '~> 0.3'
     
 #or
     
-pod 'TinyNetworking/RxSwift', '~> 0.2' # for the RxSwift extentions
+pod 'TinyNetworking/RxSwift', '~> 0.3' # for the RxSwift extentions
 ```
 
 Then, run the following command:
@@ -54,52 +48,70 @@ If you prefer not to use any of the dependency managers, you can integrate TinyN
 
 ## 👨🏻‍💻 Usage
 
-### 📦 Resouce
-Resouce is the core part of TinyNetworking and is generic over the result type.
+### 📦 Resource
+Resource is the core part of TinyNetworking and is generic over the result type.
 
 Resource has five properties: 
 
 |    Properties     |   |
 ----------|-----------------
-URL of the endpoint | required ‼️
-Request method | by default `GET`, but required for `PUT`, `POST`, `DELETE` ⚠️
-Parameters | optional ❓
-Headers | optional ❓
-Decoding function | by default `JSONDecoding`, but required if you want to implement your decoding function. ⚠️
+URL | URL of the endpoint
+Request method | by default `GET`, but required for `PUT`, `POST`, `DELETE`
+Parameters | **only** [String: String]
+Headers | [String: String]
+Decoding function | by default `JSONDecoding`, but required if you want to implement your decoding function.
 
 #### Create Resource
 
 ```swift
-Resource<Body Type, Response Type>(url: URL(string: "..."))
+Resource<BodyType, ResponseType>(url: URL(string: "..."))
 ```
 *Resouce contains two generic types, the type of the response that is expected and the type of the object that is part of the request body*
 
 ##### 🔗 `GET` resource:
 
 ```swift
-Resource<Void,  Response Type>(url: URL(string: "..."))
+Resource<Void,  ResponseType>(url: URL(string: "..."))
 ```
 or simpler: 
 ```swift
-SimpleResource<Response Type>(url: URL(string: "..."))
+SimpleResource<ResponseType>(url: URL(string: "..."))
 ```
 
 ##### 🔗 `POST` resource:
 
 ```swift
-Resource<Body Type,  Response Type>(url: URL(string: "..."), .post(*body*))
+Resource<BodyType,  ResponseType>(url: URL(string: "..."), .post(*body*))
 ```
 
 ##### 🔗 `PUT` resource:
 
 ```swift
-Resource<Body Type,  Response Type>(url: URL(string: "..."), .put(*body*))
+Resource<BodyType,  ResponseType>(url: URL(string: "..."), .put(*body*))
 ```
 
 ##### 🔗 `DELETE` resource:
 
 ```swift
-Resource<Body Type,  Response Type>(url: URL(string: "..."), .delete(*body*))
+Resource<BodyType,  ResponseType>(url: URL(string: "..."), .delete(*body*))
+```
+
+#### 💄 Add parameters
+
+```swift
+var params: [String: String] = [:]
+params["page"] = "1"
+params["per_page"] = "10"
+params["order_by"] = "popular"
+
+SimpleResource<ResponseType>(url: URL(string: "..."), parameters: params)
+```
+
+#### 🎩 Add header
+
+```swift
+let resource = SimpleResource<ResponseType>(url: URL(string: "..."))
+resource.addHeader(key: "...", value: "...")
 ```
 
 ### ⚙️ Making and handling a request
@@ -108,11 +120,11 @@ The Resouce is useless until is part of a request:
 ```swift
 import TinyNetworking
 
-let apiProvider = APIProvider()
+let tinyNetworking = TinyNetworking()
 
-let resource = SimpleResource<Response Type>(url: URL(string: "..."))
+let resource = SimpleResource<ResponseType>(url: URL(string: "..."))
 
-apiProvider.request(resource) { results in
+tinyNetworking.request(resource) { results in
   switch results {
     case let .success(response):
       print(response)
@@ -127,7 +139,7 @@ Reactive extensions are cool. TinyNetworking provides reactive extensions for Rx
 
 ### RxSwift
 ```swift
-apiProvider.rx.request(resource).subscribe { event in
+tinyNetworking.rx.request(resource).subscribe { event in
    switch event {
    case let .success(response):
       print(response)

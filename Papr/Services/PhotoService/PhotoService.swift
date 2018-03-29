@@ -16,7 +16,6 @@ struct PhotoService: PhotoServiceType {
     
     init(unsplash: TinyNetworking<Unsplash> = TinyNetworking<Unsplash>()) {
         self.unsplash = unsplash
-        unsplash.rx.request(target: .collection(id: "asd"))
     }
 
     func like(photo: Photo) -> Observable<LikeUnlikePhotoResult> {
