@@ -13,6 +13,47 @@ protocol UnsplashSessionListener {
      func didReceiveRedirect(code: String)
 }
 
+enum UnsplashAuthorization: ResourceType {
+
+    case accessToken(withCode: String)
+
+    var baseURL: URL {
+        guard let url = URL(string: "https://unsplash.com") else {
+            fatalError("FAILED: https://unsplash.com")
+        }
+        return url
+    }
+
+    var endpoint: String {
+        return "/oauth/token"
+    }
+
+    var method: HTTPMethod {
+        return .post
+    }
+
+    var task: Task {
+        switch self {
+        case let .accessToken(withCode: code):
+            var params: [String: String] = [:]
+
+            params["grant_type"] = "authorization_code"
+            params["client_id"] = UnsplashSettings.clientID.string
+            params["client_secret"] = UnsplashSettings.clientSecret.string
+            params["redirect_uri"] = UnsplashSettings.redirectURL.string
+            params["code"] = code
+
+            return .requestWithParameters(params)
+        }
+    }
+
+    var headers: [String : String] {
+        return [:]
+    }
+
+
+}
+
 class UnsplashAuthManager {
 
     var delegate: UnsplashSessionListener!
@@ -38,6 +79,7 @@ class UnsplashAuthManager {
     private let clientSecret: String
     private let redirectURL: URL
     private let scopes: [String]
+    private let unplash: TinyNetworking<UnsplashAuthorization>
 
     // MARK: Init
     init(clientID: String, clientSecret: String, scopes: [String] = [Scope.pub.string]) {
@@ -45,6 +87,8 @@ class UnsplashAuthManager {
         self.clientSecret = clientSecret
         self.redirectURL = URL(string: UnsplashSettings.redirectURL.string)!
         self.scopes = scopes
+
+        unplash = TinyNetworking<UnsplashAuthorization>()
     }
 
     // MARK: Public
@@ -55,16 +99,16 @@ class UnsplashAuthManager {
     }
     
     public func accessToken(with code: String, completion: @escaping (String?, Error?) -> Void) {
-        let resource = Resource<String, UnsplashAccessToken>(
-            url: accessTokenURL(with: code),
-            method: .post(code))
-
-        Unsplash().request(resource) { response in
+        unplash.request(resource: .accessToken(withCode: code)) { response in
             DispatchQueue.main.async { [unowned self] in
                 switch response {
                 case let .success(result):
-                    UserDefaults.standard.set(result.accessToken, forKey: self.clientID)
-                    completion(result.accessToken, nil)
+                    if let accessTokenObject = try? result.map(to: UnsplashAccessToken.self) {
+                        let token = accessTokenObject.accessToken
+                        UserDefaults.standard.set(token, forKey: self.clientID)
+                        completion(token, nil)
+
+                    }
                 case let .error(error):
                     switch error {
                     case let .requestFailed(data):
@@ -81,7 +125,7 @@ class UnsplashAuthManager {
                 }
             }
         }
-    } 
+    }
     
     public var authURL: URL {
         var components = URLComponents()

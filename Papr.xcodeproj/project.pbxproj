@@ -10,9 +10,6 @@
 		1090D75275C09BAE87BE25BD /* Pods_Papr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D778F2E1EFA76CEB59A377CB /* Pods_Papr.framework */; };
 		63CC2B27C8EE9499B1D6C702 /* Pods_PaprTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3D8A956FB1C8A8D3B456A7 /* Pods_PaprTests.framework */; };
 		CBEDD29778BCF9269C6CDB95 /* Pods_PaprUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D59E6B0C5E02E5657E3FA6EA /* Pods_PaprUITests.framework */; };
-		DC05F4F62059892200A43548 /* Unsplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05F4F52059892200A43548 /* Unsplash.swift */; };
-		DC05F4F72059892200A43548 /* Unsplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05F4F52059892200A43548 /* Unsplash.swift */; };
-		DC05F4F82059892200A43548 /* Unsplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05F4F52059892200A43548 /* Unsplash.swift */; };
 		DC1F1504203195410025F70B /* UIScrollView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */; };
 		DC1F1505203195410025F70B /* UIScrollView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */; };
 		DC1F1506203195410025F70B /* UIScrollView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */; };
@@ -124,9 +121,9 @@
 		DCBB1B701FA8BAC2004E95F0 /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B6F1FA8BAC2004E95F0 /* BindableType.swift */; };
 		DCBB1B711FA8BAC2004E95F0 /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B6F1FA8BAC2004E95F0 /* BindableType.swift */; };
 		DCBB1B721FA8BAC2004E95F0 /* BindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B6F1FA8BAC2004E95F0 /* BindableType.swift */; };
-		DCBB1B741FA8D597004E95F0 /* UnsplashAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B731FA8D597004E95F0 /* UnsplashAPI.swift */; };
-		DCBB1B751FA8D597004E95F0 /* UnsplashAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B731FA8D597004E95F0 /* UnsplashAPI.swift */; };
-		DCBB1B761FA8D597004E95F0 /* UnsplashAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B731FA8D597004E95F0 /* UnsplashAPI.swift */; };
+		DCBB1B741FA8D597004E95F0 /* Unsplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B731FA8D597004E95F0 /* Unsplash.swift */; };
+		DCBB1B751FA8D597004E95F0 /* Unsplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B731FA8D597004E95F0 /* Unsplash.swift */; };
+		DCBB1B761FA8D597004E95F0 /* Unsplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B731FA8D597004E95F0 /* Unsplash.swift */; };
 		DCBE008A202A1A980065BEF3 /* Date+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE0089202A1A980065BEF3 /* Date+Extentions.swift */; };
 		DCBE008B202A1A980065BEF3 /* Date+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE0089202A1A980065BEF3 /* Date+Extentions.swift */; };
 		DCBE008C202A1A980065BEF3 /* Date+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE0089202A1A980065BEF3 /* Date+Extentions.swift */; };
@@ -211,7 +208,6 @@
 		CB61BD2759AC178641433994 /* Pods-PaprTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaprTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PaprTests/Pods-PaprTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D59E6B0C5E02E5657E3FA6EA /* Pods_PaprUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaprUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D778F2E1EFA76CEB59A377CB /* Pods_Papr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Papr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC05F4F52059892200A43548 /* Unsplash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unsplash.swift; sourceTree = "<group>"; };
 		DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extentions.swift"; sourceTree = "<group>"; };
 		DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeUnlike.swift; sourceTree = "<group>"; };
 		DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashSettings.swift; sourceTree = "<group>"; };
@@ -262,7 +258,7 @@
 		DCBB1B661FA8BA39004E95F0 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		DCBB1B6B1FA8BA8E004E95F0 /* NibIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibIdentifiable.swift; sourceTree = "<group>"; };
 		DCBB1B6F1FA8BAC2004E95F0 /* BindableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindableType.swift; sourceTree = "<group>"; };
-		DCBB1B731FA8D597004E95F0 /* UnsplashAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPI.swift; sourceTree = "<group>"; };
+		DCBB1B731FA8D597004E95F0 /* Unsplash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unsplash.swift; sourceTree = "<group>"; };
 		DCBE0089202A1A980065BEF3 /* Date+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extentions.swift"; sourceTree = "<group>"; };
 		DCBE008D202A1EB30065BEF3 /* String+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extentions.swift"; sourceTree = "<group>"; };
 		DCC8CA052002BEE300F6C540 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -327,7 +323,6 @@
 		DC0EDE95205B20B2004CD808 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
-				DC05F4F52059892200A43548 /* Unsplash.swift */,
 				DCA09CFF2015F68200E6EBB7 /* Constants.swift */,
 				DCBB1B211FA7B1BD004E95F0 /* AppDelegate.swift */,
 			);
@@ -337,7 +332,7 @@
 		DC4191352038E3EA0012A29C /* Unsplash */ = {
 			isa = PBXGroup;
 			children = (
-				DCBB1B731FA8D597004E95F0 /* UnsplashAPI.swift */,
+				DCBB1B731FA8D597004E95F0 /* Unsplash.swift */,
 				DC5AF7541FAD2EF900ADA2BB /* Scope.swift */,
 				DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */,
 				DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */,
@@ -962,7 +957,6 @@
 				DC5AF7271FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DCBB1B6C1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */,
-				DC05F4F62059892200A43548 /* Unsplash.swift in Sources */,
 				DCC8CA072002BEE300F6C540 /* HomeViewController.swift in Sources */,
 				DC922309203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DC99FB8E2003A7CC001195FD /* PhotoServiceType.swift in Sources */,
@@ -982,7 +976,7 @@
 				DCB433CF204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */,
 				DC5AF7501FAD027F00ADA2BB /* Collection.swift in Sources */,
 				DC5AF72F1FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
-				DCBB1B741FA8D597004E95F0 /* UnsplashAPI.swift in Sources */,
+				DCBB1B741FA8D597004E95F0 /* Unsplash.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1026,7 +1020,7 @@
 				DC5AF7511FAD027F00ADA2BB /* Collection.swift in Sources */,
 				DCCD04152059C19D00670B70 /* UserServiceType.swift in Sources */,
 				DCBAEE6420363CD600561CBA /* Orientation.swift in Sources */,
-				DCBB1B751FA8D597004E95F0 /* UnsplashAPI.swift in Sources */,
+				DCBB1B751FA8D597004E95F0 /* Unsplash.swift in Sources */,
 				DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC5AF7491FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DCBB1B611FA8BA22004E95F0 /* LoginViewController.swift in Sources */,
@@ -1034,7 +1028,6 @@
 				DCBB1B681FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
 				DC92230A203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DCBB1B711FA8BAC2004E95F0 /* BindableType.swift in Sources */,
-				DC05F4F72059892200A43548 /* Unsplash.swift in Sources */,
 				DC5AF7561FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DC1F1505203195410025F70B /* UIScrollView+Extentions.swift in Sources */,
 				DCEE1F151FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
@@ -1079,7 +1072,7 @@
 				DCEE1F0D1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCBE0090202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
 				DC5AF7521FAD027F00ADA2BB /* Collection.swift in Sources */,
-				DCBB1B761FA8D597004E95F0 /* UnsplashAPI.swift in Sources */,
+				DCBB1B761FA8D597004E95F0 /* Unsplash.swift in Sources */,
 				DC5AF7291FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC1F1506203195410025F70B /* UIScrollView+Extentions.swift in Sources */,
 				DC5AF74A1FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
@@ -1089,7 +1082,6 @@
 				DCBE008C202A1A980065BEF3 /* Date+Extentions.swift in Sources */,
 				DCBB1B691FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
 				DCBB1B721FA8BAC2004E95F0 /* BindableType.swift in Sources */,
-				DC05F4F82059892200A43548 /* Unsplash.swift in Sources */,
 				DC5AF7571FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DCEE1F161FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
 				DC2E76FA203B6DB90023A173 /* LikeUnlike.swift in Sources */,

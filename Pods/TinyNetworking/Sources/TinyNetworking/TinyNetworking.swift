@@ -8,12 +8,12 @@
 
 import Foundation
 
-public enum NetworkResult<T> {
+public enum TinyNetworkingResult<T> {
     case success(T)
-    case error(NetworkError)
+    case error(TinyNetworkingError)
 }
 
-public enum NetworkError: Error {
+public enum TinyNetworkingError: Error {
     case error(Error?)
     case emptyResult
     case decodingFailed(Error?)
@@ -21,56 +21,42 @@ public enum NetworkError: Error {
     case requestFailed(Data)
 }
 
-public class TinyNetworking {
+public class TinyNetworking<Resource: ResourceType>: TinyNetworkingType {
 
     public init() {}
 
     @discardableResult
-    func performRequest<Body, Response>(
-        _ resource: Resource<Body, Response>,
+    public func request(
+        resource: Resource,
         session: URLSession = URLSession.shared,
-        completion: @escaping (NetworkResult<Response>) -> Void
+        completion: @escaping (TinyNetworkingResult<Response>) -> Void
         ) -> URLSessionDataTask {
         let request = URLRequest(resource: resource)
+
         let dataTask = session.dataTask(with: request) { data, response, error in
             guard error == nil else {
-                completion(.error(NetworkError.error(error)))
+                completion(.error(.error(error)))
                 return
             }
             guard let data = data else {
-                completion(.error(NetworkError.emptyResult))
+                completion(.error(.emptyResult))
                 return
             }
             guard let response = response as? HTTPURLResponse else {
-                completion(.error(NetworkError.noHttpResponse))
+                completion(.error(.noHttpResponse))
                 return
             }
             guard 200..<300 ~= response.statusCode else {
-                completion(.error(NetworkError.requestFailed(data)))
+                completion(.error(.requestFailed(data)))
                 return
             }
-            do {
-                guard let result = try resource.decode(data) else {
-                    completion(.error(NetworkError.decodingFailed(nil)))
-                    return
-                }
 
-                completion(.success(result))
-            } catch {
-                completion(.error(NetworkError.decodingFailed(error)))
-            }
+            completion(.success(Response(urlRequest: request, data: data)))
         }
 
         dataTask.resume()
         return dataTask
     }
 
-    public func request<Body, Response>(
-        _ resource: Resource<Body, Response>,
-        session: URLSession = URLSession.shared,
-        completion: @escaping (NetworkResult<Response>) -> Void
-        ) {
-        performRequest(resource, session: session, completion: completion)
-    }
-
 }
+

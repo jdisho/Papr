@@ -51,5 +51,3 @@ struct User: Codable {
         case links
     }
 }
-
-

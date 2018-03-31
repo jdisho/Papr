@@ -9,7 +9,6 @@
 import Foundation
 
 public extension URL {
-    
     func appendingQueryParameters(_ parameters: [String: String]) -> URL {
         var urlComponents = URLComponents(url: self, resolvingAgainstBaseURL: true)!
         var queryItems = urlComponents.queryItems ?? []

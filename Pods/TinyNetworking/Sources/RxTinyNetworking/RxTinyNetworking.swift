@@ -8,23 +8,25 @@
 
 import Foundation
 import RxSwift
-import TinyNetworking
 
 extension TinyNetworking: ReactiveCompatible {}
 
-public extension Reactive where Base: TinyNetworking {
-
-    public func request<Body, Response>(
-        _ resource: Resource<Body, Response>,
+public extension Reactive where Base: TinyNetworkingType {
+    func request(
+        resource: Base.Resource,
         session: URLSession = URLSession.shared
         ) -> Single<Response> {
         return Single.create { single in
-            let task = self.base.performRequest(resource, session: session){ result in
+            let task = self.base.request(resource: resource, session: session) { result in
                 switch result {
-                case .error(let apiError):
+                case let .error(apiError):
                     single(.error(apiError))
-                case .success(let response):
-                    single(.success(response))
+                case let .success(response):
+                    single(.success(Response(
+                        urlRequest: response.urlRequest,
+                        data: response.data)
+                        )
+                    )
                 }
             }
 
@@ -33,5 +35,26 @@ public extension Reactive where Base: TinyNetworking {
             }
         }
     }
+}
 
+// MARK: Single
+
+extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Response {
+
+    public func map<D: Decodable>(to type: D.Type) -> Single<D> {
+        return flatMap { response -> Single<D> in
+            return .just(try response.map(to: type))
+        }
+    }
+
+}
+
+// MARK: Observable
+
+extension ObservableType where E == Response {
+    public func map<D: Decodable>(to type: D.Type) -> Observable<D> {
+        return flatMap { response -> Observable<D> in
+            return .just(try response.map(to: type))
+        }
+    }
 }

@@ -12,18 +12,16 @@ import TinyNetworking
 
 struct PhotoService: PhotoServiceType {
 
-    private var unsplash: Unsplash
+    private var unsplash: TinyNetworking<Unsplash>
     
-    init(unsplash: Unsplash = Unsplash()) {
+    init(unsplash: TinyNetworking<Unsplash> = TinyNetworking<Unsplash>()) {
         self.unsplash = unsplash
     }
 
     func like(photo: Photo) -> Observable<LikeUnlikePhotoResult> {
-        let resource = Resource<Photo, LikeUnlike>(
-            url: UnsplashAPI.likePhoto(id: photo.id ?? "").path,
-            method: .post(photo))
-
-        return unsplash.request(resource)
+        return unsplash.rx
+            .request(resource: .likePhoto(id: photo.id ?? ""))
+            .map(to: LikeUnlike.self)
             .asObservable()
             .map { $0.photo }
             .unwrap()
@@ -38,11 +36,9 @@ struct PhotoService: PhotoServiceType {
     }
     
     func unlike(photo: Photo) -> Observable<LikeUnlikePhotoResult> {
-        let resource = SimpleResource<LikeUnlike>(
-            url: UnsplashAPI.unlikePhoto(id: photo.id ?? "").path,
-            method: .delete)
-
-        return unsplash.request(resource)
+        return unsplash.rx
+            .request(resource: .unlikePhoto(id: photo.id ?? ""))
+            .map(to: LikeUnlike.self)
             .asObservable()
             .map { $0.photo }
             .unwrap()
@@ -50,15 +46,17 @@ struct PhotoService: PhotoServiceType {
             .catchError { error in
                 let accessToken = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
                 guard accessToken == nil else {
-                    return .just(.error(.error(withMessage: "Failed to unlike")))
+                    return .just(.error(.error(withMessage: "Failed to like")))
                 }
                 return .just(.error(.noAccessToken))
         }
     }
     
     func photo(withId id: String) -> Observable<Photo> {
-        let resource = SimpleResource<Photo>(url: UnsplashAPI.photo(id: id).path)
-        return unsplash.request(resource).asObservable()
+        return unsplash.rx
+            .request(resource: .photo(id: id, width: nil, height: nil, rect: nil))
+            .map(to: Photo.self)
+            .asObservable()
     }
     
     func photos(
@@ -67,36 +65,38 @@ struct PhotoService: PhotoServiceType {
         curated: Bool = false
         ) -> Observable<[Photo]> {
 
-        var endPoint = UnsplashAPI.photos(
-            page: pageNumber,
-            perPage: Constants.photosPerPage,
-            orderBy: orderBy
-            ).path
 
         if curated {
-            endPoint = UnsplashAPI.curatedPhotos(
+            return unsplash.rx
+                    .request(resource: .curatedPhotos(
+                        page: pageNumber,
+                        perPage: Constants.photosPerPage,
+                        orderBy: orderBy
+                        )
+                    )
+                    .map(to: [Photo].self)
+                    .asObservable()
+        }
+
+        return unsplash.rx
+            .request(resource: .photos(
                 page: pageNumber,
                 perPage: Constants.photosPerPage,
                 orderBy: orderBy
-                ).path
-        }
-
-        var params: [String: String] = [:]
-        params["page"] = "\(pageNumber)"
-        params["per_page"] = "\(Constants.photosPerPage)"
-        params["order_by"] = orderBy.string
-
-        let resource = SimpleResource<[Photo]>(url: endPoint, parameters: params)
-        return unsplash.request(resource).asObservable()
+                )
+            )
+            .map(to: [Photo].self)
+            .asObservable()
     }
 
     func statistics(of photo: Photo) -> Observable<PhotoStatistics> {
-        let endPoint = UnsplashAPI.photoStatistics(
-            id: photo.id ?? "",
-            resolution: .days,
-            quantity: 30
-            ).path
-        let resource = SimpleResource<PhotoStatistics>(url: endPoint)
-        return unsplash.request(resource).asObservable()
+         return unsplash.rx
+            .request(resource: .photoStatistics(
+                id: photo.id ?? "",
+                resolution: .days,
+                quantity: 30)
+            )
+            .map(to: PhotoStatistics.self)
+            .asObservable()
     }
 }

@@ -8,6 +8,14 @@
 
 import Foundation
 
+struct Link: Decodable {
+    let url: String?
+
+    enum CodingKeys: String, CodingKey {
+        case url
+    }
+}
+
 struct Links: Codable {
     let selfLink: String?
     let html: String?

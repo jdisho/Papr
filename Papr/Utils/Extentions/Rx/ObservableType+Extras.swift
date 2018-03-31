@@ -22,6 +22,12 @@ extension ObservableType {
     
 }
 
+extension Observable where E == Data {
+    func map<D: Decodable>( _ type: D.Type) -> Observable<D>  {
+        return self.map { try! JSONDecoder().decode(type, from: $0) }
+    }
+}
+
 extension Observable where E == Bool {
     
     var negation: Observable<Bool> {
