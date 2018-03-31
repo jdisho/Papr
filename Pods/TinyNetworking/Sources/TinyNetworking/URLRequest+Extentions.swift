@@ -9,22 +9,32 @@
 import Foundation
 
 public extension URLRequest {
-    init(target: TargetType) {
-        let url = target.baseURL.appendingPathComponent(target.endpoint)
-        let parameters = target.parameters
+    init(resource: ResourceType) {
+        var url = resource.baseURL.appendingPathComponent(resource.endpoint)
 
-        self.init(url: url.appendingQueryParameters(parameters))
-        print(url.appendingQueryParameters(parameters))
+        if case let .requestWithParameters(parameters) = resource.task {
+            url = url.appendingQueryParameters(parameters)
+        }
 
-        httpMethod = target.resource.method.value
+        self.init(url: url)
 
-        for (key, value) in target.headers {
+        httpMethod = resource.method.rawValue
+
+        for (key, value) in resource.headers {
             addValue(value, forHTTPHeaderField: key)
         }
 
-        if case let .post(data) = target.resource.method {
-            httpBody = data
+        if resource.method == .post || resource.method == .put {
+            if case let .requestWithEncodable(encodable) = resource.task {
+                let anyEncodable = AnyEncodable(encodable)
+                httpBody = encode(object: anyEncodable)
+            }
         }
+
+    }
+
+    internal func encode<E>(object: E) -> Data? where E : Encodable {
+        return try? JSONEncoder().encode(object)
     }
 
 }

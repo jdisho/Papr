@@ -16,6 +16,17 @@ struct PhotoService: PhotoServiceType {
     
     init(unsplash: TinyNetworking<Unsplash> = TinyNetworking<Unsplash>()) {
         self.unsplash = unsplash
+
+        unsplash.request(resource: .photos(page: 2, perPage: 20, orderBy: .latest)) { response in
+            switch response {
+            case let .success(result):
+                print(result.urlRequest)
+                let a = try? result.map(to: [Photo].self)
+                print(a)
+            case let .error(error):
+                print(error)
+            }
+        }
     }
 
     func like(photo: Photo) -> Observable<LikeUnlikePhotoResult> {

@@ -194,7 +194,7 @@ enum Unsplash {
     // case updatePhoto(String)
 }
 
-extension Unsplash: TargetType  {
+extension Unsplash: ResourceType  {
 
     var baseURL: URL {
         return URL(string: "https://api.unsplash.com")!
@@ -265,7 +265,48 @@ extension Unsplash: TargetType  {
         }
     }
 
-    var parameters: [String: String] {
+    var method: HTTPMethod {
+        switch self {
+        case .getMe,
+             .userProfile,
+             .userPortfolio,
+             .userPhotos,
+             .userLikedPhotos,
+             .userCollections,
+             .userStatistics,
+             .photos,
+             .curatedPhotos,
+             .photo,
+             .randomPhoto,
+             .photoStatistics,
+             .photoDownloadLink,
+             .searchPhotos,
+             .searchCollections,
+             .searchUsers,
+             .collections,
+             .featuredCollections,
+             .curatedCollections,
+             .collection,
+             .curatedCollection,
+             .collectionPhotos,
+             .curatedCollectionPhotos,
+             .relatedCollections:
+            return .get
+        case .likePhoto,
+             .createCollection,
+             .addPhotoToCollection:
+            return .post
+        case .updateCollection,
+             .updateMe:
+            return .put
+        case .unlikePhoto,
+             .removePhotoFromCollection,
+             .deleteCollection:
+            return .delete
+        }
+    }
+
+    var task: Task {
         switch self {
         case let .updateMe(value):
             var params: [String: String] = [:]
@@ -295,7 +336,7 @@ extension Unsplash: TargetType  {
                 params["instagram_username"] = instagramUsername
             }
 
-            return params
+            return .requestWithParameters(params)
 
         case let .userProfile(value):
             var params: [String: String] = [:]
@@ -308,7 +349,7 @@ extension Unsplash: TargetType  {
                 params["h"] = "\(height)"
             }
 
-            return params
+            return .requestWithParameters(params)
 
         case let .userPhotos(value):
             var params: [String: String] = [:]
@@ -332,7 +373,7 @@ extension Unsplash: TargetType  {
                  params["quantity"] = "\(quantity)"
             }
 
-            return params
+            return .requestWithParameters(params)
 
         case let .userLikedPhotos(_, pageNumber, photosPerPage, orderBy),
              let .photos(pageNumber, photosPerPage, orderBy),
@@ -350,7 +391,7 @@ extension Unsplash: TargetType  {
                 params["order_by"] = "\(orderBy)"
             }
 
-            return params
+            return .requestWithParameters(params)
 
         case let .userStatistics(_, resolution, quantity),
              let .photoStatistics(_, resolution, quantity):
@@ -365,7 +406,7 @@ extension Unsplash: TargetType  {
                 params["quantity"] = "\(quantity)"
             }
 
-            return params
+            return .requestWithParameters(params)
 
         case let .randomPhoto(value):
             var params: [String: String] = [:]
@@ -392,7 +433,7 @@ extension Unsplash: TargetType  {
                 params["count"] = "\(count)"
             }
 
-            return params
+            return .requestWithParameters(params)
 
         case let .userCollections(_, pageNumber, photosPerPage),
              let .collections(pageNumber, photosPerPage),
@@ -410,7 +451,7 @@ extension Unsplash: TargetType  {
                 params["per_page"] = "\(photosPerPage)"
             }
 
-            return params
+            return .requestWithParameters(params)
 
         case let .searchCollections(value),
              let .searchUsers(value):
@@ -426,7 +467,7 @@ extension Unsplash: TargetType  {
                 params["per_page"] = "\(photosPerPage)"
             }
 
-            return params
+            return .requestWithParameters(params)
 
         case let .searchPhotos(value):
             var params: [String: String] = [:]
@@ -442,7 +483,7 @@ extension Unsplash: TargetType  {
                 params["orientation"] = orientation.string
             }
 
-            return params
+            return .requestWithParameters(params)
 
         case let .createCollection(value):
 
@@ -456,7 +497,7 @@ extension Unsplash: TargetType  {
                 params["description"] = isPrivate.description
             }
 
-            return params
+            return .requestWithParameters(params)
 
         case let .updateCollection(value):
             var params: [String: String] = [:]
@@ -471,7 +512,7 @@ extension Unsplash: TargetType  {
                 params["description"] = isPrivate.description
             }
 
-            return params
+            return .requestWithParameters(params)
 
         case let .addPhotoToCollection(value),
              let .removePhotoFromCollection(value):
@@ -479,64 +520,10 @@ extension Unsplash: TargetType  {
             var params: [String: String] = [:]
             params["photo_id"] = value.photoID
 
-            return params
+            return .requestWithParameters(params)
 
         default:
-            return [:]
-        }
-    }
-
-    var resource: ResourceType {
-        switch self {
-        case .getMe,
-             .userProfile:
-            return SimpleResource<User>()
-        case .updateMe:
-            return SimpleResource<User>(.put(()))
-        case .userPortfolio,
-             .photoDownloadLink:
-            return SimpleResource<Link>()
-        case .userPhotos,
-             .userLikedPhotos,
-             .photos,
-             .curatedPhotos,
-             .searchPhotos,
-             .collectionPhotos,
-             .curatedCollectionPhotos:
-            return SimpleResource<[Photo]>()
-        case .userCollections,
-             .searchCollections,
-             .collections,
-             .featuredCollections,
-             .curatedCollections,
-             .relatedCollections:
-            return SimpleResource<[Collection]>()
-        case .userStatistics:
-            return SimpleResource<[UserStatistics]>()
-        case .photo,
-             .randomPhoto:
-            return SimpleResource<Photo>()
-        case .photoStatistics:
-            return SimpleResource<PhotoStatistics>()
-        case .likePhoto:
-            return SimpleResource<LikeUnlike>(.post(()))
-        case .unlikePhoto:
-            return SimpleResource<LikeUnlike>(.delete)
-        case .searchUsers:
-            return SimpleResource<[User]>()
-        case .collection,
-             .curatedCollection:
-            return SimpleResource<Collection>()
-        case .createCollection:
-            return SimpleResource<Collection>(.post(()))
-        case .updateCollection:
-            return SimpleResource<Collection>(.put(()))
-        case .deleteCollection:
-            return SimpleResource<Collection>(.delete)
-        case .addPhotoToCollection:
-            return SimpleResource<Photo>(.post(()))
-        case .removePhotoFromCollection:
-            return SimpleResource<Photo>(.delete)
+            return .requestWithParameters([:])
         }
     }
 

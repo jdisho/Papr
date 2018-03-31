@@ -21,17 +21,17 @@ public enum TinyNetworkingError: Error {
     case requestFailed(Data)
 }
 
-public class TinyNetworking<Target: TargetType>: TinyNetworkingType {
+public class TinyNetworking<Resource: ResourceType>: TinyNetworkingType {
 
     public init() {}
 
     @discardableResult
     public func request(
-        target: Target,
+        resource: Resource,
         session: URLSession = URLSession.shared,
-        completion: @escaping (TinyNetworkingResult<Decodable>) -> Void
+        completion: @escaping (TinyNetworkingResult<Response>) -> Void
         ) -> URLSessionDataTask {
-        let request = URLRequest(target: target)
+        let request = URLRequest(resource: resource)
 
         let dataTask = session.dataTask(with: request) { data, response, error in
             guard error == nil else {
@@ -50,19 +50,13 @@ public class TinyNetworking<Target: TargetType>: TinyNetworkingType {
                 completion(.error(.requestFailed(data)))
                 return
             }
-            do {
-                guard let result = try target.resource.decode(data) else {
-                    completion(.error(.decodingFailed(nil)))
-                    return
-                }
-                completion(.success(result))
-            } catch {
-                completion(.error(.decodingFailed(error)))
-            }
+
+            completion(.success(Response(urlRequest: request, data: data)))
         }
 
         dataTask.resume()
         return dataTask
     }
+
 }
 

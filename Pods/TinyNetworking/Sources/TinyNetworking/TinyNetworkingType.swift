@@ -9,11 +9,11 @@ import Foundation
 
 public protocol TinyNetworkingType {
 
-    associatedtype Target
+    associatedtype Resource
 
     func request(
-        target: Target,
+        resource: Resource,
         session: URLSession,
-        completion: @escaping (TinyNetworkingResult<Decodable>) -> Void
+        completion: @escaping (TinyNetworkingResult<Response>) -> Void
         ) -> URLSessionDataTask
 }
