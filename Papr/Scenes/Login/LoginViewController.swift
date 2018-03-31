@@ -48,7 +48,7 @@ class LoginViewController: UIViewController, BindableType {
         outputs.loginState
             .map { $0 == .idle }
             .bind(to: loginButton.rx.isEnabled)
-             .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
         
         outputs.loginState
             .map { $0 == .idle ? 1.0 : 0.7 }

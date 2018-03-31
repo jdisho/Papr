@@ -12,13 +12,16 @@ import RxSwift
 
 struct UserService: UserServiceType {
 
-//    private var unsplash: Unsplash
-//
-//    init(unsplash: Unsplash = Unsplash()) {
-//        self.unsplash = unsplash
-//    }
+    private var unsplash: TinyNetworking<Unsplash>
+
+    init(unsplash: TinyNetworking<Unsplash> = TinyNetworking<Unsplash>()) {
+        self.unsplash = unsplash
+    }
 
     func getMe() -> Observable<User> {
-       return .empty()
+        return unsplash.rx
+            .request(resource: .getMe)
+            .map(to: User.self)
+            .asObservable()
     }
 }

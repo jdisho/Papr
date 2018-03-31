@@ -197,7 +197,10 @@ enum Unsplash {
 extension Unsplash: ResourceType  {
 
     var baseURL: URL {
-        return URL(string: "https://api.unsplash.com")!
+        guard let url = URL(string: "https://api.unsplash.com") else {
+            fatalError("FAILED: https://api.unsplash.com")
+        }
+        return url
     }
     
     var endpoint: String {
