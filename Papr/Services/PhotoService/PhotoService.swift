@@ -54,7 +54,7 @@ struct PhotoService: PhotoServiceType {
     
     func photo(withId id: String) -> Observable<Photo> {
         return unsplash.rx
-            .request(resource: .photo(id: id, width: nil, height: nil, rect: nil))
+            .request(resource: .photo(id: id, width: nil, height: nil))
             .map(to: Photo.self)
             .asObservable()
     }

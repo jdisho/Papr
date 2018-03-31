@@ -80,8 +80,7 @@ enum Unsplash {
     case photo(
         id: String,
         width: Int?,
-        height: Int?,
-        rect: [Int]?)
+        height: Int?)
 
     /// Get a random photo
     case randomPhoto(
@@ -223,8 +222,8 @@ extension Unsplash: ResourceType  {
            return "/photos"
         case .curatedPhotos:
             return "/photos/curated"
-        case let .photo(id):
-            return "/photos/\(id)"
+        case let .photo(param):
+            return "/photos/\(param.id)"
         case .randomPhoto:
             return "/photos/random"
         case let .photoStatistics(param):
@@ -392,6 +391,18 @@ extension Unsplash: ResourceType  {
             }
             if let orderBy = orderBy {
                 params["order_by"] = "\(orderBy)"
+            }
+
+            return .requestWithParameters(params)
+
+        case let .photo(value):
+            var params: [String: String] = [:]
+
+            if let width = value.width {
+                params["width"] = "\(width)"
+            }
+            if let height = value.height {
+                params["height"] = "\(height)"
             }
 
             return .requestWithParameters(params)
