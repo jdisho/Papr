@@ -19,3 +19,4 @@ class AnyEncodable: Encodable {
         try encode(to: encoder)
     }
 }
+

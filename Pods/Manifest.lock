@@ -11,8 +11,8 @@ PODS:
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
   - RxSwift (4.1.2)
-  - TinyNetworking/Core (1.0.0)
-  - TinyNetworking/RxSwift (1.0.0):
+  - TinyNetworking/Core (1.1.0)
+  - TinyNetworking/RxSwift (1.1.0):
     - RxSwift (~> 4.0)
     - TinyNetworking/Core
 
@@ -31,7 +31,7 @@ SPEC CHECKSUMS:
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
   RxSwift: e49536837d9901277638493ea537394d4b55f570
-  TinyNetworking: b5f117424fcb6b174ddb3b263567273d460663f7
+  TinyNetworking: 0bcda2ae43f4745b748cd976d960e341dfc8be5c
 
 PODFILE CHECKSUM: 62b65e21ac0520480679f619931da68fc20fded1
 

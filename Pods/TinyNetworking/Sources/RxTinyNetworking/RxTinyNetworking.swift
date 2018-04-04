@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import TinyNetworking
 
 extension TinyNetworking: ReactiveCompatible {}
 
@@ -58,3 +59,4 @@ extension ObservableType where E == Response {
         }
     }
 }
+

@@ -18,3 +18,4 @@ public protocol TinyNetworkingType {
         completion: @escaping (TinyNetworkingResult<Response>) -> Void
         ) -> URLSessionDataTask
 }
+
