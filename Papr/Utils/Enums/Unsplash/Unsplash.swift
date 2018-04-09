@@ -312,6 +312,12 @@ extension Unsplash: TargetType  {
     }
 
     var task: Task {
+        let noBracketsAndLiteralBoolEncoding = URLEncoding(
+            destination: .queryString,
+            arrayEncoding: .noBrackets,
+            boolEncoding: .literal
+        )
+
         switch self {
         case let .updateMe(value):
 
@@ -375,12 +381,7 @@ extension Unsplash: TargetType  {
 
             return .requestParameters(
                 parameters: params,
-                encoding: URLEncoding(
-                    destination: .queryString,
-                    arrayEncoding: .noBrackets,
-                    boolEncoding: .literal
-                )
-            )
+                encoding: noBracketsAndLiteralBoolEncoding)
 
         case let .userStatistics(_, resolution, quantity),
              let .photoStatistics(_, resolution, quantity):
@@ -407,12 +408,7 @@ extension Unsplash: TargetType  {
 
             return .requestParameters(
                 parameters: params,
-                encoding: URLEncoding(
-                    destination: .queryString,
-                    arrayEncoding: .noBrackets,
-                    boolEncoding: .literal
-                )
-            )
+                encoding: noBracketsAndLiteralBoolEncoding)
 
         case let .userCollections(_, pageNumber, photosPerPage),
              let .collections(pageNumber, photosPerPage),
@@ -452,12 +448,7 @@ extension Unsplash: TargetType  {
 
             return .requestParameters(
                 parameters: params,
-                encoding: URLEncoding(
-                    destination: .queryString,
-                    arrayEncoding: .noBrackets,
-                    boolEncoding: .literal
-                )
-            )
+                encoding: noBracketsAndLiteralBoolEncoding)
 
         case let .createCollection(value):
 
