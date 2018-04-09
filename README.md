@@ -32,9 +32,8 @@ To add the Client ID and Client Secret to the App, follow these steps:
 1. Pushing [`RxSwift`](https://github.com/ReactiveX/RxSwift) to its limits. 🔥
 1. MVVM + Coordinator
 1. Using Codable
-1. Using [TinyNetworking](https://github.com/jdisho/TinyNetworking) (lightweight network library)
+1. Using [`Moya`](https://github.com/Moya/Moya)
 1. Exploring Unsplash and its [API](https://unsplash.com/developers)
-1. Using as little dependecies as possible.
 1. Fun thing! 🤙
 
 ## ❤️ Contributing
