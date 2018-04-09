@@ -16,7 +16,6 @@ public extension URLRequest {
             url = url.appendingQueryParameters(parameters)
         }
 
-        print(url)
         self.init(url: url)
 
         httpMethod = resource.method.rawValue
