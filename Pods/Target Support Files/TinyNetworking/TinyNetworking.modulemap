@@ -1,6 +1,0 @@
-framework module TinyNetworking {
-  umbrella header "TinyNetworking-umbrella.h"
-
-  export *
-  module * { export * }
-}

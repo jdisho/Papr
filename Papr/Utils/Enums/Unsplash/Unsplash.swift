@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import TinyNetworking
+import Moya
 
 enum Unsplash {
 
@@ -80,10 +80,12 @@ enum Unsplash {
     case photo(
         id: String,
         width: Int?,
-        height: Int?)
+        height: Int?,
+        rect: [Int]?)
 
     /// Get a random photo
     case randomPhoto(
+        collections: [String]?,
         isFeatured: Bool?,
         username: String?,
         query: String?,
@@ -112,6 +114,7 @@ enum Unsplash {
         query: String,
         page: Int?,
         perPage: Int?,
+        collections: [String]?,
         orientation: Orientation?)
 
     /// Get collection results for a query
@@ -193,7 +196,7 @@ enum Unsplash {
     // case updatePhoto(String)
 }
 
-extension Unsplash: ResourceType  {
+extension Unsplash: TargetType  {
 
     var baseURL: URL {
         guard let url = URL(string: "https://api.unsplash.com") else {
@@ -202,7 +205,7 @@ extension Unsplash: ResourceType  {
         return url
     }
     
-    var endpoint: String {
+    var path: String {
         switch self {
         case .getMe, .updateMe:
             return "/me"
@@ -267,7 +270,7 @@ extension Unsplash: ResourceType  {
         }
     }
 
-    var method: HTTPMethod {
+    var method: Moya.Method {
         switch self {
         case .getMe,
              .userProfile,
@@ -311,143 +314,106 @@ extension Unsplash: ResourceType  {
     var task: Task {
         switch self {
         case let .updateMe(value):
-            var params: [String: String] = [:]
 
-            if let username = value.username {
-                params["username"] = username
-            }
-            if let firstName = value.firstName {
-                params["first_name"] = firstName
-            }
-            if let lastName = value.lastName {
-                params["last_name"] = lastName
-            }
-            if let email = value.email {
-                params["email"] = email
-            }
-            if let url = value.url {
-                params["url"] = url
-            }
-            if let location = value.location {
-                params["location"] = location
-            }
-            if let bio = value.bio {
-                params["bio"] = bio
-            }
-            if let instagramUsername = value.instagramUsername {
-                params["instagram_username"] = instagramUsername
-            }
+            var params: [String: Any] = [:]
+            params["username"] = value.username
+            params["first_name"] = value.firstName
+            params["last_name"] = value.lastName
+            params["email"] = value.email
+            params["url"] = value.url
+            params["location"] = value.location
+            params["bio"] = value.bio
+            params["instagram_username"] = value.instagramUsername
 
-            return .requestWithParameters(params)
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding.default)
 
         case let .userProfile(value):
-            var params: [String: String] = [:]
 
-            if let width = value.width {
-                params["w"] = "\(width)"
+            var params: [String: Any] = [:]
+            params["w"] = value.width
+            params["h"] = value.height
 
-            }
-            if let height = value.width {
-                params["h"] = "\(height)"
-            }
-
-            return .requestWithParameters(params)
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding.default)
 
         case let .userPhotos(value):
-            var params: [String: String] = [:]
 
-            if let pageNumber = value.page {
-                params["page"] = "\(pageNumber)"
-            }
-            if let photosPerPage = value.perPage {
-                params["per_page"] = "\(photosPerPage)"
-            }
-            if let orderBy = value.orderBy {
-                params["order_by"] = "\(orderBy)"
-            }
-            if let showStats = value.showStats {
-                 params["stats"] = showStats.description
-            }
-            if let resolution = value.resolution {
-                params["resolution"] = resolution.string
-            }
-            if let quantity = value.quantity {
-                 params["quantity"] = "\(quantity)"
-            }
+            var params: [String: Any] = [:]
+            params["page"] = value.page
+            params["per_page"] = value.perPage
+            params["order_by"] = value.orderBy
+            params["stats"] = value.showStats
+            params["resolution"] = value.resolution?.string
+            params["quantity"] = value.quantity
 
-            return .requestWithParameters(params)
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding.default)
 
         case let .userLikedPhotos(_, pageNumber, photosPerPage, orderBy),
              let .photos(pageNumber, photosPerPage, orderBy),
              let .curatedPhotos(pageNumber, photosPerPage, orderBy):
 
-            var params: [String: String] = [:]
+            var params: [String: Any] = [:]
+            params["page"] = pageNumber
+            params["per_page"] = photosPerPage
+            params["order_by"] = orderBy
 
-            if let pageNumber = pageNumber {
-                params["page"] = "\(pageNumber)"
-            }
-            if let photosPerPage = photosPerPage {
-                params["per_page"] = "\(photosPerPage)"
-            }
-            if let orderBy = orderBy {
-                params["order_by"] = "\(orderBy)"
-            }
-
-            return .requestWithParameters(params)
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding.default)
 
         case let .photo(value):
-            var params: [String: String] = [:]
 
-            if let width = value.width {
-                params["width"] = "\(width)"
-            }
-            if let height = value.height {
-                params["height"] = "\(height)"
-            }
+            var params: [String: Any] = [:]
+            params["w"] = value.width
+            params["h"] = value.height
+            params["rect"] = value.rect
 
-            return .requestWithParameters(params)
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding(
+                    destination: .queryString,
+                    arrayEncoding: .brackets,
+                    boolEncoding: .literal
+                )
+            )
+
 
         case let .userStatistics(_, resolution, quantity),
              let .photoStatistics(_, resolution, quantity):
 
-            var params: [String: String] = [:]
+            var params: [String: Any] = [:]
+            params["resolution"] = resolution?.string
+            params["quantity"] = quantity
 
-            if let resolution = resolution {
-                params["resolution"] = resolution.string
-            }
-
-            if let quantity = quantity {
-                params["quantity"] = "\(quantity)"
-            }
-
-            return .requestWithParameters(params)
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding.default)
 
         case let .randomPhoto(value):
-            var params: [String: String] = [:]
 
-            if let isFeatured = value.isFeatured {
-                params["featured"] = isFeatured.description
-            }
-            if let username = value.username {
-                params["username"] = username
-            }
-            if let query = value.query {
-                params["query"] = query
-            }
-            if let width = value.width {
-                params["w"] = "\(width)"
-            }
-            if let height = value.height {
-                params["h"] = "\(height)"
-            }
-            if let orientation = value.orientation {
-                params["orientation"] = orientation.string
-            }
-            if let count = value.count {
-                params["count"] = "\(count)"
-            }
+            var params: [String: Any] = [:]
+            params["collections"] = value.collections
+            params["featured"] = value.isFeatured
+            params["username"] = value.username
+            params["query"] = value.query
+            params["w"] = value.width
+            params["h"] = value.height
+            params["orientation"] = value.orientation?.string
+            params["count"] = value.count
 
-            return .requestWithParameters(params)
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding(
+                    destination: .queryString,
+                    arrayEncoding: .brackets,
+                    boolEncoding: .literal
+                )
+            )
 
         case let .userCollections(_, pageNumber, photosPerPage),
              let .collections(pageNumber, photosPerPage),
@@ -456,92 +422,86 @@ extension Unsplash: ResourceType  {
              let .collectionPhotos(_, pageNumber, photosPerPage),
              let .curatedCollectionPhotos(_, pageNumber, photosPerPage):
 
-            var params: [String: String] = [:]
+            var params: [String: Any] = [:]
+            params["page"] = pageNumber
+            params["per_page"] = photosPerPage
 
-            if let pageNumber = pageNumber {
-                 params["page"] = "\(pageNumber)"
-            }
-            if let photosPerPage = photosPerPage {
-                params["per_page"] = "\(photosPerPage)"
-            }
-
-            return .requestWithParameters(params)
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding.default)
 
         case let .searchCollections(value),
              let .searchUsers(value):
 
-            var params: [String: String] = [:]
+            var params: [String: Any] = [:]
             params["query"] = value.query
+            params["page"] = value.page
+            params["per_page"] = value.perPage
 
-            if let pageNumber = value.page {
-                params["page"] = "\(pageNumber)"
-            }
-
-            if let photosPerPage = value.perPage {
-                params["per_page"] = "\(photosPerPage)"
-            }
-
-            return .requestWithParameters(params)
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding.default)
 
         case let .searchPhotos(value):
-            var params: [String: String] = [:]
+
+            var params: [String: Any] = [:]
             params["query"] = value.query
+            params["page"] = value.page
+            params["per_page"] = value.perPage
+            params["collections"] = value.collections
+            params["orientation"] = value.orientation?.string
 
-            if let pageNumber = value.page {
-                params["page"] = "\(pageNumber)"
-            }
-            if let photosPerPage = value.perPage {
-                params["per_page"] = "\(photosPerPage)"
-            }
-            if let orientation = value.orientation {
-                params["orientation"] = orientation.string
-            }
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding(
+                    destination: .queryString,
+                    arrayEncoding: .brackets,
+                    boolEncoding: .literal
+                )
+            )
 
-            return .requestWithParameters(params)
+        case let .createCollection(value):    
 
-        case let .createCollection(value):
-
-            var params: [String: String] = [:]
+            var params: [String: Any] = [:]
             params["title"] = value.title
+            params["description"] = value.description
+            params["private"] = value.isPrivate
 
-            if let description = value.description {
-                params["description"] = description
-            }
-            if let isPrivate = value.isPrivate {
-                params["description"] = isPrivate.description
-            }
-
-            return .requestWithParameters(params)
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding.default)
 
         case let .updateCollection(value):
-            var params: [String: String] = [:]
 
-            if let title = value.title {
-                params["title"] = title
-            }
-            if let description = value.description {
-                params["description"] = description
-            }
-            if let isPrivate = value.isPrivate {
-                params["description"] = isPrivate.description
-            }
+            var params: [String: Any] = [:]
+            params["title"] = value.title
+            params["description"] = value.description
+            params["private"] = value.isPrivate
 
-            return .requestWithParameters(params)
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding.default)
 
         case let .addPhotoToCollection(value),
              let .removePhotoFromCollection(value):
 
-            var params: [String: String] = [:]
+            var params: [String: Any] = [:]
             params["photo_id"] = value.photoID
 
-            return .requestWithParameters(params)
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding.default)
 
         default:
-            return .requestWithParameters([:])
+            return .requestPlain
         }
     }
 
-    var headers: [String : String] {
+    var sampleData: Data {
+        return Data()
+    }
+
+    var headers: [String : String]? {
         let clientID = UnsplashSettings.clientID.string
         guard let token = UserDefaults.standard.string(forKey: clientID) else {
             return ["Authorization": "Client-ID \(UnsplashSettings.clientID.string)"]

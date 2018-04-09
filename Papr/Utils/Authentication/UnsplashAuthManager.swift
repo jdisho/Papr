@@ -7,13 +7,13 @@
 //
 
 import Foundation
-import TinyNetworking
+import Moya
 
 protocol UnsplashSessionListener {
      func didReceiveRedirect(code: String)
 }
 
-enum UnsplashAuthorization: ResourceType {
+enum UnsplashAuthorization: TargetType {
 
     case accessToken(withCode: String)
 
@@ -24,18 +24,18 @@ enum UnsplashAuthorization: ResourceType {
         return url
     }
 
-    var endpoint: String {
+    var path: String {
         return "/oauth/token"
     }
 
-    var method: HTTPMethod {
+    var method: Moya.Method {
         return .post
     }
 
     var task: Task {
         switch self {
         case let .accessToken(withCode: code):
-            var params: [String: String] = [:]
+            var params: [String: Any] = [:]
 
             params["grant_type"] = "authorization_code"
             params["client_id"] = UnsplashSettings.clientID.string
@@ -43,11 +43,15 @@ enum UnsplashAuthorization: ResourceType {
             params["redirect_uri"] = UnsplashSettings.redirectURL.string
             params["code"] = code
 
-            return .requestWithParameters(params)
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
         }
     }
 
-    var headers: [String : String] {
+    var sampleData: Data {
+        return Data()
+    }
+
+    var headers: [String : String]? {
         return [:]
     }
 
@@ -79,7 +83,7 @@ class UnsplashAuthManager {
     private let clientSecret: String
     private let redirectURL: URL
     private let scopes: [String]
-    private let unplash: TinyNetworking<UnsplashAuthorization>
+    private let unplash: MoyaProvider<UnsplashAuthorization>
 
     // MARK: Init
     init(clientID: String, clientSecret: String, scopes: [String] = [Scope.pub.string]) {
@@ -88,7 +92,7 @@ class UnsplashAuthManager {
         self.redirectURL = URL(string: UnsplashSettings.redirectURL.string)!
         self.scopes = scopes
 
-        unplash = TinyNetworking<UnsplashAuthorization>()
+        unplash = MoyaProvider<UnsplashAuthorization>()
     }
 
     // MARK: Public
@@ -99,20 +103,20 @@ class UnsplashAuthManager {
     }
     
     public func accessToken(with code: String, completion: @escaping (String?, Error?) -> Void) {
-        unplash.request(resource: .accessToken(withCode: code)) { response in
+        unplash.request(.accessToken(withCode: code)) { response in
             DispatchQueue.main.async { [unowned self] in
                 switch response {
                 case let .success(result):
-                    if let accessTokenObject = try? result.map(to: UnsplashAccessToken.self) {
+                    if let accessTokenObject = try? result.map(UnsplashAccessToken.self) {
                         let token = accessTokenObject.accessToken
                         UserDefaults.standard.set(token, forKey: self.clientID)
                         completion(token, nil)
 
                     }
-                case let .error(error):
-                    switch error {
-                    case let .requestFailed(data):
-                        let errorDesc = self.extractErrorDescription(from: data)
+                case .failure(let error):
+                    switch error.response {
+                    case let .some(response):
+                        let errorDesc = self.extractErrorDescription(from: response.data)
                         let error = NSError(
                             domain: "com.unsplash.error",
                             code: 1,

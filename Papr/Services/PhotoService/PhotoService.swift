@@ -8,20 +8,20 @@
 
 import Foundation
 import RxSwift
-import TinyNetworking
+import Moya
 
 struct PhotoService: PhotoServiceType {
 
-    private var unsplash: TinyNetworking<Unsplash>
+    private var unsplash: MoyaProvider<Unsplash>
     
-    init(unsplash: TinyNetworking<Unsplash> = TinyNetworking<Unsplash>()) {
+    init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>(plugins: [NetworkLoggerPlugin(verbose: true)])) {
         self.unsplash = unsplash
     }
 
     func like(photo: Photo) -> Observable<LikeUnlikePhotoResult> {
         return unsplash.rx
-            .request(resource: .likePhoto(id: photo.id ?? ""))
-            .map(to: LikeUnlike.self)
+            .request(.likePhoto(id: photo.id ?? ""))
+            .map(LikeUnlike.self)
             .asObservable()
             .map { $0.photo }
             .unwrap()
@@ -37,8 +37,8 @@ struct PhotoService: PhotoServiceType {
     
     func unlike(photo: Photo) -> Observable<LikeUnlikePhotoResult> {
         return unsplash.rx
-            .request(resource: .unlikePhoto(id: photo.id ?? ""))
-            .map(to: LikeUnlike.self)
+            .request(.unlikePhoto(id: photo.id ?? ""))
+            .map(LikeUnlike.self)
             .asObservable()
             .map { $0.photo }
             .unwrap()
@@ -54,8 +54,8 @@ struct PhotoService: PhotoServiceType {
     
     func photo(withId id: String) -> Observable<Photo> {
         return unsplash.rx
-            .request(resource: .photo(id: id, width: nil, height: nil))
-            .map(to: Photo.self)
+            .request(.photo(id: id, width: nil, height: nil, rect: nil))
+            .map(Photo.self)
             .asObservable()
     }
     
@@ -68,35 +68,35 @@ struct PhotoService: PhotoServiceType {
 
         if curated {
             return unsplash.rx
-                    .request(resource: .curatedPhotos(
+                    .request(.curatedPhotos(
                         page: pageNumber,
                         perPage: Constants.photosPerPage,
                         orderBy: orderBy
                         )
                     )
-                    .map(to: [Photo].self)
+                    .map([Photo].self)
                     .asObservable()
         }
 
         return unsplash.rx
-            .request(resource: .photos(
+            .request(.photos(
                 page: pageNumber,
                 perPage: Constants.photosPerPage,
                 orderBy: orderBy
                 )
             )
-            .map(to: [Photo].self)
+            .map([Photo].self)
             .asObservable()
     }
 
     func statistics(of photo: Photo) -> Observable<PhotoStatistics> {
          return unsplash.rx
-            .request(resource: .photoStatistics(
+            .request(.photoStatistics(
                 id: photo.id ?? "",
                 resolution: .days,
                 quantity: 30)
             )
-            .map(to: PhotoStatistics.self)
+            .map(PhotoStatistics.self)
             .asObservable()
     }
 }

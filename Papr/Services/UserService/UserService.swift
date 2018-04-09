@@ -7,21 +7,21 @@
 //
 
 import Foundation
-import TinyNetworking
+import Moya
 import RxSwift
 
 struct UserService: UserServiceType {
 
-    private var unsplash: TinyNetworking<Unsplash>
+    private var unsplash: MoyaProvider<Unsplash>
 
-    init(unsplash: TinyNetworking<Unsplash> = TinyNetworking<Unsplash>()) {
+    init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>()) {
         self.unsplash = unsplash
     }
 
     func getMe() -> Observable<User> {
         return unsplash.rx
-            .request(resource: .getMe)
-            .map(to: User.self)
+            .request(.getMe)
+            .map(User.self)
             .asObservable()
     }
 }
