@@ -377,11 +377,10 @@ extension Unsplash: TargetType  {
                 parameters: params,
                 encoding: URLEncoding(
                     destination: .queryString,
-                    arrayEncoding: .brackets,
+                    arrayEncoding: .noBrackets,
                     boolEncoding: .literal
                 )
             )
-
 
         case let .userStatistics(_, resolution, quantity),
              let .photoStatistics(_, resolution, quantity):
@@ -410,7 +409,7 @@ extension Unsplash: TargetType  {
                 parameters: params,
                 encoding: URLEncoding(
                     destination: .queryString,
-                    arrayEncoding: .brackets,
+                    arrayEncoding: .noBrackets,
                     boolEncoding: .literal
                 )
             )
@@ -455,12 +454,12 @@ extension Unsplash: TargetType  {
                 parameters: params,
                 encoding: URLEncoding(
                     destination: .queryString,
-                    arrayEncoding: .brackets,
+                    arrayEncoding: .noBrackets,
                     boolEncoding: .literal
                 )
             )
 
-        case let .createCollection(value):    
+        case let .createCollection(value):
 
             var params: [String: Any] = [:]
             params["title"] = value.title
@@ -507,5 +506,9 @@ extension Unsplash: TargetType  {
             return ["Authorization": "Client-ID \(UnsplashSettings.clientID.string)"]
         }
         return ["Authorization": "Bearer \(token)"]
+    }
+
+    var validationType: ValidationType {
+        return .successAndRedirectCodes
     }
 }
