@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import Nuke
+import Photos
 
 class HomeViewCell: UITableViewCell, BindableType {
 
@@ -26,10 +27,12 @@ class HomeViewCell: UITableViewCell, BindableType {
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var likesNumberLabel: UILabel!
     @IBOutlet var collectPhotoButton: UIButton!
+    @IBOutlet var downloadPhotoButton: UIButton!
     
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
     private var disposeBag = DisposeBag()
+    private let photoDownloadImageView = UIImageView()
 
     // MARK: Overrides
 
@@ -109,5 +112,60 @@ class HomeViewCell: UITableViewCell, BindableType {
             .map { $0 ? #imageLiteral(resourceName: "favorite-black") : #imageLiteral(resourceName: "favorite-border-black") }
             .bind(to: likeButton.rx.image())
             .disposed(by: disposeBag)
+
+        outputs.photoStream
+            .subscribe { result in
+                guard let photo = result.element else { return }
+                self.downloadPhotoButton.rx
+                    .bind(to: inputs.downloadPhotoAction, input: photo)
+            }
+            .disposed(by: disposeBag)
+
+        outputs.photoDownloadLink.unwrap()
+            .subscribe { result in
+                guard let linkString = result.element,
+                    let url = URL(string: linkString) else { return }
+                HomeViewCell.nukeManager
+                    .loadImage(with: url, into: self.photoDownloadImageView) { [unowned self] response, _ in
+                        guard let image = response.value else { return }
+                        self.writeImageToPhotosAlbum(image)
+                    }
+            }
+            .disposed(by: disposeBag)
+    }
+
+    // MARK: Helpers
+    private func writeImageToPhotosAlbum(_ image: UIImage) {
+        PHPhotoLibrary.requestAuthorization { [unowned self] authorizationStatus in
+            if authorizationStatus == .authorized {
+                self.creationRequestForAsset(from: image)
+            } else if authorizationStatus == .denied {
+                self.viewModel.alertAction.execute((
+                    title: "Upsss...",
+                    message: "Photo can't be saved! Photo Libray access is denied ⚠️"))
+            }
+        }
+    }
+
+    private func creationRequestForAsset(from image: UIImage) {
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: image)
+        }, completionHandler: { [unowned self] success, error in
+            if success {
+                self.viewModel.alertAction.execute((
+                    title: "Saved to Photos 🎉",
+                    message: "" ))
+            }
+            else if let error = error {
+                self.viewModel.alertAction.execute((
+                    title: "Upsss...",
+                    message: error.localizedDescription + "😕"))
+            }
+            else {
+                self.viewModel.alertAction.execute((
+                    title: "Upsss...",
+                    message: "Unknown error 😱"))
+            }
+        })
     }
 }

@@ -19,10 +19,22 @@ enum LikeUnlikePhotoError: Error {
     case error(withMessage: String)
 }
 
+enum DownloadPhotoResult {
+    case success(String)
+    case error(withMessage: String)
+}
+
 protocol PhotoServiceType {
     func like(photo: Photo) -> Observable<LikeUnlikePhotoResult>
+
     func unlike(photo: Photo) -> Observable<LikeUnlikePhotoResult>
+
     func photo(withId id: String) -> Observable<Photo>
+
     func photos(byPageNumber pageNumber: Int, orderBy: OrderBy, curated: Bool) -> Observable<[Photo]>
+
     func statistics(of photo: Photo) -> Observable<PhotoStatistics>
+
+    func photoDownloadLink(withId id: String) -> Observable<DownloadPhotoResult>
+
 }

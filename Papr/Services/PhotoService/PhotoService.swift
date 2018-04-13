@@ -13,8 +13,9 @@ import Moya
 struct PhotoService: PhotoServiceType {
 
     private var unsplash: MoyaProvider<Unsplash>
-    
-    init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>(plugins: [NetworkLoggerPlugin(verbose: true)])) {
+//    plugins: [NetworkLoggerPlugin(verbose: true)])
+
+    init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>()) {
         self.unsplash = unsplash
     }
 
@@ -98,5 +99,19 @@ struct PhotoService: PhotoServiceType {
             )
             .map(PhotoStatistics.self)
             .asObservable()
+    }
+
+    func photoDownloadLink(withId id: String) -> Observable<DownloadPhotoResult> {
+        return unsplash.rx
+            .request(.photoDownloadLink(id: id))
+            .map(Link.self)
+            .map { $0.url }
+            .asObservable()
+            .unwrap()
+            .map(DownloadPhotoResult.success)
+            .catchError { error in
+                return .just(.error(withMessage: "Failed to download photo"))
+            }
+
     }
 }

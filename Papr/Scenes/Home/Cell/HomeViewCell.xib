@@ -141,6 +141,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="collectPhotoButton" destination="GcZ-GX-p05" id="O29-Tf-otw"/>
+                <outlet property="downloadPhotoButton" destination="bwn-Eu-3g2" id="jsZ-2q-sG6"/>
                 <outlet property="fullNameLabel" destination="ha0-QO-K7A" id="cy0-pj-OaN"/>
                 <outlet property="likeButton" destination="XTH-qU-Wqu" id="fdB-In-rkC"/>
                 <outlet property="likesNumberLabel" destination="S44-8j-rMA" id="Lbn-Lx-Rou"/>
