@@ -13,6 +13,7 @@ import Action
 protocol PhotoViewModelInput {
     var likePhotoAction: Action<Photo, LikeUnlikePhotoResult> { get }
     var unlikePhotoAction: Action<Photo, LikeUnlikePhotoResult> { get }
+    var downloadPhotoAction: Action<Photo, DownloadPhotoResult> { get }
 }
 
 protocol PhotoViewModelOutput {
@@ -20,12 +21,14 @@ protocol PhotoViewModelOutput {
     var regularPhoto: Observable<String>! { get }
     var photoSizeCoef: Observable<Double>! { get }
     var totalLikes: Observable<String>! { get }
-    var likedByUser:  Observable<Bool>! { get }
+    var likedByUser: Observable<Bool>! { get }
+    var photoDownloadLink: Observable<String?>! { get }
 }
 
 protocol PhotoViewModelType {
     var photoViewModelInputs: PhotoViewModelInput { get }
     var photoViewModelOutputs: PhotoViewModelOutput { get }
+    var alertAction: Action<(title: String, message: String), Void> { get }
 }
 
 class PhotoViewModel: PhotoViewModelType,
@@ -35,6 +38,18 @@ class PhotoViewModel: PhotoViewModelType,
     // MARK: Inputs & Outputs
     var photoViewModelInputs: PhotoViewModelInput { return self }
     var photoViewModelOutputs: PhotoViewModelOutput { return self }
+    
+    lazy var alertAction: Action<(title: String, message: String), Void> = {
+        Action<(title: String, message: String), Void> { [unowned self] (title, message) in
+            let alertViewModel = AlertViewModel(
+                title: title,
+                message: message,
+                mode: .ok)
+            return self.sceneCoordinator.transition(
+                to: .alert(alertViewModel),
+                type: .alert)
+        }
+    }()
 
 
     // MARK: Input
@@ -45,12 +60,12 @@ class PhotoViewModel: PhotoViewModelType,
                     switch result {
                     case let .success(photo):
                         self.update(photo: photo)
-                    case .error(let error):
+                    case let .error(error):
                         switch error {
                         case .noAccessToken:
                             self.navigateToLogin.execute(())
                         case let .error(message):
-                            self.alertAction.execute(message)
+                            self.alertAction.execute((title: "Upsss...", message: message))
                         }
                     }
                 })
@@ -64,15 +79,30 @@ class PhotoViewModel: PhotoViewModelType,
                     switch result {
                     case let .success(photo):
                         self.update(photo: photo)
-                    case .error(let error):
+                    case let .error(error):
                         switch error {
                         case .noAccessToken:
                             self.navigateToLogin.execute(())
                         case let .error(message):
-                            self.alertAction.execute(message)
+                            self.alertAction.execute((title: "Upsss...", message: message))
                         }
                     }
                 })
+        }
+    }()
+
+    lazy var downloadPhotoAction: Action<Photo, DownloadPhotoResult> = {
+        Action<Photo, DownloadPhotoResult> { photo in
+            self.service.photoDownloadLink(withId: photo.id ?? "")
+                .flatMap { [unowned self] result -> Observable<DownloadPhotoResult> in
+                    switch result {
+                    case let .success(link):
+                        self.photoDownloadLinkProperty.onNext(link)
+                    case let.error(message):
+                        self.alertAction.execute((title: "Upsss...", message: message))
+                    }
+                    return .empty()
+                }
         }
     }()
 
@@ -82,24 +112,14 @@ class PhotoViewModel: PhotoViewModelType,
     var totalLikes: Observable<String>!
     var likedByUser: Observable<Bool>!
     var photoStream: Observable<Photo>!
+    var photoDownloadLink: Observable<String?>!
 
     let service: PhotoServiceType
     let sceneCoordinator: SceneCoordinatorType
 
     // MARK: Private
     private let photoStreamProperty = PublishSubject<Photo>()
-
-    private lazy var alertAction: Action<String, Void> = {
-        Action<String, Void> { [unowned self] message in
-            let alertViewModel = AlertViewModel(
-                title: "Upsss...",
-                message: message,
-                mode: .ok)
-            return self.sceneCoordinator.transition(
-                to: .alert(alertViewModel),
-                type: .alert)
-        }
-    }()
+    private let photoDownloadLinkProperty = BehaviorSubject<String?>(value: nil)
 
     private lazy var navigateToLogin: CocoaAction = {
         CocoaAction { [unowned self] message in
@@ -141,5 +161,7 @@ class PhotoViewModel: PhotoViewModelType,
 
         likedByUser = Observable.merge(photoStream, photoStreamProperty)
             .map { $0.likedByUser ?? false }
+
+        photoDownloadLink = photoDownloadLinkProperty.asObservable()
     }
 }
