@@ -106,7 +106,7 @@ class HomeViewCell: UITableViewCell, BindableType {
             .disposed(by: disposeBag)
         
         outputs.likedByUser
-            .map { $0 ? #imageLiteral(resourceName: "favorite") : #imageLiteral(resourceName: "unfavorite") }
+            .map { $0 ? #imageLiteral(resourceName: "favorite-black") : #imageLiteral(resourceName: "favorite-border-black") }
             .bind(to: likeButton.rx.image())
             .disposed(by: disposeBag)
     }

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ic_flight_land.png",
+      "filename" : "ic_bookmark_border_48pt.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ic_flight_land_2x.png",
+      "filename" : "ic_bookmark_border_48pt_2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ic_flight_land_3x.png",
+      "filename" : "ic_bookmark_border_48pt_3x.png",
       "scale" : "3x"
     }
   ],

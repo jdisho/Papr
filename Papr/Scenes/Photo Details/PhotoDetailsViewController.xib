@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -50,7 +50,7 @@
                     </state>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jct-D0-8BW">
-                    <rect key="frame" x="0.0" y="717" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ufh-7m-2YQ">
                             <rect key="frame" x="24" y="8" width="61" height="34"/>
@@ -110,7 +110,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ug5-S9-vsN">
                             <rect key="frame" x="210" y="8" width="61" height="34"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down" translatesAutoresizingMaskIntoConstraints="NO" id="IHP-fM-flj">
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-white" translatesAutoresizingMaskIntoConstraints="NO" id="IHP-fM-flj">
                                     <rect key="frame" x="0.0" y="0.0" width="25" height="34"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="25" id="N5Y-Gb-DGa"/>
@@ -174,7 +174,7 @@
                 <constraint firstItem="036-LZ-mB5" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="-132" id="P9y-2n-McE"/>
                 <constraint firstItem="eua-mW-8Jz" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="RZI-u2-Bkh"/>
                 <constraint firstItem="eua-mW-8Jz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gjX-ge-kpF"/>
-                <constraint firstItem="Jct-D0-8BW" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="100" id="niZ-xX-y7e"/>
+                <constraint firstItem="Jct-D0-8BW" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="niZ-xX-y7e"/>
                 <constraint firstItem="Jct-D0-8BW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="pqJ-pP-OUl"/>
                 <constraint firstItem="eua-mW-8Jz" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="wui-2w-tZJ"/>
             </constraints>
@@ -185,7 +185,7 @@
     </objects>
     <resources>
         <image name="close" width="24" height="24"/>
-        <image name="down" width="24" height="24"/>
+        <image name="down-white" width="24" height="24"/>
         <image name="eye-white" width="24" height="24"/>
         <image name="favorite-border-white" width="24" height="24"/>
         <image name="more-white" width="24" height="24"/>
