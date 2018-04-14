@@ -40,6 +40,7 @@ class HomeViewCell: UITableViewCell, BindableType {
         super.awakeFromNib()
         let radius = Double(self.userImageView.frame.height / 2)
         userImageView.rounded(withRadius: radius)
+        photoButton.isExclusiveTouch = true
     }
 
     override func prepareForReuse() {
