@@ -53,7 +53,7 @@
                     </state>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jct-D0-8BW">
-                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="717" width="375" height="50"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ufh-7m-2YQ">
                             <rect key="frame" x="24" y="8" width="61" height="34"/>
@@ -170,14 +170,14 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="0.0047743055555555559" blue="0.090184908598856223" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="036-LZ-mB5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="EdS-Ru-g1N"/>
                 <constraint firstItem="Jct-D0-8BW" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Oiy-fF-BXY"/>
                 <constraint firstItem="036-LZ-mB5" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="-132" id="P9y-2n-McE"/>
                 <constraint firstItem="eua-mW-8Jz" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="RZI-u2-Bkh"/>
                 <constraint firstItem="eua-mW-8Jz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gjX-ge-kpF"/>
-                <constraint firstItem="Jct-D0-8BW" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="niZ-xX-y7e"/>
+                <constraint firstItem="Jct-D0-8BW" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="100" id="niZ-xX-y7e"/>
                 <constraint firstItem="Jct-D0-8BW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="pqJ-pP-OUl"/>
                 <constraint firstItem="eua-mW-8Jz" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="wui-2w-tZJ"/>
             </constraints>

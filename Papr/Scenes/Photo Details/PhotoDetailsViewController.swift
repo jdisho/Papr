@@ -39,7 +39,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         super.viewDidLoad()
 
         configureUI()
-        showHideOverlays(withDelay: 1.0)
+        showHideOverlays(withDelay: 0.5)
     }
 
     override var prefersStatusBarHidden: Bool {
@@ -109,7 +109,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
 
     @objc private func showHideOverlays(withDelay delay: Double = 0.0) {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            UIView.animate(withDuration: 0.5,
+            UIView.animate(withDuration: 0.3,
                            animations: {
                 if self.isTouched {
                     self.statsContainerViewBottomConstraint.constant = 0
