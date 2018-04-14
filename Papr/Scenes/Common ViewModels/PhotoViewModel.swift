@@ -38,7 +38,7 @@ class PhotoViewModel: PhotoViewModelType,
     // MARK: Inputs & Outputs
     var photoViewModelInputs: PhotoViewModelInput { return self }
     var photoViewModelOutputs: PhotoViewModelOutput { return self }
-    
+
     lazy var alertAction: Action<(title: String, message: String), Void> = {
         Action<(title: String, message: String), Void> { [unowned self] (title, message) in
             let alertViewModel = AlertViewModel(

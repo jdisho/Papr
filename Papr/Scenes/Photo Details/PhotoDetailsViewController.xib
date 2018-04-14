@@ -11,6 +11,9 @@
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoDetailsViewController" customModule="Papr" customModuleProvider="target">
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isHeroEnabled" value="YES"/>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="dismissButton" destination="036-LZ-mB5" id="zZI-W2-iI9"/>
                 <outlet property="dismissButtonTopConstraint" destination="P9y-2n-McE" id="wgV-mz-dcC"/>

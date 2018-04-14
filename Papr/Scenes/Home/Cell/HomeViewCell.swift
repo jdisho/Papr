@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import Nuke
 import Photos
+import Hero
 
 class HomeViewCell: UITableViewCell, BindableType {
 
@@ -55,6 +56,11 @@ class HomeViewCell: UITableViewCell, BindableType {
     func bindViewModel() {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
+
+        outputs.photoStream
+            .map { $0.id ?? "" }
+            .bind(to: photoImageView.rx.heroId)
+            .disposed(by: disposeBag)
 
         Observable.combineLatest(outputs.likedByUser, outputs.photoStream)
             .subscribe { result in

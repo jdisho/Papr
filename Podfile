@@ -17,6 +17,9 @@ target 'Papr' do
   # Image
   pod 'Nuke'
 
+  # Transition
+  pod 'Hero'
+
   # Pods for Papr
 
   target 'PaprTests' do

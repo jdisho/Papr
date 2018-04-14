@@ -9,6 +9,7 @@
 import UIKit
 import Nuke
 import RxSwift
+import Hero
 
 class PhotoDetailsViewController: UIViewController, BindableType {
 
@@ -52,6 +53,11 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         let this = PhotoDetailsViewController.self
 
         dismissButton.rx.action = inputs.dismissAction
+
+        outputs.photoStream
+            .map { $0.id ?? "" }
+            .bind(to: photoImageView.rx.heroId)
+            .disposed(by: disposeBag)
 
         outputs.regularPhoto
             .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
