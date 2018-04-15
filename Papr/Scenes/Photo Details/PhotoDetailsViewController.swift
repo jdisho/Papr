@@ -17,6 +17,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
     var viewModel: PhotoDetailsViewModelType!
 
     // MARK: IBOutlets
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var dismissButton: UIButton!
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var photoHeightConstraint: NSLayoutConstraint!
@@ -26,6 +27,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
     @IBOutlet var totalDownloadsLabel: UILabel!
     @IBOutlet var downloadButton: UIButton!
     @IBOutlet var moreButton: UIButton!
+    @IBOutlet var statsContainerView: UIView!
     @IBOutlet var dismissButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet var statsContainerViewBottomConstraint: NSLayoutConstraint!
 
@@ -103,8 +105,12 @@ class PhotoDetailsViewController: UIViewController, BindableType {
 
     // MARK: UI
     private func configureUI() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showHideOverlays))
-        self.view.addGestureRecognizer(tapGesture)
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(showHideOverlays))
+        view.addGestureRecognizer(tapGesture)
+        view.bringSubview(toFront: dismissButton)
+        view.bringSubview(toFront: statsContainerView)
     }
 
     @objc private func showHideOverlays(withDelay delay: Double = 0.0) {
