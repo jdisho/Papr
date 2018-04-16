@@ -20,9 +20,6 @@
                 <outlet property="downloadButton" destination="lEP-4x-2q1" id="uM3-CZ-1fZ"/>
                 <outlet property="likeButton" destination="Aj9-a9-vc9" id="72Q-jU-dVQ"/>
                 <outlet property="moreButton" destination="2LU-Ib-n7p" id="FWM-hX-e4t"/>
-                <outlet property="photoHeightConstraint" destination="Ccv-Kp-97j" id="fAk-RU-bEN"/>
-                <outlet property="photoImageView" destination="aaA-Q9-CS4" id="uSu-j5-JDO"/>
-                <outlet property="scrollView" destination="tfi-K8-LDC" id="aW8-LP-Jcg"/>
                 <outlet property="statsContainerView" destination="anw-Kd-QsH" id="qaS-H8-kQG"/>
                 <outlet property="statsContainerViewBottomConstraint" destination="HTO-WM-sqo" id="AgG-aW-p7a"/>
                 <outlet property="totalDownloadsLabel" destination="OIT-zz-e5E" id="YSi-2w-qVP"/>
@@ -164,52 +161,18 @@
                         <constraint firstAttribute="bottom" secondItem="Uiq-Gd-u7t" secondAttribute="bottom" constant="8" id="zz7-ee-z0W"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dai-aA-vlU">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tfi-K8-LDC">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aaA-Q9-CS4">
-                                    <rect key="frame" x="0.0" y="2" width="375" height="663"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" priority="999" constant="663" id="Ccv-Kp-97j"/>
-                                        <constraint firstAttribute="width" constant="375" id="Y6j-lV-Fqp"/>
-                                    </constraints>
-                                </imageView>
-                            </subviews>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="aaA-Q9-CS4" secondAttribute="trailing" id="TtL-61-ui9"/>
-                                <constraint firstAttribute="bottom" secondItem="aaA-Q9-CS4" secondAttribute="bottom" id="cQu-4d-nI4"/>
-                                <constraint firstItem="aaA-Q9-CS4" firstAttribute="leading" secondItem="tfi-K8-LDC" secondAttribute="leading" id="hBH-eJ-N5K"/>
-                                <constraint firstItem="aaA-Q9-CS4" firstAttribute="centerY" secondItem="tfi-K8-LDC" secondAttribute="centerY" id="zcK-Jy-BWw"/>
-                            </constraints>
-                        </scrollView>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="tfi-K8-LDC" firstAttribute="top" secondItem="Dai-aA-vlU" secondAttribute="top" id="DbL-sy-VqF"/>
-                        <constraint firstAttribute="trailing" secondItem="tfi-K8-LDC" secondAttribute="trailing" id="djf-qA-k9T"/>
-                        <constraint firstAttribute="bottom" secondItem="tfi-K8-LDC" secondAttribute="bottom" id="e76-Bn-eUc"/>
-                        <constraint firstItem="tfi-K8-LDC" firstAttribute="leading" secondItem="Dai-aA-vlU" secondAttribute="leading" id="oOz-AL-uah"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="8Ld-Z0-j7n" firstAttribute="leading" secondItem="XpM-0d-LbB" secondAttribute="leading" constant="24" id="4sh-Dz-pUd"/>
-                <constraint firstItem="Dai-aA-vlU" firstAttribute="trailing" secondItem="XpM-0d-LbB" secondAttribute="trailing" id="5Cw-du-ffz"/>
-                <constraint firstItem="Dai-aA-vlU" firstAttribute="leading" secondItem="XpM-0d-LbB" secondAttribute="leading" id="Gm5-3H-Dag"/>
                 <constraint firstItem="anw-Kd-QsH" firstAttribute="bottom" secondItem="XpM-0d-LbB" secondAttribute="bottom" constant="100" id="HTO-WM-sqo"/>
                 <constraint firstItem="8Ld-Z0-j7n" firstAttribute="top" secondItem="XpM-0d-LbB" secondAttribute="top" constant="-132" id="MPJ-KW-Vc7"/>
                 <constraint firstItem="anw-Kd-QsH" firstAttribute="trailing" secondItem="XpM-0d-LbB" secondAttribute="trailing" id="eRh-8I-gGy"/>
-                <constraint firstItem="Dai-aA-vlU" firstAttribute="bottom" secondItem="XpM-0d-LbB" secondAttribute="bottom" id="pHn-fh-t05"/>
-                <constraint firstItem="Dai-aA-vlU" firstAttribute="top" secondItem="eqd-1g-PWx" secondAttribute="top" id="tB4-SI-LpE"/>
                 <constraint firstItem="anw-Kd-QsH" firstAttribute="leading" secondItem="XpM-0d-LbB" secondAttribute="leading" id="ynK-ia-bnK"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <viewLayoutGuide key="safeArea" id="XpM-0d-LbB"/>
-            <point key="canvasLocation" x="-576.5" y="-318.5"/>
+            <point key="canvasLocation" x="-746" y="-443"/>
         </view>
     </objects>
     <resources>
