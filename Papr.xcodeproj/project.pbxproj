@@ -67,6 +67,9 @@
 		DC7F20931FADD3400017C14A /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F20921FADD3400017C14A /* SearchResults.swift */; };
 		DC7F20941FADD3400017C14A /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F20921FADD3400017C14A /* SearchResults.swift */; };
 		DC7F20951FADD3400017C14A /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F20921FADD3400017C14A /* SearchResults.swift */; };
+		DC9147942082B9AD00781B65 /* Hero+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9147932082B9AD00781B65 /* Hero+Rx.swift */; };
+		DC9147952082B9B500781B65 /* Hero+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9147932082B9AD00781B65 /* Hero+Rx.swift */; };
+		DC9147962082B9B500781B65 /* Hero+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9147932082B9AD00781B65 /* Hero+Rx.swift */; };
 		DC922309203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC922308203F95C300C9D14F /* UIBarButtonItem+Rx.swift */; };
 		DC92230A203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC922308203F95C300C9D14F /* UIBarButtonItem+Rx.swift */; };
 		DC92230B203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC922308203F95C300C9D14F /* UIBarButtonItem+Rx.swift */; };
@@ -227,6 +230,7 @@
 		DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAccessToken.swift; sourceTree = "<group>"; };
 		DC7CF5811FC464BF006E0A39 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		DC7F20921FADD3400017C14A /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
+		DC9147932082B9AD00781B65 /* Hero+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Hero+Rx.swift"; sourceTree = "<group>"; };
 		DC922308203F95C300C9D14F /* UIBarButtonItem+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Rx.swift"; sourceTree = "<group>"; };
 		DC99FB8D2003A7CC001195FD /* PhotoServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoServiceType.swift; sourceTree = "<group>"; };
 		DC99FB912003A7DB001195FD /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
@@ -583,6 +587,7 @@
 		DCEE1F121FC9837E0010BADE /* Rx */ = {
 			isa = PBXGroup;
 			children = (
+				DC9147932082B9AD00781B65 /* Hero+Rx.swift */,
 				DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */,
 				DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */,
 				DC922308203F95C300C9D14F /* UIBarButtonItem+Rx.swift */,
@@ -784,6 +789,7 @@
 				"${BUILT_PRODUCTS_DIR}/Action/Action.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
+				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -796,6 +802,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Action.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
@@ -969,6 +976,7 @@
 				DC71C3DB1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
 				DC1F1504203195410025F70B /* UIScrollView+Extentions.swift in Sources */,
 				DC2E76F8203B6DB90023A173 /* LikeUnlike.swift in Sources */,
+				DC9147942082B9AD00781B65 /* Hero+Rx.swift in Sources */,
 				DCBAEE6320363CD600561CBA /* Orientation.swift in Sources */,
 				DCCCFCC5203A52410024D417 /* Resolution.swift in Sources */,
 				DCBE008E202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
@@ -1027,6 +1035,7 @@
 				DCBB1B751FA8D597004E95F0 /* Unsplash.swift in Sources */,
 				DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC5AF7491FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
+				DC9147952082B9B500781B65 /* Hero+Rx.swift in Sources */,
 				DCBB1B611FA8BA22004E95F0 /* LoginViewController.swift in Sources */,
 				DCEE1F101FC97CE80010BADE /* AlertViewModel.swift in Sources */,
 				DCBB1B681FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
@@ -1050,6 +1059,7 @@
 				DCC8CA092002BEE300F6C540 /* HomeViewController.swift in Sources */,
 				DCC8CA102002BEF100F6C540 /* HomeViewModel.swift in Sources */,
 				DC92230B203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
+				DC9147962082B9B500781B65 /* Hero+Rx.swift in Sources */,
 				DC71C3DD1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
 				DCC8CA152002CC2700F6C540 /* HomeViewCell.swift in Sources */,
 				DC5AF7421FACE6A300ADA2BB /* Photo.swift in Sources */,

@@ -4,6 +4,7 @@ PODS:
     - RxSwift (~> 4.0)
   - Alamofire (4.7.1)
   - Differentiator (3.0.2)
+  - Hero (1.1.0)
   - Moya/Core (11.0.2):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
@@ -22,6 +23,7 @@ PODS:
 
 DEPENDENCIES:
   - Action
+  - Hero
   - Moya/RxSwift
   - Nuke
   - RxCocoa
@@ -32,6 +34,7 @@ SPEC CHECKSUMS:
   Action: d60087ebce41b969d1afdad01e2fa1372a82f26e
   Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
+  Hero: ce59e81c79390613d97b43da7179e2c5e1017e04
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   Nuke: bf5d58b2d95ff15cb170c231fe6002d706be77e1
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
@@ -39,6 +42,6 @@ SPEC CHECKSUMS:
   RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
   RxSwift: e49536837d9901277638493ea537394d4b55f570
 
-PODFILE CHECKSUM: e57bae5b677878caeba1f64f75a6b5441a0014d8
+PODFILE CHECKSUM: 866ee364b56b584ce5ced0538a56d86b8fcebc4e
 
 COCOAPODS: 1.4.0
