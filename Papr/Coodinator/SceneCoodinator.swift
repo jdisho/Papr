@@ -58,10 +58,10 @@ class SceneCoordinator: SceneCoordinatorType {
             navigationController.pushViewController(viewController, animated: true)
             currentViewController = actualViewController(for: viewController)
         case .modal:
-            self.currentViewController.present(viewController, animated: true) {
+            currentViewController.present(viewController, animated: true) {
                 subject.onCompleted()
             }
-            self.currentViewController = self.actualViewController(for: viewController)
+            currentViewController = actualViewController(for: viewController)
         case .alert:
             currentViewController.present(viewController, animated: true) {
                 subject.onCompleted()
