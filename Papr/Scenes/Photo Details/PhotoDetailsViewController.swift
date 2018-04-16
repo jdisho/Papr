@@ -31,6 +31,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
     private let disposeBag = DisposeBag()
+    private let dummyImageView = UIImageView()
     private var isTouched = true
     private var scrollView: UIScrollView!
     private var photoImageView: UIImageView!
@@ -109,6 +110,29 @@ class PhotoDetailsViewController: UIViewController, BindableType {
                 }
             }
             .disposed(by: disposeBag)
+
+        outputs.photoStream
+            .subscribe { result in
+                guard let photo = result.element else { return }
+                self.downloadButton.rx
+                    .bind(to: inputs.downloadPhotoAction, input: photo)
+            }
+            .disposed(by: disposeBag)
+
+
+        inputs.downloadPhotoAction.elements
+            .subscribe { [unowned self] result in
+                guard let linkString = result.element,
+                    let url = URL(string: linkString) else { return }
+
+                PhotoDetailsViewController.nukeManager
+                    .loadImage(with: url, into: self.dummyImageView) { response, _ in
+                        guard let image = response.value else { return }
+                        inputs.writeImageToPhotosAlbumAction.execute(image)
+                }
+            }
+            .disposed(by: disposeBag)
+
     }
 
     // MARK: UI
@@ -290,3 +314,4 @@ extension PhotoDetailsViewController: UIGestureRecognizerDelegate {
             otherGestureRecognizer == self.doubleTapGesture
     }
 }
+

@@ -9,11 +9,13 @@
 import Foundation
 import RxSwift
 import Action
+import Photos
 
 protocol PhotoViewModelInput {
     var likePhotoAction: Action<Photo, LikeUnlikePhotoResult> { get }
     var unlikePhotoAction: Action<Photo, LikeUnlikePhotoResult> { get }
-    var downloadPhotoAction: Action<Photo, DownloadPhotoResult> { get }
+    var downloadPhotoAction: Action<Photo, String> { get }
+    var writeImageToPhotosAlbumAction: Action<UIImage, Void> { get }
 }
 
 protocol PhotoViewModelOutput {
@@ -22,13 +24,11 @@ protocol PhotoViewModelOutput {
     var photoSizeCoef: Observable<Double>! { get }
     var totalLikes: Observable<String>! { get }
     var likedByUser: Observable<Bool>! { get }
-    var photoDownloadLink: Observable<String?>! { get }
 }
 
 protocol PhotoViewModelType {
     var photoViewModelInputs: PhotoViewModelInput { get }
     var photoViewModelOutputs: PhotoViewModelOutput { get }
-    var alertAction: Action<(title: String, message: String), Void> { get }
 }
 
 class PhotoViewModel: PhotoViewModelType,
@@ -38,19 +38,6 @@ class PhotoViewModel: PhotoViewModelType,
     // MARK: Inputs & Outputs
     var photoViewModelInputs: PhotoViewModelInput { return self }
     var photoViewModelOutputs: PhotoViewModelOutput { return self }
-
-    lazy var alertAction: Action<(title: String, message: String), Void> = {
-        Action<(title: String, message: String), Void> { [unowned self] (title, message) in
-            let alertViewModel = AlertViewModel(
-                title: title,
-                message: message,
-                mode: .ok)
-            return self.sceneCoordinator.transition(
-                to: .alert(alertViewModel),
-                type: .alert)
-        }
-    }()
-
 
     // MARK: Input
     lazy var likePhotoAction: Action<Photo, LikeUnlikePhotoResult>  = {
@@ -91,18 +78,33 @@ class PhotoViewModel: PhotoViewModelType,
         }
     }()
 
-    lazy var downloadPhotoAction: Action<Photo, DownloadPhotoResult> = {
-        Action<Photo, DownloadPhotoResult> { photo in
-            self.service.photoDownloadLink(withId: photo.id ?? "")
-                .flatMap { [unowned self] result -> Observable<DownloadPhotoResult> in
+    lazy var downloadPhotoAction: Action<Photo, String> = {
+        Action<Photo, String> { photo in
+            return self.service.photoDownloadLink(withId: photo.id ?? "")
+                .flatMap { [unowned self] result -> Observable<String> in
                     switch result {
                     case let .success(link):
-                        self.photoDownloadLinkProperty.onNext(link)
+                        return .just(link)
                     case let.error(message):
                         self.alertAction.execute((title: "Upsss...", message: message))
+                        return .empty()
                     }
-                    return .empty()
                 }
+        }
+    }()
+
+    lazy var writeImageToPhotosAlbumAction: Action<UIImage, Void> = {
+        Action<UIImage, Void> { image in
+            PHPhotoLibrary.requestAuthorization { [unowned self] authorizationStatus in
+                if authorizationStatus == .authorized {
+                    self.creationRequestForAsset(from: image)
+                } else if authorizationStatus == .denied {
+                    self.alertAction.execute((
+                        title: "Upsss...",
+                        message: "Photo can't be saved! Photo Libray access is denied ⚠️"))
+                }
+            }
+            return .empty()
         }
     }()
 
@@ -112,7 +114,6 @@ class PhotoViewModel: PhotoViewModelType,
     var totalLikes: Observable<String>!
     var likedByUser: Observable<Bool>!
     var photoStream: Observable<Photo>!
-    var photoDownloadLink: Observable<String?>!
 
     let service: PhotoServiceType
     let sceneCoordinator: SceneCoordinatorType
@@ -120,6 +121,18 @@ class PhotoViewModel: PhotoViewModelType,
     // MARK: Private
     private let photoStreamProperty = PublishSubject<Photo>()
     private let photoDownloadLinkProperty = BehaviorSubject<String?>(value: nil)
+
+    private lazy var alertAction: Action<(title: String, message: String), Void> = {
+        Action<(title: String, message: String), Void> { [unowned self] (title, message) in
+            let alertViewModel = AlertViewModel(
+                title: title,
+                message: message,
+                mode: .ok)
+            return self.sceneCoordinator.transition(
+                to: .alert(alertViewModel),
+                type: .alert)
+        }
+    }()
 
     private lazy var navigateToLogin: CocoaAction = {
         CocoaAction { [unowned self] message in
@@ -161,7 +174,29 @@ class PhotoViewModel: PhotoViewModelType,
 
         likedByUser = Observable.merge(photoStream, photoStreamProperty)
             .map { $0.likedByUser ?? false }
+    }
 
-        photoDownloadLink = photoDownloadLinkProperty.asObservable()
+    // MARK: Helpers
+
+    private func creationRequestForAsset(from image: UIImage) {
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: image)
+        }, completionHandler: { [unowned self] success, error in
+            if success {
+                self.alertAction.execute((
+                    title: "Saved to Photos 🎉",
+                    message: "" ))
+            }
+            else if let error = error {
+                self.alertAction.execute((
+                    title: "Upsss...",
+                    message: error.localizedDescription + "😕"))
+            }
+            else {
+                self.alertAction.execute((
+                    title: "Upsss...",
+                    message: "Unknown error 😱"))
+            }
+        })
     }
 }
