@@ -12,8 +12,8 @@ import Action
 import Photos
 
 protocol PhotoViewModelInput {
-    var likePhotoAction: Action<Photo, LikeUnlikePhotoResult> { get }
-    var unlikePhotoAction: Action<Photo, LikeUnlikePhotoResult> { get }
+    var likePhotoAction: Action<Photo, Photo> { get }
+    var unlikePhotoAction: Action<Photo, Photo> { get }
     var downloadPhotoAction: Action<Photo, String> { get }
     var writeImageToPhotosAlbumAction: Action<UIImage, Void> { get }
 }
@@ -40,13 +40,13 @@ class PhotoViewModel: PhotoViewModelType,
     var photoViewModelOutputs: PhotoViewModelOutput { return self }
 
     // MARK: Input
-    lazy var likePhotoAction: Action<Photo, LikeUnlikePhotoResult>  = {
-        Action<Photo, LikeUnlikePhotoResult> { photo in
-            self.service.like(photo: photo)
-                .do(onNext: { [unowned self] result in
+    lazy var likePhotoAction: Action<Photo, Photo>  = {
+        Action<Photo, Photo> { photo in
+            return self.service.like(photo: photo)
+                .flatMap { result -> Observable<Photo> in
                     switch result {
                     case let .success(photo):
-                        self.update(photo: photo)
+                        return .just(photo)
                     case let .error(error):
                         switch error {
                         case .noAccessToken:
@@ -54,18 +54,19 @@ class PhotoViewModel: PhotoViewModelType,
                         case let .error(message):
                             self.alertAction.execute((title: "Upsss...", message: message))
                         }
+                        return .empty()
                     }
-                })
+                }
         }
     }()
 
-    lazy var unlikePhotoAction: Action<Photo, LikeUnlikePhotoResult>  = {
-        Action<Photo, LikeUnlikePhotoResult> { photo in
-            self.service.unlike(photo: photo)
-                .do(onNext: { [unowned self] result in
+    lazy var unlikePhotoAction: Action<Photo, Photo>  = {
+        Action<Photo, Photo> { photo in
+            return self.service.unlike(photo: photo)
+                .flatMap { result -> Observable<Photo> in
                     switch result {
                     case let .success(photo):
-                        self.update(photo: photo)
+                        return .just(photo)
                     case let .error(error):
                         switch error {
                         case .noAccessToken:
@@ -73,8 +74,9 @@ class PhotoViewModel: PhotoViewModelType,
                         case let .error(message):
                             self.alertAction.execute((title: "Upsss...", message: message))
                         }
+                        return .empty()
                     }
-                })
+                }
         }
     }()
 
@@ -119,8 +121,6 @@ class PhotoViewModel: PhotoViewModelType,
     let sceneCoordinator: SceneCoordinatorType
 
     // MARK: Private
-    private let photoStreamProperty = PublishSubject<Photo>()
-    private let photoDownloadLinkProperty = BehaviorSubject<String?>(value: nil)
 
     private lazy var alertAction: Action<(title: String, message: String), Void> = {
         Action<(title: String, message: String), Void> { [unowned self] (title, message) in
@@ -143,10 +143,6 @@ class PhotoViewModel: PhotoViewModelType,
         }
     }()
 
-    private func update(photo: Photo) {
-        photoStreamProperty.onNext(photo)
-    }
-
     // MARK: Init
     init(photo: Photo,
          service: PhotoServiceType = PhotoService(),
@@ -155,6 +151,10 @@ class PhotoViewModel: PhotoViewModelType,
         self.service = service
         self.sceneCoordinator = sceneCoordinator
         photoStream = Observable.just(photo)
+
+        let likeUnlikePhotoResult = Observable.merge(
+            likePhotoAction.elements,
+            unlikePhotoAction.elements)
 
         regularPhoto = photoStream
             .map { $0.urls?.regular ?? "" }
@@ -165,14 +165,14 @@ class PhotoViewModel: PhotoViewModelType,
                 Double(height * Int(UIScreen.main.bounds.width) / width)
         }
 
-        totalLikes = Observable.merge(photoStream, photoStreamProperty)
+        totalLikes = Observable.merge(photoStream, likeUnlikePhotoResult)
             .map { $0.likes ?? 0 }
             .map { likes in
                 guard likes != 0 else { return "" }
                 return likes.abbreviated
         }
 
-        likedByUser = Observable.merge(photoStream, photoStreamProperty)
+        likedByUser = Observable.merge(photoStream, likeUnlikePhotoResult)
             .map { $0.likedByUser ?? false }
     }
 
