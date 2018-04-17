@@ -172,7 +172,7 @@
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <viewLayoutGuide key="safeArea" id="XpM-0d-LbB"/>
-            <point key="canvasLocation" x="-746" y="-443"/>
+            <point key="canvasLocation" x="-697" y="-633"/>
         </view>
     </objects>
     <resources>
