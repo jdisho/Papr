@@ -11,7 +11,7 @@ import RxSwift
 import Action
 
 protocol HomeViewCellModelInput: PhotoViewModelInput {
-    var photoDetailsAction: Action<Photo, Void> { get }
+    var photoDetailsAction: Action<Photo, Photo> { get }
 }
 
 protocol HomeViewCellModelOutput: PhotoViewModelOutput {
@@ -40,10 +40,11 @@ class HomeViewCellModel: PhotoViewModel,
     override var photoViewModelOutputs: PhotoViewModelOutput { return outputs }
 
     // MARK: Input
-    lazy var photoDetailsAction: Action<Photo, Void> = {
-        return Action<Photo, Void> { photo in
+    lazy var photoDetailsAction: Action<Photo, Photo> = {
+        return Action<Photo, Photo> { photo in
             let viewModel = PhotoDetailsViewModel(photo: photo)
-            return self.sceneCoordinator.transition(to: .photoDetails(viewModel), type: .modal)
+            self.sceneCoordinator.transition(to: .photoDetails(viewModel), type: .modal)
+            return .just(photo)
         }
     }()
 
@@ -55,9 +56,11 @@ class HomeViewCellModel: PhotoViewModel,
     var updated: Observable<String>!
 
     // MARK: Init
-    override init(photo: Photo,
+    override init(
+        photo: Photo,
         service: PhotoServiceType = PhotoService(),
-        sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+        sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared
+        ) {
 
         super.init(photo: photo, service: service)
 

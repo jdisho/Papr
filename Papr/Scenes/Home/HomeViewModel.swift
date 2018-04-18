@@ -62,12 +62,14 @@ protocol HomeViewModelOutput {
     
      /// Emits the name of the navigation bar value when an OrderBy/Curated option is choosen.
     var navBarButtonName: Observable<NavBarTitle>! { get }
+
+    /// Emites the child viewModels
+    var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> { get }
 }
 
 protocol HomeViewModelType {
     var inputs: HomeViewModelInput { get }
     var outputs: HomeViewModelOutput { get }
-    func createHomeViewCellModel(for photo: Photo) -> HomeViewCellModel
 }
 
 class HomeViewModel: HomeViewModelType, 
@@ -137,9 +139,14 @@ class HomeViewModel: HomeViewModelType,
     var orderBy: Observable<OrderBy>!
     var navBarButtonName: Observable<NavBarTitle>!
 
-    func createHomeViewCellModel(for photo: Photo) -> HomeViewCellModel {
-        return HomeViewCellModel(photo: photo)
-    }
+    lazy var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> = {
+        return photos.map { photos -> [HomeViewCellModelType] in
+            photos.map { photo in
+                let viewModel = HomeViewCellModel(photo: photo)
+                return viewModel
+            }
+        }
+    }()
 
     // MARK: Private
     private let service: PhotoServiceType
@@ -150,8 +157,9 @@ class HomeViewModel: HomeViewModelType,
     private let navBarButtonNameProperty = BehaviorSubject<NavBarTitle>(value: .new)
 
     // MARK: Init
-    init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared, 
-         service: PhotoServiceType = PhotoService()) {
+    init(service: PhotoServiceType = PhotoService(),
+        sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+        
         self.sceneCoordinator = sceneCoordinator
         self.service = service
 
@@ -176,6 +184,7 @@ class HomeViewModel: HomeViewModelType,
                         return photos
                     }
             }
+            .share()
             .do (onNext: { _ in
                 photoArray = []
                 currentPageNumber = 1
@@ -191,8 +200,9 @@ class HomeViewModel: HomeViewModelType,
                     orderBy: orderBy,
                     curated: curated)
             }
+            .share()
 
-         photos = Observable
+        photos = Observable
             .merge(requestFirst, requestNext)
             .map { [unowned self] photos -> [Photo] in
                 photos.forEach { photo in 

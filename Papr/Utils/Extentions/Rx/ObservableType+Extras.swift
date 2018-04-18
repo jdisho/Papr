@@ -52,3 +52,14 @@ extension Observable where E: Sequence, E.Iterator.Element: Comparable {
             return self.map { $0.sorted(by: areInIncreasingOrder) }
     }
 }
+
+
+extension ObservableType where E: Collection {
+
+    func mapMany<T>(_ transform: @escaping (Self.E.Element) -> T) -> Observable<[T]> {
+        return self.map { collection -> [T] in
+            collection.map(transform)
+        }
+    }
+
+}

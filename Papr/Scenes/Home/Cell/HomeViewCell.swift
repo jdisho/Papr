@@ -39,12 +39,15 @@ class HomeViewCell: UITableViewCell, BindableType {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
         let radius = Double(self.userImageView.frame.height / 2)
         userImageView.rounded(withRadius: radius)
         photoButton.isExclusiveTouch = true
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
+
         userImageView.image = nil
         photoImageView.image = nil
         dummyImageView.image = nil
@@ -111,7 +114,7 @@ class HomeViewCell: UITableViewCell, BindableType {
         outputs.updated
             .bind(to: postedTimeLabel.rx.text)
             .disposed(by: disposeBag)
-        
+
         outputs.totalLikes
             .bind(to: likesNumberLabel.rx.text)
             .disposed(by: disposeBag)

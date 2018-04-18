@@ -9,10 +9,10 @@
 
 //MARK: CollectionsResult
 
-struct CollectionsResult: Decodable {
+struct PhotoCollectionsResult: Decodable {
     let total: Int?
     let totalPages: Int?
-    let collections: [Collection]?
+    let collections: [PhotoCollection]?
 
     enum CodingKeys: String, CodingKey {
         case total

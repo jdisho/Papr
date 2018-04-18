@@ -24,7 +24,7 @@ struct Photo: Codable {
     let urls: ImageURLs?
     let location: Location?
     let exif: Exif?
-    let collectionsItBelongs: [Collection]?
+    let collectionsItBelongs: [PhotoCollection]?
     let links: Links?
     let categories: [Category]?
 

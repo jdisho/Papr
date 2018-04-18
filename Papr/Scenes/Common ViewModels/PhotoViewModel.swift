@@ -46,6 +46,7 @@ class PhotoViewModel: PhotoViewModelType,
                 .flatMap { result -> Observable<Photo> in
                     switch result {
                     case let .success(photo):
+                        self.photoStreamProperty.onNext(photo)
                         return .just(photo)
                     case let .error(error):
                         switch error {
@@ -66,6 +67,7 @@ class PhotoViewModel: PhotoViewModelType,
                 .flatMap { result -> Observable<Photo> in
                     switch result {
                     case let .success(photo):
+                        self.photoStreamProperty.onNext(photo)
                         return .just(photo)
                     case let .error(error):
                         switch error {
@@ -122,6 +124,8 @@ class PhotoViewModel: PhotoViewModelType,
 
     // MARK: Private
 
+    private let photoStreamProperty = ReplaySubject<Photo>.create(bufferSize: 1)
+
     private lazy var alertAction: Action<(title: String, message: String), Void> = {
         Action<(title: String, message: String), Void> { [unowned self] (title, message) in
             let alertViewModel = AlertViewModel(
@@ -145,16 +149,13 @@ class PhotoViewModel: PhotoViewModelType,
 
     // MARK: Init
     init(photo: Photo,
-         service: PhotoServiceType = PhotoService(),
-         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+        service: PhotoServiceType = PhotoService(),
+        sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
         self.service = service
         self.sceneCoordinator = sceneCoordinator
-        photoStream = Observable.just(photo)
 
-        let likeUnlikePhotoResult = Observable.merge(
-            likePhotoAction.elements,
-            unlikePhotoAction.elements)
+        photoStream = Observable.just(photo)
 
         regularPhoto = photoStream
             .map { $0.urls?.regular ?? "" }
@@ -165,15 +166,16 @@ class PhotoViewModel: PhotoViewModelType,
                 Double(height * Int(UIScreen.main.bounds.width) / width)
         }
 
-        totalLikes = Observable.merge(photoStream, likeUnlikePhotoResult)
+        totalLikes = Observable.merge(photoStream, photoStreamProperty)
             .map { $0.likes ?? 0 }
             .map { likes in
                 guard likes != 0 else { return "" }
                 return likes.abbreviated
         }
 
-        likedByUser = Observable.merge(photoStream, likeUnlikePhotoResult)
+        likedByUser = Observable.merge(photoStream, photoStreamProperty)
             .map { $0.likedByUser ?? false }
+
     }
 
     // MARK: Helpers

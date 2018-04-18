@@ -37,9 +37,9 @@
 		DC5AF74C1FACF18600ADA2BB /* Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF74B1FACF18600ADA2BB /* Exif.swift */; };
 		DC5AF74D1FACF18600ADA2BB /* Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF74B1FACF18600ADA2BB /* Exif.swift */; };
 		DC5AF74E1FACF18600ADA2BB /* Exif.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF74B1FACF18600ADA2BB /* Exif.swift */; };
-		DC5AF7501FAD027F00ADA2BB /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF74F1FAD027F00ADA2BB /* Collection.swift */; };
-		DC5AF7511FAD027F00ADA2BB /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF74F1FAD027F00ADA2BB /* Collection.swift */; };
-		DC5AF7521FAD027F00ADA2BB /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF74F1FAD027F00ADA2BB /* Collection.swift */; };
+		DC5AF7501FAD027F00ADA2BB /* PhotoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF74F1FAD027F00ADA2BB /* PhotoCollection.swift */; };
+		DC5AF7511FAD027F00ADA2BB /* PhotoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF74F1FAD027F00ADA2BB /* PhotoCollection.swift */; };
+		DC5AF7521FAD027F00ADA2BB /* PhotoCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF74F1FAD027F00ADA2BB /* PhotoCollection.swift */; };
 		DC5AF7551FAD2EF900ADA2BB /* Scope.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7541FAD2EF900ADA2BB /* Scope.swift */; };
 		DC5AF7561FAD2EF900ADA2BB /* Scope.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7541FAD2EF900ADA2BB /* Scope.swift */; };
 		DC5AF7571FAD2EF900ADA2BB /* Scope.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7541FAD2EF900ADA2BB /* Scope.swift */; };
@@ -220,7 +220,7 @@
 		DC5AF7431FACEF2700ADA2BB /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		DC5AF7471FACEF5500ADA2BB /* ImageURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageURLs.swift; sourceTree = "<group>"; };
 		DC5AF74B1FACF18600ADA2BB /* Exif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exif.swift; sourceTree = "<group>"; };
-		DC5AF74F1FAD027F00ADA2BB /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		DC5AF74F1FAD027F00ADA2BB /* PhotoCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollection.swift; sourceTree = "<group>"; };
 		DC5AF7541FAD2EF900ADA2BB /* Scope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scope.swift; sourceTree = "<group>"; };
 		DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBy.swift; sourceTree = "<group>"; };
 		DC66C92E2052BA0300831478 /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
@@ -487,7 +487,7 @@
 				DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */,
 				DCCCFCC0203A4A530024D417 /* Category.swift */,
 				DC7F20921FADD3400017C14A /* SearchResults.swift */,
-				DC5AF74F1FAD027F00ADA2BB /* Collection.swift */,
+				DC5AF74F1FAD027F00ADA2BB /* PhotoCollection.swift */,
 				DC5AF73F1FACE6A300ADA2BB /* Photo.swift */,
 				DC5AF74B1FACF18600ADA2BB /* Exif.swift */,
 				DC5AF7431FACEF2700ADA2BB /* Location.swift */,
@@ -986,7 +986,7 @@
 				DCBB1B671FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
 				DCC8CA1A2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
 				DCB433CF204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */,
-				DC5AF7501FAD027F00ADA2BB /* Collection.swift in Sources */,
+				DC5AF7501FAD027F00ADA2BB /* PhotoCollection.swift in Sources */,
 				DC5AF72F1FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DCBB1B741FA8D597004E95F0 /* Unsplash.swift in Sources */,
 			);
@@ -1029,7 +1029,7 @@
 				DC99FB932003A7DB001195FD /* PhotoService.swift in Sources */,
 				DCEE1F0C1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCCCFCBE203A45DE0024D417 /* Links.swift in Sources */,
-				DC5AF7511FAD027F00ADA2BB /* Collection.swift in Sources */,
+				DC5AF7511FAD027F00ADA2BB /* PhotoCollection.swift in Sources */,
 				DCCD04152059C19D00670B70 /* UserServiceType.swift in Sources */,
 				DCBAEE6420363CD600561CBA /* Orientation.swift in Sources */,
 				DCBB1B751FA8D597004E95F0 /* Unsplash.swift in Sources */,
@@ -1085,7 +1085,7 @@
 				DCCCFCC7203A52410024D417 /* Resolution.swift in Sources */,
 				DCEE1F0D1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCBE0090202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
-				DC5AF7521FAD027F00ADA2BB /* Collection.swift in Sources */,
+				DC5AF7521FAD027F00ADA2BB /* PhotoCollection.swift in Sources */,
 				DCBB1B761FA8D597004E95F0 /* Unsplash.swift in Sources */,
 				DC5AF7291FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC1F1506203195410025F70B /* UIScrollView+Extentions.swift in Sources */,

@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxDataSources
 
-typealias HomeSectionModel = SectionModel<String, Photo>
+typealias HomeSectionModel = SectionModel<String, HomeViewCellModelType>
 
 class HomeViewController: UIViewController, BindableType {
     
@@ -84,9 +84,9 @@ class HomeViewController: UIViewController, BindableType {
             .map { $0.string }
             .bind(to: navBarButton.rx.title())
             .disposed(by: disposeBag)
-
-        outputs.photos
-            .map { [SectionModel(model: "", items: $0)] }
+        
+        outputs.homeViewCellModelTypes
+            .map { [HomeSectionModel(model: "", items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
         
@@ -129,10 +129,13 @@ class HomeViewController: UIViewController, BindableType {
     }
 
     var tableViewDataSource: TableViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
-        return { [unowned self] _, tv, ip, i in
-                var cell = tv.dequeueResuableCell(type: HomeViewCell.self, forIndexPath: ip)
-                cell.bind(to: self.viewModel.createHomeViewCellModel(for: i))
-                return cell
-            }
+        return {  _, tableView, indexPath, cellModel in
+            var cell = tableView.dequeueResuableCell(
+                type: HomeViewCell.self,
+                forIndexPath: indexPath)
+            cell.bind(to: cellModel)
+
+            return cell
+        }
     }
 }

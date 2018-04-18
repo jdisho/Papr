@@ -15,8 +15,8 @@ protocol PhotoDetailsViewModelInput: PhotoViewModelInput {
 }
 
 protocol PhotoDetailsViewModelOutput: PhotoViewModelOutput {
-    var totalViews: Observable<String> { get }
-    var totalDownloads: Observable<String> { get }
+    var totalViews: Observable<String>! { get }
+    var totalDownloads: Observable<String>! { get }
 }
 
 protocol PhotoDetailsViewModelType: PhotoViewModelType {
@@ -44,22 +44,21 @@ class PhotoDetailsViewModel: PhotoViewModel,
     }()
 
     // MARK: Outputs
-    let totalViews: Observable<String>
-    let totalDownloads: Observable<String>
+    var totalViews: Observable<String>!
+    var totalDownloads: Observable<String>!
 
-    override init(photo: Photo,
-                  service: PhotoServiceType = PhotoService(),
-                  sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
-
-        let photoStream = service
-            .photo(withId: photo.id ?? "")
-
-        totalViews = photoStream
-            .map { $0.views?.abbreviated ?? "0" }
-
-        totalDownloads = photoStream
-            .map { $0.downloads?.abbreviated ?? "0" }
+    override init(
+        photo: Photo,
+        service: PhotoServiceType = PhotoService(),
+        sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared
+        ) {
 
         super.init(photo: photo, service: service)
+
+        totalViews = service.photo(withId: photo.id ?? "")
+            .map { $0.views?.abbreviated ?? "0" }
+
+        totalDownloads = service.photo(withId: photo.id ?? "")
+            .map { $0.downloads?.abbreviated ?? "0" }
     }
 }

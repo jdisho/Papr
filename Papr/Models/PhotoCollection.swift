@@ -1,12 +1,12 @@
 //
-//  Collection.swift
+//  PhotoCollection.swift
 //  Papr
 //
 //  Created by Joan Disho on 03.11.17.
 //  Copyright © 2017 Joan Disho. All rights reserved.
 //
 
-struct Collection: Codable {
+struct PhotoCollection: Codable {
     let id: Int?
     let coverPhoto: Photo?
     let isCurated: Bool?
