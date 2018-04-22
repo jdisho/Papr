@@ -13,15 +13,55 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PhotoCollectionViewCell" customModule="Papr" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="100" height="134"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="100" height="134"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unsplash-icon-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="X5o-3o-qyp">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="100" id="hyl-Fv-SWC"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bic-E6-7fO">
+                        <rect key="frame" x="8" y="108" width="84" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wlc-8v-C5b">
+                        <rect key="frame" x="67" y="8" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="4PK-aX-q18"/>
+                            <constraint firstAttribute="width" constant="25" id="5fH-Fe-pau"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
             </view>
-            <color key="backgroundColor" red="0.2274509804" green="0.68627450980000004" blue="0.85490196080000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="X5o-3o-qyp" secondAttribute="trailing" id="557-jt-cF6"/>
+                <constraint firstItem="bic-E6-7fO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="G6Q-RL-fVG"/>
+                <constraint firstAttribute="trailing" secondItem="bic-E6-7fO" secondAttribute="trailing" constant="8" id="I9Q-DW-nGo"/>
+                <constraint firstAttribute="bottom" secondItem="bic-E6-7fO" secondAttribute="bottom" constant="8" id="Moa-EN-xiR"/>
+                <constraint firstAttribute="trailing" secondItem="wlc-8v-C5b" secondAttribute="trailing" constant="8" id="Vfn-S0-HgR"/>
+                <constraint firstItem="bic-E6-7fO" firstAttribute="top" secondItem="X5o-3o-qyp" secondAttribute="bottom" constant="8" id="Way-uZ-QIa"/>
+                <constraint firstItem="X5o-3o-qyp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fgd-es-7qj"/>
+                <constraint firstItem="wlc-8v-C5b" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="yu2-jI-AuS"/>
+                <constraint firstItem="X5o-3o-qyp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ze4-N4-tme"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <point key="canvasLocation" x="-69" y="12"/>
+            <size key="customSize" width="99" height="141"/>
+            <connections>
+                <outlet property="collectionCoverImageView" destination="X5o-3o-qyp" id="387-FY-fQ7"/>
+                <outlet property="collectionTitle" destination="bic-E6-7fO" id="YLZ-UB-i2R"/>
+            </connections>
+            <point key="canvasLocation" x="-142" y="-49.5"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="unsplash-icon-placeholder" width="300" height="300"/>
+    </resources>
 </document>

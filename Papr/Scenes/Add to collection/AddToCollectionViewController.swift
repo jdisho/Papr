@@ -61,6 +61,9 @@ class AddToCollectionViewController: UIViewController, BindableType {
     // MARK: UI
     private func configureCollectionView() {
         collectionView.registerCell(type: PhotoCollectionViewCell.self)
+        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        flowLayout.itemSize = CGSize(width: 100, height: 134)
 
         dataSource = RxCollectionViewSectionedReloadDataSource<AddToCollectionSectionModel>(
             configureCell:  collectionViewDataSource
