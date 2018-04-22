@@ -44,9 +44,13 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
     var collectionCellModelTypes: Observable<[PhotoCollectionCellModelType]>!
 
     // MARK: Private
+    private let service: CollectionServiceType
     private let sceneCoordinator: SceneCoordinatorType
 
-    init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+    init(service: CollectionServiceType = CollectionService(),
+        sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+
+        self.service = service
         self.sceneCoordinator = sceneCoordinator
     }
 
