@@ -39,7 +39,11 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
     // MARK: Inputs
     lazy var addAction: CocoaAction = {
         return CocoaAction {
-            .empty()
+            guard let collectionID = self.photoCollection.id,
+                let photoID = self.photo.id else { return Observable.empty() }
+            return self.service.addPhotoToCollection(
+                withCollectionId: collectionID,
+                photoId: photoID)
         }
     }()
 

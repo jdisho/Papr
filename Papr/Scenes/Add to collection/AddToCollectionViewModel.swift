@@ -44,7 +44,9 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
     lazy var  collectionCellModelTypes: Observable<[PhotoCollectionCellModelType]> = {
         return Observable.combineLatest(Observable.just(photo), service.myCollections())
             .map { photo, collections in
-                return collections.map { PhotoCollectionCellModel(photo: photo, photoCollection: $0) }
+                collections.map {
+                    PhotoCollectionCellModel(photo: photo, photoCollection: $0)
+                }
             }
     }()
 

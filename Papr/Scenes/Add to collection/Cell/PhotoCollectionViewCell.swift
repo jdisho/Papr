@@ -49,6 +49,8 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
 
+        addToCollectionButton.rx.action = inputs.addAction
+        
         outputs.coverPhotoURL
             .flatMap { PhotoCollectionViewCell.nukeManager.loadImage(with: $0).orEmpty }
             .bind(to: collectionCoverImageView.rx.image)

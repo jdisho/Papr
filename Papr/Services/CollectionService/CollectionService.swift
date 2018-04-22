@@ -40,6 +40,12 @@ struct CollectionService: CollectionServiceType {
             .asObservable()
     }
 
+    func addPhotoToCollection(withCollectionId id: Int, photoId: String) -> Observable<Void> {
+        return unsplash.rx.request(.addPhotoToCollection(collectionID: id, photoID: photoId))
+            .asObservable()
+            .ignoreAll()
+    }
+
     
 }
 

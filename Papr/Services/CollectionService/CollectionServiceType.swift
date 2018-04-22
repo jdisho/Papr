@@ -12,4 +12,5 @@ import RxSwift
 protocol CollectionServiceType {
     func myCollections() -> Observable<[PhotoCollection]>
     func photos(fromCollectionId id: Int) -> Observable<[Photo]>
+    func addPhotoToCollection(withCollectionId id: Int, photoId: String) -> Observable<Void>
 }
