@@ -6,6 +6,8 @@
 //  Copyright © 2017 Joan Disho. All rights reserved.
 //
 
+import RxDataSources
+
 struct PhotoCollection: Codable {
     let id: Int?
     let coverPhoto: Photo?
@@ -35,3 +37,13 @@ struct PhotoCollection: Codable {
         case links
     }
 }
+
+extension PhotoCollection: IdentifiableType {
+    typealias Identity = Int
+
+    var identity: Identity {
+        guard id != nil else { return -999 }
+        return id!
+    }
+}
+

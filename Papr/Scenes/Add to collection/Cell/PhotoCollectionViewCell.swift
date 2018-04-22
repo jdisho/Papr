@@ -8,11 +8,17 @@
 
 import UIKit
 
-class PhotoCollectionViewCell: UICollectionViewCell {
+class PhotoCollectionViewCell: UICollectionViewCell, BindableType {
+
+    // MARK: ViewModel
+    var viewModel: PhotoCollectionCellModelType!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+    }
+
+    func bindViewModel() {
+        
     }
 
 }

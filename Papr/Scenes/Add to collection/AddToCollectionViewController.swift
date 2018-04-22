@@ -9,8 +9,11 @@
 import UIKit
 import RxSwift
 import Action
+import RxDataSources
 
 class AddToCollectionViewController: UIViewController, BindableType {
+
+    typealias AddToCollectionSectionModel = SectionModel<String, PhotoCollectionCellModelType>
 
     // MARK: ViewModel
     var viewModel: AddToCollectionViewModel!
@@ -22,6 +25,7 @@ class AddToCollectionViewController: UIViewController, BindableType {
     @IBOutlet var transparentViewContainer: UIView!
 
     // MARK: Private
+    private var dataSource: RxCollectionViewSectionedReloadDataSource<AddToCollectionSectionModel>!
     private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -49,8 +53,24 @@ class AddToCollectionViewController: UIViewController, BindableType {
 
     }
 
+    // MARK: UI
     private func configureCollectionView() {
         collectionView.registerCell(type: PhotoCollectionViewCell.self)
+
+        dataSource = RxCollectionViewSectionedReloadDataSource<AddToCollectionSectionModel>(
+            configureCell:  collectionViewDataSource
+        )
+    }
+
+    var collectionViewDataSource: CollectionViewSectionedDataSource<AddToCollectionSectionModel>.ConfigureCell {
+        return { _, collectionView, indexPath, cellModel in
+            var cell = collectionView.dequeueReusableCell(
+                type: PhotoCollectionViewCell.self,
+                forIndexPath: indexPath)
+            cell.bind(to: cellModel)
+
+            return cell
+        }
     }
 
     private func showOverlayView() {
@@ -62,4 +82,5 @@ class AddToCollectionViewController: UIViewController, BindableType {
             })
         }
     }
+
 }

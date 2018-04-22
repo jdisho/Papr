@@ -10,9 +10,9 @@ import UIKit
 import RxSwift
 import RxDataSources
 
-typealias HomeSectionModel = SectionModel<String, HomeViewCellModelType>
-
 class HomeViewController: UIViewController, BindableType {
+
+    typealias HomeSectionModel = SectionModel<String, HomeViewCellModelType>
     
     // MARK: ViewModel
     var viewModel: HomeViewModelType!
@@ -129,7 +129,7 @@ class HomeViewController: UIViewController, BindableType {
     }
 
     var tableViewDataSource: TableViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
-        return {  _, tableView, indexPath, cellModel in
+        return { _, tableView, indexPath, cellModel in
             var cell = tableView.dequeueResuableCell(
                 type: HomeViewCell.self,
                 forIndexPath: indexPath)
