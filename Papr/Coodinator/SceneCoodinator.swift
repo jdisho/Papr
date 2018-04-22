@@ -52,7 +52,7 @@ class SceneCoordinator: SceneCoordinatorType {
                 .rx
                 .delegate
                 .sentMessage(#selector(UINavigationControllerDelegate.navigationController(_:didShow:animated:)))
-                .map{_ in }
+                .map{ _ in }
                 .bind(to: subject)
             
             navigationController.pushViewController(viewController, animated: true)

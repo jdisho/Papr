@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import Action
 
 class AddToCollectionViewController: UIViewController, BindableType {
 
@@ -19,17 +21,45 @@ class AddToCollectionViewController: UIViewController, BindableType {
     @IBOutlet var cancelButton: UIButton!
     @IBOutlet var transparentViewContainer: UIView!
 
+    // MARK: Private
+    private let disposeBag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.transparentViewContainer.backgroundColor = .black
-                self.transparentViewContainer.alpha = 0.2
-            })
-        }
+
+        showOverlayView()
+        configureCollectionView()
     }
 
     func bindViewModel() {
+        let inputs = viewModel.inputs
+        let outputs = viewModel.outputs
 
+        cancelButton.rx.controlEvent(.touchUpInside)
+            .subscribe(onNext: { [unowned self] in
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.transparentViewContainer.backgroundColor = .clear
+                })
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    inputs.cancelAction.execute(())
+                }
+            })
+            .disposed(by: disposeBag)
+
+    }
+
+    private func configureCollectionView() {
+        collectionView.registerCell(type: PhotoCollectionViewCell.self)
+    }
+
+    private func showOverlayView() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.transparentViewContainer.backgroundColor = .black
+                self.transparentViewContainer.alpha = 0.2
+
+            })
+        }
     }
 }
