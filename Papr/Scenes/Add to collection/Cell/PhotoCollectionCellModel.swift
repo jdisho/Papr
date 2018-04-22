@@ -36,5 +36,10 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
 
 
     // MARK: Outputs
+    private let photoCollection: PhotoCollection
+
+    init(photoCollection: PhotoCollection) {
+        self.photoCollection = photoCollection
+    }
 
 }

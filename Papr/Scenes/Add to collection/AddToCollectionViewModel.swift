@@ -17,7 +17,7 @@ protocol AddToCollectionViewModelInput {
 
 protocol AddToCollectionViewModelOutput {
     /// Emites the child viewModels
-    var collectionCellModelTypes: Observable<[PhotoCollectionCellModelType]>! { get }
+    var collectionCellModelTypes: Observable<[PhotoCollectionCellModelType]> { get }
 }
 
 protocol AddToCollectionViewModelType {
@@ -41,7 +41,10 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
     }()
 
     // MARK: Outputs
-    var collectionCellModelTypes: Observable<[PhotoCollectionCellModelType]>!
+    lazy var  collectionCellModelTypes: Observable<[PhotoCollectionCellModelType]> = {
+        return service.myCollections()
+            .mapMany { PhotoCollectionCellModel(photoCollection: $0) }
+    }()
 
     // MARK: Private
     private let service: CollectionServiceType

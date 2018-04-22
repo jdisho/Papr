@@ -128,7 +128,7 @@ class HomeViewController: UIViewController, BindableType {
         viewModel.inputs.refresh()
     }
 
-    var tableViewDataSource: TableViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
+    private var tableViewDataSource: TableViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
         return { _, tableView, indexPath, cellModel in
             var cell = tableView.dequeueResuableCell(
                 type: HomeViewCell.self,

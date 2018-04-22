@@ -39,6 +39,11 @@ class AddToCollectionViewController: UIViewController, BindableType {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
 
+        outputs.collectionCellModelTypes
+            .map { [AddToCollectionSectionModel(model: "", items: $0)] }
+            .bind(to: collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+
         cancelButton.rx.controlEvent(.touchUpInside)
             .subscribe(onNext: { [unowned self] in
                 UIView.animate(withDuration: 0.2, animations: {
@@ -62,7 +67,7 @@ class AddToCollectionViewController: UIViewController, BindableType {
         )
     }
 
-    var collectionViewDataSource: CollectionViewSectionedDataSource<AddToCollectionSectionModel>.ConfigureCell {
+    private var collectionViewDataSource: CollectionViewSectionedDataSource<AddToCollectionSectionModel>.ConfigureCell {
         return { _, collectionView, indexPath, cellModel in
             var cell = collectionView.dequeueReusableCell(
                 type: PhotoCollectionViewCell.self,
