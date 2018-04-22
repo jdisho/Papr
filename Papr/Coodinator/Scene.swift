@@ -20,6 +20,7 @@ enum Scene {
     case home(HomeViewModel)
     case alert(AlertViewModel)
     case photoDetails(PhotoDetailsViewModel)
+    case addToCollection(AddToCollectionViewModel)
 }
 
 extension Scene {
@@ -40,6 +41,11 @@ extension Scene {
             return vc
         case let .photoDetails(viewModel):
             var vc = PhotoDetailsViewController.instantiateFromNib()
+            vc.bind(to: viewModel)
+            return vc
+        case let .addToCollection(viewModel):
+            var vc = AddToCollectionViewController.instantiateFromNib()
+            vc.modalPresentationStyle = .overCurrentContext
             vc.bind(to: viewModel)
             return vc
         }

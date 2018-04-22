@@ -81,13 +81,15 @@ class HomeViewCell: UITableViewCell, BindableType {
             .disposed(by: disposeBag)
 
         outputs.photoStream
-            .subscribe { photo in
+            .subscribe { [unowned self] photo in
                 guard let photo = photo.element else { return }
                 self.photoButton.rx
                     .bind(to: inputs.photoDetailsAction, input: photo)
+                self.collectPhotoButton.rx
+                    .bind(to: inputs.userCollectionsAction, input: photo)
             }
             .disposed(by: disposeBag)
-        
+
         outputs.userProfileImage
             .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }
             .bind(to: userImageView.rx.image)

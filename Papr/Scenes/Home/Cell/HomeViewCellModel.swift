@@ -12,6 +12,7 @@ import Action
 
 protocol HomeViewCellModelInput: PhotoViewModelInput {
     var photoDetailsAction: Action<Photo, Photo> { get }
+    var userCollectionsAction: Action<Photo, Void> { get }
 }
 
 protocol HomeViewCellModelOutput: PhotoViewModelOutput {
@@ -41,10 +42,17 @@ class HomeViewCellModel: PhotoViewModel,
 
     // MARK: Input
     lazy var photoDetailsAction: Action<Photo, Photo> = {
-        return Action<Photo, Photo> { photo in
+        return Action<Photo, Photo> { [unowned self] photo in
             let viewModel = PhotoDetailsViewModel(photo: photo)
             self.sceneCoordinator.transition(to: .photoDetails(viewModel), type: .modal)
             return .just(photo)
+        }
+    }()
+
+    lazy var userCollectionsAction: Action<Photo, Void> = {
+        return Action<Photo, Void> { [unowned self] photo in
+            let viewModel = AddToCollectionViewModel()
+            return self.sceneCoordinator.transition(to: Scene.addToCollection(viewModel), type: .modal)
         }
     }()
 

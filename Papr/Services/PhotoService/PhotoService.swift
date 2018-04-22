@@ -13,7 +13,7 @@ import Moya
 struct PhotoService: PhotoServiceType {
 
     private var unsplash: MoyaProvider<Unsplash>
-//    plugins: [NetworkLoggerPlugin(verbose: true)])
+    //plugins: [NetworkLoggerPlugin(verbose: false)])
 
     init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>()) {
         self.unsplash = unsplash

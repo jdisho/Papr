@@ -46,6 +46,21 @@
 		DC5AF7591FAD2F1E00ADA2BB /* OrderBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */; };
 		DC5AF75A1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */; };
 		DC5AF75B1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */; };
+		DC658D85208CEEE500FEBC31 /* AddToCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC658D83208CEEE500FEBC31 /* AddToCollectionViewController.swift */; };
+		DC658D86208CEEE500FEBC31 /* AddToCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC658D83208CEEE500FEBC31 /* AddToCollectionViewController.swift */; };
+		DC658D87208CEEE500FEBC31 /* AddToCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC658D83208CEEE500FEBC31 /* AddToCollectionViewController.swift */; };
+		DC658D88208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC658D84208CEEE500FEBC31 /* AddToCollectionViewController.xib */; };
+		DC658D89208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC658D84208CEEE500FEBC31 /* AddToCollectionViewController.xib */; };
+		DC658D8A208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC658D84208CEEE500FEBC31 /* AddToCollectionViewController.xib */; };
+		DC658D8C208CEF0300FEBC31 /* AddToCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC658D8B208CEF0300FEBC31 /* AddToCollectionViewModel.swift */; };
+		DC658D8D208CEF0300FEBC31 /* AddToCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC658D8B208CEF0300FEBC31 /* AddToCollectionViewModel.swift */; };
+		DC658D8E208CEF0300FEBC31 /* AddToCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC658D8B208CEF0300FEBC31 /* AddToCollectionViewModel.swift */; };
+		DC658D92208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC658D90208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift */; };
+		DC658D93208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC658D90208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift */; };
+		DC658D94208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC658D90208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift */; };
+		DC658D95208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC658D91208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib */; };
+		DC658D96208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC658D91208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib */; };
+		DC658D97208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC658D91208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib */; };
 		DC66C92F2052BA0300831478 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66C92E2052BA0300831478 /* PhotoViewModel.swift */; };
 		DC66C9302052BA0300831478 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66C92E2052BA0300831478 /* PhotoViewModel.swift */; };
 		DC66C9312052BA0300831478 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66C92E2052BA0300831478 /* PhotoViewModel.swift */; };
@@ -223,6 +238,11 @@
 		DC5AF74F1FAD027F00ADA2BB /* PhotoCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollection.swift; sourceTree = "<group>"; };
 		DC5AF7541FAD2EF900ADA2BB /* Scope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scope.swift; sourceTree = "<group>"; };
 		DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBy.swift; sourceTree = "<group>"; };
+		DC658D83208CEEE500FEBC31 /* AddToCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCollectionViewController.swift; sourceTree = "<group>"; };
+		DC658D84208CEEE500FEBC31 /* AddToCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddToCollectionViewController.xib; sourceTree = "<group>"; };
+		DC658D8B208CEF0300FEBC31 /* AddToCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCollectionViewModel.swift; sourceTree = "<group>"; };
+		DC658D90208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		DC658D91208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		DC66C92E2052BA0300831478 /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
 		DC6CC643204CBD5300050589 /* PhotoStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStatistics.swift; sourceTree = "<group>"; };
 		DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthManager.swift; sourceTree = "<group>"; };
@@ -354,6 +374,26 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
+		DC658D82208CEDEF00FEBC31 /* Add to collection */ = {
+			isa = PBXGroup;
+			children = (
+				DC658D8F208CFD9100FEBC31 /* Cell */,
+				DC658D83208CEEE500FEBC31 /* AddToCollectionViewController.swift */,
+				DC658D8B208CEF0300FEBC31 /* AddToCollectionViewModel.swift */,
+				DC658D84208CEEE500FEBC31 /* AddToCollectionViewController.xib */,
+			);
+			path = "Add to collection";
+			sourceTree = "<group>";
+		};
+		DC658D8F208CFD9100FEBC31 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DC658D90208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift */,
+				DC658D91208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		DC66C92D2052B9EB00831478 /* Common ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,6 +490,7 @@
 		DCBB1B4F1FA8B774004E95F0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DC658D82208CEDEF00FEBC31 /* Add to collection */,
 				DC66C92D2052B9EB00831478 /* Common ViewModels */,
 				DCB433C5204B5B8C00C6C80C /* Photo Details */,
 				DCC8CA032002BEC200F6C540 /* Home */,
@@ -727,6 +768,8 @@
 				DCBB1B2C1FA7B1BD004E95F0 /* LaunchScreen.storyboard in Resources */,
 				DCBB1B291FA7B1BD004E95F0 /* Assets.xcassets in Resources */,
 				DCC8CA0A2002BEE300F6C540 /* HomeViewController.xib in Resources */,
+				DC658D95208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
+				DC658D88208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
 				DCC8CA162002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DCBB1B271FA7B1BD004E95F0 /* Main.storyboard in Resources */,
 				DCBB1B631FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
@@ -741,6 +784,8 @@
 				DCC8CA172002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DCBB1B641FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 				DCB433CC204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
+				DC658D89208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
+				DC658D96208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
 				DCC8CA0B2002BEE300F6C540 /* HomeViewController.xib in Resources */,
 				DCAF6BC2204D990A002B7F00 /* Assets.xcassets in Resources */,
 			);
@@ -753,6 +798,8 @@
 				DCC8CA182002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DCBB1B651FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 				DCB433CD204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
+				DC658D8A208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
+				DC658D97208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
 				DCC8CA0C2002BEE300F6C540 /* HomeViewController.xib in Resources */,
 				DCAF6BC3204D990A002B7F00 /* Assets.xcassets in Resources */,
 			);
@@ -950,9 +997,11 @@
 				DC5AF7551FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DCEE1F0B1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCBB1B591FA8B82F004E95F0 /* SceneCoodinator.swift in Sources */,
+				DC658D8C208CEF0300FEBC31 /* AddToCollectionViewModel.swift in Sources */,
 				DCC8CA0E2002BEF100F6C540 /* HomeViewModel.swift in Sources */,
 				DCBB1B701FA8BAC2004E95F0 /* BindableType.swift in Sources */,
 				DC5AF72B1FACCBF300ADA2BB /* User.swift in Sources */,
+				DC658D85208CEEE500FEBC31 /* AddToCollectionViewController.swift in Sources */,
 				DCEE1F0F1FC97CE80010BADE /* AlertViewModel.swift in Sources */,
 				DC71C3021FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				DC5AF74C1FACF18600ADA2BB /* Exif.swift in Sources */,
@@ -965,6 +1014,7 @@
 				DCCCFCC1203A4A530024D417 /* Category.swift in Sources */,
 				DCBB1B551FA8B814004E95F0 /* Scene.swift in Sources */,
 				DC99FB922003A7DB001195FD /* PhotoService.swift in Sources */,
+				DC658D92208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */,
 				DC5AF7271FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DCBB1B6C1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */,
@@ -1013,6 +1063,7 @@
 				DCAF6BC0204D465E002B7F00 /* Int+Extentions.swift in Sources */,
 				DCBB1B371FA7B1BD004E95F0 /* PaprTests.swift in Sources */,
 				DC7F20941FADD3400017C14A /* SearchResults.swift in Sources */,
+				DC658D86208CEEE500FEBC31 /* AddToCollectionViewController.swift in Sources */,
 				DCC8CA1B2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
 				DCDDF32B2027DA5F00E1EB81 /* UIView+Extentions.swift in Sources */,
 				DCBB1B6D1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
@@ -1036,11 +1087,13 @@
 				DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC5AF7491FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DC9147952082B9B500781B65 /* Hero+Rx.swift in Sources */,
+				DC658D93208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */,
 				DCBB1B611FA8BA22004E95F0 /* LoginViewController.swift in Sources */,
 				DCEE1F101FC97CE80010BADE /* AlertViewModel.swift in Sources */,
 				DCBB1B681FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
 				DC92230A203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DCBB1B711FA8BAC2004E95F0 /* BindableType.swift in Sources */,
+				DC658D8D208CEF0300FEBC31 /* AddToCollectionViewModel.swift in Sources */,
 				DC5AF7561FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DC1F1505203195410025F70B /* UIScrollView+Extentions.swift in Sources */,
 				DCEE1F151FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
@@ -1059,6 +1112,7 @@
 				DCC8CA092002BEE300F6C540 /* HomeViewController.swift in Sources */,
 				DCC8CA102002BEF100F6C540 /* HomeViewModel.swift in Sources */,
 				DC92230B203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
+				DC658D87208CEEE500FEBC31 /* AddToCollectionViewController.swift in Sources */,
 				DC9147962082B9B500781B65 /* Hero+Rx.swift in Sources */,
 				DC71C3DD1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
 				DCC8CA152002CC2700F6C540 /* HomeViewCell.swift in Sources */,
@@ -1069,11 +1123,13 @@
 				DCBB1B6E1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DCDDF3282027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
 				DC71C3041FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
+				DC658D94208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */,
 				DCB433D1204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */,
 				DC6CC646204CBD5300050589 /* PhotoStatistics.swift in Sources */,
 				DC99FB902003A7CC001195FD /* PhotoServiceType.swift in Sources */,
 				DC5AF72D1FACCBF300ADA2BB /* User.swift in Sources */,
 				DC7CF5841FC464BF006E0A39 /* URL.swift in Sources */,
+				DC658D8E208CEF0300FEBC31 /* AddToCollectionViewModel.swift in Sources */,
 				DCBAEE6520363CD600561CBA /* Orientation.swift in Sources */,
 				DC5AF7311FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DCC8CA202002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
