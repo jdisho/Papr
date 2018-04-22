@@ -31,34 +31,36 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wlc-8v-C5b">
-                        <rect key="frame" x="67" y="8" width="25" height="25"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYP-xa-xdJ">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="25" id="4PK-aX-q18"/>
-                            <constraint firstAttribute="width" constant="25" id="5fH-Fe-pau"/>
+                            <constraint firstAttribute="height" constant="100" id="moK-Ef-eca"/>
                         </constraints>
-                    </imageView>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </button>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="X5o-3o-qyp" secondAttribute="trailing" id="557-jt-cF6"/>
+                <constraint firstAttribute="trailing" secondItem="cYP-xa-xdJ" secondAttribute="trailing" id="8fF-Oj-yfi"/>
                 <constraint firstItem="bic-E6-7fO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="G6Q-RL-fVG"/>
                 <constraint firstAttribute="trailing" secondItem="bic-E6-7fO" secondAttribute="trailing" constant="8" id="I9Q-DW-nGo"/>
                 <constraint firstAttribute="bottom" secondItem="bic-E6-7fO" secondAttribute="bottom" constant="8" id="Moa-EN-xiR"/>
-                <constraint firstAttribute="trailing" secondItem="wlc-8v-C5b" secondAttribute="trailing" constant="8" id="Vfn-S0-HgR"/>
+                <constraint firstItem="cYP-xa-xdJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Oxt-CF-Y8k"/>
                 <constraint firstItem="bic-E6-7fO" firstAttribute="top" secondItem="X5o-3o-qyp" secondAttribute="bottom" constant="8" id="Way-uZ-QIa"/>
                 <constraint firstItem="X5o-3o-qyp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fgd-es-7qj"/>
-                <constraint firstItem="wlc-8v-C5b" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="yu2-jI-AuS"/>
+                <constraint firstItem="cYP-xa-xdJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="n2r-ec-0Ek"/>
                 <constraint firstItem="X5o-3o-qyp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ze4-N4-tme"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="99" height="141"/>
             <connections>
+                <outlet property="addToCollectionButton" destination="cYP-xa-xdJ" id="gIz-nb-PB7"/>
                 <outlet property="collectionCoverImageView" destination="X5o-3o-qyp" id="387-FY-fQ7"/>
                 <outlet property="collectionTitle" destination="bic-E6-7fO" id="YLZ-UB-i2R"/>
             </connections>
-            <point key="canvasLocation" x="-142" y="-49.5"/>
+            <point key="canvasLocation" x="-142" y="-50"/>
         </collectionViewCell>
     </objects>
     <resources>

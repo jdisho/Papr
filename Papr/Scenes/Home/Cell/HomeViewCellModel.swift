@@ -51,7 +51,7 @@ class HomeViewCellModel: PhotoViewModel,
 
     lazy var userCollectionsAction: Action<Photo, Void> = {
         return Action<Photo, Void> { [unowned self] photo in
-            let viewModel = AddToCollectionViewModel()
+            let viewModel = AddToCollectionViewModel(photo: photo)
             return self.sceneCoordinator.transition(to: Scene.addToCollection(viewModel), type: .modal)
         }
     }()

@@ -19,7 +19,8 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType {
     // MARK: IBOutlets
     @IBOutlet var collectionTitle: UILabel!
     @IBOutlet var collectionCoverImageView: UIImageView!
-//    @IBOutlet var isPrivateIconImageView: UIImageView!
+    @IBOutlet var addToCollectionButton: UIButton!
+
 
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
@@ -30,12 +31,16 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType {
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionCoverImageView.rounded(withRadius: 10)
+        addToCollectionButton.rounded(withRadius: 10)
+        addToCollectionButton.isExclusiveTouch = true
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
 
         collectionCoverImageView.image = #imageLiteral(resourceName: "unsplash-icon-placeholder")
+        addToCollectionButton.rx.action = nil
+
         disposeBag = DisposeBag()
     }
 
@@ -53,6 +58,18 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType {
             .bind(to: collectionTitle.rx.text)
             .disposed(by: disposeBag)
 
+        outputs.isPhotoInCollection
+            .map { $0 ? .black : .clear }
+            .bind(to: addToCollectionButton.rx.backgroundColor)
+            .disposed(by: disposeBag)
+
+        outputs.isPhotoInCollection.map { $0 ? 0.6 : 1.0 }
+            .bind(to: addToCollectionButton.rx.alpha)
+            .disposed(by: disposeBag)
+
+        outputs.isPhotoInCollection.map { $0 ? #imageLiteral(resourceName: "done-white") : nil }
+            .bind(to: addToCollectionButton.rx.image())
+            .disposed(by: disposeBag)
 
     }
 

@@ -34,6 +34,12 @@ struct CollectionService: CollectionServiceType {
             }
     }
 
+    func photos(fromCollectionId id: Int) -> Observable<[Photo]> {
+        return unsplash.rx.request(.collectionPhotos(id: id, page: 1, perPage: 10))
+            .map([Photo].self)
+            .asObservable()
+    }
+
     
 }
 

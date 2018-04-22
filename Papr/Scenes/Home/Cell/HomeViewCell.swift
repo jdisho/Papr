@@ -52,6 +52,7 @@ class HomeViewCell: UITableViewCell, BindableType {
         photoImageView.image = nil
         dummyImageView.image = nil
         likeButton.rx.action = nil
+        photoButton.rx.action = nil
         disposeBag = DisposeBag()
     }
 

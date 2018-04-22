@@ -42,17 +42,22 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
 
     // MARK: Outputs
     lazy var  collectionCellModelTypes: Observable<[PhotoCollectionCellModelType]> = {
-        return service.myCollections()
-            .mapMany { PhotoCollectionCellModel(photoCollection: $0) }
+        return Observable.combineLatest(Observable.just(photo), service.myCollections())
+            .map { photo, collections in
+                return collections.map { PhotoCollectionCellModel(photo: photo, photoCollection: $0) }
+            }
     }()
 
     // MARK: Private
+    private let photo: Photo
     private let service: CollectionServiceType
     private let sceneCoordinator: SceneCoordinatorType
 
-    init(service: CollectionServiceType = CollectionService(),
-        sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+    init(photo: Photo,
+         service: CollectionServiceType = CollectionService(),
+         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
+        self.photo = photo
         self.service = service
         self.sceneCoordinator = sceneCoordinator
     }

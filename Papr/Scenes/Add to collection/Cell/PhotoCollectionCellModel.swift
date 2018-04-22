@@ -11,13 +11,14 @@ import RxSwift
 import Action
 
 protocol PhotoCollectionCellModelInput {
-    var addAction: Action<(photo: Photo, collection: PhotoCollection), Void> { get }
+    var addAction: CocoaAction { get }
 }
 
 protocol PhotoCollectionCellModelOutput {
     var coverPhotoURL: Observable<String> { get }
     var collectionName: Observable<String> { get }
     var isCollectionPrivate: Observable<Bool> { get }
+    var isPhotoInCollection: Observable<Bool> { get }
 }
 
 
@@ -36,9 +37,9 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
     var outputs: PhotoCollectionCellModelOutput { return self }
 
     // MARK: Inputs
-    lazy var addAction: Action<(photo: Photo, collection: PhotoCollection), Void> = {
-        return Action<(photo: Photo, collection: PhotoCollection), Void> { (photo, collection) in
-            return .empty()
+    lazy var addAction: CocoaAction = {
+        return CocoaAction {
+            .empty()
         }
     }()
 
@@ -46,12 +47,20 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
     let coverPhotoURL: Observable<String>
     let collectionName: Observable<String>
     let isCollectionPrivate: Observable<Bool>
+    let isPhotoInCollection: Observable<Bool>
 
     // MARK: Private
+    private let photo: Photo
     private let photoCollection: PhotoCollection
+    private let service: CollectionServiceType
 
-    init(photoCollection: PhotoCollection) {
+    init(photo: Photo,
+         photoCollection: PhotoCollection,
+         service: CollectionServiceType = CollectionService()) {
+
+        self.photo = photo
         self.photoCollection = photoCollection
+        self.service = service
 
         let photoCollectionStream = Observable.just(photoCollection)
 
@@ -64,6 +73,13 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
         isCollectionPrivate = photoCollectionStream
             .map { $0.isPrivate ?? false }
 
+        isPhotoInCollection = Observable.combineLatest(
+            Observable.just(photo),
+            service.photos(fromCollectionId: photoCollection.id ?? 0)
+            )
+            .map { newPhoto, photos -> Bool in
+                photos.contains(newPhoto)
+            }
 
     }
 
