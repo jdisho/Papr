@@ -11,13 +11,12 @@ import RxSwift
 import Action
 
 protocol AddToCollectionViewModelInput {
-    /// Call when cancel button is pressed
     var cancelAction: CocoaAction { get }
 }
 
 protocol AddToCollectionViewModelOutput {
-    /// Emites the child viewModels
     var collectionCellModelTypes: Observable<[PhotoCollectionCellModelType]> { get }
+    var photoStream: Observable<Photo> { get }
 }
 
 protocol AddToCollectionViewModelType {
@@ -41,6 +40,7 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
     }()
 
     // MARK: Outputs
+    let photoStream: Observable<Photo>
     lazy var  collectionCellModelTypes: Observable<[PhotoCollectionCellModelType]> = {
         return Observable.combineLatest(Observable.just(photo), service.myCollections())
             .map { photo, collections in
@@ -62,6 +62,8 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
         self.photo = photo
         self.service = service
         self.sceneCoordinator = sceneCoordinator
+
+        photoStream = Observable.just(photo)
     }
 
 }

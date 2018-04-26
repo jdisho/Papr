@@ -45,9 +45,9 @@ extension Scene {
             return vc
         case let .addToCollection(viewModel):
             var vc = AddToCollectionViewController.instantiateFromNib()
-            vc.modalPresentationStyle = .overCurrentContext
+            let rootViewController = UINavigationController(rootViewController: vc)
             vc.bind(to: viewModel)
-            return vc
+            return rootViewController
         }
     }
 }

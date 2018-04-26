@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import Action
 import RxDataSources
+import Nuke
 
 class AddToCollectionViewController: UIViewController, BindableType {
 
@@ -19,46 +20,68 @@ class AddToCollectionViewController: UIViewController, BindableType {
     var viewModel: AddToCollectionViewModel!
 
     // MARK: IBOutlets
-    @IBOutlet var addToCollectionButton: UIButton!
     @IBOutlet var collectionView: UICollectionView!
-    @IBOutlet var cancelButton: UIButton!
-    @IBOutlet var transparentViewContainer: UIView!
+    @IBOutlet var photoImageView: UIImageView!
+    @IBOutlet var photoActivityIndicator: UIActivityIndicatorView!
 
     // MARK: Private
     private var dataSource: RxCollectionViewSectionedReloadDataSource<AddToCollectionSectionModel>!
     private let disposeBag = DisposeBag()
+    private static let nukeManager = Nuke.Manager.shared
+    private var cancelBarButton: UIBarButtonItem!
+    private var addToCollectionBarButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        showOverlayView()
+        configureNavigationBar()
         configureCollectionView()
     }
 
     func bindViewModel() {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
+        let this = AddToCollectionViewController.self
+
+        outputs.photoStream
+            .map { $0.urls?.full }
+            .unwrap()
+            .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
+            .flatMapIgnore { [unowned self] _ in
+                Observable.just(self.photoActivityIndicator.stopAnimating())
+            }
+            .bind(to: photoImageView.rx.image)
+            .disposed(by: disposeBag)
 
         outputs.collectionCellModelTypes
             .map { [AddToCollectionSectionModel(model: "", items: $0)] }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
-        cancelButton.rx.controlEvent(.touchUpInside)
-            .subscribe(onNext: { [unowned self] in
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.transparentViewContainer.backgroundColor = .clear
-                })
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                    inputs.cancelAction.execute(())
-                }
-            })
-            .disposed(by: disposeBag)
+        cancelBarButton.rx.action = inputs.cancelAction
 
     }
 
     // MARK: UI
+    private func configureNavigationBar() {
+        title = "Add to collection"
+        cancelBarButton = UIBarButtonItem(
+            title: "Cancel",
+            style: .plain,
+            target: self,
+            action: nil
+        )
+        addToCollectionBarButton = UIBarButtonItem(
+            image: #imageLiteral(resourceName: "add-black"),
+            style: .plain,
+            target: self,
+            action: nil
+        )
+        navigationItem.leftBarButtonItem = cancelBarButton
+        navigationItem.rightBarButtonItem = addToCollectionBarButton
+        navigationController?.navigationBar.tintColor = .black
+    }
+
     private func configureCollectionView() {
         collectionView.registerCell(type: PhotoCollectionViewCell.self)
         guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
@@ -80,15 +103,4 @@ class AddToCollectionViewController: UIViewController, BindableType {
             return cell
         }
     }
-
-    private func showOverlayView() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.transparentViewContainer.backgroundColor = .black
-                self.transparentViewContainer.alpha = 0.2
-
-            })
-        }
-    }
-
 }

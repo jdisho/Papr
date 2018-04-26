@@ -19,6 +19,16 @@ extension ObservableType {
     func unwrap<T>() -> Observable<T> where E == Optional<T> {
         return self.filter { $0 != nil }.map { $0! }
     }
+
+    func flatMapIgnore<O: ObservableConvertibleType>(_ selector: @escaping (E) throws -> O) -> Observable<E> {
+        return flatMap { result -> Observable<E> in
+            let ignoredObservable = try selector(result)
+
+            return ignoredObservable.asObservable()
+                .flatMap { _ in Observable.just(result) }
+                .take(1)
+        }
+    }
     
 }
 

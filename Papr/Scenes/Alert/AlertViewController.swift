@@ -36,19 +36,22 @@ class AlertViewController: UIAlertController, BindableType {
             guard let mode = mode.element else { return }
             switch mode {
             case .ok:
-                let alertAction = UIAlertAction(title: "Ok",
-                                                style: .cancel,
-                                                handler: { _ in  inputs.closeAction.execute(()) })
+                let alertAction = UIAlertAction(
+                    title: "Ok",
+                    style: .cancel,
+                    handler: { _ in  inputs.closeAction.execute(()) })
                 self.addAction(alertAction)
             case .yesNo:
-                let yesAction = UIAlertAction(title: "Yes",
-                                              style: .default,
-                                              handler: { _ in inputs.yesAction.execute(())})
+                let yesAction = UIAlertAction(
+                    title: "Yes",
+                    style: .default,
+                    handler: { _ in inputs.yesAction.execute(())})
                 self.addAction(yesAction)
                 
-                let noAction = UIAlertAction(title: "No",
-                                             style: .cancel,
-                                             handler: { _ in inputs.noAction.execute(())})
+                let noAction = UIAlertAction(
+                    title: "No",
+                    style: .cancel,
+                    handler: { _ in inputs.noAction.execute(())})
                 self.addAction(noAction)
             }
         }
