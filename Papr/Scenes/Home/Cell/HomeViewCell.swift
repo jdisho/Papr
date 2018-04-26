@@ -29,7 +29,8 @@ class HomeViewCell: UITableViewCell, BindableType {
     @IBOutlet var likesNumberLabel: UILabel!
     @IBOutlet var collectPhotoButton: UIButton!
     @IBOutlet var downloadPhotoButton: UIButton!
-    
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
     private var disposeBag = DisposeBag()
@@ -61,6 +62,7 @@ class HomeViewCell: UITableViewCell, BindableType {
     func bindViewModel() {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
+        let this = HomeViewCell.self
 
         outputs.photoStream
             .map { $0.id ?? "" }
@@ -97,7 +99,10 @@ class HomeViewCell: UITableViewCell, BindableType {
             .disposed(by: disposeBag)
 
         Observable.concat(outputs.smallPhoto, outputs.regularPhoto)
-            .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }
+            .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
+            .flatMapIgnore { [unowned self] _ in
+                Observable.just(self.activityIndicator.stopAnimating())
+            }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
 
