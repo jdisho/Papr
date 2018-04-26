@@ -30,11 +30,13 @@ class AddToCollectionViewController: UIViewController, BindableType {
     private static let nukeManager = Nuke.Manager.shared
     private var cancelBarButton: UIBarButtonItem!
     private var addToCollectionBarButton: UIBarButtonItem!
+    private var collectionViewActivityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureNavigationBar()
+        configureCollectionViewActivityIndicator()
         configureCollectionView()
     }
 
@@ -55,6 +57,9 @@ class AddToCollectionViewController: UIViewController, BindableType {
 
         outputs.collectionCellModelTypes
             .map { [AddToCollectionSectionModel(model: "", items: $0)] }
+            .flatMapIgnore { [unowned self] _ in
+                Observable.just(self.collectionViewActivityIndicator.stopAnimating())
+            }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
@@ -80,6 +85,14 @@ class AddToCollectionViewController: UIViewController, BindableType {
         navigationItem.leftBarButtonItem = cancelBarButton
         navigationItem.rightBarButtonItem = addToCollectionBarButton
         navigationController?.navigationBar.tintColor = .black
+    }
+
+    private func configureCollectionViewActivityIndicator() {
+        collectionViewActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        collectionView.addSubview(collectionViewActivityIndicator)
+        collectionViewActivityIndicator.center = CGPoint(x: collectionView.frame.width/2, y: collectionView.frame.height/2)
+        collectionViewActivityIndicator.startAnimating()
+        collectionViewActivityIndicator.hidesWhenStopped = true
     }
 
     private func configureCollectionView() {

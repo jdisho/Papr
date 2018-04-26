@@ -20,7 +20,7 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType {
     @IBOutlet var collectionTitle: UILabel!
     @IBOutlet var collectionCoverImageView: UIImageView!
     @IBOutlet var addToCollectionButton: UIButton!
-
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
@@ -48,11 +48,15 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType {
     func bindViewModel() {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
+        let this = PhotoCollectionViewCell.self
 
         addToCollectionButton.rx.action = inputs.addAction
         
         outputs.coverPhotoURL
-            .flatMap { PhotoCollectionViewCell.nukeManager.loadImage(with: $0).orEmpty }
+            .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
+            .flatMapIgnore { [unowned self] _ in
+                Observable.just(self.activityIndicator.stopAnimating())
+            }
             .bind(to: collectionCoverImageView.rx.image)
             .disposed(by: disposeBag)
 

@@ -38,6 +38,9 @@
                         </constraints>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </button>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="j9f-S8-i9P">
+                        <rect key="frame" x="40" y="57" width="20" height="20"/>
+                    </activityIndicatorView>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -49,6 +52,8 @@
                 <constraint firstAttribute="bottom" secondItem="bic-E6-7fO" secondAttribute="bottom" constant="8" id="Moa-EN-xiR"/>
                 <constraint firstItem="cYP-xa-xdJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Oxt-CF-Y8k"/>
                 <constraint firstItem="bic-E6-7fO" firstAttribute="top" secondItem="X5o-3o-qyp" secondAttribute="bottom" constant="8" id="Way-uZ-QIa"/>
+                <constraint firstItem="j9f-S8-i9P" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="ZzO-pG-frg"/>
+                <constraint firstItem="j9f-S8-i9P" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="aYS-pi-6FK"/>
                 <constraint firstItem="X5o-3o-qyp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fgd-es-7qj"/>
                 <constraint firstItem="cYP-xa-xdJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="n2r-ec-0Ek"/>
                 <constraint firstItem="X5o-3o-qyp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ze4-N4-tme"/>
@@ -56,6 +61,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="99" height="141"/>
             <connections>
+                <outlet property="activityIndicator" destination="j9f-S8-i9P" id="Rv7-AJ-nX3"/>
                 <outlet property="addToCollectionButton" destination="cYP-xa-xdJ" id="gIz-nb-PB7"/>
                 <outlet property="collectionCoverImageView" destination="X5o-3o-qyp" id="387-FY-fQ7"/>
                 <outlet property="collectionTitle" destination="bic-E6-7fO" id="YLZ-UB-i2R"/>

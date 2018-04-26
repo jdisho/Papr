@@ -64,6 +64,9 @@
                         </collectionView>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="hou-SL-287" firstAttribute="centerX" secondItem="vnm-is-p5o" secondAttribute="centerX" id="Ucs-3y-W3T"/>
+                    </constraints>
                 </stackView>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="WG3-pl-130">
                     <rect key="frame" x="150" y="183" width="20" height="20"/>
