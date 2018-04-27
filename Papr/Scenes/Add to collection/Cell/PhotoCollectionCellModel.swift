@@ -85,6 +85,7 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
             .map { newPhoto, photos -> Bool in
                 photos.contains(newPhoto)
             }
+            .catchErrorJustReturn(false)
 
     }
 

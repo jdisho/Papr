@@ -21,14 +21,10 @@ struct CollectionService: CollectionServiceType {
     func collections(
         withUsername username: String,
         byPageNumber pageNumber: Int
-        ) -> Observable<Result<[PhotoCollection], String>> {
+        ) -> Observable<[PhotoCollection]> {
             return self.unsplash.rx
                 .request(.userCollections(username: username, page: pageNumber, perPage: Constants.photosPerPage))
                 .map([PhotoCollection].self)
-                .map(Result.success)
-                .catchError { error in
-                    return .just(.error(error.localizedDescription))
-                }
                 .asObservable()
         }
 

@@ -57,8 +57,10 @@ class PhotoDetailsViewModel: PhotoViewModel,
 
         totalViews = service.photo(withId: photo.id ?? "")
             .map { $0.views?.abbreviated ?? "0" }
+            .catchErrorJustReturn("0")
 
         totalDownloads = service.photo(withId: photo.id ?? "")
             .map { $0.downloads?.abbreviated ?? "0" }
+            .catchErrorJustReturn("0")
     }
 }

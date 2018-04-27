@@ -42,18 +42,30 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
     // MARK: Outputs
     let photoStream: Observable<Photo>
     lazy var  collectionCellModelTypes: Observable<[PhotoCollectionCellModelType]> = {
-        Observable.combineLatest(photoStream, myCollections)
+        Observable.combineLatest(photoStream, myCollectionsStream)
             .map { photo, collections in
                 collections.map { PhotoCollectionCellModel(photo: photo, photoCollection: $0) }
             }
     }()
 
     // MARK: Private
-    private let loggedInUser: User
-    private let photo: Photo
-    private let service: CollectionServiceType
-    private let sceneCoordinator: SceneCoordinatorType
-    private let myCollections: Observable<[PhotoCollection]>
+    private var loggedInUser: User!
+    private var photo: Photo!
+    private var service: CollectionServiceType!
+    private var sceneCoordinator: SceneCoordinatorType!
+    private var myCollectionsStream: Observable<[PhotoCollection]>!
+
+    lazy var alertAction: Action<String, Void> = {
+        Action<String, Void> { [unowned self] message in
+            let alertViewModel = AlertViewModel(
+                title: "Upsss...",
+                message: message,
+                mode: .ok)
+            return self.sceneCoordinator.transition(
+                to: .alert(alertViewModel),
+                type: .alert)
+        }
+    }()
 
     init(loggedInUser: User,
          photo: Photo,
@@ -67,22 +79,18 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
 
         photoStream = Observable.just(photo)
 
-        myCollections = service.collections(withUsername: loggedInUser.username ?? "", byPageNumber: 1)
-            .flatMap { result -> Observable<[PhotoCollection]> in
-                switch result {
-                case let .success(collections):
-                    return .just(collections)
-                case let .error(error):
-                    let alertViewModel = AlertViewModel(
-                        title: "Upsss...",
-                        message: error,
-                        mode: .ok)
-                    sceneCoordinator.transition(
-                        to: .alert(alertViewModel),
-                        type: .alert)
-                    return .empty()
-                }
+        var myCollections = [PhotoCollection]()
+
+        myCollectionsStream = service.collections(withUsername: loggedInUser.username ?? "", byPageNumber: 1)
+            .map { collections -> [PhotoCollection] in
+                myCollections = collections
+                return myCollections
             }
+            .catchError({ [unowned self] error in
+                self.alertAction.execute(error.localizedDescription)
+                return Observable.just(myCollections)
+            })
+
     }
 
 }
