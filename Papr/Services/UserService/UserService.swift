@@ -18,10 +18,18 @@ struct UserService: UserServiceType {
         self.unsplash = unsplash
     }
 
-    func getMe() -> Observable<User> {
+    func getMe() -> Observable<Result<User, NonPublicScopeError>> {
         return unsplash.rx
             .request(.getMe)
             .map(User.self)
+            .map(Result.success)
+            .catchError { error in
+                let accessToken = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
+                guard accessToken == nil else {
+                    return .just(.error(.error(withMessage: error.localizedDescription)))
+                }
+                return .just(.error(.noAccessToken))
+            }
             .asObservable()
     }
 }

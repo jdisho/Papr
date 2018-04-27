@@ -51,8 +51,24 @@ class HomeViewCellModel: PhotoViewModel,
 
     lazy var userCollectionsAction: Action<Photo, Void> = {
         return Action<Photo, Void> { [unowned self] photo in
-            let viewModel = AddToCollectionViewModel(photo: photo)
-            return self.sceneCoordinator.transition(to: Scene.addToCollection(viewModel), type: .modal)
+           return self.userService.getMe().share()
+            .flatMap { result -> Observable<Void> in
+                    switch result {
+                    case let .success(user):
+                        let viewModel = AddToCollectionViewModel(loggedInUser: user, photo: photo)
+                        return self.sceneCoordinator.transition(
+                            to: Scene.addToCollection(viewModel),
+                            type: .modal)
+                    case let .error(error):
+                        switch error {
+                        case .noAccessToken:
+                            self.navigateToLogin.execute(())
+                        case let .error(message):
+                            self.alertAction.execute((title: "Upsss...", message: message))
+                        }
+                        return .empty()
+                    }
+            }
         }
     }()
 
@@ -63,12 +79,17 @@ class HomeViewCellModel: PhotoViewModel,
     var smallPhoto: Observable<String>!
     var updated: Observable<String>!
 
+    // MARK: Private
+    private let userService: UserServiceType
+
     // MARK: Init
     override init(
         photo: Photo,
         service: PhotoServiceType = PhotoService(),
         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared
         ) {
+
+        self.userService = UserService()
 
         super.init(photo: photo, service: service)
 

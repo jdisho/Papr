@@ -13,6 +13,7 @@
 		DC1F1504203195410025F70B /* UIScrollView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */; };
 		DC1F1505203195410025F70B /* UIScrollView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */; };
 		DC1F1506203195410025F70B /* UIScrollView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */; };
+		DC2576F52093D38B00369B7D /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2576F42093D38B00369B7D /* Result.swift */; };
 		DC2E76F8203B6DB90023A173 /* LikeUnlike.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */; };
 		DC2E76F9203B6DB90023A173 /* LikeUnlike.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */; };
 		DC2E76FA203B6DB90023A173 /* LikeUnlike.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */; };
@@ -236,6 +237,7 @@
 		D59E6B0C5E02E5657E3FA6EA /* Pods_PaprUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaprUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D778F2E1EFA76CEB59A377CB /* Pods_Papr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Papr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extentions.swift"; sourceTree = "<group>"; };
+		DC2576F42093D38B00369B7D /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeUnlike.swift; sourceTree = "<group>"; };
 		DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashSettings.swift; sourceTree = "<group>"; };
 		DC5AF72A1FACCBF300ADA2BB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 		DCBB1B531FA8B7EC004E95F0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				DC2576F42093D38B00369B7D /* Result.swift */,
 				DC658D9D208D137A00FEBC31 /* CollectionService */,
 				DCCD04122059C17700670B70 /* UserService */,
 				DC99FB8C2003A7AD001195FD /* PhotoService */,
@@ -1021,6 +1024,7 @@
 				DC5AF7551FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DCEE1F0B1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCBB1B591FA8B82F004E95F0 /* SceneCoodinator.swift in Sources */,
+				DC2576F52093D38B00369B7D /* Result.swift in Sources */,
 				DC658D8C208CEF0300FEBC31 /* AddToCollectionViewModel.swift in Sources */,
 				DC658DA3208D13A400FEBC31 /* CollectionService.swift in Sources */,
 				DCC8CA0E2002BEF100F6C540 /* HomeViewModel.swift in Sources */,

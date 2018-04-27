@@ -43,7 +43,8 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
                 let photoID = self.photo.id else { return Observable.empty() }
             return self.service.addPhotoToCollection(
                 withCollectionId: collectionID,
-                photoId: photoID)
+                photoId: photoID
+                ).ignoreAll()
         }
     }()
 

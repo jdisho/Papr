@@ -47,3 +47,17 @@ extension PhotoCollection: IdentifiableType {
     }
 }
 
+struct AddToCollectionResponse: Decodable {
+    let photo: Photo?
+    let collection: PhotoCollection?
+    let user: User?
+    let createdAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case photo
+        case collection
+        case user
+        case createdAt = "created_at"
+    }
+}
+

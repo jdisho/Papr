@@ -9,8 +9,15 @@
 import Foundation
 import RxSwift
 
+enum NonPublicScopeError {
+    case noAccessToken
+    case error(withMessage: String)
+}
+
 protocol CollectionServiceType {
-    func myCollections() -> Observable<[PhotoCollection]>
+    func collections(withUsername username: String,byPageNumber pageNumber: Int) -> Observable<Result<[PhotoCollection], String>>
+
     func photos(fromCollectionId id: Int) -> Observable<[Photo]>
-    func addPhotoToCollection(withCollectionId id: Int, photoId: String) -> Observable<Void>
+    
+    func addPhotoToCollection(withCollectionId id: Int, photoId: String) -> Observable<Result<PhotoCollection, String>>
 }

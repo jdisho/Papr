@@ -42,28 +42,47 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
     // MARK: Outputs
     let photoStream: Observable<Photo>
     lazy var  collectionCellModelTypes: Observable<[PhotoCollectionCellModelType]> = {
-        return Observable.combineLatest(Observable.just(photo), service.myCollections())
+        Observable.combineLatest(photoStream, myCollections)
             .map { photo, collections in
-                collections.map {
-                    PhotoCollectionCellModel(photo: photo, photoCollection: $0)
-                }
+                collections.map { PhotoCollectionCellModel(photo: photo, photoCollection: $0) }
             }
     }()
 
     // MARK: Private
+    private let loggedInUser: User
     private let photo: Photo
     private let service: CollectionServiceType
     private let sceneCoordinator: SceneCoordinatorType
+    private let myCollections: Observable<[PhotoCollection]>
 
-    init(photo: Photo,
+    init(loggedInUser: User,
+         photo: Photo,
          service: CollectionServiceType = CollectionService(),
          sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
+        self.loggedInUser = loggedInUser
         self.photo = photo
         self.service = service
         self.sceneCoordinator = sceneCoordinator
 
         photoStream = Observable.just(photo)
+
+        myCollections = service.collections(withUsername: loggedInUser.username ?? "", byPageNumber: 1)
+            .flatMap { result -> Observable<[PhotoCollection]> in
+                switch result {
+                case let .success(collections):
+                    return .just(collections)
+                case let .error(error):
+                    let alertViewModel = AlertViewModel(
+                        title: "Upsss...",
+                        message: error,
+                        mode: .ok)
+                    sceneCoordinator.transition(
+                        to: .alert(alertViewModel),
+                        type: .alert)
+                    return .empty()
+                }
+            }
     }
 
 }

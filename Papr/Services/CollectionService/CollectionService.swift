@@ -18,21 +18,19 @@ struct CollectionService: CollectionServiceType {
         self.unsplash = unsplash
     }
 
-    func myCollections() -> Observable<[PhotoCollection]> {
-        return unsplash.rx.request(.getMe)
-            .map(User.self)
-            .map { $0.username }
-            .asObservable()
-            .unwrap()
-            .flatMap { username in
-                self.unsplash.rx.request(.userCollections(
-                    username: username,
-                    page: 1,
-                    perPage: 10)
-                )
+    func collections(
+        withUsername username: String,
+        byPageNumber pageNumber: Int
+        ) -> Observable<Result<[PhotoCollection], String>> {
+            return self.unsplash.rx
+                .request(.userCollections(username: username, page: pageNumber, perPage: Constants.photosPerPage))
                 .map([PhotoCollection].self)
-            }
-    }
+                .map(Result.success)
+                .catchError { error in
+                    return .just(.error(error.localizedDescription))
+                }
+                .asObservable()
+        }
 
     func photos(fromCollectionId id: Int) -> Observable<[Photo]> {
         return unsplash.rx.request(.collectionPhotos(id: id, page: 1, perPage: 10))
@@ -40,10 +38,15 @@ struct CollectionService: CollectionServiceType {
             .asObservable()
     }
 
-    func addPhotoToCollection(withCollectionId id: Int, photoId: String) -> Observable<Void> {
+    func addPhotoToCollection(withCollectionId id: Int, photoId: String) -> Observable<Result<PhotoCollection, String>> {
         return unsplash.rx.request(.addPhotoToCollection(collectionID: id, photoID: photoId))
+            .map(AddToCollectionResponse.self)
+            .map { $0.collection }
             .asObservable()
-            .ignoreAll()
+            .unwrap()
+            .map(Result.success)
+            .catchError { _ in .just(.error("Failed to add photo to the collection")) }
+
     }
 
     

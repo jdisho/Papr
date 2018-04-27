@@ -111,9 +111,8 @@ class UnsplashAuthManager {
                         let token = accessTokenObject.accessToken
                         UserDefaults.standard.set(token, forKey: self.clientID)
                         completion(token, nil)
-
                     }
-                case .failure(let error):
+                case let .failure(error):
                     switch error.response {
                     case let .some(response):
                         let errorDesc = self.extractErrorDescription(from: response.data)

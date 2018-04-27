@@ -112,6 +112,27 @@ class PhotoViewModel: PhotoViewModelType,
         }
     }()
 
+    lazy var alertAction: Action<(title: String, message: String), Void> = {
+        Action<(title: String, message: String), Void> { [unowned self] (title, message) in
+            let alertViewModel = AlertViewModel(
+                title: title,
+                message: message,
+                mode: .ok)
+            return self.sceneCoordinator.transition(
+                to: .alert(alertViewModel),
+                type: .alert)
+        }
+    }()
+
+    lazy var navigateToLogin: CocoaAction = {
+        CocoaAction { [unowned self] message in
+            let viewModel = LoginViewModel()
+            return self.sceneCoordinator.transition(
+                to: Scene.login(viewModel),
+                type: .modal)
+        }
+    }()
+
     // MARK: Output
     var regularPhoto: Observable<String>!
     var photoSizeCoef: Observable<Double>!
@@ -125,27 +146,6 @@ class PhotoViewModel: PhotoViewModelType,
     // MARK: Private
 
     private let photoStreamProperty = ReplaySubject<Photo>.create(bufferSize: 1)
-
-    private lazy var alertAction: Action<(title: String, message: String), Void> = {
-        Action<(title: String, message: String), Void> { [unowned self] (title, message) in
-            let alertViewModel = AlertViewModel(
-                title: title,
-                message: message,
-                mode: .ok)
-            return self.sceneCoordinator.transition(
-                to: .alert(alertViewModel),
-                type: .alert)
-        }
-    }()
-
-    private lazy var navigateToLogin: CocoaAction = {
-        CocoaAction { [unowned self] message in
-            let viewModel = LoginViewModel()
-            return self.sceneCoordinator.transition(
-                to: Scene.login(viewModel),
-                type: .modal)
-        }
-    }()
 
     // MARK: Init
     init(photo: Photo,
