@@ -94,16 +94,19 @@ class HomeViewCellModel: PhotoViewModel,
         super.init(photo: photo, service: service)
 
         userProfileImage = photoStream
-            .map { $0.user?.profileImage?.medium ?? "" }
+            .map { $0.user?.profileImage?.medium }
+            .unwrap()
 
         fullname = photoStream
-            .map { $0.user?.fullName ?? "" }
+            .map { $0.user?.fullName }
+            .unwrap()
 
         username = photoStream
             .map { "@\($0.user?.username ?? "")" }
 
         smallPhoto = photoStream
-            .map { $0.urls?.small ?? "" }
+            .map { $0.urls?.small }
+            .unwrap()
 
         updated = photoStream
             .map { $0.updated ?? "" }

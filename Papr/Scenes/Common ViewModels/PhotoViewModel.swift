@@ -158,7 +158,8 @@ class PhotoViewModel: PhotoViewModelType,
         photoStream = Observable.just(photo)
 
         regularPhoto = photoStream
-            .map { $0.urls?.regular ?? "" }
+            .map { $0.urls?.regular }
+            .unwrap()
 
         photoSizeCoef = photoStream
             .map { (width: $0.width ?? 0, height: $0.height ?? 0) }
@@ -175,14 +176,15 @@ class PhotoViewModel: PhotoViewModelType,
             .map { likes in
                 guard likes != 0 else { return "" }
                 return likes.abbreviated
-        }
+            }
 
         likedByUser = Observable.combineLatest(photoStream, photoStreamProperty)
             .flatMap { oldPhoto, newPhoto -> Observable<Photo> in
                 guard let photo = newPhoto else { return Observable.just(oldPhoto) }
                 return Observable.just(photo)
             }
-            .map { $0.likedByUser ?? false }
+            .map { $0.likedByUser }
+            .unwrap()
 
     }
 
