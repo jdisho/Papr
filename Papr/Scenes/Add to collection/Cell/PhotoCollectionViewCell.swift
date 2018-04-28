@@ -50,7 +50,13 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType {
         let outputs = viewModel.outputs
         let this = PhotoCollectionViewCell.self
 
-        addToCollectionButton.rx.action = inputs.addAction
+        outputs.isPhotoInCollection
+            .subscribe { result in
+                guard let isPart = result.element else { return }
+                self.addToCollectionButton.rx.action = isPart ? inputs.removeAction :
+                                                                   inputs.addAction
+            }
+            .disposed(by: disposeBag)
         
         outputs.coverPhotoURL
             .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }

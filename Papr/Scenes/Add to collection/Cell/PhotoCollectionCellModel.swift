@@ -111,18 +111,21 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
 
         let photoCollectionStream = Observable.merge(
             Observable.just(photoCollection),
-            service.collection(withID: photoCollection.id ?? 0))
+            service.collection(withID: photoCollection.id ?? 0)
+            )
             .catchErrorJustReturn(photoCollection)
 
-        coverPhotoURL = Observable.merge(
-            photoCollectionStream.map { $0.coverPhoto?.urls?.thumb }.unwrap(),
-            photoProperty.map { $0?.urls?.thumb }.unwrap())
+        coverPhotoURL = photoCollectionStream
+            .map { $0.coverPhoto?.urls?.thumb }
+            .unwrap()
 
         collectionName = photoCollectionStream
-            .map { $0.title ?? "" }
+            .map { $0.title }
+            .unwrap()
 
         isCollectionPrivate = photoCollectionStream
-            .map { $0.isPrivate ?? false }
+            .map { $0.isPrivate }
+            .unwrap()
 
         isPhotoInCollection = Observable.combineLatest(Observable.just(photo), photoProperty)
             .map { currentPhoto, updatedPhoto  -> Photo in
