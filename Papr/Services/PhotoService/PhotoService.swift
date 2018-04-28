@@ -13,20 +13,20 @@ import Moya
 struct PhotoService: PhotoServiceType {
 
     private var unsplash: MoyaProvider<Unsplash>
-//    plugins: [NetworkLoggerPlugin(verbose: true)])
+    //plugins: [NetworkLoggerPlugin(verbose: false)])
 
     init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>()) {
         self.unsplash = unsplash
     }
 
-    func like(photo: Photo) -> Observable<LikeUnlikePhotoResult> {
+    func like(photo: Photo) ->  Observable<Result<Photo, NonPublicScopeError>> {
         return unsplash.rx
             .request(.likePhoto(id: photo.id ?? ""))
             .map(LikeUnlike.self)
-            .asObservable()
             .map { $0.photo }
+            .asObservable()
             .unwrap()
-            .map(LikeUnlikePhotoResult.success)
+            .map(Result.success)
             .catchError { error in
                 let accessToken = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
                 guard accessToken == nil else {
@@ -36,14 +36,14 @@ struct PhotoService: PhotoServiceType {
             }
     }
     
-    func unlike(photo: Photo) -> Observable<LikeUnlikePhotoResult> {
+    func unlike(photo: Photo) ->  Observable<Result<Photo, NonPublicScopeError>> {
         return unsplash.rx
             .request(.unlikePhoto(id: photo.id ?? ""))
             .map(LikeUnlike.self)
             .asObservable()
             .map { $0.photo }
             .unwrap()
-            .map(LikeUnlikePhotoResult.success)
+            .map(Result.success)
             .catchError { error in
                 let accessToken = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
                 guard accessToken == nil else {
@@ -101,16 +101,16 @@ struct PhotoService: PhotoServiceType {
             .asObservable()
     }
 
-    func photoDownloadLink(withId id: String) -> Observable<DownloadPhotoResult> {
+    func photoDownloadLink(withId id: String) ->  Observable<Result<String, String>> {
         return unsplash.rx
             .request(.photoDownloadLink(id: id))
             .map(Link.self)
             .map { $0.url }
             .asObservable()
             .unwrap()
-            .map(DownloadPhotoResult.success)
+            .map(Result.success)
             .catchError { error in
-                return .just(.error(withMessage: "Failed to download photo"))
+                return .just(.error("Failed to download photo"))
             }
 
     }

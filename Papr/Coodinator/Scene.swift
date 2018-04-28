@@ -20,6 +20,7 @@ enum Scene {
     case home(HomeViewModel)
     case alert(AlertViewModel)
     case photoDetails(PhotoDetailsViewModel)
+    case addToCollection(AddToCollectionViewModel)
 }
 
 extension Scene {
@@ -42,6 +43,11 @@ extension Scene {
             var vc = PhotoDetailsViewController.instantiateFromNib()
             vc.bind(to: viewModel)
             return vc
+        case let .addToCollection(viewModel):
+            var vc = AddToCollectionViewController.instantiateFromNib()
+            let rootViewController = UINavigationController(rootViewController: vc)
+            vc.bind(to: viewModel)
+            return rootViewController
         }
     }
 }

@@ -145,23 +145,23 @@ enum Unsplash {
         perPage: Int?)
 
     /// Retrieve a collection
-    case collection(id: String)
+    case collection(id: Int)
 
     /// Retrieve a curated collection
-    case curatedCollection(id: String)
+    case curatedCollection(id: Int)
 
     /// Retrieve a related collection
-    case relatedCollections(id: String)
+    case relatedCollections(id: Int)
 
     /// Retrieve a collection’s photos
     case collectionPhotos(
-        id: String,
+        id: Int,
         page: Int?,
         perPage: Int?)
 
     /// Retrieve a curated collection’s photos
     case curatedCollectionPhotos(
-        id: String,
+        id: Int,
         page: Int?,
         perPage: Int?)
 
@@ -173,22 +173,22 @@ enum Unsplash {
 
     /// Update an existing collection
     case updateCollection(
-        id: String,
+        id: Int,
         title: String?,
         description: String?,
         isPrivate: Bool?)
 
     /// Delete an existing collection
-    case deleteCollection(id: String)
+    case deleteCollection(id: Int)
 
     /// Add a photo to a collection
     case addPhotoToCollection(
-        collectionID: String,
+        collectionID: Int,
         photoID: String)
 
     /// Remove a photo from a collection
     case removePhotoFromCollection(
-        collectionID: String,
+        collectionID: Int,
         photoID: String)
 
     // MARK: - TODO: Support these cases

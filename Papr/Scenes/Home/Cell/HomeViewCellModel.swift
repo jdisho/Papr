@@ -12,6 +12,7 @@ import Action
 
 protocol HomeViewCellModelInput: PhotoViewModelInput {
     var photoDetailsAction: Action<Photo, Photo> { get }
+    var userCollectionsAction: Action<Photo, Void> { get }
 }
 
 protocol HomeViewCellModelOutput: PhotoViewModelOutput {
@@ -41,10 +42,33 @@ class HomeViewCellModel: PhotoViewModel,
 
     // MARK: Input
     lazy var photoDetailsAction: Action<Photo, Photo> = {
-        return Action<Photo, Photo> { photo in
+        return Action<Photo, Photo> { [unowned self] photo in
             let viewModel = PhotoDetailsViewModel(photo: photo)
             self.sceneCoordinator.transition(to: .photoDetails(viewModel), type: .modal)
             return .just(photo)
+        }
+    }()
+
+    lazy var userCollectionsAction: Action<Photo, Void> = {
+        return Action<Photo, Void> { [unowned self] photo in
+           return self.userService.getMe().share()
+            .flatMap { result -> Observable<Void> in
+                    switch result {
+                    case let .success(user):
+                        let viewModel = AddToCollectionViewModel(loggedInUser: user, photo: photo)
+                        return self.sceneCoordinator.transition(
+                            to: Scene.addToCollection(viewModel),
+                            type: .modal)
+                    case let .error(error):
+                        switch error {
+                        case .noAccessToken:
+                            self.navigateToLogin.execute(())
+                        case let .error(message):
+                            self.alertAction.execute((title: "Upsss...", message: message))
+                        }
+                        return .empty()
+                    }
+            }
         }
     }()
 
@@ -55,6 +79,9 @@ class HomeViewCellModel: PhotoViewModel,
     var smallPhoto: Observable<String>!
     var updated: Observable<String>!
 
+    // MARK: Private
+    private let userService: UserServiceType
+
     // MARK: Init
     override init(
         photo: Photo,
@@ -62,19 +89,24 @@ class HomeViewCellModel: PhotoViewModel,
         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared
         ) {
 
+        self.userService = UserService()
+
         super.init(photo: photo, service: service)
 
         userProfileImage = photoStream
-            .map { $0.user?.profileImage?.medium ?? "" }
+            .map { $0.user?.profileImage?.medium }
+            .unwrap()
 
         fullname = photoStream
-            .map { $0.user?.fullName ?? "" }
+            .map { $0.user?.fullName }
+            .unwrap()
 
         username = photoStream
             .map { "@\($0.user?.username ?? "")" }
 
         smallPhoto = photoStream
-            .map { $0.urls?.small ?? "" }
+            .map { $0.urls?.small }
+            .unwrap()
 
         updated = photoStream
             .map { $0.updated ?? "" }

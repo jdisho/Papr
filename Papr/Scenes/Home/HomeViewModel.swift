@@ -140,12 +140,7 @@ class HomeViewModel: HomeViewModelType,
     var navBarButtonName: Observable<NavBarTitle>!
 
     lazy var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> = {
-        return photos.map { photos -> [HomeViewCellModelType] in
-            photos.map { photo in
-                let viewModel = HomeViewCellModel(photo: photo)
-                return viewModel
-            }
-        }
+        return photos.mapMany { HomeViewCellModel(photo: $0) }
     }()
 
     // MARK: Private
@@ -205,7 +200,7 @@ class HomeViewModel: HomeViewModelType,
         photos = Observable
             .merge(requestFirst, requestNext)
             .map { [unowned self] photos -> [Photo] in
-                photos.forEach { photo in 
+                photos.forEach { photo in
                     photoArray.append(photo)
                 }
                 self.refreshProperty.onNext(false)

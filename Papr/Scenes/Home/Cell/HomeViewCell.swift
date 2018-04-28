@@ -29,7 +29,8 @@ class HomeViewCell: UITableViewCell, BindableType {
     @IBOutlet var likesNumberLabel: UILabel!
     @IBOutlet var collectPhotoButton: UIButton!
     @IBOutlet var downloadPhotoButton: UIButton!
-    
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
     private var disposeBag = DisposeBag()
@@ -52,6 +53,7 @@ class HomeViewCell: UITableViewCell, BindableType {
         photoImageView.image = nil
         dummyImageView.image = nil
         likeButton.rx.action = nil
+        photoButton.rx.action = nil
         disposeBag = DisposeBag()
     }
 
@@ -60,6 +62,7 @@ class HomeViewCell: UITableViewCell, BindableType {
     func bindViewModel() {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
+        let this = HomeViewCell.self
 
         outputs.photoStream
             .map { $0.id ?? "" }
@@ -81,20 +84,25 @@ class HomeViewCell: UITableViewCell, BindableType {
             .disposed(by: disposeBag)
 
         outputs.photoStream
-            .subscribe { photo in
+            .subscribe { [unowned self] photo in
                 guard let photo = photo.element else { return }
                 self.photoButton.rx
                     .bind(to: inputs.photoDetailsAction, input: photo)
+                self.collectPhotoButton.rx
+                    .bind(to: inputs.userCollectionsAction, input: photo)
             }
             .disposed(by: disposeBag)
-        
+
         outputs.userProfileImage
             .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }
             .bind(to: userImageView.rx.image)
             .disposed(by: disposeBag)
 
         Observable.concat(outputs.smallPhoto, outputs.regularPhoto)
-            .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }
+            .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
+            .flatMapIgnore { [unowned self] _ in
+                Observable.just(self.activityIndicator.stopAnimating())
+            }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
 

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddToCollectionViewController" customModule="Papr" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="hou-SL-287" id="GY8-tE-p6V"/>
+                <outlet property="photoActivityIndicator" destination="WG3-pl-130" id="ihw-Rj-VWI"/>
+                <outlet property="photoImageView" destination="UL6-0b-cQn" id="rqd-fh-9Zd"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UL6-0b-cQn">
+                    <rect key="frame" x="16" y="36" width="288" height="315"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="288" id="ys2-vZ-UpI"/>
+                    </constraints>
+                </imageView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="vnm-is-p5o">
+                    <rect key="frame" x="0.0" y="367" width="320" height="201"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="doE-Of-Qsf">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collections" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBd-2u-Qfp">
+                                    <rect key="frame" x="117.5" y="15.5" width="85.5" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="UBd-2u-Qfp" firstAttribute="centerX" secondItem="doE-Of-Qsf" secondAttribute="centerX" id="6uz-oc-DN7"/>
+                                <constraint firstItem="UBd-2u-Qfp" firstAttribute="centerY" secondItem="doE-Of-Qsf" secondAttribute="centerY" id="HSv-gQ-VXd"/>
+                                <constraint firstAttribute="height" constant="50" id="pee-Tj-q60"/>
+                            </constraints>
+                        </view>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" keyboardDismissMode="interactive" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="hou-SL-287">
+                            <rect key="frame" x="0.0" y="51" width="320" height="150"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="150" id="hRQ-f1-EfY"/>
+                            </constraints>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wCl-7s-mvx">
+                                <size key="itemSize" width="50" height="50"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="hou-SL-287" firstAttribute="centerX" secondItem="vnm-is-p5o" secondAttribute="centerX" id="Ucs-3y-W3T"/>
+                    </constraints>
+                </stackView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="WG3-pl-130">
+                    <rect key="frame" x="150" y="183" width="20" height="20"/>
+                </activityIndicatorView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="UL6-0b-cQn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="DPX-Ra-MiF"/>
+                <constraint firstItem="vnm-is-p5o" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Ejb-nf-0jD"/>
+                <constraint firstItem="vnm-is-p5o" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="cMK-fV-RvU"/>
+                <constraint firstItem="WG3-pl-130" firstAttribute="centerX" secondItem="UL6-0b-cQn" secondAttribute="centerX" id="gc2-9v-umb"/>
+                <constraint firstItem="WG3-pl-130" firstAttribute="centerY" secondItem="UL6-0b-cQn" secondAttribute="centerY" id="vWf-Pp-VcP"/>
+                <constraint firstItem="vnm-is-p5o" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="wHj-Zq-e71"/>
+                <constraint firstItem="UL6-0b-cQn" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="xup-rH-ABL"/>
+                <constraint firstItem="vnm-is-p5o" firstAttribute="top" secondItem="UL6-0b-cQn" secondAttribute="bottom" constant="16" id="zdV-g0-MFI"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="-287" y="-81"/>
+        </view>
+    </objects>
+</document>

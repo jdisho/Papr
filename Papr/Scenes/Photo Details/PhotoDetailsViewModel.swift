@@ -56,9 +56,13 @@ class PhotoDetailsViewModel: PhotoViewModel,
         super.init(photo: photo, service: service)
 
         totalViews = service.photo(withId: photo.id ?? "")
-            .map { $0.views?.abbreviated ?? "0" }
+            .map { $0.views?.abbreviated }
+            .unwrap()
+            .catchErrorJustReturn("0")
 
         totalDownloads = service.photo(withId: photo.id ?? "")
-            .map { $0.downloads?.abbreviated ?? "0" }
+            .map { $0.downloads?.abbreviated }
+            .unwrap()
+            .catchErrorJustReturn("0")
     }
 }

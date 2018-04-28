@@ -9,25 +9,10 @@
 import Foundation
 import RxSwift
 
-enum LikeUnlikePhotoResult {
-    case success(Photo)
-    case error(LikeUnlikePhotoError)
-}
-
-enum LikeUnlikePhotoError: Error {
-    case noAccessToken
-    case error(withMessage: String)
-}
-
-enum DownloadPhotoResult {
-    case success(String)
-    case error(withMessage: String)
-}
-
 protocol PhotoServiceType {
-    func like(photo: Photo) -> Observable<LikeUnlikePhotoResult>
+    func like(photo: Photo) -> Observable<Result<Photo, NonPublicScopeError>>
 
-    func unlike(photo: Photo) -> Observable<LikeUnlikePhotoResult>
+    func unlike(photo: Photo) -> Observable<Result<Photo, NonPublicScopeError>>
 
     func photo(withId id: String) -> Observable<Photo>
 
@@ -35,6 +20,6 @@ protocol PhotoServiceType {
 
     func statistics(of photo: Photo) -> Observable<PhotoStatistics>
 
-    func photoDownloadLink(withId id: String) -> Observable<DownloadPhotoResult>
+    func photoDownloadLink(withId id: String) -> Observable<Result<String, String>>
 
 }

@@ -112,6 +112,27 @@ class PhotoViewModel: PhotoViewModelType,
         }
     }()
 
+    lazy var alertAction: Action<(title: String, message: String), Void> = {
+        Action<(title: String, message: String), Void> { [unowned self] (title, message) in
+            let alertViewModel = AlertViewModel(
+                title: title,
+                message: message,
+                mode: .ok)
+            return self.sceneCoordinator.transition(
+                to: .alert(alertViewModel),
+                type: .alert)
+        }
+    }()
+
+    lazy var navigateToLogin: CocoaAction = {
+        CocoaAction { [unowned self] message in
+            let viewModel = LoginViewModel()
+            return self.sceneCoordinator.transition(
+                to: Scene.login(viewModel),
+                type: .modal)
+        }
+    }()
+
     // MARK: Output
     var regularPhoto: Observable<String>!
     var photoSizeCoef: Observable<Double>!
@@ -124,28 +145,7 @@ class PhotoViewModel: PhotoViewModelType,
 
     // MARK: Private
 
-    private let photoStreamProperty = ReplaySubject<Photo>.create(bufferSize: 1)
-
-    private lazy var alertAction: Action<(title: String, message: String), Void> = {
-        Action<(title: String, message: String), Void> { [unowned self] (title, message) in
-            let alertViewModel = AlertViewModel(
-                title: title,
-                message: message,
-                mode: .ok)
-            return self.sceneCoordinator.transition(
-                to: .alert(alertViewModel),
-                type: .alert)
-        }
-    }()
-
-    private lazy var navigateToLogin: CocoaAction = {
-        CocoaAction { [unowned self] message in
-            let viewModel = LoginViewModel()
-            return self.sceneCoordinator.transition(
-                to: Scene.login(viewModel),
-                type: .modal)
-        }
-    }()
+    private let photoStreamProperty = BehaviorSubject<Photo?>(value: nil)
 
     // MARK: Init
     init(photo: Photo,
@@ -158,7 +158,8 @@ class PhotoViewModel: PhotoViewModelType,
         photoStream = Observable.just(photo)
 
         regularPhoto = photoStream
-            .map { $0.urls?.regular ?? "" }
+            .map { $0.urls?.regular }
+            .unwrap()
 
         photoSizeCoef = photoStream
             .map { (width: $0.width ?? 0, height: $0.height ?? 0) }
@@ -166,15 +167,24 @@ class PhotoViewModel: PhotoViewModelType,
                 Double(height * Int(UIScreen.main.bounds.width) / width)
         }
 
-        totalLikes = Observable.merge(photoStream, photoStreamProperty)
+        totalLikes = Observable.combineLatest(photoStream, photoStreamProperty)
+            .flatMap { oldPhoto, newPhoto -> Observable<Photo> in
+                guard let photo = newPhoto else { return Observable.just(oldPhoto) }
+                return Observable.just(photo)
+            }
             .map { $0.likes ?? 0 }
             .map { likes in
                 guard likes != 0 else { return "" }
                 return likes.abbreviated
-        }
+            }
 
-        likedByUser = Observable.merge(photoStream, photoStreamProperty)
-            .map { $0.likedByUser ?? false }
+        likedByUser = Observable.combineLatest(photoStream, photoStreamProperty)
+            .flatMap { oldPhoto, newPhoto -> Observable<Photo> in
+                guard let photo = newPhoto else { return Observable.just(oldPhoto) }
+                return Observable.just(photo)
+            }
+            .map { $0.likedByUser }
+            .unwrap()
 
     }
 

@@ -45,9 +45,15 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
         }
     }()
 
+    lazy var closeAction: CocoaAction = {
+        return CocoaAction { [unowned self] _ in
+            self.sceneCoordinator.pop(animated: true)
+        }
+    }()
+
     // MARK: Output
-    var buttonName: Observable<String>
-    var loginState: Observable<LoginState>
+    let buttonName: Observable<String>
+    let loginState: Observable<LoginState>
     
     // MARK: Private
     fileprivate let authManager: UnsplashAuthManager
@@ -82,12 +88,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
         self.authManager.delegate = self
     }
     
-    // MARK: Action
-    lazy var closeAction: CocoaAction = {
-        return CocoaAction { [unowned self] _ in
-            self.sceneCoordinator.pop(animated: true)
-        }
-    }()
+    // MARK: Private
     
     private lazy var navigateToHomeAction: CocoaAction = {
         return CocoaAction { [unowned self] _ in
@@ -129,6 +130,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
         }
         return .empty()
     }
+
 }
 
 extension LoginViewModel: UnsplashSessionListener {
