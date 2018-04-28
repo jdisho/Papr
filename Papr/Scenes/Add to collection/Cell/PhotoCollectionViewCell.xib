@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="100" height="134"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unsplash-icon-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="X5o-3o-qyp">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unsplash-icon-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="X5o-3o-qyp">
                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="hyl-Fv-SWC"/>
