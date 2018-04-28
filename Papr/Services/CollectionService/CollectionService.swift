@@ -37,15 +37,24 @@ struct CollectionService: CollectionServiceType {
             .asObservable()
     }
 
-    func addPhotoToCollection(withCollectionId id: Int, photoId: String) -> Observable<Result<Photo, String>> {
+    func addPhotoToCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, String>> {
         return unsplash.rx.request(.addPhotoToCollection(collectionID: id, photoID: photoId))
-            .map(AddToCollectionResponse.self)
+            .map(CollectionResponse.self)
             .map { $0.photo }
             .asObservable()
             .unwrap()
             .map(Result.success)
             .catchError { _ in .just(.error("Failed to add photo to the collection")) }
+    }
 
+    func removePhotoFromCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, String>> {
+        return unsplash.rx.request(.removePhotoFromCollection(collectionID: id, photoID: photoId))
+            .map(CollectionResponse.self)
+            .map { $0.photo }
+            .asObservable()
+            .unwrap()
+            .map(Result.success)
+            .catchError { _ in .just(.error("Failed to remove photo from the collection")) }
     }
 
     

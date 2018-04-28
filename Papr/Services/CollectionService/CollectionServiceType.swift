@@ -21,5 +21,7 @@ protocol CollectionServiceType {
 
     func photos(fromCollectionId id: Int) -> Observable<[Photo]>
     
-    func addPhotoToCollection(withCollectionId id: Int, photoId: String) -> Observable<Result<Photo, String>>
+    func addPhotoToCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, String>>
+
+    func removePhotoFromCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, String>>
 }

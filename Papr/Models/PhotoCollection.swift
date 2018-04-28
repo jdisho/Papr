@@ -47,7 +47,7 @@ extension PhotoCollection: IdentifiableType {
     }
 }
 
-struct AddToCollectionResponse: Decodable {
+struct CollectionResponse: Decodable {
     let photo: Photo?
     let collection: PhotoCollection?
     let user: User?

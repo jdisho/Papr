@@ -12,6 +12,7 @@ import Action
 
 protocol PhotoCollectionCellModelInput {
     var addAction: CocoaAction { get }
+    var removeAction: CocoaAction { get }
 }
 
 protocol PhotoCollectionCellModelOutput {
@@ -42,7 +43,7 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
             guard let collectionID = self.photoCollection.id,
                 let photoID = self.photo.id else { return Observable.empty() }
             return self.service
-                .addPhotoToCollection(withCollectionId: collectionID, photoId: photoID)
+                .addPhotoToCollection(withId: collectionID, photoId: photoID)
                 .flatMap { result -> Observable<Void> in
                     switch result {
                     case let .success(photo):
@@ -52,6 +53,24 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
                     }
                     return .empty()
                 }
+        }
+    }()
+
+    lazy var removeAction: CocoaAction = {
+        return CocoaAction {
+            guard let collectionID = self.photoCollection.id,
+                let photoID = self.photo.id else { return Observable.empty() }
+            return self.service
+                .removePhotoFromCollection(withId: collectionID, photoId: photoID)
+                .flatMap { result -> Observable<Void> in
+                    switch result {
+                    case let .success(photo):
+                        self.photoProperty.onNext(photo)
+                    case let .error(error):
+                        self.alertAction.execute(error)
+                    }
+                    return .empty()
+            }
         }
     }()
 
