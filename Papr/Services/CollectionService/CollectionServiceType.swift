@@ -15,9 +15,11 @@ enum NonPublicScopeError {
 }
 
 protocol CollectionServiceType {
-    func collections(withUsername username: String,byPageNumber pageNumber: Int) -> Observable<[PhotoCollection]>
+    func collection(withID id: Int) -> Observable<PhotoCollection>
+    
+    func collections(withUsername username: String) -> Observable<[PhotoCollection]>
 
     func photos(fromCollectionId id: Int) -> Observable<[Photo]>
     
-    func addPhotoToCollection(withCollectionId id: Int, photoId: String) -> Observable<Result<PhotoCollection, String>>
+    func addPhotoToCollection(withCollectionId id: Int, photoId: String) -> Observable<Result<Photo, String>>
 }

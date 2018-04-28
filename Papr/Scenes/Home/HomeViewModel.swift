@@ -200,7 +200,9 @@ class HomeViewModel: HomeViewModelType,
         photos = Observable
             .merge(requestFirst, requestNext)
             .map { [unowned self] photos -> [Photo] in
-                photoArray = photos
+                photos.forEach { photo in
+                    photoArray.append(photo)
+                }
                 self.refreshProperty.onNext(false)
                 return photoArray
             }

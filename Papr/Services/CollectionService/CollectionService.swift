@@ -18,12 +18,15 @@ struct CollectionService: CollectionServiceType {
         self.unsplash = unsplash
     }
 
-    func collections(
-        withUsername username: String,
-        byPageNumber pageNumber: Int
-        ) -> Observable<[PhotoCollection]> {
+    func collection(withID id: Int) -> Observable<PhotoCollection> {
+        return unsplash.rx.request(.collection(id: id))
+            .map(PhotoCollection.self)
+            .asObservable()
+    }
+
+    func collections(withUsername username: String) -> Observable<[PhotoCollection]> {
             return self.unsplash.rx
-                .request(.userCollections(username: username, page: pageNumber, perPage: Constants.photosPerPage))
+                .request(.userCollections(username: username, page: 1, perPage: 20))
                 .map([PhotoCollection].self)
                 .asObservable()
         }
@@ -34,10 +37,10 @@ struct CollectionService: CollectionServiceType {
             .asObservable()
     }
 
-    func addPhotoToCollection(withCollectionId id: Int, photoId: String) -> Observable<Result<PhotoCollection, String>> {
+    func addPhotoToCollection(withCollectionId id: Int, photoId: String) -> Observable<Result<Photo, String>> {
         return unsplash.rx.request(.addPhotoToCollection(collectionID: id, photoID: photoId))
             .map(AddToCollectionResponse.self)
-            .map { $0.collection }
+            .map { $0.photo }
             .asObservable()
             .unwrap()
             .map(Result.success)

@@ -145,7 +145,7 @@ class PhotoViewModel: PhotoViewModelType,
 
     // MARK: Private
 
-    private let photoStreamProperty = ReplaySubject<Photo>.create(bufferSize: 1)
+    private let photoStreamProperty = BehaviorSubject<Photo?>(value: nil)
 
     // MARK: Init
     init(photo: Photo,
@@ -166,14 +166,22 @@ class PhotoViewModel: PhotoViewModelType,
                 Double(height * Int(UIScreen.main.bounds.width) / width)
         }
 
-        totalLikes = Observable.merge(photoStream, photoStreamProperty)
+        totalLikes = Observable.combineLatest(photoStream, photoStreamProperty)
+            .flatMap { oldPhoto, newPhoto -> Observable<Photo> in
+                guard let photo = newPhoto else { return Observable.just(oldPhoto) }
+                return Observable.just(photo)
+            }
             .map { $0.likes ?? 0 }
             .map { likes in
                 guard likes != 0 else { return "" }
                 return likes.abbreviated
         }
 
-        likedByUser = Observable.merge(photoStream, photoStreamProperty)
+        likedByUser = Observable.combineLatest(photoStream, photoStreamProperty)
+            .flatMap { oldPhoto, newPhoto -> Observable<Photo> in
+                guard let photo = newPhoto else { return Observable.just(oldPhoto) }
+                return Observable.just(photo)
+            }
             .map { $0.likedByUser ?? false }
 
     }

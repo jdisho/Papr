@@ -81,9 +81,11 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
 
         var myCollections = [PhotoCollection]()
 
-        myCollectionsStream = service.collections(withUsername: loggedInUser.username ?? "", byPageNumber: 1)
+        myCollectionsStream = service.collections(withUsername: loggedInUser.username ?? "")
             .map { collections -> [PhotoCollection] in
-                myCollections = collections
+                collections.forEach { collection in
+                    myCollections.append(collection)
+                }
                 return myCollections
             }
             .catchError({ [unowned self] error in
