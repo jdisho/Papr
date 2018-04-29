@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class CreateCollectionViewController: UIViewController, BindableType {
 
@@ -32,6 +33,27 @@ class CreateCollectionViewController: UIViewController, BindableType {
 
     // MARK: BindableType
     func bindViewModel() {
+        let inputs = viewModel.inputs
+        let outputs = viewModel.outputs
+
+        nameTextField.rx.text.orEmpty
+            .bind(to: inputs.collectionName)
+            .disposed(by: disposeBag)
+
+        descriptionTextField.rx.text.orEmpty
+            .bind(to: inputs.collectionDescription)
+            .disposed(by: disposeBag)
+
+        privateSwitch.rx.isOn
+            .bind(to: inputs.isPrivate)
+            .disposed(by: disposeBag)
+
+        outputs.saveButtonEnabled
+            .bind(to: saveBarButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+
+        cancelBarButton.rx.action = inputs.cancelAction
+        saveBarButton.rx.action = inputs.saveAction
     }
 
     // MARK: UI

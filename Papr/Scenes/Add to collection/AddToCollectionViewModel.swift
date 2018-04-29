@@ -42,7 +42,7 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
 
     lazy var navigateToCreateCollectionAction: CocoaAction = {
         CocoaAction { [unowned self] _ in
-            let viewModel = CreateCollectionViewModel()
+            let viewModel = CreateCollectionViewModel(photo: self.photo)
             return self.sceneCoordinator.transition(to: .createCollection(viewModel), type: .modal)
         }
     }()

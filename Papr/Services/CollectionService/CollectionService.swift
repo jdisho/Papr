@@ -57,6 +57,22 @@ struct CollectionService: CollectionServiceType {
             .catchError { _ in .just(.error("Failed to remove photo from the collection")) }
     }
 
+    func createCollection(
+        with title: String,
+        description: String,
+        isPrivate: Bool
+        ) -> Observable<Result<PhotoCollection, String>> {
+
+        return unsplash.rx.request(.createCollection(
+            title: title,
+            description: description,
+            isPrivate: isPrivate))
+            .map(PhotoCollection.self)
+            .asObservable()
+            .map (Result.success)
+            .catchError { _ in .just(.error("Failed to create the collection")) }
+    }
+
     
 }
 
