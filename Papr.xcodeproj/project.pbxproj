@@ -17,6 +17,15 @@
 		DC2E76F8203B6DB90023A173 /* LikeUnlike.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */; };
 		DC2E76F9203B6DB90023A173 /* LikeUnlike.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */; };
 		DC2E76FA203B6DB90023A173 /* LikeUnlike.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */; };
+		DC3917A52096683600492F62 /* CreateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3917A32096683600492F62 /* CreateCollectionViewController.swift */; };
+		DC3917A62096683600492F62 /* CreateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3917A32096683600492F62 /* CreateCollectionViewController.swift */; };
+		DC3917A72096683600492F62 /* CreateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3917A32096683600492F62 /* CreateCollectionViewController.swift */; };
+		DC3917A82096683600492F62 /* CreateCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC3917A42096683600492F62 /* CreateCollectionViewController.xib */; };
+		DC3917A92096683600492F62 /* CreateCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC3917A42096683600492F62 /* CreateCollectionViewController.xib */; };
+		DC3917AA2096683600492F62 /* CreateCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC3917A42096683600492F62 /* CreateCollectionViewController.xib */; };
+		DC3917AC2096684800492F62 /* CreateCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3917AB2096684800492F62 /* CreateCollectionViewModel.swift */; };
+		DC3917AD2096684800492F62 /* CreateCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3917AB2096684800492F62 /* CreateCollectionViewModel.swift */; };
+		DC3917AE2096684800492F62 /* CreateCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3917AB2096684800492F62 /* CreateCollectionViewModel.swift */; };
 		DC5AF7271FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
 		DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
 		DC5AF7291FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
@@ -239,6 +248,9 @@
 		DC1F1503203195410025F70B /* UIScrollView+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extentions.swift"; sourceTree = "<group>"; };
 		DC2576F42093D38B00369B7D /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeUnlike.swift; sourceTree = "<group>"; };
+		DC3917A32096683600492F62 /* CreateCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollectionViewController.swift; sourceTree = "<group>"; };
+		DC3917A42096683600492F62 /* CreateCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateCollectionViewController.xib; sourceTree = "<group>"; };
+		DC3917AB2096684800492F62 /* CreateCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollectionViewModel.swift; sourceTree = "<group>"; };
 		DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashSettings.swift; sourceTree = "<group>"; };
 		DC5AF72A1FACCBF300ADA2BB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
@@ -365,6 +377,16 @@
 				DCBB1B211FA7B1BD004E95F0 /* AppDelegate.swift */,
 			);
 			path = Commons;
+			sourceTree = "<group>";
+		};
+		DC3917A22096680500492F62 /* Create Collection */ = {
+			isa = PBXGroup;
+			children = (
+				DC3917A32096683600492F62 /* CreateCollectionViewController.swift */,
+				DC3917AB2096684800492F62 /* CreateCollectionViewModel.swift */,
+				DC3917A42096683600492F62 /* CreateCollectionViewController.xib */,
+			);
+			path = "Create Collection";
 			sourceTree = "<group>";
 		};
 		DC4191352038E3EA0012A29C /* Unsplash */ = {
@@ -514,6 +536,7 @@
 		DCBB1B4F1FA8B774004E95F0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DC3917A22096680500492F62 /* Create Collection */,
 				DC658D82208CEDEF00FEBC31 /* Add to collection */,
 				DC66C92D2052B9EB00831478 /* Common ViewModels */,
 				DCB433C5204B5B8C00C6C80C /* Photo Details */,
@@ -797,6 +820,7 @@
 				DC658D95208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
 				DC658D88208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
 				DCC8CA162002CC2700F6C540 /* HomeViewCell.xib in Resources */,
+				DC3917A82096683600492F62 /* CreateCollectionViewController.xib in Resources */,
 				DCBB1B271FA7B1BD004E95F0 /* Main.storyboard in Resources */,
 				DCBB1B631FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 				DCB433CB204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
@@ -809,6 +833,7 @@
 			files = (
 				DCC8CA172002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DCBB1B641FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
+				DC3917A92096683600492F62 /* CreateCollectionViewController.xib in Resources */,
 				DCB433CC204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
 				DC658D89208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
 				DC658D96208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
@@ -823,6 +848,7 @@
 			files = (
 				DCC8CA182002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DCBB1B651FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
+				DC3917AA2096683600492F62 /* CreateCollectionViewController.xib in Resources */,
 				DCB433CD204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
 				DC658D8A208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
 				DC658D97208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
@@ -1031,6 +1057,7 @@
 				DCBB1B701FA8BAC2004E95F0 /* BindableType.swift in Sources */,
 				DC5AF72B1FACCBF300ADA2BB /* User.swift in Sources */,
 				DC658D85208CEEE500FEBC31 /* AddToCollectionViewController.swift in Sources */,
+				DC3917AC2096684800492F62 /* CreateCollectionViewModel.swift in Sources */,
 				DCEE1F0F1FC97CE80010BADE /* AlertViewModel.swift in Sources */,
 				DC71C3021FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				DC5AF74C1FACF18600ADA2BB /* Exif.swift in Sources */,
@@ -1068,6 +1095,7 @@
 				DC5AF7501FAD027F00ADA2BB /* PhotoCollection.swift in Sources */,
 				DC658D9F208D139800FEBC31 /* CollectionServiceType.swift in Sources */,
 				DC5AF72F1FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
+				DC3917A52096683600492F62 /* CreateCollectionViewController.swift in Sources */,
 				DCBB1B741FA8D597004E95F0 /* Unsplash.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1076,6 +1104,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC3917A62096683600492F62 /* CreateCollectionViewController.swift in Sources */,
 				DCDDF3272027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
 				DC2E76F9203B6DB90023A173 /* LikeUnlike.swift in Sources */,
 				DC71C3101FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
@@ -1127,6 +1156,7 @@
 				DC92230A203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DCBB1B711FA8BAC2004E95F0 /* BindableType.swift in Sources */,
 				DC658D8D208CEF0300FEBC31 /* AddToCollectionViewModel.swift in Sources */,
+				DC3917AD2096684800492F62 /* CreateCollectionViewModel.swift in Sources */,
 				DC5AF7561FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DC1F1505203195410025F70B /* UIScrollView+Extentions.swift in Sources */,
 				DCEE1F151FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
@@ -1154,11 +1184,13 @@
 				DC7F20951FADD3400017C14A /* SearchResults.swift in Sources */,
 				DCC8CA1C2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
 				DCBB1B6E1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
+				DC3917A72096683600492F62 /* CreateCollectionViewController.swift in Sources */,
 				DC658DA1208D139800FEBC31 /* CollectionServiceType.swift in Sources */,
 				DCDDF3282027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
 				DC71C3041FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				DC658D94208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */,
 				DCB433D1204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */,
+				DC3917AE2096684800492F62 /* CreateCollectionViewModel.swift in Sources */,
 				DC6CC646204CBD5300050589 /* PhotoStatistics.swift in Sources */,
 				DC99FB902003A7CC001195FD /* PhotoServiceType.swift in Sources */,
 				DC5AF72D1FACCBF300ADA2BB /* User.swift in Sources */,

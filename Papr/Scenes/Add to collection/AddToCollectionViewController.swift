@@ -17,7 +17,7 @@ class AddToCollectionViewController: UIViewController, BindableType {
     typealias AddToCollectionSectionModel = SectionModel<String, PhotoCollectionCellModelType>
 
     // MARK: ViewModel
-    var viewModel: AddToCollectionViewModel!
+    var viewModel: AddToCollectionViewModelType!
 
     // MARK: IBOutlets
     @IBOutlet var collectionView: UICollectionView!
