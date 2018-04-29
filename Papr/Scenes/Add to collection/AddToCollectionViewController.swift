@@ -65,6 +65,7 @@ class AddToCollectionViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         cancelBarButton.rx.action = inputs.cancelAction
+        addToCollectionBarButton.rx.action = inputs.navigateToCreateCollectionAction
 
     }
 

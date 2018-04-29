@@ -12,6 +12,7 @@ import Action
 
 protocol AddToCollectionViewModelInput {
     var cancelAction: CocoaAction { get }
+    var navigateToCreateCollectionAction: CocoaAction { get }
 }
 
 protocol AddToCollectionViewModelOutput {
@@ -36,6 +37,13 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
     lazy var cancelAction: CocoaAction = {
         CocoaAction { [unowned self] _ in
             self.sceneCoordinator.pop(animated: true)
+        }
+    }()
+
+    lazy var navigateToCreateCollectionAction: CocoaAction = {
+        CocoaAction { [unowned self] _ in
+            let viewModel = CreateCollectionViewModel()
+            return self.sceneCoordinator.transition(to: .createCollection(viewModel), type: .modal)
         }
     }()
 
