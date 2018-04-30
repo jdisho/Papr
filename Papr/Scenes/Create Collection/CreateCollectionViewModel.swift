@@ -49,34 +49,16 @@ class CreateCollectionViewModel: CreateCollectionViewModelInput,
     lazy var saveAction: CocoaAction = {
         CocoaAction { [unowned self] _ in
             let result = Observable.combineLatest(self.collectionName, self.collectionDescription, self.isPrivate)
+                .take(1)
                 .flatMap { name, description, isPrivate -> Observable<Photo> in
-                    return self.service.createCollection(with: name, description: description, isPrivate: isPrivate)
-                        .flatMap { result -> Observable<Photo> in
-                            switch result {
-                            case let .success(collection):
-                                return self.addPhotoToCollection(id: collection.id ?? 0, photoId: self.photo.id ?? "")
-                            case let .error(error):
-                                return .empty()
-                            }
+                    self.createCollection(with: name, description: description, isPrivate: isPrivate)
+                        .flatMap { collection -> Observable<Photo> in
+                            self.addPhotoToCollection(collection)
                         }
                 }
             return result.ignoreAll()
         }
     }()
-
-    private func addPhotoToCollection(id: Int, photoId: String) -> Observable<Photo> {
-        return self.service.addPhotoToCollection(withId: id, photoId: photoId)
-            .flatMap { result -> Observable<Photo> in
-                switch result {
-                case let .success(photo):
-                    print("success")
-                    return .just(photo)
-                case let .error(error):
-                    print(error)
-                    return .empty()
-                }
-        }
-    }
 
     // MARK: Outputs
     let saveButtonEnabled: Observable<Bool>
@@ -87,6 +69,18 @@ class CreateCollectionViewModel: CreateCollectionViewModelInput,
     private let service: CollectionServiceType
     private let sceneCoordinator: SceneCoordinatorType
 
+    private lazy var alertAction: Action<String, Void> = {
+        Action<String, Void> { [unowned self] message in
+            let alertViewModel = AlertViewModel(
+                title: "Upsss...",
+                message: message,
+                mode: .ok)
+            return self.sceneCoordinator.transition(
+                to: .alert(alertViewModel),
+                type: .alert)
+        }
+    }()
+
     init(photo: Photo,
          service: CollectionServiceType = CollectionService(),
          sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
@@ -96,5 +90,36 @@ class CreateCollectionViewModel: CreateCollectionViewModelInput,
         self.sceneCoordinator = sceneCoordinator
 
         saveButtonEnabled = collectionName.map { $0 != "" }
+    }
+
+    // MARK: Helpers
+
+    private func addPhotoToCollection(_ collection: PhotoCollection) -> Observable<Photo> {
+        guard let collectionId = collection.id,
+            let photoId = photo.id else { return Observable.empty() }
+        return service.addPhotoToCollection(withId: collectionId, photoId: photoId)
+            .flatMap { result -> Observable<Photo> in
+                switch result {
+                case let .success(photo):
+                    self.sceneCoordinator.pop(animated: true)
+                    return .just(photo)
+                case let .error(error):
+                    self.alertAction.execute(error)
+                    return .empty()
+                }
+            }
+    }
+
+    private func createCollection(with name: String, description: String, isPrivate: Bool) -> Observable<PhotoCollection> {
+        return service.createCollection(with: name, description: description, isPrivate: isPrivate)
+            .flatMap { result -> Observable<PhotoCollection> in
+                switch result {
+                case let .success(collection):
+                    return .just(collection)
+                case let .error(error):
+                    self.alertAction.execute(error)
+                    return .empty()
+                }
+        }
     }
 }

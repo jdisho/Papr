@@ -24,10 +24,13 @@ class CreateCollectionViewController: UIViewController, BindableType {
     private let disposeBag = DisposeBag()
     private var cancelBarButton: UIBarButtonItem!
     private var saveBarButton: UIBarButtonItem!
+    private var activityIndicatorBarButton: UIBarButtonItem!
+    private var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        nameTextField.becomeFirstResponder()
         configureNavigationBar()
     }
 
@@ -52,6 +55,15 @@ class CreateCollectionViewController: UIViewController, BindableType {
             .bind(to: saveBarButton.rx.isEnabled)
             .disposed(by: disposeBag)
 
+        inputs.saveAction.executing
+            .subscribe { [unowned self] result in
+                guard let isExecuting = result.element else { return }
+                if isExecuting {
+                    self.navigationItem.rightBarButtonItem = self.activityIndicatorBarButton
+                }
+            }.disposed(by: disposeBag)
+
+
         cancelBarButton.rx.action = inputs.cancelAction
         saveBarButton.rx.action = inputs.saveAction
     }
@@ -59,6 +71,12 @@ class CreateCollectionViewController: UIViewController, BindableType {
     // MARK: UI
     private func configureNavigationBar() {
         title = "New collection"
+
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicator.startAnimating()
+
+        activityIndicatorBarButton = UIBarButtonItem(customView: activityIndicator)
+
         cancelBarButton = UIBarButtonItem(
             title: "Cancel",
             style: .plain,
@@ -71,6 +89,7 @@ class CreateCollectionViewController: UIViewController, BindableType {
             target: self,
             action: nil
         )
+
         navigationItem.leftBarButtonItem = cancelBarButton
         navigationItem.rightBarButtonItem = saveBarButton
         navigationController?.navigationBar.tintColor = .black
