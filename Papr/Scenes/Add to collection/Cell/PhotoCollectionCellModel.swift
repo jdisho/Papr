@@ -93,9 +93,7 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
                 title: "Upsss...",
                 message: message,
                 mode: .ok)
-            return self.sceneCoordinator.transition(
-                to: .alert(alertViewModel),
-                type: .alert)
+            return self.sceneCoordinator.transition(to: Scene.alert(alertViewModel))
         }
     }()
 

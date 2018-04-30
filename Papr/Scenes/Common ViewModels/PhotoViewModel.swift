@@ -118,18 +118,14 @@ class PhotoViewModel: PhotoViewModelType,
                 title: title,
                 message: message,
                 mode: .ok)
-            return self.sceneCoordinator.transition(
-                to: .alert(alertViewModel),
-                type: .alert)
+            return self.sceneCoordinator.transition(to: Scene.alert(alertViewModel))
         }
     }()
 
     lazy var navigateToLogin: CocoaAction = {
         CocoaAction { [unowned self] message in
             let viewModel = LoginViewModel()
-            return self.sceneCoordinator.transition(
-                to: Scene.login(viewModel),
-                type: .modal)
+            return self.sceneCoordinator.transition(to: Scene.login(viewModel))
         }
     }()
 

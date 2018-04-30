@@ -44,7 +44,7 @@ class HomeViewCellModel: PhotoViewModel,
     lazy var photoDetailsAction: Action<Photo, Photo> = {
         return Action<Photo, Photo> { [unowned self] photo in
             let viewModel = PhotoDetailsViewModel(photo: photo)
-            self.sceneCoordinator.transition(to: .photoDetails(viewModel), type: .modal)
+            self.sceneCoordinator.transition(to: Scene.photoDetails(viewModel))
             return .just(photo)
         }
     }()
@@ -56,9 +56,7 @@ class HomeViewCellModel: PhotoViewModel,
                     switch result {
                     case let .success(user):
                         let viewModel = AddToCollectionViewModel(loggedInUser: user, photo: photo)
-                        return self.sceneCoordinator.transition(
-                            to: Scene.addToCollection(viewModel),
-                            type: .modal)
+                        return self.sceneCoordinator.transition(to: Scene.addToCollection(viewModel))
                     case let .error(error):
                         switch error {
                         case .noAccessToken:

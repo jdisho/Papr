@@ -14,6 +14,9 @@ import UIKit
      It comprises a view controller and a view model.
  */
 
+protocol TargetScene {
+    var transition: SceneTransitionType { get }
+}
 
 enum Scene {
     case login(LoginViewModel)
@@ -24,36 +27,36 @@ enum Scene {
     case createCollection(CreateCollectionViewModel)
 }
 
-extension Scene {
-    func viewController() -> UIViewController {
+extension Scene: TargetScene {
+    var transition: SceneTransitionType {
         switch self {
         case let .login(viewModel):
             var vc = LoginViewController.instantiateFromNib()
             vc.bind(to: viewModel)
-            return vc
+            return .root(vc)
         case let .home(viewModel):
             var vc = HomeViewController.instantiateFromNib()
             let rootViewController = UINavigationController(rootViewController: vc)
             vc.bind(to: viewModel)
-            return rootViewController
+            return .root(rootViewController)
         case let .alert(viewModel):
             var vc = AlertViewController(title: nil, message: nil, preferredStyle: .alert)
             vc.bind(to: viewModel)
-            return vc
+            return .present(vc)
         case let .photoDetails(viewModel):
             var vc = PhotoDetailsViewController.instantiateFromNib()
             vc.bind(to: viewModel)
-            return vc
+            return .present(vc)
         case let .addToCollection(viewModel):
             var vc = AddToCollectionViewController.instantiateFromNib()
             let rootViewController = UINavigationController(rootViewController: vc)
             vc.bind(to: viewModel)
-            return rootViewController
+            return .present(rootViewController)
         case let .createCollection(viewModel):
             var vc = CreateCollectionViewController.instantiateFromNib()
             let rootViewController = UINavigationController(rootViewController: vc)
             vc.bind(to: viewModel)
-            return rootViewController
+            return .present(rootViewController)
         }
     }
 }

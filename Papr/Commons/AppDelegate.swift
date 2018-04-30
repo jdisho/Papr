@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SceneCoordinator.shared = sceneCoordinator
 
         let homeScene = Scene.home(HomeViewModel())
-        sceneCoordinator.transition(to: homeScene, type: .root)
+        sceneCoordinator.transition(to: homeScene)
 
         return true
     }

@@ -43,7 +43,7 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
     lazy var navigateToCreateCollectionAction: CocoaAction = {
         CocoaAction { [unowned self] _ in
             let viewModel = CreateCollectionViewModel(photo: self.photo)
-            return self.sceneCoordinator.transition(to: .createCollection(viewModel), type: .modal)
+            return self.sceneCoordinator.transition(to: Scene.createCollection(viewModel))
         }
     }()
 
@@ -69,9 +69,7 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
                 title: "Upsss...",
                 message: message,
                 mode: .ok)
-            return self.sceneCoordinator.transition(
-                to: .alert(alertViewModel),
-                type: .alert)
+            return self.sceneCoordinator.transition(to: Scene.alert(alertViewModel))
         }
     }()
 

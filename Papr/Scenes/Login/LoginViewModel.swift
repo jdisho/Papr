@@ -92,9 +92,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     
     private lazy var navigateToHomeAction: CocoaAction = {
         return CocoaAction { [unowned self] _ in
-            return self.sceneCoordinator.transition(
-                to: .home(HomeViewModel()),
-                type: .root)
+            return self.sceneCoordinator.transition(to: Scene.home(HomeViewModel()))
             }
     }()
 
@@ -104,9 +102,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
                 title: "Upsss...",
                 message: message,
                 mode: .ok)
-            return self.sceneCoordinator.transition(
-                to: .alert(alertViewModel),
-                type: .alert)
+            return self.sceneCoordinator.transition(to: Scene.alert(alertViewModel))
         }
     }()
 

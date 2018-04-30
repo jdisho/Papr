@@ -34,16 +34,15 @@ class SceneCoordinator: SceneCoordinatorType {
     }
     
     @discardableResult
-    func transition(to scene: Scene, type: SceneTransitionType) -> Observable<Void> {
+    func transition(to scene: TargetScene) -> Observable<Void> {
         let subject = PublishSubject<Void>()
-        let viewController = scene.viewController()
-        
-        switch type {
-        case .root:
+
+        switch scene.transition {
+        case let .root(viewController):
             currentViewController = actualViewController(for: viewController)
             window.rootViewController = viewController
             subject.onCompleted()
-        case .push:
+        case let .push(viewController):
             guard let navigationController = viewController.navigationController else {
                 fatalError("Can't push a view controller without a current navigation controller")
             }
@@ -57,15 +56,11 @@ class SceneCoordinator: SceneCoordinatorType {
             
             navigationController.pushViewController(viewController, animated: true)
             currentViewController = actualViewController(for: viewController)
-        case .modal:
+        case let .present(viewController):
             currentViewController.present(viewController, animated: true) {
                 subject.onCompleted()
             }
             currentViewController = actualViewController(for: viewController)
-        case .alert:
-            currentViewController.present(viewController, animated: true) {
-                subject.onCompleted()
-            }
         }
         
         return subject
