@@ -133,6 +133,18 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             }
             .disposed(by: disposeBag)
 
+        outputs.photoStream
+            .map { $0.links?.html }
+            .unwrap()
+            .subscribe { result in
+                guard let urlString = result.element,
+                    let url = URL(string: urlString),
+                    let image = self.photoImageView.image
+                    else { return }
+
+                self.moreButton.rx.bind(to: inputs.moreAction, input: [url, image])
+            }
+            .disposed(by: disposeBag)
     }
 
     // MARK: UI

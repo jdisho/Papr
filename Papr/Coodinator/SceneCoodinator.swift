@@ -61,6 +61,10 @@ class SceneCoordinator: SceneCoordinatorType {
                 subject.onCompleted()
             }
             currentViewController = actualViewController(for: viewController)
+        case let .alert(viewController):
+            currentViewController.present(viewController, animated: true) {
+                subject.onCompleted()
+            }
         }
         
         return subject

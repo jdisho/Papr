@@ -12,6 +12,7 @@ import Action
 
 protocol PhotoDetailsViewModelInput: PhotoViewModelInput {
     var dismissAction: CocoaAction { get }
+    var moreAction: Action<[Any], Void> { get }
 }
 
 protocol PhotoDetailsViewModelOutput: PhotoViewModelOutput {
@@ -40,6 +41,12 @@ class PhotoDetailsViewModel: PhotoViewModel,
     lazy var dismissAction: CocoaAction = {
         CocoaAction { [unowned self] _ in
             self.sceneCoordinator.pop(animated: true)
+        }
+    }()
+
+    lazy var moreAction: Action<[Any], Void> = {
+        Action<[Any], Void>  { [unowned self] items in
+            return self.sceneCoordinator.transition(to: Scene.activity(items))
         }
     }()
 

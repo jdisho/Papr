@@ -22,6 +22,7 @@ enum Scene {
     case login(LoginViewModel)
     case home(HomeViewModel)
     case alert(AlertViewModel)
+    case activity([Any])
     case photoDetails(PhotoDetailsViewModel)
     case addToCollection(AddToCollectionViewModel)
     case createCollection(CreateCollectionViewModel)
@@ -42,7 +43,10 @@ extension Scene: TargetScene {
         case let .alert(viewModel):
             var vc = AlertViewController(title: nil, message: nil, preferredStyle: .alert)
             vc.bind(to: viewModel)
-            return .present(vc)
+            return .alert(vc)
+        case let .activity(items):
+            let vc = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            return .alert(vc)
         case let .photoDetails(viewModel):
             var vc = PhotoDetailsViewController.instantiateFromNib()
             vc.bind(to: viewModel)
