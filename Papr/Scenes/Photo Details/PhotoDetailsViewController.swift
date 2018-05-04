@@ -207,19 +207,10 @@ class PhotoDetailsViewController: UIViewController, BindableType {
     private func configureContentSize(withHeight height: CGFloat) {
         let bounds = view.bounds
         scrollView.frame = bounds
-        let size: CGSize
-        let containerSize = CGSize(width: bounds.width, height: bounds.height)
-        if containerSize.width / containerSize.height < view.bounds.size.width / height {
-            size = CGSize(
-                width: containerSize.width,
-                height: containerSize.width * height / view.bounds.size.width
-            )
-        } else {
-            size = CGSize(
-                width: containerSize.height * view.bounds.size.width / height,
-                height: containerSize.height
-            )
-        }
+        let size = CGSize(
+            width: UIScreen.main.bounds.width,
+            height: height
+        )
         photoImageView.frame = CGRect(origin: .zero, size: size)
         scrollView.contentSize = size
     }

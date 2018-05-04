@@ -33,7 +33,7 @@ extension Scene: TargetScene {
         case let .login(viewModel):
             var vc = LoginViewController.instantiateFromNib()
             vc.bind(to: viewModel)
-            return .root(vc)
+            return .present(vc)
         case let .home(viewModel):
             var vc = HomeViewController.instantiateFromNib()
             let rootViewController = UINavigationController(rootViewController: vc)
