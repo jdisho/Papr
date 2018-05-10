@@ -83,6 +83,15 @@
 		DC66C92F2052BA0300831478 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66C92E2052BA0300831478 /* PhotoViewModel.swift */; };
 		DC66C9302052BA0300831478 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66C92E2052BA0300831478 /* PhotoViewModel.swift */; };
 		DC66C9312052BA0300831478 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66C92E2052BA0300831478 /* PhotoViewModel.swift */; };
+		DC66E65620A4CB4C005E5E31 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E65320A4CB4C005E5E31 /* SearchViewController.swift */; };
+		DC66E65720A4CB4C005E5E31 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E65320A4CB4C005E5E31 /* SearchViewController.swift */; };
+		DC66E65820A4CB4C005E5E31 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E65320A4CB4C005E5E31 /* SearchViewController.swift */; };
+		DC66E65920A4CB4C005E5E31 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E65420A4CB4C005E5E31 /* SearchViewModel.swift */; };
+		DC66E65A20A4CB4C005E5E31 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E65420A4CB4C005E5E31 /* SearchViewModel.swift */; };
+		DC66E65B20A4CB4C005E5E31 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E65420A4CB4C005E5E31 /* SearchViewModel.swift */; };
+		DC66E65C20A4CB4C005E5E31 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC66E65520A4CB4C005E5E31 /* SearchViewController.xib */; };
+		DC66E65D20A4CB4C005E5E31 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC66E65520A4CB4C005E5E31 /* SearchViewController.xib */; };
+		DC66E65E20A4CB4C005E5E31 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC66E65520A4CB4C005E5E31 /* SearchViewController.xib */; };
 		DC6CC644204CBD5300050589 /* PhotoStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6CC643204CBD5300050589 /* PhotoStatistics.swift */; };
 		DC6CC645204CBD5300050589 /* PhotoStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6CC643204CBD5300050589 /* PhotoStatistics.swift */; };
 		DC6CC646204CBD5300050589 /* PhotoStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6CC643204CBD5300050589 /* PhotoStatistics.swift */; };
@@ -270,6 +279,9 @@
 		DC658D9E208D139800FEBC31 /* CollectionServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionServiceType.swift; sourceTree = "<group>"; };
 		DC658DA2208D13A400FEBC31 /* CollectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionService.swift; sourceTree = "<group>"; };
 		DC66C92E2052BA0300831478 /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
+		DC66E65320A4CB4C005E5E31 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		DC66E65420A4CB4C005E5E31 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		DC66E65520A4CB4C005E5E31 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		DC6CC643204CBD5300050589 /* PhotoStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStatistics.swift; sourceTree = "<group>"; };
 		DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthManager.swift; sourceTree = "<group>"; };
 		DC71C30E1FBDE00A00C8E41A /* UnsplashAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthError.swift; sourceTree = "<group>"; };
@@ -448,6 +460,16 @@
 			path = "Common ViewModels";
 			sourceTree = "<group>";
 		};
+		DC66E65220A4CB31005E5E31 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				DC66E65320A4CB4C005E5E31 /* SearchViewController.swift */,
+				DC66E65420A4CB4C005E5E31 /* SearchViewModel.swift */,
+				DC66E65520A4CB4C005E5E31 /* SearchViewController.xib */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		DC7CF5851FC468C6006E0A39 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -536,6 +558,7 @@
 		DCBB1B4F1FA8B774004E95F0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DC66E65220A4CB31005E5E31 /* Search */,
 				DC3917A22096680500492F62 /* Create Collection */,
 				DC658D82208CEDEF00FEBC31 /* Add to collection */,
 				DC66C92D2052B9EB00831478 /* Common ViewModels */,
@@ -821,6 +844,7 @@
 				DC658D88208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
 				DCC8CA162002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DC3917A82096683600492F62 /* CreateCollectionViewController.xib in Resources */,
+				DC66E65C20A4CB4C005E5E31 /* SearchViewController.xib in Resources */,
 				DCBB1B271FA7B1BD004E95F0 /* Main.storyboard in Resources */,
 				DCBB1B631FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 				DCB433CB204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
@@ -836,6 +860,7 @@
 				DC3917A92096683600492F62 /* CreateCollectionViewController.xib in Resources */,
 				DCB433CC204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
 				DC658D89208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
+				DC66E65D20A4CB4C005E5E31 /* SearchViewController.xib in Resources */,
 				DC658D96208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
 				DCC8CA0B2002BEE300F6C540 /* HomeViewController.xib in Resources */,
 				DCAF6BC2204D990A002B7F00 /* Assets.xcassets in Resources */,
@@ -851,6 +876,7 @@
 				DC3917AA2096683600492F62 /* CreateCollectionViewController.xib in Resources */,
 				DCB433CD204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
 				DC658D8A208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
+				DC66E65E20A4CB4C005E5E31 /* SearchViewController.xib in Resources */,
 				DC658D97208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
 				DCC8CA0C2002BEE300F6C540 /* HomeViewController.xib in Resources */,
 				DCAF6BC3204D990A002B7F00 /* Assets.xcassets in Resources */,
@@ -1039,11 +1065,13 @@
 				DC658D9A208CFE1700FEBC31 /* PhotoCollectionCellModel.swift in Sources */,
 				DC66C92F2052BA0300831478 /* PhotoViewModel.swift in Sources */,
 				DCDDF32A2027DA5F00E1EB81 /* UIView+Extentions.swift in Sources */,
+				DC66E65920A4CB4C005E5E31 /* SearchViewModel.swift in Sources */,
 				DC5AF7441FACEF2700ADA2BB /* Location.swift in Sources */,
 				DCEE1F141FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
 				DC5AF7481FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DCBB1B221FA7B1BD004E95F0 /* AppDelegate.swift in Sources */,
 				DCC8CA1E2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
+				DC66E65620A4CB4C005E5E31 /* SearchViewController.swift in Sources */,
 				DC6CC644204CBD5300050589 /* PhotoStatistics.swift in Sources */,
 				DCA09D002015F68200E6EBB7 /* Constants.swift in Sources */,
 				DCDDF3262027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
@@ -1121,6 +1149,7 @@
 				DC5AF7411FACE6A300ADA2BB /* Photo.swift in Sources */,
 				DC658D9B208CFE1700FEBC31 /* PhotoCollectionCellModel.swift in Sources */,
 				DCAF6BC0204D465E002B7F00 /* Int+Extentions.swift in Sources */,
+				DC66E65A20A4CB4C005E5E31 /* SearchViewModel.swift in Sources */,
 				DCBB1B371FA7B1BD004E95F0 /* PaprTests.swift in Sources */,
 				DC7F20941FADD3400017C14A /* SearchResults.swift in Sources */,
 				DC658D86208CEEE500FEBC31 /* AddToCollectionViewController.swift in Sources */,
@@ -1134,6 +1163,7 @@
 				DC99FB8F2003A7CC001195FD /* PhotoServiceType.swift in Sources */,
 				DC5AF72C1FACCBF300ADA2BB /* User.swift in Sources */,
 				DC7CF5831FC464BF006E0A39 /* URL.swift in Sources */,
+				DC66E65720A4CB4C005E5E31 /* SearchViewController.swift in Sources */,
 				DC5AF7301FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DCC8CA1F2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DC5AF7451FACEF2700ADA2BB /* Location.swift in Sources */,
@@ -1176,6 +1206,7 @@
 				DCC8CA102002BEF100F6C540 /* HomeViewModel.swift in Sources */,
 				DC92230B203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DC658D87208CEEE500FEBC31 /* AddToCollectionViewController.swift in Sources */,
+				DC66E65B20A4CB4C005E5E31 /* SearchViewModel.swift in Sources */,
 				DC9147962082B9B500781B65 /* Hero+Rx.swift in Sources */,
 				DC71C3DD1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
 				DCC8CA152002CC2700F6C540 /* HomeViewCell.swift in Sources */,
@@ -1184,6 +1215,7 @@
 				DC7F20951FADD3400017C14A /* SearchResults.swift in Sources */,
 				DCC8CA1C2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
 				DCBB1B6E1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
+				DC66E65820A4CB4C005E5E31 /* SearchViewController.swift in Sources */,
 				DC3917A72096683600492F62 /* CreateCollectionViewController.swift in Sources */,
 				DC658DA1208D139800FEBC31 /* CollectionServiceType.swift in Sources */,
 				DCDDF3282027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
