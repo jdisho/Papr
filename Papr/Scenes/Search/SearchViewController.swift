@@ -29,7 +29,7 @@ class SearchViewController: UIViewController, BindableType {
     // MARK: BindableType
 
     func bindViewModel() {
-        // TODO: Bind view model to UI
+       viewModel.outputs.searchResults.debug().subscribe()
     }
   
 }
