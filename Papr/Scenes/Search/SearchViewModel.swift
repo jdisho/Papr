@@ -15,7 +15,7 @@ protocol SearchViewModelInput {
 }
 
 protocol SearchViewModelOutput {
-    var searchResults: Observable<[String]> { get }
+    var searchResultCellModel: Observable<[SearchResultCellModel]> { get }
 }
 
 protocol SearchViewModelType {
@@ -32,11 +32,14 @@ class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewMode
     var searchString = BehaviorSubject<String>(value: "")
 
     // MARK: - Outputs
-    let searchResults: Observable<[String]>
+    lazy var searchResultCellModel: Observable<[SearchResultCellModel]> = {
+        return searchResults.mapMany { SearchResultCellModel(searchResult: $0) }
+    }()
 
     // MARK: - Private
     private let service: SearchServiceType
     private let sceneCoordinator: SceneCoordinatorType
+    private let searchResults: Observable<[SearchResult]>
 
     // MARK: - Init
 
@@ -49,10 +52,9 @@ class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewMode
         let predefinedText = Observable.of(["Photos with ", "Collections with", "Users with"])
 
         searchResults = Observable.combineLatest(predefinedText, searchString)
-            .map { predefinedText, query -> [String] in
-                return predefinedText.map { $0 + "\"\(query)\"" }
+            .map { predefinedText, query -> [SearchResult] in
+                return predefinedText.map { SearchResult(query: query, predefinedText: $0) }
             }
-
     }
 
 
