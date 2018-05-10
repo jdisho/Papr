@@ -11,11 +11,11 @@ import RxSwift
 import Action
 
 protocol SearchViewModelInput {
-    var searchString: BehaviorSubject<String> { get }
+    var searchString: BehaviorSubject<String?> { get }
 }
 
 protocol SearchViewModelOutput {
-    var searchResultCellModel: Observable<[SearchResultCellModel]> { get }
+    var searchResultCellModel: Observable<[SearchResultCellModelType]> { get }
 }
 
 protocol SearchViewModelType {
@@ -29,10 +29,10 @@ class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewMode
     var outputs: SearchViewModelOutput { return self }
 
     // MARK: - Inputs
-    var searchString = BehaviorSubject<String>(value: "")
+    var searchString = BehaviorSubject<String?>(value: nil)
 
     // MARK: - Outputs
-    lazy var searchResultCellModel: Observable<[SearchResultCellModel]> = {
+    lazy var searchResultCellModel: Observable<[SearchResultCellModelType]> = {
         return searchResults.mapMany { SearchResultCellModel(searchResult: $0) }
     }()
 
@@ -51,11 +51,9 @@ class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewMode
 
         let predefinedText = Observable.of(["Photos with ", "Collections with", "Users with"])
 
-        searchResults = Observable.combineLatest(predefinedText, searchString)
+        searchResults = Observable.combineLatest(predefinedText, searchString.unwrap())
             .map { predefinedText, query -> [SearchResult] in
                 return predefinedText.map { SearchResult(query: query, predefinedText: $0) }
             }
     }
-
-
 }

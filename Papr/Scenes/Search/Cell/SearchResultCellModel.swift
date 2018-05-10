@@ -12,13 +12,13 @@ import RxDataSources
 
     // MARK: SearchResult
 
-struct SearchResult {
+struct SearchResult: Equatable {
     let query: String
     let description: String
 
     init(query: String, predefinedText: String) {
         self.query = query
-        description = predefinedText + "\"\(query)\""
+        description = predefinedText + " \"\(query)\""
     }
 }
 
@@ -54,5 +54,4 @@ class SearchResultCellModel: SearchResultCellModelType,
     init(searchResult: SearchResult) {
         self.searchResult = Observable.just(searchResult)
     }
-
 }
