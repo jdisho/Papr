@@ -19,19 +19,19 @@ class SearchViewController: UIViewController, BindableType {
     var viewModel: SearchViewModelType!
 
     // MARK: IBOutlets
-    @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var tableView: UITableView!
 
     // MARK: Private
-    private let disposeBag = DisposeBag()
+    private var searchBar: UISearchBar!
     private var dataSource: RxTableViewSectionedReloadDataSource<SearchSectionModel>!
+    private let disposeBag = DisposeBag()
 
     // MARK: Init
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Search 🔭"
+        configureSearchBar()
         configureTableView()
     }
 
@@ -56,9 +56,23 @@ class SearchViewController: UIViewController, BindableType {
             .map { [SearchSectionModel(model: "", items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+
+        tableView.rx.itemSelected
+            .map { $0.row }
+            .bind(to: inputs.searchTrigger)
+            .disposed(by: disposeBag)
+
     }
 
-    // MARK: TableView
+    // MARK: UI
+
+    private func configureSearchBar() {
+        searchBar = UISearchBar()
+        searchBar.searchBarStyle = .minimal
+        searchBar.placeholder = "Search Unsplash"
+        navigationItem.titleView = searchBar
+
+    }
 
     private func configureTableView() {
         tableView.tableFooterView =  UIView()
@@ -75,6 +89,7 @@ class SearchViewController: UIViewController, BindableType {
                 type: SearchResultCell.self,
                 forIndexPath: indexPath)
             cell.bind(to: cellModel)
+
             return cell
         }
     }

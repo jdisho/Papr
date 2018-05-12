@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="Papr" customModuleProvider="target">
             <connections>
-                <outlet property="searchBar" destination="Xjt-mM-yjW" id="PUb-w7-bVo"/>
                 <outlet property="tableView" destination="LwF-2t-SO2" id="glg-EY-cdc"/>
                 <outlet property="view" destination="iN0-l3-epB" id="KJy-oY-61R"/>
             </connections>
@@ -22,27 +21,20 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="Xjt-mM-yjW">
-                    <rect key="frame" x="8" y="20" width="359" height="56"/>
-                    <textInputTraits key="textInputTraits"/>
-                </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LwF-2t-SO2">
-                    <rect key="frame" x="0.0" y="76" width="375" height="591"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
-                <constraint firstItem="LwF-2t-SO2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="24a-Pv-fnw"/>
-                <constraint firstItem="LwF-2t-SO2" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Do2-kT-ykM"/>
-                <constraint firstItem="LwF-2t-SO2" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="LRh-dF-74c"/>
-                <constraint firstItem="Xjt-mM-yjW" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="RlQ-cm-LAu"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Xjt-mM-yjW" secondAttribute="trailing" constant="8" id="eak-tV-BSB"/>
-                <constraint firstItem="Xjt-mM-yjW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="iJe-8I-uJr"/>
-                <constraint firstItem="LwF-2t-SO2" firstAttribute="top" secondItem="Xjt-mM-yjW" secondAttribute="bottom" id="q9O-Xb-89n"/>
+                <constraint firstItem="LwF-2t-SO2" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="8r0-Ls-37w"/>
+                <constraint firstItem="LwF-2t-SO2" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Npd-J4-izk"/>
+                <constraint firstItem="LwF-2t-SO2" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="OzV-0M-Clz"/>
+                <constraint firstItem="LwF-2t-SO2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="awC-PE-XaG"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="-233" y="-51"/>
+            <point key="canvasLocation" x="-233.5" y="-51.5"/>
         </view>
     </objects>
 </document>
