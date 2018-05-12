@@ -27,6 +27,9 @@ enum Scene {
     case addToCollection(AddToCollectionViewModel)
     case createCollection(CreateCollectionViewModel)
     case searchAll(SearchViewModel)
+    case searchPhotos(SearchPhotosViewModel)
+    case searchCollections(SearchCollectionsViewModel)
+    case searchUsers(SearchUsersViewModel)
 }
 
 extension Scene: TargetScene {
@@ -67,6 +70,18 @@ extension Scene: TargetScene {
             let rootViewController = UINavigationController(rootViewController: vc)
             vc.bind(to: viewModel)
             return .root(rootViewController)
+        case let .searchPhotos(viewModel):
+            var vc = SearchPhotosViewController.instantiateFromNib()
+            vc.bind(to: viewModel)
+            return .push(vc)
+        case let .searchCollections(viewModel):
+            var vc = SearchCollectionsViewController.instantiateFromNib()
+            vc.bind(to: viewModel)
+            return .push(vc)
+        case let .searchUsers(viewModel):
+            var vc = SearchUsersViewController.instantiateFromNib()
+            vc.bind(to: viewModel)
+            return .push(vc)
         }
     }
 }

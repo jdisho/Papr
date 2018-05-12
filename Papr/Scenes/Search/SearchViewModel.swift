@@ -12,6 +12,7 @@ import Action
 
 protocol SearchViewModelInput {
     var searchString: BehaviorSubject<String?> { get }
+    var searchTrigger: InputSubject<Int>! { get }
 }
 
 protocol SearchViewModelOutput {
@@ -30,6 +31,7 @@ class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewMode
 
     // MARK: - Inputs
     var searchString = BehaviorSubject<String?>(value: nil)
+    var searchTrigger: InputSubject<Int>!
 
     // MARK: - Outputs
     lazy var searchResultCellModel: Observable<[SearchResultCellModelType]> = {
@@ -40,6 +42,17 @@ class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewMode
     private let service: SearchServiceType
     private let sceneCoordinator: SceneCoordinatorType
     private let searchResults: Observable<[SearchResult]>
+
+    private lazy var searchAction: Action<Int, Void> = {
+        return Action<Int, Void> { row in
+            switch row {
+                case 0: return .empty()
+                case 1: return .empty()
+                case 2: return .empty()
+                default: fatalError()
+            }
+        }
+    }()
 
     // MARK: - Init
 
@@ -55,5 +68,8 @@ class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewMode
             .map { predefinedText, query -> [SearchResult] in
                 return predefinedText.map { SearchResult(query: query, predefinedText: $0) }
             }
+
+        searchTrigger = searchAction.inputs
+
     }
 }

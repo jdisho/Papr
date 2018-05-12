@@ -119,6 +119,33 @@
 		DC71C3DB1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */; };
 		DC71C3DC1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */; };
 		DC71C3DD1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */; };
+		DC73732620A796C900922AE4 /* SearchPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732320A796C900922AE4 /* SearchPhotosViewController.swift */; };
+		DC73732720A796C900922AE4 /* SearchPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732320A796C900922AE4 /* SearchPhotosViewController.swift */; };
+		DC73732820A796C900922AE4 /* SearchPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732320A796C900922AE4 /* SearchPhotosViewController.swift */; };
+		DC73732920A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */; };
+		DC73732A20A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */; };
+		DC73732B20A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */; };
+		DC73732C20A796C900922AE4 /* SearchPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC73732520A796C900922AE4 /* SearchPhotosViewController.xib */; };
+		DC73732D20A796C900922AE4 /* SearchPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC73732520A796C900922AE4 /* SearchPhotosViewController.xib */; };
+		DC73732E20A796C900922AE4 /* SearchPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC73732520A796C900922AE4 /* SearchPhotosViewController.xib */; };
+		DC73733220A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732F20A7970400922AE4 /* SearchCollectionsViewController.swift */; };
+		DC73733320A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732F20A7970400922AE4 /* SearchCollectionsViewController.swift */; };
+		DC73733420A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732F20A7970400922AE4 /* SearchCollectionsViewController.swift */; };
+		DC73733520A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733020A7970400922AE4 /* SearchCollectionsViewModel.swift */; };
+		DC73733620A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733020A7970400922AE4 /* SearchCollectionsViewModel.swift */; };
+		DC73733720A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733020A7970400922AE4 /* SearchCollectionsViewModel.swift */; };
+		DC73733820A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC73733120A7970400922AE4 /* SearchCollectionsViewController.xib */; };
+		DC73733920A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC73733120A7970400922AE4 /* SearchCollectionsViewController.xib */; };
+		DC73733A20A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC73733120A7970400922AE4 /* SearchCollectionsViewController.xib */; };
+		DC73733E20A7974C00922AE4 /* SearchUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733B20A7974C00922AE4 /* SearchUsersViewController.swift */; };
+		DC73733F20A7974C00922AE4 /* SearchUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733B20A7974C00922AE4 /* SearchUsersViewController.swift */; };
+		DC73734020A7974C00922AE4 /* SearchUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733B20A7974C00922AE4 /* SearchUsersViewController.swift */; };
+		DC73734120A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733C20A7974C00922AE4 /* SearchUsersViewModel.swift */; };
+		DC73734220A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733C20A7974C00922AE4 /* SearchUsersViewModel.swift */; };
+		DC73734320A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733C20A7974C00922AE4 /* SearchUsersViewModel.swift */; };
+		DC73734420A7974C00922AE4 /* SearchUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC73733D20A7974C00922AE4 /* SearchUsersViewController.xib */; };
+		DC73734520A7974C00922AE4 /* SearchUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC73733D20A7974C00922AE4 /* SearchUsersViewController.xib */; };
+		DC73734620A7974C00922AE4 /* SearchUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC73733D20A7974C00922AE4 /* SearchUsersViewController.xib */; };
 		DC7CF5821FC464BF006E0A39 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7CF5811FC464BF006E0A39 /* URL.swift */; };
 		DC7CF5831FC464BF006E0A39 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7CF5811FC464BF006E0A39 /* URL.swift */; };
 		DC7CF5841FC464BF006E0A39 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7CF5811FC464BF006E0A39 /* URL.swift */; };
@@ -306,6 +333,15 @@
 		DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthManager.swift; sourceTree = "<group>"; };
 		DC71C30E1FBDE00A00C8E41A /* UnsplashAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthError.swift; sourceTree = "<group>"; };
 		DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAccessToken.swift; sourceTree = "<group>"; };
+		DC73732320A796C900922AE4 /* SearchPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosViewController.swift; sourceTree = "<group>"; };
+		DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosViewModel.swift; sourceTree = "<group>"; };
+		DC73732520A796C900922AE4 /* SearchPhotosViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPhotosViewController.xib; sourceTree = "<group>"; };
+		DC73732F20A7970400922AE4 /* SearchCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionsViewController.swift; sourceTree = "<group>"; };
+		DC73733020A7970400922AE4 /* SearchCollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionsViewModel.swift; sourceTree = "<group>"; };
+		DC73733120A7970400922AE4 /* SearchCollectionsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCollectionsViewController.xib; sourceTree = "<group>"; };
+		DC73733B20A7974C00922AE4 /* SearchUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersViewController.swift; sourceTree = "<group>"; };
+		DC73733C20A7974C00922AE4 /* SearchUsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersViewModel.swift; sourceTree = "<group>"; };
+		DC73733D20A7974C00922AE4 /* SearchUsersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchUsersViewController.xib; sourceTree = "<group>"; };
 		DC7CF5811FC464BF006E0A39 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		DC7F20921FADD3400017C14A /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		DC9147932082B9AD00781B65 /* Hero+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Hero+Rx.swift"; sourceTree = "<group>"; };
@@ -483,6 +519,9 @@
 		DC66E65220A4CB31005E5E31 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				DC73732220A796AB00922AE4 /* SearchUsers */,
+				DC73732120A796A100922AE4 /* SearchCollections */,
+				DC73732020A7969300922AE4 /* SearchPhotos */,
 				DC66E66D20A4D9E9005E5E31 /* Cell */,
 				DC66E65320A4CB4C005E5E31 /* SearchViewController.swift */,
 				DC66E65420A4CB4C005E5E31 /* SearchViewModel.swift */,
@@ -508,6 +547,36 @@
 				DC66E66F20A4DA0F005E5E31 /* SearchResultCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		DC73732020A7969300922AE4 /* SearchPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				DC73732320A796C900922AE4 /* SearchPhotosViewController.swift */,
+				DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */,
+				DC73732520A796C900922AE4 /* SearchPhotosViewController.xib */,
+			);
+			path = SearchPhotos;
+			sourceTree = "<group>";
+		};
+		DC73732120A796A100922AE4 /* SearchCollections */ = {
+			isa = PBXGroup;
+			children = (
+				DC73732F20A7970400922AE4 /* SearchCollectionsViewController.swift */,
+				DC73733020A7970400922AE4 /* SearchCollectionsViewModel.swift */,
+				DC73733120A7970400922AE4 /* SearchCollectionsViewController.xib */,
+			);
+			path = SearchCollections;
+			sourceTree = "<group>";
+		};
+		DC73732220A796AB00922AE4 /* SearchUsers */ = {
+			isa = PBXGroup;
+			children = (
+				DC73733B20A7974C00922AE4 /* SearchUsersViewController.swift */,
+				DC73733C20A7974C00922AE4 /* SearchUsersViewModel.swift */,
+				DC73733D20A7974C00922AE4 /* SearchUsersViewController.xib */,
+			);
+			path = SearchUsers;
 			sourceTree = "<group>";
 		};
 		DC7CF5851FC468C6006E0A39 /* Authentication */ = {
@@ -880,7 +949,9 @@
 			files = (
 				DCBB1B2C1FA7B1BD004E95F0 /* LaunchScreen.storyboard in Resources */,
 				DCBB1B291FA7B1BD004E95F0 /* Assets.xcassets in Resources */,
+				DC73733820A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */,
 				DCC8CA0A2002BEE300F6C540 /* HomeViewController.xib in Resources */,
+				DC73734420A7974C00922AE4 /* SearchUsersViewController.xib in Resources */,
 				DC658D95208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
 				DC658D88208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
 				DCC8CA162002CC2700F6C540 /* HomeViewCell.xib in Resources */,
@@ -888,6 +959,7 @@
 				DC66E66920A4D7D6005E5E31 /* SearchViewController.xib in Resources */,
 				DCBB1B271FA7B1BD004E95F0 /* Main.storyboard in Resources */,
 				DCBB1B631FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
+				DC73732C20A796C900922AE4 /* SearchPhotosViewController.xib in Resources */,
 				DC66E67320A4DA0F005E5E31 /* SearchResultCell.xib in Resources */,
 				DCB433CB204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
 			);
@@ -898,12 +970,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCC8CA172002CC2700F6C540 /* HomeViewCell.xib in Resources */,
+				DC73732D20A796C900922AE4 /* SearchPhotosViewController.xib in Resources */,
 				DCBB1B641FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 				DC3917A92096683600492F62 /* CreateCollectionViewController.xib in Resources */,
 				DCB433CC204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
 				DC658D89208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
 				DC66E66A20A4D7D6005E5E31 /* SearchViewController.xib in Resources */,
 				DC66E67420A4DA0F005E5E31 /* SearchResultCell.xib in Resources */,
+				DC73734520A7974C00922AE4 /* SearchUsersViewController.xib in Resources */,
+				DC73733920A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */,
 				DC658D96208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
 				DCC8CA0B2002BEE300F6C540 /* HomeViewController.xib in Resources */,
 				DCAF6BC2204D990A002B7F00 /* Assets.xcassets in Resources */,
@@ -915,12 +990,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCC8CA182002CC2700F6C540 /* HomeViewCell.xib in Resources */,
+				DC73732E20A796C900922AE4 /* SearchPhotosViewController.xib in Resources */,
 				DCBB1B651FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 				DC3917AA2096683600492F62 /* CreateCollectionViewController.xib in Resources */,
 				DCB433CD204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
 				DC658D8A208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
 				DC66E66B20A4D7D6005E5E31 /* SearchViewController.xib in Resources */,
 				DC66E67520A4DA0F005E5E31 /* SearchResultCell.xib in Resources */,
+				DC73734620A7974C00922AE4 /* SearchUsersViewController.xib in Resources */,
+				DC73733A20A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */,
 				DC658D97208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
 				DCC8CA0C2002BEE300F6C540 /* HomeViewController.xib in Resources */,
 				DCAF6BC3204D990A002B7F00 /* Assets.xcassets in Resources */,
@@ -1123,6 +1201,7 @@
 				DC5AF7551FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DCEE1F0B1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCBB1B591FA8B82F004E95F0 /* SceneCoodinator.swift in Sources */,
+				DC73733E20A7974C00922AE4 /* SearchUsersViewController.swift in Sources */,
 				DC2576F52093D38B00369B7D /* Result.swift in Sources */,
 				DC66E66520A4D016005E5E31 /* SearchService.swift in Sources */,
 				DC658D8C208CEF0300FEBC31 /* AddToCollectionViewModel.swift in Sources */,
@@ -1141,6 +1220,7 @@
 				DC7F20931FADD3400017C14A /* SearchResults.swift in Sources */,
 				DCCCFCBD203A45DE0024D417 /* Links.swift in Sources */,
 				DCCD04182059C25900670B70 /* UserService.swift in Sources */,
+				DC73733520A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */,
 				DCCCFCC1203A4A530024D417 /* Category.swift in Sources */,
 				DCBB1B551FA8B814004E95F0 /* Scene.swift in Sources */,
 				DC99FB922003A7DB001195FD /* PhotoService.swift in Sources */,
@@ -1152,6 +1232,7 @@
 				DCC8CA072002BEE300F6C540 /* HomeViewController.swift in Sources */,
 				DC922309203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DC99FB8E2003A7CC001195FD /* PhotoServiceType.swift in Sources */,
+				DC73732620A796C900922AE4 /* SearchPhotosViewController.swift in Sources */,
 				DCC8CA132002CC2700F6C540 /* HomeViewCell.swift in Sources */,
 				DC71C30F1FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
 				DC71C3DB1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
@@ -1160,14 +1241,17 @@
 				DC2E76F8203B6DB90023A173 /* LikeUnlike.swift in Sources */,
 				DC9147942082B9AD00781B65 /* Hero+Rx.swift in Sources */,
 				DCBAEE6320363CD600561CBA /* Orientation.swift in Sources */,
+				DC73734120A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */,
 				DCCCFCC5203A52410024D417 /* Resolution.swift in Sources */,
 				DCBE008E202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
 				DC7CF5821FC464BF006E0A39 /* URL.swift in Sources */,
+				DC73732920A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */,
 				DCBB1B5B1FA8B840004E95F0 /* SceneTransitionType.swift in Sources */,
 				DC5AF7591FAD2F1E00ADA2BB /* OrderBy.swift in Sources */,
 				DCBB1B671FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
 				DCC8CA1A2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
 				DCB433CF204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */,
+				DC73733220A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */,
 				DC5AF7501FAD027F00ADA2BB /* PhotoCollection.swift in Sources */,
 				DC658D9F208D139800FEBC31 /* CollectionServiceType.swift in Sources */,
 				DC5AF72F1FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
@@ -1184,9 +1268,11 @@
 				DCDDF3272027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
 				DC2E76F9203B6DB90023A173 /* LikeUnlike.swift in Sources */,
 				DC71C3101FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
+				DC73733320A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */,
 				DCA09D012015F68200E6EBB7 /* Constants.swift in Sources */,
 				DCB433C9204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */,
 				DC66E67120A4DA0F005E5E31 /* SearchResultCell.swift in Sources */,
+				DC73734220A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */,
 				DC66C9302052BA0300831478 /* PhotoViewModel.swift in Sources */,
 				DC5AF74D1FACF18600ADA2BB /* Exif.swift in Sources */,
 				DCB433D0204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */,
@@ -1214,6 +1300,7 @@
 				DC5AF72C1FACCBF300ADA2BB /* User.swift in Sources */,
 				DC7CF5831FC464BF006E0A39 /* URL.swift in Sources */,
 				DC66E65720A4CB4C005E5E31 /* SearchViewController.swift in Sources */,
+				DC73732A20A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */,
 				DC5AF7301FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DCC8CA1F2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DC5AF7451FACEF2700ADA2BB /* Location.swift in Sources */,
@@ -1224,13 +1311,16 @@
 				DC658DA4208D13A400FEBC31 /* CollectionService.swift in Sources */,
 				DCCD04152059C19D00670B70 /* UserServiceType.swift in Sources */,
 				DC658DA0208D139800FEBC31 /* CollectionServiceType.swift in Sources */,
+				DC73732720A796C900922AE4 /* SearchPhotosViewController.swift in Sources */,
 				DCBAEE6420363CD600561CBA /* Orientation.swift in Sources */,
 				DC66E67820A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */,
 				DCBB1B751FA8D597004E95F0 /* Unsplash.swift in Sources */,
 				DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC5AF7491FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DC9147952082B9B500781B65 /* Hero+Rx.swift in Sources */,
+				DC73733F20A7974C00922AE4 /* SearchUsersViewController.swift in Sources */,
 				DC658D93208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */,
+				DC73733620A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */,
 				DCBB1B611FA8BA22004E95F0 /* LoginViewController.swift in Sources */,
 				DCEE1F101FC97CE80010BADE /* AlertViewModel.swift in Sources */,
 				DCBB1B681FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
@@ -1271,6 +1361,7 @@
 				DC66E65820A4CB4C005E5E31 /* SearchViewController.swift in Sources */,
 				DC3917A72096683600492F62 /* CreateCollectionViewController.swift in Sources */,
 				DC658DA1208D139800FEBC31 /* CollectionServiceType.swift in Sources */,
+				DC73732B20A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */,
 				DCDDF3282027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
 				DC66E66320A4D003005E5E31 /* SearchServiceType.swift in Sources */,
 				DC71C3041FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
@@ -1283,18 +1374,22 @@
 				DC7CF5841FC464BF006E0A39 /* URL.swift in Sources */,
 				DC658D8E208CEF0300FEBC31 /* AddToCollectionViewModel.swift in Sources */,
 				DCBAEE6520363CD600561CBA /* Orientation.swift in Sources */,
+				DC73733720A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */,
 				DC5AF7311FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DCC8CA202002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DCB433CA204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */,
 				DCCD04162059C19D00670B70 /* UserServiceType.swift in Sources */,
+				DC73732820A796C900922AE4 /* SearchPhotosViewController.swift in Sources */,
 				DC5AF7461FACEF2700ADA2BB /* Location.swift in Sources */,
 				DC99FB942003A7DB001195FD /* PhotoService.swift in Sources */,
 				DC658DA5208D13A400FEBC31 /* CollectionService.swift in Sources */,
 				DCCD041A2059C25900670B70 /* UserService.swift in Sources */,
 				DCCCFCC7203A52410024D417 /* Resolution.swift in Sources */,
 				DCEE1F0D1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
+				DC73734020A7974C00922AE4 /* SearchUsersViewController.swift in Sources */,
 				DCBE0090202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
 				DC658D9C208CFE1700FEBC31 /* PhotoCollectionCellModel.swift in Sources */,
+				DC73734320A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */,
 				DC5AF7521FAD027F00ADA2BB /* PhotoCollection.swift in Sources */,
 				DCBB1B761FA8D597004E95F0 /* Unsplash.swift in Sources */,
 				DC5AF7291FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
@@ -1315,6 +1410,7 @@
 				DC66E67920A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */,
 				DCAF6BC1204D465E002B7F00 /* Int+Extentions.swift in Sources */,
 				DC66C9312052BA0300831478 /* PhotoViewModel.swift in Sources */,
+				DC73733420A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */,
 				DCCCFCC3203A4A530024D417 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
