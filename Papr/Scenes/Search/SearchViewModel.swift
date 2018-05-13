@@ -46,9 +46,15 @@ class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewMode
     private lazy var searchAction: Action<Int, Void> = {
         return Action<Int, Void> { row in
             switch row {
-                case 0: return .empty()
-                case 1: return .empty()
-                case 2: return .empty()
+                case 0:
+                    let viewModel = SearchPhotosViewModel()
+                    return self.sceneCoordinator.transition(to: Scene.searchPhotos(viewModel))
+                case 1:
+                    let viewModel = SearchCollectionsViewModel()
+                    return self.sceneCoordinator.transition(to: Scene.searchCollections(viewModel))
+                case 2:
+                    let viewModel = SearchUsersViewModel()
+                    return self.sceneCoordinator.transition(to: Scene.searchUsers(viewModel))
                 default: fatalError()
             }
         }
