@@ -21,8 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sceneCoordinator = SceneCoordinator(window: window!)
         SceneCoordinator.shared = sceneCoordinator
 
-        let homeScene = Scene.home(HomeViewModel())
-        sceneCoordinator.transition(to: homeScene)
+        sceneCoordinator.transition(to: Scene.papr)
 
         return true
     }

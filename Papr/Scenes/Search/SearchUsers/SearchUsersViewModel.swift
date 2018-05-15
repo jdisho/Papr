@@ -14,6 +14,8 @@ protocol SearchUsersViewModelInput {
 }
 
 protocol SearchUsersViewModelOutput {
+    var searchQuery: Observable<String> { get }
+    var totalResults: Observable<Int> { get }
 }
 
 protocol SearchUsersViewModelType {
@@ -29,13 +31,27 @@ class SearchUsersViewModel: SearchUsersViewModelType, SearchUsersViewModelInput,
     // MARK: - Inputs
 
     // MARK: - Outputs
+    var searchQuery: Observable<String>
+    var totalResults: Observable<Int>
 
     // MARK: - Private
+    private let service: SearchServiceType
+    private let sceneCoordinator: SceneCoordinatorType
 
     // MARK: - Init
 
-    init() {
-        // TODO: Inject dependencies
+    init(searchQuery: String,
+         service: SearchServiceType = SearchService(),
+         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+
+        self.service = service
+        self.sceneCoordinator = sceneCoordinator
+        self.searchQuery = Observable.just(searchQuery)
+
+        let users = service.searchUsers(with: searchQuery, pageNumber: 10)
+
+        totalResults = users.map { $0.total }.unwrap()
+        
     }
 
 }

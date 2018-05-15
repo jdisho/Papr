@@ -269,6 +269,9 @@
 		DCEE1F141FC983920010BADE /* UIAlertController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */; };
 		DCEE1F151FC983920010BADE /* UIAlertController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */; };
 		DCEE1F161FC983920010BADE /* UIAlertController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */; };
+		DCF3961220A8E3C400F3906D /* PaprTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */; };
+		DCF3961320A8E3C400F3906D /* PaprTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */; };
+		DCF3961420A8E3C400F3906D /* PaprTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -396,6 +399,7 @@
 		DCEE1F0A1FC97CDC0010BADE /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		DCEE1F0E1FC97CE80010BADE /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Rx.swift"; sourceTree = "<group>"; };
+		DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaprTabBarController.swift; sourceTree = "<group>"; };
 		DD3D8A956FB1C8A8D3B456A7 /* Pods_PaprTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaprTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1B488556B6761A1E7A75AA3 /* Pods-PaprTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaprTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PaprTests/Pods-PaprTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -667,6 +671,7 @@
 		DCBB1B4F1FA8B774004E95F0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */,
 				DC66E65220A4CB31005E5E31 /* Search */,
 				DC3917A22096680500492F62 /* Create Collection */,
 				DC658D82208CEDEF00FEBC31 /* Add to collection */,
@@ -1192,6 +1197,7 @@
 				DCEE1F141FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
 				DC5AF7481FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DCBB1B221FA7B1BD004E95F0 /* AppDelegate.swift in Sources */,
+				DCF3961220A8E3C400F3906D /* PaprTabBarController.swift in Sources */,
 				DCC8CA1E2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DC66E65620A4CB4C005E5E31 /* SearchViewController.swift in Sources */,
 				DC66E67020A4DA0F005E5E31 /* SearchResultCell.swift in Sources */,
@@ -1312,6 +1318,7 @@
 				DCCD04152059C19D00670B70 /* UserServiceType.swift in Sources */,
 				DC658DA0208D139800FEBC31 /* CollectionServiceType.swift in Sources */,
 				DC73732720A796C900922AE4 /* SearchPhotosViewController.swift in Sources */,
+				DCF3961320A8E3C400F3906D /* PaprTabBarController.swift in Sources */,
 				DCBAEE6420363CD600561CBA /* Orientation.swift in Sources */,
 				DC66E67820A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */,
 				DCBB1B751FA8D597004E95F0 /* Unsplash.swift in Sources */,
@@ -1357,6 +1364,7 @@
 				DCBB1B421FA7B1BD004E95F0 /* PaprUITests.swift in Sources */,
 				DC7F20951FADD3400017C14A /* SearchResults.swift in Sources */,
 				DCC8CA1C2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
+				DCF3961420A8E3C400F3906D /* PaprTabBarController.swift in Sources */,
 				DCBB1B6E1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC66E65820A4CB4C005E5E31 /* SearchViewController.swift in Sources */,
 				DC3917A72096683600492F62 /* CreateCollectionViewController.swift in Sources */,

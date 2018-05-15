@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-class SearchViewController: UIViewController, BindableType {
+class SearchViewController: UIViewController, BindableType, UITableViewDelegate {
 
     typealias SearchSectionModel = SectionModel<String, SearchResultCellModelType>
 
@@ -34,7 +34,6 @@ class SearchViewController: UIViewController, BindableType {
         configureSearchBar()
         configureTableView()
     }
-
     // MARK: BindableType
 
     func bindViewModel() {
@@ -62,6 +61,9 @@ class SearchViewController: UIViewController, BindableType {
             .bind(to: inputs.searchTrigger)
             .disposed(by: disposeBag)
 
+        tableView.rx
+            .setDelegate(self)
+            .disposed(by: disposeBag)
     }
 
     // MARK: UI
@@ -75,7 +77,7 @@ class SearchViewController: UIViewController, BindableType {
     }
 
     private func configureTableView() {
-        tableView.tableFooterView =  UIView()
+        tableView.tableFooterView = UIView()
         tableView.rowHeight = 56
         tableView.registerCell(type: SearchResultCell.self)
         dataSource = RxTableViewSectionedReloadDataSource<SearchSectionModel>(

@@ -12,12 +12,12 @@
 struct PhotoCollectionsResult: Decodable {
     let total: Int?
     let totalPages: Int?
-    let collections: [PhotoCollection]?
+    let results: [PhotoCollection]?
 
     enum CodingKeys: String, CodingKey {
         case total
         case totalPages = "total_pages"
-        case collections
+        case results
     }
 }
 
@@ -26,12 +26,12 @@ struct PhotoCollectionsResult: Decodable {
 struct PhotosResult: Decodable {
     let total: Int?
     let totalPages: Int?
-    let photos: [Photo]?
+    let results: [Photo]?
 
     enum CodingKeys: String, CodingKey {
         case total
         case totalPages = "total_pages"
-        case photos
+        case results
     }
 }
 
@@ -40,12 +40,12 @@ struct PhotosResult: Decodable {
 struct UsersResult: Decodable {
     let total: Int?
     let totalPages: Int?
-    let users: [User]?
+    let results: [User]?
 
     enum CodingKeys: String, CodingKey {
         case total
         case totalPages = "total_pages"
-        case users
+        case results
     }
 }
 

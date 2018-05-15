@@ -21,7 +21,10 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
     fileprivate var window: UIWindow
     fileprivate var currentViewController: UIViewController {
         didSet {
-            currentViewController.navigationController?.rx.delegate.setForwardToDelegate(self, retainDelegate: false)
+            currentViewController.navigationController?.rx.delegate
+                .setForwardToDelegate(self, retainDelegate: false)
+            currentViewController.tabBarController?.rx.delegate
+                .setForwardToDelegate(self, retainDelegate: false)
         }
     }
     
@@ -42,6 +45,12 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
         let subject = PublishSubject<Void>()
 
         switch scene.transition {
+        case let .tabBar(tabBarController):
+            guard let selectedViewController = tabBarController.selectedViewController else {
+               fatalError("Selected view controller doesn't exists")
+            }
+            currentViewController = SceneCoordinator.actualViewController(for: selectedViewController)
+            window.rootViewController = tabBarController
         case let .root(viewController):
             currentViewController = SceneCoordinator.actualViewController(for: viewController)
             window.rootViewController = viewController
@@ -69,8 +78,7 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
             }
         }
         
-        return subject
-            .asObservable()
+        return subject.asObservable()
             .take(1)
     }
     
@@ -100,9 +108,9 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
             fatalError("Not a modal, no navigation controller: can't navigate back from \(currentViewController)")
         }
         
-        return subject
-            .asObservable()
+        return subject.asObservable()
             .take(1)
+            .ignoreAll()
     }
 }
 
@@ -110,6 +118,14 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
 
 extension SceneCoordinator: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        currentViewController = SceneCoordinator.actualViewController(for: viewController)
+    }
+}
+
+// MARK: - UITabBarControllerDelegate
+
+extension SceneCoordinator: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController)  {
         currentViewController = SceneCoordinator.actualViewController(for: viewController)
     }
 }

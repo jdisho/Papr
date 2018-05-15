@@ -39,33 +39,31 @@ class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewMode
     }()
 
     // MARK: - Private
-    private let service: SearchServiceType
     private let sceneCoordinator: SceneCoordinatorType
     private let searchResults: Observable<[SearchResult]>
 
     private lazy var searchAction: Action<Int, Void> = {
         return Action<Int, Void> { row in
+            guard let searchStringValue = try? self.searchString.value(),
+                let query = searchStringValue else { return .empty() }
             switch row {
-                case 0:
-                    let viewModel = SearchPhotosViewModel()
-                    return self.sceneCoordinator.transition(to: Scene.searchPhotos(viewModel))
-                case 1:
-                    let viewModel = SearchCollectionsViewModel()
-                    return self.sceneCoordinator.transition(to: Scene.searchCollections(viewModel))
-                case 2:
-                    let viewModel = SearchUsersViewModel()
-                    return self.sceneCoordinator.transition(to: Scene.searchUsers(viewModel))
-                default: fatalError()
+            case 0:
+                let viewModel = SearchPhotosViewModel()
+                return self.sceneCoordinator.transition(to: Scene.searchPhotos(viewModel))
+            case 1:
+                let viewModel = SearchCollectionsViewModel()
+                return self.sceneCoordinator.transition(to: Scene.searchCollections(viewModel))
+            case 2:
+                let viewModel = SearchUsersViewModel(searchQuery: query)
+                return self.sceneCoordinator.transition(to: Scene.searchUsers(viewModel))
+            default: fatalError()
             }
         }
     }()
 
     // MARK: - Init
 
-    init(service: SearchServiceType = SearchService(),
-         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
-
-        self.service = service
+    init(sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
         self.sceneCoordinator = sceneCoordinator
 
         let predefinedText = Observable.of(["Photos with ", "Collections with", "Users with"])
@@ -76,6 +74,5 @@ class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewMode
             }
 
         searchTrigger = searchAction.inputs
-
     }
 }
