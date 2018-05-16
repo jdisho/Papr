@@ -47,7 +47,7 @@ extension Scene: TargetScene {
             let rootSearchVC = UINavigationController(rootViewController: searchVC)
             searchVC.bind(to: SearchViewModel())
 
-            rootHomeVC.tabBarItem = UITabBarItem(tabBarSystemItem: .mostRecent, tag: 0)
+            rootHomeVC.tabBarItem = UITabBarItem(title: "Photos", image: #imageLiteral(resourceName: "photo-black"), selectedImage: #imageLiteral(resourceName: "photo-black"))
             rootSearchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
 
             paprTabBarController.viewControllers = [

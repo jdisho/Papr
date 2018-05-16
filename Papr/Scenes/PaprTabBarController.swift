@@ -8,4 +8,11 @@
 
 import UIKit
 
-class PaprTabBarController: UITabBarController {}
+class PaprTabBarController: UITabBarController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.tabBar.tintColor = .black
+    }
+}
