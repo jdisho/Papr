@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -61,7 +61,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beautiful Free Images" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dv4-FF-IQh">
-                    <rect key="frame" x="94" y="426" width="187" height="21"/>
+                    <rect key="frame" x="16" y="426" width="343" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -77,14 +77,14 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ils-uD-r30" secondAttribute="trailing" constant="16" id="YiB-2I-9Xa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZyJ-aA-ow8" secondAttribute="trailing" constant="32" id="ckE-as-PdZ"/>
                 <constraint firstItem="ZyJ-aA-ow8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="eRj-s0-pC7"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dv4-FF-IQh" secondAttribute="trailing" constant="94" id="eUc-0Z-654"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dv4-FF-IQh" secondAttribute="trailing" constant="16" id="eUc-0Z-654"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ShO-Hb-jPG" secondAttribute="trailing" constant="64" id="f6X-Je-QSJ"/>
                 <constraint firstItem="D7O-BZ-cnU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="jad-QI-9Vo"/>
                 <constraint firstItem="D7O-BZ-cnU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="kjP-K5-jeP"/>
                 <constraint firstItem="Ils-uD-r30" firstAttribute="top" secondItem="ShO-Hb-jPG" secondAttribute="bottom" constant="24" id="pbd-gu-SiM"/>
                 <constraint firstItem="ZyJ-aA-ow8" firstAttribute="top" secondItem="dv4-FF-IQh" secondAttribute="bottom" constant="132" id="roL-Hc-xUs"/>
                 <constraint firstItem="dv4-FF-IQh" firstAttribute="top" secondItem="Ils-uD-r30" secondAttribute="bottom" constant="16" id="z5u-0I-uBl"/>
-                <constraint firstItem="dv4-FF-IQh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="94" id="zj4-9M-DIn"/>
+                <constraint firstItem="dv4-FF-IQh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="zj4-9M-DIn"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="24.5" y="52.5"/>
