@@ -195,8 +195,8 @@ class HomeViewModel: HomeViewModelType,
             }
             .share()
 
-        photos = Observable
-            .merge(requestFirst, requestNext)
+        photos = requestFirst
+            .merge(with: requestNext)
             .map { [unowned self] photos -> [Photo] in
                 photos.forEach { photo in
                     photoArray.append(photo)

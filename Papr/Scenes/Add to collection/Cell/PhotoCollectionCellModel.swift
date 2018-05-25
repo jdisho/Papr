@@ -107,10 +107,8 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
         self.service = service
         self.sceneCoordinator = sceneCoordinator
 
-        let photoCollectionStream = Observable.merge(
-            Observable.just(photoCollection),
-            service.collection(withID: photoCollection.id ?? 0)
-            )
+        let photoCollectionStream = Observable.just(photoCollection)
+            .merge(with: service.collection(withID: photoCollection.id ?? 0))
             .catchErrorJustReturn(photoCollection)
 
         coverPhotoURL = photoCollectionStream
@@ -135,7 +133,6 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
                     .map { $0.contains(photo) }
             }
             .catchErrorJustReturn(false)
-
     }
 
 }
