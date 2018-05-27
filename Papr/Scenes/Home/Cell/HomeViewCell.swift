@@ -94,7 +94,7 @@ class HomeViewCell: UITableViewCell, BindableType {
             .disposed(by: disposeBag)
 
         outputs.userProfileImage
-            .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }
+            .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
             .bind(to: userImageView.rx.image)
             .disposed(by: disposeBag)
 
