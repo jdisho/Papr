@@ -10,12 +10,12 @@ import Foundation
 import RxSwift
 import Action
 
-protocol SearchUsersViewModelInput {
-}
+protocol SearchUsersViewModelInput {}
 
 protocol SearchUsersViewModelOutput {
     var searchQuery: Observable<String> { get }
     var totalResults: Observable<Int> { get }
+    var usersViewModel: Observable<[UserCellModelType]> { get }
 }
 
 protocol SearchUsersViewModelType {
@@ -34,7 +34,12 @@ class SearchUsersViewModel: SearchUsersViewModelType, SearchUsersViewModelInput,
     var searchQuery: Observable<String>
     var totalResults: Observable<Int>
 
+    lazy var usersViewModel: Observable<[UserCellModelType]> = {
+        return users.mapMany { UserCellModel(user: $0) }
+    }()
+
     // MARK: - Private
+    private let users: Observable<[User]>
     private let service: SearchServiceType
     private let sceneCoordinator: SceneCoordinatorType
 
@@ -48,9 +53,10 @@ class SearchUsersViewModel: SearchUsersViewModelType, SearchUsersViewModelInput,
         self.sceneCoordinator = sceneCoordinator
         self.searchQuery = Observable.just(searchQuery)
 
-        let users = service.searchUsers(with: searchQuery, pageNumber: 10)
+        let result = service.searchUsers(with: searchQuery, pageNumber: 10)
 
-        totalResults = users.map { $0.total }.unwrap()
+        users = result.map { $0.results }.unwrap()
+        totalResults = result.map { $0.total }.unwrap()
         
     }
 

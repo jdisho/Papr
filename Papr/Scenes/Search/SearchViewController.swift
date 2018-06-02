@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-class SearchViewController: UIViewController, BindableType, UITableViewDelegate {
+class SearchViewController: UIViewController, BindableType {
 
     typealias SearchSectionModel = SectionModel<String, SearchResultCellModelType>
 
@@ -59,10 +59,6 @@ class SearchViewController: UIViewController, BindableType, UITableViewDelegate 
         tableView.rx.itemSelected
             .map { $0.row }
             .bind(to: inputs.searchTrigger)
-            .disposed(by: disposeBag)
-
-        tableView.rx
-            .setDelegate(self)
             .disposed(by: disposeBag)
     }
 
