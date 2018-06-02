@@ -32,16 +32,17 @@ class SearchPhotosViewController: UIViewController, BindableType {
     }
 
     func bindViewModel() {
-        
+        let outputs = viewModel.outputs
+
+        outputs.searchPhotosCellModelType
+            .map { [SearchPhotosSectionModel(model: "", items: $0)] }
+            .bind(to: collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
     }
 
     // MARK: UI
     private func configureCollectionView() {
         collectionView.registerCell(type: SearchPhotosCell.self)
-        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-        flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        flowLayout.itemSize = CGSize(width: 150, height: 150)
-
         dataSource = RxCollectionViewSectionedReloadDataSource<SearchPhotosSectionModel>(
             configureCell:  collectionViewDataSource
         )
@@ -52,7 +53,7 @@ class SearchPhotosViewController: UIViewController, BindableType {
             var cell = collectionView.dequeueReusableCell(
                 type: SearchPhotosCell.self,
                 forIndexPath: indexPath)
-
+            cell.bind(to: cellModel)
             return cell
         }
     }

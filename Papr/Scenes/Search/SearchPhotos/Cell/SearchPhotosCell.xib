@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H71-m3-wR0">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H71-m3-wR0">
                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -30,7 +30,7 @@
             <connections>
                 <outlet property="photoImageView" destination="H71-m3-wR0" id="heo-z4-PSZ"/>
             </connections>
-            <point key="canvasLocation" x="-190" y="-171"/>
+            <point key="canvasLocation" x="-353" y="-221"/>
         </collectionViewCell>
     </objects>
 </document>
