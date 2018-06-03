@@ -36,18 +36,24 @@ class SearchUsersViewController: UIViewController, BindableType {
     // MARK: - BindableType
 
     func bindViewModel() {
+        let inputs = viewModel.input
         let outputs = viewModel.output
 
-        Observable.zip(outputs.searchQuery, outputs.totalResults)
-            .map { query, resultsNumber in
-                return "\(query): \(resultsNumber) results"
-            }
-            .bind(to: self.rx.title)
+        outputs.navTitle
+            .bind(to: rx.title)
             .disposed(by: disposeBag)
 
         outputs.usersViewModel
             .map { [SearchUsersSectionModel(model: "", items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+
+        tableView.rx.contentOffset
+            .map { [unowned self] _ in
+                return self.tableView.isNearTheBottomEdge()
+            }
+            .distinctUntilChanged()
+            .bind(to: inputs.loadMore)
             .disposed(by: disposeBag)
     }
 

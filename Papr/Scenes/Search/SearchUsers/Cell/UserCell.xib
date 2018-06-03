@@ -23,14 +23,13 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5zn-Up-v5G">
                         <rect key="frame" x="16" y="8" width="44.5" height="44.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="44.5" id="333-fE-NLb"/>
-                            <constraint firstAttribute="height" constant="44.5" id="yOa-Nh-FWg"/>
+                            <constraint firstAttribute="width" constant="44.5" id="RmQ-Pg-eGB"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2Z-ZL-7e2">
                         <rect key="frame" x="410" y="19" width="70" height="23"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="70" id="nnx-sl-QyX"/>
+                            <constraint firstAttribute="width" constant="70" id="Zcr-uF-Cqm"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                         <state key="normal" title="Follow">
@@ -38,21 +37,22 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Joan Disho" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhv-S7-JRU">
-                        <rect key="frame" x="68" y="20" width="87" height="21"/>
+                        <rect key="frame" x="68" y="20" width="334" height="21"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="k2Z-ZL-7e2" secondAttribute="bottom" constant="8" id="Ajx-jO-Fj5"/>
-                    <constraint firstItem="k2Z-ZL-7e2" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="FeR-56-fy7"/>
-                    <constraint firstItem="Mhv-S7-JRU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Kf2-ce-u1l"/>
-                    <constraint firstItem="5zn-Up-v5G" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="L0g-yy-bSh"/>
-                    <constraint firstItem="k2Z-ZL-7e2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="Nxl-Xg-4tv"/>
-                    <constraint firstItem="Mhv-S7-JRU" firstAttribute="leading" secondItem="5zn-Up-v5G" secondAttribute="trailing" constant="8" id="gSh-Mj-5DZ"/>
-                    <constraint firstAttribute="bottom" secondItem="5zn-Up-v5G" secondAttribute="bottom" constant="8" id="gwD-Uv-X0d"/>
-                    <constraint firstItem="5zn-Up-v5G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="vFu-Op-Ir2"/>
+                    <constraint firstItem="5zn-Up-v5G" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="1Yi-AW-k8t"/>
+                    <constraint firstItem="5zn-Up-v5G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="FB1-ke-bmk"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="k2Z-ZL-7e2" secondAttribute="bottom" constant="8" id="NzW-pS-vHm"/>
+                    <constraint firstAttribute="bottom" secondItem="5zn-Up-v5G" secondAttribute="bottom" constant="8" id="SM6-qh-Egn"/>
+                    <constraint firstItem="Mhv-S7-JRU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="c60-hz-mJG"/>
+                    <constraint firstItem="k2Z-ZL-7e2" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="fCY-dR-bGb"/>
+                    <constraint firstItem="Mhv-S7-JRU" firstAttribute="leading" secondItem="5zn-Up-v5G" secondAttribute="trailing" constant="8" id="hmo-bK-LUV"/>
+                    <constraint firstItem="k2Z-ZL-7e2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="x3t-5h-VFa"/>
+                    <constraint firstItem="k2Z-ZL-7e2" firstAttribute="leading" secondItem="Mhv-S7-JRU" secondAttribute="trailing" constant="8" id="zYq-mi-977"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -61,7 +61,7 @@
                 <outlet property="fullNameLabel" destination="Mhv-S7-JRU" id="T9N-Rt-6LF"/>
                 <outlet property="profilePhotoImageView" destination="5zn-Up-v5G" id="xHi-CE-zHj"/>
             </connections>
-            <point key="canvasLocation" x="-355" y="-222"/>
+            <point key="canvasLocation" x="-355" y="-222.5"/>
         </tableViewCell>
     </objects>
 </document>

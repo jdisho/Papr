@@ -10,12 +10,15 @@ import Foundation
 import RxSwift
 import Action
 
-protocol SearchUsersViewModelInput {}
+protocol SearchUsersViewModelInput {
+    var loadMore: BehaviorSubject<Bool> { get }
+}
 
 protocol SearchUsersViewModelOutput {
     var searchQuery: Observable<String> { get }
     var totalResults: Observable<Int> { get }
     var usersViewModel: Observable<[UserCellModelType]> { get }
+    var navTitle: Observable<String> { get }
 }
 
 protocol SearchUsersViewModelType {
@@ -29,17 +32,19 @@ class SearchUsersViewModel: SearchUsersViewModelType, SearchUsersViewModelInput,
     var output: SearchUsersViewModelOutput { return self }
 
     // MARK: - Inputs
+    let loadMore = BehaviorSubject<Bool>(value: false)
 
     // MARK: - Outputs
-    var searchQuery: Observable<String>
-    var totalResults: Observable<Int>
+    let searchQuery: Observable<String>
+    let totalResults: Observable<Int>
+    let navTitle: Observable<String>
 
     lazy var usersViewModel: Observable<[UserCellModelType]> = {
         return users.mapMany { UserCellModel(user: $0) }
     }()
 
     // MARK: - Private
-    private let users: Observable<[User]>
+    private var users: Observable<[User]>!
     private let service: SearchServiceType
     private let sceneCoordinator: SceneCoordinatorType
 
@@ -53,11 +58,39 @@ class SearchUsersViewModel: SearchUsersViewModelType, SearchUsersViewModelInput,
         self.sceneCoordinator = sceneCoordinator
         self.searchQuery = Observable.just(searchQuery)
 
-        let result = service.searchUsers(with: searchQuery, pageNumber: 1)
+        var usersArray = [User]([])
 
-        users = result.map { $0.results }.unwrap()
-        totalResults = result.map { $0.total }.unwrap()
-        
+        let firstUserSearchResult = service.searchUsers(with: searchQuery, pageNumber: 1)
+
+        totalResults = firstUserSearchResult
+            .map { $0.total }
+            .unwrap()
+
+        navTitle =  Observable.zip(self.searchQuery, totalResults)
+            .map { query, resultsNumber in
+                return "\(query): \(resultsNumber) results"
+        }
+
+        let requestFirst = firstUserSearchResult
+            .map { $0.results }
+            .unwrap()
+
+        let requestNext = loadMore
+            .count()
+            .flatMap { loadMore, count -> Observable<[User]> in
+                guard loadMore else { return .empty() }
+                return self.service.searchUsers(with: searchQuery, pageNumber: count)
+                    .map { $0.results }
+                    .unwrap()
+            }
+
+        users = Observable.merge(requestFirst, requestNext)
+            .map { users -> [User] in
+                users.forEach { user in
+                    usersArray.append(user)
+                }
+                print(usersArray.count)
+                return usersArray
+            }
     }
-
 }
