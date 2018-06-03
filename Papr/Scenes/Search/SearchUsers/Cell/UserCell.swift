@@ -18,7 +18,6 @@ class UserCell: UITableViewCell, BindableType {
     // MARK: IBOutlets
     @IBOutlet var profilePhotoImageView: UIImageView!
     @IBOutlet var fullNameLabel: UILabel!
-    @IBOutlet var followersNumberLabel: UILabel!
     @IBOutlet var followButton: UIButton!
 
     // MARK: Private
@@ -28,6 +27,10 @@ class UserCell: UITableViewCell, BindableType {
     // MARK: Overrides
 
     override func awakeFromNib() {
+        profilePhotoImageView.cornerRadius = 5
+        followButton.cornerRadius = 5
+        followButton.borderWidth = 1
+        followButton.borderColor = UIColor(hexString: "5096E8")?.cgColor
         super.awakeFromNib()
     }
 
@@ -44,10 +47,6 @@ class UserCell: UITableViewCell, BindableType {
 
         outputs.fullName
             .bind(to: fullNameLabel.rx.text)
-            .disposed(by: disposeBag)
-
-        outputs.followersNumber
-            .bind(to: followersNumberLabel.rx.text)
             .disposed(by: disposeBag)
 
         outputs.profilePhotoURL

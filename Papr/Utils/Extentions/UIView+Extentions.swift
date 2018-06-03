@@ -9,10 +9,32 @@
 import UIKit
 
 extension UIView {
+    var cornerRadius: Double {
+        get {
+            return Double(layer.cornerRadius)
+        }
+        set {
+            layer.masksToBounds = false
+            layer.cornerRadius = CGFloat(newValue)
+            clipsToBounds = true
+        }
+    }
 
-    func rounded(withRadius radius: Double) {
-        self.layer.masksToBounds = false
-        self.layer.cornerRadius = CGFloat(radius)
-        self.clipsToBounds = true
+    var borderColor: CGColor? {
+        get {
+            return layer.borderColor
+        }
+        set {
+            layer.borderColor = newValue
+        }
+    }
+
+    var borderWidth: Double {
+        get {
+            return Double(layer.borderWidth)
+        }
+        set {
+            layer.borderWidth = CGFloat(newValue)
+        }
     }
 }

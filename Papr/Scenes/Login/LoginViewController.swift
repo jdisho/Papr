@@ -24,7 +24,7 @@ class LoginViewController: UIViewController, BindableType {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loginButton.rounded(withRadius: 10)
+        loginButton.cornerRadius = 10
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {

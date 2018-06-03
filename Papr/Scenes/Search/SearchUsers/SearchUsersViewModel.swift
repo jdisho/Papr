@@ -53,7 +53,7 @@ class SearchUsersViewModel: SearchUsersViewModelType, SearchUsersViewModelInput,
         self.sceneCoordinator = sceneCoordinator
         self.searchQuery = Observable.just(searchQuery)
 
-        let result = service.searchUsers(with: searchQuery, pageNumber: 10)
+        let result = service.searchUsers(with: searchQuery, pageNumber: 1)
 
         users = result.map { $0.results }.unwrap()
         totalResults = result.map { $0.total }.unwrap()

@@ -293,6 +293,7 @@
 		DCF3961220A8E3C400F3906D /* PaprTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */; };
 		DCF3961320A8E3C400F3906D /* PaprTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */; };
 		DCF3961420A8E3C400F3906D /* PaprTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */; };
+		DCFB564920C46A93007401DE /* UIColor+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFB564820C46A93007401DE /* UIColor+Extentions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -428,6 +429,7 @@
 		DCEE1F0E1FC97CE80010BADE /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Rx.swift"; sourceTree = "<group>"; };
 		DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaprTabBarController.swift; sourceTree = "<group>"; };
+		DCFB564820C46A93007401DE /* UIColor+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extentions.swift"; sourceTree = "<group>"; };
 		DD3D8A956FB1C8A8D3B456A7 /* Pods_PaprTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaprTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1B488556B6761A1E7A75AA3 /* Pods-PaprTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaprTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PaprTests/Pods-PaprTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -816,6 +818,7 @@
 				DCBB1B6F1FA8BAC2004E95F0 /* BindableType.swift */,
 				DC7CF5811FC464BF006E0A39 /* URL.swift */,
 				DCDDF3292027DA5F00E1EB81 /* UIView+Extentions.swift */,
+				DCFB564820C46A93007401DE /* UIColor+Extentions.swift */,
 				DCBE0089202A1A980065BEF3 /* Date+Extentions.swift */,
 				DCBE008D202A1EB30065BEF3 /* String+Extentions.swift */,
 				DCAF6BBE204D465E002B7F00 /* Int+Extentions.swift */,
@@ -1318,6 +1321,7 @@
 				DCBE008E202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
 				DC7CF5821FC464BF006E0A39 /* URL.swift in Sources */,
 				DC73732920A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */,
+				DCFB564920C46A93007401DE /* UIColor+Extentions.swift in Sources */,
 				DCBB1B5B1FA8B840004E95F0 /* SceneTransitionType.swift in Sources */,
 				DCB915B520BB1A9A003D1069 /* SearchPhotosCell.swift in Sources */,
 				DC5AF7591FAD2F1E00ADA2BB /* OrderBy.swift in Sources */,

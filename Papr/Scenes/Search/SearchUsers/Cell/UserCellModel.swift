@@ -12,7 +12,6 @@ import RxSwift
 protocol UserCellModelInput {}
 protocol UserCellModelOutput {
     var fullName: Observable<String> { get }
-    var followersNumber: Observable<String> { get }
     var profilePhotoURL: Observable<String> { get }
     var isFollowedByUser: Observable<Bool> { get }
 }
@@ -30,7 +29,6 @@ class UserCellModel: UserCellModelType, UserCellModelInput, UserCellModelOutput 
 
     // MARK: Outputs
     let fullName: Observable<String>
-    let followersNumber: Observable<String>
     let profilePhotoURL: Observable<String>
     let isFollowedByUser: Observable<Bool>
 
@@ -40,10 +38,6 @@ class UserCellModel: UserCellModelType, UserCellModelInput, UserCellModelOutput 
 
         fullName = userStream
             .map { $0.fullName }
-            .unwrap()
-
-        followersNumber = userStream
-            .map { $0.followersCount?.abbreviated }
             .unwrap()
 
         profilePhotoURL = userStream

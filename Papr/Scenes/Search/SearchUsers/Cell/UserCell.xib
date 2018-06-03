@@ -14,62 +14,54 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="UserCell" customModule="Papr" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="500" height="60"/>
+            <rect key="frame" x="0.0" y="0.0" width="500" height="61"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="500" height="59.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="500" height="60.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5zn-Up-v5G">
-                        <rect key="frame" x="16" y="4" width="52" height="52"/>
+                        <rect key="frame" x="16" y="8" width="44.5" height="44.5"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="52" id="ktf-wH-Ejt"/>
-                            <constraint firstAttribute="width" constant="52" id="lgr-iT-lFz"/>
+                            <constraint firstAttribute="width" constant="44.5" id="333-fE-NLb"/>
+                            <constraint firstAttribute="height" constant="44.5" id="yOa-Nh-FWg"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2Z-ZL-7e2">
+                        <rect key="frame" x="410" y="19" width="70" height="23"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="nnx-sl-QyX"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                        <state key="normal" title="Follow">
+                            <color key="titleColor" red="0.31372549020000001" green="0.58823529409999997" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Joan Disho" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhv-S7-JRU">
-                        <rect key="frame" x="76" y="8" width="87" height="21"/>
+                        <rect key="frame" x="68" y="20" width="87" height="21"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13K" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzB-h6-WZj">
-                        <rect key="frame" x="76" y="33.5" width="26" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.47450980392156861" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2Z-ZL-7e2">
-                        <rect key="frame" x="420" y="15" width="60" height="30"/>
-                        <color key="backgroundColor" red="0.27058823529411763" green="0.63137254901960782" blue="0.80784313725490198" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="60" id="Cz1-2o-puh"/>
-                            <constraint firstAttribute="height" constant="30" id="TCA-4p-lsT"/>
-                        </constraints>
-                        <state key="normal" title="Follow">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </state>
-                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="uzB-h6-WZj" secondAttribute="bottom" constant="8" id="0cL-N5-5BX"/>
-                    <constraint firstItem="5zn-Up-v5G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="1FT-iM-01z"/>
-                    <constraint firstItem="Mhv-S7-JRU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="3Ub-lG-pmJ"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="k2Z-ZL-7e2" secondAttribute="trailing" id="5ly-82-WHf"/>
-                    <constraint firstItem="5zn-Up-v5G" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="5ti-dY-ruK"/>
-                    <constraint firstItem="k2Z-ZL-7e2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="8r6-SE-tFI"/>
-                    <constraint firstItem="Mhv-S7-JRU" firstAttribute="leading" secondItem="5zn-Up-v5G" secondAttribute="trailing" constant="8" id="DE6-fV-6Ff"/>
-                    <constraint firstItem="uzB-h6-WZj" firstAttribute="leading" secondItem="5zn-Up-v5G" secondAttribute="trailing" constant="8" id="ffK-JT-LxH"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="k2Z-ZL-7e2" secondAttribute="bottom" constant="8" id="Ajx-jO-Fj5"/>
+                    <constraint firstItem="k2Z-ZL-7e2" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="FeR-56-fy7"/>
+                    <constraint firstItem="Mhv-S7-JRU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Kf2-ce-u1l"/>
+                    <constraint firstItem="5zn-Up-v5G" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="L0g-yy-bSh"/>
+                    <constraint firstItem="k2Z-ZL-7e2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="Nxl-Xg-4tv"/>
+                    <constraint firstItem="Mhv-S7-JRU" firstAttribute="leading" secondItem="5zn-Up-v5G" secondAttribute="trailing" constant="8" id="gSh-Mj-5DZ"/>
+                    <constraint firstAttribute="bottom" secondItem="5zn-Up-v5G" secondAttribute="bottom" constant="8" id="gwD-Uv-X0d"/>
+                    <constraint firstItem="5zn-Up-v5G" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="vFu-Op-Ir2"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="followButton" destination="k2Z-ZL-7e2" id="QuO-Ao-cte"/>
-                <outlet property="followersNumberLabel" destination="uzB-h6-WZj" id="fAF-8l-khA"/>
                 <outlet property="fullNameLabel" destination="Mhv-S7-JRU" id="T9N-Rt-6LF"/>
                 <outlet property="profilePhotoImageView" destination="5zn-Up-v5G" id="xHi-CE-zHj"/>
             </connections>
-            <point key="canvasLocation" x="-91" y="-144"/>
+            <point key="canvasLocation" x="-355" y="-222"/>
         </tableViewCell>
     </objects>
 </document>
