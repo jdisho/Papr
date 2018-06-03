@@ -44,10 +44,6 @@ class HomeViewController: UIViewController, BindableType {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
 
-        dataSource = RxTableViewSectionedReloadDataSource<HomeSectionModel>(
-            configureCell:  tableViewDataSource
-        )
-
         outputs.curated.subscribe { [unowned self] curated in
             guard let curated = curated.element else { return }
             if curated {
@@ -116,6 +112,10 @@ class HomeViewController: UIViewController, BindableType {
     private func configureTableView() {
         tableView.registerCell(type: HomeViewCell.self)
         tableView.estimatedRowHeight = 400
+
+        dataSource = RxTableViewSectionedReloadDataSource<HomeSectionModel>(
+            configureCell:  tableViewDataSource
+        )
     }
 
     private func configureRefreshControl() {

@@ -35,7 +35,7 @@ class AddToCollectionViewController: UIViewController, BindableType {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        photoImageView.rounded(withRadius: 10)
+        photoImageView.cornerRadius = 10
         configureNavigationBar()
         configureCollectionViewActivityIndicator()
         configureCollectionView()

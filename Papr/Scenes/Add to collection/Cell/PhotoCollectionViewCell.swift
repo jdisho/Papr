@@ -30,8 +30,8 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        collectionCoverImageView.rounded(withRadius: 10)
-        addToCollectionButton.rounded(withRadius: 10)
+        collectionCoverImageView.cornerRadius = 10
+        addToCollectionButton.cornerRadius = 10
         addToCollectionButton.isExclusiveTouch = true
     }
 

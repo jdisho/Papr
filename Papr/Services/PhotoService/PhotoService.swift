@@ -64,7 +64,7 @@ struct PhotoService: PhotoServiceType {
         byPageNumber pageNumber: Int = 1,
         orderBy: OrderBy = OrderBy.latest,
         curated: Bool = false
-        ) -> Observable<[Photo]> {
+        ) -> Observable<Result<[Photo], String>> {
 
 
         if curated {
@@ -77,6 +77,10 @@ struct PhotoService: PhotoServiceType {
                     )
                     .map([Photo].self)
                     .asObservable()
+                    .map(Result.success)
+                    .catchError { error in
+                        return .just(.error(error.localizedDescription))
+                    }
         }
 
         return unsplash.rx
@@ -88,6 +92,10 @@ struct PhotoService: PhotoServiceType {
             )
             .map([Photo].self)
             .asObservable()
+            .map(Result.success)
+            .catchError { error in
+                return .just(.error(error.localizedDescription))
+            }
     }
 
     func statistics(of photo: Photo) -> Observable<PhotoStatistics> {

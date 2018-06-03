@@ -166,18 +166,24 @@ class HomeViewModel: HomeViewModelType,
 
         let requestFirst = Observable
             .combineLatest(isRefreshing, orderBy, curated)
-            .flatMapLatest { isRefreshing, orderBy, curated -> Observable<[Photo]> in
+            .flatMap { isRefreshing, orderBy, curated -> Observable<[Photo]> in
                 guard isRefreshing else { return .empty() }
-                return service
-                    .photos(byPageNumber: 1,
-                            orderBy: orderBy, 
-                            curated: curated)
-                    .map { [unowned self] photos in 
+                return service.photos(
+                    byPageNumber: 1,
+                    orderBy: orderBy,
+                    curated: curated)
+                    .flatMap { [unowned self] result -> Observable<[Photo]> in
                         self.navBarButtonNameProperty.onNext(curated ? .curated : .new)
-                        return photos
+                        switch result {
+                        case let .success(photos):
+                            return .just(photos)
+                        case let .error(error):
+                            self.alertAction.execute(error)
+                            self.refreshProperty.onNext(false)
+                            return .empty()
+                        }
                     }
             }
-            .share()
             .do (onNext: { _ in
                 photoArray = []
                 currentPageNumber = 1
@@ -185,15 +191,24 @@ class HomeViewModel: HomeViewModelType,
 
         let requestNext = Observable
             .combineLatest(loadMore, orderBy, curated)
-            .flatMapLatest { loadMore, orderBy, curated -> Observable<[Photo]> in 
+            .flatMap { loadMore, orderBy, curated -> Observable<[Photo]> in 
                 guard loadMore else { return .empty() }
                 currentPageNumber += 1
                 return service.photos(
                     byPageNumber: currentPageNumber,
                     orderBy: orderBy,
                     curated: curated)
+                    .flatMap { [unowned self] result -> Observable<[Photo]> in
+                        switch result {
+                        case let .success(photos):
+                            return .just(photos)
+                        case let .error(error):
+                            self.alertAction.execute(error)
+                            self.refreshProperty.onNext(false)
+                            return .empty()
+                        }
+                    }
             }
-            .share()
 
         photos = requestFirst
             .merge(with: requestNext)
@@ -204,12 +219,5 @@ class HomeViewModel: HomeViewModelType,
                 self.refreshProperty.onNext(false)
                 return photoArray
             }
-            .catchError({ [unowned self] error in
-                self.alertAction.execute(error.localizedDescription)
-                self.refreshProperty.onNext(false)
-                return Observable.just(photoArray)
-            })
     }
 }
-
-

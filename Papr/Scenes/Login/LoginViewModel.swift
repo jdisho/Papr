@@ -90,9 +90,9 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     
     // MARK: Private
     
-    private lazy var navigateToHomeAction: CocoaAction = {
+    private lazy var navigateToTabBarAction: CocoaAction = {
         return CocoaAction { [unowned self] _ in
-            return self.sceneCoordinator.transition(to: Scene.home(HomeViewModel()))
+            return self.sceneCoordinator.transition(to: Scene.papr)
             }
     }()
 
@@ -138,7 +138,7 @@ extension LoginViewModel: UnsplashSessionListener {
             if let error = error {
                 self.alertAction.execute(error.localizedDescription)
             } else {
-                self.navigateToHomeAction.execute(())
+                self.navigateToTabBarAction.execute(())
             }
         }
     }

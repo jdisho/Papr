@@ -14,19 +14,26 @@ import RxCocoa
  Scene coordinator, manage scene navigation and presentation.
  */
 
-class SceneCoordinator: SceneCoordinatorType {
+class SceneCoordinator: NSObject, SceneCoordinatorType {
     
     static var shared: SceneCoordinator!
     
-    private var window: UIWindow
-    private var currentViewController: UIViewController
+    fileprivate var window: UIWindow
+    fileprivate var currentViewController: UIViewController {
+        didSet {
+            currentViewController.navigationController?.rx.delegate
+                .setForwardToDelegate(self, retainDelegate: false)
+            currentViewController.tabBarController?.rx.delegate
+                .setForwardToDelegate(self, retainDelegate: false)
+        }
+    }
     
     required init(window: UIWindow) {
         self.window = window
         currentViewController = window.rootViewController!
     }
     
-    func actualViewController(for viewController: UIViewController) -> UIViewController {
+    static func actualViewController(for viewController: UIViewController) -> UIViewController {
         if let navigationController = viewController as? UINavigationController {
             return navigationController.viewControllers.first!
         }
@@ -38,46 +45,49 @@ class SceneCoordinator: SceneCoordinatorType {
         let subject = PublishSubject<Void>()
 
         switch scene.transition {
+        case let .tabBar(tabBarController):
+            guard let selectedViewController = tabBarController.selectedViewController else {
+               fatalError("Selected view controller doesn't exists")
+            }
+            currentViewController = SceneCoordinator.actualViewController(for: selectedViewController)
+            window.rootViewController = tabBarController
         case let .root(viewController):
-            currentViewController = actualViewController(for: viewController)
+            currentViewController = SceneCoordinator.actualViewController(for: viewController)
             window.rootViewController = viewController
             subject.onCompleted()
         case let .push(viewController):
-            guard let navigationController = viewController.navigationController else {
+            guard let navigationController = currentViewController.navigationController else {
                 fatalError("Can't push a view controller without a current navigation controller")
             }
-            
-            _ = navigationController
-                .rx
-                .delegate
+
+            _ = navigationController.rx.delegate
                 .sentMessage(#selector(UINavigationControllerDelegate.navigationController(_:didShow:animated:)))
-                .map{ _ in }
+                .map { _ in }
                 .bind(to: subject)
-            
-            navigationController.pushViewController(viewController, animated: true)
-            currentViewController = actualViewController(for: viewController)
+
+            navigationController.pushViewController(SceneCoordinator.actualViewController(for: viewController), animated: true)
+            currentViewController = SceneCoordinator.actualViewController(for: viewController)
         case let .present(viewController):
             currentViewController.present(viewController, animated: true) {
                 subject.onCompleted()
             }
-            currentViewController = actualViewController(for: viewController)
+            currentViewController = SceneCoordinator.actualViewController(for: viewController)
         case let .alert(viewController):
             currentViewController.present(viewController, animated: true) {
                 subject.onCompleted()
             }
         }
         
-        return subject
-            .asObservable()
+        return subject.asObservable()
             .take(1)
     }
     
     @discardableResult
     func pop(animated: Bool) -> Observable<Void> {
         let subject = PublishSubject<Void>()
-        if let presenter = currentViewController.presentingViewController {
+        if let presentingViewController = currentViewController.presentingViewController {
             currentViewController.dismiss(animated: animated) {
-                self.currentViewController = self.actualViewController(for: presenter)
+                self.currentViewController = SceneCoordinator.actualViewController(for: presentingViewController)
                 subject.onCompleted()
             }
         } else if let navigationController = currentViewController.navigationController {
@@ -93,14 +103,29 @@ class SceneCoordinator: SceneCoordinatorType {
                 fatalError("can't navigate back from \(currentViewController)")
             }
             
-            currentViewController = actualViewController(for: navigationController.viewControllers.last!)
+            currentViewController = SceneCoordinator.actualViewController(for: navigationController.viewControllers.last!)
         } else {
             fatalError("Not a modal, no navigation controller: can't navigate back from \(currentViewController)")
         }
         
-        return subject
-            .asObservable()
+        return subject.asObservable()
             .take(1)
+            .ignoreAll()
     }
 }
 
+// MARK: - UINavigationControllerDelegate
+
+extension SceneCoordinator: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        currentViewController = SceneCoordinator.actualViewController(for: viewController)
+    }
+}
+
+// MARK: - UITabBarControllerDelegate
+
+extension SceneCoordinator: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController)  {
+        currentViewController = SceneCoordinator.actualViewController(for: viewController)
+    }
+}

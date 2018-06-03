@@ -41,8 +41,7 @@ class HomeViewCell: UITableViewCell, BindableType {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        let radius = Double(self.userImageView.frame.height / 2)
-        userImageView.rounded(withRadius: radius)
+        userImageView.cornerRadius = Double(userImageView.frame.height / 2)
         photoButton.isExclusiveTouch = true
     }
 
@@ -94,7 +93,7 @@ class HomeViewCell: UITableViewCell, BindableType {
             .disposed(by: disposeBag)
 
         outputs.userProfileImage
-            .flatMap { HomeViewCell.nukeManager.loadImage(with: $0).orEmpty }
+            .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
             .bind(to: userImageView.rx.image)
             .disposed(by: disposeBag)
 

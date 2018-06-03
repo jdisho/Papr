@@ -83,6 +83,30 @@
 		DC66C92F2052BA0300831478 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66C92E2052BA0300831478 /* PhotoViewModel.swift */; };
 		DC66C9302052BA0300831478 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66C92E2052BA0300831478 /* PhotoViewModel.swift */; };
 		DC66C9312052BA0300831478 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66C92E2052BA0300831478 /* PhotoViewModel.swift */; };
+		DC66E65620A4CB4C005E5E31 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E65320A4CB4C005E5E31 /* SearchViewController.swift */; };
+		DC66E65720A4CB4C005E5E31 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E65320A4CB4C005E5E31 /* SearchViewController.swift */; };
+		DC66E65820A4CB4C005E5E31 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E65320A4CB4C005E5E31 /* SearchViewController.swift */; };
+		DC66E65920A4CB4C005E5E31 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E65420A4CB4C005E5E31 /* SearchViewModel.swift */; };
+		DC66E65A20A4CB4C005E5E31 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E65420A4CB4C005E5E31 /* SearchViewModel.swift */; };
+		DC66E65B20A4CB4C005E5E31 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E65420A4CB4C005E5E31 /* SearchViewModel.swift */; };
+		DC66E66120A4D003005E5E31 /* SearchServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E66020A4D003005E5E31 /* SearchServiceType.swift */; };
+		DC66E66220A4D003005E5E31 /* SearchServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E66020A4D003005E5E31 /* SearchServiceType.swift */; };
+		DC66E66320A4D003005E5E31 /* SearchServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E66020A4D003005E5E31 /* SearchServiceType.swift */; };
+		DC66E66520A4D016005E5E31 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E66420A4D016005E5E31 /* SearchService.swift */; };
+		DC66E66620A4D016005E5E31 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E66420A4D016005E5E31 /* SearchService.swift */; };
+		DC66E66720A4D016005E5E31 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E66420A4D016005E5E31 /* SearchService.swift */; };
+		DC66E66920A4D7D6005E5E31 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC66E66820A4D7D6005E5E31 /* SearchViewController.xib */; };
+		DC66E66A20A4D7D6005E5E31 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC66E66820A4D7D6005E5E31 /* SearchViewController.xib */; };
+		DC66E66B20A4D7D6005E5E31 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC66E66820A4D7D6005E5E31 /* SearchViewController.xib */; };
+		DC66E67020A4DA0F005E5E31 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E66E20A4DA0F005E5E31 /* SearchResultCell.swift */; };
+		DC66E67120A4DA0F005E5E31 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E66E20A4DA0F005E5E31 /* SearchResultCell.swift */; };
+		DC66E67220A4DA0F005E5E31 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E66E20A4DA0F005E5E31 /* SearchResultCell.swift */; };
+		DC66E67320A4DA0F005E5E31 /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC66E66F20A4DA0F005E5E31 /* SearchResultCell.xib */; };
+		DC66E67420A4DA0F005E5E31 /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC66E66F20A4DA0F005E5E31 /* SearchResultCell.xib */; };
+		DC66E67520A4DA0F005E5E31 /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC66E66F20A4DA0F005E5E31 /* SearchResultCell.xib */; };
+		DC66E67720A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E67620A4DA25005E5E31 /* SearchResultCellModel.swift */; };
+		DC66E67820A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E67620A4DA25005E5E31 /* SearchResultCellModel.swift */; };
+		DC66E67920A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E67620A4DA25005E5E31 /* SearchResultCellModel.swift */; };
 		DC6CC644204CBD5300050589 /* PhotoStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6CC643204CBD5300050589 /* PhotoStatistics.swift */; };
 		DC6CC645204CBD5300050589 /* PhotoStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6CC643204CBD5300050589 /* PhotoStatistics.swift */; };
 		DC6CC646204CBD5300050589 /* PhotoStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6CC643204CBD5300050589 /* PhotoStatistics.swift */; };
@@ -95,6 +119,36 @@
 		DC71C3DB1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */; };
 		DC71C3DC1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */; };
 		DC71C3DD1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */; };
+		DC72A4D220C305D7001550D1 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC72A4D020C305D7001550D1 /* UserCell.swift */; };
+		DC72A4D320C305D7001550D1 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC72A4D020C305D7001550D1 /* UserCell.swift */; };
+		DC72A4D420C305D7001550D1 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC72A4D020C305D7001550D1 /* UserCell.swift */; };
+		DC72A4D520C305D7001550D1 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC72A4D120C305D7001550D1 /* UserCell.xib */; };
+		DC72A4D620C305D7001550D1 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC72A4D120C305D7001550D1 /* UserCell.xib */; };
+		DC72A4D720C305D7001550D1 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC72A4D120C305D7001550D1 /* UserCell.xib */; };
+		DC72A4D920C305E8001550D1 /* UserCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC72A4D820C305E8001550D1 /* UserCellModel.swift */; };
+		DC72A4DA20C305E8001550D1 /* UserCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC72A4D820C305E8001550D1 /* UserCellModel.swift */; };
+		DC72A4DB20C305E8001550D1 /* UserCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC72A4D820C305E8001550D1 /* UserCellModel.swift */; };
+		DC72A4DD20C313E8001550D1 /* SearchUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC72A4DC20C313E8001550D1 /* SearchUsersViewController.xib */; };
+		DC72A4DE20C313E8001550D1 /* SearchUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC72A4DC20C313E8001550D1 /* SearchUsersViewController.xib */; };
+		DC72A4DF20C313E8001550D1 /* SearchUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC72A4DC20C313E8001550D1 /* SearchUsersViewController.xib */; };
+		DC73732920A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */; };
+		DC73732A20A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */; };
+		DC73732B20A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */; };
+		DC73733220A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732F20A7970400922AE4 /* SearchCollectionsViewController.swift */; };
+		DC73733320A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732F20A7970400922AE4 /* SearchCollectionsViewController.swift */; };
+		DC73733420A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732F20A7970400922AE4 /* SearchCollectionsViewController.swift */; };
+		DC73733520A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733020A7970400922AE4 /* SearchCollectionsViewModel.swift */; };
+		DC73733620A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733020A7970400922AE4 /* SearchCollectionsViewModel.swift */; };
+		DC73733720A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733020A7970400922AE4 /* SearchCollectionsViewModel.swift */; };
+		DC73733820A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC73733120A7970400922AE4 /* SearchCollectionsViewController.xib */; };
+		DC73733920A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC73733120A7970400922AE4 /* SearchCollectionsViewController.xib */; };
+		DC73733A20A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC73733120A7970400922AE4 /* SearchCollectionsViewController.xib */; };
+		DC73733E20A7974C00922AE4 /* SearchUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733B20A7974C00922AE4 /* SearchUsersViewController.swift */; };
+		DC73733F20A7974C00922AE4 /* SearchUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733B20A7974C00922AE4 /* SearchUsersViewController.swift */; };
+		DC73734020A7974C00922AE4 /* SearchUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733B20A7974C00922AE4 /* SearchUsersViewController.swift */; };
+		DC73734120A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733C20A7974C00922AE4 /* SearchUsersViewModel.swift */; };
+		DC73734220A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733C20A7974C00922AE4 /* SearchUsersViewModel.swift */; };
+		DC73734320A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733C20A7974C00922AE4 /* SearchUsersViewModel.swift */; };
 		DC7CF5821FC464BF006E0A39 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7CF5811FC464BF006E0A39 /* URL.swift */; };
 		DC7CF5831FC464BF006E0A39 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7CF5811FC464BF006E0A39 /* URL.swift */; };
 		DC7CF5841FC464BF006E0A39 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7CF5811FC464BF006E0A39 /* URL.swift */; };
@@ -129,6 +183,24 @@
 		DCB433CF204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB433CE204B5BBB00C6C80C /* PhotoDetailsViewModel.swift */; };
 		DCB433D0204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB433CE204B5BBB00C6C80C /* PhotoDetailsViewModel.swift */; };
 		DCB433D1204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB433CE204B5BBB00C6C80C /* PhotoDetailsViewModel.swift */; };
+		DCB915A520B9A7BE003D1069 /* SearchPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB915A120B9A7BE003D1069 /* SearchPhotosViewController.xib */; };
+		DCB915A620B9A7BE003D1069 /* SearchPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB915A120B9A7BE003D1069 /* SearchPhotosViewController.xib */; };
+		DCB915A720B9A7BE003D1069 /* SearchPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB915A120B9A7BE003D1069 /* SearchPhotosViewController.xib */; };
+		DCB915AA20B9A81D003D1069 /* SearchPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915A920B9A81D003D1069 /* SearchPhotosViewController.swift */; };
+		DCB915AB20B9A81D003D1069 /* SearchPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915A920B9A81D003D1069 /* SearchPhotosViewController.swift */; };
+		DCB915AC20B9A81D003D1069 /* SearchPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915A920B9A81D003D1069 /* SearchPhotosViewController.swift */; };
+		DCB915AF20B9A8DE003D1069 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915AE20B9A8DE003D1069 /* PinterestLayout.swift */; };
+		DCB915B020B9A8DE003D1069 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915AE20B9A8DE003D1069 /* PinterestLayout.swift */; };
+		DCB915B120B9A8DE003D1069 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915AE20B9A8DE003D1069 /* PinterestLayout.swift */; };
+		DCB915B520BB1A9A003D1069 /* SearchPhotosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915B320BB1A9A003D1069 /* SearchPhotosCell.swift */; };
+		DCB915B620BB1A9A003D1069 /* SearchPhotosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915B320BB1A9A003D1069 /* SearchPhotosCell.swift */; };
+		DCB915B720BB1A9A003D1069 /* SearchPhotosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915B320BB1A9A003D1069 /* SearchPhotosCell.swift */; };
+		DCB915B820BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB915B420BB1A9A003D1069 /* SearchPhotosCell.xib */; };
+		DCB915B920BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB915B420BB1A9A003D1069 /* SearchPhotosCell.xib */; };
+		DCB915BA20BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB915B420BB1A9A003D1069 /* SearchPhotosCell.xib */; };
+		DCB915BC20BB1AA9003D1069 /* SearchPhotosCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915BB20BB1AA9003D1069 /* SearchPhotosCellModel.swift */; };
+		DCB915BD20BB1AA9003D1069 /* SearchPhotosCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915BB20BB1AA9003D1069 /* SearchPhotosCellModel.swift */; };
+		DCB915BE20BB1AA9003D1069 /* SearchPhotosCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915BB20BB1AA9003D1069 /* SearchPhotosCellModel.swift */; };
 		DCBAEE6320363CD600561CBA /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAEE6220363CD600561CBA /* Orientation.swift */; };
 		DCBAEE6420363CD600561CBA /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAEE6220363CD600561CBA /* Orientation.swift */; };
 		DCBAEE6520363CD600561CBA /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAEE6220363CD600561CBA /* Orientation.swift */; };
@@ -218,6 +290,10 @@
 		DCEE1F141FC983920010BADE /* UIAlertController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */; };
 		DCEE1F151FC983920010BADE /* UIAlertController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */; };
 		DCEE1F161FC983920010BADE /* UIAlertController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */; };
+		DCF3961220A8E3C400F3906D /* PaprTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */; };
+		DCF3961320A8E3C400F3906D /* PaprTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */; };
+		DCF3961420A8E3C400F3906D /* PaprTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */; };
+		DCFB564920C46A93007401DE /* UIColor+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFB564820C46A93007401DE /* UIColor+Extentions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,10 +346,28 @@
 		DC658D9E208D139800FEBC31 /* CollectionServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionServiceType.swift; sourceTree = "<group>"; };
 		DC658DA2208D13A400FEBC31 /* CollectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionService.swift; sourceTree = "<group>"; };
 		DC66C92E2052BA0300831478 /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
+		DC66E65320A4CB4C005E5E31 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		DC66E65420A4CB4C005E5E31 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		DC66E66020A4D003005E5E31 /* SearchServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceType.swift; sourceTree = "<group>"; };
+		DC66E66420A4D016005E5E31 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
+		DC66E66820A4D7D6005E5E31 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		DC66E66E20A4DA0F005E5E31 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
+		DC66E66F20A4DA0F005E5E31 /* SearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultCell.xib; sourceTree = "<group>"; };
+		DC66E67620A4DA25005E5E31 /* SearchResultCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCellModel.swift; sourceTree = "<group>"; };
 		DC6CC643204CBD5300050589 /* PhotoStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStatistics.swift; sourceTree = "<group>"; };
 		DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthManager.swift; sourceTree = "<group>"; };
 		DC71C30E1FBDE00A00C8E41A /* UnsplashAuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthError.swift; sourceTree = "<group>"; };
 		DC71C3DA1FBF635C00C8E41A /* UnsplashAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAccessToken.swift; sourceTree = "<group>"; };
+		DC72A4D020C305D7001550D1 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		DC72A4D120C305D7001550D1 /* UserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
+		DC72A4D820C305E8001550D1 /* UserCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellModel.swift; sourceTree = "<group>"; };
+		DC72A4DC20C313E8001550D1 /* SearchUsersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchUsersViewController.xib; sourceTree = "<group>"; };
+		DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosViewModel.swift; sourceTree = "<group>"; };
+		DC73732F20A7970400922AE4 /* SearchCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionsViewController.swift; sourceTree = "<group>"; };
+		DC73733020A7970400922AE4 /* SearchCollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionsViewModel.swift; sourceTree = "<group>"; };
+		DC73733120A7970400922AE4 /* SearchCollectionsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCollectionsViewController.xib; sourceTree = "<group>"; };
+		DC73733B20A7974C00922AE4 /* SearchUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersViewController.swift; sourceTree = "<group>"; };
+		DC73733C20A7974C00922AE4 /* SearchUsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersViewModel.swift; sourceTree = "<group>"; };
 		DC7CF5811FC464BF006E0A39 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		DC7F20921FADD3400017C14A /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		DC9147932082B9AD00781B65 /* Hero+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Hero+Rx.swift"; sourceTree = "<group>"; };
@@ -285,6 +379,12 @@
 		DCB433C6204B5BAD00C6C80C /* PhotoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewController.swift; sourceTree = "<group>"; };
 		DCB433C7204B5BAD00C6C80C /* PhotoDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoDetailsViewController.xib; sourceTree = "<group>"; };
 		DCB433CE204B5BBB00C6C80C /* PhotoDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewModel.swift; sourceTree = "<group>"; };
+		DCB915A120B9A7BE003D1069 /* SearchPhotosViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPhotosViewController.xib; sourceTree = "<group>"; };
+		DCB915A920B9A81D003D1069 /* SearchPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosViewController.swift; sourceTree = "<group>"; };
+		DCB915AE20B9A8DE003D1069 /* PinterestLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
+		DCB915B320BB1A9A003D1069 /* SearchPhotosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosCell.swift; sourceTree = "<group>"; };
+		DCB915B420BB1A9A003D1069 /* SearchPhotosCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPhotosCell.xib; sourceTree = "<group>"; };
+		DCB915BB20BB1AA9003D1069 /* SearchPhotosCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosCellModel.swift; sourceTree = "<group>"; };
 		DCBAEE6220363CD600561CBA /* Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Orientation.swift; sourceTree = "<group>"; };
 		DCBB1B1E1FA7B1BD004E95F0 /* Papr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Papr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCBB1B211FA7B1BD004E95F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -328,6 +428,8 @@
 		DCEE1F0A1FC97CDC0010BADE /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		DCEE1F0E1FC97CE80010BADE /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Rx.swift"; sourceTree = "<group>"; };
+		DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaprTabBarController.swift; sourceTree = "<group>"; };
+		DCFB564820C46A93007401DE /* UIColor+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extentions.swift"; sourceTree = "<group>"; };
 		DD3D8A956FB1C8A8D3B456A7 /* Pods_PaprTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaprTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1B488556B6761A1E7A75AA3 /* Pods-PaprTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaprTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PaprTests/Pods-PaprTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -448,6 +550,81 @@
 			path = "Common ViewModels";
 			sourceTree = "<group>";
 		};
+		DC66E65220A4CB31005E5E31 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				DC73732220A796AB00922AE4 /* SearchUsers */,
+				DC73732120A796A100922AE4 /* SearchCollections */,
+				DC73732020A7969300922AE4 /* SearchPhotos */,
+				DC66E66D20A4D9E9005E5E31 /* Cell */,
+				DC66E65320A4CB4C005E5E31 /* SearchViewController.swift */,
+				DC66E65420A4CB4C005E5E31 /* SearchViewModel.swift */,
+				DC66E66820A4D7D6005E5E31 /* SearchViewController.xib */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		DC66E65F20A4CFE6005E5E31 /* SearchService */ = {
+			isa = PBXGroup;
+			children = (
+				DC66E66020A4D003005E5E31 /* SearchServiceType.swift */,
+				DC66E66420A4D016005E5E31 /* SearchService.swift */,
+			);
+			path = SearchService;
+			sourceTree = "<group>";
+		};
+		DC66E66D20A4D9E9005E5E31 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DC66E66E20A4DA0F005E5E31 /* SearchResultCell.swift */,
+				DC66E67620A4DA25005E5E31 /* SearchResultCellModel.swift */,
+				DC66E66F20A4DA0F005E5E31 /* SearchResultCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DC72A4CF20C30584001550D1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DC72A4D020C305D7001550D1 /* UserCell.swift */,
+				DC72A4D820C305E8001550D1 /* UserCellModel.swift */,
+				DC72A4D120C305D7001550D1 /* UserCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DC73732020A7969300922AE4 /* SearchPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				DCB915B220BB1A68003D1069 /* Cell */,
+				DCB915A920B9A81D003D1069 /* SearchPhotosViewController.swift */,
+				DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */,
+				DCB915A120B9A7BE003D1069 /* SearchPhotosViewController.xib */,
+			);
+			path = SearchPhotos;
+			sourceTree = "<group>";
+		};
+		DC73732120A796A100922AE4 /* SearchCollections */ = {
+			isa = PBXGroup;
+			children = (
+				DC73732F20A7970400922AE4 /* SearchCollectionsViewController.swift */,
+				DC73733020A7970400922AE4 /* SearchCollectionsViewModel.swift */,
+				DC73733120A7970400922AE4 /* SearchCollectionsViewController.xib */,
+			);
+			path = SearchCollections;
+			sourceTree = "<group>";
+		};
+		DC73732220A796AB00922AE4 /* SearchUsers */ = {
+			isa = PBXGroup;
+			children = (
+				DC72A4CF20C30584001550D1 /* Cell */,
+				DC73733B20A7974C00922AE4 /* SearchUsersViewController.swift */,
+				DC73733C20A7974C00922AE4 /* SearchUsersViewModel.swift */,
+				DC72A4DC20C313E8001550D1 /* SearchUsersViewController.xib */,
+			);
+			path = SearchUsers;
+			sourceTree = "<group>";
+		};
 		DC7CF5851FC468C6006E0A39 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -475,6 +652,24 @@
 			path = "Photo Details";
 			sourceTree = "<group>";
 		};
+		DCB915AD20B9A8B0003D1069 /* Custom UI */ = {
+			isa = PBXGroup;
+			children = (
+				DCB915AE20B9A8DE003D1069 /* PinterestLayout.swift */,
+			);
+			path = "Custom UI";
+			sourceTree = "<group>";
+		};
+		DCB915B220BB1A68003D1069 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DCB915B320BB1A9A003D1069 /* SearchPhotosCell.swift */,
+				DCB915BB20BB1AA9003D1069 /* SearchPhotosCellModel.swift */,
+				DCB915B420BB1A9A003D1069 /* SearchPhotosCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		DCBB1B151FA7B1BD004E95F0 = {
 			isa = PBXGroup;
 			children = (
@@ -500,6 +695,7 @@
 		DCBB1B201FA7B1BD004E95F0 /* Papr */ = {
 			isa = PBXGroup;
 			children = (
+				DCB915AD20B9A8B0003D1069 /* Custom UI */,
 				DC0EDE95205B20B2004CD808 /* Commons */,
 				DCBB1B501FA8B7B2004E95F0 /* Coodinator */,
 				DCBB1B4F1FA8B774004E95F0 /* Scenes */,
@@ -536,6 +732,8 @@
 		DCBB1B4F1FA8B774004E95F0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */,
+				DC66E65220A4CB31005E5E31 /* Search */,
 				DC3917A22096680500492F62 /* Create Collection */,
 				DC658D82208CEDEF00FEBC31 /* Add to collection */,
 				DC66C92D2052B9EB00831478 /* Common ViewModels */,
@@ -593,6 +791,7 @@
 			isa = PBXGroup;
 			children = (
 				DC2576F42093D38B00369B7D /* Result.swift */,
+				DC66E65F20A4CFE6005E5E31 /* SearchService */,
 				DC658D9D208D137A00FEBC31 /* CollectionService */,
 				DCCD04122059C17700670B70 /* UserService */,
 				DC99FB8C2003A7AD001195FD /* PhotoService */,
@@ -619,6 +818,7 @@
 				DCBB1B6F1FA8BAC2004E95F0 /* BindableType.swift */,
 				DC7CF5811FC464BF006E0A39 /* URL.swift */,
 				DCDDF3292027DA5F00E1EB81 /* UIView+Extentions.swift */,
+				DCFB564820C46A93007401DE /* UIColor+Extentions.swift */,
 				DCBE0089202A1A980065BEF3 /* Date+Extentions.swift */,
 				DCBE008D202A1EB30065BEF3 /* String+Extentions.swift */,
 				DCAF6BBE204D465E002B7F00 /* Int+Extentions.swift */,
@@ -815,14 +1015,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCBB1B2C1FA7B1BD004E95F0 /* LaunchScreen.storyboard in Resources */,
+				DCB915A520B9A7BE003D1069 /* SearchPhotosViewController.xib in Resources */,
 				DCBB1B291FA7B1BD004E95F0 /* Assets.xcassets in Resources */,
+				DC72A4D520C305D7001550D1 /* UserCell.xib in Resources */,
+				DC73733820A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */,
 				DCC8CA0A2002BEE300F6C540 /* HomeViewController.xib in Resources */,
 				DC658D95208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
 				DC658D88208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
+				DCB915B820BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */,
 				DCC8CA162002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DC3917A82096683600492F62 /* CreateCollectionViewController.xib in Resources */,
+				DC66E66920A4D7D6005E5E31 /* SearchViewController.xib in Resources */,
+				DC72A4DD20C313E8001550D1 /* SearchUsersViewController.xib in Resources */,
 				DCBB1B271FA7B1BD004E95F0 /* Main.storyboard in Resources */,
 				DCBB1B631FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
+				DC66E67320A4DA0F005E5E31 /* SearchResultCell.xib in Resources */,
 				DCB433CB204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -833,12 +1040,19 @@
 			files = (
 				DCC8CA172002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DCBB1B641FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
+				DCB915B920BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */,
 				DC3917A92096683600492F62 /* CreateCollectionViewController.xib in Resources */,
+				DC72A4DE20C313E8001550D1 /* SearchUsersViewController.xib in Resources */,
 				DCB433CC204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
 				DC658D89208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
+				DC66E66A20A4D7D6005E5E31 /* SearchViewController.xib in Resources */,
+				DC66E67420A4DA0F005E5E31 /* SearchResultCell.xib in Resources */,
+				DC73733920A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */,
 				DC658D96208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
+				DCB915A620B9A7BE003D1069 /* SearchPhotosViewController.xib in Resources */,
 				DCC8CA0B2002BEE300F6C540 /* HomeViewController.xib in Resources */,
 				DCAF6BC2204D990A002B7F00 /* Assets.xcassets in Resources */,
+				DC72A4D620C305D7001550D1 /* UserCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -848,12 +1062,19 @@
 			files = (
 				DCC8CA182002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DCBB1B651FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
+				DCB915BA20BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */,
 				DC3917AA2096683600492F62 /* CreateCollectionViewController.xib in Resources */,
+				DC72A4DF20C313E8001550D1 /* SearchUsersViewController.xib in Resources */,
 				DCB433CD204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
 				DC658D8A208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
+				DC66E66B20A4D7D6005E5E31 /* SearchViewController.xib in Resources */,
+				DC66E67520A4DA0F005E5E31 /* SearchResultCell.xib in Resources */,
+				DC73733A20A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */,
 				DC658D97208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
+				DCB915A720B9A7BE003D1069 /* SearchPhotosViewController.xib in Resources */,
 				DCC8CA0C2002BEE300F6C540 /* HomeViewController.xib in Resources */,
 				DCAF6BC3204D990A002B7F00 /* Assets.xcassets in Resources */,
+				DC72A4D720C305D7001550D1 /* UserCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1039,18 +1260,24 @@
 				DC658D9A208CFE1700FEBC31 /* PhotoCollectionCellModel.swift in Sources */,
 				DC66C92F2052BA0300831478 /* PhotoViewModel.swift in Sources */,
 				DCDDF32A2027DA5F00E1EB81 /* UIView+Extentions.swift in Sources */,
+				DC66E65920A4CB4C005E5E31 /* SearchViewModel.swift in Sources */,
 				DC5AF7441FACEF2700ADA2BB /* Location.swift in Sources */,
 				DCEE1F141FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
 				DC5AF7481FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DCBB1B221FA7B1BD004E95F0 /* AppDelegate.swift in Sources */,
+				DCF3961220A8E3C400F3906D /* PaprTabBarController.swift in Sources */,
 				DCC8CA1E2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
+				DC66E65620A4CB4C005E5E31 /* SearchViewController.swift in Sources */,
+				DC66E67020A4DA0F005E5E31 /* SearchResultCell.swift in Sources */,
 				DC6CC644204CBD5300050589 /* PhotoStatistics.swift in Sources */,
 				DCA09D002015F68200E6EBB7 /* Constants.swift in Sources */,
 				DCDDF3262027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
 				DC5AF7551FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DCEE1F0B1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCBB1B591FA8B82F004E95F0 /* SceneCoodinator.swift in Sources */,
+				DC73733E20A7974C00922AE4 /* SearchUsersViewController.swift in Sources */,
 				DC2576F52093D38B00369B7D /* Result.swift in Sources */,
+				DC66E66520A4D016005E5E31 /* SearchService.swift in Sources */,
 				DC658D8C208CEF0300FEBC31 /* AddToCollectionViewModel.swift in Sources */,
 				DC658DA3208D13A400FEBC31 /* CollectionService.swift in Sources */,
 				DCC8CA0E2002BEF100F6C540 /* HomeViewModel.swift in Sources */,
@@ -1058,6 +1285,7 @@
 				DC5AF72B1FACCBF300ADA2BB /* User.swift in Sources */,
 				DC658D85208CEEE500FEBC31 /* AddToCollectionViewController.swift in Sources */,
 				DC3917AC2096684800492F62 /* CreateCollectionViewModel.swift in Sources */,
+				DC72A4D220C305D7001550D1 /* UserCell.swift in Sources */,
 				DCEE1F0F1FC97CE80010BADE /* AlertViewModel.swift in Sources */,
 				DC71C3021FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				DC5AF74C1FACF18600ADA2BB /* Exif.swift in Sources */,
@@ -1067,13 +1295,16 @@
 				DC7F20931FADD3400017C14A /* SearchResults.swift in Sources */,
 				DCCCFCBD203A45DE0024D417 /* Links.swift in Sources */,
 				DCCD04182059C25900670B70 /* UserService.swift in Sources */,
+				DC73733520A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */,
 				DCCCFCC1203A4A530024D417 /* Category.swift in Sources */,
 				DCBB1B551FA8B814004E95F0 /* Scene.swift in Sources */,
 				DC99FB922003A7DB001195FD /* PhotoService.swift in Sources */,
 				DC658D92208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */,
+				DC66E67720A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */,
 				DC5AF7271FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DCBB1B6C1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */,
+				DCB915AF20B9A8DE003D1069 /* PinterestLayout.swift in Sources */,
 				DCC8CA072002BEE300F6C540 /* HomeViewController.swift in Sources */,
 				DC922309203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DC99FB8E2003A7CC001195FD /* PhotoServiceType.swift in Sources */,
@@ -1081,19 +1312,28 @@
 				DC71C30F1FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
 				DC71C3DB1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
 				DC1F1504203195410025F70B /* UIScrollView+Extentions.swift in Sources */,
+				DC66E66120A4D003005E5E31 /* SearchServiceType.swift in Sources */,
 				DC2E76F8203B6DB90023A173 /* LikeUnlike.swift in Sources */,
 				DC9147942082B9AD00781B65 /* Hero+Rx.swift in Sources */,
 				DCBAEE6320363CD600561CBA /* Orientation.swift in Sources */,
+				DC73734120A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */,
 				DCCCFCC5203A52410024D417 /* Resolution.swift in Sources */,
 				DCBE008E202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
 				DC7CF5821FC464BF006E0A39 /* URL.swift in Sources */,
+				DC73732920A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */,
+				DCFB564920C46A93007401DE /* UIColor+Extentions.swift in Sources */,
 				DCBB1B5B1FA8B840004E95F0 /* SceneTransitionType.swift in Sources */,
+				DCB915B520BB1A9A003D1069 /* SearchPhotosCell.swift in Sources */,
 				DC5AF7591FAD2F1E00ADA2BB /* OrderBy.swift in Sources */,
 				DCBB1B671FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
+				DCB915BC20BB1AA9003D1069 /* SearchPhotosCellModel.swift in Sources */,
 				DCC8CA1A2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
 				DCB433CF204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */,
+				DC73733220A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */,
 				DC5AF7501FAD027F00ADA2BB /* PhotoCollection.swift in Sources */,
 				DC658D9F208D139800FEBC31 /* CollectionServiceType.swift in Sources */,
+				DC72A4D920C305E8001550D1 /* UserCellModel.swift in Sources */,
+				DCB915AA20B9A81D003D1069 /* SearchPhotosViewController.swift in Sources */,
 				DC5AF72F1FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DC3917A52096683600492F62 /* CreateCollectionViewController.swift in Sources */,
 				DCBB1B741FA8D597004E95F0 /* Unsplash.swift in Sources */,
@@ -1108,19 +1348,25 @@
 				DCDDF3272027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
 				DC2E76F9203B6DB90023A173 /* LikeUnlike.swift in Sources */,
 				DC71C3101FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
+				DC73733320A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */,
 				DCA09D012015F68200E6EBB7 /* Constants.swift in Sources */,
 				DCB433C9204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */,
+				DC66E67120A4DA0F005E5E31 /* SearchResultCell.swift in Sources */,
+				DC73734220A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */,
 				DC66C9302052BA0300831478 /* PhotoViewModel.swift in Sources */,
 				DC5AF74D1FACF18600ADA2BB /* Exif.swift in Sources */,
 				DCB433D0204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */,
 				DCC8CA082002BEE300F6C540 /* HomeViewController.swift in Sources */,
 				DCC8CA0F2002BEF100F6C540 /* HomeViewModel.swift in Sources */,
+				DC72A4DA20C305E8001550D1 /* UserCellModel.swift in Sources */,
 				DC6CC645204CBD5300050589 /* PhotoStatistics.swift in Sources */,
 				DC71C3DC1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
 				DCC8CA142002CC2700F6C540 /* HomeViewCell.swift in Sources */,
 				DC5AF7411FACE6A300ADA2BB /* Photo.swift in Sources */,
 				DC658D9B208CFE1700FEBC31 /* PhotoCollectionCellModel.swift in Sources */,
 				DCAF6BC0204D465E002B7F00 /* Int+Extentions.swift in Sources */,
+				DC66E65A20A4CB4C005E5E31 /* SearchViewModel.swift in Sources */,
+				DC66E66620A4D016005E5E31 /* SearchService.swift in Sources */,
 				DCBB1B371FA7B1BD004E95F0 /* PaprTests.swift in Sources */,
 				DC7F20941FADD3400017C14A /* SearchResults.swift in Sources */,
 				DC658D86208CEEE500FEBC31 /* AddToCollectionViewController.swift in Sources */,
@@ -1133,23 +1379,34 @@
 				DCCD04192059C25900670B70 /* UserService.swift in Sources */,
 				DC99FB8F2003A7CC001195FD /* PhotoServiceType.swift in Sources */,
 				DC5AF72C1FACCBF300ADA2BB /* User.swift in Sources */,
+				DCB915B020B9A8DE003D1069 /* PinterestLayout.swift in Sources */,
 				DC7CF5831FC464BF006E0A39 /* URL.swift in Sources */,
+				DC66E65720A4CB4C005E5E31 /* SearchViewController.swift in Sources */,
+				DC73732A20A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */,
 				DC5AF7301FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DCC8CA1F2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DC5AF7451FACEF2700ADA2BB /* Location.swift in Sources */,
+				DCB915BD20BB1AA9003D1069 /* SearchPhotosCellModel.swift in Sources */,
 				DC99FB932003A7DB001195FD /* PhotoService.swift in Sources */,
 				DCEE1F0C1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
+				DC72A4D320C305D7001550D1 /* UserCell.swift in Sources */,
 				DCCCFCBE203A45DE0024D417 /* Links.swift in Sources */,
 				DC5AF7511FAD027F00ADA2BB /* PhotoCollection.swift in Sources */,
 				DC658DA4208D13A400FEBC31 /* CollectionService.swift in Sources */,
 				DCCD04152059C19D00670B70 /* UserServiceType.swift in Sources */,
 				DC658DA0208D139800FEBC31 /* CollectionServiceType.swift in Sources */,
+				DCF3961320A8E3C400F3906D /* PaprTabBarController.swift in Sources */,
 				DCBAEE6420363CD600561CBA /* Orientation.swift in Sources */,
+				DC66E67820A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */,
+				DCB915AB20B9A81D003D1069 /* SearchPhotosViewController.swift in Sources */,
 				DCBB1B751FA8D597004E95F0 /* Unsplash.swift in Sources */,
 				DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC5AF7491FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DC9147952082B9B500781B65 /* Hero+Rx.swift in Sources */,
+				DC73733F20A7974C00922AE4 /* SearchUsersViewController.swift in Sources */,
 				DC658D93208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */,
+				DCB915B620BB1A9A003D1069 /* SearchPhotosCell.swift in Sources */,
+				DC73733620A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */,
 				DCBB1B611FA8BA22004E95F0 /* LoginViewController.swift in Sources */,
 				DCEE1F101FC97CE80010BADE /* AlertViewModel.swift in Sources */,
 				DCBB1B681FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
@@ -1163,6 +1420,7 @@
 				DC5AF75A1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */,
 				DCBE008B202A1A980065BEF3 /* Date+Extentions.swift in Sources */,
 				DCCCFCC2203A4A530024D417 /* Category.swift in Sources */,
+				DC66E66220A4D003005E5E31 /* SearchServiceType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1173,9 +1431,12 @@
 				DC71C3111FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
 				DC5AF74E1FACF18600ADA2BB /* Exif.swift in Sources */,
 				DCC8CA092002BEE300F6C540 /* HomeViewController.swift in Sources */,
+				DCB915B720BB1A9A003D1069 /* SearchPhotosCell.swift in Sources */,
 				DCC8CA102002BEF100F6C540 /* HomeViewModel.swift in Sources */,
 				DC92230B203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DC658D87208CEEE500FEBC31 /* AddToCollectionViewController.swift in Sources */,
+				DC66E65B20A4CB4C005E5E31 /* SearchViewModel.swift in Sources */,
+				DC66E67220A4DA0F005E5E31 /* SearchResultCell.swift in Sources */,
 				DC9147962082B9B500781B65 /* Hero+Rx.swift in Sources */,
 				DC71C3DD1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
 				DCC8CA152002CC2700F6C540 /* HomeViewCell.swift in Sources */,
@@ -1183,10 +1444,15 @@
 				DCBB1B421FA7B1BD004E95F0 /* PaprUITests.swift in Sources */,
 				DC7F20951FADD3400017C14A /* SearchResults.swift in Sources */,
 				DCC8CA1C2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
+				DCF3961420A8E3C400F3906D /* PaprTabBarController.swift in Sources */,
+				DCB915AC20B9A81D003D1069 /* SearchPhotosViewController.swift in Sources */,
 				DCBB1B6E1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
+				DC66E65820A4CB4C005E5E31 /* SearchViewController.swift in Sources */,
 				DC3917A72096683600492F62 /* CreateCollectionViewController.swift in Sources */,
 				DC658DA1208D139800FEBC31 /* CollectionServiceType.swift in Sources */,
+				DC73732B20A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */,
 				DCDDF3282027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
+				DC66E66320A4D003005E5E31 /* SearchServiceType.swift in Sources */,
 				DC71C3041FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				DC658D94208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */,
 				DCB433D1204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */,
@@ -1197,8 +1463,10 @@
 				DC7CF5841FC464BF006E0A39 /* URL.swift in Sources */,
 				DC658D8E208CEF0300FEBC31 /* AddToCollectionViewModel.swift in Sources */,
 				DCBAEE6520363CD600561CBA /* Orientation.swift in Sources */,
+				DC73733720A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */,
 				DC5AF7311FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DCC8CA202002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
+				DC72A4D420C305D7001550D1 /* UserCell.swift in Sources */,
 				DCB433CA204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */,
 				DCCD04162059C19D00670B70 /* UserServiceType.swift in Sources */,
 				DC5AF7461FACEF2700ADA2BB /* Location.swift in Sources */,
@@ -1207,8 +1475,12 @@
 				DCCD041A2059C25900670B70 /* UserService.swift in Sources */,
 				DCCCFCC7203A52410024D417 /* Resolution.swift in Sources */,
 				DCEE1F0D1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
+				DC73734020A7974C00922AE4 /* SearchUsersViewController.swift in Sources */,
 				DCBE0090202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
+				DCB915BE20BB1AA9003D1069 /* SearchPhotosCellModel.swift in Sources */,
+				DC72A4DB20C305E8001550D1 /* UserCellModel.swift in Sources */,
 				DC658D9C208CFE1700FEBC31 /* PhotoCollectionCellModel.swift in Sources */,
+				DC73734320A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */,
 				DC5AF7521FAD027F00ADA2BB /* PhotoCollection.swift in Sources */,
 				DCBB1B761FA8D597004E95F0 /* Unsplash.swift in Sources */,
 				DC5AF7291FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
@@ -1218,15 +1490,19 @@
 				DCBB1B621FA8BA22004E95F0 /* LoginViewController.swift in Sources */,
 				DCEE1F111FC97CE80010BADE /* AlertViewModel.swift in Sources */,
 				DCBE008C202A1A980065BEF3 /* Date+Extentions.swift in Sources */,
+				DC66E66720A4D016005E5E31 /* SearchService.swift in Sources */,
 				DCBB1B691FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
+				DCB915B120B9A8DE003D1069 /* PinterestLayout.swift in Sources */,
 				DCBB1B721FA8BAC2004E95F0 /* BindableType.swift in Sources */,
 				DC5AF7571FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DCEE1F161FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
 				DC2E76FA203B6DB90023A173 /* LikeUnlike.swift in Sources */,
 				DC5AF75B1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */,
 				DCDDF32C2027DA5F00E1EB81 /* UIView+Extentions.swift in Sources */,
+				DC66E67920A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */,
 				DCAF6BC1204D465E002B7F00 /* Int+Extentions.swift in Sources */,
 				DC66C9312052BA0300831478 /* PhotoViewModel.swift in Sources */,
+				DC73733420A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */,
 				DCCCFCC3203A4A530024D417 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

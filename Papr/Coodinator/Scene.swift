@@ -19,27 +19,46 @@ protocol TargetScene {
 }
 
 enum Scene {
+    case papr
     case login(LoginViewModel)
-    case home(HomeViewModel)
     case alert(AlertViewModel)
     case activity([Any])
     case photoDetails(PhotoDetailsViewModel)
     case addToCollection(AddToCollectionViewModel)
     case createCollection(CreateCollectionViewModel)
+    case searchPhotos(SearchPhotosViewModel)
+    case searchCollections(SearchCollectionsViewModel)
+    case searchUsers(SearchUsersViewModel)
 }
 
 extension Scene: TargetScene {
     var transition: SceneTransitionType {
         switch self {
+        case .papr:
+            let paprTabBarController = PaprTabBarController.instantiateFromNib()
+
+            // MARK: HomeViewController
+            var homeVC = HomeViewController.instantiateFromNib()
+            let rootHomeVC = UINavigationController(rootViewController: homeVC)
+            homeVC.bind(to: HomeViewModel())
+
+            // MARK: SearchViewController
+            var searchVC = SearchViewController.instantiateFromNib()
+            let rootSearchVC = UINavigationController(rootViewController: searchVC)
+            searchVC.bind(to: SearchViewModel())
+
+            rootHomeVC.tabBarItem = UITabBarItem(title: "Photos", image: #imageLiteral(resourceName: "photo-black"), selectedImage: #imageLiteral(resourceName: "photo-black"))
+            rootSearchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
+
+            paprTabBarController.viewControllers = [
+                rootHomeVC,
+                rootSearchVC
+            ]
+            return .tabBar(paprTabBarController)
         case let .login(viewModel):
             var vc = LoginViewController.instantiateFromNib()
             vc.bind(to: viewModel)
             return .present(vc)
-        case let .home(viewModel):
-            var vc = HomeViewController.instantiateFromNib()
-            let rootViewController = UINavigationController(rootViewController: vc)
-            vc.bind(to: viewModel)
-            return .root(rootViewController)
         case let .alert(viewModel):
             var vc = AlertViewController(title: nil, message: nil, preferredStyle: .alert)
             vc.bind(to: viewModel)
@@ -61,6 +80,18 @@ extension Scene: TargetScene {
             let rootViewController = UINavigationController(rootViewController: vc)
             vc.bind(to: viewModel)
             return .present(rootViewController)
+        case let .searchPhotos(viewModel):
+            var vc = SearchPhotosViewController.instantiateFromNib()
+            vc.bind(to: viewModel)
+            return .push(vc)
+        case let .searchCollections(viewModel):
+            var vc = SearchCollectionsViewController.instantiateFromNib()
+            vc.bind(to: viewModel)
+            return .push(vc)
+        case let .searchUsers(viewModel):
+            var vc = SearchUsersViewController.instantiateFromNib()
+            vc.bind(to: viewModel)
+            return .push(vc)
         }
     }
 }
