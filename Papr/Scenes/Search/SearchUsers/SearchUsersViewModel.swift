@@ -40,7 +40,10 @@ class SearchUsersViewModel: SearchUsersViewModelType, SearchUsersViewModelInput,
     let navTitle: Observable<String>
 
     lazy var usersViewModel: Observable<[UserCellModelType]> = {
-        return users.mapMany { UserCellModel(user: $0) }
+        return Observable.combineLatest(users, searchQuery)
+            .map { users, searchQuery in
+                users.map { UserCellModel.init(user: $0, searchQuery: searchQuery) }
+            }
     }()
 
     // MARK: - Private

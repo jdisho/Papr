@@ -42,7 +42,7 @@ class UserCell: UITableViewCell, BindableType {
         let this = UserCell.self
 
         outputs.fullName
-            .bind(to: fullNameLabel.rx.text)
+            .bind(to: fullNameLabel.rx.attributedText)
             .disposed(by: disposeBag)
 
         outputs.profilePhotoURL

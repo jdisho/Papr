@@ -11,7 +11,7 @@ import RxSwift
 
 protocol UserCellModelInput {}
 protocol UserCellModelOutput {
-    var fullName: Observable<String> { get }
+    var fullName: Observable<NSAttributedString> { get }
     var profilePhotoURL: Observable<String> { get }
 }
 
@@ -27,15 +27,15 @@ class UserCellModel: UserCellModelType, UserCellModelInput, UserCellModelOutput 
     var outputs: UserCellModelOutput { return self }
 
     // MARK: Outputs
-    let fullName: Observable<String>
+    let fullName: Observable<NSAttributedString>
     let profilePhotoURL: Observable<String>
 
     // MARK: Init
-    init(user: User) {
+    init(user: User, searchQuery: String) {
        let userStream = Observable.just(user)
 
         fullName = userStream
-            .map { $0.fullName }
+            .map { $0.fullName?.attributedString(withHighlightedText: searchQuery) }
             .unwrap()
 
         profilePhotoURL = userStream
