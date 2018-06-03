@@ -13,7 +13,6 @@ protocol UserCellModelInput {}
 protocol UserCellModelOutput {
     var fullName: Observable<String> { get }
     var profilePhotoURL: Observable<String> { get }
-    var isFollowedByUser: Observable<Bool> { get }
 }
 
 protocol UserCellModelType {
@@ -30,7 +29,6 @@ class UserCellModel: UserCellModelType, UserCellModelInput, UserCellModelOutput 
     // MARK: Outputs
     let fullName: Observable<String>
     let profilePhotoURL: Observable<String>
-    let isFollowedByUser: Observable<Bool>
 
     // MARK: Init
     init(user: User) {
@@ -42,10 +40,6 @@ class UserCellModel: UserCellModelType, UserCellModelInput, UserCellModelOutput 
 
         profilePhotoURL = userStream
             .map { $0.profileImage?.medium }
-            .unwrap()
-
-        isFollowedByUser = userStream
-            .map { $0.followedByUser }
             .unwrap()
     }
 }

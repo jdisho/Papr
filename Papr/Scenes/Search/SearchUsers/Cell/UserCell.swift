@@ -18,7 +18,6 @@ class UserCell: UITableViewCell, BindableType {
     // MARK: IBOutlets
     @IBOutlet var profilePhotoImageView: UIImageView!
     @IBOutlet var fullNameLabel: UILabel!
-    @IBOutlet var followButton: UIButton!
 
     // MARK: Private
     private static let nukeManager = Nuke.Manager.shared
@@ -28,9 +27,6 @@ class UserCell: UITableViewCell, BindableType {
 
     override func awakeFromNib() {
         profilePhotoImageView.cornerRadius = 5
-        followButton.cornerRadius = 5
-        followButton.borderWidth = 1
-        followButton.borderColor = UIColor(hexString: "5096E8")?.cgColor
         super.awakeFromNib()
     }
 
@@ -53,7 +49,5 @@ class UserCell: UITableViewCell, BindableType {
             .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
             .bind(to: profilePhotoImageView.rx.image)
             .disposed(by: disposeBag)
-
-        // TODO: Change followButton color
     }
 }
