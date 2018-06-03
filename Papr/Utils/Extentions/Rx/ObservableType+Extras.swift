@@ -39,12 +39,11 @@ extension ObservableType {
 
         return Observable.combineLatest(self, result)
     }
-    
-}
 
     func merge(with other: Observable<E>) -> Observable<E> {
         return Observable.merge(self.asObservable(), other)
     }
+    
 }
 extension Observable where E == Data {
     func map<D: Decodable>( _ type: D.Type) -> Observable<D>  {

@@ -92,7 +92,6 @@ class SearchUsersViewModel: SearchUsersViewModelType, SearchUsersViewModelInput,
                 users.forEach { user in
                     usersArray.append(user)
                 }
-                print(usersArray.count)
                 return usersArray
             }
     }
