@@ -40,7 +40,9 @@ extension Date {
         } else if roundedDate >= 24 * 60.0 && roundedDate < 7 * 24 * 60 {
             return "\(Int(self.since(Date(), in: .day).rounded()))d"
         } else if roundedDate >= 7 * 24 * 60.0 && roundedDate < 30 * 24 * 60 {
-            return "\(Int(self.since(Date(), in: .week).rounded()))w"
+            let dateformatter = DateFormatter()
+            dateformatter.dateFormat = "MM/dd/yy"
+            return "\(dateformatter.string(from: self))"
         } else if roundedDate >= 30 * 24 * 60 && roundedDate < 365 * 24 * 60 {
             return "\(Int(self.since(Date(), in: .month).rounded()))mo"
         } else if roundedDate >= 365 * 24 * 60 {
