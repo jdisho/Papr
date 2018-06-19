@@ -45,6 +45,14 @@ extension ObservableType {
     }
     
 }
+extension Observable where E == String {
+
+    func mapToURL() -> Observable<URL> {
+        return map { URL(string: $0) }
+            .filter { $0 != nil }
+            .map { $0! }
+    }
+}
 extension Observable where E == Data {
     func map<D: Decodable>( _ type: D.Type) -> Observable<D>  {
         return self.map { try JSONDecoder().decode(type, from: $0) }

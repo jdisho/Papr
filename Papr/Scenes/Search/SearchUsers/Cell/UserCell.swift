@@ -20,7 +20,7 @@ class UserCell: UITableViewCell, BindableType {
     @IBOutlet var fullNameLabel: UILabel!
 
     // MARK: Private
-    private static let nukeManager = Nuke.Manager.shared
+    private static let imagePipeline = Nuke.ImagePipeline.shared
     private var disposeBag = DisposeBag()
 
     // MARK: Overrides
@@ -46,7 +46,9 @@ class UserCell: UITableViewCell, BindableType {
             .disposed(by: disposeBag)
 
         outputs.profilePhotoURL
-            .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
+            .mapToURL()
+            .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
+            .map { $0.image }
             .bind(to: profilePhotoImageView.rx.image)
             .disposed(by: disposeBag)
     }

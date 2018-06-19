@@ -29,7 +29,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
     @IBOutlet var statsContainerViewBottomConstraint: NSLayoutConstraint!
 
     // MARK: Private
-    private static let nukeManager = Nuke.Manager.shared
+    private static let imagePipeline = Nuke.ImagePipeline.shared
     private let disposeBag = DisposeBag()
     private let dummyImageView = UIImageView()
     private var isTouched = true
@@ -68,7 +68,9 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         outputs.regularPhoto
-            .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
+            .mapToURL()
+            .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
+            .map { $0.image }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
 
@@ -125,9 +127,8 @@ class PhotoDetailsViewController: UIViewController, BindableType {
                 guard let linkString = result.element,
                     let url = URL(string: linkString) else { return }
 
-                PhotoDetailsViewController.nukeManager
-                    .loadImage(with: url, into: self.dummyImageView) { response, _ in
-                        guard let image = response.value else { return }
+                Nuke.loadImage(with: url, into: self.dummyImageView) { response, _ in
+                        guard let image = response?.image else { return }
                         inputs.writeImageToPhotosAlbumAction.execute(image)
                 }
             }

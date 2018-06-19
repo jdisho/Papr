@@ -192,12 +192,12 @@ internal class HeroCoreAnimationViewContext: HeroAnimatorViewContext {
       CALayer.heroAddedAnimations = nil
 
       for (layer, key, anim) in addedAnimations {
+        layer.removeAnimation(forKey: key)
         if #available(iOS 9.0, *), let anim = anim as? CASpringAnimation {
           anim.stiffness = stiffness
           anim.damping = damping
           self.addAnimation(anim, for: key, to: layer)
         } else {
-          layer.removeAnimation(forKey: key)
           self.addAnimation(anim, for: key, to: layer)
         }
       }
@@ -345,6 +345,26 @@ internal class HeroCoreAnimationViewContext: HeroAnimatorViewContext {
       animations = []
       _ = animate(key: key, beginTime: 0, duration: 100, fromValue: targetValue, toValue: targetValue)
       animations = oldAnimations
+    }
+  }
+
+  override func changeTarget(state: HeroTargetState, isDestination: Bool) {
+    let targetState = viewState(targetState: state)
+    for (key, targetValue) in targetState {
+      let from: Any?, to: Any?
+      if let data = self.state[key] {
+        from = data.0
+        to = data.1
+      } else {
+        let data = currentValue(key: key)
+        from = data
+        to = data
+      }
+      if isDestination {
+        self.state[key] = (from, targetValue)
+      } else {
+        self.state[key] = (targetValue, to)
+      }
     }
   }
 

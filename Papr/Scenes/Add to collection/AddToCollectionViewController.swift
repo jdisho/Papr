@@ -27,7 +27,7 @@ class AddToCollectionViewController: UIViewController, BindableType {
     // MARK: Private
     private var dataSource: RxCollectionViewSectionedReloadDataSource<AddToCollectionSectionModel>!
     private let disposeBag = DisposeBag()
-    private static let nukeManager = Nuke.Manager.shared
+    private static let imagePipeline = Nuke.ImagePipeline.shared
     private var cancelBarButton: UIBarButtonItem!
     private var addToCollectionBarButton: UIBarButtonItem!
     private var collectionViewActivityIndicator: UIActivityIndicatorView!
@@ -49,12 +49,15 @@ class AddToCollectionViewController: UIViewController, BindableType {
         outputs.photoStream
             .map { $0.urls?.full }
             .unwrap()
-            .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
+            .mapToURL()
+            .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
+            .map { $0.image }
             .flatMapIgnore { [unowned self] _ in
                 Observable.just(self.photoActivityIndicator.stopAnimating())
             }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
+
 
         outputs.collectionCellModelTypes
             .map { [AddToCollectionSectionModel(model: "", items: $0)] }

@@ -12,17 +12,17 @@ import Foundation
 /// When preheating is no longer necessary call `stopPreheating(with:)` method.
 ///
 /// All `Preheater` methods are thread-safe.
-public final class Preheater {
-    private let manager: Manager
+public final class ImagePreheater {
+    private let pipeline: ImagePipeline
     private let queue = DispatchQueue(label: "com.github.kean.Nuke.Preheater")
     private let preheatQueue = OperationQueue()
-    private var tasks = [AnyHashable: Task]()
+    private var tasks = [PreheatKey: Task]()
 
     /// Initializes the `Preheater` instance.
-    /// - parameter manager: `Manager.shared` by default.
+    /// - parameter manager: `Loader.shared` by default.
     /// - parameter `maxConcurrentRequestCount`: 2 by default.
-    public init(manager: Manager = Manager.shared, maxConcurrentRequestCount: Int = 2) {
-        self.manager = manager
+    public init(pipeline: ImagePipeline = ImagePipeline.shared, maxConcurrentRequestCount: Int = 2) {
+        self.pipeline = pipeline
         self.preheatQueue.maxConcurrentOperationCount = maxConcurrentRequestCount
     }
 
@@ -31,25 +31,35 @@ public final class Preheater {
     /// When you call this method, `Preheater` starts to load and cache images
     /// for the given requests. At any time afterward, you can create tasks
     /// for individual images with equivalent requests.
-    public func startPreheating(with requests: [Request]) {
+    public func startPreheating(with requests: [ImageRequest]) {
         queue.async {
             requests.forEach(self._startPreheating)
         }
     }
 
-    private func _startPreheating(with request: Request) {
-        let key = request.loadKey
-        guard tasks[key] == nil else { return } // already exists
+    private func _startPreheating(with request: ImageRequest) {
+        let key = PreheatKey(request: request)
+
+        // Check if we we've already started preheating.
+        guard tasks[key] == nil else { return }
+
+        // Check if the image is already in memory cache.
+        guard pipeline.configuration.imageCache?.cachedResponse(for: request) == nil else {
+            return // already in memory cache
+        }
 
         let task = Task(request: request, key: key)
         let token = task.cts.token
 
         let operation = Operation(starter: { [weak self] finish in
-            self?.manager.loadImage(with: request, token: token) { _ in
+            let task = self?.pipeline.loadImage(with: request) { [weak self] _, _  in
                 self?._remove(task)
                 finish()
             }
-            token.register(finish)
+            token.register {
+                task?.cancel()
+                finish()
+            }
         })
         preheatQueue.addOperation(operation)
         token.register { [weak operation] in operation?.cancel() }
@@ -66,14 +76,14 @@ public final class Preheater {
 
     /// Stops preheating images for the given requests and cancels outstanding
     /// requests.
-    public func stopPreheating(with requests: [Request]) {
+    public func stopPreheating(with requests: [ImageRequest]) {
         queue.async {
             requests.forEach(self._stopPreheating)
         }
     }
 
-    private func _stopPreheating(with request: Request) {
-        if let task = tasks[request.loadKey] {
+    private func _stopPreheating(with request: ImageRequest) {
+        if let task = tasks[PreheatKey(request: request)] {
             tasks[task.key] = nil
             task.cts.cancel()
         }
@@ -88,13 +98,33 @@ public final class Preheater {
     }
 
     private final class Task {
-        let key: AnyHashable
-        let request: Request
-        let cts = CancellationTokenSource()
+        let key: PreheatKey
+        let request: ImageRequest
+        let cts = _CancellationTokenSource()
 
-        init(request: Request, key: AnyHashable) {
+        init(request: ImageRequest, key: PreheatKey) {
             self.request = request
             self.key = key
         }
+    }
+
+    private struct PreheatKey: Hashable {
+        let cacheKey: ImageRequest.CacheKey
+        let loadKey: ImageRequest.LoadKey
+
+        init(request: ImageRequest) {
+            self.cacheKey = ImageRequest.CacheKey(request: request)
+            self.loadKey = ImageRequest.LoadKey(request: request)
+        }
+
+        #if !swift(>=4.1)
+        var hashValue: Int {
+            return cacheKey.hashValue
+        }
+
+        static func == (lhs: PreheatKey, rhs: PreheatKey) -> Bool {
+            return lhs.cacheKey == rhs.cacheKey && lhs.loadKey == rhs.loadKey
+        }
+        #endif
     }
 }

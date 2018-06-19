@@ -23,12 +23,12 @@
 import UIKit
 
 public protocol HeroPreprocessor: class {
-  weak var hero: HeroTransition! { get set }
+  var hero: HeroTransition! { get set }
   func process(fromViews: [UIView], toViews: [UIView])
 }
 
 public protocol HeroAnimator: class {
-  weak var hero: HeroTransition! { get set }
+  var hero: HeroTransition! { get set }
   func canAnimate(view: UIView, appearing: Bool) -> Bool
   func animate(fromViews: [UIView], toViews: [UIView]) -> TimeInterval
   func clean()
@@ -36,6 +36,7 @@ public protocol HeroAnimator: class {
   func seekTo(timePassed: TimeInterval)
   func resume(timePassed: TimeInterval, reverse: Bool) -> TimeInterval
   func apply(state: HeroTargetState, to view: UIView)
+  func changeTarget(state: HeroTargetState, isDestination: Bool, to view: UIView)
 }
 
 public protocol HeroProgressUpdateObserver: class {
