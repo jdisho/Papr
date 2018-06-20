@@ -14,7 +14,7 @@ extension Reactive where Base: UIBarButtonItem {
     
     /// Bindable sink for `image` property.
     public var image: Binder<UIImage> {
-        return Binder(self.base) { button, image in
+        return Binder(base) { button, image in
             button.image = image
         }
     }
@@ -24,7 +24,7 @@ extension Reactive where Base: UIButton {
 
     /// Bindable sink for `backgroundColor` property.
     public var backgroundColor: Binder<UIColor> {
-        return Binder(self.base) { button, color in
+        return Binder(base) { button, color in
             button.backgroundColor = color
         }
     }

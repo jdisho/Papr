@@ -13,11 +13,11 @@ import RxCocoa
 extension ObservableType {
     
     func ignoreAll() -> Observable<Void> {
-        return self.map { _ in }
+        return map { _ in }
     }
     
     func unwrap<T>() -> Observable<T> where E == Optional<T> {
-        return self.filter { $0 != nil }.map { $0! }
+        return filter { $0 != nil }.map { $0! }
     }
 
     func flatMapIgnore<O: ObservableConvertibleType>(_ selector: @escaping (E) throws -> O) -> Observable<E> {
@@ -55,14 +55,14 @@ extension Observable where E == String {
 }
 extension Observable where E == Data {
     func map<D: Decodable>( _ type: D.Type) -> Observable<D>  {
-        return self.map { try JSONDecoder().decode(type, from: $0) }
+        return map { try JSONDecoder().decode(type, from: $0) }
     }
 }
 
 extension Observable where E == Bool {
     
     var negation: Observable<Bool> {
-        return self.map { !$0 }
+        return map { !$0 }
     }
 
 }
@@ -75,12 +75,12 @@ extension Observable where E: Sequence, E.Iterator.Element: Comparable {
      */
     
     func sorted<T>() -> Observable<[T]> where E.Iterator.Element == T {
-        return self.map { $0.sorted() }
+        return map { $0.sorted() }
     }
     
     func sorted<T>(_ areInIncreasingOrder: @escaping (T, T) -> Bool) -> Observable<[T]> 
         where E.Iterator.Element == T {
-            return self.map { $0.sorted(by: areInIncreasingOrder) }
+            return map { $0.sorted(by: areInIncreasingOrder) }
     }
 }
 

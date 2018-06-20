@@ -11,6 +11,6 @@ import UIKit
 extension UIScrollView {
     
     func isNearTheBottomEdge(offset: CGFloat = 100) -> Bool {
-        return self.contentOffset.y + self.frame.size.height + offset >= self.contentSize.height
+        return contentOffset.y + frame.size.height + offset >= contentSize.height
     }
 }
