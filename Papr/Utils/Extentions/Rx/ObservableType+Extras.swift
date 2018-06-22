@@ -61,7 +61,7 @@ extension Observable where E == Data {
 
 extension Observable where E == Bool {
     
-    var negation: Observable<Bool> {
+    func negate() -> Observable<Bool> {
         return map { !$0 }
     }
 
