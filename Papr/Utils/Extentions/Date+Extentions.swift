@@ -38,13 +38,11 @@ extension Date {
         if roundedDate >= 60.0 && roundedDate < 24 * 60.0 {
             return "\(Int(since(Date(), in: .hour).rounded()))h"
         } else if roundedDate >= 24 * 60.0 && roundedDate < 7 * 24 * 60 {
-            return "\(Int(since(Date(), in: .day).rounded()))d"
-        } else if roundedDate >= 7 * 24 * 60.0 && roundedDate < 30 * 24 * 60 {
-            return "\(Int(since(Date(), in: .week).rounded()))w"
-        } else if roundedDate >= 30 * 24 * 60 && roundedDate < 365 * 24 * 60 {
-            return "\(Int(since(Date(), in: .month).rounded()))mo"
-        } else if roundedDate >= 365 * 24 * 60 {
-            return "\(Int(since(Date(), in: .year).rounded()))y"
+            return "\(Int(self.since(Date(), in: .day).rounded()))d"
+        } else if roundedDate >= 7 * 24 * 60.0 {
+            let dateformatter = DateFormatter()
+            dateformatter.dateFormat = "dd/MM/yy"
+            return dateformatter.string(from: self)
         }
         return "\(Int(roundedDate))min"
     }
