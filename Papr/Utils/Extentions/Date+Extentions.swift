@@ -34,9 +34,9 @@ extension Date {
     }
 
     var abbreviated: String {
-        let roundedDate = self.since(Date(), in: .minute).rounded()
+        let roundedDate = since(Date(), in: .minute).rounded()
         if roundedDate >= 60.0 && roundedDate < 24 * 60.0 {
-            return "\(Int(self.since(Date(), in: .hour).rounded()))h"
+            return "\(Int(since(Date(), in: .hour).rounded()))h"
         } else if roundedDate >= 24 * 60.0 && roundedDate < 7 * 24 * 60 {
             return "\(Int(self.since(Date(), in: .day).rounded()))d"
         } else if roundedDate >= 7 * 24 * 60.0 {
