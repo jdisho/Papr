@@ -76,6 +76,11 @@ class HomeViewController: UIViewController, BindableType {
             .bind(to: refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
 
+        outputs.isRefreshing
+            .negate()
+            .bind(to: rightBarButtonItem.rx.isEnabled)
+            .disposed(by: disposeBag)
+
         outputs.navBarButtonName
             .map { $0.string }
             .bind(to: navBarButton.rx.title())

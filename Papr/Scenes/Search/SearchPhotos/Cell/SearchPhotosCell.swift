@@ -19,7 +19,7 @@ class SearchPhotosCell: UICollectionViewCell, BindableType {
     @IBOutlet var photoImageView: UIImageView!
 
     // MARK: Privates
-    private static let nukeManager = Nuke.Manager.shared
+    private static let imagePipeline = Nuke.ImagePipeline.shared
     private var disposeBag = DisposeBag()
 
     override func prepareForReuse() {
@@ -34,7 +34,9 @@ class SearchPhotosCell: UICollectionViewCell, BindableType {
         let this = SearchPhotosCell.self
 
         outputs.photoURL
-            .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
+            .mapToURL()
+            .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
+            .map { $0.image }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
     }

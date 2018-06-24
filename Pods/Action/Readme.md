@@ -100,7 +100,7 @@ Then run `pod install` and that'll be 👌
 Add this to `Cartfile`
 
 ```
-github "RxSwiftCommunity/Action" ~> 2.3.0
+github "RxSwiftCommunity/Action" ~> 3.6.0
 ```
 
 If you are using RxSwift 3.2.0 or below, Use Action `~2.2.0` instead!

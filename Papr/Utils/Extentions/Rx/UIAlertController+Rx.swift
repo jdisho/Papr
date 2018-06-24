@@ -14,14 +14,14 @@ extension Reactive where Base: UIAlertController {
     
     /// Bindable sink for `title`.
     public var title: Binder<String> {
-        return Binder(self.base) { alertController, title in
+        return Binder(base) { alertController, title in
             alertController.title = title
         }
     }
     
     /// Bindable sink for `message`.
     public var message: Binder<String> {
-        return Binder(self.base) { alertController, message in
+        return Binder(base) { alertController, message in
             alertController.message = message
         }
     }

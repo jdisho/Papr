@@ -23,7 +23,7 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType {
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
     // MARK: Private
-    private static let nukeManager = Nuke.Manager.shared
+    private static let imagePipeline = Nuke.ImagePipeline.shared
     private var disposeBag = DisposeBag()
 
     // MARK: Overrides
@@ -59,7 +59,9 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType {
             .disposed(by: disposeBag)
         
         outputs.coverPhotoURL
-            .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
+            .mapToURL()
+            .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
+            .map { $0.image }
             .flatMapIgnore { [unowned self] _ in
                 Observable.just(self.activityIndicator.stopAnimating())
             }

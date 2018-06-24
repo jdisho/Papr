@@ -15,7 +15,7 @@ extension Reactive where Base: UIView {
 
     /// Bindable sink for `hero.id`.
     public var heroId: Binder<String> {
-        return Binder(self.base) { view, id in
+        return Binder(base) { view, id in
             view.hero.id = id
         }
     }

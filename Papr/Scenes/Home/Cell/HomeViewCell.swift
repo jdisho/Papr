@@ -32,7 +32,7 @@ class HomeViewCell: UITableViewCell, BindableType {
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
     // MARK: Private
-    private static let nukeManager = Nuke.Manager.shared
+    private static let imagePipeline = Nuke.ImagePipeline.shared
     private var disposeBag = DisposeBag()
     private let dummyImageView = UIImageView()
 
@@ -93,12 +93,16 @@ class HomeViewCell: UITableViewCell, BindableType {
             .disposed(by: disposeBag)
 
         outputs.userProfileImage
-            .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
+            .mapToURL()
+            .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
+            .map { $0.image }
             .bind(to: userImageView.rx.image)
             .disposed(by: disposeBag)
 
         Observable.concat(outputs.smallPhoto, outputs.regularPhoto)
-            .flatMap { this.nukeManager.loadImage(with: $0).orEmpty }
+            .mapToURL()
+            .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
+            .map { $0.image }
             .flatMapIgnore { [unowned self] _ in
                 Observable.just(self.activityIndicator.stopAnimating())
             }
@@ -145,10 +149,9 @@ class HomeViewCell: UITableViewCell, BindableType {
                 guard let linkString = result.element,
                     let url = URL(string: linkString) else { return }
 
-                HomeViewCell.nukeManager
-                    .loadImage(with: url, into: self.dummyImageView) { response, _ in
-                        guard let image = response.value else { return }
-                        inputs.writeImageToPhotosAlbumAction.execute(image)
+                Nuke.loadImage(with: url, into: self.dummyImageView) { response, _ in
+                    guard let image = response?.image else { return }
+                    inputs.writeImageToPhotosAlbumAction.execute(image)
                 }
             }
             .disposed(by: disposeBag)

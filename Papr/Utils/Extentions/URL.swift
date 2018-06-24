@@ -11,8 +11,7 @@ import Foundation
 extension URL {
     
     func value(for queryKey: String) -> String? {
-        let stringURL = self.absoluteString
-        guard let items = URLComponents(string: stringURL)?.queryItems else { return nil }
+        guard let items = URLComponents(string: absoluteString)?.queryItems else { return nil }
         for item in items where item.name == queryKey {
             return item.value
         }
