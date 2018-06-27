@@ -12,33 +12,33 @@ import Moya
 
 struct CollectionService: CollectionServiceType {
 
-    private var unsplash: MoyaProvider<Unsplash>
+    private var unsplash: MoyaProvider<MultiTarget>
 
-    init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>()) {
+    init(unsplash: MoyaProvider<MultiTarget> = MoyaProvider<MultiTarget>()) {
         self.unsplash = unsplash
     }
 
     func collection(withID id: Int) -> Observable<PhotoCollection> {
-        return unsplash.rx.request(.collection(id: id))
+        return unsplash.rx.request(MultiTarget(Unsplash.collection(id: id)))
             .map(PhotoCollection.self)
             .asObservable()
     }
 
     func collections(withUsername username: String) -> Observable<[PhotoCollection]> {
             return self.unsplash.rx
-                .request(.userCollections(username: username, page: 1, perPage: 20))
+                .request(MultiTarget(Unsplash.userCollections(username: username, page: 1, perPage: 20)))
                 .map([PhotoCollection].self)
                 .asObservable()
         }
 
     func photos(fromCollectionId id: Int) -> Observable<[Photo]> {
-        return unsplash.rx.request(.collectionPhotos(id: id, page: 1, perPage: 10))
+        return unsplash.rx.request(MultiTarget(Unsplash.collectionPhotos(id: id, page: 1, perPage: 10)))
             .map([Photo].self)
             .asObservable()
     }
 
     func addPhotoToCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, String>> {
-        return unsplash.rx.request(.addPhotoToCollection(collectionID: id, photoID: photoId))
+        return unsplash.rx.request(MultiTarget(Unsplash.addPhotoToCollection(collectionID: id, photoID: photoId)))
             .map(CollectionResponse.self)
             .map { $0.photo }
             .asObservable()
@@ -48,7 +48,7 @@ struct CollectionService: CollectionServiceType {
     }
 
     func removePhotoFromCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, String>> {
-        return unsplash.rx.request(.removePhotoFromCollection(collectionID: id, photoID: photoId))
+        return unsplash.rx.request(MultiTarget(Unsplash.removePhotoFromCollection(collectionID: id, photoID: photoId)))
             .map(CollectionResponse.self)
             .map { $0.photo }
             .asObservable()
@@ -63,10 +63,10 @@ struct CollectionService: CollectionServiceType {
         isPrivate: Bool
         ) -> Observable<Result<PhotoCollection, String>> {
 
-        return unsplash.rx.request(.createCollection(
+        return unsplash.rx.request(MultiTarget(Unsplash.createCollection(
             title: title,
             description: description,
-            isPrivate: isPrivate))
+            isPrivate: isPrivate)))
             .map(PhotoCollection.self)
             .asObservable()
             .map (Result.success)

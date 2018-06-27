@@ -12,16 +12,16 @@ import Moya
 
 struct PhotoService: PhotoServiceType {
 
-    private var unsplash: MoyaProvider<Unsplash>
+    private var unsplash: MoyaProvider<MultiTarget>
     //plugins: [NetworkLoggerPlugin(verbose: false)])
 
-    init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>()) {
+    init(unsplash: MoyaProvider<MultiTarget> = MoyaProvider<MultiTarget>()) {
         self.unsplash = unsplash
     }
 
     func like(photo: Photo) ->  Observable<Result<Photo, NonPublicScopeError>> {
         return unsplash.rx
-            .request(.likePhoto(id: photo.id ?? ""))
+            .request(MultiTarget(Unsplash.likePhoto(id: photo.id ?? "")))
             .map(LikeUnlike.self)
             .map { $0.photo }
             .asObservable()
@@ -38,7 +38,7 @@ struct PhotoService: PhotoServiceType {
     
     func unlike(photo: Photo) ->  Observable<Result<Photo, NonPublicScopeError>> {
         return unsplash.rx
-            .request(.unlikePhoto(id: photo.id ?? ""))
+            .request(MultiTarget(Unsplash.unlikePhoto(id: photo.id ?? "")))
             .map(LikeUnlike.self)
             .asObservable()
             .map { $0.photo }
@@ -55,7 +55,7 @@ struct PhotoService: PhotoServiceType {
     
     func photo(withId id: String) -> Observable<Photo> {
         return unsplash.rx
-            .request(.photo(id: id, width: nil, height: nil, rect: nil))
+            .request(MultiTarget(Unsplash.photo(id: id, width: nil, height: nil, rect: nil)))
             .map(Photo.self)
             .asObservable()
     }
@@ -69,12 +69,12 @@ struct PhotoService: PhotoServiceType {
 
         if curated {
             return unsplash.rx
-                    .request(.curatedPhotos(
+                    .request(MultiTarget(Unsplash.curatedPhotos(
                         page: pageNumber,
                         perPage: Constants.photosPerPage,
                         orderBy: orderBy
                         )
-                    )
+                    ))
                     .map([Photo].self)
                     .asObservable()
                     .map(Result.success)
@@ -84,12 +84,12 @@ struct PhotoService: PhotoServiceType {
         }
 
         return unsplash.rx
-            .request(.photos(
+            .request(MultiTarget(Unsplash.photos(
                 page: pageNumber,
                 perPage: Constants.photosPerPage,
                 orderBy: orderBy
                 )
-            )
+            ))
             .map([Photo].self)
             .asObservable()
             .map(Result.success)
@@ -100,18 +100,18 @@ struct PhotoService: PhotoServiceType {
 
     func statistics(of photo: Photo) -> Observable<PhotoStatistics> {
          return unsplash.rx
-            .request(.photoStatistics(
+            .request(MultiTarget(Unsplash.photoStatistics(
                 id: photo.id ?? "",
                 resolution: .days,
                 quantity: 30)
-            )
+            ))
             .map(PhotoStatistics.self)
             .asObservable()
     }
 
     func photoDownloadLink(withId id: String) ->  Observable<Result<String, String>> {
         return unsplash.rx
-            .request(.photoDownloadLink(id: id))
+            .request(MultiTarget(Unsplash.photoDownloadLink(id: id)))
             .map(Link.self)
             .map { $0.url }
             .asObservable()
