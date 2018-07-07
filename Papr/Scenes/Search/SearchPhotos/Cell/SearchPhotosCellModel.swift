@@ -8,9 +8,13 @@
 
 import Foundation
 import RxSwift
+import Action
 
-protocol SearchPhotosCellModelInput {}
+protocol SearchPhotosCellModelInput {
+    var photoDetailsAction: Action<Photo, Photo> { get }
+}
 protocol SearchPhotosCellModelOutput {
+    var photoStream: Observable<Photo>! { get }
     var photoURL: Observable<String> { get }
     var photoHeight: Observable<Double> { get }
 }
@@ -28,13 +32,26 @@ class SearchPhotosCellModel: SearchPhotosCellModelType,
     var inputs: SearchPhotosCellModelInput { return self }
     var outputs: SearchPhotosCellModelOutput { return self }
 
+    // MARK: Inputs
+    
+    lazy var photoDetailsAction: Action<Photo, Photo> = {
+        return Action<Photo, Photo> { [unowned self] photo in
+            let viewModel = PhotoDetailsViewModel(photo: photo)
+            self.sceneCoordinator.transition(to: Scene.photoDetails(viewModel))
+            return .just(photo)
+        }
+    }()
+    
     // MARK: Outputs
     let photoURL: Observable<String>
     let photoHeight: Observable<Double>
+    let sceneCoordinator: SceneCoordinatorType
+    var photoStream: Observable<Photo>!
 
     // MARK: Init
-    init(photo: Photo) {
-        let photoStream = Observable.just(photo)
+    init(photo: Photo, sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+        self.photoStream = Observable.just(photo)
+        self.sceneCoordinator = sceneCoordinator
 
         photoURL = photoStream
             .map { $0.urls?.small }
