@@ -1,0 +1,4 @@
+#include "Pods/Target Support Files/Pods-Papr/Pods-Papr.release.xcconfig"
+
+UNSPLASH_CLIENT_SECRET=550dfea297d53e54b05f0a59458a3bddce6217f8f44e34d30524a3b0d2425eca
+UNSPLASH_CLIENT_ID=0dd1dc721b7672e96f4bdf71af623fb68ea7b1d4829681744a4a08e0a8ef68c8

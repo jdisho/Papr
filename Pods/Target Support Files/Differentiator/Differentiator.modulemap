@@ -1,6 +1,0 @@
-framework module Differentiator {
-  umbrella header "Differentiator-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -42,8 +42,7 @@ enum UnsplashSettings {
         static let clientSecret = UnsplashSecrets.environmentVariable(named: "UNSPLASH_CLIENT_SECRET") ?? ""
 
         static func environmentVariable(named: String) -> String? {
-            let processInfo = ProcessInfo.processInfo
-            guard let value = processInfo.environment[named] else {
+            guard let infoDictionary = Bundle.main.infoDictionary, let value = infoDictionary[named] as? String else {
                 print("‼️ Missing Environment Variable: '\(named)'")
                 return nil
             }
