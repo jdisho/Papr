@@ -101,7 +101,7 @@ class AddToCollectionViewController: UIViewController, BindableType {
     }
 
     private func configureCollectionView() {
-        collectionView.registerCell(type: PhotoCollectionViewCell.self)
+        collectionView.register(cellType: PhotoCollectionViewCell.self)
         guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
         flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         flowLayout.itemSize = CGSize(width: 100, height: 134)
@@ -113,9 +113,7 @@ class AddToCollectionViewController: UIViewController, BindableType {
 
     private var collectionViewDataSource: CollectionViewSectionedDataSource<AddToCollectionSectionModel>.ConfigureCell {
         return { _, collectionView, indexPath, cellModel in
-            var cell = collectionView.dequeueReusableCell(
-                type: PhotoCollectionViewCell.self,
-                forIndexPath: indexPath)
+            var cell = collectionView.dequeueReusableCell(withCellType: PhotoCollectionViewCell.self, forIndexPath: indexPath)
             cell.bind(to: cellModel)
 
             return cell

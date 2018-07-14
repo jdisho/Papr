@@ -42,7 +42,7 @@ class SearchPhotosViewController: UIViewController, BindableType {
 
     // MARK: UI
     private func configureCollectionView() {
-        collectionView.registerCell(type: SearchPhotosCell.self)
+        collectionView.register(cellType: SearchPhotosCell.self)
         dataSource = RxCollectionViewSectionedReloadDataSource<SearchPhotosSectionModel>(
             configureCell:  collectionViewDataSource
         )
@@ -50,9 +50,7 @@ class SearchPhotosViewController: UIViewController, BindableType {
 
     private var collectionViewDataSource: CollectionViewSectionedDataSource<SearchPhotosSectionModel>.ConfigureCell {
         return { _, collectionView, indexPath, cellModel in
-            var cell = collectionView.dequeueReusableCell(
-                type: SearchPhotosCell.self,
-                forIndexPath: indexPath)
+            var cell = collectionView.dequeueReusableCell(withCellType: SearchPhotosCell.self, forIndexPath: indexPath)
             cell.bind(to: cellModel)
             return cell
         }

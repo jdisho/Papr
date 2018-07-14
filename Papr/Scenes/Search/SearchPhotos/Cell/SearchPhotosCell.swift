@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import Nuke
 
-class SearchPhotosCell: UICollectionViewCell, BindableType {
+class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassIdentifiable {
 
     // MARK: ViewModel
     var viewModel: SearchPhotosCellModelType!

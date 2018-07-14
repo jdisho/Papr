@@ -8,112 +8,113 @@
 
 import UIKit
 
-protocol NibIdentifiable {
-    static var nibIdentifier: String { get }
+protocol NibIdentifiable: class {
+    static var nib: UINib { get }
 }
 
 extension NibIdentifiable {
-    
     static var nib: UINib {
-        return UINib(nibName: nibIdentifier, bundle: nil)
+        return UINib(nibName: String(describing: self), bundle: Bundle(for: self))
     }
-    
 }
 
-extension UIView: NibIdentifiable {
-    
-    static var nibIdentifier: String {
-        return String(describing: self)
-    }
-    
+protocol ClassIdentifiable: class {
+    static var reuseId: String { get }
 }
 
-extension UIViewController: NibIdentifiable {
-    
-    static var nibIdentifier: String {
+extension ClassIdentifiable {
+    static var reuseId: String {
         return String(describing: self)
     }
-    
 }
 
 extension NibIdentifiable where Self: UIView {
-    
-    static func instantiateFromNib() -> Self {
-        guard let view = UINib(nibName: nibIdentifier, bundle: nil)
-            .instantiate(withOwner: nil, options: nil).first as? Self 
-            else { fatalError("Couldn't find nib file for \(String(describing: Self.self))") }
+    static func initFromNib() -> Self {
+        guard let view = nib.instantiate(withOwner: nil, options: nil).first as? Self
+            else { fatalError("Couldn't find nib file for \(self)") }
         return view
     }
-    
-}
-
-extension NibIdentifiable where Self: UIViewController {
-    
-    static func instantiateFromNib() -> Self {
-        return Self(nibName: nibIdentifier, bundle: nil)
-    }
-    
 }
 
 extension NibIdentifiable where Self: UITableView {
-    
-    static func instantiateFromNib() -> Self {
-        guard let tableView = UINib(nibName: nibIdentifier, bundle: nil)
-            .instantiate(withOwner: nil, options: nil).first as? Self 
-            else { fatalError("Couldn't find nib file for \(String(describing: Self.self))") }
+    static func initFromNib() -> Self {
+        guard let tableView = nib.instantiate(withOwner: nil, options: nil).first as? Self
+            else { fatalError("Couldn't find nib file for \(self)") }
         return tableView
     }
-    
 }
 
-extension NibIdentifiable where Self: UITableViewController {
-    
-    static func instantiateFromNib() -> Self {
-        return Self(nibName: nibIdentifier, bundle: nil)
+extension NibIdentifiable where Self: UICollectionView {
+    static func initFromNib() -> Self {
+        guard let collectionView = nib.instantiate(withOwner: nil, options: nil).first as? Self
+            else { fatalError("Couldn't find nib file for \(self)") }
+        return collectionView
     }
-    
+}
+
+extension NibIdentifiable where Self: UIViewController {
+    static func initFromNib() -> Self {
+       return Self(nibName: nibIdentifier, bundle: nil)
+    }
+}
+
+extension UIViewController: NibIdentifiable {
+    static var nibIdentifier: String {
+        return String(describing: self)
+    }
 }
 
 extension UITableView {
-    
-    func registerCell<T: UITableViewCell>(type: T.Type) {
-        register(T.nib, forCellReuseIdentifier: String(describing: T.self))
+
+    func register<T: UITableViewCell>(cellType: T.Type) where T: ClassIdentifiable {
+        register(cellType.self, forCellReuseIdentifier: cellType.reuseId)
     }
-    
-    func registerHeaderFooterView<T: UITableViewHeaderFooterView>(type: T.Type) {
-        register(type.nib, forHeaderFooterViewReuseIdentifier: String(describing: T.self))
+
+    func register<T: UITableViewCell>(cellType: T.Type) where T: NibIdentifiable & ClassIdentifiable {
+        register(cellType.nib, forCellReuseIdentifier: cellType.reuseId)
     }
-    
-    func dequeueReusableCell<T: UITableViewCell>(type: T.Type) -> T {
-        guard let cell = self.dequeueReusableCell(withIdentifier: String(describing: T.self)) as? T 
-            else { fatalError("Couldn't find nib file for \(String(describing: T.self))") } 
+
+    func registerHeaderFooter<T: UITableViewHeaderFooterView>(viewType: T.Type) where T: ClassIdentifiable {
+        register(viewType.self, forHeaderFooterViewReuseIdentifier: viewType.reuseId)
+    }
+
+    func registerHeaderFooter<T: UITableViewHeaderFooterView>(viewType: T.Type) where T: NibIdentifiable & ClassIdentifiable {
+        register(viewType.nib, forHeaderFooterViewReuseIdentifier: viewType.reuseId)
+    }
+
+    func dequeueReusableCell<T: UITableViewCell>(withCellType type: T.Type = T.self) -> T where T: ClassIdentifiable {
+        guard let cell = dequeueReusableCell(withIdentifier: type.reuseId) as? T
+            else { fatalError("Couldn't dequeue a UITableViewCell with identifier: \(type.reuseId)") }
         return cell
     }
-    
-    func dequeueResuableCell<T: UITableViewCell>(type: T.Type, forIndexPath indexPath: IndexPath) -> T {
-        guard let cell = self.dequeueReusableCell(withIdentifier: String(describing: T.self), for: indexPath) as? T
-            else { fatalError("Couldn't find nib file for \(String(describing: T.self))") }
+
+    func dequeueResuableCell<T: UITableViewCell>(withCellType type: T.Type = T.self, forIndexPath indexPath: IndexPath) -> T where T: ClassIdentifiable {
+        guard let cell = dequeueReusableCell(withIdentifier: type.reuseId, for: indexPath) as? T
+            else { fatalError("Couldn't dequeue a UITableViewCell with identifier: \(type.reuseId)") }
         return cell
     }
-    
-    func dequeueResuableHeaderFooterView<T: UITableViewHeaderFooterView>(type: T.Type) -> T {
-        guard let headerFooterView = self.dequeueReusableHeaderFooterView(withIdentifier: String(describing: T.self)) as? T 
-            else { fatalError("Couldn't find nib file for \(String(describing: T.self))") }
+
+    func dequeueResuableHeaderFooterView<T: UITableViewHeaderFooterView>(withViewType type: T.Type) -> T where T: ClassIdentifiable {
+        guard let headerFooterView = self.dequeueReusableHeaderFooterView(withIdentifier: type.reuseId) as? T
+            else { fatalError("Couldn't dequeue a UITableViewHeaderFooterView with identifier: \(type.reuseId)") }
         return headerFooterView
     }
-    
+
 }
 
 extension UICollectionView {
-    
-    func registerCell<T: UICollectionViewCell>(type: T.Type) {
-        register(type.nib, forCellWithReuseIdentifier: String(describing: T.self))
+
+    func register<C: UICollectionViewCell>(cellType: C.Type) where C: ClassIdentifiable {
+        register(cellType.self, forCellWithReuseIdentifier: cellType.reuseId)
     }
-    
-    func dequeueReusableCell<T: UICollectionViewCell>(type: T.Type, forIndexPath indexPath: IndexPath) -> T {
-        guard let cell = self.dequeueReusableCell(withReuseIdentifier: String(describing: T.self), for: indexPath) as? T else {
-            fatalError("Couldn't find nib file for \(String(describing: T.self))")
-        }
+
+    func register<C: UICollectionViewCell>(cellType: C.Type) where C: NibIdentifiable & ClassIdentifiable {
+        register(cellType.nib, forCellWithReuseIdentifier: cellType.reuseId)
+    }
+
+    func dequeueReusableCell<C: UICollectionViewCell>(withCellType type: C.Type = C.self, forIndexPath indexPath: IndexPath) -> C where C: ClassIdentifiable {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: type.reuseId, for: indexPath) as? C
+            else { fatalError("Couldn't dequeue a UICollectionViewCell with identifier: \(type.reuseId)") }
         return cell
     }
     

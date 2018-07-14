@@ -75,7 +75,7 @@ class SearchViewController: UIViewController, BindableType {
     private func configureTableView() {
         tableView.tableFooterView = UIView()
         tableView.rowHeight = 56
-        tableView.registerCell(type: SearchResultCell.self)
+        tableView.register(cellType: SearchResultCell.self)
         dataSource = RxTableViewSectionedReloadDataSource<SearchSectionModel>(
             configureCell:  tableViewDataSource
         )
@@ -83,9 +83,7 @@ class SearchViewController: UIViewController, BindableType {
 
     private var tableViewDataSource: RxTableViewSectionedReloadDataSource<SearchSectionModel>.ConfigureCell {
         return { _, tableView, indexPath, cellModel in
-            var cell = tableView.dequeueResuableCell(
-                type: SearchResultCell.self,
-                forIndexPath: indexPath)
+            var cell = tableView.dequeueResuableCell(withCellType: SearchResultCell.self, forIndexPath: indexPath)
             cell.bind(to: cellModel)
 
             return cell

@@ -115,7 +115,7 @@ class HomeViewController: UIViewController, BindableType {
     }
 
     private func configureTableView() {
-        tableView.registerCell(type: HomeViewCell.self)
+        tableView.register(cellType: HomeViewCell.self)
         tableView.estimatedRowHeight = 400
 
         dataSource = RxTableViewSectionedReloadDataSource<HomeSectionModel>(
@@ -135,9 +135,7 @@ class HomeViewController: UIViewController, BindableType {
 
     private var tableViewDataSource: TableViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
         return { _, tableView, indexPath, cellModel in
-            var cell = tableView.dequeueResuableCell(
-                type: HomeViewCell.self,
-                forIndexPath: indexPath)
+            var cell = tableView.dequeueResuableCell(withCellType: HomeViewCell.self, forIndexPath: indexPath)
             cell.bind(to: cellModel)
 
             return cell

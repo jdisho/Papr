@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import Nuke
 
-class UserCell: UITableViewCell, BindableType {
+class UserCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdentifiable {
 
     // MARK: ViewModel
     var viewModel: UserCellModelType!

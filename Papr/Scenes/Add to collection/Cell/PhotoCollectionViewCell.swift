@@ -11,7 +11,7 @@ import RxSwift
 import Action
 import Nuke
 
-class PhotoCollectionViewCell: UICollectionViewCell, BindableType {
+class PhotoCollectionViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassIdentifiable {
 
     // MARK: ViewModel
     var viewModel: PhotoCollectionCellModelType!

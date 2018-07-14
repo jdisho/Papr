@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class SearchResultCell: UITableViewCell, BindableType {
+class SearchResultCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdentifiable {
 
     // MARK: ViewModel
     var viewModel: SearchResultCellModelType!

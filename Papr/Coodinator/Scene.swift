@@ -35,15 +35,15 @@ extension Scene: TargetScene {
     var transition: SceneTransitionType {
         switch self {
         case .papr:
-            let paprTabBarController = PaprTabBarController.instantiateFromNib()
+            let paprTabBarController = PaprTabBarController()
 
             // MARK: HomeViewController
-            var homeVC = HomeViewController.instantiateFromNib()
+            var homeVC = HomeViewController.initFromNib()
             let rootHomeVC = UINavigationController(rootViewController: homeVC)
             homeVC.bind(to: HomeViewModel())
 
             // MARK: SearchViewController
-            var searchVC = SearchViewController.instantiateFromNib()
+            var searchVC = SearchViewController.initFromNib()
             let rootSearchVC = UINavigationController(rootViewController: searchVC)
             searchVC.bind(to: SearchViewModel())
 
@@ -56,7 +56,7 @@ extension Scene: TargetScene {
             ]
             return .tabBar(paprTabBarController)
         case let .login(viewModel):
-            var vc = LoginViewController.instantiateFromNib()
+            var vc = LoginViewController.initFromNib()
             vc.bind(to: viewModel)
             return .present(vc)
         case let .alert(viewModel):
@@ -67,29 +67,29 @@ extension Scene: TargetScene {
             let vc = UIActivityViewController(activityItems: items, applicationActivities: nil)
             return .alert(vc)
         case let .photoDetails(viewModel):
-            var vc = PhotoDetailsViewController.instantiateFromNib()
+            var vc = PhotoDetailsViewController.initFromNib()
             vc.bind(to: viewModel)
             return .present(vc)
         case let .addToCollection(viewModel):
-            var vc = AddToCollectionViewController.instantiateFromNib()
+            var vc = AddToCollectionViewController.initFromNib()
             let rootViewController = UINavigationController(rootViewController: vc)
             vc.bind(to: viewModel)
             return .present(rootViewController)
         case let .createCollection(viewModel):
-            var vc = CreateCollectionViewController.instantiateFromNib()
+            var vc = CreateCollectionViewController.initFromNib()
             let rootViewController = UINavigationController(rootViewController: vc)
             vc.bind(to: viewModel)
             return .present(rootViewController)
         case let .searchPhotos(viewModel):
-            var vc = SearchPhotosViewController.instantiateFromNib()
+            var vc = SearchPhotosViewController.initFromNib()
             vc.bind(to: viewModel)
             return .push(vc)
         case let .searchCollections(viewModel):
-            var vc = SearchCollectionsViewController.instantiateFromNib()
+            var vc = SearchCollectionsViewController.initFromNib()
             vc.bind(to: viewModel)
             return .push(vc)
         case let .searchUsers(viewModel):
-            var vc = SearchUsersViewController.instantiateFromNib()
+            var vc = SearchUsersViewController.initFromNib()
             vc.bind(to: viewModel)
             return .push(vc)
         }

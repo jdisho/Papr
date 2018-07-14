@@ -914,6 +914,7 @@
 				DCBB1B1B1FA7B1BD004E95F0 /* Frameworks */,
 				DCBB1B1C1FA7B1BD004E95F0 /* Resources */,
 				0BD9448C5FCB6EFEF7E2B09F /* [CP] Embed Pods Frameworks */,
+				6C6E99FB0E9702D0F8316CAD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -932,6 +933,8 @@
 				DCBB1B2E1FA7B1BD004E95F0 /* Sources */,
 				DCBB1B2F1FA7B1BD004E95F0 /* Frameworks */,
 				DCBB1B301FA7B1BD004E95F0 /* Resources */,
+				46176A17FD26987213623896 /* [CP] Embed Pods Frameworks */,
+				2AC0392D31F8ED950A856610 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -951,6 +954,8 @@
 				DCBB1B391FA7B1BD004E95F0 /* Sources */,
 				DCBB1B3A1FA7B1BD004E95F0 /* Frameworks */,
 				DCBB1B3B1FA7B1BD004E95F0 /* Resources */,
+				5DCDBFC578775AE9B42083A4 /* [CP] Embed Pods Frameworks */,
+				DF64FBD4DE272CDD0BCE1450 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1134,6 +1139,66 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Papr/Pods-Papr-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		2AC0392D31F8ED950A856610 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PaprTests/Pods-PaprTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		46176A17FD26987213623896 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PaprTests/Pods-PaprTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5DCDBFC578775AE9B42083A4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PaprUITests/Pods-PaprUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6C6E99FB0E9702D0F8316CAD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Papr/Pods-Papr-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		ACB1B207744BA4C855B53D15 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1150,6 +1215,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF64FBD4DE272CDD0BCE1450 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PaprUITests/Pods-PaprUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F798D865D49CA26F4996D71B /* [CP] Check Pods Manifest.lock */ = {

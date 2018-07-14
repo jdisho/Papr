@@ -12,7 +12,7 @@ import Nuke
 import Photos
 import Hero
 
-class HomeViewCell: UITableViewCell, BindableType {
+class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdentifiable {
 
     // MARK: ViewModel
     var viewModel: HomeViewCellModelType!
