@@ -28,6 +28,7 @@
 		DC487F432104F0970042DBBC /* ClassIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F422104F0970042DBBC /* ClassIdentifiable.swift */; };
 		DC487F452104F0D80042DBBC /* UITableView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F442104F0D80042DBBC /* UITableView+Identifiable.swift */; };
 		DC487F472104F0FF0042DBBC /* UICollectionView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F462104F0FF0042DBBC /* UICollectionView+Identifiable.swift */; };
+		DC487F4A2104FCB00042DBBC /* BouncyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F482104FCB00042DBBC /* BouncyView.swift */; };
 		DC5AF7271FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
 		DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
 		DC5AF7291FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
@@ -335,6 +336,7 @@
 		DC487F422104F0970042DBBC /* ClassIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassIdentifiable.swift; sourceTree = "<group>"; };
 		DC487F442104F0D80042DBBC /* UITableView+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Identifiable.swift"; sourceTree = "<group>"; };
 		DC487F462104F0FF0042DBBC /* UICollectionView+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Identifiable.swift"; sourceTree = "<group>"; };
+		DC487F482104FCB00042DBBC /* BouncyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyView.swift; sourceTree = "<group>"; };
 		DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashSettings.swift; sourceTree = "<group>"; };
 		DC5AF72A1FACCBF300ADA2BB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
@@ -676,6 +678,7 @@
 			children = (
 				DCB915AE20B9A8DE003D1069 /* PinterestLayout.swift */,
 				DC3918CE21046AE8003DA2CA /* UserProfileButtonManager.swift */,
+				DC487F482104FCB00042DBBC /* BouncyView.swift */,
 			);
 			path = "Custom UI";
 			sourceTree = "<group>";
@@ -1320,6 +1323,7 @@
 				DC3918CF21046AE8003DA2CA /* UserProfileButtonManager.swift in Sources */,
 				DCCD04182059C25900670B70 /* UserService.swift in Sources */,
 				DC73733520A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */,
+				DC487F4A2104FCB00042DBBC /* BouncyView.swift in Sources */,
 				DCCCFCC1203A4A530024D417 /* Category.swift in Sources */,
 				DCBB1B551FA8B814004E95F0 /* Scene.swift in Sources */,
 				DC99FB922003A7DB001195FD /* PhotoService.swift in Sources */,

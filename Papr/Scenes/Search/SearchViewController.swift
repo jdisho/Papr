@@ -20,6 +20,7 @@ class SearchViewController: UIViewController, BindableType {
 
     // MARK: IBOutlets
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var noResultView: UIView!
 
     // MARK: Private
     private var searchBar: UISearchBar!
@@ -33,7 +34,9 @@ class SearchViewController: UIViewController, BindableType {
 
         configureSearchBar()
         configureTableView()
+        configureBouncyView()
     }
+
     // MARK: BindableType
 
     func bindViewModel() {
@@ -49,6 +52,12 @@ class SearchViewController: UIViewController, BindableType {
             .unwrap()
             .map { $0.count == 0 }
             .bind(to: tableView.rx.isHidden)
+            .disposed(by: disposeBag)
+
+        searchBar.rx.text
+            .unwrap()
+            .map { $0.count > 0 }
+            .bind(to: noResultView.rx.isHidden)
             .disposed(by: disposeBag)
 
         outputs.searchResultCellModel
@@ -69,7 +78,6 @@ class SearchViewController: UIViewController, BindableType {
         searchBar.searchBarStyle = .minimal
         searchBar.placeholder = "Search Unsplash"
         navigationItem.titleView = searchBar
-
     }
 
     private func configureTableView() {
@@ -79,6 +87,21 @@ class SearchViewController: UIViewController, BindableType {
         dataSource = RxTableViewSectionedReloadDataSource<SearchSectionModel>(
             configureCell:  tableViewDataSource
         )
+    }
+
+    private func configureBouncyView() {
+        let bouncyView = BouncyView(frame: noResultView.frame)
+        bouncyView.configure(emoji: "🏞", message: "Search Unsplash")
+        bouncyView.translatesAutoresizingMaskIntoConstraints = false
+        bouncyView.clipsToBounds = true
+        noResultView.addSubview(bouncyView)
+
+        NSLayoutConstraint.activate([
+            bouncyView.leadingAnchor.constraint(equalTo: noResultView.leadingAnchor),
+            bouncyView.trailingAnchor.constraint(equalTo: noResultView.trailingAnchor),
+            bouncyView.topAnchor.constraint(equalTo: noResultView.topAnchor),
+            bouncyView.bottomAnchor.constraint(equalTo: noResultView.bottomAnchor)
+        ])
     }
 
     private var tableViewDataSource: RxTableViewSectionedReloadDataSource<SearchSectionModel>.ConfigureCell {
