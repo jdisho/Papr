@@ -44,6 +44,6 @@ extension Date {
             dateformatter.dateFormat = "dd/MM/yy"
             return dateformatter.string(from: self)
         }
-        return "\(Int(roundedDate))min"
+        return "\(Int(roundedDate)) min"
     }
 }

@@ -26,6 +26,8 @@
 		DC3917AC2096684800492F62 /* CreateCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3917AB2096684800492F62 /* CreateCollectionViewModel.swift */; };
 		DC3917AD2096684800492F62 /* CreateCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3917AB2096684800492F62 /* CreateCollectionViewModel.swift */; };
 		DC3917AE2096684800492F62 /* CreateCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3917AB2096684800492F62 /* CreateCollectionViewModel.swift */; };
+		DC3918CF21046AE8003DA2CA /* UserProfileButtonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3918CE21046AE8003DA2CA /* UserProfileButtonManager.swift */; };
+		DC487F402104E99F0042DBBC /* UIScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F3F2104E99F0042DBBC /* UIScrollView+Rx.swift */; };
 		DC5AF7271FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
 		DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
 		DC5AF7291FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
@@ -329,6 +331,8 @@
 		DC3917A32096683600492F62 /* CreateCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollectionViewController.swift; sourceTree = "<group>"; };
 		DC3917A42096683600492F62 /* CreateCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateCollectionViewController.xib; sourceTree = "<group>"; };
 		DC3917AB2096684800492F62 /* CreateCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollectionViewModel.swift; sourceTree = "<group>"; };
+		DC3918CE21046AE8003DA2CA /* UserProfileButtonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileButtonManager.swift; sourceTree = "<group>"; };
+		DC487F3F2104E99F0042DBBC /* UIScrollView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Rx.swift"; sourceTree = "<group>"; };
 		DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashSettings.swift; sourceTree = "<group>"; };
 		DC5AF72A1FACCBF300ADA2BB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
@@ -658,6 +662,7 @@
 			isa = PBXGroup;
 			children = (
 				DCB915AE20B9A8DE003D1069 /* PinterestLayout.swift */,
+				DC3918CE21046AE8003DA2CA /* UserProfileButtonManager.swift */,
 			);
 			path = "Custom UI";
 			sourceTree = "<group>";
@@ -885,6 +890,7 @@
 				DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */,
 				DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */,
 				DC922308203F95C300C9D14F /* UIBarButtonItem+Rx.swift */,
+				DC487F3F2104E99F0042DBBC /* UIScrollView+Rx.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -1298,6 +1304,7 @@
 				DCB433C8204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */,
 				DC7F20931FADD3400017C14A /* SearchResults.swift in Sources */,
 				DCCCFCBD203A45DE0024D417 /* Links.swift in Sources */,
+				DC3918CF21046AE8003DA2CA /* UserProfileButtonManager.swift in Sources */,
 				DCCD04182059C25900670B70 /* UserService.swift in Sources */,
 				DC73733520A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */,
 				DCCCFCC1203A4A530024D417 /* Category.swift in Sources */,
@@ -1305,6 +1312,7 @@
 				DC99FB922003A7DB001195FD /* PhotoService.swift in Sources */,
 				DC658D92208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */,
 				DC66E67720A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */,
+				DC487F402104E99F0042DBBC /* UIScrollView+Rx.swift in Sources */,
 				DC5AF7271FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DCBB1B6C1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */,
@@ -1659,7 +1667,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W44QDC3NZM;
+				DEVELOPMENT_TEAM = V52NKR4UCE;
 				INFOPLIST_FILE = Papr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1676,7 +1684,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = W44QDC3NZM;
+				DEVELOPMENT_TEAM = V52NKR4UCE;
 				INFOPLIST_FILE = Papr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

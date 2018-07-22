@@ -48,10 +48,7 @@ class SearchUsersViewController: UIViewController, BindableType {
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
-        tableView.rx.contentOffset
-            .map { [unowned self] _ in
-                return self.tableView.isNearTheBottomEdge()
-            }
+        tableView.rx.reachedBottom
             .distinctUntilChanged()
             .bind(to: inputs.loadMore)
             .disposed(by: disposeBag)

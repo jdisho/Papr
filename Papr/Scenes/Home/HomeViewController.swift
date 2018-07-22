@@ -90,12 +90,8 @@ class HomeViewController: UIViewController, BindableType {
             .map { [HomeSectionModel(model: "", items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-        
-        tableView.rx
-            .contentOffset
-            .flatMap { [unowned self] _ in 
-                return Observable.just(self.tableView.isNearTheBottomEdge())
-            }
+
+        tableView.rx.reachedBottom
             .distinctUntilChanged()
             .skipUntil(outputs.isRefreshing)
             .bind(to: inputs.loadMore)
