@@ -12,15 +12,15 @@ import RxSwift
 
 struct UserService: UserServiceType {
 
-    private var unsplash: MoyaProvider<Unsplash>
+    private var unsplash: MoyaProvider<MultiTarget>
 
-    init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>()) {
+    init(unsplash: MoyaProvider<MultiTarget> = MoyaProvider<MultiTarget>()) {
         self.unsplash = unsplash
     }
 
     func getMe() -> Observable<Result<User, NonPublicScopeError>> {
         return unsplash.rx
-            .request(.getMe)
+            .request(MultiTarget(Unsplash.getMe))
             .map(User.self)
             .map(Result.success)
             .catchError { error in

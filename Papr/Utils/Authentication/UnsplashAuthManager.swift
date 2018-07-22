@@ -83,7 +83,7 @@ class UnsplashAuthManager {
     private let clientSecret: String
     private let redirectURL: URL
     private let scopes: [String]
-    private let unplash: MoyaProvider<UnsplashAuthorization>
+    private let unplash: MoyaProvider<MultiTarget>
 
     // MARK: Init
     init(clientID: String, clientSecret: String, scopes: [String] = [Scope.pub.string]) {
@@ -92,7 +92,7 @@ class UnsplashAuthManager {
         self.redirectURL = URL(string: UnsplashSettings.redirectURL.string)!
         self.scopes = scopes
 
-        unplash = MoyaProvider<UnsplashAuthorization>()
+        unplash = MoyaProvider<MultiTarget>()
     }
 
     // MARK: Public
@@ -103,7 +103,7 @@ class UnsplashAuthManager {
     }
     
     public func accessToken(with code: String, completion: @escaping (String?, Error?) -> Void) {
-        unplash.request(.accessToken(withCode: code)) { response in
+        unplash.request(MultiTarget(UnsplashAuthorization.accessToken(withCode: code))) { response in
             DispatchQueue.main.async { [unowned self] in
                 switch response {
                 case let .success(result):
