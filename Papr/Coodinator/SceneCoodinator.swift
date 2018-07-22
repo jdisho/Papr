@@ -21,10 +21,8 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
     fileprivate var window: UIWindow
     fileprivate var currentViewController: UIViewController {
         didSet {
-            currentViewController.navigationController?.rx.delegate
-                .setForwardToDelegate(self, retainDelegate: false)
-            currentViewController.tabBarController?.rx.delegate
-                .setForwardToDelegate(self, retainDelegate: false)
+            currentViewController.navigationController?.delegate = self
+            currentViewController.tabBarController?.delegate = self
         }
     }
     
@@ -66,7 +64,6 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
                 .bind(to: subject)
 
             navigationController.pushViewController(SceneCoordinator.actualViewController(for: viewController), animated: true)
-            currentViewController = SceneCoordinator.actualViewController(for: viewController)
         case let .present(viewController):
             currentViewController.present(viewController, animated: true) {
                 subject.onCompleted()

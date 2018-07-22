@@ -37,12 +37,12 @@ extension Scene: TargetScene {
         case .papr:
             let paprTabBarController = PaprTabBarController()
 
-            // MARK: HomeViewController
+            //HomeViewController
             var homeVC = HomeViewController.initFromNib()
             let rootHomeVC = UINavigationController(rootViewController: homeVC)
             homeVC.bind(to: HomeViewModel())
 
-            // MARK: SearchViewController
+            //SearchViewController
             var searchVC = SearchViewController.initFromNib()
             let rootSearchVC = UINavigationController(rootViewController: searchVC)
             searchVC.bind(to: SearchViewModel())
