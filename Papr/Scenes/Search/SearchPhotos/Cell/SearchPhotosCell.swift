@@ -17,7 +17,8 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
 
     // MARK: IBOutlets
     @IBOutlet var photoImageView: UIImageView!
-
+    @IBOutlet weak var photoButton: UIButton!
+    
     // MARK: Privates
     private static let imagePipeline = Nuke.ImagePipeline.shared
     private var disposeBag = DisposeBag()
@@ -30,6 +31,7 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
     }
 
     func bindViewModel() {
+        let inputs = viewModel.inputs
         let outputs = viewModel.outputs
         let this = SearchPhotosCell.self
 
@@ -38,6 +40,14 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
             .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
             .map { $0.image }
             .bind(to: photoImageView.rx.image)
+            .disposed(by: disposeBag)
+        
+        outputs.photoStream
+            .subscribe { [unowned self] photo in
+                guard let photo = photo.element else { return }
+                self.photoButton.rx
+                    .bind(to: inputs.photoDetailsAction, input: photo)
+            }
             .disposed(by: disposeBag)
     }
 

@@ -23,11 +23,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IER-k4-dw9">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                    </button>
                 </subviews>
             </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="IER-k4-dw9" secondAttribute="trailing" id="5is-Gb-vLz"/>
+                <constraint firstItem="IER-k4-dw9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="67o-wc-Sw7"/>
+                <constraint firstItem="IER-k4-dw9" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Aa3-gV-qIB"/>
+                <constraint firstAttribute="bottom" secondItem="IER-k4-dw9" secondAttribute="bottom" id="d2j-Ab-l2c"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="206" height="144"/>
             <connections>
+                <outlet property="photoButton" destination="IER-k4-dw9" id="XkM-9v-Gdg"/>
                 <outlet property="photoImageView" destination="H71-m3-wR0" id="heo-z4-PSZ"/>
             </connections>
             <point key="canvasLocation" x="-353" y="-221"/>
