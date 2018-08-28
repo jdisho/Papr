@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 extension Reactive where Base: UIScrollView {
-    var reachedBottom: ControlEvent<Bool> {
+    func reachedBottom(_ offset: CGFloat = 0.0) -> ControlEvent<Bool> {
         let observable = contentOffset
             .flatMap { [weak base] contentOffset -> Observable<Bool> in
                 guard let scrollView = base else { return .empty() }
@@ -19,7 +19,7 @@ extension Reactive where Base: UIScrollView {
                     - scrollView.contentInset.top
                     - scrollView.contentInset.bottom
                 let y = contentOffset.y + scrollView.contentInset.top
-                let threshold = max(0.0, scrollView.contentSize.height - visibleHeight)
+                let threshold = max(offset, scrollView.contentSize.height - visibleHeight)
 
                 return .just(y > threshold)
         }
