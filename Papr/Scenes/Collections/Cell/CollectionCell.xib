@@ -12,18 +12,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="500" id="KGk-i7-Jjw" customClass="CollectionCell" customModule="Papr" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="345" height="500"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="351" id="KGk-i7-Jjw" customClass="CollectionCell" customModule="Papr" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="345" height="351"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="345" height="499.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="345" height="350.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nh5-BM-hiF">
-                        <rect key="frame" x="32" y="32" width="281" height="435.5"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nh5-BM-hiF">
+                        <rect key="frame" x="24" y="24" width="297" height="302.5"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ep4-mf-nA6">
-                        <rect key="frame" x="32" y="397.5" width="281" height="70"/>
+                        <rect key="frame" x="24" y="256.5" width="297" height="70"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oa4-1a-CIN">
                                 <rect key="frame" x="16" y="10" width="50" height="50"/>
@@ -33,13 +33,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udH-l8-xfz">
-                                <rect key="frame" x="74" y="44" width="191" height="18"/>
+                                <rect key="frame" x="74" y="44" width="207" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yF-bE-eyo">
-                                <rect key="frame" x="74" y="8" width="191" height="20.5"/>
+                                <rect key="frame" x="74" y="8" width="207" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -60,13 +60,13 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Nh5-BM-hiF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="EF7-eD-7EJ"/>
-                    <constraint firstAttribute="bottom" secondItem="Nh5-BM-hiF" secondAttribute="bottom" constant="32" id="IvA-oY-Lwg"/>
-                    <constraint firstAttribute="trailing" secondItem="Nh5-BM-hiF" secondAttribute="trailing" constant="32" id="OH0-C8-BDQ"/>
-                    <constraint firstAttribute="bottom" secondItem="ep4-mf-nA6" secondAttribute="bottom" constant="32" id="iy6-Nh-dKA"/>
-                    <constraint firstAttribute="trailing" secondItem="ep4-mf-nA6" secondAttribute="trailing" constant="32" id="lgM-ls-Zrm"/>
-                    <constraint firstItem="ep4-mf-nA6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="32" id="uBb-Pg-GVE"/>
-                    <constraint firstItem="Nh5-BM-hiF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="32" id="wZJ-na-0oa"/>
+                    <constraint firstItem="Nh5-BM-hiF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="EF7-eD-7EJ"/>
+                    <constraint firstAttribute="bottom" secondItem="Nh5-BM-hiF" secondAttribute="bottom" constant="24" id="IvA-oY-Lwg"/>
+                    <constraint firstAttribute="trailing" secondItem="Nh5-BM-hiF" secondAttribute="trailing" constant="24" id="OH0-C8-BDQ"/>
+                    <constraint firstAttribute="bottom" secondItem="ep4-mf-nA6" secondAttribute="bottom" constant="24" id="iy6-Nh-dKA"/>
+                    <constraint firstAttribute="trailing" secondItem="ep4-mf-nA6" secondAttribute="trailing" constant="24" id="lgM-ls-Zrm"/>
+                    <constraint firstItem="ep4-mf-nA6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="uBb-Pg-GVE"/>
+                    <constraint firstItem="Nh5-BM-hiF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="wZJ-na-0oa"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -77,7 +77,7 @@
                 <outlet property="photoCollectionTitleLabel" destination="1yF-bE-eyo" id="ecR-Eg-FwV"/>
                 <outlet property="userProfilePic" destination="Oa4-1a-CIN" id="0Jc-La-S3g"/>
             </connections>
-            <point key="canvasLocation" x="-458.39999999999998" y="143.92803598200899"/>
+            <point key="canvasLocation" x="-458.39999999999998" y="210.04497751124438"/>
         </tableViewCell>
     </objects>
 </document>

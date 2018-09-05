@@ -129,7 +129,6 @@ class HomeViewModel: HomeViewModelType,
         }
     }()
 
-
     // MARK: Output
     var photos: Observable<[Photo]>!
     var isRefreshing: Observable<Bool>!

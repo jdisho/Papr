@@ -11,7 +11,7 @@ import RxSwift
 
 protocol CollectionsViewModelInput {}
 protocol CollectionsViewModelOutput {
-
+    var collectionCellsModelType: Observable<[CollectionCellViewModelType]> { get }
 }
 protocol CollectionsViewModelType {
     var input: CollectionsViewModelInput { get }
@@ -28,10 +28,14 @@ class CollectionsViewModel: CollectionsViewModelType,
     // MARK: Inputs
 
     // MARK: Outputs
+    lazy var collectionCellsModelType: Observable<[CollectionCellViewModelType]> = {
+        return photoCollections.mapMany { CollectionCellViewModel(photoCollection: $0) }
+    }()
 
     // MARK: Private
     private let service: CollectionServiceType
     private let sceneCoordinator: SceneCoordinatorType
+    private let photoCollections: Observable<[PhotoCollection]>
 
     // MARK: Init
     init(service: CollectionServiceType = CollectionService(),
@@ -39,5 +43,16 @@ class CollectionsViewModel: CollectionsViewModelType,
 
         self.service = service
         self.sceneCoordinator = sceneCoordinator
+
+        photoCollections = service
+            .collections(byPageNumber: 1, curated: false)
+            .flatMap { result -> Observable<[PhotoCollection]> in
+                switch result {
+                case let .success(photoCollections):
+                    return Observable.just(photoCollections)
+                case .error(_):
+                    return Observable.empty()
+                }
+            }
     }
 }

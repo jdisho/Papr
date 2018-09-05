@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import Nuke
 
-class CollectionCell: UITableViewCell, BindableType {
+class CollectionCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdentifiable {
 
     // MARK: ViewModel
     var viewModel: CollectionCellViewModelType!
@@ -32,7 +32,7 @@ class CollectionCell: UITableViewCell, BindableType {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        photoCollectionImagePreview.cornerRadius = 5.0
+        photoCollectionImagePreview.cornerRadius = 10.0
         userProfilePic.cornerRadius = Double(userProfilePic.frame.height / 2)
     }
 
@@ -65,7 +65,7 @@ class CollectionCell: UITableViewCell, BindableType {
             .disposed(by: disposeBag)
 
         output.photoCollection
-            .map { $0.description }
+            .map { $0.title }
             .unwrap()
             .bind(to: photoCollectionTitleLabel.rx.text)
             .disposed(by: disposeBag)
