@@ -29,7 +29,28 @@ struct CollectionService: CollectionServiceType {
                 .request(.userCollections(username: username, page: 1, perPage: 20))
                 .map([PhotoCollection].self)
                 .asObservable()
+    }
+
+    func collections(byPageNumber page: Int, curated: Bool) -> Observable<Result<[PhotoCollection], String>> {
+
+        var request: PrimitiveSequence<SingleTrait, Response>
+
+        if curated {
+           request = unsplash.rx
+                .request(.curatedCollections(page: page, perPage: 10))
+        } else {
+            request = unsplash.rx
+                .request(.featuredCollections(page: page, perPage: 10))
         }
+
+        return request
+            .map([PhotoCollection].self)
+            .asObservable()
+            .map(Result.success)
+            .catchError { error in
+                return .just(.error(error.localizedDescription))
+            }
+    }
 
     func photos(fromCollectionId id: Int) -> Observable<[Photo]> {
         return unsplash.rx.request(.collectionPhotos(id: id, page: 1, perPage: 10))

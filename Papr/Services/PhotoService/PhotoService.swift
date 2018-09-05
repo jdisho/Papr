@@ -62,7 +62,7 @@ struct PhotoService: PhotoServiceType {
     
     func photos(
         byPageNumber pageNumber: Int = 1,
-        orderBy: OrderBy = OrderBy.latest,
+        orderBy: OrderBy = .latest,
         curated: Bool = false
         ) -> Observable<Result<[Photo], String>> {
 

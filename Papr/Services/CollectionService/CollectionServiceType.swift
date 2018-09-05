@@ -19,6 +19,8 @@ protocol CollectionServiceType {
     
     func collections(withUsername username: String) -> Observable<[PhotoCollection]>
 
+    func collections(byPageNumber page: Int, curated: Bool) -> Observable<Result<[PhotoCollection], String>>
+
     func photos(fromCollectionId id: Int) -> Observable<[Photo]>
     
     func addPhotoToCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, String>>
