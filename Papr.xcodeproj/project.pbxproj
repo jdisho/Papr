@@ -11,6 +11,8 @@
 		63CC2B27C8EE9499B1D6C702 /* Pods_PaprTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3D8A956FB1C8A8D3B456A7 /* Pods_PaprTests.framework */; };
 		C0CD2444213EB2BD0053A802 /* CollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD2443213EB2BD0053A802 /* CollectionsViewController.swift */; };
 		C0CD2446213EB2E40053A802 /* CollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD2445213EB2E40053A802 /* CollectionsViewModel.swift */; };
+		C0CD2449213FC22C0053A802 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD2448213FC22C0053A802 /* CollectionCell.swift */; };
+		C0CD244B213FC23B0053A802 /* CollectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD244A213FC23B0053A802 /* CollectionCellViewModel.swift */; };
 		CBEDD29778BCF9269C6CDB95 /* Pods_PaprUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D59E6B0C5E02E5657E3FA6EA /* Pods_PaprUITests.framework */; };
 		DC2576F52093D38B00369B7D /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2576F42093D38B00369B7D /* Result.swift */; };
 		DC2E76F8203B6DB90023A173 /* LikeUnlike.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */; };
@@ -327,6 +329,8 @@
 		7ADA4A068C8B3E3A9F491B6C /* Pods-PaprUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaprUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PaprUITests/Pods-PaprUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C0CD2443213EB2BD0053A802 /* CollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsViewController.swift; sourceTree = "<group>"; };
 		C0CD2445213EB2E40053A802 /* CollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsViewModel.swift; sourceTree = "<group>"; };
+		C0CD2448213FC22C0053A802 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
+		C0CD244A213FC23B0053A802 /* CollectionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellViewModel.swift; sourceTree = "<group>"; };
 		CB61BD2759AC178641433994 /* Pods-PaprTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaprTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PaprTests/Pods-PaprTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D59E6B0C5E02E5657E3FA6EA /* Pods_PaprUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaprUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D778F2E1EFA76CEB59A377CB /* Pods_Papr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Papr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -489,10 +493,20 @@
 		C0CD2442213EB2630053A802 /* Collections */ = {
 			isa = PBXGroup;
 			children = (
+				C0CD2447213FC1FC0053A802 /* Cell */,
 				C0CD2443213EB2BD0053A802 /* CollectionsViewController.swift */,
 				C0CD2445213EB2E40053A802 /* CollectionsViewModel.swift */,
 			);
 			path = Collections;
+			sourceTree = "<group>";
+		};
+		C0CD2447213FC1FC0053A802 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C0CD2448213FC22C0053A802 /* CollectionCell.swift */,
+				C0CD244A213FC23B0053A802 /* CollectionCellViewModel.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		DC0EDE95205B20B2004CD808 /* Commons */ = {
@@ -1229,6 +1243,7 @@
 				DCF3961220A8E3C400F3906D /* PaprTabBarController.swift in Sources */,
 				DCC8CA1E2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DC66E65620A4CB4C005E5E31 /* SearchViewController.swift in Sources */,
+				C0CD2449213FC22C0053A802 /* CollectionCell.swift in Sources */,
 				DC66E67020A4DA0F005E5E31 /* SearchResultCell.swift in Sources */,
 				DC6CC644204CBD5300050589 /* PhotoStatistics.swift in Sources */,
 				DCA09D002015F68200E6EBB7 /* Constants.swift in Sources */,
@@ -1275,6 +1290,7 @@
 				DC99FB8E2003A7CC001195FD /* PhotoServiceType.swift in Sources */,
 				DCC8CA132002CC2700F6C540 /* HomeViewCell.swift in Sources */,
 				C0CD2446213EB2E40053A802 /* CollectionsViewModel.swift in Sources */,
+				C0CD244B213FC23B0053A802 /* CollectionCellViewModel.swift in Sources */,
 				DC71C30F1FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
 				DC71C3DB1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
 				DC66E66120A4D003005E5E31 /* SearchServiceType.swift in Sources */,
