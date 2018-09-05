@@ -10,8 +10,14 @@ import UIKit
 
 class CollectionCell: UITableViewCell, BindableType {
 
-    // MARK: ViewModel
     var viewModel: CollectionCellViewModelType!
 
-    func bindViewModel() {}
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    func bindViewModel() {
+        let output = viewModel.output
+    }
 }
