@@ -47,11 +47,18 @@ extension Scene: TargetScene {
             let rootSearchVC = UINavigationController(rootViewController: searchVC)
             searchVC.bind(to: SearchViewModel())
 
-            rootHomeVC.tabBarItem = UITabBarItem(title: "Photos", image: #imageLiteral(resourceName: "photo-black"), selectedImage: #imageLiteral(resourceName: "photo-black"))
-            rootSearchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
+            //CollectionsViewController
+            var collectionsVC = CollectionsViewController()
+            let rootCollectionVC = UINavigationController(rootViewController: collectionsVC)
+            collectionsVC.bind(to: CollectionsViewModel())
+
+            rootHomeVC.tabBarItem = UITabBarItem(title: "Photos", image: #imageLiteral(resourceName: "photo-black"), tag: 0)
+            rootCollectionVC.tabBarItem = UITabBarItem(title: "Collections", image: #imageLiteral(resourceName: "collections-black"), tag: 1)
+            rootSearchVC.tabBarItem = UITabBarItem.init(title: "Search", image: #imageLiteral(resourceName: "search-black"), tag: 2)
 
             paprTabBarController.viewControllers = [
                 rootHomeVC,
+                rootCollectionVC,
                 rootSearchVC
             ]
             return .tabBar(paprTabBarController)

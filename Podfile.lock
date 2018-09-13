@@ -20,6 +20,7 @@ PODS:
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
   - RxSwift (4.2.0)
+  - VanillaConstraints (1.0.1)
 
 DEPENDENCIES:
   - Action
@@ -29,6 +30,7 @@ DEPENDENCIES:
   - RxCocoa
   - RxDataSources
   - RxSwift
+  - VanillaConstraints
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -42,6 +44,7 @@ SPEC REPOS:
     - RxCocoa
     - RxDataSources
     - RxSwift
+    - VanillaConstraints
 
 SPEC CHECKSUMS:
   Action: 3d9486d3da02b572b0a034b6c49ac4c3fbcc8b63
@@ -54,7 +57,8 @@ SPEC CHECKSUMS:
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
+  VanillaConstraints: 79afbbd46076f7db75156fe89d73529beae99a9f
 
-PODFILE CHECKSUM: 866ee364b56b584ce5ced0538a56d86b8fcebc4e
+PODFILE CHECKSUM: 612c2dc566dbb5eafad8c9af8510ad8651bddd91
 
 COCOAPODS: 1.5.3

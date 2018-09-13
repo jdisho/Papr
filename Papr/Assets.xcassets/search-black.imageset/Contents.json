@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "baseline_photo_black_36dp.png",
+      "filename" : "baseline_search_black_36dp.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "baseline_photo_black_36dp-1.png",
+      "filename" : "baseline_search_black_36dp-1.png",
       "scale" : "2x"
     },
     {
@@ -18,8 +18,5 @@
   "info" : {
     "version" : 1,
     "author" : "xcode"
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }
