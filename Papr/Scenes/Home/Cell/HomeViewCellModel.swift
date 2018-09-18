@@ -20,6 +20,7 @@ protocol HomeViewCellModelOutput: PhotoViewModelOutput {
     var fullname: Observable<String>! { get }
     var username: Observable<String>! { get }
     var smallPhoto: Observable<String>! { get }
+    var fullPhoto: Observable<String>! { get }
     var updated: Observable<String>! { get }
 }
 
@@ -75,6 +76,7 @@ class HomeViewCellModel: PhotoViewModel,
     var fullname: Observable<String>!
     var username: Observable<String>!
     var smallPhoto: Observable<String>!
+    var fullPhoto: Observable<String>!
     var updated: Observable<String>!
 
     // MARK: Private
@@ -104,6 +106,10 @@ class HomeViewCellModel: PhotoViewModel,
 
         smallPhoto = photoStream
             .map { $0.urls?.small }
+            .unwrap()
+
+        fullPhoto = photoStream
+            .map { $0.urls?.full }
             .unwrap()
 
         updated = photoStream

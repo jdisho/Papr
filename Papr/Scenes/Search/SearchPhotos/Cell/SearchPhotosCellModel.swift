@@ -31,8 +31,6 @@ class SearchPhotosCellModel: SearchPhotosCellModelType,
     // MARK: Outputs
     let smallPhotoURL: Observable<String>
     let regularPhotoURL: Observable<String>
-    let fullPhotoURL: Observable<String>
-    let rawPhotoURL: Observable<String>
 
     // MARK: Init
     init(photo: Photo) {
