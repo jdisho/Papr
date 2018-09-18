@@ -16,7 +16,6 @@ protocol SearchPhotosViewModelInput {
 
 protocol SearchPhotosViewModelOutput {
     var searchPhotosCellModelType: Observable<[SearchPhotosCellModelType]> { get }
-    var photosHeight: Observable<[Double]> { get }
 }
 
 protocol SearchPhotosViewModelType {
@@ -35,12 +34,6 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
     // MARK: - Outputs
     lazy var searchPhotosCellModelType: Observable<[SearchPhotosCellModelType]> = {
         return photos.mapMany { SearchPhotosCellModel(photo: $0) }
-    }()
-
-    lazy var photosHeight: Observable<[Double]> = {
-        return searchPhotosCellModelType
-            .mapMany { $0.outputs.photoHeight }
-            .flatMap(Observable.combineLatest)
     }()
 
     // MARK: - Private

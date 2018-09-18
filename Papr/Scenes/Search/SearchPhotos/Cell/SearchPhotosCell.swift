@@ -17,6 +17,7 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
 
     // MARK: IBOutlets
     @IBOutlet var photoImageView: UIImageView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
     // MARK: Privates
     private static let imagePipeline = Nuke.ImagePipeline.shared
@@ -37,6 +38,9 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
             .mapToURL()
             .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
             .map { $0.image }
+            .flatMapIgnore { [unowned self] _ in
+                Observable.just(self.activityIndicator.stopAnimating())
+            }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
     }
