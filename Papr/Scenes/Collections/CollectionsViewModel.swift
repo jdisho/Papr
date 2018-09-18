@@ -38,7 +38,8 @@ class CollectionsViewModel: CollectionsViewModelType,
     private let photoCollections: Observable<[PhotoCollection]>
 
     // MARK: Init
-    init(service: CollectionServiceType = CollectionService(),
+    init(service: CollectionServiceType =
+        CollectionService(),
          sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
         self.service = service

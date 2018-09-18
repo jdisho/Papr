@@ -42,7 +42,17 @@ class SearchPhotosViewController: UIViewController, BindableType {
 
     // MARK: UI
     private func configureCollectionView() {
+        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+
+        let spacing = 2 / UIScreen.main.scale
+        let cellWidth = (UIScreen.main.bounds.width / 3) - spacing
+
+        flowLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
+        flowLayout.minimumInteritemSpacing = spacing
+        flowLayout.minimumLineSpacing = spacing
+
         collectionView.register(cellType: SearchPhotosCell.self)
+
         dataSource = RxCollectionViewSectionedReloadDataSource<SearchPhotosSectionModel>(
             configureCell:  collectionViewDataSource
         )
@@ -56,4 +66,5 @@ class SearchPhotosViewController: UIViewController, BindableType {
         }
     }
 }
+
 
