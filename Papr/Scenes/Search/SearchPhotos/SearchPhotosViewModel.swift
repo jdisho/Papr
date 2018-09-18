@@ -10,7 +10,9 @@ import Foundation
 import RxSwift
 import Action
 
-protocol SearchPhotosViewModelInput {}
+protocol SearchPhotosViewModelInput {
+    var loadMore: BehaviorSubject<Bool> { get }
+}
 
 protocol SearchPhotosViewModelOutput {
     var searchPhotosCellModelType: Observable<[SearchPhotosCellModelType]> { get }
@@ -28,6 +30,7 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
     var outputs: SearchPhotosViewModelOutput { return self }
 
     // MARK: - Inputs
+    let loadMore = BehaviorSubject<Bool>(value: false)
 
     // MARK: - Outputs
     lazy var searchPhotosCellModelType: Observable<[SearchPhotosCellModelType]> = {
@@ -41,7 +44,7 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
     }()
 
     // MARK: - Private
-    private let photos: Observable<[Photo]>
+    private var photos: Observable<[Photo]>!
     private let service: SearchServiceType
     private let sceneCoordinator: SceneCoordinatorType
     // MARK: - Init
@@ -53,9 +56,32 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
         self.service = service
         self.sceneCoordinator = sceneCoordinator
 
-        photos = service.searchPhotos(with: searchQuery, pageNumber: 1)
+        var currentPageNumber = 1
+        var photoArray = [Photo]([])
+
+        let requestFirst = service
+            .searchPhotos(with: searchQuery, pageNumber: currentPageNumber)
             .map { $0.results }
             .unwrap()
+
+        let requestNext = loadMore.asObservable()
+            .flatMap { loadMore -> Observable<[Photo]> in
+                guard loadMore else { return .empty() }
+                currentPageNumber += 1
+                return service
+                    .searchPhotos(with: searchQuery, pageNumber: currentPageNumber)
+                    .map { $0.results }
+                    .unwrap()
+            }
+
+        photos = requestFirst
+            .merge(with: requestNext)
+            .map { [unowned self] photos -> [Photo] in
+                photos.forEach { photo in
+                    photoArray.append(photo)
+                }
+                return photoArray
+            }
     }
 
 }

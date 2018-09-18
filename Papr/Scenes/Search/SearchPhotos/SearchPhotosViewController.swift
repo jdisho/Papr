@@ -32,11 +32,17 @@ class SearchPhotosViewController: UIViewController, BindableType {
     }
 
     func bindViewModel() {
+        let inputs = viewModel.inputs
         let outputs = viewModel.outputs
 
         outputs.searchPhotosCellModelType
             .map { [SearchPhotosSectionModel(model: "", items: $0)] }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+
+        collectionView.rx.reachedBottom()
+            .distinctUntilChanged()
+            .bind(to: inputs.loadMore)
             .disposed(by: disposeBag)
     }
 
