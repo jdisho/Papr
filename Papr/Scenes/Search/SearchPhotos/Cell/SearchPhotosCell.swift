@@ -34,9 +34,16 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
         let outputs = viewModel.outputs
         let this = SearchPhotosCell.self
 
-        outputs.photoURL
-            .mapToURL()
-            .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
+        Observable.combineLatest(
+            outputs.smallPhotoURL,
+            outputs.regularPhotoURL
+            )
+            .flatMap { small, regular -> Observable<ImageResponse> in
+                return Observable.concat(
+                    this.imagePipeline.rx.loadImage(with: URL(string: small)),
+                    this.imagePipeline.rx.loadImage(with: URL(string: regular))
+                )
+            }
             .map { $0.image }
             .flatMapIgnore { [unowned self] _ in
                 Observable.just(self.activityIndicator.stopAnimating())

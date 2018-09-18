@@ -11,7 +11,8 @@ import RxSwift
 
 protocol SearchPhotosCellModelInput {}
 protocol SearchPhotosCellModelOutput {
-    var photoURL: Observable<String> { get }
+    var smallPhotoURL: Observable<String> { get }
+    var regularPhotoURL: Observable<String> { get }
 }
 
 protocol SearchPhotosCellModelType {
@@ -28,20 +29,21 @@ class SearchPhotosCellModel: SearchPhotosCellModelType,
     var outputs: SearchPhotosCellModelOutput { return self }
 
     // MARK: Outputs
-    let photoURL: Observable<String>
+    let smallPhotoURL: Observable<String>
+    let regularPhotoURL: Observable<String>
+    let fullPhotoURL: Observable<String>
+    let rawPhotoURL: Observable<String>
 
     // MARK: Init
     init(photo: Photo) {
         let photoStream = Observable.just(photo)
 
-        let smallPhotoURL = photoStream
+        smallPhotoURL = photoStream
             .map { $0.urls?.small }
+            .unwrap()
 
-        let regularPhotoURL = photoStream
+        regularPhotoURL = photoStream
             .map { $0.urls?.regular }
-
-        photoURL = smallPhotoURL
-            .concat(regularPhotoURL)
             .unwrap()
     }
 }
