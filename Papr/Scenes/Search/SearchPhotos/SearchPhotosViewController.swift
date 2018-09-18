@@ -35,6 +35,10 @@ class SearchPhotosViewController: UIViewController, BindableType {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
 
+        outputs.navTitle
+            .bind(to: rx.title)
+            .disposed(by: disposeBag)
+
         outputs.searchPhotosCellModelType
             .map { [SearchPhotosSectionModel(model: "", items: $0)] }
             .bind(to: collectionView.rx.items(dataSource: dataSource))

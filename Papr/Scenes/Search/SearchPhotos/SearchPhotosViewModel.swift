@@ -16,6 +16,7 @@ protocol SearchPhotosViewModelInput {
 
 protocol SearchPhotosViewModelOutput {
     var searchPhotosCellModelType: Observable<[SearchPhotosCellModelType]> { get }
+    var navTitle: Observable<String> { get }
 }
 
 protocol SearchPhotosViewModelType {
@@ -32,6 +33,7 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
     let loadMore = BehaviorSubject<Bool>(value: false)
 
     // MARK: - Outputs
+    let navTitle: Observable<String>
     lazy var searchPhotosCellModelType: Observable<[SearchPhotosCellModelType]> = {
         return photos.mapMany { SearchPhotosCellModel(photo: $0) }
     }()
@@ -52,6 +54,11 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
         var currentPageNumber = 1
         var photoArray = [Photo]([])
 
+        let searchResultsNumber = service
+            .searchPhotos(with: searchQuery, pageNumber: currentPageNumber)
+            .map { $0.total }
+            .unwrap()
+
         let requestFirst = service
             .searchPhotos(with: searchQuery, pageNumber: currentPageNumber)
             .map { $0.results }
@@ -67,9 +74,14 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
                     .unwrap()
             }
 
+        navTitle =  Observable.zip(Observable.just(searchQuery), searchResultsNumber)
+            .map { query, resultsNumber in
+                return "\(query): \(resultsNumber) results"
+            }
+
         photos = requestFirst
             .merge(with: requestNext)
-            .map { [unowned self] photos -> [Photo] in
+            .map { photos -> [Photo] in
                 photos.forEach { photo in
                     photoArray.append(photo)
                 }
