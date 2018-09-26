@@ -13,6 +13,8 @@ class PaprTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tabBar.tintColor = .black
+        tabBar.tintColor = .white
+        tabBar.barTintColor = .black
+        tabBar.backgroundColor = .black
     }
 }
