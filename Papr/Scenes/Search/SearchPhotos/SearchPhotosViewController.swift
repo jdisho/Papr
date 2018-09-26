@@ -22,6 +22,7 @@ class SearchPhotosViewController: UIViewController, BindableType {
     @IBOutlet var collectionView: UICollectionView!
 
     // MARK: Privates
+    private var loadingView: LoadingView!
     private var dataSource: RxCollectionViewSectionedReloadDataSource<SearchPhotosSectionModel>!
     private let disposeBag = DisposeBag()
 
@@ -29,6 +30,7 @@ class SearchPhotosViewController: UIViewController, BindableType {
         super.viewDidLoad()
 
         configureCollectionView()
+        configureLoadingView()
     }
 
     func bindViewModel() {
@@ -41,6 +43,9 @@ class SearchPhotosViewController: UIViewController, BindableType {
 
         outputs.searchPhotosCellModelType
             .map { [SearchPhotosSectionModel(model: "", items: $0)] }
+            .flatMapIgnore { [unowned self] _ in
+                Observable.just(self.loadingView.stopAnimating())
+            }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
@@ -51,6 +56,11 @@ class SearchPhotosViewController: UIViewController, BindableType {
     }
 
     // MARK: UI
+    private func configureLoadingView() {
+        loadingView = LoadingView(frame: collectionView.frame)
+        loadingView.add(to: view).pinToEdges()
+    }
+
     private func configureCollectionView() {
         guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
 
