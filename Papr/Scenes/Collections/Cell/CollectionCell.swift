@@ -28,12 +28,25 @@ class CollectionCell: UITableViewCell, BindableType, NibIdentifiable & ClassIden
     // MARK: Private
     private static let imagePipeline = Nuke.ImagePipeline.shared
     private var disposeBag = DisposeBag()
+    private var blurredView: UIVisualEffectView {
+        let blurEffect = UIBlurEffect(style: .dark)
+        return UIVisualEffectView(effect: blurEffect)
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
         photoCollectionImagePreview.cornerRadius = 10.0
         userProfilePic.cornerRadius = Double(userProfilePic.frame.height / 2)
+
+        infoViewContainer.cornerRadius = 10.0
+        if #available(iOS 10.0, *) {
+            infoViewContainer.blur(withStyle: .regular)
+        } else {
+            infoViewContainer.blur(withStyle: .light)
+        }
+        [userProfilePic, photoCollectionTitleLabel, photoCollectionAuthorLabel]
+            .forEach { infoViewContainer.bringSubview(toFront: $0) }
     }
 
     override func prepareForReuse() {

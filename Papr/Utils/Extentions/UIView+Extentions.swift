@@ -37,4 +37,24 @@ extension UIView {
             layer.borderWidth = CGFloat(newValue)
         }
     }
+
+    func blur(withStyle style: UIBlurEffectStyle = .light) {
+        let blurEffect = UIBlurEffect(style: style)
+        let blurredView = UIVisualEffectView(effect: blurEffect)
+        blurredView.frame = bounds
+        blurredView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(blurredView)
+        clipsToBounds = true
+    }
+
+    func round(corners: UIRectCorner = .allCorners, radius: CGFloat = 5.0) {
+        let rect = CAShapeLayer()
+        rect.frame = bounds
+        rect.position = center
+        rect.path = UIBezierPath(
+            roundedRect: bounds,
+            byRoundingCorners: corners,
+            cornerRadii: CGSize(width: radius, height: radius)).cgPath
+        layer.mask = rect
+    }
 }
