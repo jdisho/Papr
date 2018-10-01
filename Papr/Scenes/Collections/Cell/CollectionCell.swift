@@ -46,33 +46,33 @@ class CollectionCell: UITableViewCell, BindableType, NibIdentifiable & ClassIden
         let output = viewModel.output
         let this = CollectionCell.self
 
-        output.photoCollection
-            .map { $0.coverPhoto?.urls?.full }
-            .unwrap()
-            .mapToURL()
-            .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
+        Observable.combineLatest(output.smallPhotoURL, output.regularPhotoURL)
+            .flatMap { small, regular -> Observable<ImageResponse> in
+                return Observable.concat(
+                    this.imagePipeline.rx.loadImage(with: URL(string: small)),
+                    this.imagePipeline.rx.loadImage(with: URL(string: regular))
+                )
+            }
             .map { $0.image }
             .bind(to: photoCollectionImagePreview.rx.image)
             .disposed(by: disposeBag)
 
-        output.photoCollection
-            .map { $0.user?.profileImage?.medium }
-            .unwrap()
-            .mapToURL()
-            .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
+        Observable.combineLatest(output.mediumUserProfilePic, output.largeUserProfilePic)
+            .flatMap { medium, large -> Observable<ImageResponse> in
+                return Observable.concat(
+                    this.imagePipeline.rx.loadImage(with: URL(string: medium)),
+                    this.imagePipeline.rx.loadImage(with: URL(string: large))
+                )
+            }
             .map { $0.image }
             .bind(to: userProfilePic.rx.image)
             .disposed(by: disposeBag)
 
-        output.photoCollection
-            .map { $0.title }
-            .unwrap()
+        output.title
             .bind(to: photoCollectionTitleLabel.rx.text)
             .disposed(by: disposeBag)
 
-        output.photoCollection
-            .map { $0.user?.fullName }
-            .unwrap()
+        output.username
             .bind(to: photoCollectionAuthorLabel.rx.text)
             .disposed(by: disposeBag)
     }
