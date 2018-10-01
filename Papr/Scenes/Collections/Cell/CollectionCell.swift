@@ -45,11 +45,15 @@ class CollectionCell: UITableViewCell, BindableType, NibIdentifiable & ClassIden
         } else {
             infoViewContainer.blur(withStyle: .light)
         }
+
         [userProfilePic, photoCollectionTitleLabel, photoCollectionAuthorLabel]
             .forEach { infoViewContainer.bringSubview(toFront: $0) }
+
+        photoCollectionImagePreview.dim(withAlpha: 0.2)
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         userProfilePic.image = nil
         photoCollectionImagePreview.image = nil
         disposeBag = DisposeBag()
