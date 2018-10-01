@@ -39,21 +39,44 @@ extension Scene: TargetScene {
 
             //HomeViewController
             var homeVC = HomeViewController.initFromNib()
+            let homeViewModel = HomeViewModel()
             let rootHomeVC = UINavigationController(rootViewController: homeVC)
-            homeVC.bind(to: HomeViewModel())
+            homeVC.bind(to: homeViewModel)
 
             //SearchViewController
             var searchVC = SearchViewController.initFromNib()
+            let searchViewModel = SearchViewModel()
             let rootSearchVC = UINavigationController(rootViewController: searchVC)
-            searchVC.bind(to: SearchViewModel())
+            searchVC.bind(to: searchViewModel)
 
-            rootHomeVC.tabBarItem = UITabBarItem(title: "Photos", image: #imageLiteral(resourceName: "photo-black"), selectedImage: #imageLiteral(resourceName: "photo-black"))
-            rootSearchVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 1)
+            //CollectionsViewController
+            var collectionsVC = CollectionsViewController()
+            let collectionViewModel = CollectionsViewModel()
+            let rootCollectionVC = UINavigationController(rootViewController: collectionsVC)
+            collectionsVC.bind(to: collectionViewModel)
+
+            rootHomeVC.tabBarItem = UITabBarItem(
+                title: "Photos",
+                image: UIImage(named: "photo-white"),
+                tag: 0
+            )
+            rootCollectionVC.tabBarItem = UITabBarItem(
+                title: "Collections",
+                image: UIImage(named: "collections-white"),
+                tag: 1
+            )
+            rootSearchVC.tabBarItem = UITabBarItem(
+                title: "Search",
+                image: UIImage(named: "search-white"),
+                tag: 2
+            )
 
             paprTabBarController.viewControllers = [
                 rootHomeVC,
+                rootCollectionVC,
                 rootSearchVC
             ]
+
             return .tabBar(paprTabBarController)
         case let .login(viewModel):
             var vc = LoginViewController.initFromNib()

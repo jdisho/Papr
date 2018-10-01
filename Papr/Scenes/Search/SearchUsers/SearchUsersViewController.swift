@@ -22,6 +22,7 @@ class SearchUsersViewController: UIViewController, BindableType {
     @IBOutlet var tableView: UITableView!
 
     // MARK: Private
+    private var loadingView: LoadingView!
     private var dataSource: RxTableViewSectionedReloadDataSource<SearchUsersSectionModel>!
     private let disposeBag = DisposeBag()
 
@@ -31,6 +32,7 @@ class SearchUsersViewController: UIViewController, BindableType {
         super.viewDidLoad()
 
         configureTableView()
+        configureLoadingView()
     }
 
     // MARK: - BindableType
@@ -45,6 +47,9 @@ class SearchUsersViewController: UIViewController, BindableType {
 
         outputs.usersViewModel
             .map { [SearchUsersSectionModel(model: "", items: $0)] }
+            .flatMapIgnore { [unowned self] _ in
+                Observable.just(self.loadingView.stopAnimating())
+            }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
@@ -55,6 +60,11 @@ class SearchUsersViewController: UIViewController, BindableType {
     }
 
     // MARK: UI
+    private func configureLoadingView() {
+        loadingView = LoadingView(frame: tableView.frame)
+        loadingView.add(to: view).pinToEdges()
+    }
+
     private func configureTableView() {
         tableView.register(cellType: UserCell.self)
         tableView.rowHeight = 60

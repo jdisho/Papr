@@ -17,6 +17,7 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
 
     // MARK: IBOutlets
     @IBOutlet var photoImageView: UIImageView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
     // MARK: Privates
     private static let imagePipeline = Nuke.ImagePipeline.shared
@@ -33,10 +34,20 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
         let outputs = viewModel.outputs
         let this = SearchPhotosCell.self
 
-        outputs.photoURL
-            .mapToURL()
-            .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
+        Observable.combineLatest(
+            outputs.smallPhotoURL,
+            outputs.regularPhotoURL
+            )
+            .flatMap { small, regular -> Observable<ImageResponse> in
+                return Observable.concat(
+                    this.imagePipeline.rx.loadImage(with: URL(string: small)),
+                    this.imagePipeline.rx.loadImage(with: URL(string: regular))
+                )
+            }
             .map { $0.image }
+            .flatMapIgnore { [unowned self] _ in
+                Observable.just(self.activityIndicator.stopAnimating())
+            }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
     }

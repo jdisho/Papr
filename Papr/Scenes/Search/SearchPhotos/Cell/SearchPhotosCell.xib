@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,18 +19,33 @@
                 <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H71-m3-wR0">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H71-m3-wR0">
                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5dX-sR-VlG">
+                        <rect key="frame" x="60" y="60" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="Khh-sS-Noi"/>
+                            <constraint firstAttribute="width" constant="30" id="aT5-WD-s3N"/>
+                        </constraints>
+                    </activityIndicatorView>
                 </subviews>
             </view>
+            <constraints>
+                <constraint firstItem="5dX-sR-VlG" firstAttribute="centerY" secondItem="H71-m3-wR0" secondAttribute="centerY" id="1cN-WA-Og4"/>
+                <constraint firstItem="5dX-sR-VlG" firstAttribute="centerX" secondItem="H71-m3-wR0" secondAttribute="centerX" id="5QC-Nl-EHh"/>
+                <constraint firstAttribute="bottom" secondItem="H71-m3-wR0" secondAttribute="bottom" id="Kv6-oB-D5y"/>
+                <constraint firstItem="H71-m3-wR0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Pnm-pD-32w"/>
+                <constraint firstItem="H71-m3-wR0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="guR-SF-cLb"/>
+                <constraint firstAttribute="trailing" secondItem="H71-m3-wR0" secondAttribute="trailing" id="znh-Od-glz"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="206" height="144"/>
             <connections>
+                <outlet property="activityIndicator" destination="5dX-sR-VlG" id="y40-J2-W1W"/>
                 <outlet property="photoImageView" destination="H71-m3-wR0" id="heo-z4-PSZ"/>
             </connections>
-            <point key="canvasLocation" x="-353" y="-221"/>
+            <point key="canvasLocation" x="-648" y="-214"/>
         </collectionViewCell>
     </objects>
 </document>

@@ -99,9 +99,19 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
             .bind(to: userImageView.rx.image)
             .disposed(by: disposeBag)
 
-        Observable.concat(outputs.smallPhoto, outputs.regularPhoto)
-            .mapToURL()
-            .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
+
+        Observable.combineLatest(
+            outputs.smallPhoto,
+            outputs.regularPhoto,
+            outputs.fullPhoto
+            )
+            .flatMap { small, regular, full -> Observable<ImageResponse> in
+                return Observable.concat(
+                    this.imagePipeline.rx.loadImage(with: URL(string: small)),
+                    this.imagePipeline.rx.loadImage(with: URL(string: regular)),
+                    this.imagePipeline.rx.loadImage(with: URL(string: full))
+                )
+            }
             .map { $0.image }
             .flatMapIgnore { [unowned self] _ in
                 Observable.just(self.activityIndicator.stopAnimating())

@@ -15,7 +15,8 @@ extension ImagePipeline: ReactiveCompatible {}
 public extension Reactive where Base: ImagePipeline {
 
     // MARK: Observables
-    public func loadImage(with url: URL) -> Observable<ImageResponse> {
+    public func loadImage(with url: URL?) -> Observable<ImageResponse> {
+        guard let url = url else { return .empty() }
         return self.load(with: ImageRequest(url: url)).orEmpty()
     }
 

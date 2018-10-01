@@ -10,11 +10,13 @@ import Foundation
 import RxSwift
 import Action
 
-protocol SearchPhotosViewModelInput {}
+protocol SearchPhotosViewModelInput {
+    var loadMore: BehaviorSubject<Bool> { get }
+}
 
 protocol SearchPhotosViewModelOutput {
     var searchPhotosCellModelType: Observable<[SearchPhotosCellModelType]> { get }
-    var photosHeight: Observable<[Double]> { get }
+    var navTitle: Observable<String> { get }
 }
 
 protocol SearchPhotosViewModelType {
@@ -28,20 +30,16 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
     var outputs: SearchPhotosViewModelOutput { return self }
 
     // MARK: - Inputs
+    let loadMore = BehaviorSubject<Bool>(value: false)
 
     // MARK: - Outputs
+    let navTitle: Observable<String>
     lazy var searchPhotosCellModelType: Observable<[SearchPhotosCellModelType]> = {
         return photos.mapMany { SearchPhotosCellModel(photo: $0) }
     }()
 
-    lazy var photosHeight: Observable<[Double]> = {
-        return searchPhotosCellModelType
-            .mapMany { $0.outputs.photoHeight }
-            .flatMap(Observable.combineLatest)
-    }()
-
     // MARK: - Private
-    private let photos: Observable<[Photo]>
+    private var photos: Observable<[Photo]>!
     private let service: SearchServiceType
     private let sceneCoordinator: SceneCoordinatorType
     // MARK: - Init
@@ -53,9 +51,42 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
         self.service = service
         self.sceneCoordinator = sceneCoordinator
 
-        photos = service.searchPhotos(with: searchQuery, pageNumber: 1)
+        var currentPageNumber = 1
+        var photoArray = [Photo]([])
+
+        let searchResultsNumber = service
+            .searchPhotos(with: searchQuery, pageNumber: currentPageNumber)
+            .map { $0.total }
+            .unwrap()
+
+        let requestFirst = service
+            .searchPhotos(with: searchQuery, pageNumber: currentPageNumber)
             .map { $0.results }
             .unwrap()
+
+        let requestNext = loadMore.asObservable()
+            .flatMap { loadMore -> Observable<[Photo]> in
+                guard loadMore else { return .empty() }
+                currentPageNumber += 1
+                return service
+                    .searchPhotos(with: searchQuery, pageNumber: currentPageNumber)
+                    .map { $0.results }
+                    .unwrap()
+            }
+
+        navTitle =  Observable.zip(Observable.just(searchQuery), searchResultsNumber)
+            .map { query, resultsNumber in
+                return "\(query): \(resultsNumber) results"
+            }
+
+        photos = requestFirst
+            .merge(with: requestNext)
+            .map { photos -> [Photo] in
+                photos.forEach { photo in
+                    photoArray.append(photo)
+                }
+                return photoArray
+            }
     }
 
 }

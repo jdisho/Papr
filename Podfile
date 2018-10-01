@@ -20,6 +20,9 @@ target 'Papr' do
   # Transition
   pod 'Hero'
 
+  # Constraints
+  pod 'VanillaConstraints'
+
   # Pods for Papr
 
   target 'PaprTests' do

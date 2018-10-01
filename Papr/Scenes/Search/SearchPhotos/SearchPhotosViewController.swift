@@ -22,6 +22,7 @@ class SearchPhotosViewController: UIViewController, BindableType {
     @IBOutlet var collectionView: UICollectionView!
 
     // MARK: Privates
+    private var loadingView: LoadingView!
     private var dataSource: RxCollectionViewSectionedReloadDataSource<SearchPhotosSectionModel>!
     private let disposeBag = DisposeBag()
 
@@ -29,20 +30,49 @@ class SearchPhotosViewController: UIViewController, BindableType {
         super.viewDidLoad()
 
         configureCollectionView()
+        configureLoadingView()
     }
 
     func bindViewModel() {
+        let inputs = viewModel.inputs
         let outputs = viewModel.outputs
+
+        outputs.navTitle
+            .bind(to: rx.title)
+            .disposed(by: disposeBag)
 
         outputs.searchPhotosCellModelType
             .map { [SearchPhotosSectionModel(model: "", items: $0)] }
+            .flatMapIgnore { [unowned self] _ in
+                Observable.just(self.loadingView.stopAnimating())
+            }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+
+        collectionView.rx.reachedBottom()
+            .distinctUntilChanged()
+            .bind(to: inputs.loadMore)
             .disposed(by: disposeBag)
     }
 
     // MARK: UI
+    private func configureLoadingView() {
+        loadingView = LoadingView(frame: collectionView.frame)
+        loadingView.add(to: view).pinToEdges()
+    }
+
     private func configureCollectionView() {
+        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+
+        let spacing = 2 / UIScreen.main.scale
+        let cellWidth = (UIScreen.main.bounds.width / 3) - spacing
+
+        flowLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
+        flowLayout.minimumInteritemSpacing = spacing
+        flowLayout.minimumLineSpacing = spacing
+
         collectionView.register(cellType: SearchPhotosCell.self)
+
         dataSource = RxCollectionViewSectionedReloadDataSource<SearchPhotosSectionModel>(
             configureCell:  collectionViewDataSource
         )
@@ -56,4 +86,5 @@ class SearchPhotosViewController: UIViewController, BindableType {
         }
     }
 }
+
 
