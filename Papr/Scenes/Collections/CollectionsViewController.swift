@@ -27,6 +27,7 @@ class CollectionsViewController: UIViewController, BindableType {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "Explore 🌄"
         configureTableView()
     }
 
