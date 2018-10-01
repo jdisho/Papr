@@ -23,15 +23,12 @@ class CollectionCell: UITableViewCell, BindableType, NibIdentifiable & ClassIden
     @IBOutlet var userProfilePic: UIImageView!
     @IBOutlet var photoCollectionTitleLabel: UILabel!
     @IBOutlet var photoCollectionAuthorLabel: UILabel!
-
+    @IBOutlet var photosNumberLabel: UILabel!
+    
     // MARK: Privates
     // MARK: Private
     private static let imagePipeline = Nuke.ImagePipeline.shared
     private var disposeBag = DisposeBag()
-    private var blurredView: UIVisualEffectView {
-        let blurEffect = UIBlurEffect(style: .dark)
-        return UIVisualEffectView(effect: blurEffect)
-    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,7 +43,8 @@ class CollectionCell: UITableViewCell, BindableType, NibIdentifiable & ClassIden
             infoViewContainer.blur(withStyle: .light)
         }
 
-        [userProfilePic, photoCollectionTitleLabel, photoCollectionAuthorLabel]
+        infoViewContainer.subviews
+            .filter { !($0 is UIVisualEffectView) }
             .forEach { infoViewContainer.bringSubview(toFront: $0) }
 
         photoCollectionImagePreview.dim(withAlpha: 0.2)
@@ -91,6 +89,10 @@ class CollectionCell: UITableViewCell, BindableType, NibIdentifiable & ClassIden
 
         output.username
             .bind(to: photoCollectionAuthorLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        output.photosNumber
+            .bind(to: photosNumberLabel.rx.text)
             .disposed(by: disposeBag)
     }
 }

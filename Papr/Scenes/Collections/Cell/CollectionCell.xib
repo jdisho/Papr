@@ -32,15 +32,21 @@
                                     <constraint firstAttribute="width" constant="45" id="Ix7-tu-91g"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udH-l8-xfz">
-                                <rect key="frame" x="69" y="40.5" width="212" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udH-l8-xfz">
+                                <rect key="frame" x="69" y="40.5" width="161" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yF-bE-eyo">
-                                <rect key="frame" x="69" y="12.5" width="212" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yF-bE-eyo">
+                                <rect key="frame" x="69" y="12.5" width="161" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0gp-Jt-X2t">
+                                <rect key="frame" x="238" y="25" width="43" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -50,11 +56,13 @@
                             <constraint firstItem="udH-l8-xfz" firstAttribute="leading" secondItem="Oa4-1a-CIN" secondAttribute="trailing" constant="8" id="7AI-es-cIj"/>
                             <constraint firstItem="1yF-bE-eyo" firstAttribute="leading" secondItem="Oa4-1a-CIN" secondAttribute="trailing" constant="8" id="AWz-cS-DYB"/>
                             <constraint firstItem="Oa4-1a-CIN" firstAttribute="leading" secondItem="ep4-mf-nA6" secondAttribute="leading" constant="16" id="FgQ-Qp-Aep"/>
+                            <constraint firstItem="0gp-Jt-X2t" firstAttribute="leading" secondItem="1yF-bE-eyo" secondAttribute="trailing" constant="8" id="G7p-Ne-o86"/>
                             <constraint firstItem="udH-l8-xfz" firstAttribute="bottom" secondItem="Oa4-1a-CIN" secondAttribute="bottom" id="UQK-gx-6Rw"/>
                             <constraint firstAttribute="height" constant="70" id="bjw-gr-CDJ"/>
-                            <constraint firstAttribute="trailing" secondItem="1yF-bE-eyo" secondAttribute="trailing" constant="16" id="hEf-xZ-I9M"/>
+                            <constraint firstItem="0gp-Jt-X2t" firstAttribute="leading" secondItem="udH-l8-xfz" secondAttribute="trailing" constant="8" id="fsi-Op-JOb"/>
                             <constraint firstItem="1yF-bE-eyo" firstAttribute="top" secondItem="Oa4-1a-CIN" secondAttribute="top" id="pTF-1S-Qb0"/>
-                            <constraint firstAttribute="trailing" secondItem="udH-l8-xfz" secondAttribute="trailing" constant="16" id="w16-nv-dti"/>
+                            <constraint firstItem="0gp-Jt-X2t" firstAttribute="centerY" secondItem="ep4-mf-nA6" secondAttribute="centerY" id="phY-Zl-1wS"/>
+                            <constraint firstAttribute="trailing" secondItem="0gp-Jt-X2t" secondAttribute="trailing" constant="16" id="sFF-b9-HLb"/>
                             <constraint firstItem="Oa4-1a-CIN" firstAttribute="centerY" secondItem="ep4-mf-nA6" secondAttribute="centerY" id="xdX-Dg-S21"/>
                         </constraints>
                     </view>
@@ -75,9 +83,10 @@
                 <outlet property="photoCollectionAuthorLabel" destination="udH-l8-xfz" id="RAW-Om-2jn"/>
                 <outlet property="photoCollectionImagePreview" destination="Nh5-BM-hiF" id="sC4-nj-3gZ"/>
                 <outlet property="photoCollectionTitleLabel" destination="1yF-bE-eyo" id="ecR-Eg-FwV"/>
+                <outlet property="photosNumberLabel" destination="0gp-Jt-X2t" id="bRj-lD-ybB"/>
                 <outlet property="userProfilePic" destination="Oa4-1a-CIN" id="0Jc-La-S3g"/>
             </connections>
-            <point key="canvasLocation" x="-778" y="-114"/>
+            <point key="canvasLocation" x="-778.39999999999998" y="-114.69265367316342"/>
         </tableViewCell>
     </objects>
 </document>

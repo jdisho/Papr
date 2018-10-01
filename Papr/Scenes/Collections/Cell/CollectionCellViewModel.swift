@@ -17,6 +17,7 @@ protocol CollectionCellViewModelOutput {
     var largeUserProfilePic: Observable<String> { get }
     var username: Observable<String> { get }
     var title: Observable<String> { get }
+    var photosNumber: Observable<String> { get }
 }
 protocol CollectionCellViewModelType {
     var input: CollectionCellViewModelInput { get }
@@ -40,6 +41,7 @@ class CollectionCellViewModel: CollectionCellViewModelType,
     let largeUserProfilePic: Observable<String>
     let username: Observable<String>
     let title: Observable<String>
+    var photosNumber: Observable<String>
 
     // MARK: Private
 
@@ -69,6 +71,10 @@ class CollectionCellViewModel: CollectionCellViewModelType,
 
         username = photoCollectionStream
             .map { ($0.user?.firstName ?? "") + " " + ($0.user?.lastName ?? "") }
+
+        photosNumber = photoCollectionStream
+            .map { $0.totalPhotos?.abbreviated }
+            .unwrap()
 
     }
 }
