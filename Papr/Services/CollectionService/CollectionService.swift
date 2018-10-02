@@ -37,10 +37,10 @@ struct CollectionService: CollectionServiceType {
 
         if curated {
            request = unsplash.rx
-                .request(.curatedCollections(page: page, perPage: 10))
+                .request(.curatedCollections(page: page, perPage: 20))
         } else {
             request = unsplash.rx
-                .request(.featuredCollections(page: page, perPage: 10))
+                .request(.featuredCollections(page: page, perPage: 20))
         }
 
         return request
