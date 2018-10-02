@@ -54,7 +54,6 @@ class SearchUsersViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         tableView.rx.reachedBottom()
-            .distinctUntilChanged()
             .bind(to: inputs.loadMore)
             .disposed(by: disposeBag)
     }

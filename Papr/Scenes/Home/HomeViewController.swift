@@ -92,7 +92,6 @@ class HomeViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         tableView.rx.reachedBottom()
-            .distinctUntilChanged()
             .skipUntil(outputs.isRefreshing)
             .bind(to: inputs.loadMore)
             .disposed(by: disposeBag)

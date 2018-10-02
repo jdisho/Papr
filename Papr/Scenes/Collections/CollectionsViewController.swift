@@ -48,7 +48,6 @@ class CollectionsViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         tableView.rx.reachedBottom()
-            .distinctUntilChanged()
             .skipUntil(output.isRefreshing)
             .bind(to: input.loadMore)
             .disposed(by: disposeBag)
