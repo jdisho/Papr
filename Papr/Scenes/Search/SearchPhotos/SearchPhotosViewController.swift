@@ -50,7 +50,6 @@ class SearchPhotosViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         collectionView.rx.reachedBottom()
-            .distinctUntilChanged()
             .bind(to: inputs.loadMore)
             .disposed(by: disposeBag)
     }
