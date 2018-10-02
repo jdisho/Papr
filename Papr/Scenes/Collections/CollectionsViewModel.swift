@@ -67,18 +67,18 @@ class CollectionsViewModel: CollectionsViewModelType,
 
         isRefreshing = refreshProperty.asObservable()
 
-        let requestFirst = isRefreshing
+        let requestFirst = isRefreshing.debug()
             .flatMapLatest { isRefreshing -> Observable<[PhotoCollection]> in
                 guard isRefreshing else { return .empty() }
                 return service
-                    .collections(byPageNumber: currentPageNumber, curated: false)
+                    .collections(byPageNumber: 1, curated: false)
                     .flatMap { [unowned self] result -> Observable<[PhotoCollection]> in
                         switch result {
                         case let .success(photoCollections):
-                            return Observable.just(photoCollections)
+                            return .just(photoCollections)
                         case .error(_):
                             self.refreshProperty.onNext(false)
-                            return Observable.empty()
+                            return .empty()
                         }
                 }
             }
@@ -96,10 +96,10 @@ class CollectionsViewModel: CollectionsViewModelType,
                     .flatMap { [unowned self] result -> Observable<[PhotoCollection]> in
                         switch result {
                         case let .success(photoCollections):
-                            return Observable.just(photoCollections)
+                            return .just(photoCollections)
                         case .error(_):
                             self.refreshProperty.onNext(false)
-                            return Observable.empty()
+                            return .empty()
                         }
                 }
             }
