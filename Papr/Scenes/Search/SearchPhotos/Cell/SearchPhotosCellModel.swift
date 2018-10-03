@@ -8,8 +8,11 @@
 
 import Foundation
 import RxSwift
+import UIKit
 
-protocol SearchPhotosCellModelInput {}
+protocol SearchPhotosCellModelInput {
+    var photoSize: Variable<CGSize> { get }
+}
 protocol SearchPhotosCellModelOutput {
     var smallPhotoURL: Observable<String> { get }
     var regularPhotoURL: Observable<String> { get }
@@ -23,11 +26,14 @@ protocol SearchPhotosCellModelType {
 class SearchPhotosCellModel: SearchPhotosCellModelType,
                             SearchPhotosCellModelInput,
                             SearchPhotosCellModelOutput {
-
+    
     // MARK: Inputs & Outputs
     var inputs: SearchPhotosCellModelInput { return self }
     var outputs: SearchPhotosCellModelOutput { return self }
 
+    // MARK: Inputs
+    var photoSize: Variable<CGSize> = Variable(.zero)
+    
     // MARK: Outputs
     let smallPhotoURL: Observable<String>
     let regularPhotoURL: Observable<String>
