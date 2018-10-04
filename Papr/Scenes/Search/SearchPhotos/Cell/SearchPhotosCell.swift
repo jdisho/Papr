@@ -46,8 +46,8 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
                 )
             }
             .map { $0.image }
-            .do(onNext: { image in
-                inputs.photoSize.value = image.size
+            .do(onNext: {
+                inputs.updateSize(width: Double($0.size.width), height: Double($0.size.height))
             })
             .flatMapIgnore { [unowned self] _ in
                 Observable.just(self.activityIndicator.stopAnimating())
