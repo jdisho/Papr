@@ -10,8 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-let defaultCellSize = CGSize(width: 100, height: 100)
-
 @objc protocol PinterestLayoutDelegate: class {
     func collectionView(_ collectionView: UICollectionView, sizeForPhotoAtIndexPath indexPath: IndexPath) -> CGSize
 }
@@ -40,7 +38,7 @@ class PinterestLayout: UICollectionViewLayout {
     override func prepare() {
         guard let collectionView = collectionView, collectionView.numberOfSections > 0 else { return }
 
-        cache = [UICollectionViewLayoutAttributes]()
+        cache.removeAll()
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
         var xOffset = [CGFloat]()
 
@@ -51,13 +49,11 @@ class PinterestLayout: UICollectionViewLayout {
         var column = 0
         var yOffset = [CGFloat](repeating: 0, count: numberOfColumns)
         
-        
         for item in 0..<collectionView.numberOfItems(inSection: 0) {
             let indexPath = IndexPath(item: item, section: 0)
             
-            
-            let size = delegate?.collectionView(collectionView, sizeForPhotoAtIndexPath: indexPath) ?? defaultCellSize
-            let cellContentHeight = size.height / (size.width / columnWidth)
+            let size = delegate?.collectionView(collectionView, sizeForPhotoAtIndexPath: indexPath) ?? CGSize(width: 100, height: 100)
+            let cellContentHeight = size.height * columnWidth / size.width
             let height = cellPadding + cellContentHeight
             let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
             let insetFrame = frame.insetBy(dx: cellPadding, dy: cellPadding)
@@ -92,9 +88,11 @@ extension Reactive where Base: PinterestLayout {
         return RxPinterestLayoutDelegateProxy.proxy(for: base)
     }
     
-    func updateHeight(_ indexPath: IndexPath, size: CGSize) {
-        delegate.sizes[indexPath] = size
-        base.invalidateLayout()
+    func updateSize(_ indexPath: IndexPath) -> Binder<CGSize> {
+        return Binder(base) { base, size in
+            self.delegate.sizes[indexPath] = size
+            base.invalidateLayout()
+        }
     }
 }
 
@@ -121,7 +119,7 @@ class RxPinterestLayoutDelegateProxy: DelegateProxy<PinterestLayout, PinterestLa
     }
     
     func collectionView(_ collectionView: UICollectionView, sizeForPhotoAtIndexPath indexPath: IndexPath) -> CGSize {
-        return sizes[indexPath] ?? defaultCellSize
+        return sizes[indexPath] ?? CGSize(width: 100, height: 100)
     }
 }
 

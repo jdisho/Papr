@@ -22,7 +22,7 @@ class SearchPhotosViewController: UIViewController, BindableType {
     @IBOutlet var collectionView: UICollectionView!
 
     // MARK: Privates
-    private var pinterestLayout: PinterestLayout = PinterestLayout()
+    private let pinterestLayout: PinterestLayout = PinterestLayout()
     private var loadingView: LoadingView!
     private var dataSource: RxCollectionViewSectionedReloadDataSource<SearchPhotosSectionModel>!
     private let disposeBag = DisposeBag()
@@ -78,9 +78,7 @@ class SearchPhotosViewController: UIViewController, BindableType {
             
             cellModel.inputs.photoSize.asObservable()
                 .skip(1)
-                .subscribe(onNext: { size in
-                    self.pinterestLayout.rx.updateHeight(indexPath, size: size)
-                })
+                .bind(to: self.pinterestLayout.rx.updateSize(indexPath))
                 .disposed(by: self.disposeBag)
 
             return cell
