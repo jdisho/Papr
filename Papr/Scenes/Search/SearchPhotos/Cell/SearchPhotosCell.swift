@@ -31,6 +31,7 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
     }
 
     func bindViewModel() {
+        let inputs = viewModel.inputs
         let outputs = viewModel.outputs
         let this = SearchPhotosCell.self
 
@@ -45,6 +46,9 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
                 )
             }
             .map { $0.image }
+            .do(onNext: {
+                inputs.updateSize(width: Double($0.size.width), height: Double($0.size.height))
+            })
             .flatMapIgnore { [unowned self] _ in
                 Observable.just(self.activityIndicator.stopAnimating())
             }

@@ -22,6 +22,7 @@ class SearchPhotosViewController: UIViewController, BindableType {
     @IBOutlet var collectionView: UICollectionView!
 
     // MARK: Privates
+    private let pinterestLayout: PinterestLayout = PinterestLayout()
     private var loadingView: LoadingView!
     private var dataSource: RxCollectionViewSectionedReloadDataSource<SearchPhotosSectionModel>!
     private let disposeBag = DisposeBag()
@@ -61,14 +62,7 @@ class SearchPhotosViewController: UIViewController, BindableType {
     }
 
     private func configureCollectionView() {
-        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
-
-        let spacing = 2 / UIScreen.main.scale
-        let cellWidth = (UIScreen.main.bounds.width / 3) - spacing
-
-        flowLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
-        flowLayout.minimumInteritemSpacing = spacing
-        flowLayout.minimumLineSpacing = spacing
+        collectionView.collectionViewLayout = pinterestLayout
 
         collectionView.register(cellType: SearchPhotosCell.self)
 
@@ -81,6 +75,13 @@ class SearchPhotosViewController: UIViewController, BindableType {
         return { _, collectionView, indexPath, cellModel in
             var cell = collectionView.dequeueReusableCell(withCellType: SearchPhotosCell.self, forIndexPath: indexPath)
             cell.bind(to: cellModel)
+            
+            cellModel.outputs.photoSize.asObservable()
+                .skip(1)
+                .map { CGSize(width: $0.width, height: $0.height) }
+                .bind(to: self.pinterestLayout.rx.updateSize(indexPath))
+                .disposed(by: self.disposeBag)
+
             return cell
         }
     }
