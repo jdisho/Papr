@@ -76,7 +76,7 @@ class SearchPhotosViewController: UIViewController, BindableType {
             var cell = collectionView.dequeueReusableCell(withCellType: SearchPhotosCell.self, forIndexPath: indexPath)
             cell.bind(to: cellModel)
             
-            cellModel.outputs.photoSize.asObservable()
+            cellModel.outputs.photoSize
                 .skip(1)
                 .map { CGSize(width: $0.width, height: $0.height) }
                 .bind(to: self.pinterestLayout.rx.updateSize(indexPath))
