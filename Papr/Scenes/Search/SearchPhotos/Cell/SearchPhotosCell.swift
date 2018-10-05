@@ -46,11 +46,9 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
                 )
             }
             .map { $0.image }
-            .do(onNext: {
-                inputs.updateSize(width: Double($0.size.width), height: Double($0.size.height))
-            })
-            .flatMapIgnore { [unowned self] _ in
-                Observable.just(self.activityIndicator.stopAnimating())
+            .flatMapIgnore { [unowned self] image -> Observable<Void> in
+                inputs.updateSize(width: Double(image.size.width), height: Double(image.size.height))
+                return(.just(self.activityIndicator.stopAnimating()))
             }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
