@@ -21,7 +21,7 @@ class PinterestLayout: UICollectionViewLayout {
 
     // MARK: Fileprivates
     fileprivate let numberOfColumns = 2
-    fileprivate let cellPadding: CGFloat = 6
+    fileprivate let cellPadding: CGFloat = 1 / UIScreen.main.scale
     fileprivate var contentHeight: CGFloat = 0
     fileprivate var contentWidth: CGFloat {
         guard let collectionView = collectionView else { return 0 }
@@ -36,9 +36,10 @@ class PinterestLayout: UICollectionViewLayout {
     }
     
     override func prepare() {
-        guard let collectionView = collectionView, collectionView.numberOfSections > 0 else { return }
+        guard cache.isEmpty,
+            let collectionView = collectionView,
+            collectionView.numberOfSections > 0 else { return }
 
-        cache.removeAll()
         let columnWidth = contentWidth / CGFloat(numberOfColumns)
         var xOffset = [CGFloat]()
 
@@ -80,46 +81,14 @@ class PinterestLayout: UICollectionViewLayout {
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return cache[indexPath.row]
     }
-}
 
-extension Reactive where Base: PinterestLayout {
-
-    var delegate: RxPinterestLayoutDelegateProxy {
-        return RxPinterestLayoutDelegateProxy.proxy(for: base)
-    }
-    
-    func updateSize(_ indexPath: IndexPath) -> Binder<CGSize> {
-        return Binder(base) { base, size in
-            self.delegate.sizes[indexPath] = size
-            base.invalidateLayout()
-        }
-    }
-}
-
-class RxPinterestLayoutDelegateProxy: DelegateProxy<PinterestLayout, PinterestLayoutDelegate>, PinterestLayoutDelegate, DelegateProxyType {
-    
-    weak private(set) var pinterestLayout: PinterestLayout?
-    var sizes:[IndexPath: CGSize] = [:]
-
-    init(pinterestLayout: PinterestLayout) {
-        self.pinterestLayout = pinterestLayout
-        super.init(parentObject: pinterestLayout, delegateProxy: RxPinterestLayoutDelegateProxy.self)
+    override func invalidateLayout() {
+        cache.removeAll()
+        super.invalidateLayout()
     }
 
-    static func registerKnownImplementations() {
-        self.register { RxPinterestLayoutDelegateProxy(pinterestLayout: $0) }
-    }
-
-    static func currentDelegate(for object: PinterestLayout) -> PinterestLayoutDelegate? {
-        return object.delegate
-    }
-
-    static func setCurrentDelegate(_ delegate: PinterestLayoutDelegate?, to object: PinterestLayout) {
-        object.delegate = delegate
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, sizeForPhotoAtIndexPath indexPath: IndexPath) -> CGSize {
-        return sizes[indexPath] ?? CGSize(width: 100, height: 100)
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        return true
     }
 }
 
