@@ -29,6 +29,7 @@ enum Scene {
     case searchPhotos(SearchPhotosViewModel)
     case searchCollections(SearchCollectionsViewModel)
     case searchUsers(SearchUsersViewModel)
+    case userProfile(UserProfileViewModel)
 }
 
 extension Scene: TargetScene {
@@ -115,6 +116,10 @@ extension Scene: TargetScene {
             return .push(vc)
         case let .searchUsers(viewModel):
             var vc = SearchUsersViewController.initFromNib()
+            vc.bind(to: viewModel)
+            return .push(vc)
+        case let .userProfile(viewModel):
+            var vc = UserProfileViewController.initFromNib()
             vc.bind(to: viewModel)
             return .push(vc)
         }
