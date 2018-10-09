@@ -29,6 +29,7 @@ enum Scene {
     case searchPhotos(SearchPhotosViewModel)
     case searchCollections(SearchCollectionsViewModel)
     case searchUsers(SearchUsersViewModel)
+    case userProfile(UserProfileViewModel)
 }
 
 extension Scene: TargetScene {
@@ -40,19 +41,19 @@ extension Scene: TargetScene {
             //HomeViewController
             var homeVC = HomeViewController.initFromNib()
             let homeViewModel = HomeViewModel()
-            let rootHomeVC = UINavigationController(rootViewController: homeVC)
+            let rootHomeVC = UserProfileButtonManager(rootViewController: homeVC)
             homeVC.bind(to: homeViewModel)
 
             //SearchViewController
             var searchVC = SearchViewController.initFromNib()
             let searchViewModel = SearchViewModel()
-            let rootSearchVC = UINavigationController(rootViewController: searchVC)
+            let rootSearchVC = UserProfileButtonManager(rootViewController: searchVC)
             searchVC.bind(to: searchViewModel)
 
             //CollectionsViewController
             var collectionsVC = CollectionsViewController()
             let collectionViewModel = CollectionsViewModel()
-            let rootCollectionVC = UINavigationController(rootViewController: collectionsVC)
+            let rootCollectionVC = UserProfileButtonManager(rootViewController: collectionsVC)
             collectionsVC.bind(to: collectionViewModel)
 
             rootHomeVC.tabBarItem = UITabBarItem(
@@ -60,11 +61,13 @@ extension Scene: TargetScene {
                 image: UIImage(named: "photo-white"),
                 tag: 0
             )
+
             rootCollectionVC.tabBarItem = UITabBarItem(
                 title: "Collections",
                 image: UIImage(named: "collections-white"),
                 tag: 1
             )
+
             rootSearchVC.tabBarItem = UITabBarItem(
                 title: "Search",
                 image: UIImage(named: "search-white"),
@@ -113,6 +116,10 @@ extension Scene: TargetScene {
             return .push(vc)
         case let .searchUsers(viewModel):
             var vc = SearchUsersViewController.initFromNib()
+            vc.bind(to: viewModel)
+            return .push(vc)
+        case let .userProfile(viewModel):
+            var vc = UserProfileViewController.initFromNib()
             vc.bind(to: viewModel)
             return .push(vc)
         }

@@ -10,6 +10,9 @@
 		1090D75275C09BAE87BE25BD /* Pods_Papr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D778F2E1EFA76CEB59A377CB /* Pods_Papr.framework */; };
 		63CC2B27C8EE9499B1D6C702 /* Pods_PaprTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD3D8A956FB1C8A8D3B456A7 /* Pods_PaprTests.framework */; };
 		C00739572151547500F51C91 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00739562151547500F51C91 /* LoadingView.swift */; };
+		C09D7656216CC91E0035F54D /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09D7654216CC91E0035F54D /* UserProfileViewController.swift */; };
+		C09D7657216CC91E0035F54D /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C09D7655216CC91E0035F54D /* UserProfileViewController.xib */; };
+		C09D7659216CC98B0035F54D /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09D7658216CC98B0035F54D /* UserProfileViewModel.swift */; };
 		C0CD2444213EB2BD0053A802 /* CollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD2443213EB2BD0053A802 /* CollectionsViewController.swift */; };
 		C0CD2446213EB2E40053A802 /* CollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD2445213EB2E40053A802 /* CollectionsViewModel.swift */; };
 		C0CD244B213FC23B0053A802 /* CollectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD244A213FC23B0053A802 /* CollectionCellViewModel.swift */; };
@@ -332,6 +335,9 @@
 		73C64AFFEE5BB0DA9AE1AB4D /* Pods-Papr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Papr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Papr/Pods-Papr.release.xcconfig"; sourceTree = "<group>"; };
 		7ADA4A068C8B3E3A9F491B6C /* Pods-PaprUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaprUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PaprUITests/Pods-PaprUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C00739562151547500F51C91 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		C09D7654216CC91E0035F54D /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		C09D7655216CC91E0035F54D /* UserProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfileViewController.xib; sourceTree = "<group>"; };
+		C09D7658216CC98B0035F54D /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		C0CD2443213EB2BD0053A802 /* CollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsViewController.swift; sourceTree = "<group>"; };
 		C0CD2445213EB2E40053A802 /* CollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsViewModel.swift; sourceTree = "<group>"; };
 		C0CD244A213FC23B0053A802 /* CollectionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellViewModel.swift; sourceTree = "<group>"; };
@@ -504,6 +510,16 @@
 				C00739562151547500F51C91 /* LoadingView.swift */,
 			);
 			path = LoadingView;
+			sourceTree = "<group>";
+		};
+		C09D7653216CC9010035F54D /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				C09D7654216CC91E0035F54D /* UserProfileViewController.swift */,
+				C09D7658216CC98B0035F54D /* UserProfileViewModel.swift */,
+				C09D7655216CC91E0035F54D /* UserProfileViewController.xib */,
+			);
+			path = UserProfile;
 			sourceTree = "<group>";
 		};
 		C0CD2442213EB2630053A802 /* Collections */ = {
@@ -801,8 +817,9 @@
 		DCBB1B4F1FA8B774004E95F0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				C00739552151546100F51C91 /* LoadingView */,
+				C09D7653216CC9010035F54D /* UserProfile */,
 				DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */,
+				C00739552151546100F51C91 /* LoadingView */,
 				C0CD2442213EB2630053A802 /* Collections */,
 				DC66E65220A4CB31005E5E31 /* Search */,
 				DC3917A22096680500492F62 /* Create Collection */,
@@ -1090,6 +1107,7 @@
 				DC73733820A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */,
 				DCC8CA0A2002BEE300F6C540 /* HomeViewController.xib in Resources */,
 				DC658D95208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
+				C09D7657216CC91E0035F54D /* UserProfileViewController.xib in Resources */,
 				DC658D88208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
 				DCB915B820BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */,
 				DCC8CA162002CC2700F6C540 /* HomeViewCell.xib in Resources */,
@@ -1299,6 +1317,7 @@
 				DCCCFCC1203A4A530024D417 /* Category.swift in Sources */,
 				DCBB1B551FA8B814004E95F0 /* Scene.swift in Sources */,
 				DC99FB922003A7DB001195FD /* PhotoService.swift in Sources */,
+				C09D7656216CC91E0035F54D /* UserProfileViewController.swift in Sources */,
 				DC658D92208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */,
 				DC66E67720A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */,
 				DC487F402104E99F0042DBBC /* UIScrollView+Rx.swift in Sources */,
@@ -1307,6 +1326,7 @@
 				DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */,
 				DCB915AF20B9A8DE003D1069 /* PinterestLayout.swift in Sources */,
 				DCC8CA072002BEE300F6C540 /* HomeViewController.swift in Sources */,
+				C09D7659216CC98B0035F54D /* UserProfileViewModel.swift in Sources */,
 				DC922309203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DC99FB8E2003A7CC001195FD /* PhotoServiceType.swift in Sources */,
 				DCC8CA132002CC2700F6C540 /* HomeViewCell.swift in Sources */,
