@@ -817,8 +817,8 @@
 		DCBB1B4F1FA8B774004E95F0 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				C09D7653216CC9010035F54D /* UserProfile */,
 				DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */,
+				C09D7653216CC9010035F54D /* UserProfile */,
 				C00739552151546100F51C91 /* LoadingView */,
 				C0CD2442213EB2630053A802 /* Collections */,
 				DC66E65220A4CB31005E5E31 /* Search */,

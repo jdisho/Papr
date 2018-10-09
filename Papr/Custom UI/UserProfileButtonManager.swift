@@ -15,16 +15,47 @@ import VanillaConstraints
 
 class UserProfileButtonManager: UINavigationController {
 
+    // MARK: Properties
+
     private static let imagePipeline = Nuke.ImagePipeline.shared
-    private let service: UserServiceType = UserService()
-    private let sceneCoordiantor: SceneCoordinatorType = SceneCoordinator.shared
     private let disposeBag = DisposeBag()
+
+    private var service: UserServiceType!
+    private var sceneCoordiantor: SceneCoordinatorType!
+
+    private lazy var showUserProfileAction: CocoaAction = {
+        let viewModel = UserProfileViewModel()
+        return CocoaAction { [unowned self] in
+            self.sceneCoordiantor.transition(to: Scene.userProfile(viewModel))
+        }
+    }()
+
+    // MARK: Init
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    init(rootViewController: UIViewController,
+        service: UserServiceType = UserService(),
+        sceneCoordiantor: SceneCoordinatorType = SceneCoordinator.shared) {
+        super.init(rootViewController: rootViewController)
+
+        self.service = service
+        self.sceneCoordiantor = sceneCoordiantor
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func didMove(toParentViewController parent: UIViewController?) {
         super.didMove(toParentViewController: parent)
 
         configureNavigationBar()
     }
+
+    // MARK: Helpers
 
     private func configureNavigationBar() {
         let profileImage = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
@@ -55,11 +86,4 @@ class UserProfileButtonManager: UINavigationController {
             .bind(to: profileImage.rx.image)
             .disposed(by: disposeBag)
     }
-
-    private lazy var showUserProfileAction: CocoaAction = {
-        let viewModel = UserProfileViewModel()
-        return CocoaAction { [unowned self] in
-            self.sceneCoordiantor.transition(to: Scene.userProfile(viewModel))
-        }
-    }()
 }
