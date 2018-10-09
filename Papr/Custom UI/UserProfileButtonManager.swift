@@ -8,20 +8,45 @@
 
 import Foundation
 import UIKit
+import RxSwift
+import Nuke
 
-class UserProfileButtonManager: NSObject {
-    private var navigationController: UINavigationController?
+class UserProfileButtonManager: UINavigationController {
 
-    init(nc: UINavigationController) {
-        super.init()
-        let allowedVC = nc.viewControllers.first(where: { $0 is HomeViewController })
-        if allowedVC != nil {
-            allowedVC!.navigationItem.leftBarButtonItem = UIBarButtonItem(
-                title: "Profile",
-                style: .plain,
-                target: self,
-                action: nil
-            )
-        }
+    private var service: UserServiceType = UserService()
+    private static let imagePipeline = Nuke.ImagePipeline.shared
+    private let profileImageBarButton = UIBarButtonItem()
+    private let disposeBag = DisposeBag()
+
+    override func didMove(toParentViewController parent: UIViewController?) {
+        super.didMove(toParentViewController: parent)
+
+        configureNavigationBar()
+    }
+
+    private func configureNavigationBar() {
+        let profileImage = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 35, height: 35)))
+        profileImage.cornerRadius = Double(profileImage.frame.height / 2)
+        let profileImageBarButtonItem = UIBarButtonItem(customView: profileImage)
+
+        topViewController?.navigationItem.leftBarButtonItem = profileImageBarButtonItem
+
+        service.getMe()
+            .flatMap { result -> Observable<User> in
+                switch result {
+                case let .success(user):
+                    return .just(user)
+                case .error(_):
+                    return .empty()
+                }
+            }
+            .map { $0.profileImage?.medium }
+            .unwrap()
+            .mapToURL()
+            .debug()
+            .flatMap { UserProfileButtonManager.imagePipeline.rx.loadImage(with: $0) }
+            .map { $0.image }
+            .bind(to: profileImage.rx.image)
+            .disposed(by: disposeBag)
     }
 }

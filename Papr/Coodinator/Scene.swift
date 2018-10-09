@@ -40,7 +40,7 @@ extension Scene: TargetScene {
             //HomeViewController
             var homeVC = HomeViewController.initFromNib()
             let homeViewModel = HomeViewModel()
-            let rootHomeVC = UINavigationController(rootViewController: homeVC)
+            let rootHomeVC = UserProfileButtonManager(rootViewController: homeVC)
             homeVC.bind(to: homeViewModel)
 
             //SearchViewController
