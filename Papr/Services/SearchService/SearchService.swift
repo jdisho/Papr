@@ -21,7 +21,7 @@ struct SearchService: SearchServiceType {
         return unsplash.rx.request(.searchPhotos(
                 query: query,
                 page: pageNumber,
-                perPage: 30,
+                perPage: 10,
                 collections: nil,
                 orientation: nil)
             )
