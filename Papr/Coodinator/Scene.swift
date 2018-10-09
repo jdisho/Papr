@@ -46,13 +46,13 @@ extension Scene: TargetScene {
             //SearchViewController
             var searchVC = SearchViewController.initFromNib()
             let searchViewModel = SearchViewModel()
-            let rootSearchVC = UINavigationController(rootViewController: searchVC)
+            let rootSearchVC = UserProfileButtonManager(rootViewController: searchVC)
             searchVC.bind(to: searchViewModel)
 
             //CollectionsViewController
             var collectionsVC = CollectionsViewController()
             let collectionViewModel = CollectionsViewModel()
-            let rootCollectionVC = UINavigationController(rootViewController: collectionsVC)
+            let rootCollectionVC = UserProfileButtonManager(rootViewController: collectionsVC)
             collectionsVC.bind(to: collectionViewModel)
 
             rootHomeVC.tabBarItem = UITabBarItem(
@@ -60,11 +60,13 @@ extension Scene: TargetScene {
                 image: UIImage(named: "photo-white"),
                 tag: 0
             )
+
             rootCollectionVC.tabBarItem = UITabBarItem(
                 title: "Collections",
                 image: UIImage(named: "collections-white"),
                 tag: 1
             )
+
             rootSearchVC.tabBarItem = UITabBarItem(
                 title: "Search",
                 image: UIImage(named: "search-white"),

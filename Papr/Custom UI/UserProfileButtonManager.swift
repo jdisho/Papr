@@ -13,9 +13,8 @@ import Nuke
 
 class UserProfileButtonManager: UINavigationController {
 
-    private var service: UserServiceType = UserService()
     private static let imagePipeline = Nuke.ImagePipeline.shared
-    private let profileImageBarButton = UIBarButtonItem()
+    private let service: UserServiceType = UserService()
     private let disposeBag = DisposeBag()
 
     override func didMove(toParentViewController parent: UIViewController?) {
@@ -25,7 +24,7 @@ class UserProfileButtonManager: UINavigationController {
     }
 
     private func configureNavigationBar() {
-        let profileImage = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 35, height: 35)))
+        let profileImage = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         profileImage.cornerRadius = Double(profileImage.frame.height / 2)
         let profileImageBarButtonItem = UIBarButtonItem(customView: profileImage)
 
@@ -43,7 +42,6 @@ class UserProfileButtonManager: UINavigationController {
             .map { $0.profileImage?.medium }
             .unwrap()
             .mapToURL()
-            .debug()
             .flatMap { UserProfileButtonManager.imagePipeline.rx.loadImage(with: $0) }
             .map { $0.image }
             .bind(to: profileImage.rx.image)
