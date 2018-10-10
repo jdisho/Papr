@@ -59,6 +59,7 @@ class UserProfileButtonManager: UINavigationController {
 
     private func configureNavigationBar() {
         let profileImage = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        profileImage.isHidden = true
         profileImage.cornerRadius = Double(profileImage.frame.height / 2)
 
         var button = UIButton(frame: .zero)
@@ -73,8 +74,9 @@ class UserProfileButtonManager: UINavigationController {
             .flatMap { result -> Observable<User> in
                 switch result {
                 case let .success(user):
+                    profileImage.isHidden = false
                     return .just(user)
-                case .error(_):
+                case .error:
                     return .empty()
                 }
             }

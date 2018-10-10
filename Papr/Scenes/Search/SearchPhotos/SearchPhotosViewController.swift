@@ -22,9 +22,9 @@ class SearchPhotosViewController: UIViewController, BindableType {
     @IBOutlet var collectionView: UICollectionView!
 
     // MARK: Privates
-    private let pinterestLayout: PinterestLayout = PinterestLayout()
     private var loadingView: LoadingView!
     private var dataSource: RxCollectionViewSectionedReloadDataSource<SearchPhotosSectionModel>!
+    private let pinterestLayout: PinterestLayout = PinterestLayout()
     private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
