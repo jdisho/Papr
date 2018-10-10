@@ -36,6 +36,12 @@ class SearchViewController: UIViewController, BindableType {
         configureTableView()
         configureBouncyView()
     }
+    
+    // MARK: Overrides
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.searchBar.endEditing(true)
+    }
 
     // MARK: BindableType
 
@@ -66,24 +72,12 @@ class SearchViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         tableView.rx.itemSelected
-            .map({ [unowned self] indexpath -> IndexPath? in
-
-                
-                if self.searchBar.isFirstResponder {
-                    self.searchBar.endEditing(true)
-                    return nil
-                } else {
-                    return indexpath
-                }
-            })
-            .unwrap()
+            .flatMapIgnore { [unowned self] _ in
+                Observable.just(self.searchBar.endEditing(true))
+            }
             .map { $0.row }
             .bind(to: inputs.searchTrigger)
             .disposed(by: disposeBag)
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.searchBar.endEditing(true)
     }
 
     // MARK: UI
