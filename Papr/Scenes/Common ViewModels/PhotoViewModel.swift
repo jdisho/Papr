@@ -164,13 +164,9 @@ class PhotoViewModel: PhotoViewModelType,
         }
 
         totalLikes = Observable.combineLatest(photoStream, photoStreamProperty)
-            .map { oldPhoto, newPhoto -> Photo in
-                guard let photo = newPhoto else { return oldPhoto }
-                return photo
-            }
-            .flatMap { photo in
-                service.photo(withId: photo.id ?? "")
-                    .map { $0.likes }
+            .map { oldPhoto, newPhoto -> Int? in
+                guard let photo = newPhoto else { return oldPhoto.likes }
+                return photo.likes
             }
             .unwrap()
             .map { likes in
@@ -180,13 +176,9 @@ class PhotoViewModel: PhotoViewModelType,
             .catchErrorJustReturn("")
 
         likedByUser = Observable.combineLatest(photoStream, photoStreamProperty)
-            .map { oldPhoto, newPhoto -> Photo in
-                guard let photo = newPhoto else { return oldPhoto }
-                return photo
-            }
-            .flatMap { photo in
-                service.photo(withId: photo.id ?? "")
-                    .map { $0.likedByUser }
+            .map { oldPhoto, newPhoto -> Bool? in
+                guard let photo = newPhoto else { return oldPhoto.likedByUser }
+                return photo.likedByUser
             }
             .unwrap()
             .catchErrorJustReturn(false)
