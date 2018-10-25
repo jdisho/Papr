@@ -18,6 +18,9 @@
 		C0CD244B213FC23B0053A802 /* CollectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD244A213FC23B0053A802 /* CollectionCellViewModel.swift */; };
 		C0CD244E213FEBC10053A802 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD244C213FEBC10053A802 /* CollectionCell.swift */; };
 		C0CD244F213FEBC10053A802 /* CollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CD244D213FEBC10053A802 /* CollectionCell.xib */; };
+		C0D52CB12181DA7700FB0517 /* FlatCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D52CB02181DA7700FB0517 /* FlatCache.swift */; };
+		C0D52CB42181DAB000FB0517 /* FlatCacheKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D52CB32181DAB000FB0517 /* FlatCacheKey.swift */; };
+		C0D52CB62181DADD00FB0517 /* Cachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D52CB52181DADD00FB0517 /* Cachable.swift */; };
 		C0F79DEF2167A5080051232D /* RxPinterestLayoutDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F79DEE2167A5080051232D /* RxPinterestLayoutDelegateProxy.swift */; };
 		C0F79DF12167A58C0051232D /* PinterestLayout+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F79DF02167A58C0051232D /* PinterestLayout+Rx.swift */; };
 		CBEDD29778BCF9269C6CDB95 /* Pods_PaprUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D59E6B0C5E02E5657E3FA6EA /* Pods_PaprUITests.framework */; };
@@ -343,6 +346,9 @@
 		C0CD244A213FC23B0053A802 /* CollectionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellViewModel.swift; sourceTree = "<group>"; };
 		C0CD244C213FEBC10053A802 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		C0CD244D213FEBC10053A802 /* CollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionCell.xib; sourceTree = "<group>"; };
+		C0D52CB02181DA7700FB0517 /* FlatCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatCache.swift; sourceTree = "<group>"; };
+		C0D52CB32181DAB000FB0517 /* FlatCacheKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatCacheKey.swift; sourceTree = "<group>"; };
+		C0D52CB52181DADD00FB0517 /* Cachable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cachable.swift; sourceTree = "<group>"; };
 		C0F79DEE2167A5080051232D /* RxPinterestLayoutDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxPinterestLayoutDelegateProxy.swift; sourceTree = "<group>"; };
 		C0F79DF02167A58C0051232D /* PinterestLayout+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PinterestLayout+Rx.swift"; sourceTree = "<group>"; };
 		CB61BD2759AC178641433994 /* Pods-PaprTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaprTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PaprTests/Pods-PaprTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -540,6 +546,16 @@
 				C0CD244D213FEBC10053A802 /* CollectionCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		C0D52CAF2181DA5700FB0517 /* FlatCache */ = {
+			isa = PBXGroup;
+			children = (
+				C0D52CB02181DA7700FB0517 /* FlatCache.swift */,
+				C0D52CB32181DAB000FB0517 /* FlatCacheKey.swift */,
+				C0D52CB52181DADD00FB0517 /* Cachable.swift */,
+			);
+			path = FlatCache;
 			sourceTree = "<group>";
 		};
 		DC0EDE95205B20B2004CD808 /* Commons */ = {
@@ -847,6 +863,7 @@
 		DCBB1B511FA8B7BA004E95F0 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C0D52CAF2181DA5700FB0517 /* FlatCache */,
 				DC5AF7531FAD2EE400ADA2BB /* Enums */,
 				DC7CF5851FC468C6006E0A39 /* Authentication */,
 				DCBB1B6A1FA8BA5D004E95F0 /* Extentions */,
@@ -1305,6 +1322,7 @@
 				DC71C3021FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				C0F79DF12167A58C0051232D /* PinterestLayout+Rx.swift in Sources */,
 				DC5AF74C1FACF18600ADA2BB /* Exif.swift in Sources */,
+				C0D52CB12181DA7700FB0517 /* FlatCache.swift in Sources */,
 				DCCD04142059C19D00670B70 /* UserServiceType.swift in Sources */,
 				DCBB1B571FA8B823004E95F0 /* SceneCoodinatorType.swift in Sources */,
 				DCB433C8204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */,
@@ -1343,6 +1361,7 @@
 				DC73734120A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */,
 				DCCCFCC5203A52410024D417 /* Resolution.swift in Sources */,
 				DCBE008E202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
+				C0D52CB42181DAB000FB0517 /* FlatCacheKey.swift in Sources */,
 				DC7CF5821FC464BF006E0A39 /* URL.swift in Sources */,
 				DC73732920A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */,
 				DCFB564920C46A93007401DE /* UIColor+Extentions.swift in Sources */,
@@ -1358,6 +1377,7 @@
 				DC73733220A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */,
 				DC5AF7501FAD027F00ADA2BB /* PhotoCollection.swift in Sources */,
 				DC658D9F208D139800FEBC31 /* CollectionServiceType.swift in Sources */,
+				C0D52CB62181DADD00FB0517 /* Cachable.swift in Sources */,
 				DC72A4D920C305E8001550D1 /* UserCellModel.swift in Sources */,
 				DCB915AA20B9A81D003D1069 /* SearchPhotosViewController.swift in Sources */,
 				DC5AF72F1FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
