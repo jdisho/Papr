@@ -66,36 +66,15 @@ struct PhotoService: PhotoServiceType {
         curated: Bool = false
         ) -> Observable<Result<[Photo], String>> {
 
+        let photos: Unsplash = curated ?
+            .curatedPhotos(page: pageNumber, perPage: Constants.photosPerPage, orderBy: orderBy) :
+            .photos(page: pageNumber, perPage: Constants.photosPerPage, orderBy: orderBy)
 
-        if curated {
-            return unsplash.rx
-                    .request(.curatedPhotos(
-                        page: pageNumber,
-                        perPage: Constants.photosPerPage,
-                        orderBy: orderBy
-                        )
-                    )
-                    .map([Photo].self)
-                    .asObservable()
-                    .map(Result.success)
-                    .catchError { error in
-                        return .just(.error(error.localizedDescription))
-                    }
-        }
-
-        return unsplash.rx
-            .request(.photos(
-                page: pageNumber,
-                perPage: Constants.photosPerPage,
-                orderBy: orderBy
-                )
-            )
+        return unsplash.rx.request(photos)
             .map([Photo].self)
             .asObservable()
             .map(Result.success)
-            .catchError { error in
-                return .just(.error(error.localizedDescription))
-            }
+            .catchError { .just(.error($0.localizedDescription)) }
     }
 
     func statistics(of photo: Photo) -> Observable<PhotoStatistics> {
@@ -117,9 +96,7 @@ struct PhotoService: PhotoServiceType {
             .asObservable()
             .unwrap()
             .map(Result.success)
-            .catchError { error in
-                return .just(.error("Failed to download photo"))
-            }
+            .catchError { _ in return .just(.error("Failed to download photo")) }
 
     }
 }
