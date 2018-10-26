@@ -32,7 +32,6 @@ struct CollectionService: CollectionServiceType {
     }
 
     func collections(byPageNumber page: Int, curated: Bool) -> Observable<Result<[PhotoCollection], String>> {
-        
         let collections: Unsplash = curated ?
             .curatedCollections(page: page, perPage: 20) :
             .featuredCollections(page: page, perPage: 20)
@@ -41,9 +40,7 @@ struct CollectionService: CollectionServiceType {
             .map([PhotoCollection].self)
             .asObservable()
             .map(Result.success)
-            .catchError { error in
-                return .just(.error(error.localizedDescription))
-            }
+            .catchError { .just(.error($0.localizedDescription)) }
     }
 
     func photos(fromCollectionId id: Int) -> Observable<[Photo]> {

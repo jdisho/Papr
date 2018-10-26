@@ -24,7 +24,7 @@ public struct CacheKey: Equatable, Hashable {
 }
 
 public protocol Identifiable {
-    var id: String { get }
+    var identifier: String { get }
 }
 
 public protocol Cachable: Identifiable { }
@@ -35,12 +35,13 @@ private extension Cachable {
     }
 
     var cacheKey: CacheKey {
-        return CacheKey(typeName: Self.typeName, id: id)
+        return CacheKey(typeName: Self.typeName, id: identifier)
     }
 }
 
 public final class Cache  {
 
+    public static let shared = Cache()
     private let storageStream = PublishSubject<[CacheKey: Any]>()
     private var storage = [CacheKey: Any]()
 
