@@ -209,7 +209,7 @@ class HomeViewModel: HomeViewModelType,
                     }
             }
 
-        photos = requestFirst
+        let serverPhotos = requestFirst
             .merge(with: requestNext)
             .map { [unowned self] photos -> [Photo] in
                 photos.forEach { photo in
@@ -217,6 +217,14 @@ class HomeViewModel: HomeViewModelType,
                 }
                 self.refreshProperty.onNext(false)
                 return photoArray
-            }
+            }.share(replay: 1)
+
+        let cachedPhotos = (Cache.shared.collection() as Observable<[Photo]>).share(replay: 1)
+
+        photos = Observable.combineLatest(serverPhotos, cachedPhotos).map { serverPhotos, cachedPhotos -> [Photo] in
+            guard cachedPhotos.isEmpty else { return cachedPhotos }
+            return serverPhotos
+        }
+
     }
 }

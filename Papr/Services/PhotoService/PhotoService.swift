@@ -13,7 +13,6 @@ import Moya
 struct PhotoService: PhotoServiceType {
 
     private var unsplash: MoyaProvider<Unsplash>
-    //plugins: [NetworkLoggerPlugin(verbose: false)])
 
     init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>()) {
         self.unsplash = unsplash
@@ -26,8 +25,9 @@ struct PhotoService: PhotoServiceType {
             .map { $0.photo }
             .asObservable()
             .unwrap()
+            .flatMapIgnore { Observable.just(Cache.shared.set(value: $0)) }
             .map(Result.success)
-            .catchError { error in
+            .catchError { _ in
                 let accessToken = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
                 guard accessToken == nil else {
                     return .just(.error(.error(withMessage: "Failed to like")))
@@ -40,11 +40,12 @@ struct PhotoService: PhotoServiceType {
         return unsplash.rx
             .request(.unlikePhoto(id: photo.id ?? ""))
             .map(LikeUnlike.self)
-            .asObservable()
             .map { $0.photo }
+            .asObservable()
             .unwrap()
+            .flatMapIgnore { Observable.just(Cache.shared.set(value: $0)) }
             .map(Result.success)
-            .catchError { error in
+            .catchError { _ in
                 let accessToken = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
                 guard accessToken == nil else {
                     return .just(.error(.error(withMessage: "Failed to like")))
@@ -66,6 +67,8 @@ struct PhotoService: PhotoServiceType {
         curated: Bool = false
         ) -> Observable<Result<[Photo], String>> {
 
+        if pageNumber == 1 { Cache.shared.clear() }
+        
         let photos: Unsplash = curated ?
             .curatedPhotos(page: pageNumber, perPage: Constants.photosPerPage, orderBy: orderBy) :
             .photos(page: pageNumber, perPage: Constants.photosPerPage, orderBy: orderBy)
@@ -73,6 +76,7 @@ struct PhotoService: PhotoServiceType {
         return unsplash.rx.request(photos)
             .map([Photo].self)
             .asObservable()
+            .flatMapIgnore { Observable.just(Cache.shared.set(values: $0)) }  // Populate the cache.
             .map(Result.success)
             .catchError { .just(.error($0.localizedDescription)) }
     }

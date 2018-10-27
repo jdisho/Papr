@@ -27,7 +27,7 @@ public protocol Identifiable {
     var identifier: String { get }
 }
 
-public protocol Cachable: Identifiable { }
+public protocol Cachable: Identifiable, Equatable { }
 
 private extension Cachable {
     static var typeName: String {
@@ -42,32 +42,44 @@ private extension Cachable {
 public final class Cache  {
 
     public static let shared = Cache()
-    private let storageStream = PublishSubject<[CacheKey: Any]>()
-    private var storage = [CacheKey: Any]()
+
+    private let storageStream = PublishSubject<[(key: CacheKey, value: Any)]>()
+    private var storage = [(key: CacheKey, value: Any)]()
 
     public init() { }
 
     public func set<T: Cachable>(value: T) {
-        let key = value.cacheKey
-        storage[key] = value
-
+        populate(storage: &storage, with: value)
         storageStream.onNext(storage)
     }
 
     public func set<T: Cachable>(values: [T]) {
         for value in values {
-            let key = value.cacheKey
-            storage[key] = value
+            populate(storage: &storage, with: value)
         }
+
         storageStream.onNext(storage)
     }
 
     public func collection<T: Cachable>() -> Observable<[T]> {
-        return storageStream.map { $0.values.map { $0 as? T }.compactMap { $0 } }
+        return storageStream.map { $0.map { $0.value as? T }.compactMap { $0 } }
     }
 
     public func clear() {
-        storage.removeAll()
-        storageStream.onNext([:])
+        if !storage.isEmpty {
+            print("Cache is cleared 🧻")
+            storage.removeAll()
+            storageStream.onNext(storage)
+        }
+    }
+
+    private func populate<T: Cachable>(storage: inout [(key: CacheKey, value: Any)], with value: T) {
+        let values = storage.map { $0.value as? T }.compactMap { $0 }
+        if let foundedValue = values.first(where: { $0.cacheKey.id == value.cacheKey.id }),
+            let index = values.firstIndex(of: foundedValue) {
+            storage[index] = (key: value.cacheKey, value: value)
+        } else {
+            storage.append((key: value.cacheKey, value: value))
+        }
     }
 }
