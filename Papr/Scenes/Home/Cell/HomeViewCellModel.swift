@@ -44,7 +44,11 @@ class HomeViewCellModel: PhotoViewModel,
     // MARK: Input
     lazy var photoDetailsAction: Action<Photo, Photo> = {
         return Action<Photo, Photo> { [unowned self] photo in
-            let viewModel = PhotoDetailsViewModel(photo: photo)
+            let viewModel = PhotoDetailsViewModel(
+                photo: photo,
+                likedByUser: self.isLikedByUser,
+                totalLikes: self.likesNumber
+            )
             self.sceneCoordinator.transition(to: Scene.photoDetails(viewModel))
             return .just(photo)
         }
@@ -81,17 +85,28 @@ class HomeViewCellModel: PhotoViewModel,
 
     // MARK: Private
     private let userService: UserServiceType
+    private let isLikedByUser: Bool
+    private let likesNumber: Int
 
     // MARK: Init
     override init(
         photo: Photo,
+        likedByUser: Bool,
+        totalLikes: Int,
         service: PhotoServiceType = PhotoService(),
         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared
         ) {
 
         self.userService = UserService()
+        isLikedByUser = likedByUser
+        likesNumber = totalLikes
 
-        super.init(photo: photo, service: service)
+        super.init(
+            photo: photo,
+            likedByUser: likedByUser,
+            totalLikes: totalLikes,
+            service: service
+        )
 
         userProfileImage = photoStream
             .map { $0.user?.profileImage?.medium }

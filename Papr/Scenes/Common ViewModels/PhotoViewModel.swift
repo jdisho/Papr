@@ -145,8 +145,10 @@ class PhotoViewModel: PhotoViewModelType,
 
     // MARK: Init
     init(photo: Photo,
-        service: PhotoServiceType = PhotoService(),
-        sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+         likedByUser: Bool,
+         totalLikes: Int,
+         service: PhotoServiceType = PhotoService(),
+         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
         self.service = service
         self.sceneCoordinator = sceneCoordinator
@@ -163,25 +165,24 @@ class PhotoViewModel: PhotoViewModelType,
                 Double(height * Int(UIScreen.main.bounds.width) / width)
         }
 
-        totalLikes = Observable.combineLatest(photoStream, photoStreamProperty)
-            .map { oldPhoto, newPhoto -> Int? in
-                guard let photo = newPhoto else { return oldPhoto.likes }
-                return photo.likes
-            }
-            .unwrap()
-            .map { likes in
-                guard likes != 0 else { return "" }
-                return likes.abbreviated
-            }
-            .catchErrorJustReturn("")
+        self.totalLikes = Observable.combineLatest(
+            photoStreamProperty.asObservable().map { $0?.likes },
+            Observable.just(totalLikes)
+            )
+            .map { serverLikes, cachedLikes -> Int in
+                guard let serverLikes = serverLikes else { return cachedLikes }
+                return serverLikes
+            }.map { $0.abbreviated }
 
-        likedByUser = Observable.combineLatest(photoStream, photoStreamProperty)
-            .map { oldPhoto, newPhoto -> Bool? in
-                guard let photo = newPhoto else { return oldPhoto.likedByUser }
-                return photo.likedByUser
-            }
-            .unwrap()
-            .catchErrorJustReturn(false)
+
+        self.likedByUser = Observable.combineLatest(
+            photoStreamProperty.asObservable().map { $0?.likedByUser },
+            Observable.just(likedByUser)
+        )
+        .map { serverLikedByUser, cachedLikedByUser -> Bool in
+            guard let serverLikedByUser = serverLikedByUser else { return cachedLikedByUser }
+            return serverLikedByUser
+        }
 
     }
 

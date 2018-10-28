@@ -56,11 +56,18 @@ class PhotoDetailsViewModel: PhotoViewModel,
 
     override init(
         photo: Photo,
+        likedByUser: Bool,
+        totalLikes: Int,
         service: PhotoServiceType = PhotoService(),
         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared
         ) {
 
-        super.init(photo: photo, service: service)
+        super.init(
+            photo: photo,
+            likedByUser: likedByUser,
+            totalLikes: totalLikes,
+            service: service
+        )
 
         totalViews = service.photo(withId: photo.id ?? "")
             .map { $0.views?.abbreviated }
