@@ -67,4 +67,10 @@ extension Photo: Equatable {
     }
 }
 
+extension Photo: Cachable {
+    var identifier: String {
+        return id ?? ""
+    }
+}
+
 

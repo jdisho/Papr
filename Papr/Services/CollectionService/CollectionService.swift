@@ -32,24 +32,15 @@ struct CollectionService: CollectionServiceType {
     }
 
     func collections(byPageNumber page: Int, curated: Bool) -> Observable<Result<[PhotoCollection], String>> {
+        let collections: Unsplash = curated ?
+            .curatedCollections(page: page, perPage: 20) :
+            .featuredCollections(page: page, perPage: 20)
 
-        var request: PrimitiveSequence<SingleTrait, Response>
-
-        if curated {
-           request = unsplash.rx
-                .request(.curatedCollections(page: page, perPage: 20))
-        } else {
-            request = unsplash.rx
-                .request(.featuredCollections(page: page, perPage: 20))
-        }
-
-        return request
+        return unsplash.rx.request(collections)
             .map([PhotoCollection].self)
             .asObservable()
             .map(Result.success)
-            .catchError { error in
-                return .just(.error(error.localizedDescription))
-            }
+            .catchError { .just(.error($0.localizedDescription)) }
     }
 
     func photos(fromCollectionId id: Int) -> Observable<[Photo]> {

@@ -18,6 +18,7 @@
 		C0CD244B213FC23B0053A802 /* CollectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD244A213FC23B0053A802 /* CollectionCellViewModel.swift */; };
 		C0CD244E213FEBC10053A802 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD244C213FEBC10053A802 /* CollectionCell.swift */; };
 		C0CD244F213FEBC10053A802 /* CollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CD244D213FEBC10053A802 /* CollectionCell.xib */; };
+		C0D52CB12181DA7700FB0517 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D52CB02181DA7700FB0517 /* Cache.swift */; };
 		C0F79DEF2167A5080051232D /* RxPinterestLayoutDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F79DEE2167A5080051232D /* RxPinterestLayoutDelegateProxy.swift */; };
 		C0F79DF12167A58C0051232D /* PinterestLayout+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F79DF02167A58C0051232D /* PinterestLayout+Rx.swift */; };
 		CBEDD29778BCF9269C6CDB95 /* Pods_PaprUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D59E6B0C5E02E5657E3FA6EA /* Pods_PaprUITests.framework */; };
@@ -343,6 +344,7 @@
 		C0CD244A213FC23B0053A802 /* CollectionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCellViewModel.swift; sourceTree = "<group>"; };
 		C0CD244C213FEBC10053A802 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		C0CD244D213FEBC10053A802 /* CollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionCell.xib; sourceTree = "<group>"; };
+		C0D52CB02181DA7700FB0517 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		C0F79DEE2167A5080051232D /* RxPinterestLayoutDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxPinterestLayoutDelegateProxy.swift; sourceTree = "<group>"; };
 		C0F79DF02167A58C0051232D /* PinterestLayout+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PinterestLayout+Rx.swift"; sourceTree = "<group>"; };
 		CB61BD2759AC178641433994 /* Pods-PaprTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PaprTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PaprTests/Pods-PaprTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -540,6 +542,14 @@
 				C0CD244D213FEBC10053A802 /* CollectionCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		C0D52CAF2181DA5700FB0517 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				C0D52CB02181DA7700FB0517 /* Cache.swift */,
+			);
+			path = Cache;
 			sourceTree = "<group>";
 		};
 		DC0EDE95205B20B2004CD808 /* Commons */ = {
@@ -847,6 +857,7 @@
 		DCBB1B511FA8B7BA004E95F0 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				C0D52CAF2181DA5700FB0517 /* Cache */,
 				DC5AF7531FAD2EE400ADA2BB /* Enums */,
 				DC7CF5851FC468C6006E0A39 /* Authentication */,
 				DCBB1B6A1FA8BA5D004E95F0 /* Extentions */,
@@ -1000,6 +1011,7 @@
 				DCBB1B1B1FA7B1BD004E95F0 /* Frameworks */,
 				DCBB1B1C1FA7B1BD004E95F0 /* Resources */,
 				0BD9448C5FCB6EFEF7E2B09F /* [CP] Embed Pods Frameworks */,
+				AFE468260E22DE8825FFBAE2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1018,6 +1030,8 @@
 				DCBB1B2E1FA7B1BD004E95F0 /* Sources */,
 				DCBB1B2F1FA7B1BD004E95F0 /* Frameworks */,
 				DCBB1B301FA7B1BD004E95F0 /* Resources */,
+				0FB34BF093AE3591EC6A4C33 /* [CP] Embed Pods Frameworks */,
+				AD3298BF80A17CD1AC06613F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1037,6 +1051,8 @@
 				DCBB1B391FA7B1BD004E95F0 /* Sources */,
 				DCBB1B3A1FA7B1BD004E95F0 /* Frameworks */,
 				DCBB1B3B1FA7B1BD004E95F0 /* Resources */,
+				97FDE6F41E440D2C0F516CEE /* [CP] Embed Pods Frameworks */,
+				8A11B80FFC4222F8C6B1D33F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1224,6 +1240,51 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Papr/Pods-Papr-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		0FB34BF093AE3591EC6A4C33 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PaprTests/Pods-PaprTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8A11B80FFC4222F8C6B1D33F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PaprUITests/Pods-PaprUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97FDE6F41E440D2C0F516CEE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PaprUITests/Pods-PaprUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		ACB1B207744BA4C855B53D15 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1240,6 +1301,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AD3298BF80A17CD1AC06613F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PaprTests/Pods-PaprTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AFE468260E22DE8825FFBAE2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Papr/Pods-Papr-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F798D865D49CA26F4996D71B /* [CP] Check Pods Manifest.lock */ = {
@@ -1305,6 +1396,7 @@
 				DC71C3021FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				C0F79DF12167A58C0051232D /* PinterestLayout+Rx.swift in Sources */,
 				DC5AF74C1FACF18600ADA2BB /* Exif.swift in Sources */,
+				C0D52CB12181DA7700FB0517 /* Cache.swift in Sources */,
 				DCCD04142059C19D00670B70 /* UserServiceType.swift in Sources */,
 				DCBB1B571FA8B823004E95F0 /* SceneCoodinatorType.swift in Sources */,
 				DCB433C8204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */,

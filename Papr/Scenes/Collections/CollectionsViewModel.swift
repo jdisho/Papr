@@ -67,7 +67,7 @@ class CollectionsViewModel: CollectionsViewModelType,
 
         isRefreshing = refreshProperty.asObservable()
 
-        let requestFirst = isRefreshing.debug()
+        let requestFirst = isRefreshing
             .flatMapLatest { isRefreshing -> Observable<[PhotoCollection]> in
                 guard isRefreshing else { return .empty() }
                 return service

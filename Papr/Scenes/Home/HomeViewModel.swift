@@ -137,7 +137,19 @@ class HomeViewModel: HomeViewModelType,
     var navBarButtonName: Observable<NavBarTitle>!
 
     lazy var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> = {
-        return photos.mapMany { HomeViewCellModel(photo: $0) }
+        let cachedPhotos = (Cache.shared.collection() as Observable<[Photo]>).share(replay: 1)
+        return Observable.combineLatest(photos, cachedPhotos).map { serverPhotos, cachedPhotos -> [HomeViewCellModelType] in
+            var homeViewCellModelArray = [HomeViewCellModelType]()
+            for (serverPhoto, cachedPhoto) in zip(serverPhotos, cachedPhotos) {
+                let homeViewCellModel = HomeViewCellModel(
+                    photo: serverPhoto,
+                    likedByUser: cachedPhoto.likedByUser ?? false,
+                    totalLikes: cachedPhoto.likes ?? 0
+                )
+                homeViewCellModelArray.append(homeViewCellModel)
+            }
+            return homeViewCellModelArray
+        }
     }()
 
     // MARK: Private
@@ -217,6 +229,6 @@ class HomeViewModel: HomeViewModelType,
                 }
                 self.refreshProperty.onNext(false)
                 return photoArray
-            }
+            }.share(replay: 1)
     }
 }

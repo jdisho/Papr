@@ -13,7 +13,6 @@ import Moya
 struct PhotoService: PhotoServiceType {
 
     private var unsplash: MoyaProvider<Unsplash>
-    //plugins: [NetworkLoggerPlugin(verbose: false)])
 
     init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>()) {
         self.unsplash = unsplash
@@ -26,8 +25,9 @@ struct PhotoService: PhotoServiceType {
             .map { $0.photo }
             .asObservable()
             .unwrap()
+            .flatMapIgnore { Observable.just(Cache.shared.set(value: $0)) } // 🎡 Update cache
             .map(Result.success)
-            .catchError { error in
+            .catchError { _ in
                 let accessToken = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
                 guard accessToken == nil else {
                     return .just(.error(.error(withMessage: "Failed to like")))
@@ -40,11 +40,12 @@ struct PhotoService: PhotoServiceType {
         return unsplash.rx
             .request(.unlikePhoto(id: photo.id ?? ""))
             .map(LikeUnlike.self)
-            .asObservable()
             .map { $0.photo }
+            .asObservable()
             .unwrap()
+            .flatMapIgnore { Observable.just(Cache.shared.set(value: $0)) } // 🎡 Update cache
             .map(Result.success)
-            .catchError { error in
+            .catchError { _ in
                 let accessToken = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
                 guard accessToken == nil else {
                     return .just(.error(.error(withMessage: "Failed to like")))
@@ -66,36 +67,18 @@ struct PhotoService: PhotoServiceType {
         curated: Bool = false
         ) -> Observable<Result<[Photo], String>> {
 
+        if pageNumber == 1 { Cache.shared.clear() }
+        
+        let photos: Unsplash = curated ?
+            .curatedPhotos(page: pageNumber, perPage: Constants.photosPerPage, orderBy: orderBy) :
+            .photos(page: pageNumber, perPage: Constants.photosPerPage, orderBy: orderBy)
 
-        if curated {
-            return unsplash.rx
-                    .request(.curatedPhotos(
-                        page: pageNumber,
-                        perPage: Constants.photosPerPage,
-                        orderBy: orderBy
-                        )
-                    )
-                    .map([Photo].self)
-                    .asObservable()
-                    .map(Result.success)
-                    .catchError { error in
-                        return .just(.error(error.localizedDescription))
-                    }
-        }
-
-        return unsplash.rx
-            .request(.photos(
-                page: pageNumber,
-                perPage: Constants.photosPerPage,
-                orderBy: orderBy
-                )
-            )
+        return unsplash.rx.request(photos)
             .map([Photo].self)
             .asObservable()
+            .flatMapIgnore { Observable.just(Cache.shared.set(values: $0)) }  // 👨‍👩‍👧‍👧 Populate the cache.
             .map(Result.success)
-            .catchError { error in
-                return .just(.error(error.localizedDescription))
-            }
+            .catchError { .just(.error($0.localizedDescription)) }
     }
 
     func statistics(of photo: Photo) -> Observable<PhotoStatistics> {
@@ -117,9 +100,7 @@ struct PhotoService: PhotoServiceType {
             .asObservable()
             .unwrap()
             .map(Result.success)
-            .catchError { error in
-                return .just(.error("Failed to download photo"))
-            }
+            .catchError { _ in return .just(.error("Failed to download photo")) }
 
     }
 }
