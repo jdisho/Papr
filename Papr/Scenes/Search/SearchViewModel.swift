@@ -48,7 +48,7 @@ class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewMode
                 let query = searchStringValue else { return .empty() }
             switch row {
             case 0:
-                let viewModel = SearchPhotosViewModel(searchQuery: query)
+                let viewModel = SearchPhotosViewModel(type: .searchPhotos(searchQuery: query, searchService: SearchService()))
                 return self.sceneCoordinator.transition(to: Scene.searchPhotos(viewModel))
             case 1:
                 let viewModel = SearchCollectionsViewModel()
