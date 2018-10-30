@@ -18,7 +18,7 @@ protocol CollectionsViewModelInput {
     func refresh()
 
      /// Call when a collection is selected
-    var collectionDetailsAction: Action<Int, Void> { get }
+    var collectionDetailsAction: Action<PhotoCollection, Void> { get }
 }
 protocol CollectionsViewModelOutput {
     /// Emits a boolean when the pull-to-refresh control is refreshing or not.
@@ -53,12 +53,12 @@ class CollectionsViewModel: CollectionsViewModelType,
         return photoCollections.mapMany { CollectionCellViewModel(photoCollection: $0) }
     }()
 
-    lazy var collectionDetailsAction: Action<Int, Void> = {
-        return Action<Int, Void> { [unowned self] collectionID in
+    lazy var collectionDetailsAction: Action<PhotoCollection, Void> = {
+        return Action<PhotoCollection, Void> { [unowned self] collection in
             let viewModel = SearchPhotosViewModel(type:
                 .collectionPhotos(
-                    title: "Test Title",
-                    collectionID: collectionID,
+                    title: collection.title ?? "",
+                    collectionID: collection.id ?? 0,
                     collectionService: CollectionService()
                 )
             )

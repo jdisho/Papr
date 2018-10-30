@@ -61,7 +61,35 @@ class CollectionCell: UITableViewCell, BindableType, NibIdentifiable & ClassIden
         let output = viewModel.output
         let this = CollectionCell.self
 
-        Observable.combineLatest(output.smallPhotoURL, output.regularPhotoURL)
+
+        let smallPhotoURL = output.photoCollection
+            .map { $0.coverPhoto?.urls?.small }
+            .unwrap()
+
+        let regularPhotoURL = output.photoCollection
+            .map { $0.coverPhoto?.urls?.regular }
+            .unwrap()
+
+        let mediumUserProfilePic = output.photoCollection
+            .map { $0.user?.profileImage?.medium }
+            .unwrap()
+
+        let largeUserProfilePic = output.photoCollection
+            .map { $0.user?.profileImage?.large }
+            .unwrap()
+
+        let title = output.photoCollection
+            .map { $0.title }
+            .unwrap()
+
+        let username = output.photoCollection
+            .map { ($0.user?.firstName ?? "") + " " + ($0.user?.lastName ?? "") }
+
+        let photosNumber = output.photoCollection
+            .map { $0.totalPhotos?.abbreviated }
+            .unwrap()
+
+        Observable.combineLatest(smallPhotoURL, regularPhotoURL)
             .flatMap { small, regular -> Observable<ImageResponse> in
                 return Observable.concat(
                     this.imagePipeline.rx.loadImage(with: URL(string: small)),
@@ -72,7 +100,7 @@ class CollectionCell: UITableViewCell, BindableType, NibIdentifiable & ClassIden
             .bind(to: photoCollectionImagePreview.rx.image)
             .disposed(by: disposeBag)
 
-        Observable.combineLatest(output.mediumUserProfilePic, output.largeUserProfilePic)
+        Observable.combineLatest(mediumUserProfilePic, largeUserProfilePic)
             .flatMap { medium, large -> Observable<ImageResponse> in
                 return Observable.concat(
                     this.imagePipeline.rx.loadImage(with: URL(string: medium)),
@@ -83,15 +111,15 @@ class CollectionCell: UITableViewCell, BindableType, NibIdentifiable & ClassIden
             .bind(to: userProfilePic.rx.image)
             .disposed(by: disposeBag)
 
-        output.title
+        title
             .bind(to: photoCollectionTitleLabel.rx.text)
             .disposed(by: disposeBag)
 
-        output.username
+        username
             .bind(to: photoCollectionAuthorLabel.rx.text)
             .disposed(by: disposeBag)
 
-        output.photosNumber
+        photosNumber
             .bind(to: photosNumberLabel.rx.text)
             .disposed(by: disposeBag)
     }

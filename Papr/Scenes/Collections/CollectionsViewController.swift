@@ -52,7 +52,6 @@ class CollectionsViewController: UIViewController, BindableType {
             .bind(to: input.loadMore)
             .disposed(by: disposeBag)
 
-
         tableView.rx.itemSelected
             .map { [unowned self] indexPath -> CollectionCell? in
                 guard let cell = self.tableView.cellForRow(at: indexPath) as? CollectionCell
@@ -62,11 +61,8 @@ class CollectionsViewController: UIViewController, BindableType {
             .unwrap()
             .map { $0.viewModel }
             .unwrap()
-            .flatMap { $0.output.collectionID }
-            .subscribe { result in
-                guard let collectionID = result.element else { return }
-                input.collectionDetailsAction.execute(collectionID)
-            }
+            .flatMap { $0.output.photoCollection }
+            .bind(to: input.collectionDetailsAction.inputs)
             .disposed(by: disposeBag)
     }
 
