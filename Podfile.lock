@@ -32,6 +32,20 @@ DEPENDENCIES:
   - RxSwift
   - VanillaConstraints
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Action
+    - Alamofire
+    - Differentiator
+    - Hero
+    - Moya
+    - Nuke
+    - Result
+    - RxCocoa
+    - RxDataSources
+    - RxSwift
+    - VanillaConstraints
+
 SPEC CHECKSUMS:
   Action: 2275d04a407ecaf46a58d58a304388a28155a0a1
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -47,4 +61,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 612c2dc566dbb5eafad8c9af8510ad8651bddd91
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
