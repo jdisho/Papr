@@ -84,7 +84,7 @@ class SearchViewController: UIViewController, BindableType {
 
     private func configureSearchBar() {
         searchBar = UISearchBar()
-        searchBar.searchBarStyle = .minimal
+        searchBar.searchBarStyle = .default
         searchBar.placeholder = "Search Unsplash"
         navigationItem.titleView = searchBar
     }

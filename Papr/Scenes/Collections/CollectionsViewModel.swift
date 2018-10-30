@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import Action
 
 protocol CollectionsViewModelInput {
     /// Call when the bottom of the list is reached
@@ -15,6 +16,9 @@ protocol CollectionsViewModelInput {
 
     /// Call when pull-to-refresh is invoked
     func refresh()
+
+     /// Call when a collection is selected
+    var collectionDetailsAction: Action<PhotoCollection, Void> { get }
 }
 protocol CollectionsViewModelOutput {
     /// Emits a boolean when the pull-to-refresh control is refreshing or not.
@@ -47,6 +51,19 @@ class CollectionsViewModel: CollectionsViewModelType,
 
     lazy var collectionCellsModelType: Observable<[CollectionCellViewModelType]> = {
         return photoCollections.mapMany { CollectionCellViewModel(photoCollection: $0) }
+    }()
+
+    lazy var collectionDetailsAction: Action<PhotoCollection, Void> = {
+        return Action<PhotoCollection, Void> { [unowned self] collection in
+            let viewModel = SearchPhotosViewModel(type:
+                .collectionPhotos(
+                    title: collection.title ?? "",
+                    collectionID: collection.id ?? 0,
+                    collectionService: CollectionService()
+                )
+            )
+            return self.sceneCoordinator.transition(to: Scene.searchPhotos(viewModel))
+        }
     }()
 
     // MARK: Private

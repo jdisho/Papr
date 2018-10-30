@@ -129,7 +129,7 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
                 return photo
             }
             .flatMap { photo in
-                service.photos(fromCollectionId: photoCollection.id ?? 0)
+                service.photos(fromCollectionId: photoCollection.id ?? 0, pageNumber: 1)
                     .map { $0.contains(photo) }
             }
             .catchErrorJustReturn(false)

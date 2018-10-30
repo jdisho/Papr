@@ -106,7 +106,6 @@ class HomeViewController: UIViewController, BindableType {
         rightBarButtonItem = UIBarButtonItem()
         navigationItem.titleView = navBarButton
         navigationItem.rightBarButtonItem = rightBarButtonItem
-        navigationController?.navigationBar.tintColor = .black
     }
 
     private func configureTableView() {

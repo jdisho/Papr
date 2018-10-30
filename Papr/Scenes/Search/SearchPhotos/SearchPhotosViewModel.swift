@@ -29,6 +29,11 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
     var inputs: SearchPhotosViewModelInput { return self }
     var outputs: SearchPhotosViewModelOutput { return self }
 
+    enum SearchType {
+        case collectionPhotos(title: String, collectionID: Int, collectionService: CollectionServiceType)
+        case searchPhotos(searchQuery: String, searchService: SearchServiceType)
+    }
+
     // MARK: - Inputs
     let loadMore = BehaviorSubject<Bool>(value: false)
 
@@ -40,44 +45,61 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
 
     // MARK: - Private
     private var photos: Observable<[Photo]>!
-    private let service: SearchServiceType
     private let sceneCoordinator: SceneCoordinatorType
     // MARK: - Init
 
-    init(searchQuery: String,
-         service: SearchServiceType = SearchService(),
-         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+    init(type: SearchType, sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
-        self.service = service
         self.sceneCoordinator = sceneCoordinator
 
-        var currentPageNumber = 1
         var photoArray = [Photo]([])
+        var currentPageNumber = 1
+        let requestFirst: Observable<[Photo]>
+        let requestNext: Observable<[Photo]>
 
-        let searchResultsNumber = service
-            .searchPhotos(with: searchQuery, pageNumber: currentPageNumber)
-            .map { $0.total }
-            .unwrap()
+        switch type {
+        case let .searchPhotos(searchQuery: searchQuery, searchService: searchService):
 
-        let requestFirst = service
-            .searchPhotos(with: searchQuery, pageNumber: currentPageNumber)
-            .map { $0.results }
-            .unwrap()
+            let searchResultsNumber = searchService
+                .searchPhotos(with: searchQuery, pageNumber: currentPageNumber)
+                .map { $0.total }
+                .unwrap()
 
-        let requestNext = loadMore.asObservable()
-            .flatMap { loadMore -> Observable<[Photo]> in
-                guard loadMore else { return .empty() }
-                currentPageNumber += 1
-                return service
-                    .searchPhotos(with: searchQuery, pageNumber: currentPageNumber)
-                    .map { $0.results }
-                    .unwrap()
+            requestFirst = searchService
+                .searchPhotos(with: searchQuery, pageNumber: 1)
+                .map { $0.results }
+                .unwrap()
+
+
+            requestNext = loadMore.asObservable()
+                .flatMap { loadMore -> Observable<[Photo]> in
+                    guard loadMore else { return .empty() }
+                    currentPageNumber += 1
+                    return searchService
+                        .searchPhotos(with: searchQuery, pageNumber: currentPageNumber)
+                        .map { $0.results }
+                        .unwrap()
             }
 
-        navTitle =  Observable.zip(Observable.just(searchQuery), searchResultsNumber)
-            .map { query, resultsNumber in
-                return "\(query): \(resultsNumber) results"
+            navTitle =  Observable.zip(Observable.just(searchQuery), searchResultsNumber)
+                .map { query, resultsNumber in
+                    return "\(query): \(resultsNumber) results"
             }
+
+        case let .collectionPhotos(title: title, collectionID: collectionID, collectionService: collectionService):
+            
+            requestFirst = collectionService.photos(fromCollectionId: collectionID, pageNumber: 1)
+
+            requestNext = loadMore.asObservable()
+                .flatMap { loadMore -> Observable<[Photo]> in
+                    guard loadMore else { return .empty() }
+                    currentPageNumber += 1
+                    return collectionService.photos(fromCollectionId: collectionID, pageNumber: currentPageNumber)
+            }
+
+            navTitle = Observable.just(title)
+
+        }
 
         photos = requestFirst
             .merge(with: requestNext)

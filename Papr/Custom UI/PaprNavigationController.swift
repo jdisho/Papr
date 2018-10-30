@@ -1,5 +1,5 @@
 //
-//  UserProfileButtonManager.swift
+//  PaprNavigationController.swift
 //  Papr
 //
 //  Created by Joan Disho on 22.07.18.
@@ -13,7 +13,7 @@ import Nuke
 import Action
 import VanillaConstraints
 
-class UserProfileButtonManager: UINavigationController {
+class PaprNavigationController: UINavigationController {
 
     // MARK: Properties
 
@@ -58,6 +58,9 @@ class UserProfileButtonManager: UINavigationController {
     // MARK: Helpers
 
     private func configureNavigationBar() {
+        navigationBar.tintColor = .black
+        navigationBar.isTranslucent = false
+
         let profileImage = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         profileImage.isHidden = true
         profileImage.cornerRadius = Double(profileImage.frame.height / 2)
@@ -69,6 +72,7 @@ class UserProfileButtonManager: UINavigationController {
         button.rx.action = showUserProfileAction
 
         topViewController?.navigationItem.leftBarButtonItem = profileImageBarButtonItem
+        topViewController?.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
 
         service.getMe()
             .flatMap { result -> Observable<User> in
@@ -83,7 +87,7 @@ class UserProfileButtonManager: UINavigationController {
             .map { $0.profileImage?.medium }
             .unwrap()
             .mapToURL()
-            .flatMap { UserProfileButtonManager.imagePipeline.rx.loadImage(with: $0) }
+            .flatMap { PaprNavigationController.imagePipeline.rx.loadImage(with: $0) }
             .map { $0.image }
             .bind(to: profileImage.rx.image)
             .disposed(by: disposeBag)

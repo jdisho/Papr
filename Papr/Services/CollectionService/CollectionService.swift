@@ -43,8 +43,8 @@ struct CollectionService: CollectionServiceType {
             .catchError { .just(.error($0.localizedDescription)) }
     }
 
-    func photos(fromCollectionId id: Int) -> Observable<[Photo]> {
-        return unsplash.rx.request(.collectionPhotos(id: id, page: 1, perPage: 10))
+    func photos(fromCollectionId id: Int, pageNumber: Int) -> Observable<[Photo]> {
+        return unsplash.rx.request(.collectionPhotos(id: id, page: pageNumber, perPage: 10))
             .map([Photo].self)
             .asObservable()
     }
