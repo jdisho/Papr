@@ -35,7 +35,7 @@
 		DC3917AC2096684800492F62 /* CreateCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3917AB2096684800492F62 /* CreateCollectionViewModel.swift */; };
 		DC3917AD2096684800492F62 /* CreateCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3917AB2096684800492F62 /* CreateCollectionViewModel.swift */; };
 		DC3917AE2096684800492F62 /* CreateCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3917AB2096684800492F62 /* CreateCollectionViewModel.swift */; };
-		DC3918CF21046AE8003DA2CA /* UserProfileButtonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3918CE21046AE8003DA2CA /* UserProfileButtonManager.swift */; };
+		DC3918CF21046AE8003DA2CA /* PaprNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3918CE21046AE8003DA2CA /* PaprNavigationController.swift */; };
 		DC487F402104E99F0042DBBC /* UIScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F3F2104E99F0042DBBC /* UIScrollView+Rx.swift */; };
 		DC487F432104F0970042DBBC /* ClassIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F422104F0970042DBBC /* ClassIdentifiable.swift */; };
 		DC487F452104F0D80042DBBC /* UITableView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F442104F0D80042DBBC /* UITableView+Identifiable.swift */; };
@@ -355,7 +355,7 @@
 		DC3917A32096683600492F62 /* CreateCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollectionViewController.swift; sourceTree = "<group>"; };
 		DC3917A42096683600492F62 /* CreateCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateCollectionViewController.xib; sourceTree = "<group>"; };
 		DC3917AB2096684800492F62 /* CreateCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCollectionViewModel.swift; sourceTree = "<group>"; };
-		DC3918CE21046AE8003DA2CA /* UserProfileButtonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileButtonManager.swift; sourceTree = "<group>"; };
+		DC3918CE21046AE8003DA2CA /* PaprNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaprNavigationController.swift; sourceTree = "<group>"; };
 		DC487F3F2104E99F0042DBBC /* UIScrollView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Rx.swift"; sourceTree = "<group>"; };
 		DC487F422104F0970042DBBC /* ClassIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassIdentifiable.swift; sourceTree = "<group>"; };
 		DC487F442104F0D80042DBBC /* UITableView+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Identifiable.swift"; sourceTree = "<group>"; };
@@ -747,7 +747,7 @@
 			isa = PBXGroup;
 			children = (
 				DCB915AE20B9A8DE003D1069 /* PinterestLayout.swift */,
-				DC3918CE21046AE8003DA2CA /* UserProfileButtonManager.swift */,
+				DC3918CE21046AE8003DA2CA /* PaprNavigationController.swift */,
 				DC487F482104FCB00042DBBC /* BouncyView.swift */,
 			);
 			path = "Custom UI";
@@ -1322,7 +1322,7 @@
 				DCB433C8204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */,
 				DC7F20931FADD3400017C14A /* SearchResults.swift in Sources */,
 				DCCCFCBD203A45DE0024D417 /* Links.swift in Sources */,
-				DC3918CF21046AE8003DA2CA /* UserProfileButtonManager.swift in Sources */,
+				DC3918CF21046AE8003DA2CA /* PaprNavigationController.swift in Sources */,
 				DCCD04182059C25900670B70 /* UserService.swift in Sources */,
 				DC73733520A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */,
 				DC487F4A2104FCB00042DBBC /* BouncyView.swift in Sources */,

@@ -41,19 +41,19 @@ extension Scene: TargetScene {
             //HomeViewController
             var homeVC = HomeViewController.initFromNib()
             let homeViewModel = HomeViewModel()
-            let rootHomeVC = UserProfileButtonManager(rootViewController: homeVC)
+            let rootHomeVC = PaprNavigationController(rootViewController: homeVC)
             homeVC.bind(to: homeViewModel)
 
             //SearchViewController
             var searchVC = SearchViewController.initFromNib()
             let searchViewModel = SearchViewModel()
-            let rootSearchVC = UserProfileButtonManager(rootViewController: searchVC)
+            let rootSearchVC = PaprNavigationController(rootViewController: searchVC)
             searchVC.bind(to: searchViewModel)
 
             //CollectionsViewController
             var collectionsVC = CollectionsViewController()
             let collectionViewModel = CollectionsViewModel()
-            let rootCollectionVC = UserProfileButtonManager(rootViewController: collectionsVC)
+            let rootCollectionVC = PaprNavigationController(rootViewController: collectionsVC)
             collectionsVC.bind(to: collectionViewModel)
 
             rootHomeVC.tabBarItem = UITabBarItem(
