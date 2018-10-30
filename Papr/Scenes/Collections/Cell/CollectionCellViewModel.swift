@@ -11,6 +11,7 @@ import RxSwift
 
 protocol CollectionCellViewModelInput {}
 protocol CollectionCellViewModelOutput {
+    var collectionID: Observable<Int> { get }
     var smallPhotoURL: Observable<String> { get }
     var regularPhotoURL: Observable<String> { get }
     var mediumUserProfilePic: Observable<String> { get }
@@ -35,6 +36,7 @@ class CollectionCellViewModel: CollectionCellViewModelType,
     // MARK: Input
 
     // MARK: Output
+    let collectionID: Observable<Int>
     let smallPhotoURL: Observable<String>
     let regularPhotoURL: Observable<String>
     let mediumUserProfilePic: Observable<String>
@@ -48,6 +50,10 @@ class CollectionCellViewModel: CollectionCellViewModelType,
     // MARK: Init
     init(photoCollection: PhotoCollection) {
         let photoCollectionStream = Observable.just(photoCollection)
+
+        collectionID = photoCollectionStream
+            .map { $0.id }
+            .unwrap()
 
         smallPhotoURL = photoCollectionStream
             .map { $0.coverPhoto?.urls?.small }

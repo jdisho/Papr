@@ -51,6 +51,23 @@ class CollectionsViewController: UIViewController, BindableType {
             .skipUntil(output.isRefreshing)
             .bind(to: input.loadMore)
             .disposed(by: disposeBag)
+
+
+        tableView.rx.itemSelected
+            .map { [unowned self] indexPath -> CollectionCell? in
+                guard let cell = self.tableView.cellForRow(at: indexPath) as? CollectionCell
+                    else { return nil }
+                return cell
+            }
+            .unwrap()
+            .map { $0.viewModel }
+            .unwrap()
+            .flatMap { $0.output.collectionID }
+            .subscribe { result in
+                guard let collectionID = result.element else { return }
+                input.collectionDetailsAction.execute(collectionID)
+            }
+            .disposed(by: disposeBag)
     }
 
     private func configureTableView() {

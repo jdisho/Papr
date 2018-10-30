@@ -40,7 +40,7 @@ protocol HomeViewModelInput {
     /// Call when OrderBy-Latest is invoked
     var orderByFrequencyAction: CocoaAction { get }
     
-     /// Call when an alert is invoked
+    /// Call when an alert is invoked
     var alertAction: Action<String, Void> { get }
     
     /// Call when pull-to-refresh is invoked
