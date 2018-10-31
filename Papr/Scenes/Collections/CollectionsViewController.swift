@@ -77,7 +77,7 @@ class CollectionsViewController: UIViewController, BindableType {
         let cellWidth = (UIScreen.main.bounds.width / 2) - spacing
 
         flowLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
-        flowLayout.sectionInset = UIEdgeInsets(top: 16.0, left: 8.0, bottom: 16.0, right: 8.0)
+        flowLayout.sectionInset = UIEdgeInsets(top: 16.0, left: 8.0, bottom: 0, right: 8.0)
         flowLayout.minimumLineSpacing = spacing
 
         collectionView.register(cellType: CollectionCell.self)

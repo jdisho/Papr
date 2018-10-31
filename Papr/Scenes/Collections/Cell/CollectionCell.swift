@@ -21,7 +21,6 @@ class CollectionCell: UICollectionViewCell, BindableType, NibIdentifiable & Clas
     @IBOutlet var photoCollectionImagePreview: UIImageView!
     @IBOutlet var photoCollectionTitleLabel: UILabel!
     @IBOutlet var photoCollectionAuthorLabel: UILabel!
-//    @IBOutlet var photosNumberLabel: UILabel!
 
     // MARK: Privates
     private static let imagePipeline = Nuke.ImagePipeline.shared
@@ -30,7 +29,7 @@ class CollectionCell: UICollectionViewCell, BindableType, NibIdentifiable & Clas
     override func awakeFromNib() {
         super.awakeFromNib()
         photoCollectionImagePreview.cornerRadius = 10.0
-        photoCollectionImagePreview.dim(withAlpha: 0.4)
+        photoCollectionImagePreview.dim(withAlpha: 0.5)
     }
 
     override func prepareForReuse() {
@@ -58,10 +57,6 @@ class CollectionCell: UICollectionViewCell, BindableType, NibIdentifiable & Clas
         let username = output.photoCollection
             .map { ($0.user?.firstName ?? "") + " " + ($0.user?.lastName ?? "") }
 
-//        let photosNumber = output.photoCollection
-//            .map { $0.totalPhotos?.abbreviated }
-//            .unwrap()
-
         Observable.combineLatest(smallPhotoURL, regularPhotoURL)
             .flatMap { small, regular -> Observable<ImageResponse> in
                 return Observable.concat(
@@ -80,9 +75,5 @@ class CollectionCell: UICollectionViewCell, BindableType, NibIdentifiable & Clas
         username
             .bind(to: photoCollectionAuthorLabel.rx.text)
             .disposed(by: disposeBag)
-
-//        photosNumber
-//            .bind(to: photosNumberLabel.rx.text)
-//            .disposed(by: disposeBag)
     }
 }
