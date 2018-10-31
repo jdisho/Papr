@@ -23,29 +23,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="287" height="247"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mw-z3-jyS">
-                        <rect key="frame" x="16" y="95.5" width="255" height="24"/>
-                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                        <rect key="frame" x="8" y="97" width="271" height="21.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVg-aF-83s">
-                        <rect key="frame" x="16" y="127.5" width="255" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="8" y="126.5" width="271" height="16"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="7mw-z3-jyS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="04R-Cj-nMK"/>
+                <constraint firstItem="7mw-z3-jyS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="04R-Cj-nMK"/>
                 <constraint firstItem="2o0-rI-EzI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="4d6-u1-wl7"/>
-                <constraint firstAttribute="trailing" secondItem="SVg-aF-83s" secondAttribute="trailing" constant="16" id="72H-lS-KAM"/>
-                <constraint firstItem="SVg-aF-83s" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="D4p-3u-frm"/>
+                <constraint firstAttribute="trailing" secondItem="SVg-aF-83s" secondAttribute="trailing" constant="8" id="72H-lS-KAM"/>
+                <constraint firstItem="SVg-aF-83s" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="D4p-3u-frm"/>
                 <constraint firstAttribute="trailing" secondItem="2o0-rI-EzI" secondAttribute="trailing" id="EO4-mb-Axq"/>
                 <constraint firstAttribute="bottom" secondItem="2o0-rI-EzI" secondAttribute="bottom" id="HUz-IT-uJJ"/>
                 <constraint firstItem="7mw-z3-jyS" firstAttribute="centerY" secondItem="2o0-rI-EzI" secondAttribute="centerY" constant="-16" id="WTK-Kj-5oc"/>
                 <constraint firstItem="2o0-rI-EzI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="nwc-KK-eyM"/>
-                <constraint firstAttribute="trailing" secondItem="7mw-z3-jyS" secondAttribute="trailing" constant="16" id="uge-7f-10U"/>
+                <constraint firstAttribute="trailing" secondItem="7mw-z3-jyS" secondAttribute="trailing" constant="8" id="uge-7f-10U"/>
                 <constraint firstItem="SVg-aF-83s" firstAttribute="top" secondItem="7mw-z3-jyS" secondAttribute="bottom" constant="8" id="vAT-5O-jYb"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
