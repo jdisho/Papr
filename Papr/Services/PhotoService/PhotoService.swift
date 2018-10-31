@@ -103,4 +103,20 @@ struct PhotoService: PhotoServiceType {
             .catchError { _ in return .just(.error("Failed to download photo")) }
 
     }
+
+    func randomPhoto(from collections: [String], isFeatured: Bool, orientation: Orientation) -> Observable<Photo> {
+        return unsplash.rx.request(
+            .randomPhoto(
+                collections: collections,
+                isFeatured: isFeatured,
+                username: nil,
+                query: nil,
+                width: nil,
+                height: nil,
+                orientation: orientation,
+                count: nil)
+            )
+            .map(Photo.self)
+            .asObservable()
+    }
 }
