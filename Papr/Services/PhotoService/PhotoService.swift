@@ -114,7 +114,7 @@ struct PhotoService: PhotoServiceType {
                 width: nil,
                 height: nil,
                 orientation: orientation,
-                count: 10)
+                count: 30)
             )
             .map([Photo].self)
             .asObservable()

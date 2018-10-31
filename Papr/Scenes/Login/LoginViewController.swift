@@ -30,6 +30,7 @@ class LoginViewController: UIViewController, BindableType {
         loginButton.cornerRadius = 10
         imageView.dim(withAlpha: 0.3)
         imageView.image = nil
+        imageView.image = UIImage(named: "placeholder_wallpaper")
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -62,13 +63,13 @@ class LoginViewController: UIViewController, BindableType {
             .map { $0 == .idle ? 1.0 : 0.9 }
             .bind(to: loginButton.rx.alpha)
             .disposed(by: disposeBag)
-
+        
         outputs.randomPhotos
             .map { $0.compactMap { $0.urls?.regular } }
             .mapMany { this.imagePipeline.rx.loadImage(with: URL(string: $0)) }
             .mapMany { $0.map { $0.image } }
             .flatMap(Observable.combineLatest)
-            .map { UIImage.animatedImage(with: $0, duration: 20.0) }
+            .map { UIImage.animatedImage(with: $0, duration: 60.0) }
             .unwrap()
             .bind(to: imageView.rx.image)
             .disposed(by: disposeBag)
