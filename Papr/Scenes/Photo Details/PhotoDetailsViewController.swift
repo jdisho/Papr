@@ -259,7 +259,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             UIView.animate(withDuration: 0.3, animations: { [unowned self] in
                 if self.isTouched {
                     self.statsContainerViewBottomConstraint.constant = 0
-                    self.dismissButtonTopConstraint.constant = 32
+                    self.dismissButtonTopConstraint.constant = 16
                     self.isTouched = false
                 } else {
                     self.hideOverlays()
