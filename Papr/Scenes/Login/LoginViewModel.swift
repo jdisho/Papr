@@ -25,6 +25,7 @@ protocol LoginViewModelInput {
 protocol LoginViewModelOuput {
     var buttonName: Observable<String> { get }
     var loginState: Observable<LoginState> { get }
+    var randomPhoto: Observable<Photo> { get }
 }
 
 protocol LoginViewModelType {
@@ -54,10 +55,12 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     // MARK: Output
     let buttonName: Observable<String>
     let loginState: Observable<LoginState>
+    let randomPhoto: Observable<Photo>
     
     // MARK: Private
     fileprivate let authManager: UnsplashAuthManager
-    private let service: UserServiceType
+    private let userService: UserServiceType
+    private let photoService: PhotoServiceType
     private let sceneCoordinator: SceneCoordinatorType
     private var _authSession: Any?
     @available(iOS 11.0, *)
@@ -74,16 +77,20 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     private let loginStateProperty = BehaviorSubject<LoginState>(value: .idle)
 
     // MARK: Init
-    init(service: UserServiceType = UserService(),
+    init(userService: UserServiceType = UserService(),
+         photoService: PhotoServiceType = PhotoService(),
          sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared,
          authManager: UnsplashAuthManager = UnsplashAuthManager.sharedAuthManager) {
 
-        self.service = service
+        self.userService = userService
+        self.photoService = photoService
         self.sceneCoordinator = sceneCoordinator
         self.authManager = authManager
 
         loginState = loginStateProperty.asObservable()
         buttonName = buttonNameProperty.asObservable()
+
+        randomPhoto = photoService.randomPhoto(from: ["autumn"], isFeatured: true, orientation: .portrait)
 
         self.authManager.delegate = self
     }
