@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="activityIndicatorView" destination="csh-Q1-UGg" id="2Qj-j8-AN6"/>
                 <outlet property="closeButton" destination="D7O-BZ-cnU" id="x8Q-Wa-fiC"/>
+                <outlet property="imageView" destination="cD8-Vc-TNg" id="pVN-3R-Hvb"/>
                 <outlet property="loginButton" destination="ZyJ-aA-ow8" id="0HR-sL-ldU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -25,6 +26,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cD8-Vc-TNg">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZyJ-aA-ow8">
                     <rect key="frame" x="24" y="579" width="327" height="48"/>
@@ -32,16 +34,17 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="dqq-LE-B20"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                     <state key="normal" title="Login with Unsplash">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                 </button>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="csh-Q1-UGg">
                     <rect key="frame" x="40" y="593" width="20" height="20"/>
+                    <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </activityIndicatorView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D7O-BZ-cnU">
-                    <rect key="frame" x="24" y="52" width="40" height="40"/>
+                    <rect key="frame" x="24" y="36" width="40" height="40"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="Wid-HX-PLk"/>
@@ -51,24 +54,23 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Papr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ils-uD-r30">
-                    <rect key="frame" x="16" y="371.5" width="343" height="38.5"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Papr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" translatesAutoresizingMaskIntoConstraints="NO" id="Ils-uD-r30">
+                    <rect key="frame" x="16" y="426" width="343" height="41"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beautiful Free Images" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dv4-FF-IQh">
-                    <rect key="frame" x="16" y="426" width="343" height="21"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beautiful Free Images" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="dv4-FF-IQh">
+                    <rect key="frame" x="16" y="483" width="343" height="24"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="cD8-Vc-TNg" secondAttribute="trailing" id="450-zm-k6I"/>
                 <constraint firstItem="csh-Q1-UGg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="6H4-s6-zQP"/>
-                <constraint firstItem="cD8-Vc-TNg" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="E1v-W1-ocC"/>
+                <constraint firstItem="cD8-Vc-TNg" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="E1v-W1-ocC"/>
                 <constraint firstItem="csh-Q1-UGg" firstAttribute="centerY" secondItem="ZyJ-aA-ow8" secondAttribute="centerY" id="F8U-nB-ULt"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ZyJ-aA-ow8" secondAttribute="bottom" constant="40" id="OzF-IU-GUX"/>
                 <constraint firstItem="Ils-uD-r30" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="RJk-Pr-1ZE"/>
@@ -78,8 +80,8 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dv4-FF-IQh" secondAttribute="trailing" constant="16" id="eUc-0Z-654"/>
                 <constraint firstItem="cD8-Vc-TNg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="jPo-fy-M5t"/>
                 <constraint firstItem="D7O-BZ-cnU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="jad-QI-9Vo"/>
-                <constraint firstItem="D7O-BZ-cnU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="kjP-K5-jeP"/>
-                <constraint firstItem="ZyJ-aA-ow8" firstAttribute="top" secondItem="dv4-FF-IQh" secondAttribute="bottom" constant="132" id="roL-Hc-xUs"/>
+                <constraint firstItem="D7O-BZ-cnU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="kjP-K5-jeP"/>
+                <constraint firstItem="ZyJ-aA-ow8" firstAttribute="top" secondItem="dv4-FF-IQh" secondAttribute="bottom" constant="72" id="roL-Hc-xUs"/>
                 <constraint firstItem="cD8-Vc-TNg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="vpf-TJ-llV"/>
                 <constraint firstItem="dv4-FF-IQh" firstAttribute="top" secondItem="Ils-uD-r30" secondAttribute="bottom" constant="16" id="z5u-0I-uBl"/>
                 <constraint firstItem="dv4-FF-IQh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="zj4-9M-DIn"/>

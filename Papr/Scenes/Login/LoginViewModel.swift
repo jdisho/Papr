@@ -90,7 +90,8 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
         loginState = loginStateProperty.asObservable()
         buttonName = buttonNameProperty.asObservable()
 
-        randomPhoto = photoService.randomPhoto(from: ["autumn"], isFeatured: true, orientation: .portrait)
+        // ⛓ 311028: https://unsplash.com/collections/311028/autumn
+        randomPhoto = photoService.randomPhoto(from: ["311028"], isFeatured: true, orientation: .portrait)
 
         self.authManager.delegate = self
     }
