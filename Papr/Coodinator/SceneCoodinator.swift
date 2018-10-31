@@ -42,7 +42,7 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
         if let navigationController = viewController as? UINavigationController {
             return navigationController.viewControllers.first!
         }
-        return viewController
+        return controller
     }
     
     @discardableResult
