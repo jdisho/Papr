@@ -8,6 +8,9 @@ Papr is an unofficial Unsplash app for iOS.
     <img src="https://github.com/jdisho/Papr/blob/develop/Screenshots/home.png" width="24%"/> 
     <img src="https://github.com/jdisho/Papr/blob/develop/Screenshots/photo_details.png" width="24%"/>
     <img src="https://github.com/jdisho/Papr/blob/develop/Screenshots/add_to_collection.png" width="24%"/>
+    <img src="https://github.com/jdisho/Papr/blob/develop/Screenshots/explore.png" width="24%"/> 
+    <img src="https://github.com/jdisho/Papr/blob/develop/Screenshots/photo_collection.png" width="24%"/> 
+    <img src="https://github.com/jdisho/Papr/blob/develop/Screenshots/search.png" width="24%"/>
   </p>
 
 ## 🏃‍♂️ Getting Started
