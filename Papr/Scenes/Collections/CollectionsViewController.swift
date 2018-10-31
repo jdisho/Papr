@@ -68,15 +68,16 @@ class CollectionsViewController: UIViewController, BindableType {
 
     private func configureCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.backgroundColor = .white
         collectionView.add(to: view).pinToEdges()
 
         guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
 
-        let spacing = 10 / UIScreen.main.scale
+        let spacing = (1 / UIScreen.main.scale) + 16
         let cellWidth = (UIScreen.main.bounds.width / 2) - spacing
 
         flowLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
-        flowLayout.minimumInteritemSpacing = spacing
+        flowLayout.sectionInset = UIEdgeInsets(top: 16.0, left: 8.0, bottom: 16.0, right: 8.0)
         flowLayout.minimumLineSpacing = spacing
 
         collectionView.register(cellType: CollectionCell.self)
