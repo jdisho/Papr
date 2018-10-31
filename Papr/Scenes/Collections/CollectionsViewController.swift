@@ -20,8 +20,8 @@ class CollectionsViewController: UIViewController, BindableType {
     var viewModel: CollectionsViewModelType!
 
     // MARK: Private
-    private var tableView: UITableView!
-    private var dataSource: RxTableViewSectionedReloadDataSource<CollectionsSectionModel>!
+    private var collectionView: UICollectionView!
+    private var dataSource: RxCollectionViewSectionedReloadDataSource<CollectionsSectionModel>!
     private var refreshControl: UIRefreshControl!
     private let disposeBag = DisposeBag()
 
@@ -30,7 +30,7 @@ class CollectionsViewController: UIViewController, BindableType {
 
         title = "Explore 🌄"
 
-        configureTableView()
+        configureCollectionView()
         configureRefreshControl()
     }
 
@@ -44,17 +44,17 @@ class CollectionsViewController: UIViewController, BindableType {
 
         output.collectionCellsModelType
             .map { [CollectionsSectionModel(model: "", items: $0)] }
-            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
-        tableView.rx.reachedBottom()
+        collectionView.rx.reachedBottom()
             .skipUntil(output.isRefreshing)
             .bind(to: input.loadMore)
             .disposed(by: disposeBag)
 
-        tableView.rx.itemSelected
+        collectionView.rx.itemSelected
             .map { [unowned self] indexPath -> CollectionCell? in
-                guard let cell = self.tableView.cellForRow(at: indexPath) as? CollectionCell
+                guard let cell = self.collectionView.cellForItem(at: indexPath) as? CollectionCell
                     else { return nil }
                 return cell
             }
@@ -66,32 +66,38 @@ class CollectionsViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
     }
 
-    private func configureTableView() {
-        tableView = UITableView(frame: .zero)
-        tableView.rowHeight = 400
-        tableView.estimatedRowHeight = 400
-        tableView.separatorColor = .clear
-        tableView.add(to: view).pinToEdges()
+    private func configureCollectionView() {
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.add(to: view).pinToEdges()
 
-        tableView.register(cellType: CollectionCell.self)
-        dataSource = RxTableViewSectionedReloadDataSource<CollectionsSectionModel>(
-            configureCell:  tableViewDataSource
+        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+
+        let spacing = 10 / UIScreen.main.scale
+        let cellWidth = (UIScreen.main.bounds.width / 2) - spacing
+
+        flowLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
+        flowLayout.minimumInteritemSpacing = spacing
+        flowLayout.minimumLineSpacing = spacing
+
+        collectionView.register(cellType: CollectionCell.self)
+        dataSource = RxCollectionViewSectionedReloadDataSource<CollectionsSectionModel>(
+            configureCell:  collectionViewDataSource
         )
     }
 
     private func configureRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        tableView.addSubview(refreshControl)
+        collectionView.addSubview(refreshControl)
     }
 
     @objc private func refresh() {
         viewModel.input.refresh()
     }
 
-    private var tableViewDataSource: TableViewSectionedDataSource<CollectionsSectionModel>.ConfigureCell {
+    private var collectionViewDataSource: CollectionViewSectionedDataSource<CollectionsSectionModel>.ConfigureCell {
         return { _, tableView, indexPath, cellModel in
-            var cell = tableView.dequeueResuableCell(withCellType: CollectionCell.self, forIndexPath: indexPath)
+            var cell: CollectionCell = self.collectionView.dequeueReusableCell(forIndexPath: indexPath)
             cell.bind(to: cellModel)
             return cell
         }
