@@ -22,4 +22,6 @@ protocol PhotoServiceType {
 
     func photoDownloadLink(withId id: String) -> Observable<Result<String, String>>
 
+    func randomPhoto(from collections: [String], isFeatured: Bool, orientation: Orientation) ->  Observable<Photo>
+
 }
