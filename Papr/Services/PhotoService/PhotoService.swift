@@ -104,7 +104,7 @@ struct PhotoService: PhotoServiceType {
 
     }
 
-    func randomPhoto(from collections: [String], isFeatured: Bool, orientation: Orientation) -> Observable<Photo> {
+    func randomPhotos(from collections: [String], isFeatured: Bool, orientation: Orientation) -> Observable<[Photo]> {
         return unsplash.rx.request(
             .randomPhoto(
                 collections: collections,
@@ -114,9 +114,9 @@ struct PhotoService: PhotoServiceType {
                 width: nil,
                 height: nil,
                 orientation: orientation,
-                count: nil)
+                count: 10)
             )
-            .map(Photo.self)
+            .map([Photo].self)
             .asObservable()
     }
 }

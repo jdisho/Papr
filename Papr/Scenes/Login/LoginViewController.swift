@@ -29,6 +29,7 @@ class LoginViewController: UIViewController, BindableType {
         super.viewDidLoad()
         loginButton.cornerRadius = 10
         imageView.dim(withAlpha: 0.3)
+        imageView.image = nil
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -58,23 +59,17 @@ class LoginViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
         
         outputs.loginState
-            .map { $0 == .idle ? 1.0 : 0.7 }
+            .map { $0 == .idle ? 1.0 : 0.9 }
             .bind(to: loginButton.rx.alpha)
             .disposed(by: disposeBag)
 
-        Observable.combineLatest(
-            outputs.randomPhoto.map { $0.urls?.small }.unwrap(),
-            outputs.randomPhoto.map { $0.urls?.regular }.unwrap(),
-            outputs.randomPhoto.map { $0.urls?.full }.unwrap()
-            )
-            .flatMap { small, regular, full -> Observable<ImageResponse> in
-                return Observable.concat(
-                    this.imagePipeline.rx.loadImage(with: URL(string: small)),
-                    this.imagePipeline.rx.loadImage(with: URL(string: regular)),
-                    this.imagePipeline.rx.loadImage(with: URL(string: full))
-                )
-            }
-            .map { $0.image }
+        outputs.randomPhotos
+            .map { $0.compactMap { $0.urls?.regular } }
+            .mapMany { this.imagePipeline.rx.loadImage(with: URL(string: $0)) }
+            .mapMany { $0.map { $0.image } }
+            .flatMap(Observable.combineLatest)
+            .map { UIImage.animatedImage(with: $0, duration: 20.0) }
+            .unwrap()
             .bind(to: imageView.rx.image)
             .disposed(by: disposeBag)
     }

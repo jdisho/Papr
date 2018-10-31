@@ -25,7 +25,7 @@ protocol LoginViewModelInput {
 protocol LoginViewModelOuput {
     var buttonName: Observable<String> { get }
     var loginState: Observable<LoginState> { get }
-    var randomPhoto: Observable<Photo> { get }
+    var randomPhotos: Observable<[Photo]> { get }
 }
 
 protocol LoginViewModelType {
@@ -55,7 +55,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     // MARK: Output
     let buttonName: Observable<String>
     let loginState: Observable<LoginState>
-    let randomPhoto: Observable<Photo>
+    let randomPhotos: Observable<[Photo]>
     
     // MARK: Private
     fileprivate let authManager: UnsplashAuthManager
@@ -91,7 +91,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
         buttonName = buttonNameProperty.asObservable()
 
         // ⛓ 311028: https://unsplash.com/collections/311028/autumn
-        randomPhoto = photoService.randomPhoto(from: ["311028"], isFeatured: true, orientation: .portrait)
+        randomPhotos = photoService.randomPhotos(from: ["311028"], isFeatured: true, orientation: .portrait)
 
         self.authManager.delegate = self
     }
