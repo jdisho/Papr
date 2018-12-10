@@ -1,25 +1,27 @@
 PODS:
-  - Action (3.8.0):
-    - RxCocoa (~> 4.3.0)
-    - RxSwift (~> 4.3.0)
-  - Alamofire (4.7.3)
+  - Action (3.9.1):
+    - RxCocoa (~> 4.3)
+    - RxSwift (~> 4.3)
+  - Alamofire (4.8.0)
   - Differentiator (3.1.0)
   - Hero (1.4.0)
-  - Moya/Core (11.0.2):
+  - Moya/Core (12.0.1):
     - Alamofire (~> 4.1)
-    - Result (~> 3.0)
-  - Moya/RxSwift (11.0.2):
+    - Result (~> 4.0)
+  - Moya/RxSwift (12.0.1):
     - Moya/Core
     - RxSwift (~> 4.0)
-  - Nuke (7.5)
-  - Result (3.2.4)
-  - RxCocoa (4.3.1):
+  - Nuke (7.5.1)
+  - Result (4.0.0)
+  - RxAtomic (4.4.0)
+  - RxCocoa (4.4.0):
     - RxSwift (~> 4.0)
   - RxDataSources (3.1.0):
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxSwift (4.3.1)
+  - RxSwift (4.4.0):
+    - RxAtomic (~> 4.4)
   - VanillaConstraints (1.0.1)
 
 DEPENDENCIES:
@@ -32,33 +34,20 @@ DEPENDENCIES:
   - RxSwift
   - VanillaConstraints
 
-SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - Action
-    - Alamofire
-    - Differentiator
-    - Hero
-    - Moya
-    - Nuke
-    - Result
-    - RxCocoa
-    - RxDataSources
-    - RxSwift
-    - VanillaConstraints
-
 SPEC CHECKSUMS:
-  Action: 2275d04a407ecaf46a58d58a304388a28155a0a1
-  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  Action: 2f461c203c480b17aa99b3bb166e4329ecff6908
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
-  Moya: a725035953bc1c0eb1be505ab903984501d82440
-  Nuke: 799c0430f87b11c4dacfa80b13e1c4f0a1464b90
-  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
-  RxCocoa: 78763c7b07d02455598d9fc3c1ad091a28b73635
+  Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
+  Nuke: 3814db501e55f17951451839c726ffd91641e9a5
+  Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
+  RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
+  RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
-  RxSwift: fe0fd770a43acdb7d0a53da411c9b892e69bb6e4
+  RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
   VanillaConstraints: 79afbbd46076f7db75156fe89d73529beae99a9f
 
 PODFILE CHECKSUM: 612c2dc566dbb5eafad8c9af8510ad8651bddd91
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.4.0
