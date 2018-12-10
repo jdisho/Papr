@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import Action
 import Nuke
+import RxNuke
 
 class PhotoCollectionViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassIdentifiable {
 

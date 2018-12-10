@@ -15,7 +15,7 @@ target 'Papr' do
   pod 'Moya/RxSwift'
   
   # Image
-  pod 'Nuke'
+  pod 'RxNuke'
 
   # Transition
   pod 'Hero'

@@ -76,7 +76,7 @@ class BouncyView: UIView {
 
     // MARK: Helper
     @objc private func resetAnimations() {
-        let timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        let timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         let duration: TimeInterval = 1
 
         let emojiBounce = CABasicAnimation(keyPath: "transform.translation.y")

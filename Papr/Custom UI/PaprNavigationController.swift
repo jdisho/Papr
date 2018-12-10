@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import RxSwift
 import Nuke
+import RxNuke
 import Action
 import VanillaConstraints
 
@@ -49,8 +50,8 @@ class PaprNavigationController: UINavigationController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func didMove(toParentViewController parent: UIViewController?) {
-        super.didMove(toParentViewController: parent)
+    override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
 
         configureNavigationBar()
     }

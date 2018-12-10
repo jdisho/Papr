@@ -41,8 +41,8 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
             )
             .flatMap { small, regular -> Observable<ImageResponse> in
                 return Observable.concat(
-                    this.imagePipeline.rx.loadImage(with: URL(string: small)),
-                    this.imagePipeline.rx.loadImage(with: URL(string: regular))
+                    this.imagePipeline.rx.loadImage(with: URL(string: small)!).asObservable(),
+                    this.imagePipeline.rx.loadImage(with: URL(string: regular)!).asObservable()
                 )
             }
             .map { $0.image }

@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import Nuke
+import RxNuke
 
 class LoginViewController: UIViewController, BindableType {
 
@@ -66,7 +67,7 @@ class LoginViewController: UIViewController, BindableType {
         
         outputs.randomPhotos
             .map { $0.compactMap { $0.urls?.regular } }
-            .mapMany { this.imagePipeline.rx.loadImage(with: URL(string: $0)) }
+            .mapMany { this.imagePipeline.rx.loadImage(with: URL(string: $0)!).asObservable() }
             .mapMany { $0.map { $0.image } }
             .flatMap(Observable.combineLatest)
             .map { UIImage.animatedImage(with: $0, duration: 60.0) }

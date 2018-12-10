@@ -189,6 +189,51 @@
 		DCAF6BC1204D465E002B7F00 /* Int+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAF6BBE204D465E002B7F00 /* Int+Extentions.swift */; };
 		DCAF6BC2204D990A002B7F00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCBB1B281FA7B1BD004E95F0 /* Assets.xcassets */; };
 		DCAF6BC3204D990A002B7F00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCBB1B281FA7B1BD004E95F0 /* Assets.xcassets */; };
+		DCB35C7A21BF095900859FB2 /* SceneCoodinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B561FA8B823004E95F0 /* SceneCoodinatorType.swift */; };
+		DCB35C7B21BF095A00859FB2 /* SceneCoodinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B561FA8B823004E95F0 /* SceneCoodinatorType.swift */; };
+		DCB35C7C21BF096F00859FB2 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B541FA8B814004E95F0 /* Scene.swift */; };
+		DCB35C7E21BF097100859FB2 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B541FA8B814004E95F0 /* Scene.swift */; };
+		DCB35C7F21BF097400859FB2 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B5A1FA8B840004E95F0 /* SceneTransitionType.swift */; };
+		DCB35C8021BF097400859FB2 /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B5A1FA8B840004E95F0 /* SceneTransitionType.swift */; };
+		DCB35C8121BF097800859FB2 /* SceneCoodinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B581FA8B82E004E95F0 /* SceneCoodinator.swift */; };
+		DCB35C8221BF097900859FB2 /* SceneCoodinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B581FA8B82E004E95F0 /* SceneCoodinator.swift */; };
+		DCB35C8321BF099700859FB2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2576F42093D38B00369B7D /* Result.swift */; };
+		DCB35C8421BF099700859FB2 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2576F42093D38B00369B7D /* Result.swift */; };
+		DCB35C8521BF09B500859FB2 /* UIScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F3F2104E99F0042DBBC /* UIScrollView+Rx.swift */; };
+		DCB35C8621BF09B600859FB2 /* UIScrollView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F3F2104E99F0042DBBC /* UIScrollView+Rx.swift */; };
+		DCB35C8721BF09BC00859FB2 /* UICollectionView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F462104F0FF0042DBBC /* UICollectionView+Identifiable.swift */; };
+		DCB35C8821BF09BD00859FB2 /* UICollectionView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F462104F0FF0042DBBC /* UICollectionView+Identifiable.swift */; };
+		DCB35C8921BF09C000859FB2 /* UITableView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F442104F0D80042DBBC /* UITableView+Identifiable.swift */; };
+		DCB35C8A21BF09C000859FB2 /* UITableView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F442104F0D80042DBBC /* UITableView+Identifiable.swift */; };
+		DCB35C8B21BF09C400859FB2 /* ClassIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F422104F0970042DBBC /* ClassIdentifiable.swift */; };
+		DCB35C8C21BF09C400859FB2 /* ClassIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F422104F0970042DBBC /* ClassIdentifiable.swift */; };
+		DCB35C8D21BF09E300859FB2 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09D7658216CC98B0035F54D /* UserProfileViewModel.swift */; };
+		DCB35C8E21BF09E400859FB2 /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09D7658216CC98B0035F54D /* UserProfileViewModel.swift */; };
+		DCB35C8F21BF09ED00859FB2 /* PaprNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3918CE21046AE8003DA2CA /* PaprNavigationController.swift */; };
+		DCB35C9021BF09EE00859FB2 /* PaprNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3918CE21046AE8003DA2CA /* PaprNavigationController.swift */; };
+		DCB35C9121BF09F600859FB2 /* CollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD2443213EB2BD0053A802 /* CollectionsViewController.swift */; };
+		DCB35C9221BF09F600859FB2 /* CollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD2443213EB2BD0053A802 /* CollectionsViewController.swift */; };
+		DCB35C9321BF09FD00859FB2 /* CollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD2445213EB2E40053A802 /* CollectionsViewModel.swift */; };
+		DCB35C9421BF09FD00859FB2 /* CollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD2445213EB2E40053A802 /* CollectionsViewModel.swift */; };
+		DCB35C9521BF0A5C00859FB2 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09D7654216CC91E0035F54D /* UserProfileViewController.swift */; };
+		DCB35C9621BF0A5D00859FB2 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09D7654216CC91E0035F54D /* UserProfileViewController.swift */; };
+		DCB35C9721BF0A6A00859FB2 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D52CB02181DA7700FB0517 /* Cache.swift */; };
+		DCB35C9821BF0A6A00859FB2 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D52CB02181DA7700FB0517 /* Cache.swift */; };
+		DCB35C9921BF0A9200859FB2 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00739562151547500F51C91 /* LoadingView.swift */; };
+		DCB35C9A21BF0A9300859FB2 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00739562151547500F51C91 /* LoadingView.swift */; };
+		DCB35C9B21BF0ABC00859FB2 /* PinterestLayout+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F79DF02167A58C0051232D /* PinterestLayout+Rx.swift */; };
+		DCB35C9C21BF0ABD00859FB2 /* PinterestLayout+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F79DF02167A58C0051232D /* PinterestLayout+Rx.swift */; };
+		DCB35C9D21BF0AC100859FB2 /* RxPinterestLayoutDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F79DEE2167A5080051232D /* RxPinterestLayoutDelegateProxy.swift */; };
+		DCB35C9E21BF0AC100859FB2 /* RxPinterestLayoutDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F79DEE2167A5080051232D /* RxPinterestLayoutDelegateProxy.swift */; };
+		DCB35C9F21BF0BF900859FB2 /* CollectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD244A213FC23B0053A802 /* CollectionCellViewModel.swift */; };
+		DCB35CA021BF0BFA00859FB2 /* CollectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD244A213FC23B0053A802 /* CollectionCellViewModel.swift */; };
+		DCB35CA121BF0C0200859FB2 /* BouncyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F482104FCB00042DBBC /* BouncyView.swift */; };
+		DCB35CA221BF0C0300859FB2 /* BouncyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F482104FCB00042DBBC /* BouncyView.swift */; };
+		DCB35CA321BF0C0800859FB2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA09CFF2015F68200E6EBB7 /* Constants.swift */; };
+		DCB35CA421BF0C1E00859FB2 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD244C213FEBC10053A802 /* CollectionCell.swift */; };
+		DCB35CA521BF0C1F00859FB2 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD244C213FEBC10053A802 /* CollectionCell.swift */; };
+		DCB35CA621BF0C5C00859FB2 /* UIColor+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFB564820C46A93007401DE /* UIColor+Extentions.swift */; };
+		DCB35CA721BF0C5C00859FB2 /* UIColor+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFB564820C46A93007401DE /* UIColor+Extentions.swift */; };
 		DCB433C8204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB433C6204B5BAD00C6C80C /* PhotoDetailsViewController.swift */; };
 		DCB433C9204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB433C6204B5BAD00C6C80C /* PhotoDetailsViewController.swift */; };
 		DCB433CA204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB433C6204B5BAD00C6C80C /* PhotoDetailsViewController.swift */; };
@@ -290,9 +335,6 @@
 		DCCD04182059C25900670B70 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD04172059C25900670B70 /* UserService.swift */; };
 		DCCD04192059C25900670B70 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD04172059C25900670B70 /* UserService.swift */; };
 		DCCD041A2059C25900670B70 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD04172059C25900670B70 /* UserService.swift */; };
-		DCDDF3262027A6B700E1EB81 /* Nuke+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */; };
-		DCDDF3272027A6B700E1EB81 /* Nuke+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */; };
-		DCDDF3282027A6B700E1EB81 /* Nuke+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */; };
 		DCDDF32A2027DA5F00E1EB81 /* UIView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3292027DA5F00E1EB81 /* UIView+Extentions.swift */; };
 		DCDDF32B2027DA5F00E1EB81 /* UIView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3292027DA5F00E1EB81 /* UIView+Extentions.swift */; };
 		DCDDF32C2027DA5F00E1EB81 /* UIView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDDF3292027DA5F00E1EB81 /* UIView+Extentions.swift */; };
@@ -457,7 +499,6 @@
 		DCCCFCC4203A52410024D417 /* Resolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resolution.swift; sourceTree = "<group>"; };
 		DCCD04132059C19D00670B70 /* UserServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServiceType.swift; sourceTree = "<group>"; };
 		DCCD04172059C25900670B70 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
-		DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Nuke+Rx.swift"; sourceTree = "<group>"; };
 		DCDDF3292027DA5F00E1EB81 /* UIView+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extentions.swift"; sourceTree = "<group>"; };
 		DCEE1F0A1FC97CDC0010BADE /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		DCEE1F0E1FC97CE80010BADE /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
@@ -913,7 +954,6 @@
 			children = (
 				DC487F412104F06E0042DBBC /* Indentifiable */,
 				DCEE1F121FC9837E0010BADE /* Rx */,
-				DCDDF3242027A69C00E1EB81 /* Nuke+Rx */,
 				DCBB1B6F1FA8BAC2004E95F0 /* BindableType.swift */,
 				DC7CF5811FC464BF006E0A39 /* URL.swift */,
 				DCDDF3292027DA5F00E1EB81 /* UIView+Extentions.swift */,
@@ -953,14 +993,6 @@
 				DCCD04172059C25900670B70 /* UserService.swift */,
 			);
 			path = UserService;
-			sourceTree = "<group>";
-		};
-		DCDDF3242027A69C00E1EB81 /* Nuke+Rx */ = {
-			isa = PBXGroup;
-			children = (
-				DCDDF3252027A6B700E1EB81 /* Nuke+Rx.swift */,
-			);
-			path = "Nuke+Rx";
 			sourceTree = "<group>";
 		};
 		DCEE1F091FC97CB80010BADE /* Alert */ = {
@@ -1071,7 +1103,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Joan Disho";
 				TargetAttributes = {
 					DCBB1B1D1FA7B1BD004E95F0 = {
@@ -1219,6 +1251,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
+				"${BUILT_PRODUCTS_DIR}/RxNuke/RxNuke.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/VanillaConstraints/VanillaConstraints.framework",
 			);
@@ -1234,6 +1267,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxNuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VanillaConstraints.framework",
 			);
@@ -1378,7 +1412,6 @@
 				DC66E67020A4DA0F005E5E31 /* SearchResultCell.swift in Sources */,
 				DC6CC644204CBD5300050589 /* PhotoStatistics.swift in Sources */,
 				DCA09D002015F68200E6EBB7 /* Constants.swift in Sources */,
-				DCDDF3262027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
 				DC5AF7551FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DCEE1F0B1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCBB1B591FA8B82F004E95F0 /* SceneCoodinator.swift in Sources */,
@@ -1467,12 +1500,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC3917A62096683600492F62 /* CreateCollectionViewController.swift in Sources */,
-				DCDDF3272027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
+				DCB35C8721BF09BC00859FB2 /* UICollectionView+Identifiable.swift in Sources */,
 				DC2E76F9203B6DB90023A173 /* LikeUnlike.swift in Sources */,
 				DC71C3101FBDE00A00C8E41A /* UnsplashAuthError.swift in Sources */,
 				DC73733320A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */,
 				DCA09D012015F68200E6EBB7 /* Constants.swift in Sources */,
+				DCB35C9321BF09FD00859FB2 /* CollectionsViewModel.swift in Sources */,
 				DCB433C9204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */,
+				DCB35C9121BF09F600859FB2 /* CollectionsViewController.swift in Sources */,
 				DC66E67120A4DA0F005E5E31 /* SearchResultCell.swift in Sources */,
 				DC73734220A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */,
 				DC66C9302052BA0300831478 /* PhotoViewModel.swift in Sources */,
@@ -1489,15 +1524,19 @@
 				DCAF6BC0204D465E002B7F00 /* Int+Extentions.swift in Sources */,
 				DC66E65A20A4CB4C005E5E31 /* SearchViewModel.swift in Sources */,
 				DC66E66620A4D016005E5E31 /* SearchService.swift in Sources */,
+				DCB35CA621BF0C5C00859FB2 /* UIColor+Extentions.swift in Sources */,
 				DCBB1B371FA7B1BD004E95F0 /* PaprTests.swift in Sources */,
 				DC7F20941FADD3400017C14A /* SearchResults.swift in Sources */,
+				DCB35C8521BF09B500859FB2 /* UIScrollView+Rx.swift in Sources */,
 				DC658D86208CEEE500FEBC31 /* AddToCollectionViewController.swift in Sources */,
 				DCC8CA1B2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */,
+				DCB35C8B21BF09C400859FB2 /* ClassIdentifiable.swift in Sources */,
 				DCDDF32B2027DA5F00E1EB81 /* UIView+Extentions.swift in Sources */,
 				DCBB1B6D1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DCBE008F202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
 				DCCCFCC6203A52410024D417 /* Resolution.swift in Sources */,
 				DC71C3031FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
+				DCB35C8121BF097800859FB2 /* SceneCoodinator.swift in Sources */,
 				DCCD04192059C25900670B70 /* UserService.swift in Sources */,
 				DC99FB8F2003A7CC001195FD /* PhotoServiceType.swift in Sources */,
 				DC5AF72C1FACCBF300ADA2BB /* User.swift in Sources */,
@@ -1505,6 +1544,8 @@
 				DC7CF5831FC464BF006E0A39 /* URL.swift in Sources */,
 				DC66E65720A4CB4C005E5E31 /* SearchViewController.swift in Sources */,
 				DC73732A20A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */,
+				DCB35C9B21BF0ABC00859FB2 /* PinterestLayout+Rx.swift in Sources */,
+				DCB35C9921BF0A9200859FB2 /* LoadingView.swift in Sources */,
 				DC5AF7301FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DCC8CA1F2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DC5AF7451FACEF2700ADA2BB /* Location.swift in Sources */,
@@ -1512,31 +1553,44 @@
 				DC99FB932003A7DB001195FD /* PhotoService.swift in Sources */,
 				DCEE1F0C1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DC72A4D320C305D7001550D1 /* UserCell.swift in Sources */,
+				DCB35CA121BF0C0200859FB2 /* BouncyView.swift in Sources */,
+				DCB35C7A21BF095900859FB2 /* SceneCoodinatorType.swift in Sources */,
 				DCCCFCBE203A45DE0024D417 /* Links.swift in Sources */,
 				DC5AF7511FAD027F00ADA2BB /* PhotoCollection.swift in Sources */,
 				DC658DA4208D13A400FEBC31 /* CollectionService.swift in Sources */,
 				DCCD04152059C19D00670B70 /* UserServiceType.swift in Sources */,
 				DC658DA0208D139800FEBC31 /* CollectionServiceType.swift in Sources */,
 				DCF3961320A8E3C400F3906D /* PaprTabBarController.swift in Sources */,
+				DCB35C8321BF099700859FB2 /* Result.swift in Sources */,
 				DCBAEE6420363CD600561CBA /* Orientation.swift in Sources */,
+				DCB35C9521BF0A5C00859FB2 /* UserProfileViewController.swift in Sources */,
 				DC66E67820A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */,
 				DCB915AB20B9A81D003D1069 /* SearchPhotosViewController.swift in Sources */,
+				DCB35C8D21BF09E300859FB2 /* UserProfileViewModel.swift in Sources */,
+				DCB35C7C21BF096F00859FB2 /* Scene.swift in Sources */,
 				DCBB1B751FA8D597004E95F0 /* Unsplash.swift in Sources */,
 				DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC5AF7491FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DC9147952082B9B500781B65 /* Hero+Rx.swift in Sources */,
+				DCB35C9F21BF0BF900859FB2 /* CollectionCellViewModel.swift in Sources */,
+				DCB35C8F21BF09ED00859FB2 /* PaprNavigationController.swift in Sources */,
 				DC73733F20A7974C00922AE4 /* SearchUsersViewController.swift in Sources */,
 				DC658D93208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */,
 				DCB915B620BB1A9A003D1069 /* SearchPhotosCell.swift in Sources */,
+				DCB35C7F21BF097400859FB2 /* SceneTransitionType.swift in Sources */,
 				DC73733620A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */,
 				DCBB1B611FA8BA22004E95F0 /* LoginViewController.swift in Sources */,
 				DCEE1F101FC97CE80010BADE /* AlertViewModel.swift in Sources */,
+				DCB35CA421BF0C1E00859FB2 /* CollectionCell.swift in Sources */,
 				DCBB1B681FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
+				DCB35C8921BF09C000859FB2 /* UITableView+Identifiable.swift in Sources */,
 				DC92230A203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DCBB1B711FA8BAC2004E95F0 /* BindableType.swift in Sources */,
 				DC658D8D208CEF0300FEBC31 /* AddToCollectionViewModel.swift in Sources */,
 				DC3917AD2096684800492F62 /* CreateCollectionViewModel.swift in Sources */,
+				DCB35C9721BF0A6A00859FB2 /* Cache.swift in Sources */,
 				DC5AF7561FAD2EF900ADA2BB /* Scope.swift in Sources */,
+				DCB35C9D21BF0AC100859FB2 /* RxPinterestLayoutDelegateProxy.swift in Sources */,
 				DCEE1F151FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
 				DC5AF75A1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */,
 				DCBE008B202A1A980065BEF3 /* Date+Extentions.swift in Sources */,
@@ -1555,12 +1609,14 @@
 				DCB915B720BB1A9A003D1069 /* SearchPhotosCell.swift in Sources */,
 				DCC8CA102002BEF100F6C540 /* HomeViewModel.swift in Sources */,
 				DC92230B203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
+				DCB35C8421BF099700859FB2 /* Result.swift in Sources */,
 				DC658D87208CEEE500FEBC31 /* AddToCollectionViewController.swift in Sources */,
 				DC66E65B20A4CB4C005E5E31 /* SearchViewModel.swift in Sources */,
 				DC66E67220A4DA0F005E5E31 /* SearchResultCell.swift in Sources */,
 				DC9147962082B9B500781B65 /* Hero+Rx.swift in Sources */,
 				DC71C3DD1FBF635C00C8E41A /* UnsplashAccessToken.swift in Sources */,
 				DCC8CA152002CC2700F6C540 /* HomeViewCell.swift in Sources */,
+				DCB35CA221BF0C0300859FB2 /* BouncyView.swift in Sources */,
 				DC5AF7421FACE6A300ADA2BB /* Photo.swift in Sources */,
 				DCBB1B421FA7B1BD004E95F0 /* PaprUITests.swift in Sources */,
 				DC7F20951FADD3400017C14A /* SearchResults.swift in Sources */,
@@ -1572,7 +1628,7 @@
 				DC3917A72096683600492F62 /* CreateCollectionViewController.swift in Sources */,
 				DC658DA1208D139800FEBC31 /* CollectionServiceType.swift in Sources */,
 				DC73732B20A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */,
-				DCDDF3282027A6B700E1EB81 /* Nuke+Rx.swift in Sources */,
+				DCB35CA721BF0C5C00859FB2 /* UIColor+Extentions.swift in Sources */,
 				DC66E66320A4D003005E5E31 /* SearchServiceType.swift in Sources */,
 				DC71C3041FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				DC658D94208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */,
@@ -1580,21 +1636,29 @@
 				DC3917AE2096684800492F62 /* CreateCollectionViewModel.swift in Sources */,
 				DC6CC646204CBD5300050589 /* PhotoStatistics.swift in Sources */,
 				DC99FB902003A7CC001195FD /* PhotoServiceType.swift in Sources */,
+				DCB35C8E21BF09E400859FB2 /* UserProfileViewModel.swift in Sources */,
+				DCB35C8A21BF09C000859FB2 /* UITableView+Identifiable.swift in Sources */,
 				DC5AF72D1FACCBF300ADA2BB /* User.swift in Sources */,
+				DCB35C7E21BF097100859FB2 /* Scene.swift in Sources */,
 				DC7CF5841FC464BF006E0A39 /* URL.swift in Sources */,
 				DC658D8E208CEF0300FEBC31 /* AddToCollectionViewModel.swift in Sources */,
 				DCBAEE6520363CD600561CBA /* Orientation.swift in Sources */,
+				DCB35C8621BF09B600859FB2 /* UIScrollView+Rx.swift in Sources */,
 				DC73733720A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */,
+				DCB35C8221BF097900859FB2 /* SceneCoodinator.swift in Sources */,
 				DC5AF7311FACCE5200ADA2BB /* ProfileImage.swift in Sources */,
 				DCC8CA202002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
 				DC72A4D420C305D7001550D1 /* UserCell.swift in Sources */,
 				DCB433CA204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */,
+				DCB35C9821BF0A6A00859FB2 /* Cache.swift in Sources */,
 				DCCD04162059C19D00670B70 /* UserServiceType.swift in Sources */,
 				DC5AF7461FACEF2700ADA2BB /* Location.swift in Sources */,
 				DC99FB942003A7DB001195FD /* PhotoService.swift in Sources */,
 				DC658DA5208D13A400FEBC31 /* CollectionService.swift in Sources */,
 				DCCD041A2059C25900670B70 /* UserService.swift in Sources */,
 				DCCCFCC7203A52410024D417 /* Resolution.swift in Sources */,
+				DCB35C8021BF097400859FB2 /* SceneTransitionType.swift in Sources */,
+				DCB35C7B21BF095A00859FB2 /* SceneCoodinatorType.swift in Sources */,
 				DCEE1F0D1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DC73734020A7974C00922AE4 /* SearchUsersViewController.swift in Sources */,
 				DCBE0090202A1EB30065BEF3 /* String+Extentions.swift in Sources */,
@@ -1603,26 +1667,38 @@
 				DC658D9C208CFE1700FEBC31 /* PhotoCollectionCellModel.swift in Sources */,
 				DC73734320A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */,
 				DC5AF7521FAD027F00ADA2BB /* PhotoCollection.swift in Sources */,
+				DCB35C8821BF09BD00859FB2 /* UICollectionView+Identifiable.swift in Sources */,
 				DCBB1B761FA8D597004E95F0 /* Unsplash.swift in Sources */,
 				DC5AF7291FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC5AF74A1FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
+				DCB35C9621BF0A5D00859FB2 /* UserProfileViewController.swift in Sources */,
+				DCB35C9C21BF0ABD00859FB2 /* PinterestLayout+Rx.swift in Sources */,
 				DCCCFCBF203A45DE0024D417 /* Links.swift in Sources */,
+				DCB35CA321BF0C0800859FB2 /* Constants.swift in Sources */,
 				DCBB1B621FA8BA22004E95F0 /* LoginViewController.swift in Sources */,
 				DCEE1F111FC97CE80010BADE /* AlertViewModel.swift in Sources */,
 				DCBE008C202A1A980065BEF3 /* Date+Extentions.swift in Sources */,
 				DC66E66720A4D016005E5E31 /* SearchService.swift in Sources */,
 				DCBB1B691FA8BA39004E95F0 /* LoginViewModel.swift in Sources */,
+				DCB35C9021BF09EE00859FB2 /* PaprNavigationController.swift in Sources */,
 				DCB915B120B9A8DE003D1069 /* PinterestLayout.swift in Sources */,
+				DCB35C8C21BF09C400859FB2 /* ClassIdentifiable.swift in Sources */,
+				DCB35CA021BF0BFA00859FB2 /* CollectionCellViewModel.swift in Sources */,
 				DCBB1B721FA8BAC2004E95F0 /* BindableType.swift in Sources */,
+				DCB35CA521BF0C1F00859FB2 /* CollectionCell.swift in Sources */,
 				DC5AF7571FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DCEE1F161FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
+				DCB35C9221BF09F600859FB2 /* CollectionsViewController.swift in Sources */,
 				DC2E76FA203B6DB90023A173 /* LikeUnlike.swift in Sources */,
+				DCB35C9E21BF0AC100859FB2 /* RxPinterestLayoutDelegateProxy.swift in Sources */,
+				DCB35C9421BF09FD00859FB2 /* CollectionsViewModel.swift in Sources */,
 				DC5AF75B1FAD2F1E00ADA2BB /* OrderBy.swift in Sources */,
 				DCDDF32C2027DA5F00E1EB81 /* UIView+Extentions.swift in Sources */,
 				DC66E67920A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */,
 				DCAF6BC1204D465E002B7F00 /* Int+Extentions.swift in Sources */,
 				DC66C9312052BA0300831478 /* PhotoViewModel.swift in Sources */,
 				DC73733420A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */,
+				DCB35C9A21BF0A9300859FB2 /* LoadingView.swift in Sources */,
 				DCCCFCC3203A4A530024D417 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1676,6 +1752,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1683,6 +1760,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1716,6 +1794,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1733,6 +1812,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1740,6 +1820,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1765,6 +1846,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1781,7 +1863,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = disho.Papr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1798,7 +1880,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = disho.Papr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1815,7 +1897,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = disho.PaprTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Papr.app/Papr";
 			};
@@ -1833,7 +1915,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = disho.PaprTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Papr.app/Papr";
 			};
@@ -1850,7 +1932,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = disho.PaprUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Papr;
 			};
@@ -1867,7 +1949,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = disho.PaprUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Papr;
 			};

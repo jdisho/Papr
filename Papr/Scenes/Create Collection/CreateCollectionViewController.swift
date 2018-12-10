@@ -72,7 +72,7 @@ class CreateCollectionViewController: UIViewController, BindableType {
     private func configureNavigationBar() {
         title = "New collection"
 
-        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator.startAnimating()
 
         activityIndicatorBarButton = UIBarButtonItem(customView: activityIndicator)

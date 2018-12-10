@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import Nuke
+import RxNuke
 
 class UserCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdentifiable {
 

@@ -38,7 +38,7 @@ extension UIView {
         }
     }
 
-    func blur(withStyle style: UIBlurEffectStyle = .light) {
+    func blur(withStyle style: UIBlurEffect.Style = .light) {
         let blurEffect = UIBlurEffect(style: style)
         let blurredView = UIVisualEffectView(effect: blurEffect)
         blurredView.frame = bounds

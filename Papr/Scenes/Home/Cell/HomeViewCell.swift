@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import Nuke
+import RxNuke
 import Photos
 import Hero
 
@@ -107,9 +108,9 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
             )
             .flatMap { small, regular, full -> Observable<ImageResponse> in
                 return Observable.concat(
-                    this.imagePipeline.rx.loadImage(with: URL(string: small)),
-                    this.imagePipeline.rx.loadImage(with: URL(string: regular)),
-                    this.imagePipeline.rx.loadImage(with: URL(string: full))
+                    this.imagePipeline.rx.loadImage(with: URL(string: small)!).asObservable(),
+                    this.imagePipeline.rx.loadImage(with: URL(string: regular)!).asObservable(),
+                    this.imagePipeline.rx.loadImage(with: URL(string: full)!).asObservable()
                 )
             }
             .map { $0.image }

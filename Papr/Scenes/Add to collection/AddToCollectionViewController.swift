@@ -11,6 +11,7 @@ import RxSwift
 import Action
 import RxDataSources
 import Nuke
+import RxNuke
 
 class AddToCollectionViewController: UIViewController, BindableType {
 
@@ -93,7 +94,7 @@ class AddToCollectionViewController: UIViewController, BindableType {
     }
 
     private func configureCollectionViewActivityIndicator() {
-        collectionViewActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        collectionViewActivityIndicator = UIActivityIndicatorView(style: .gray)
         collectionView.addSubview(collectionViewActivityIndicator)
         collectionViewActivityIndicator.center = CGPoint(x: collectionView.frame.width/2, y: collectionView.frame.height/2)
         collectionViewActivityIndicator.startAnimating()

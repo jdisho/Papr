@@ -8,6 +8,7 @@
 
 import UIKit
 import Nuke
+import RxNuke
 import RxSwift
 import Hero
 
@@ -66,7 +67,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             .map { $0.id ?? "" }
             .bind(to: photoImageView.rx.heroId)
             .disposed(by: disposeBag)
-
+        
         outputs.regularPhoto
             .mapToURL()
             .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
@@ -154,8 +155,8 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         configurePhotoImageView()
         configureTapGestures()
 
-        view.bringSubview(toFront: dismissButton)
-        view.bringSubview(toFront: statsContainerView)
+        view.bringSubviewToFront(dismissButton)
+        view.bringSubviewToFront(statsContainerView)
     }
 
     private func configureTapGestures() {

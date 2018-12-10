@@ -12,7 +12,7 @@ import VanillaConstraints
 
 class LoadingView: UIView {
 
-    private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    private let activityIndicatorView = UIActivityIndicatorView(style: .gray)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
