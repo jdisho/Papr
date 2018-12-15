@@ -80,7 +80,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     init(userService: UserServiceType = UserService(),
          photoService: PhotoServiceType = PhotoService(),
          sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared,
-         authManager: UnsplashAuthManager = UnsplashAuthManager.sharedAuthManager) {
+         authManager: UnsplashAuthManager = UnsplashAuthManager.shared) {
 
         self.userService = userService
         self.photoService = photoService

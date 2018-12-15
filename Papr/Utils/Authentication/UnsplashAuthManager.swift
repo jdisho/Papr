@@ -54,28 +54,28 @@ enum UnsplashAuthorization: TargetType {
     var headers: [String : String]? {
         return [:]
     }
-
-
 }
 
 class UnsplashAuthManager {
 
     var delegate: UnsplashSessionListener!
 
-    static var sharedAuthManager: UnsplashAuthManager {
+    static var shared: UnsplashAuthManager {
         return UnsplashAuthManager(
             clientID: UnsplashSettings.clientID.string, 
             clientSecret: UnsplashSettings.clientSecret.string, 
-            scopes: [Scope.pub.string,
-                     Scope.readUser.string,
-                     Scope.writeUser.string,
-                     Scope.readPhotos.string,
-                     Scope.writePhotos.string,
-                     Scope.writeLikes.string,
-                     Scope.writeFollowers.string,
-                     Scope.readCollections.string,
-                     Scope.writeCollections.string 
-            ])
+            scopes: [
+                Scope.pub.string,
+                Scope.readUser.string,
+                Scope.writeUser.string,
+                Scope.readPhotos.string,
+                Scope.writePhotos.string,
+                Scope.writeLikes.string,
+                Scope.writeFollowers.string,
+                Scope.readCollections.string,
+                Scope.writeCollections.string
+            ]
+        )
     }
 
     // MARK: Private
@@ -112,18 +112,17 @@ class UnsplashAuthManager {
                     completion(token, nil)
                 }
             case let .failure(error):
-                switch error.response {
-                case let .some(response):
-                    let errorDesc = self.extractErrorDescription(from: response.data)
-                    let error = NSError(
-                        domain: "com.unsplash.error",
-                        code: 1,
-                        userInfo: [NSLocalizedDescriptionKey: errorDesc ?? "undefined error"]
-                    )
+                guard case let response? = error.response else {
                     completion(nil, error)
-                default:
-                    completion(nil, error)
+                    return
                 }
+                let errorDesc = self.extractErrorDescription(from: response.data)
+                let unsplashError = NSError(
+                    domain: "com.unsplash.error",
+                    code: 1,
+                    userInfo: [NSLocalizedDescriptionKey: errorDesc ?? "undefined error"]
+                )
+                completion(nil, unsplashError)
             }
         }
     }
@@ -133,7 +132,6 @@ class UnsplashAuthManager {
         components.scheme = "https"
         components.host = UnsplashSettings.host.string
         components.path = "/oauth/authorize"
-
 
         var params: [String: String] = [:]
         params["response_type"] = "code"
@@ -147,10 +145,7 @@ class UnsplashAuthManager {
     }
     
     public var accessToken: String? {
-        guard let token = UserDefaults.standard.string(forKey: clientID) else {
-            return nil
-        }
-        return token
+        return UserDefaults.standard.string(forKey: clientID)
     }
     
     public func clearAccessToken() {
@@ -178,13 +173,11 @@ class UnsplashAuthManager {
     }
     
     private func extractCode(from url: URL) -> String? {
-        guard let code = url.value(for: "code") else { return nil }
-        return code
+       return url.value(for: "code")
     }
     
     private func extractErrorDescription(from data: Data) -> String? {
         let error = try? JSONDecoder().decode(UnsplashAuthError.self, from: data)
-        guard let authError = error else { return nil }
-        return authError.errorDescription
+        return error?.errorDescription
     }
 }
