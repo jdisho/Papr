@@ -53,14 +53,12 @@ class CollectionsViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         collectionView.rx.itemSelected
-            .map { [unowned self] indexPath -> CollectionCell? in
-                guard let cell = self.collectionView.cellForItem(at: indexPath) as? CollectionCell
-                    else { return nil }
-                return cell
+            .flatMap { [weak self] indexPath -> Observable<CollectionCell> in
+                guard let cell = self?.collectionView.cellForItem(at: indexPath) as? CollectionCell
+                    else { return .empty() }
+                return .just(cell)
             }
-            .unwrap()
             .map { $0.viewModel }
-            .unwrap()
             .flatMap { $0.output.photoCollection }
             .bind(to: input.collectionDetailsAction.inputs)
             .disposed(by: disposeBag)

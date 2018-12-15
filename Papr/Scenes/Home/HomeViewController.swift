@@ -46,11 +46,7 @@ class HomeViewController: UIViewController, BindableType {
 
         outputs.curated.subscribe { [unowned self] curated in
             guard let curated = curated.element else { return }
-            if curated {
-                 self.navBarButton.rx.action = inputs.showLatestPhotosAction 
-            } else {
-                self.navBarButton.rx.action  = inputs.showCuratedPhotosAction
-            }
+            self.navBarButton.rx.action = curated ? inputs.showLatestPhotosAction : inputs.showCuratedPhotosAction
         }
         .disposed(by: disposeBag)
         
