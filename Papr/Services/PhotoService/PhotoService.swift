@@ -12,10 +12,13 @@ import Moya
 
 struct PhotoService: PhotoServiceType {
 
-    private var unsplash: MoyaProvider<Unsplash>
+    private let unsplash: MoyaProvider<Unsplash>
+    private let cache: Cache
 
-    init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>()) {
+    init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>(),
+         cache: Cache = Cache.shared) {
         self.unsplash = unsplash
+        self.cache = cache
     }
 
     func like(photo: Photo) ->  Observable<Result<Photo, NonPublicScopeError>> {
@@ -25,7 +28,7 @@ struct PhotoService: PhotoServiceType {
             .map { $0.photo }
             .asObservable()
             .unwrap()
-            .flatMapIgnore { Observable.just(Cache.shared.set(value: $0)) } // 🎡 Update cache
+            .flatMapIgnore { Observable.just(self.cache.set(value: $0)) } // 🎡 Update cache
             .map(Result.success)
             .catchError { _ in
                 let accessToken = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
@@ -43,7 +46,7 @@ struct PhotoService: PhotoServiceType {
             .map { $0.photo }
             .asObservable()
             .unwrap()
-            .flatMapIgnore { Observable.just(Cache.shared.set(value: $0)) } // 🎡 Update cache
+            .flatMapIgnore { Observable.just(self.cache.set(value: $0)) } // 🎡 Update cache
             .map(Result.success)
             .catchError { _ in
                 let accessToken = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
@@ -67,7 +70,7 @@ struct PhotoService: PhotoServiceType {
         curated: Bool = false
         ) -> Observable<Result<[Photo], String>> {
 
-        if pageNumber == 1 { Cache.shared.clear() }
+        if pageNumber == 1 { cache.clear() }
         
         let photos: Unsplash = curated ?
             .curatedPhotos(page: pageNumber, perPage: Constants.photosPerPage, orderBy: orderBy) :
@@ -76,7 +79,7 @@ struct PhotoService: PhotoServiceType {
         return unsplash.rx.request(photos)
             .map([Photo].self)
             .asObservable()
-            .flatMapIgnore { Observable.just(Cache.shared.set(values: $0)) }  // 👨‍👩‍👧‍👧 Populate the cache.
+            .flatMapIgnore { Observable.just(self.cache.set(values: $0)) }  // 👨‍👩‍👧‍👧 Populate the cache.
             .map(Result.success)
             .catchError { .just(.error($0.localizedDescription)) }
     }

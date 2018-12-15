@@ -137,22 +137,24 @@ class HomeViewModel: HomeViewModelType,
     var navBarButtonName: Observable<NavBarTitle>!
 
     lazy var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> = {
-        let cachedPhotos = (Cache.shared.collection() as Observable<[Photo]>).share(replay: 1)
-        return Observable.combineLatest(photos, cachedPhotos).map { serverPhotos, cachedPhotos -> [HomeViewCellModelType] in
-            var homeViewCellModelArray = [HomeViewCellModelType]()
-            for (serverPhoto, cachedPhoto) in zip(serverPhotos, cachedPhotos) {
-                let homeViewCellModel = HomeViewCellModel(
-                    photo: serverPhoto,
-                    likedByUser: cachedPhoto.likedByUser ?? false,
-                    totalLikes: cachedPhoto.likes ?? 0
-                )
-                homeViewCellModelArray.append(homeViewCellModel)
-            }
-            return homeViewCellModelArray
+        let cachedPhotos = (cache.collection() as Observable<[Photo]>)
+        return Observable.combineLatest(photos, cachedPhotos)
+            .map { serverPhotos, cachedPhotos -> [HomeViewCellModelType] in
+                var homeViewCellModelArray = [HomeViewCellModelType]()
+                for (serverPhoto, cachedPhoto) in zip(serverPhotos, cachedPhotos) {
+                    let homeViewCellModel = HomeViewCellModel(
+                        photo: serverPhoto,
+                        likedByUser: cachedPhoto.likedByUser ?? false,
+                        totalLikes: cachedPhoto.likes ?? 0
+                    )
+                    homeViewCellModelArray.append(homeViewCellModel)
+                }
+                return homeViewCellModelArray
         }
     }()
 
     // MARK: Private
+    private let cache: Cache
     private let service: PhotoServiceType
     private let sceneCoordinator: SceneCoordinatorType
     private let refreshProperty = BehaviorSubject<Bool>(value: true)
@@ -161,11 +163,13 @@ class HomeViewModel: HomeViewModelType,
     private let navBarButtonNameProperty = BehaviorSubject<NavBarTitle>(value: .new)
 
     // MARK: Init
-    init(service: PhotoServiceType = PhotoService(),
+    init(cache: Cache = Cache.shared,
+        service: PhotoServiceType = PhotoService(),
         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
-        
-        self.sceneCoordinator = sceneCoordinator
+
+        self.cache = cache
         self.service = service
+        self.sceneCoordinator = sceneCoordinator
 
         var currentPageNumber = 1
         var photoArray = [Photo]([])

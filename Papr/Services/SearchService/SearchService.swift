@@ -11,7 +11,7 @@ import RxSwift
 import Moya
 
 struct SearchService: SearchServiceType {
-    private var unsplash: MoyaProvider<Unsplash>
+    private let unsplash: MoyaProvider<Unsplash>
 
     init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>()) {
         self.unsplash = unsplash

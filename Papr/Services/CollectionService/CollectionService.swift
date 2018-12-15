@@ -12,7 +12,7 @@ import Moya
 
 struct CollectionService: CollectionServiceType {
 
-    private var unsplash: MoyaProvider<Unsplash>
+    private let unsplash: MoyaProvider<Unsplash>
 
     init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>()) {
         self.unsplash = unsplash
