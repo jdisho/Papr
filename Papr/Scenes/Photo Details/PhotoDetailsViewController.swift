@@ -11,6 +11,7 @@ import Nuke
 import RxNuke
 import RxSwift
 import Hero
+import VanillaConstraints
 
 class PhotoDetailsViewController: UIViewController, BindableType {
 
@@ -112,15 +113,14 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             }
             .disposed(by: disposeBag)
 
-
         inputs.downloadPhotoAction.elements
             .subscribe { [unowned self] result in
                 guard let linkString = result.element,
                     let url = URL(string: linkString) else { return }
 
                 Nuke.loadImage(with: url, into: self.dummyImageView) { response, _ in
-                        guard let image = response?.image else { return }
-                        inputs.writeImageToPhotosAlbumAction.execute(image)
+                    guard let image = response?.image else { return }
+                    inputs.writeImageToPhotosAlbumAction.execute(image)
                 }
             }
             .disposed(by: disposeBag)
@@ -128,13 +128,9 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         outputs.photoStream
             .map { $0.links?.html }
             .unwrap()
-            .subscribe { result in
-                guard let urlString = result.element,
-                    let url = URL(string: urlString),
-                    let image = self.photoImageView.image
-                    else { return }
-
-                self.moreButton.rx.bind(to: inputs.moreAction, input: [url, image])
+            .bind { [weak self] in
+                guard let image = self?.photoImageView.image else { return }
+                self?.moreButton.rx.bind(to: inputs.moreAction, input: [$0, image])
             }
             .disposed(by: disposeBag)
     }
@@ -181,25 +177,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         scrollView.contentMode = .center
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
-        view.addSubview(scrollView)
-
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-
-        scrollView.trailingAnchor.constraint(
-            equalTo: view.trailingAnchor,
-            constant: 0).isActive = true
-
-        scrollView.leadingAnchor.constraint(
-            equalTo: view.leadingAnchor,
-            constant: 0).isActive = true
-
-        scrollView.topAnchor.constraint(
-            equalTo: view.topAnchor,
-            constant: 0).isActive = true
-
-        scrollView.bottomAnchor.constraint(
-            equalTo: view.bottomAnchor,
-            constant: 0).isActive = true
+        scrollView.add(to: view).pinToEdges()
     }
 
     private func configurePhotoImageView() {
@@ -265,8 +243,6 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         self.dismissButtonTopConstraint.constant = -100
         self.isTouched = true
     }
-
-
 
     @objc func zoomInOut(gestureRecognizer: UITapGestureRecognizer) {
         if scrollView.zoomScale == 1 {
