@@ -65,31 +65,21 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
         let this = HomeViewCell.self
 
         outputs.photoStream
-            .map { $0.id ?? "" }
+            .map { $0.id }
+            .unwrap()
             .bind(to: photoImageView.rx.heroId)
             .disposed(by: disposeBag)
 
         Observable.combineLatest(outputs.likedByUser, outputs.photoStream)
-            .subscribe { result in
-                guard let result = result.element else { return }
-                let (likedByUser, photo) = result
-                if likedByUser {
-                    self.likeButton.rx
-                        .bind(to: inputs.unlikePhotoAction, input: photo)
-                } else {
-                    self.likeButton.rx
-                        .bind(to: inputs.likePhotoAction, input: photo)
-                }
+            .bind { [weak self] in
+                self?.likeButton.rx.bind(to: $0 ? inputs.unlikePhotoAction: inputs.likePhotoAction, input: $1)
             }
             .disposed(by: disposeBag)
 
         outputs.photoStream
-            .subscribe { [unowned self] photo in
-                guard let photo = photo.element else { return }
-                self.photoButton.rx
-                    .bind(to: inputs.photoDetailsAction, input: photo)
-                self.collectPhotoButton.rx
-                    .bind(to: inputs.userCollectionsAction, input: photo)
+            .bind { [weak self] in
+                self?.photoButton.rx.bind(to: inputs.photoDetailsAction, input: $0)
+                self?.collectPhotoButton.rx.bind(to: inputs.userCollectionsAction, input: $0)
             }
             .disposed(by: disposeBag)
 
@@ -104,8 +94,7 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
         Observable.combineLatest(
             outputs.smallPhoto,
             outputs.regularPhoto,
-            outputs.fullPhoto
-            )
+            outputs.fullPhoto)
             .flatMap { small, regular, full -> Observable<ImageResponse> in
                 return Observable.concat(
                     this.imagePipeline.rx.loadImage(with: URL(string: small)!).asObservable(),
@@ -147,10 +136,8 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
             .disposed(by: disposeBag)
 
         outputs.photoStream
-            .subscribe { result in
-                guard let photo = result.element else { return }
-                self.downloadPhotoButton.rx
-                    .bind(to: inputs.downloadPhotoAction, input: photo)
+            .bind { [weak self] in
+                self?.downloadPhotoButton.rx.bind(to: inputs.downloadPhotoAction, input: $0)
             }
             .disposed(by: disposeBag)
 
@@ -166,7 +153,6 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
                 }
             }
             .disposed(by: disposeBag)
-
     }
     
 }

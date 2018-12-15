@@ -128,11 +128,10 @@ class HomeViewCellModel: PhotoViewModel,
             .unwrap()
 
         updated = photoStream
-            .map { $0.updated ?? "" }
+            .map { $0.updated }
+            .unwrap()
             .map { $0.toDate }
-            .map { date -> String in
-                guard let date = date else { return "" }
-                return date.abbreviated
-            }
+            .unwrap()
+            .map { $0.abbreviated }
     }
 }
