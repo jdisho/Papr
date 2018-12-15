@@ -90,7 +90,6 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
             .bind(to: userImageView.rx.image)
             .disposed(by: disposeBag)
 
-
         Observable.combineLatest(
             outputs.smallPhoto,
             outputs.regularPhoto,

@@ -101,7 +101,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     private lazy var navigateToTabBarAction: CocoaAction = {
         return CocoaAction { [unowned self] _ in
             return self.sceneCoordinator.transition(to: Scene.papr)
-            }
+        }
     }()
 
     private lazy var alertAction: Action<String, Void> = {
@@ -122,8 +122,8 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
                 callbackURLScheme: UnsplashSettings.callbackURLScheme.string,
                 completionHandler: { [weak self] (callbackUrl, error) in
                 guard error == nil, let callbackUrl = callbackUrl else {
-                    switch error! {
-                    case SFAuthenticationError.canceledLogin: break
+                    switch error {
+                    case SFAuthenticationError.canceledLogin?: break
                     default: fatalError()
                     }
                     return
@@ -134,7 +134,6 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
         }
         return .empty()
     }
-
 }
 
 extension LoginViewModel: UnsplashSessionListener {
