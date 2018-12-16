@@ -77,13 +77,9 @@ class PaprNavigationController: UINavigationController {
 
         service.getMe()
             .flatMap { result -> Observable<User> in
-                switch result {
-                case let .success(user):
-                    profileImage.isHidden = false
-                    return .just(user)
-                case .error:
-                    return .empty()
-                }
+                guard case let .success(user) = result else { return .empty() }
+                profileImage.isHidden = false
+                return .just(user)
             }
             .map { $0.profileImage?.medium }
             .unwrap()

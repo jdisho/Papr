@@ -80,7 +80,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     init(userService: UserServiceType = UserService(),
          photoService: PhotoServiceType = PhotoService(),
          sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared,
-         authManager: UnsplashAuthManager = UnsplashAuthManager.sharedAuthManager) {
+         authManager: UnsplashAuthManager = UnsplashAuthManager.shared) {
 
         self.userService = userService
         self.photoService = photoService
@@ -101,7 +101,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     private lazy var navigateToTabBarAction: CocoaAction = {
         return CocoaAction { [unowned self] _ in
             return self.sceneCoordinator.transition(to: Scene.papr)
-            }
+        }
     }()
 
     private lazy var alertAction: Action<String, Void> = {
@@ -119,11 +119,11 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
         if #available(iOS 11.0, *) {
             self.authSession = SFAuthenticationSession(
                 url: authManager.authURL,
-                callbackURLScheme: UnsplashSettings.callbackURLScheme.string,
+                callbackURLScheme: Constants.UnsplashSettings.callbackURLScheme,
                 completionHandler: { [weak self] (callbackUrl, error) in
                 guard error == nil, let callbackUrl = callbackUrl else {
-                    switch error! {
-                    case SFAuthenticationError.canceledLogin: break
+                    switch error {
+                    case SFAuthenticationError.canceledLogin?: break
                     default: fatalError()
                     }
                     return
@@ -134,7 +134,6 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
         }
         return .empty()
     }
-
 }
 
 extension LoginViewModel: UnsplashSessionListener {

@@ -163,12 +163,11 @@ class PhotoViewModel: PhotoViewModelType,
             .map { (width: $0.width ?? 0, height: $0.height ?? 0) }
             .map { (width, height) -> Double in
                 Double(height * Int(UIScreen.main.bounds.width) / width)
-        }
+            }
 
         self.totalLikes = Observable.combineLatest(
             photoStreamProperty.asObservable().map { $0?.likes },
-            Observable.just(totalLikes)
-            )
+            Observable.just(totalLikes))
             .map { serverLikes, cachedLikes -> Int in
                 guard let serverLikes = serverLikes else { return cachedLikes }
                 return serverLikes
@@ -177,12 +176,11 @@ class PhotoViewModel: PhotoViewModelType,
 
         self.likedByUser = Observable.combineLatest(
             photoStreamProperty.asObservable().map { $0?.likedByUser },
-            Observable.just(likedByUser)
-        )
-        .map { serverLikedByUser, cachedLikedByUser -> Bool in
-            guard let serverLikedByUser = serverLikedByUser else { return cachedLikedByUser }
-            return serverLikedByUser
-        }
+            Observable.just(likedByUser))
+            .map { serverLikedByUser, cachedLikedByUser -> Bool in
+                guard let serverLikedByUser = serverLikedByUser else { return cachedLikedByUser }
+                return serverLikedByUser
+            }
 
     }
 

@@ -11,13 +11,6 @@ import Foundation
 // Currently, the only resolution supported is “days”. 
 // Unsplash probably will add more later.
 
-enum Resolution {
+enum Resolution: String {
     case days
-
-    var string: String {
-        switch self {
-        case .days:
-            return "days"
-        }
-    }
 }

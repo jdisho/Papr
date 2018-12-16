@@ -41,9 +41,6 @@
 		DC487F452104F0D80042DBBC /* UITableView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F442104F0D80042DBBC /* UITableView+Identifiable.swift */; };
 		DC487F472104F0FF0042DBBC /* UICollectionView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F462104F0FF0042DBBC /* UICollectionView+Identifiable.swift */; };
 		DC487F4A2104FCB00042DBBC /* BouncyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F482104FCB00042DBBC /* BouncyView.swift */; };
-		DC5AF7271FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
-		DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
-		DC5AF7291FAB989400ADA2BB /* UnsplashSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */; };
 		DC5AF72B1FACCBF300ADA2BB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF72A1FACCBF300ADA2BB /* User.swift */; };
 		DC5AF72C1FACCBF300ADA2BB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF72A1FACCBF300ADA2BB /* User.swift */; };
 		DC5AF72D1FACCBF300ADA2BB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF72A1FACCBF300ADA2BB /* User.swift */; };
@@ -403,7 +400,6 @@
 		DC487F442104F0D80042DBBC /* UITableView+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Identifiable.swift"; sourceTree = "<group>"; };
 		DC487F462104F0FF0042DBBC /* UICollectionView+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Identifiable.swift"; sourceTree = "<group>"; };
 		DC487F482104FCB00042DBBC /* BouncyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyView.swift; sourceTree = "<group>"; };
-		DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashSettings.swift; sourceTree = "<group>"; };
 		DC5AF72A1FACCBF300ADA2BB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		DC5AF73F1FACE6A300ADA2BB /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -618,7 +614,6 @@
 				DCBB1B731FA8D597004E95F0 /* Unsplash.swift */,
 				DC5AF7541FAD2EF900ADA2BB /* Scope.swift */,
 				DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */,
-				DC5AF7261FAB989400ADA2BB /* UnsplashSettings.swift */,
 				DCCCFCC4203A52410024D417 /* Resolution.swift */,
 				DCBAEE6220363CD600561CBA /* Orientation.swift */,
 			);
@@ -1448,7 +1443,6 @@
 				DC658D92208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */,
 				DC66E67720A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */,
 				DC487F402104E99F0042DBBC /* UIScrollView+Rx.swift in Sources */,
-				DC5AF7271FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DCBB1B6C1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */,
 				DCB915AF20B9A8DE003D1069 /* PinterestLayout.swift in Sources */,
@@ -1569,7 +1563,6 @@
 				DCB35C8D21BF09E300859FB2 /* UserProfileViewModel.swift in Sources */,
 				DCB35C7C21BF096F00859FB2 /* Scene.swift in Sources */,
 				DCBB1B751FA8D597004E95F0 /* Unsplash.swift in Sources */,
-				DC5AF7281FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC5AF7491FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DC9147952082B9B500781B65 /* Hero+Rx.swift in Sources */,
 				DCB35C9F21BF0BF900859FB2 /* CollectionCellViewModel.swift in Sources */,
@@ -1669,7 +1662,6 @@
 				DC5AF7521FAD027F00ADA2BB /* PhotoCollection.swift in Sources */,
 				DCB35C8821BF09BD00859FB2 /* UICollectionView+Identifiable.swift in Sources */,
 				DCBB1B761FA8D597004E95F0 /* Unsplash.swift in Sources */,
-				DC5AF7291FAB989400ADA2BB /* UnsplashSettings.swift in Sources */,
 				DC5AF74A1FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DCB35C9621BF0A5D00859FB2 /* UserProfileViewController.swift in Sources */,
 				DCB35C9C21BF0ABD00859FB2 /* PinterestLayout+Rx.swift in Sources */,

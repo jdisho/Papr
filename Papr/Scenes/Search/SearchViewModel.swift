@@ -43,8 +43,9 @@ class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewMode
     private let searchResults: Observable<[SearchResult]>
 
     private lazy var searchAction: Action<Int, Void> = {
-        return Action<Int, Void> { row in
-            guard let searchStringValue = try? self.searchString.value(),
+        return Action<Int, Void> { [weak self] row in
+            guard let `self` = self,
+                let searchStringValue = try? self.searchString.value(),
                 let query = searchStringValue else { return .empty() }
             switch row {
             case 0:
@@ -56,7 +57,7 @@ class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewMode
             case 2:
                 let viewModel = SearchUsersViewModel(searchQuery: query)
                 return self.sceneCoordinator.transition(to: Scene.searchUsers(viewModel))
-            default: fatalError()
+            default: return .empty()
             }
         }
     }()

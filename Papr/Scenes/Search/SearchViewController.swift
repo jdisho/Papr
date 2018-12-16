@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import VanillaConstraints
 
 class SearchViewController: UIViewController, BindableType {
 
@@ -50,7 +51,7 @@ class SearchViewController: UIViewController, BindableType {
         let outputs = viewModel.outputs
 
         searchBar.rx.text
-            .filter { ($0 ?? "").count > 0 }
+            .unwrap()
             .bind(to: inputs.searchString)
             .disposed(by: disposeBag)
 
@@ -105,16 +106,8 @@ class SearchViewController: UIViewController, BindableType {
     private func configureBouncyView() {
         let bouncyView = BouncyView(frame: noResultView.frame)
         bouncyView.configure(emoji: "🏞", message: "Search Unsplash")
-        bouncyView.translatesAutoresizingMaskIntoConstraints = false
         bouncyView.clipsToBounds = true
-        noResultView.addSubview(bouncyView)
-
-        NSLayoutConstraint.activate([
-            bouncyView.leadingAnchor.constraint(equalTo: noResultView.leadingAnchor),
-            bouncyView.trailingAnchor.constraint(equalTo: noResultView.trailingAnchor),
-            bouncyView.topAnchor.constraint(equalTo: noResultView.topAnchor),
-            bouncyView.bottomAnchor.constraint(equalTo: noResultView.bottomAnchor)
-        ])
+        bouncyView.add(to: noResultView).pinToEdges()
     }
 
     private var tableViewDataSource: RxTableViewSectionedReloadDataSource<SearchSectionModel>.ConfigureCell {
