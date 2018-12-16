@@ -39,7 +39,7 @@ class UserCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdentifiab
     }
 
     func bindViewModel() {
-        let outputs = viewModel.outputs
+        let outputs = viewModel.output
         let this = UserCell.self
 
         outputs.fullName

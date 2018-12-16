@@ -22,7 +22,7 @@ class SearchResultCell: UITableViewCell, BindableType, NibIdentifiable & ClassId
 
     // MARK: BindableType
     func bindViewModel() {
-        viewModel.outputs.searchResult
+        viewModel.output.searchResult
             .map { $0.description }
             .bind(to: titleLabel.rx.text)
             .disposed(by: disposeBag)

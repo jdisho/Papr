@@ -10,31 +10,15 @@ import Foundation
 import RxSwift
 import Action
 
-protocol SearchUsersViewModelInput {
-    var loadMore: BehaviorSubject<Bool> { get }
-}
-
-protocol SearchUsersViewModelOutput {
-    var searchQuery: Observable<String> { get }
-    var totalResults: Observable<Int> { get }
-    var usersViewModel: Observable<[UserCellModelType]> { get }
-    var navTitle: Observable<String> { get }
-}
-
-protocol SearchUsersViewModelType {
-    var input: SearchUsersViewModelInput { get }
-    var output: SearchUsersViewModelOutput { get }
-}
-
-class SearchUsersViewModel: SearchUsersViewModelType, SearchUsersViewModelInput, SearchUsersViewModelOutput {
-
-    var input: SearchUsersViewModelInput { return self }
-    var output: SearchUsersViewModelOutput { return self }
+class SearchUsersViewModel: AutoModel {
 
     // MARK: - Inputs
+    /// sourcery:begin: input
     let loadMore = BehaviorSubject<Bool>(value: false)
+    /// sourcery:end
 
     // MARK: - Outputs
+    /// sourcery:begin: output
     let searchQuery: Observable<String>
     let totalResults: Observable<Int>
     let navTitle: Observable<String>
@@ -45,6 +29,7 @@ class SearchUsersViewModel: SearchUsersViewModelType, SearchUsersViewModelInput,
                 users.map { UserCellModel.init(user: $0, searchQuery: searchQuery) }
             }
     }()
+    /// sourcery:end
 
     // MARK: - Private
     private var users: Observable<[User]>!

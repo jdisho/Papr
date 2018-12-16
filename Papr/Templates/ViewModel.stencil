@@ -1,0 +1,51 @@
+import RxSwift
+import Action
+import UIKit
+
+{% for type in types.implementing.AutoModel %}
+
+// MARK: {{ type.name }}
+protocol {{ type.name }}Input{% if type.supertype %}: {{ type.supertype.name }}Input{% endif %} {
+{% for variable in type.variables %}
+{% if variable.annotations.input %}
+  var {{ variable.name }}: {{ variable.typeName }} { get }
+{% endif %}
+{% endfor %}
+
+{% for method in type.methods %}
+{% if method.annotations.input %}
+  func {{ method.name }}
+{% endif %}
+{% endfor %}
+}
+
+protocol {{ type.name }}Output{% if type.supertype %}: {{ type.supertype.name }}Output{% endif %} {
+{% for variable in type.variables %}
+{% if variable.annotations.output %}
+  var {{ variable.name }}: {{ variable.typeName }} { get }
+{% endif %}
+{% endfor %}
+}
+
+protocol {{ type.name }}Type{% if type.supertype %}: {{ type.supertype.name }}Type{% endif %} {
+{% if types.implementing.AutoModel|inherits:type.name %}
+  var {{ type.name|lowerFirstLetter }}Input: {{ type.name }}Input { get }
+  var {{ type.name|lowerFirstLetter }}Output: {{ type.name }}Output { get }
+{% else %}
+  var input: {{ type.name }}Input { get }
+  var output: {{ type.name }}Output { get }
+{% endif %}
+}
+
+extension {{ type.name }}: {{ type.name }}Type, {{ type.name }}Input, {{ type.name }}Output {
+  // MARK: Inputs & Outputs
+{% if types.implementing.AutoModel|inherits:type.name %}
+  var {{ type.name|lowerFirstLetter }}Input: {{ type.name }}Input { return self }
+  var {{ type.name|lowerFirstLetter }}Output: {{ type.name }}Output { return self }
+{% else %}
+  var input: {{ type.name }}Input { return self }
+  var output: {{ type.name }}Output { return self }
+{% endif %}
+}
+
+{% endfor %}

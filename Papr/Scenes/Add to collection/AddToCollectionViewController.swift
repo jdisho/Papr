@@ -43,8 +43,8 @@ class AddToCollectionViewController: UIViewController, BindableType {
     }
 
     func bindViewModel() {
-        let inputs = viewModel.inputs
-        let outputs = viewModel.outputs
+        let inputs = viewModel.input
+        let outputs = viewModel.output
         let this = AddToCollectionViewController.self
 
         outputs.photoStream

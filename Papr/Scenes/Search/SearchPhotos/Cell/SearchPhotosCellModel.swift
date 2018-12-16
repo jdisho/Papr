@@ -9,37 +9,21 @@
 import Foundation
 import RxSwift
 
-protocol SearchPhotosCellModelInput {
-    func updateSize(width: Double, height: Double)
-}
-protocol SearchPhotosCellModelOutput {
-    var smallPhotoURL: Observable<String> { get }
-    var regularPhotoURL: Observable<String> { get }
-    var photoSize: Observable<(width: Double, height: Double)> { get }
-}
-
-protocol SearchPhotosCellModelType {
-    var inputs: SearchPhotosCellModelInput { get }
-    var outputs: SearchPhotosCellModelOutput { get }
-}
-
-class SearchPhotosCellModel: SearchPhotosCellModelType,
-                            SearchPhotosCellModelInput,
-                            SearchPhotosCellModelOutput {
-    
-    // MARK: Inputs & Outputs
-    var inputs: SearchPhotosCellModelInput { return self }
-    var outputs: SearchPhotosCellModelOutput { return self }
+class SearchPhotosCellModel: AutoModel {
 
     // MARK: Inputs
+    /// sourcery:begin: input
     func updateSize(width: Double, height: Double) {
         photoSizeProperty.onNext((width: width, height: height))
     }
+    /// sourcery:end
     
     // MARK: Outputs
+    /// sourcery:begin: output
     let smallPhotoURL: Observable<String>
     let regularPhotoURL: Observable<String>
     let photoSize: Observable<(width: Double, height: Double)>
+    /// sourcery:end
     
     // MARK: Privates
     private let photoSizeProperty = BehaviorSubject<(width: Double, height: Double)>(value: (width: 0, height: 0))

@@ -10,24 +10,7 @@ import Foundation
 import RxSwift
 import Action
 
-protocol SearchPhotosViewModelInput {
-    var loadMore: BehaviorSubject<Bool> { get }
-}
-
-protocol SearchPhotosViewModelOutput {
-    var searchPhotosCellModelType: Observable<[SearchPhotosCellModelType]> { get }
-    var navTitle: Observable<String> { get }
-}
-
-protocol SearchPhotosViewModelType {
-    var inputs: SearchPhotosViewModelInput { get }
-    var outputs: SearchPhotosViewModelOutput { get }
-}
-
-class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInput, SearchPhotosViewModelOutput {
-
-    var inputs: SearchPhotosViewModelInput { return self }
-    var outputs: SearchPhotosViewModelOutput { return self }
+class SearchPhotosViewModel: AutoModel {
 
     enum SearchType {
         case collectionPhotos(title: String, collectionID: Int, collectionService: CollectionServiceType)
@@ -35,13 +18,17 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
     }
 
     // MARK: - Inputs
+    /// sourcery:begin: input
     let loadMore = BehaviorSubject<Bool>(value: false)
+    /// sourcery:end
 
     // MARK: - Outputs
+    /// sourcery:begin: output
     let navTitle: Observable<String>
     lazy var searchPhotosCellModelType: Observable<[SearchPhotosCellModelType]> = {
         return photos.mapMany { SearchPhotosCellModel(photo: $0) }
     }()
+    /// sourcery:end
 
     // MARK: - Private
     private var photos: Observable<[Photo]>!

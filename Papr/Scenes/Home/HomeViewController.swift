@@ -41,8 +41,8 @@ class HomeViewController: UIViewController, BindableType {
     // MARK: BindableType
     
     func bindViewModel() {
-        let inputs = viewModel.inputs
-        let outputs = viewModel.outputs
+        let inputs = viewModel.input
+        let outputs = viewModel.output
 
         outputs.curated.subscribe { [unowned self] curated in
             guard let curated = curated.element else { return }
@@ -120,7 +120,7 @@ class HomeViewController: UIViewController, BindableType {
     }
 
     @objc private func refresh() {
-        viewModel.inputs.refresh()
+        viewModel.input.refresh()
     }
 
     private var tableViewDataSource: TableViewSectionedDataSource<HomeSectionModel>.ConfigureCell {

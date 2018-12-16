@@ -17,29 +17,10 @@ enum LoginState {
     case tokenIsFetched
 }
 
-protocol LoginViewModelInput {
-    var loginAction: CocoaAction { get }
-    var closeAction: CocoaAction { get }
-}
-
-protocol LoginViewModelOuput {
-    var buttonName: Observable<String> { get }
-    var loginState: Observable<LoginState> { get }
-    var randomPhotos: Observable<[Photo]> { get }
-}
-
-protocol LoginViewModelType {
-    var inputs: LoginViewModelInput { get }
-    var outputs: LoginViewModelOuput { get }
-}
-
-class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelType   {
-
-    // MARK: Inputs & Outputs
-    var inputs: LoginViewModelInput { return self }
-    var outputs: LoginViewModelOuput { return self }
+class LoginViewModel: AutoModel   {
 
     // MARK: Input
+    /// sourcery:begin: input
     lazy var loginAction: CocoaAction = {
         return CocoaAction { [unowned self] _ in
             self.authenticate()
@@ -51,11 +32,14 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
             self.sceneCoordinator.pop(animated: true)
         }
     }()
+    /// sourcery:end
 
     // MARK: Output
+    /// sourcery:begin: output
     let buttonName: Observable<String>
     let loginState: Observable<LoginState>
     let randomPhotos: Observable<[Photo]>
+    /// sourcery:end
     
     // MARK: Private
     fileprivate let authManager: UnsplashAuthManager

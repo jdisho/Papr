@@ -10,32 +10,10 @@ import Foundation
 import RxSwift
 import Action
 
-protocol CreateCollectionViewModelInput {
-    var cancelAction: CocoaAction { get }
-    var saveAction: CocoaAction { get }
-    var collectionName: BehaviorSubject<String> { get }
-    var collectionDescription: BehaviorSubject<String> { get }
-    var isPrivate: BehaviorSubject<Bool> { get }
-}
-
-protocol CreateCollectionViewModelOutput {
-    var saveButtonEnabled: Observable<Bool> { get }
-}
-
-protocol CreateCollectionViewModelType {
-    var inputs: CreateCollectionViewModelInput { get }
-    var outputs: CreateCollectionViewModelOutput {  get}
-}
-
-class CreateCollectionViewModel: CreateCollectionViewModelInput,
-                                CreateCollectionViewModelOutput,
-                                CreateCollectionViewModelType  {
-
-    // MARK: Inputs & Outputs
-    var inputs: CreateCollectionViewModelInput { return self }
-    var outputs: CreateCollectionViewModelOutput { return self }
+class CreateCollectionViewModel: AutoModel  {
 
     // MARK: Inputs
+    /// sourcery:begin: input
     let collectionName = BehaviorSubject<String>(value: "")
     let collectionDescription = BehaviorSubject<String>(value: "")
     let isPrivate = BehaviorSubject<Bool>(value: false)
@@ -59,9 +37,12 @@ class CreateCollectionViewModel: CreateCollectionViewModelInput,
             return result.ignoreAll()
         }
     }()
+    /// sourcery:end
 
     // MARK: Outputs
+    /// sourcery:begin: output
     let saveButtonEnabled: Observable<Bool>
+    /// sourcery:end
 
 
     // MARK: Private

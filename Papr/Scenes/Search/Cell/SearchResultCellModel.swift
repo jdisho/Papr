@@ -30,26 +30,13 @@ extension SearchResult: IdentifiableType {
 
     // MARK: SearchResultCellModel
 
-protocol SearchResultCellModelInput {}
 
-protocol SearchResultCellModelOutput {
-    var searchResult: Observable<SearchResult> { get }
-}
-
-protocol SearchResultCellModelType {
-    var inputs: SearchResultCellModelInput { get }
-    var outputs: SearchResultCellModelOutput { get }
-}
-
-class SearchResultCellModel: SearchResultCellModelType,
-                            SearchResultCellModelInput,
-                            SearchResultCellModelOutput {
-    // MARK: Inputs & Outputs
-    var inputs: SearchResultCellModelInput { return self }
-    var outputs: SearchResultCellModelOutput { return self }
-
+class SearchResultCellModel: AutoModel {
+ 
     // MARK: Outputs
+    /// sourcery:begin: output
     let searchResult: Observable<SearchResult>
+    /// sourcery:end
 
     init(searchResult: SearchResult) {
         self.searchResult = Observable.just(searchResult)

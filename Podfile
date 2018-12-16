@@ -24,6 +24,7 @@ target 'Papr' do
   pod 'VanillaConstraints'
 
   # Pods for Papr
+  pod 'Sourcery'
 
   target 'PaprTests' do
     inherit! :search_paths

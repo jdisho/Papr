@@ -9,26 +9,13 @@
 import Foundation
 import RxSwift
 
-protocol UserCellModelInput {}
-protocol UserCellModelOutput {
-    var fullName: Observable<NSAttributedString> { get }
-    var profilePhotoURL: Observable<String> { get }
-}
-
-protocol UserCellModelType {
-    var inputs: UserCellModelInput { get }
-    var outputs: UserCellModelOutput { get }
-}
-
-class UserCellModel: UserCellModelType, UserCellModelInput, UserCellModelOutput {
-
-    // MARK: Inputs & Outputs
-    var inputs: UserCellModelInput { return self }
-    var outputs: UserCellModelOutput { return self }
+class UserCellModel: AutoModel {
 
     // MARK: Outputs
+    /// sourcery:begin: output
     let fullName: Observable<NSAttributedString>
     let profilePhotoURL: Observable<String>
+    /// sourcery:end
 
     // MARK: Init
     init(user: User, searchQuery: String) {

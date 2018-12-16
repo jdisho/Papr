@@ -35,8 +35,8 @@ class SearchPhotosViewController: UIViewController, BindableType {
     }
 
     func bindViewModel() {
-        let inputs = viewModel.inputs
-        let outputs = viewModel.outputs
+        let inputs = viewModel.input
+        let outputs = viewModel.output
 
         outputs.navTitle
             .bind(to: rx.title)
@@ -76,7 +76,7 @@ class SearchPhotosViewController: UIViewController, BindableType {
             var cell = collectionView.dequeueReusableCell(withCellType: SearchPhotosCell.self, forIndexPath: indexPath)
             cell.bind(to: cellModel)
             
-            cellModel.outputs.photoSize
+            cellModel.output.photoSize
                 .skip(1)
                 .map { CGSize(width: $0.width, height: $0.height) }
                 .bind(to: self.pinterestLayout.rx.updateSize(indexPath))
