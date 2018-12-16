@@ -31,7 +31,7 @@ struct PhotoService: PhotoServiceType {
             .flatMapIgnore { Observable.just(self.cache.set(value: $0)) } // 🎡 Update cache
             .map(Result.success)
             .catchError { _ in
-                let accessToken = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
+                let accessToken = UserDefaults.standard.string(forKey: Constants.UnsplashSettings.clientID)
                 guard accessToken == nil else {
                     return .just(.error(.error(withMessage: "Failed to like")))
                 }
@@ -49,7 +49,7 @@ struct PhotoService: PhotoServiceType {
             .flatMapIgnore { Observable.just(self.cache.set(value: $0)) } // 🎡 Update cache
             .map(Result.success)
             .catchError { _ in
-                let accessToken = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
+                let accessToken = UserDefaults.standard.string(forKey: Constants.UnsplashSettings.clientID)
                 guard accessToken == nil else {
                     return .just(.error(.error(withMessage: "Failed to like")))
                 }

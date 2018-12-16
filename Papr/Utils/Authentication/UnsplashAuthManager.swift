@@ -38,9 +38,9 @@ enum UnsplashAuthorization: TargetType {
             var params: [String: Any] = [:]
 
             params["grant_type"] = "authorization_code"
-            params["client_id"] = UnsplashSettings.clientID.string
-            params["client_secret"] = UnsplashSettings.clientSecret.string
-            params["redirect_uri"] = UnsplashSettings.redirectURL.string
+            params["client_id"] = Constants.UnsplashSettings.clientID
+            params["client_secret"] = Constants.UnsplashSettings.clientSecret
+            params["redirect_uri"] = Constants.UnsplashSettings.redirectURL
             params["code"] = code
 
             return .requestParameters(parameters: params, encoding: URLEncoding.default)
@@ -62,41 +62,58 @@ class UnsplashAuthManager {
 
     static var shared: UnsplashAuthManager {
         return UnsplashAuthManager(
-            clientID: UnsplashSettings.clientID.string, 
-            clientSecret: UnsplashSettings.clientSecret.string, 
-            scopes: [
-                Scope.pub.string,
-                Scope.readUser.string,
-                Scope.writeUser.string,
-                Scope.readPhotos.string,
-                Scope.writePhotos.string,
-                Scope.writeLikes.string,
-                Scope.writeFollowers.string,
-                Scope.readCollections.string,
-                Scope.writeCollections.string
-            ]
+            clientID: Constants.UnsplashSettings.clientID,
+            clientSecret: Constants.UnsplashSettings.clientSecret, 
+            scopes: Scope.allCases
         )
     }
 
-    // MARK: Private
+    // MARK: Private Properties
     private let clientID: String
     private let clientSecret: String
     private let redirectURL: URL
-    private let scopes: [String]
+    private let scopes: [Scope]
     private let unplash: MoyaProvider<UnsplashAuthorization>
 
+    // MARK: Public Properties
+    public var accessToken: String? {
+        return UserDefaults.standard.string(forKey: clientID)
+    }
+
+    public func clearAccessToken() {
+        UserDefaults.standard.removeObject(forKey: clientID)
+    }
+
+    public var authURL: URL {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = Constants.UnsplashSettings.host
+        components.path = "/oauth/authorize"
+
+        var params: [String: String] = [:]
+        params["response_type"] = "code"
+        params["client_id"] = clientID
+        params["redirect_uri"] = redirectURL.absoluteString
+        params["scope"] = scopes.map { $0.rawValue }.joined(separator: "+")
+
+        let url = components.url?.appendingQueryParameters(params)
+
+        return url!
+    }
+
     // MARK: Init
-    init(clientID: String, clientSecret: String, scopes: [String] = [Scope.pub.string]) {
+    init(clientID: String,
+         clientSecret: String,
+         scopes: [Scope] = [Scope.pub],
+         unsplash:  MoyaProvider<UnsplashAuthorization> = MoyaProvider<UnsplashAuthorization>()) {
         self.clientID = clientID
         self.clientSecret = clientSecret
-        self.redirectURL = URL(string: UnsplashSettings.redirectURL.string)!
+        self.redirectURL = URL(string: Constants.UnsplashSettings.redirectURL)!
         self.scopes = scopes
-
-        unplash = MoyaProvider<UnsplashAuthorization>()
+        self.unplash = unsplash
     }
 
     // MARK: Public
-
     public func receivedCodeRedirect(url: URL) {
         guard let code = extractCode(from: url) else { return }
         delegate.didReceiveRedirect(code: code)
@@ -126,38 +143,12 @@ class UnsplashAuthManager {
             }
         }
     }
-    
-    public var authURL: URL {
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = UnsplashSettings.host.string
-        components.path = "/oauth/authorize"
 
-        var params: [String: String] = [:]
-        params["response_type"] = "code"
-        params["client_id"] = clientID
-        params["redirect_uri"] = redirectURL.absoluteString
-        params["scope"] = scopes.joined(separator: "+")
-
-        let url = components.url?.appendingQueryParameters(params)
-
-        return url!
-    }
-    
-    public var accessToken: String? {
-        return UserDefaults.standard.string(forKey: clientID)
-    }
-    
-    public func clearAccessToken() {
-        UserDefaults.standard.removeObject(forKey: clientID)
-    }
-    
     // MARK: Private
-    
     private func accessTokenURL(with code: String) -> URL {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = UnsplashSettings.host.string
+        components.host = Constants.UnsplashSettings.host
         components.path = "/oauth/token"
 
         var params: [String: String] = [:]

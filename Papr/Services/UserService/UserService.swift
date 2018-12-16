@@ -24,7 +24,7 @@ struct UserService: UserServiceType {
             .map(User.self)
             .map(Result.success)
             .catchError { error in
-                let accessToken = UserDefaults.standard.string(forKey: UnsplashSettings.clientID.string)
+                let accessToken = UserDefaults.standard.string(forKey: Constants.UnsplashSettings.clientID)
                 guard accessToken == nil else {
                     return .just(.error(.error(withMessage: error.localizedDescription)))
                 }

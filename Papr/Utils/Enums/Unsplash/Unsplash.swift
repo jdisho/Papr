@@ -352,7 +352,7 @@ extension Unsplash: TargetType  {
             params["per_page"] = value.perPage
             params["order_by"] = value.orderBy
             params["stats"] = value.showStats
-            params["resolution"] = value.resolution?.string
+            params["resolution"] = value.resolution?.rawValue
             params["quantity"] = value.quantity
 
             return .requestParameters(
@@ -387,7 +387,7 @@ extension Unsplash: TargetType  {
              let .photoStatistics(_, resolution, quantity):
 
             var params: [String: Any] = [:]
-            params["resolution"] = resolution?.string
+            params["resolution"] = resolution?.rawValue
             params["quantity"] = quantity
 
             return .requestParameters(
@@ -403,7 +403,7 @@ extension Unsplash: TargetType  {
             params["query"] = value.query
             params["w"] = value.width
             params["h"] = value.height
-            params["orientation"] = value.orientation?.string
+            params["orientation"] = value.orientation?.rawValue
             params["count"] = value.count
 
             return .requestParameters(
@@ -444,7 +444,7 @@ extension Unsplash: TargetType  {
             params["page"] = value.page
             params["per_page"] = value.perPage
             params["collections"] = value.collections
-            params["orientation"] = value.orientation?.string
+            params["orientation"] = value.orientation?.rawValue
 
             return .requestParameters(
                 parameters: params,
@@ -492,9 +492,9 @@ extension Unsplash: TargetType  {
     }
 
     var headers: [String : String]? {
-        let clientID = UnsplashSettings.clientID.string
+        let clientID = Constants.UnsplashSettings.clientID
         guard let token = UserDefaults.standard.string(forKey: clientID) else {
-            return ["Authorization": "Client-ID \(UnsplashSettings.clientID.string)"]
+            return ["Authorization": "Client-ID \(clientID)"]
         }
         return ["Authorization": "Bearer \(token)"]
     }

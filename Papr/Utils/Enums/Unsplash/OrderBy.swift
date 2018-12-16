@@ -8,19 +8,8 @@
 
 import Foundation
 
-enum OrderBy {
+enum OrderBy: String {
     case latest
     case oldest
     case popular
-    
-    var string: String {
-        switch self {
-        case .latest:
-            return "latest"
-        case .oldest:
-            return "oldest"
-        case .popular:
-            return "popular"
-        }
-    }
 }

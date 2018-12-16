@@ -119,7 +119,7 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
         if #available(iOS 11.0, *) {
             self.authSession = SFAuthenticationSession(
                 url: authManager.authURL,
-                callbackURLScheme: UnsplashSettings.callbackURLScheme.string,
+                callbackURLScheme: Constants.UnsplashSettings.callbackURLScheme,
                 completionHandler: { [weak self] (callbackUrl, error) in
                 guard error == nil, let callbackUrl = callbackUrl else {
                     switch error {
