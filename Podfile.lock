@@ -25,6 +25,7 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
+  - Sourcery (0.15.0)
   - VanillaConstraints (1.0.1)
 
 DEPENDENCIES:
@@ -35,6 +36,7 @@ DEPENDENCIES:
   - RxDataSources
   - RxNuke
   - RxSwift
+  - Sourcery
   - VanillaConstraints
 
 SPEC CHECKSUMS:
@@ -50,8 +52,9 @@ SPEC CHECKSUMS:
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxNuke: 8be1b71b08b238608834e5ffac597bcafab1e66f
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
+  Sourcery: 5895672cae353cdbfa95f3f4aaeb75a664d76f6a
   VanillaConstraints: 79afbbd46076f7db75156fe89d73529beae99a9f
 
-PODFILE CHECKSUM: 52dc7ac4bd4e6ec32df1c61bf27ba3d794efd418
+PODFILE CHECKSUM: 190c53b7671152118338497b67c5855de66d681d
 
 COCOAPODS: 1.4.0

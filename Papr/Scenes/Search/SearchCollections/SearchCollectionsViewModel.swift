@@ -10,21 +10,7 @@ import Foundation
 import RxSwift
 import Action
 
-protocol SearchCollectionsViewModelInput {
-}
-
-protocol SearchCollectionsViewModelOutput {
-}
-
-protocol SearchCollectionsViewModelType {
-    var input: SearchCollectionsViewModelInput { get }
-    var output: SearchCollectionsViewModelOutput { get }
-}
-
-class SearchCollectionsViewModel: SearchCollectionsViewModelType, SearchCollectionsViewModelInput, SearchCollectionsViewModelOutput {
-
-    var input: SearchCollectionsViewModelInput { return self }
-    var output: SearchCollectionsViewModelOutput { return self }
+class SearchCollectionsViewModel: AutoModel {
 
     // MARK: - Inputs
 

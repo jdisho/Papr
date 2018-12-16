@@ -10,34 +10,10 @@ import Foundation
 import RxSwift
 import Action
 
-protocol PhotoCollectionCellModelInput {
-    var addAction: CocoaAction { get }
-    var removeAction: CocoaAction { get }
-}
-
-protocol PhotoCollectionCellModelOutput {
-    var coverPhotoURL: Observable<String> { get }
-    var collectionName: Observable<String> { get }
-    var isCollectionPrivate: Observable<Bool> { get }
-    var isPhotoInCollection: Observable<Bool> { get }
-}
-
-
-protocol PhotoCollectionCellModelType {
-    var inputs: PhotoCollectionCellModelInput { get }
-    var outputs: PhotoCollectionCellModelOutput { get }
-}
-
-class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
-                                PhotoCollectionCellModelOutput,
-                                PhotoCollectionCellModelType {
-
-
-    // MARK: Inputs & Outputs
-    var inputs: PhotoCollectionCellModelInput { return self }
-    var outputs: PhotoCollectionCellModelOutput { return self }
+class PhotoCollectionCellModel: AutoModel {
 
     // MARK: Inputs
+    /// sourcery:begin: input
     lazy var addAction: CocoaAction = {
         return CocoaAction {
             guard let collectionID = self.photoCollection.id,
@@ -73,12 +49,15 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
             }
         }
     }()
+    /// sourcery:end
 
     // MARK: Outputs
+    /// sourcery:begin: output
     let coverPhotoURL: Observable<String>
     let collectionName: Observable<String>
     let isCollectionPrivate: Observable<Bool>
     let isPhotoInCollection: Observable<Bool>
+    /// sourcery:end
 
     // MARK: Private
     private let photo: Photo

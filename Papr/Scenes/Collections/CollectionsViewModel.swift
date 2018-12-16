@@ -10,49 +10,16 @@ import Foundation
 import RxSwift
 import Action
 
-protocol CollectionsViewModelInput {
-    /// Call when the bottom of the list is reached
-    var loadMore: BehaviorSubject<Bool> { get }
-
-    /// Call when pull-to-refresh is invoked
-    func refresh()
-
-     /// Call when a collection is selected
-    var collectionDetailsAction: Action<PhotoCollection, Void> { get }
-}
-protocol CollectionsViewModelOutput {
-    /// Emits a boolean when the pull-to-refresh control is refreshing or not.
-    var isRefreshing: Observable<Bool>! { get }
-
-    /// Emites the child viewModels
-    var collectionCellsModelType: Observable<[CollectionCellViewModelType]> { get }
-}
-protocol CollectionsViewModelType {
-    var input: CollectionsViewModelInput { get }
-    var output: CollectionsViewModelOutput { get }
-}
-
-class CollectionsViewModel: CollectionsViewModelType,
-                            CollectionsViewModelInput,
-                            CollectionsViewModelOutput {
-    // MARK: Inputs & Outputs
-    var input: CollectionsViewModelInput { return self }
-    var output: CollectionsViewModelOutput { return self }
-
+class CollectionsViewModel: AutoModel {
+  
     // MARK: Inputs
+    /// sourcery:begin: input
     let loadMore = BehaviorSubject<Bool>(value: false)
-
+  
     func refresh() {
         refreshProperty.onNext(true)
     }
-
-    // MARK: Outputs
-    var isRefreshing: Observable<Bool>!
-
-    lazy var collectionCellsModelType: Observable<[CollectionCellViewModelType]> = {
-        return photoCollections.mapMany { CollectionCellViewModel(photoCollection: $0) }
-    }()
-
+    
     lazy var collectionDetailsAction: Action<PhotoCollection, Void> = {
         return Action<PhotoCollection, Void> { [unowned self] collection in
             let viewModel = SearchPhotosViewModel(type:
@@ -65,6 +32,16 @@ class CollectionsViewModel: CollectionsViewModelType,
             return self.sceneCoordinator.transition(to: Scene.searchPhotos(viewModel))
         }
     }()
+    /// sourcery:end
+
+    // MARK: Outputs
+    /// sourcery:begin: output
+    var isRefreshing: Observable<Bool>!
+
+    lazy var collectionCellsModelType: Observable<[CollectionCellViewModelType]> = {
+        return photoCollections.mapMany { CollectionCellViewModel(photoCollection: $0) }
+    }()
+    /// sourcery:end
 
     // MARK: Private
     private let service: CollectionServiceType

@@ -24,63 +24,10 @@ enum NavBarTitle {
     }
 }
 
-protocol HomeViewModelInput {
-    /// Call when the bottom of the list is reached
-    var loadMore: BehaviorSubject<Bool> { get }
-
-    /// Call when show-curated-photos is invoked
-    var showCuratedPhotosAction: CocoaAction { get }
-    
-    /// Call when show-lastest-photos is invoked
-    var showLatestPhotosAction: CocoaAction { get }
-    
-    /// Call when OrderBy-Popular is invoked
-    var orderByPopularityAction: CocoaAction { get }
-    
-    /// Call when OrderBy-Latest is invoked
-    var orderByFrequencyAction: CocoaAction { get }
-    
-    /// Call when an alert is invoked
-    var alertAction: Action<String, Void> { get }
-    
-    /// Call when pull-to-refresh is invoked
-    func refresh()
-}
-
-protocol HomeViewModelOutput {
-    /// Emits an array of photos for the collectionView
-    var photos: Observable<[Photo]>! { get }
-
-    /// Emits a boolean when the pull-to-refresh control is refreshing or not.
-    var isRefreshing: Observable<Bool>! { get }
-
-    /// Emits a boolean when the Curated option is chosen.
-    var curated: Observable<Bool>! { get }
-
-    /// Emits an OrderBy value when an OrderBy option is chosen.
-    var orderBy: Observable<OrderBy>! { get }
-    
-     /// Emits the name of the navigation bar value when an OrderBy/Curated option is choosen.
-    var navBarButtonName: Observable<NavBarTitle>! { get }
-
-    /// Emites the child viewModels
-    var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> { get }
-}
-
-protocol HomeViewModelType {
-    var inputs: HomeViewModelInput { get }
-    var outputs: HomeViewModelOutput { get }
-}
-
-class HomeViewModel: HomeViewModelType, 
-                     HomeViewModelInput, 
-                     HomeViewModelOutput {
-
-    // MARK: Inputs & Outputs
-    var inputs: HomeViewModelInput { return self }
-    var outputs: HomeViewModelOutput { return self }
+class HomeViewModel: AutoModel {
 
     // MARK: Input
+    /// sourcery:begin: input
     let loadMore = BehaviorSubject<Bool>(value: false)
 
     func refresh() {
@@ -128,8 +75,10 @@ class HomeViewModel: HomeViewModelType,
             return self.sceneCoordinator.transition(to: Scene.alert(alertViewModel))
         }
     }()
+    /// sourcery:end
 
     // MARK: Output
+    /// sourcery:begin: output
     var photos: Observable<[Photo]>!
     var isRefreshing: Observable<Bool>!
     var curated: Observable<Bool>!
@@ -152,6 +101,7 @@ class HomeViewModel: HomeViewModelType,
                 return homeViewCellModelArray
         }
     }()
+    /// sourcery:end
 
     // MARK: Private
     private let cache: Cache

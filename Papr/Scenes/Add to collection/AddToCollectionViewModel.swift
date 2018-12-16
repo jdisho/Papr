@@ -10,30 +10,10 @@ import Foundation
 import RxSwift
 import Action
 
-protocol AddToCollectionViewModelInput {
-    var cancelAction: CocoaAction { get }
-    var navigateToCreateCollectionAction: CocoaAction { get }
-}
-
-protocol AddToCollectionViewModelOutput {
-    var collectionCellModelTypes: Observable<[PhotoCollectionCellModelType]> { get }
-    var photoStream: Observable<Photo> { get }
-}
-
-protocol AddToCollectionViewModelType {
-    var inputs: AddToCollectionViewModelInput { get }
-    var outputs: AddToCollectionViewModelOutput { get }
-}
-
-class AddToCollectionViewModel: AddToCollectionViewModelInput,
-                                AddToCollectionViewModelOutput,
-                                AddToCollectionViewModelType  {
-
-    // MARK: Inputs & Outputs
-    var inputs: AddToCollectionViewModelInput { return self }
-    var outputs: AddToCollectionViewModelOutput { return self }
+class AddToCollectionViewModel: AutoModel  {
 
     // MARK: Inputs
+    /// sourcery:begin: input
     lazy var cancelAction: CocoaAction = {
         CocoaAction { [unowned self] _ in
             self.sceneCoordinator.pop(animated: true)
@@ -46,8 +26,10 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
             return self.sceneCoordinator.transition(to: Scene.createCollection(viewModel))
         }
     }()
+    /// sourcery:end
 
     // MARK: Outputs
+    /// sourcery:begin: output
     let photoStream: Observable<Photo>
     lazy var  collectionCellModelTypes: Observable<[PhotoCollectionCellModelType]> = {
         Observable.combineLatest(photoStream, myCollectionsStream)
@@ -55,6 +37,7 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
                 collections.map { PhotoCollectionCellModel(photo: photo, photoCollection: $0) }
             }
     }()
+    /// sourcery:end
 
     // MARK: Private
     private var loggedInUser: User!

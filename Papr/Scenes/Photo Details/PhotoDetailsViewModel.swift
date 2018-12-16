@@ -10,34 +10,10 @@ import Foundation
 import RxSwift
 import Action
 
-protocol PhotoDetailsViewModelInput: PhotoViewModelInput {
-    var dismissAction: CocoaAction { get }
-    var moreAction: Action<[Any], Void> { get }
-}
-
-protocol PhotoDetailsViewModelOutput: PhotoViewModelOutput {
-    var totalViews: Observable<String>! { get }
-    var totalDownloads: Observable<String>! { get }
-}
-
-protocol PhotoDetailsViewModelType: PhotoViewModelType {
-    var inputs: PhotoDetailsViewModelInput { get }
-    var outputs: PhotoDetailsViewModelOutput { get }
-}
-
-class PhotoDetailsViewModel: PhotoViewModel,
-                             PhotoDetailsViewModelType,
-                             PhotoDetailsViewModelInput,
-                             PhotoDetailsViewModelOutput {
-
-    // MARK: Inputs & Outputs
-    var inputs: PhotoDetailsViewModelInput { return self }
-    override var photoViewModelInputs: PhotoViewModelInput { return inputs }
-
-    var outputs: PhotoDetailsViewModelOutput { return self }
-    override var photoViewModelOutputs: PhotoViewModelOutput { return outputs }
+class PhotoDetailsViewModel: PhotoViewModel {
 
     // MARK: Inputs
+    /// sourcery:begin: input
     lazy var dismissAction: CocoaAction = {
         CocoaAction { [unowned self] _ in
             self.sceneCoordinator.pop(animated: true)
@@ -49,10 +25,13 @@ class PhotoDetailsViewModel: PhotoViewModel,
             return self.sceneCoordinator.transition(to: Scene.activity(items))
         }
     }()
+    /// sourcery:end
 
     // MARK: Outputs
+    /// sourcery:begin: output
     var totalViews: Observable<String>!
     var totalDownloads: Observable<String>!
+    /// sourcery:end
 
     override init(
         photo: Photo,

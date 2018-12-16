@@ -10,38 +10,11 @@ import Foundation
 import RxSwift
 import Action
 
-protocol HomeViewCellModelInput: PhotoViewModelInput {
-    var photoDetailsAction: Action<Photo, Photo> { get }
-    var userCollectionsAction: Action<Photo, Void> { get }
-}
 
-protocol HomeViewCellModelOutput: PhotoViewModelOutput {
-    var userProfileImage: Observable<String>! { get }
-    var fullname: Observable<String>! { get }
-    var username: Observable<String>! { get }
-    var smallPhoto: Observable<String>! { get }
-    var fullPhoto: Observable<String>! { get }
-    var updated: Observable<String>! { get }
-}
-
-protocol HomeViewCellModelType: PhotoViewModelType {
-    var inputs: HomeViewCellModelInput { get }
-    var outputs: HomeViewCellModelOutput { get }
-}
-
-class HomeViewCellModel: PhotoViewModel,
-                         HomeViewCellModelType,
-                         HomeViewCellModelInput, 
-                         HomeViewCellModelOutput {
-
-    // MARK: Inputs & Outputs
-    var inputs: HomeViewCellModelInput { return self }
-    override var photoViewModelInputs: PhotoViewModelInput { return inputs }
-
-    var outputs: HomeViewCellModelOutput { return self }
-    override var photoViewModelOutputs: PhotoViewModelOutput { return outputs }
+class HomeViewCellModel: PhotoViewModel {
 
     // MARK: Input
+    /// sourcery:begin: input
     lazy var photoDetailsAction: Action<Photo, Photo> = {
         return Action<Photo, Photo> { [unowned self] photo in
             let viewModel = PhotoDetailsViewModel(
@@ -74,14 +47,17 @@ class HomeViewCellModel: PhotoViewModel,
             }
         }
     }()
+    /// sourcery:end
 
     // MARK: Output
+    /// sourcery:begin: output
     var userProfileImage: Observable<String>!
     var fullname: Observable<String>!
     var username: Observable<String>!
     var smallPhoto: Observable<String>!
     var fullPhoto: Observable<String>!
     var updated: Observable<String>!
+    /// sourcery:end
 
     // MARK: Private
     private let userService: UserServiceType

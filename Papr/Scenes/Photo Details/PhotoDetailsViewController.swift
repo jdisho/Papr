@@ -58,8 +58,8 @@ class PhotoDetailsViewController: UIViewController, BindableType {
 
      // MARK: BindableType
     func bindViewModel() {
-        let inputs = viewModel.inputs
-        let outputs = viewModel.outputs
+        let inputs = viewModel.input
+        let outputs = viewModel.output
         let this = PhotoDetailsViewController.self
 
         dismissButton.rx.action = inputs.dismissAction

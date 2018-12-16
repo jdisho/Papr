@@ -47,8 +47,8 @@ class SearchViewController: UIViewController, BindableType {
     // MARK: BindableType
 
     func bindViewModel() {
-        let inputs = viewModel.inputs
-        let outputs = viewModel.outputs
+        let inputs = viewModel.input
+        let outputs = viewModel.output
 
         searchBar.rx.text
             .unwrap()

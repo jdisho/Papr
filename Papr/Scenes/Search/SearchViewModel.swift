@@ -10,33 +10,21 @@ import Foundation
 import RxSwift
 import Action
 
-protocol SearchViewModelInput {
-    var searchString: BehaviorSubject<String?> { get }
-    var searchTrigger: InputSubject<Int>! { get }
-}
 
-protocol SearchViewModelOutput {
-    var searchResultCellModel: Observable<[SearchResultCellModelType]> { get }
-}
-
-protocol SearchViewModelType {
-    var inputs: SearchViewModelInput { get }
-    var outputs: SearchViewModelOutput { get }
-}
-
-class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewModelOutput {
-
-    var inputs: SearchViewModelInput { return self }
-    var outputs: SearchViewModelOutput { return self }
+class SearchViewModel: AutoModel {
 
     // MARK: - Inputs
+    /// sourcery:begin: input
     var searchString = BehaviorSubject<String?>(value: nil)
     var searchTrigger: InputSubject<Int>!
+    /// sourcery:end
 
     // MARK: - Outputs
+    /// sourcery:begin: output
     lazy var searchResultCellModel: Observable<[SearchResultCellModelType]> = {
         return searchResults.mapMany { SearchResultCellModel(searchResult: $0) }
     }()
+    /// sourcery:end
 
     // MARK: - Private
     private let sceneCoordinator: SceneCoordinatorType

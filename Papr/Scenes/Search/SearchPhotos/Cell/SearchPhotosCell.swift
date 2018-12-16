@@ -31,8 +31,8 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
     }
 
     func bindViewModel() {
-        let inputs = viewModel.inputs
-        let outputs = viewModel.outputs
+        let inputs = viewModel.input
+        let outputs = viewModel.output
         let this = SearchPhotosCell.self
 
         Observable.combineLatest(

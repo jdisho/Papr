@@ -21,8 +21,8 @@ class AlertViewController: UIAlertController, BindableType {
     // MARK: BindableType
     
     func bindViewModel() {
-        let inputs = viewModel.inputs
-        let outputs = viewModel.outputs
+        let inputs = viewModel.input
+        let outputs = viewModel.output
         
         outputs.title
             .bind(to: self.rx.title)

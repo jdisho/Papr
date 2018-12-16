@@ -15,34 +15,10 @@ enum AlertMode {
     case yesNo
 }
 
-protocol AlertViewModelInput {
-    var closeAction: CocoaAction { get }
-    var yesAction: CocoaAction { get }
-    var noAction: CocoaAction { get }
-}
-
-protocol AlertViewModelOutput {
-    var title: Observable<String> { get }
-    var message: Observable<String> { get }
-    var mode: Observable<AlertMode> { get }
-    
-    var yesObservable: Observable<Void> { get }
-    var noObservable: Observable<Void> { get }
-    var okObservable: Observable<Void> { get }
-}
-
-protocol AlertViewModelType {
-    var inputs: AlertViewModelInput { get }
-    var outputs: AlertViewModelOutput { get }
-}
-
-class AlertViewModel: AlertViewModelType, AlertViewModelInput, AlertViewModelOutput {
-    
-    // MARK: Inputs & Outputs
-    var inputs: AlertViewModelInput { return self }
-    var outputs: AlertViewModelOutput { return self }
-    
+class AlertViewModel: AutoModel {
+  
     // MARK: Inputs
+    /// sourcery:begin: input
     lazy var closeAction: CocoaAction = {
         CocoaAction { [unowned self] in
             self.okPublisher.onNext(())
@@ -63,14 +39,17 @@ class AlertViewModel: AlertViewModelType, AlertViewModelInput, AlertViewModelOut
             return .empty()
         }
     }()
+    /// sourcery:end
     
     // MARK: Outputs
+    /// sourcery:begin: output
     let title: Observable<String>
     let message: Observable<String>
     let mode: Observable<AlertMode>
     let yesObservable: Observable<Void>
     let noObservable: Observable<Void>
     let okObservable: Observable<Void>
+    /// sourcery:end
 
     // MARK: Private
     private let yesPublisher = PublishSubject<Void>()

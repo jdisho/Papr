@@ -36,8 +36,8 @@ class CreateCollectionViewController: UIViewController, BindableType {
 
     // MARK: BindableType
     func bindViewModel() {
-        let inputs = viewModel.inputs
-        let outputs = viewModel.outputs
+        let inputs = viewModel.input
+        let outputs = viewModel.output
 
         nameTextField.rx.text.orEmpty
             .bind(to: inputs.collectionName)

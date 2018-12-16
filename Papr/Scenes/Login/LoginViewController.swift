@@ -39,8 +39,8 @@ class LoginViewController: UIViewController, BindableType {
     }
 
     func bindViewModel() {
-        let inputs = viewModel.inputs
-        let outputs = viewModel.outputs
+        let inputs = viewModel.input
+        let outputs = viewModel.output
         let this = LoginViewController.self
 
         loginButton.rx.action = inputs.loginAction

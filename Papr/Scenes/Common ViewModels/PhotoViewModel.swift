@@ -11,35 +11,10 @@ import RxSwift
 import Action
 import Photos
 
-protocol PhotoViewModelInput {
-    var likePhotoAction: Action<Photo, Photo> { get }
-    var unlikePhotoAction: Action<Photo, Photo> { get }
-    var downloadPhotoAction: Action<Photo, String> { get }
-    var writeImageToPhotosAlbumAction: Action<UIImage, Void> { get }
-}
-
-protocol PhotoViewModelOutput {
-    var photoStream: Observable<Photo>! { get }
-    var regularPhoto: Observable<String>! { get }
-    var photoSizeCoef: Observable<Double>! { get }
-    var totalLikes: Observable<String>! { get }
-    var likedByUser: Observable<Bool>! { get }
-}
-
-protocol PhotoViewModelType {
-    var photoViewModelInputs: PhotoViewModelInput { get }
-    var photoViewModelOutputs: PhotoViewModelOutput { get }
-}
-
-class PhotoViewModel: PhotoViewModelType,
-                      PhotoViewModelInput,
-                      PhotoViewModelOutput {
-
-    // MARK: Inputs & Outputs
-    var photoViewModelInputs: PhotoViewModelInput { return self }
-    var photoViewModelOutputs: PhotoViewModelOutput { return self }
+class PhotoViewModel: AutoModel {
 
     // MARK: Input
+    /// sourcery:begin: input
     lazy var likePhotoAction: Action<Photo, Photo>  = {
         Action<Photo, Photo> { photo in
             return self.service.like(photo: photo)
@@ -128,8 +103,10 @@ class PhotoViewModel: PhotoViewModelType,
             return self.sceneCoordinator.transition(to: Scene.login(viewModel))
         }
     }()
+    /// sourcery:end
 
     // MARK: Output
+    /// sourcery:begin: output
     var regularPhoto: Observable<String>!
     var photoSizeCoef: Observable<Double>!
     var totalLikes: Observable<String>!
@@ -138,6 +115,7 @@ class PhotoViewModel: PhotoViewModelType,
 
     let service: PhotoServiceType
     let sceneCoordinator: SceneCoordinatorType
+    /// sourcery:end
 
     // MARK: Private
 

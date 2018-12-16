@@ -9,27 +9,14 @@
 import Foundation
 import RxSwift
 
-protocol CollectionCellViewModelInput {}
-protocol CollectionCellViewModelOutput {
-    var photoCollection: Observable<PhotoCollection> { get }
-}
-protocol CollectionCellViewModelType {
-    var input: CollectionCellViewModelInput { get }
-    var output: CollectionCellViewModelOutput { get }
-}
-
-class CollectionCellViewModel: CollectionCellViewModelType,
-                                CollectionCellViewModelInput,
-                                CollectionCellViewModelOutput {
-
-    // MARK: Input & Output
-    var input: CollectionCellViewModelInput { return self }
-    var output: CollectionCellViewModelOutput { return self }
+class CollectionCellViewModel: AutoModel {
 
     // MARK: Input
 
     // MARK: Output
+    /// sourcery:begin: output
     let photoCollection: Observable<PhotoCollection>
+    /// sourcery:end
 
     // MARK: Private
 
