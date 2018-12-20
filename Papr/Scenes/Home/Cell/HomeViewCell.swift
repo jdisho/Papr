@@ -122,8 +122,8 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
             .bind(to: usernameLabel.rx.text)
             .disposed(by: disposeBag)
 
-        outputs.photoSizeCoef
-            .map { CGFloat($0) }
+        outputs.photoSize
+            .map { CGFloat($1 * Int(UIScreen.main.bounds.width) / $0) }
             .bind(to: photoHeightConstraint.rx.constant)
             .disposed(by: disposeBag)
 
