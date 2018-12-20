@@ -115,7 +115,7 @@ extension Scene: TargetScene {
             vc.bind(to: viewModel)
             return .push(vc)
         case let .searchUsers(viewModel):
-            var vc = SearchUsersViewController.initFromNib()
+            var vc = SearchUsersViewController()
             vc.bind(to: viewModel)
             return .push(vc)
         case let .userProfile(viewModel):

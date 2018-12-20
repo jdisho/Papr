@@ -140,9 +140,6 @@
 		DC72A4D920C305E8001550D1 /* UserCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC72A4D820C305E8001550D1 /* UserCellModel.swift */; };
 		DC72A4DA20C305E8001550D1 /* UserCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC72A4D820C305E8001550D1 /* UserCellModel.swift */; };
 		DC72A4DB20C305E8001550D1 /* UserCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC72A4D820C305E8001550D1 /* UserCellModel.swift */; };
-		DC72A4DD20C313E8001550D1 /* SearchUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC72A4DC20C313E8001550D1 /* SearchUsersViewController.xib */; };
-		DC72A4DE20C313E8001550D1 /* SearchUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC72A4DC20C313E8001550D1 /* SearchUsersViewController.xib */; };
-		DC72A4DF20C313E8001550D1 /* SearchUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC72A4DC20C313E8001550D1 /* SearchUsersViewController.xib */; };
 		DC73732920A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */; };
 		DC73732A20A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */; };
 		DC73732B20A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */; };
@@ -430,7 +427,6 @@
 		DC72A4D020C305D7001550D1 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		DC72A4D120C305D7001550D1 /* UserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		DC72A4D820C305E8001550D1 /* UserCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellModel.swift; sourceTree = "<group>"; };
-		DC72A4DC20C313E8001550D1 /* SearchUsersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchUsersViewController.xib; sourceTree = "<group>"; };
 		DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosViewModel.swift; sourceTree = "<group>"; };
 		DC73732F20A7970400922AE4 /* SearchCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionsViewController.swift; sourceTree = "<group>"; };
 		DC73733020A7970400922AE4 /* SearchCollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionsViewModel.swift; sourceTree = "<group>"; };
@@ -743,7 +739,6 @@
 				DC72A4CF20C30584001550D1 /* Cell */,
 				DC73733B20A7974C00922AE4 /* SearchUsersViewController.swift */,
 				DC73733C20A7974C00922AE4 /* SearchUsersViewModel.swift */,
-				DC72A4DC20C313E8001550D1 /* SearchUsersViewController.xib */,
 			);
 			path = SearchUsers;
 			sourceTree = "<group>";
@@ -1149,7 +1144,6 @@
 				DCC8CA162002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DC3917A82096683600492F62 /* CreateCollectionViewController.xib in Resources */,
 				DC66E66920A4D7D6005E5E31 /* SearchViewController.xib in Resources */,
-				DC72A4DD20C313E8001550D1 /* SearchUsersViewController.xib in Resources */,
 				DCBB1B271FA7B1BD004E95F0 /* Main.storyboard in Resources */,
 				DCBB1B631FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 				DC66E67320A4DA0F005E5E31 /* SearchResultCell.xib in Resources */,
@@ -1166,7 +1160,6 @@
 				DCBB1B641FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 				DCB915B920BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */,
 				DC3917A92096683600492F62 /* CreateCollectionViewController.xib in Resources */,
-				DC72A4DE20C313E8001550D1 /* SearchUsersViewController.xib in Resources */,
 				DCB433CC204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
 				DC658D89208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
 				DC66E66A20A4D7D6005E5E31 /* SearchViewController.xib in Resources */,
@@ -1187,7 +1180,6 @@
 				DCBB1B651FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 				DCB915BA20BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */,
 				DC3917AA2096683600492F62 /* CreateCollectionViewController.xib in Resources */,
-				DC72A4DF20C313E8001550D1 /* SearchUsersViewController.xib in Resources */,
 				DCB433CD204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
 				DC658D8A208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
 				DC66E66B20A4D7D6005E5E31 /* SearchViewController.xib in Resources */,
