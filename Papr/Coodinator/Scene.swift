@@ -39,7 +39,7 @@ extension Scene: TargetScene {
             let paprTabBarController = PaprTabBarController()
 
             //HomeViewController
-            var homeVC = HomeViewController.initFromNib()
+            var homeVC = HomeViewController()
             let homeViewModel = HomeViewModel()
             let rootHomeVC = PaprNavigationController(rootViewController: homeVC)
             homeVC.bind(to: homeViewModel)

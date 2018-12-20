@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxDataSources
+import VanillaConstraints
 
 class HomeViewController: UIViewController, BindableType {
 
@@ -17,29 +18,32 @@ class HomeViewController: UIViewController, BindableType {
     // MARK: ViewModel
     var viewModel: HomeViewModelType!
 
-    // MARK: IBOutlets
-    @IBOutlet var tableView: UITableView!
-    
     // MARK: Private
     private let disposeBag = DisposeBag()
     private var dataSource: RxTableViewSectionedReloadDataSource<HomeSectionModel>!
+    private var tableView: UITableView!
     private var refreshControl: UIRefreshControl!
     private var navBarButton: UIButton!
     private var rightBarButtonItem: UIBarButtonItem!
+    private var tableViewDataSource: TableViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
+        return { _, tableView, indexPath, cellModel in
+            var cell = tableView.dequeueResuableCell(withCellType: HomeViewCell.self, forIndexPath: indexPath)
+            cell.bind(to: cellModel)
+            return cell
+        }
+    }
 
     // MARK: Override
-
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
         configureNavigationController()
-        configureRefreshControl()
         configureTableView()
+        configureRefreshControl()
         refresh()
     }
 
     // MARK: BindableType
-    
     func bindViewModel() {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
@@ -94,7 +98,6 @@ class HomeViewController: UIViewController, BindableType {
     }
 
     // MARK: UI
-
     private func configureNavigationController() {
         navBarButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
         navBarButton.setTitleColor(.black, for: .normal)
@@ -105,6 +108,9 @@ class HomeViewController: UIViewController, BindableType {
     }
 
     private func configureTableView() {
+        tableView = UITableView(frame: .zero)
+        tableView.separatorColor = .clear
+        tableView.add(to: view).pinToEdges()
         tableView.register(cellType: HomeViewCell.self)
         tableView.estimatedRowHeight = 400
 
@@ -121,14 +127,5 @@ class HomeViewController: UIViewController, BindableType {
 
     @objc private func refresh() {
         viewModel.inputs.refresh()
-    }
-
-    private var tableViewDataSource: TableViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
-        return { _, tableView, indexPath, cellModel in
-            var cell = tableView.dequeueResuableCell(withCellType: HomeViewCell.self, forIndexPath: indexPath)
-            cell.bind(to: cellModel)
-
-            return cell
-        }
     }
 }
