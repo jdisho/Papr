@@ -27,7 +27,7 @@ class UserCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdentifiab
     // MARK: Overrides
 
     override func awakeFromNib() {
-        profilePhotoImageView.cornerRadius = 5
+        profilePhotoImageView.round(radius: 5.0)
         super.awakeFromNib()
     }
 

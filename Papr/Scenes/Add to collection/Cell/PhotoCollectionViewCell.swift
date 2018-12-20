@@ -31,8 +31,6 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType, NibIdentifiab
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        collectionCoverImageView.cornerRadius = 10
-        addToCollectionButton.cornerRadius = 10
         addToCollectionButton.isExclusiveTouch = true
     }
 
@@ -45,6 +43,12 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType, NibIdentifiab
         disposeBag = DisposeBag()
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        collectionCoverImageView.round(radius: 10.0)
+        addToCollectionButton.round(radius: 10.0)
+    }
     // MARK: BindableType
     func bindViewModel() {
         let inputs = viewModel.inputs
