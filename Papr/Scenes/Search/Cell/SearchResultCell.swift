@@ -9,22 +9,24 @@
 import UIKit
 import RxSwift
 
-class SearchResultCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdentifiable {
+class SearchResultCell: UITableViewCell, BindableType, ClassIdentifiable {
 
     // MARK: ViewModel
     var viewModel: SearchResultCellModelType!
 
-    // MARK: IBOutlets
-    @IBOutlet var titleLabel: UILabel!
-
     // MARK: Private
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
 
     // MARK: BindableType
     func bindViewModel() {
         viewModel.outputs.searchResult
             .map { $0.description }
-            .bind(to: titleLabel.rx.text)
+            .bind(to: textLabel!.rx.text)
             .disposed(by: disposeBag)
     }
 }

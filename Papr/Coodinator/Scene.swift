@@ -107,7 +107,7 @@ extension Scene: TargetScene {
             vc.bind(to: viewModel)
             return .present(rootViewController)
         case let .searchPhotos(viewModel):
-            var vc = SearchPhotosViewController.initFromNib()
+            var vc = SearchPhotosViewController()
             vc.bind(to: viewModel)
             return .push(vc)
         case let .searchCollections(viewModel):
