@@ -113,9 +113,6 @@
 		DC66E67020A4DA0F005E5E31 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E66E20A4DA0F005E5E31 /* SearchResultCell.swift */; };
 		DC66E67120A4DA0F005E5E31 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E66E20A4DA0F005E5E31 /* SearchResultCell.swift */; };
 		DC66E67220A4DA0F005E5E31 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E66E20A4DA0F005E5E31 /* SearchResultCell.swift */; };
-		DC66E67320A4DA0F005E5E31 /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC66E66F20A4DA0F005E5E31 /* SearchResultCell.xib */; };
-		DC66E67420A4DA0F005E5E31 /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC66E66F20A4DA0F005E5E31 /* SearchResultCell.xib */; };
-		DC66E67520A4DA0F005E5E31 /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC66E66F20A4DA0F005E5E31 /* SearchResultCell.xib */; };
 		DC66E67720A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E67620A4DA25005E5E31 /* SearchResultCellModel.swift */; };
 		DC66E67820A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E67620A4DA25005E5E31 /* SearchResultCellModel.swift */; };
 		DC66E67920A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E67620A4DA25005E5E31 /* SearchResultCellModel.swift */; };
@@ -140,9 +137,6 @@
 		DC72A4D920C305E8001550D1 /* UserCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC72A4D820C305E8001550D1 /* UserCellModel.swift */; };
 		DC72A4DA20C305E8001550D1 /* UserCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC72A4D820C305E8001550D1 /* UserCellModel.swift */; };
 		DC72A4DB20C305E8001550D1 /* UserCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC72A4D820C305E8001550D1 /* UserCellModel.swift */; };
-		DC72A4DD20C313E8001550D1 /* SearchUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC72A4DC20C313E8001550D1 /* SearchUsersViewController.xib */; };
-		DC72A4DE20C313E8001550D1 /* SearchUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC72A4DC20C313E8001550D1 /* SearchUsersViewController.xib */; };
-		DC72A4DF20C313E8001550D1 /* SearchUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC72A4DC20C313E8001550D1 /* SearchUsersViewController.xib */; };
 		DC73732920A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */; };
 		DC73732A20A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */; };
 		DC73732B20A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */; };
@@ -240,9 +234,6 @@
 		DCB433CF204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB433CE204B5BBB00C6C80C /* PhotoDetailsViewModel.swift */; };
 		DCB433D0204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB433CE204B5BBB00C6C80C /* PhotoDetailsViewModel.swift */; };
 		DCB433D1204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB433CE204B5BBB00C6C80C /* PhotoDetailsViewModel.swift */; };
-		DCB915A520B9A7BE003D1069 /* SearchPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB915A120B9A7BE003D1069 /* SearchPhotosViewController.xib */; };
-		DCB915A620B9A7BE003D1069 /* SearchPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB915A120B9A7BE003D1069 /* SearchPhotosViewController.xib */; };
-		DCB915A720B9A7BE003D1069 /* SearchPhotosViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB915A120B9A7BE003D1069 /* SearchPhotosViewController.xib */; };
 		DCB915AA20B9A81D003D1069 /* SearchPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915A920B9A81D003D1069 /* SearchPhotosViewController.swift */; };
 		DCB915AB20B9A81D003D1069 /* SearchPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915A920B9A81D003D1069 /* SearchPhotosViewController.swift */; };
 		DCB915AC20B9A81D003D1069 /* SearchPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915A920B9A81D003D1069 /* SearchPhotosViewController.swift */; };
@@ -299,9 +290,6 @@
 		DCC8CA072002BEE300F6C540 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA052002BEE300F6C540 /* HomeViewController.swift */; };
 		DCC8CA082002BEE300F6C540 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA052002BEE300F6C540 /* HomeViewController.swift */; };
 		DCC8CA092002BEE300F6C540 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA052002BEE300F6C540 /* HomeViewController.swift */; };
-		DCC8CA0A2002BEE300F6C540 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC8CA062002BEE300F6C540 /* HomeViewController.xib */; };
-		DCC8CA0B2002BEE300F6C540 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC8CA062002BEE300F6C540 /* HomeViewController.xib */; };
-		DCC8CA0C2002BEE300F6C540 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC8CA062002BEE300F6C540 /* HomeViewController.xib */; };
 		DCC8CA0E2002BEF100F6C540 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA0D2002BEF100F6C540 /* HomeViewModel.swift */; };
 		DCC8CA0F2002BEF100F6C540 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA0D2002BEF100F6C540 /* HomeViewModel.swift */; };
 		DCC8CA102002BEF100F6C540 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA0D2002BEF100F6C540 /* HomeViewModel.swift */; };
@@ -424,7 +412,6 @@
 		DC66E66420A4D016005E5E31 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		DC66E66820A4D7D6005E5E31 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		DC66E66E20A4DA0F005E5E31 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
-		DC66E66F20A4DA0F005E5E31 /* SearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultCell.xib; sourceTree = "<group>"; };
 		DC66E67620A4DA25005E5E31 /* SearchResultCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCellModel.swift; sourceTree = "<group>"; };
 		DC6CC643204CBD5300050589 /* PhotoStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStatistics.swift; sourceTree = "<group>"; };
 		DC71C3011FBD9B7200C8E41A /* UnsplashAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAuthManager.swift; sourceTree = "<group>"; };
@@ -433,7 +420,6 @@
 		DC72A4D020C305D7001550D1 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		DC72A4D120C305D7001550D1 /* UserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		DC72A4D820C305E8001550D1 /* UserCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellModel.swift; sourceTree = "<group>"; };
-		DC72A4DC20C313E8001550D1 /* SearchUsersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchUsersViewController.xib; sourceTree = "<group>"; };
 		DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosViewModel.swift; sourceTree = "<group>"; };
 		DC73732F20A7970400922AE4 /* SearchCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionsViewController.swift; sourceTree = "<group>"; };
 		DC73733020A7970400922AE4 /* SearchCollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionsViewModel.swift; sourceTree = "<group>"; };
@@ -451,7 +437,6 @@
 		DCB433C6204B5BAD00C6C80C /* PhotoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewController.swift; sourceTree = "<group>"; };
 		DCB433C7204B5BAD00C6C80C /* PhotoDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoDetailsViewController.xib; sourceTree = "<group>"; };
 		DCB433CE204B5BBB00C6C80C /* PhotoDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewModel.swift; sourceTree = "<group>"; };
-		DCB915A120B9A7BE003D1069 /* SearchPhotosViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPhotosViewController.xib; sourceTree = "<group>"; };
 		DCB915A920B9A81D003D1069 /* SearchPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosViewController.swift; sourceTree = "<group>"; };
 		DCB915AE20B9A8DE003D1069 /* PinterestLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
 		DCB915B320BB1A9A003D1069 /* SearchPhotosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosCell.swift; sourceTree = "<group>"; };
@@ -484,7 +469,6 @@
 		DCBE0089202A1A980065BEF3 /* Date+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extentions.swift"; sourceTree = "<group>"; };
 		DCBE008D202A1EB30065BEF3 /* String+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extentions.swift"; sourceTree = "<group>"; };
 		DCC8CA052002BEE300F6C540 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		DCC8CA062002BEE300F6C540 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		DCC8CA0D2002BEF100F6C540 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewCell.xib; sourceTree = "<group>"; };
@@ -705,7 +689,6 @@
 			children = (
 				DC66E66E20A4DA0F005E5E31 /* SearchResultCell.swift */,
 				DC66E67620A4DA25005E5E31 /* SearchResultCellModel.swift */,
-				DC66E66F20A4DA0F005E5E31 /* SearchResultCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -726,7 +709,6 @@
 				DCB915B220BB1A68003D1069 /* Cell */,
 				DCB915A920B9A81D003D1069 /* SearchPhotosViewController.swift */,
 				DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */,
-				DCB915A120B9A7BE003D1069 /* SearchPhotosViewController.xib */,
 			);
 			path = SearchPhotos;
 			sourceTree = "<group>";
@@ -747,7 +729,6 @@
 				DC72A4CF20C30584001550D1 /* Cell */,
 				DC73733B20A7974C00922AE4 /* SearchUsersViewController.swift */,
 				DC73733C20A7974C00922AE4 /* SearchUsersViewModel.swift */,
-				DC72A4DC20C313E8001550D1 /* SearchUsersViewController.xib */,
 			);
 			path = SearchUsers;
 			sourceTree = "<group>";
@@ -966,7 +947,6 @@
 				DCC8CA042002BECB00F6C540 /* Cell */,
 				DCC8CA052002BEE300F6C540 /* HomeViewController.swift */,
 				DCC8CA0D2002BEF100F6C540 /* HomeViewModel.swift */,
-				DCC8CA062002BEE300F6C540 /* HomeViewController.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1143,11 +1123,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCBB1B2C1FA7B1BD004E95F0 /* LaunchScreen.storyboard in Resources */,
-				DCB915A520B9A7BE003D1069 /* SearchPhotosViewController.xib in Resources */,
 				DCBB1B291FA7B1BD004E95F0 /* Assets.xcassets in Resources */,
 				DC72A4D520C305D7001550D1 /* UserCell.xib in Resources */,
 				DC73733820A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */,
-				DCC8CA0A2002BEE300F6C540 /* HomeViewController.xib in Resources */,
 				DC658D95208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
 				C09D7657216CC91E0035F54D /* UserProfileViewController.xib in Resources */,
 				DC658D88208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
@@ -1155,10 +1133,8 @@
 				DCC8CA162002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DC3917A82096683600492F62 /* CreateCollectionViewController.xib in Resources */,
 				DC66E66920A4D7D6005E5E31 /* SearchViewController.xib in Resources */,
-				DC72A4DD20C313E8001550D1 /* SearchUsersViewController.xib in Resources */,
 				DCBB1B271FA7B1BD004E95F0 /* Main.storyboard in Resources */,
 				DCBB1B631FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
-				DC66E67320A4DA0F005E5E31 /* SearchResultCell.xib in Resources */,
 				DCB433CB204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
 				C006934F2189DB4500AC6736 /* CollectionCell.xib in Resources */,
 			);
@@ -1172,15 +1148,11 @@
 				DCBB1B641FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 				DCB915B920BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */,
 				DC3917A92096683600492F62 /* CreateCollectionViewController.xib in Resources */,
-				DC72A4DE20C313E8001550D1 /* SearchUsersViewController.xib in Resources */,
 				DCB433CC204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
 				DC658D89208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
 				DC66E66A20A4D7D6005E5E31 /* SearchViewController.xib in Resources */,
-				DC66E67420A4DA0F005E5E31 /* SearchResultCell.xib in Resources */,
 				DC73733920A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */,
 				DC658D96208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
-				DCB915A620B9A7BE003D1069 /* SearchPhotosViewController.xib in Resources */,
-				DCC8CA0B2002BEE300F6C540 /* HomeViewController.xib in Resources */,
 				DCAF6BC2204D990A002B7F00 /* Assets.xcassets in Resources */,
 				DC72A4D620C305D7001550D1 /* UserCell.xib in Resources */,
 			);
@@ -1194,15 +1166,11 @@
 				DCBB1B651FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 				DCB915BA20BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */,
 				DC3917AA2096683600492F62 /* CreateCollectionViewController.xib in Resources */,
-				DC72A4DF20C313E8001550D1 /* SearchUsersViewController.xib in Resources */,
 				DCB433CD204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */,
 				DC658D8A208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
 				DC66E66B20A4D7D6005E5E31 /* SearchViewController.xib in Resources */,
-				DC66E67520A4DA0F005E5E31 /* SearchResultCell.xib in Resources */,
 				DC73733A20A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */,
 				DC658D97208CFDBA00FEBC31 /* PhotoCollectionViewCell.xib in Resources */,
-				DCB915A720B9A7BE003D1069 /* SearchPhotosViewController.xib in Resources */,
-				DCC8CA0C2002BEE300F6C540 /* HomeViewController.xib in Resources */,
 				DCAF6BC3204D990A002B7F00 /* Assets.xcassets in Resources */,
 				DC72A4D720C305D7001550D1 /* UserCell.xib in Resources */,
 			);
@@ -1848,13 +1816,15 @@
 			baseConfigurationReference = 30E2A6CF20ECF0A400389AB4 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V52NKR4UCE;
+				DEVELOPMENT_TEAM = 7N2HZNZE64;
 				INFOPLIST_FILE = Papr/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = disho.Papr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1865,13 +1835,15 @@
 			baseConfigurationReference = 30E2A6D020ED007900389AB4 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V52NKR4UCE;
+				DEVELOPMENT_TEAM = 7N2HZNZE64;
 				INFOPLIST_FILE = Papr/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = disho.Papr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

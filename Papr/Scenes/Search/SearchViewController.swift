@@ -24,12 +24,20 @@ class SearchViewController: UIViewController, BindableType {
     @IBOutlet var noResultView: UIView!
 
     // MARK: Private
+    private let disposeBag = DisposeBag()
     private var searchBar: UISearchBar!
     private var dataSource: RxTableViewSectionedReloadDataSource<SearchSectionModel>!
-    private let disposeBag = DisposeBag()
+    private var tableViewDataSource: RxTableViewSectionedReloadDataSource<SearchSectionModel>.ConfigureCell {
+        return { _, tableView, indexPath, cellModel in
+            var cell = tableView.dequeueResuableCell(withCellType: SearchResultCell.self, forIndexPath: indexPath)
+            cell.accessoryType = .disclosureIndicator
+            cell.bind(to: cellModel)
+
+            return cell
+        }
+    }
 
     // MARK: Init
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -109,14 +117,4 @@ class SearchViewController: UIViewController, BindableType {
         bouncyView.clipsToBounds = true
         bouncyView.add(to: noResultView).pinToEdges()
     }
-
-    private var tableViewDataSource: RxTableViewSectionedReloadDataSource<SearchSectionModel>.ConfigureCell {
-        return { _, tableView, indexPath, cellModel in
-            var cell = tableView.dequeueResuableCell(withCellType: SearchResultCell.self, forIndexPath: indexPath)
-            cell.bind(to: cellModel)
-
-            return cell
-        }
-    }
-  
 }

@@ -18,14 +18,26 @@ class SearchPhotosViewController: UIViewController, BindableType {
     // MARK: ViewModel
     var viewModel: SearchPhotosViewModelType!
 
-    // MARK: IBOutlets
-    @IBOutlet var collectionView: UICollectionView!
-
     // MARK: Privates
+    private let pinterestLayout = PinterestLayout()
+    private let disposeBag = DisposeBag()
+    private var collectionView: UICollectionView!
     private var loadingView: LoadingView!
     private var dataSource: RxCollectionViewSectionedReloadDataSource<SearchPhotosSectionModel>!
-    private let pinterestLayout: PinterestLayout = PinterestLayout()
-    private let disposeBag = DisposeBag()
+    private var collectionViewDataSource: CollectionViewSectionedDataSource<SearchPhotosSectionModel>.ConfigureCell {
+        return { _, collectionView, indexPath, cellModel in
+            var cell = collectionView.dequeueReusableCell(withCellType: SearchPhotosCell.self, forIndexPath: indexPath)
+            cell.bind(to: cellModel)
+
+            cellModel.outputs.photoSize
+                .skip(1)
+                .map { CGSize(width: $0.width, height: $0.height) }
+                .bind(to: self.pinterestLayout.rx.updateSize(indexPath))
+                .disposed(by: self.disposeBag)
+
+            return cell
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,28 +74,13 @@ class SearchPhotosViewController: UIViewController, BindableType {
     }
 
     private func configureCollectionView() {
-        collectionView.collectionViewLayout = pinterestLayout
-
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: pinterestLayout)
+        collectionView.backgroundColor = .white
+        collectionView.add(to: view).pinToEdges()
         collectionView.register(cellType: SearchPhotosCell.self)
-
         dataSource = RxCollectionViewSectionedReloadDataSource<SearchPhotosSectionModel>(
             configureCell:  collectionViewDataSource
         )
-    }
-
-    private var collectionViewDataSource: CollectionViewSectionedDataSource<SearchPhotosSectionModel>.ConfigureCell {
-        return { _, collectionView, indexPath, cellModel in
-            var cell = collectionView.dequeueReusableCell(withCellType: SearchPhotosCell.self, forIndexPath: indexPath)
-            cell.bind(to: cellModel)
-            
-            cellModel.outputs.photoSize
-                .skip(1)
-                .map { CGSize(width: $0.width, height: $0.height) }
-                .bind(to: self.pinterestLayout.rx.updateSize(indexPath))
-                .disposed(by: self.disposeBag)
-
-            return cell
-        }
     }
 }
 

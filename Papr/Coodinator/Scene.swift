@@ -39,7 +39,7 @@ extension Scene: TargetScene {
             let paprTabBarController = PaprTabBarController()
 
             //HomeViewController
-            var homeVC = HomeViewController.initFromNib()
+            var homeVC = HomeViewController()
             let homeViewModel = HomeViewModel()
             let rootHomeVC = PaprNavigationController(rootViewController: homeVC)
             homeVC.bind(to: homeViewModel)
@@ -107,7 +107,7 @@ extension Scene: TargetScene {
             vc.bind(to: viewModel)
             return .present(rootViewController)
         case let .searchPhotos(viewModel):
-            var vc = SearchPhotosViewController.initFromNib()
+            var vc = SearchPhotosViewController()
             vc.bind(to: viewModel)
             return .push(vc)
         case let .searchCollections(viewModel):
@@ -115,7 +115,7 @@ extension Scene: TargetScene {
             vc.bind(to: viewModel)
             return .push(vc)
         case let .searchUsers(viewModel):
-            var vc = SearchUsersViewController.initFromNib()
+            var vc = SearchUsersViewController()
             vc.bind(to: viewModel)
             return .push(vc)
         case let .userProfile(viewModel):

@@ -28,7 +28,7 @@ class CollectionCell: UICollectionViewCell, BindableType, NibIdentifiable & Clas
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        photoCollectionImagePreview.cornerRadius = 10.0
+        photoCollectionImagePreview.round(radius: 10.0)
         photoCollectionImagePreview.dim(withAlpha: 0.5)
     }
 

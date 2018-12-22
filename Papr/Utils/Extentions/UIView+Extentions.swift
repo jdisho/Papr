@@ -9,17 +9,6 @@
 import UIKit
 
 extension UIView {
-    var cornerRadius: Double {
-        get {
-            return Double(layer.cornerRadius)
-        }
-        set {
-            layer.masksToBounds = false
-            layer.cornerRadius = CGFloat(newValue)
-            clipsToBounds = true
-        }
-    }
-
     var borderColor: CGColor? {
         get {
             return layer.borderColor
@@ -47,17 +36,6 @@ extension UIView {
         clipsToBounds = true
     }
 
-    func round(corners: UIRectCorner = .allCorners, radius: CGFloat = 5.0) {
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.frame = bounds
-        shapeLayer.position = center
-        shapeLayer.path = UIBezierPath(
-            roundedRect: bounds,
-            byRoundingCorners: corners,
-            cornerRadii: CGSize(width: radius, height: radius)).cgPath
-        layer.mask = shapeLayer
-    }
-
     func dim(withAlpha alpha: CGFloat) {
         let view = UIView(frame: bounds)
         view.backgroundColor = .black
@@ -65,5 +43,19 @@ extension UIView {
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(view)
         clipsToBounds = true
+    }
+
+    func round(corners: UIRectCorner = .allCorners, radius: CGFloat) {
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else { return }
+            let path = UIBezierPath(
+                roundedRect: self.bounds,
+                byRoundingCorners: corners,
+                cornerRadii: CGSize(width: radius, height: radius)
+            )
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            self.layer.mask = mask
+        }
     }
 }

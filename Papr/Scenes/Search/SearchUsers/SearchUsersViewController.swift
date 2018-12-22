@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import VanillaConstraints
 
 class SearchUsersViewController: UIViewController, BindableType {
 
@@ -18,10 +19,8 @@ class SearchUsersViewController: UIViewController, BindableType {
     // MARK: ViewModel
     var viewModel: SearchUsersViewModel!
 
-    // MARK: IBOutlets
-    @IBOutlet var tableView: UITableView!
-
     // MARK: Private
+    private var tableView: UITableView!
     private var loadingView: LoadingView!
     private var dataSource: RxTableViewSectionedReloadDataSource<SearchUsersSectionModel>!
     private let disposeBag = DisposeBag()
@@ -65,6 +64,8 @@ class SearchUsersViewController: UIViewController, BindableType {
     }
 
     private func configureTableView() {
+        tableView = UITableView(frame: .zero)
+        tableView.add(to: view).pinToEdges()
         tableView.register(cellType: UserCell.self)
         tableView.rowHeight = 60
         dataSource = RxTableViewSectionedReloadDataSource<SearchUsersSectionModel>(

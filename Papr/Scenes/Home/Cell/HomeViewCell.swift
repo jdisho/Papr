@@ -38,11 +38,10 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
     private let dummyImageView = UIImageView()
 
     // MARK: Overrides
-
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        userImageView.cornerRadius = Double(userImageView.frame.height / 2)
+        userImageView.round(radius: userImageView.frame.height / 2)
         photoButton.isExclusiveTouch = true
     }
 
@@ -58,7 +57,6 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
     }
 
     // MARK: BindableType
-
     func bindViewModel() {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
@@ -116,8 +114,8 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
             .bind(to: usernameLabel.rx.text)
             .disposed(by: disposeBag)
 
-        outputs.photoSizeCoef
-            .map { CGFloat($0) }
+        outputs.photoSize
+            .map { CGFloat($1 * Int(UIScreen.main.bounds.width) / $0) }
             .bind(to: photoHeightConstraint.rx.constant)
             .disposed(by: disposeBag)
 
@@ -153,5 +151,4 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
             }
             .disposed(by: disposeBag)
     }
-    
 }
