@@ -28,8 +28,8 @@ class CollectionCell: UICollectionViewCell, BindableType, NibIdentifiable & Clas
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        photoCollectionImagePreview.round(radius: 10.0)
-        photoCollectionImagePreview.dim(withAlpha: 0.5)
+        photoCollectionImagePreview.roundCorners(withRadius: 10.0)
+        photoCollectionImagePreview.dim(withAlpha: 0.3)
     }
 
     override func prepareForReuse() {

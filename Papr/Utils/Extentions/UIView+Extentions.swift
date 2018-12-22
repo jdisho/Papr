@@ -37,15 +37,14 @@ extension UIView {
     }
 
     func dim(withAlpha alpha: CGFloat) {
-        let view = UIView(frame: bounds)
-        view.backgroundColor = .black
-        view.alpha = alpha
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(view)
-        clipsToBounds = true
+        let coverLayer = CALayer()
+        coverLayer.frame = bounds
+        coverLayer.backgroundColor = UIColor.black.cgColor
+        coverLayer.opacity = Float(alpha)
+        layer.addSublayer(coverLayer)
     }
 
-    func round(corners: UIRectCorner = .allCorners, radius: CGFloat) {
+    func roundCorners(_ corners: UIRectCorner = .allCorners, withRadius radius: CGFloat) {
         DispatchQueue.main.async { [weak self] in
             guard let `self` = self else { return }
             let path = UIBezierPath(
