@@ -38,10 +38,10 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
     private let dummyImageView = UIImageView()
 
     // MARK: Overrides
-
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        userImageView.round(radius: userImageView.frame.height / 2)
         photoButton.isExclusiveTouch = true
     }
 
@@ -56,15 +56,7 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
         disposeBag = DisposeBag()
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        userImageView.round(radius: userImageView.frame.height / 2)
-        photoImageView.round(radius: 8.0)
-    }
-    
     // MARK: BindableType
-
     func bindViewModel() {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
