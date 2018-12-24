@@ -105,7 +105,7 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
             }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
-
+    
         outputs.fullname
             .bind(to: fullNameLabel.rx.text)
             .disposed(by: disposeBag)

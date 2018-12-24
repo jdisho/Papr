@@ -23,13 +23,12 @@ class CollectionCell: UICollectionViewCell, BindableType, NibIdentifiable & Clas
     @IBOutlet var photoCollectionAuthorLabel: UILabel!
 
     // MARK: Privates
-    private static let imagePipeline = Nuke.ImagePipeline.shared
     private var disposeBag = DisposeBag()
 
     override func awakeFromNib() {
         super.awakeFromNib()
         photoCollectionImagePreview.roundCorners(withRadius: 10.0)
-        photoCollectionImagePreview.dim(withAlpha: 0.3)
+        photoCollectionImagePreview.dim(withAlpha: 0.2)
     }
 
     override func prepareForReuse() {
@@ -40,40 +39,46 @@ class CollectionCell: UICollectionViewCell, BindableType, NibIdentifiable & Clas
 
     func bindViewModel() {
         let output = viewModel.output
-        let this = CollectionCell.self
 
-        let smallPhotoURL = output.photoCollection
-            .map { $0.coverPhoto?.urls?.small }
-            .unwrap()
-
-        let regularPhotoURL = output.photoCollection
-            .map { $0.coverPhoto?.urls?.regular }
-            .unwrap()
-
-        let title = output.photoCollection
+        output.photoCollection
             .map { $0.title }
             .unwrap()
-
-        let username = output.photoCollection
-            .map { ($0.user?.firstName ?? "") + " " + ($0.user?.lastName ?? "") }
-
-        Observable.combineLatest(smallPhotoURL, regularPhotoURL)
-            .flatMap { small, regular -> Observable<ImageResponse> in
-                return Observable.concat(
-                    this.imagePipeline.rx.loadImage(with: URL(string: small)!).asObservable(),
-                    this.imagePipeline.rx.loadImage(with: URL(string: regular)!).asObservable()
-                )
-            }
-            .map { $0.image }
-            .bind(to: photoCollectionImagePreview.rx.image)
-            .disposed(by: disposeBag)
-
-        title
             .bind(to: photoCollectionTitleLabel.rx.text)
             .disposed(by: disposeBag)
 
-        username
+        output.photoCollection
+            .map { ($0.user?.firstName ?? "") + " " + ($0.user?.lastName ?? "") }
             .bind(to: photoCollectionAuthorLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        output.photoCollection
+            .bind { [weak self] collection in
+                guard let `self` = self,
+                    let collectionCoverColor = UIColor(hexString: collection.coverPhoto?.color ?? ""),
+                    let collectionCoverColorPhotoURLString = collection.coverPhoto?.urls?.regular,
+                    let collectionCoverColorPhotoURL = URL(string: collectionCoverColorPhotoURLString)
+                    else { return }
+
+                let options = ImageLoadingOptions(
+                    placeholder: UIImage.fromColor(collectionCoverColor),
+                    transition: .fadeIn(duration: 0.5, options: .curveEaseInOut),
+                    failureImage: nil,
+                    failureImageTransition: nil,
+                    contentModes: ImageLoadingOptions.ContentModes(
+                        success: .scaleAspectFill,
+                        failure: .scaleAspectFill,
+                        placeholder: .scaleAspectFill
+                    )
+                )
+
+                Nuke.loadImage(
+                    with: collectionCoverColorPhotoURL,
+                    options: options,
+                    into: self.photoCollectionImagePreview,
+                    progress: nil,
+                    completion: nil
+                )
+            }
             .disposed(by: disposeBag)
     }
 }
