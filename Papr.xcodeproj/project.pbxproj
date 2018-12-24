@@ -333,6 +333,7 @@
 		DCEE1F151FC983920010BADE /* UIAlertController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */; };
 		DCEE1F161FC983920010BADE /* UIAlertController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */; };
 		DCEFAFCA21D176030004F2C7 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEFAFC921D176030004F2C7 /* UIImage+Extensions.swift */; };
+		DCEFAFCC21D181650004F2C7 /* UIView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEFAFCB21D181650004F2C7 /* UIView+Rx.swift */; };
 		DCF3961220A8E3C400F3906D /* PaprTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */; };
 		DCF3961320A8E3C400F3906D /* PaprTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */; };
 		DCF3961420A8E3C400F3906D /* PaprTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */; };
@@ -485,6 +486,7 @@
 		DCEE1F0E1FC97CE80010BADE /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Rx.swift"; sourceTree = "<group>"; };
 		DCEFAFC921D176030004F2C7 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		DCEFAFCB21D181650004F2C7 /* UIView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Rx.swift"; sourceTree = "<group>"; };
 		DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaprTabBarController.swift; sourceTree = "<group>"; };
 		DCFB564820C46A93007401DE /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		DD3D8A956FB1C8A8D3B456A7 /* Pods_PaprTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaprTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -992,6 +994,7 @@
 				DC487F3F2104E99F0042DBBC /* UIScrollView+Rx.swift */,
 				C0F79DEE2167A5080051232D /* RxPinterestLayoutDelegateProxy.swift */,
 				C0F79DF02167A58C0051232D /* PinterestLayout+Rx.swift */,
+				DCEFAFCB21D181650004F2C7 /* UIView+Rx.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -1413,6 +1416,7 @@
 				C09D7656216CC91E0035F54D /* UserProfileViewController.swift in Sources */,
 				DC658D92208CFDBA00FEBC31 /* PhotoCollectionViewCell.swift in Sources */,
 				DC66E67720A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */,
+				DCEFAFCC21D181650004F2C7 /* UIView+Rx.swift in Sources */,
 				DC487F402104E99F0042DBBC /* UIScrollView+Rx.swift in Sources */,
 				DCBB1B6C1FA8BA8E004E95F0 /* NibIdentifiable.swift in Sources */,
 				DC5AF7401FACE6A300ADA2BB /* Photo.swift in Sources */,

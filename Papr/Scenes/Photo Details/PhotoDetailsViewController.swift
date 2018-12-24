@@ -68,6 +68,15 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             .map { $0.id ?? "" }
             .bind(to: photoImageView.rx.heroId)
             .disposed(by: disposeBag)
+
+        outputs.photoStream
+            .map { $0.color }
+            .debug()
+            .unwrap()
+            .map { UIColor(hexString: $0, alpha: 0.7) }
+            .unwrap()
+            .bind(to: scrollView.rx.backgroundColor)
+            .disposed(by: disposeBag)
         
         outputs.regularPhoto
             .mapToURL()
