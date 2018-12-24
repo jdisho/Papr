@@ -332,6 +332,7 @@
 		DCEE1F141FC983920010BADE /* UIAlertController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */; };
 		DCEE1F151FC983920010BADE /* UIAlertController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */; };
 		DCEE1F161FC983920010BADE /* UIAlertController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */; };
+		DCEFAFCA21D176030004F2C7 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEFAFC921D176030004F2C7 /* UIImage+Extensions.swift */; };
 		DCF3961220A8E3C400F3906D /* PaprTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */; };
 		DCF3961320A8E3C400F3906D /* PaprTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */; };
 		DCF3961420A8E3C400F3906D /* PaprTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */; };
@@ -483,6 +484,7 @@
 		DCEE1F0A1FC97CDC0010BADE /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		DCEE1F0E1FC97CE80010BADE /* AlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewModel.swift; sourceTree = "<group>"; };
 		DCEE1F131FC983920010BADE /* UIAlertController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Rx.swift"; sourceTree = "<group>"; };
+		DCEFAFC921D176030004F2C7 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		DCF3961020A8E3C400F3906D /* PaprTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaprTabBarController.swift; sourceTree = "<group>"; };
 		DCFB564820C46A93007401DE /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		DD3D8A956FB1C8A8D3B456A7 /* Pods_PaprTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PaprTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -877,7 +879,7 @@
 				C0D52CAF2181DA5700FB0517 /* Cache */,
 				DC5AF7531FAD2EE400ADA2BB /* Enums */,
 				DC7CF5851FC468C6006E0A39 /* Authentication */,
-				DCBB1B6A1FA8BA5D004E95F0 /* Extentions */,
+				DCBB1B6A1FA8BA5D004E95F0 /* Extensions */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -925,7 +927,7 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		DCBB1B6A1FA8BA5D004E95F0 /* Extentions */ = {
+		DCBB1B6A1FA8BA5D004E95F0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				DC487F412104F06E0042DBBC /* Indentifiable */,
@@ -937,8 +939,9 @@
 				DCBE0089202A1A980065BEF3 /* Date+Extensions.swift */,
 				DCBE008D202A1EB30065BEF3 /* String+Extensions.swift */,
 				DCAF6BBE204D465E002B7F00 /* Int+Extensions.swift */,
+				DCEFAFC921D176030004F2C7 /* UIImage+Extensions.swift */,
 			);
-			path = Extentions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		DCC8CA032002BEC200F6C540 /* Home */ = {
@@ -1416,6 +1419,7 @@
 				DCB915AF20B9A8DE003D1069 /* PinterestLayout.swift in Sources */,
 				DCC8CA072002BEE300F6C540 /* HomeViewController.swift in Sources */,
 				C09D7659216CC98B0035F54D /* UserProfileViewModel.swift in Sources */,
+				DCEFAFCA21D176030004F2C7 /* UIImage+Extensions.swift in Sources */,
 				DC922309203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */,
 				DC99FB8E2003A7CC001195FD /* PhotoServiceType.swift in Sources */,
 				DCC8CA132002CC2700F6C540 /* HomeViewCell.swift in Sources */,
