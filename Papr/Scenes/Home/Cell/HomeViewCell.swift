@@ -88,24 +88,39 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
             .bind(to: userImageView.rx.image)
             .disposed(by: disposeBag)
 
-        Observable.combineLatest(
-            outputs.smallPhoto,
-            outputs.regularPhoto,
-            outputs.fullPhoto)
-            .flatMap { small, regular, full -> Observable<ImageResponse> in
-                return Observable.concat(
-                    this.imagePipeline.rx.loadImage(with: URL(string: small)!).asObservable(),
-                    this.imagePipeline.rx.loadImage(with: URL(string: regular)!).asObservable(),
-                    this.imagePipeline.rx.loadImage(with: URL(string: full)!).asObservable()
+        outputs.photoStream
+            .flatMapIgnore { [weak self] _ in
+               Observable.just(self?.activityIndicator.stopAnimating())
+             }
+            .bind { [weak self] photo in
+                guard let `self` = self,
+                    let photoURLString = photo.urls?.regular,
+                    let url = URL(string: photoURLString),
+                    let color = UIColor(hexString: photo.color ?? "")
+                    else { return }
+
+                let options = ImageLoadingOptions(
+                    placeholder: UIImage.fromColor(color),
+                    transition: .fadeIn(duration: 0.5, options: .curveEaseInOut),
+                    failureImage: nil,
+                    failureImageTransition: nil,
+                    contentModes: ImageLoadingOptions.ContentModes(
+                        success: .scaleAspectFit,
+                        failure: .scaleAspectFill,
+                        placeholder: .scaleAspectFill
+                    )
+                )
+
+                Nuke.loadImage(
+                    with: url,
+                    options: options,
+                    into: self.photoImageView,
+                    progress: nil,
+                    completion: nil
                 )
             }
-            .map { $0.image }
-            .flatMapIgnore { [unowned self] _ in
-                Observable.just(self.activityIndicator.stopAnimating())
-            }
-            .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
-    
+
         outputs.fullname
             .bind(to: fullNameLabel.rx.text)
             .disposed(by: disposeBag)
@@ -140,8 +155,8 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
 
 
         inputs.downloadPhotoAction.elements
-            .subscribe { [unowned self] result in
-                guard let linkString = result.element,
+            .bind { [weak self] linkString in
+                guard let `self` = self,
                     let url = URL(string: linkString) else { return }
 
                 Nuke.loadImage(with: url, into: self.dummyImageView) { response, _ in
