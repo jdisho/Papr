@@ -12,6 +12,7 @@ import Action
 
 protocol PhotoDetailsViewModelInput: PhotoViewModelInput {
     var dismissAction: CocoaAction { get }
+    var revertAction: CocoaAction { get }
     var moreAction: Action<[Any], Void> { get }
 }
 
@@ -37,10 +38,20 @@ class PhotoDetailsViewModel: PhotoViewModel,
     var outputs: PhotoDetailsViewModelOutput { return self }
     override var photoViewModelOutputs: PhotoViewModelOutput { return outputs }
 
+    var popCancelable:Disposable?
+    
     // MARK: Inputs
     lazy var dismissAction: CocoaAction = {
         CocoaAction { [unowned self] _ in
-            self.sceneCoordinator.pop(animated: true)
+            self.popCancelable = self.sceneCoordinator.pop(animated: true).subscribe()
+            return .empty()
+        }
+    }()
+    
+    lazy var revertAction: CocoaAction = {
+        CocoaAction { [unowned self] _ in
+            self.popCancelable?.dispose()
+            return .empty()
         }
     }()
 

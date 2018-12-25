@@ -39,6 +39,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
     private var photoImageView: UIImageView!
     private var tapGesture: UITapGestureRecognizer!
     private var doubleTapGesture: UITapGestureRecognizer!
+    private var dismissGesture: UIPanGestureRecognizer!
 
     // MARK: Overrides
     override func viewDidLoad() {
@@ -140,6 +141,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         configureScrollView()
         configurePhotoImageView()
         configureTapGestures()
+        configureDismissGesutures()
 
         view.bringSubviewToFront(dismissButton)
         view.bringSubviewToFront(statsContainerView)
@@ -195,6 +197,12 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         )
         photoImageView.frame = CGRect(origin: .zero, size: size)
         scrollView.contentSize = size
+    }
+    
+    private func configureDismissGesutures() {
+        dismissGesture = UIPanGestureRecognizer(target: self, action: #selector(dismissController))
+        
+        view.addGestureRecognizer(dismissGesture)
     }
 
 
@@ -258,6 +266,29 @@ class PhotoDetailsViewController: UIViewController, BindableType {
 
     @objc func zoomOut() {
         scrollView.setZoomScale(1, animated: true)
+    }
+    
+    @objc func dismissController() {
+        if scrollView.zoomScale > 1 { return }
+        
+        let translation = dismissGesture.translation(in: nil)
+        let progress = abs(translation.y / view.bounds.height) * 1.5
+        switch dismissGesture.state {
+            case .began:
+                Hero.shared.defaultAnimation = .fade
+                viewModel.inputs.dismissAction.execute(())
+            case .changed:
+                Hero.shared.update(progress)
+                let currentPos = CGPoint(x: translation.x + view.center.x, y: translation.y + view.center.y)
+                Hero.shared.apply(modifiers: [.position(currentPos)], to: photoImageView)
+            default:
+                if progress + dismissGesture.velocity(in: nil).y / view.bounds.height > 0.3 {
+                    Hero.shared.finish()
+                } else {
+                    viewModel.inputs.revertAction.execute(())
+                    Hero.shared.cancel()
+                }
+        }
     }
 
 }
