@@ -102,7 +102,6 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
         
         if let presentingViewController = currentViewController.presentingViewController {
             currentViewController.dismiss(animated: animated) {
-                print("here")
                 if !isDisposed {
                     self.currentViewController = SceneCoordinator.actualViewController(for: presentingViewController)
                     currentObserver?.on(.completed)
