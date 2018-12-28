@@ -24,7 +24,7 @@ extension String {
         return range.location != NSNotFound ? range : nil
     }
 
-    func attributedString(withHighlightedText text: String, color: UIColor = Constants.Color.yellowZ) -> NSAttributedString {
+    func attributedString(withHighlightedText text: String, color: UIColor = Constants.Appearance.Color.yellowZ) -> NSAttributedString {
         guard let range = lowercased().nsRange(of: text.lowercased()) else {
             return NSAttributedString(string: self)
         }
