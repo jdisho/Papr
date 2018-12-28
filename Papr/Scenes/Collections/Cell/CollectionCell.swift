@@ -29,7 +29,7 @@ class CollectionCell: UICollectionViewCell, BindableType, NibIdentifiable & Clas
     override func awakeFromNib() {
         super.awakeFromNib()
         photoCollectionImagePreview.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
-        photoCollectionImagePreview.dim(withAlpha: 0.3)
+        photoCollectionImagePreview.dim(withAlpha: 0.2)
     }
 
     override func prepareForReuse() {
@@ -51,6 +51,16 @@ class CollectionCell: UICollectionViewCell, BindableType, NibIdentifiable & Clas
         output.photoCollection
             .map { ($0.user?.firstName ?? "") + " " + ($0.user?.lastName ?? "") }
             .bind(to: photoCollectionAuthorLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        output.photoCollection
+            .map { $0.coverPhoto?.color }
+            .unwrap()
+            .map { UIColor(hexString: $0) }
+            .unwrap()
+            .map { $0.toImage() }
+            .unwrap()
+            .bind(to: photoCollectionImagePreview.rx.image)
             .disposed(by: disposeBag)
 
         let smallPhotoURL = output.photoCollection
