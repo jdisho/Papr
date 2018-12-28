@@ -15,7 +15,7 @@ protocol SearchPhotosCellModelInput {
 protocol SearchPhotosCellModelOutput {
     var smallPhotoURL: Observable<String> { get }
     var regularPhotoURL: Observable<String> { get }
-    var photoSize: Observable<(width: Double, height: Double)> { get }
+    var photoSize: Observable<(Double, Double)> { get }
 }
 
 protocol SearchPhotosCellModelType {
@@ -39,10 +39,10 @@ class SearchPhotosCellModel: SearchPhotosCellModelType,
     // MARK: Outputs
     let smallPhotoURL: Observable<String>
     let regularPhotoURL: Observable<String>
-    let photoSize: Observable<(width: Double, height: Double)>
+    let photoSize: Observable<(Double, Double)>
     
     // MARK: Privates
-    private let photoSizeProperty = BehaviorSubject<(width: Double, height: Double)>(value: (width: 0, height: 0))
+    private let photoSizeProperty = BehaviorSubject<(Double, Double)>(value: (0, 0))
 
     // MARK: Init
     init(photo: Photo) {
