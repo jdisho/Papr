@@ -30,7 +30,6 @@ class SearchPhotosViewController: UIViewController, BindableType {
             cell.bind(to: cellModel)
 
             cellModel.outputs.photoSize
-                .skip(1)
                 .map { CGSize(width: $0.0, height: $0.1) }
                 .bind(to: self.pinterestLayout.rx.updateSize(indexPath))
                 .disposed(by: self.disposeBag)
