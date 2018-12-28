@@ -20,7 +20,7 @@ class HomeViewController: UIViewController, BindableType {
 
     // MARK: Private
     private let disposeBag = DisposeBag()
-    private let pinterestLayout = PinterestLayout()
+    private let collectionViewLayout: UICollectionViewLayout
     private var dataSource: RxCollectionViewSectionedReloadDataSource<HomeSectionModel>!
     private var collectionView: UICollectionView!
     private var refreshControl: UIRefreshControl!
@@ -31,23 +31,34 @@ class HomeViewController: UIViewController, BindableType {
             var cell = collectionView.dequeueReusableCell(withCellType: HomeViewCell.self, forIndexPath: indexPath)
             cell.bind(to: cellModel)
 
-            cellModel.outputs.photoSize
-                .map { (size) -> CGSize in
-                    let (width, height) = size
-                    let screenWidth = Double(UIScreen.main.bounds.width)
-                    let newHeight = (height * screenWidth / width).rounded()
-                    // FIX 😳: 115 is the size of top + bottom bar
-                    return CGSize(width: screenWidth, height: newHeight + 115.0)
-                }
-                .debug()
-                .bind(to: self.pinterestLayout.rx.updateSize(indexPath))
-                .disposed(by: self.disposeBag)
-
+            if let pinterestLayout = collectionView.collectionViewLayout as? PinterestLayout {
+                cellModel.outputs.photoSize
+                    .map { (size) -> CGSize in
+                        let (width, height) = size
+                        let screenWidth = Double(UIScreen.main.bounds.width)
+                        let newHeight = (height * screenWidth / width).rounded()
+                        // FIX 😳: 115 is the size of top + bottom bar
+                        return CGSize(width: screenWidth, height: newHeight + 115.0)
+                    }
+                    .debug()
+                    .bind(to: pinterestLayout.rx.updateSize(indexPath))
+                    .disposed(by: self.disposeBag)
+            }
             return cell
         }
     }
 
     // MARK: Override
+    init(collectionViewLayout: UICollectionViewLayout) {
+        self.collectionViewLayout = collectionViewLayout
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -122,7 +133,6 @@ class HomeViewController: UIViewController, BindableType {
     }
 
     private func configureCollectionView() {
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: pinterestLayout)
         collectionView.backgroundColor = .white
         collectionView.add(to: view).pinToEdges()
         collectionView.register(cellType: HomeViewCell.self)
