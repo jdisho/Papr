@@ -20,7 +20,7 @@ class HomeViewController: UIViewController, BindableType {
 
     // MARK: Private
     private let disposeBag = DisposeBag()
-    private let collectionViewLayout: UICollectionViewLayout
+    private let collectionViewLayout: UICollectionViewLayout!
     private var dataSource: RxCollectionViewSectionedReloadDataSource<HomeSectionModel>!
     private var collectionView: UICollectionView!
     private var refreshControl: UIRefreshControl!
@@ -40,7 +40,6 @@ class HomeViewController: UIViewController, BindableType {
                         // FIX 😳: 115 is the size of top + bottom bar
                         return CGSize(width: screenWidth, height: newHeight + 115.0)
                     }
-                    .debug()
                     .bind(to: pinterestLayout.rx.updateSize(indexPath))
                     .disposed(by: self.disposeBag)
             }

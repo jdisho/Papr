@@ -39,7 +39,7 @@ extension Scene: TargetScene {
             let paprTabBarController = PaprTabBarController()
 
             //HomeViewController
-            var homeVC = HomeViewController(collectionViewLayout: PinterestLayout())
+            var homeVC = HomeViewController(collectionViewLayout: PinterestLayout(numberOfColumns: 1))
             let homeViewModel = HomeViewModel()
             let rootHomeVC = PaprNavigationController(rootViewController: homeVC)
             homeVC.bind(to: homeViewModel)
@@ -107,7 +107,7 @@ extension Scene: TargetScene {
             vc.bind(to: viewModel)
             return .present(rootViewController)
         case let .searchPhotos(viewModel):
-            var vc = SearchPhotosViewController()
+            var vc = SearchPhotosViewController(collectionViewLayout: PinterestLayout(numberOfColumns: 2))
             vc.bind(to: viewModel)
             return .push(vc)
         case let .searchCollections(viewModel):
