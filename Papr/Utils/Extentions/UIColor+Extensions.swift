@@ -38,4 +38,20 @@ extension UIColor {
 
         self.init(red: red, green: green, blue: blue, alpha: CGFloat(a))
     }
+
+    func toImage() -> UIImage? {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContext(rect.size)
+
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+
+        context.setFillColor(cgColor)
+        context.fill(rect)
+
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+
+        UIGraphicsEndImageContext()
+
+        return image
+    }
 }

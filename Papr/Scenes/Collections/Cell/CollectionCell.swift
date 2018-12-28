@@ -42,6 +42,17 @@ class CollectionCell: UICollectionViewCell, BindableType, NibIdentifiable & Clas
         let output = viewModel.output
         let this = CollectionCell.self
 
+        output.photoCollection
+            .map { $0.title }
+            .unwrap()
+            .bind(to: photoCollectionTitleLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        output.photoCollection
+            .map { ($0.user?.firstName ?? "") + " " + ($0.user?.lastName ?? "") }
+            .bind(to: photoCollectionAuthorLabel.rx.text)
+            .disposed(by: disposeBag)
+
         let smallPhotoURL = output.photoCollection
             .map { $0.coverPhoto?.urls?.small }
             .unwrap()
@@ -49,13 +60,6 @@ class CollectionCell: UICollectionViewCell, BindableType, NibIdentifiable & Clas
         let regularPhotoURL = output.photoCollection
             .map { $0.coverPhoto?.urls?.regular }
             .unwrap()
-
-        let title = output.photoCollection
-            .map { $0.title }
-            .unwrap()
-
-        let username = output.photoCollection
-            .map { ($0.user?.firstName ?? "") + " " + ($0.user?.lastName ?? "") }
 
         Observable.combineLatest(smallPhotoURL, regularPhotoURL)
             .flatMap { small, regular -> Observable<ImageResponse> in
@@ -66,14 +70,6 @@ class CollectionCell: UICollectionViewCell, BindableType, NibIdentifiable & Clas
             }
             .map { $0.image }
             .bind(to: photoCollectionImagePreview.rx.image)
-            .disposed(by: disposeBag)
-
-        title
-            .bind(to: photoCollectionTitleLabel.rx.text)
-            .disposed(by: disposeBag)
-
-        username
-            .bind(to: photoCollectionAuthorLabel.rx.text)
             .disposed(by: disposeBag)
     }
 }
