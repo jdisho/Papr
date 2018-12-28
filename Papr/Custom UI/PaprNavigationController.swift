@@ -64,7 +64,7 @@ class PaprNavigationController: UINavigationController {
 
         let profileImage = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
         profileImage.isHidden = true
-        profileImage.roundCorners(withRadius: profileImage.frame.height / 2)
+        profileImage.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
 
         var button = UIButton(frame: .zero)
         button.add(to: profileImage).size(profileImage.frame.size).pinToEdges()

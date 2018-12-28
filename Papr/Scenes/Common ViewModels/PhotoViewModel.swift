@@ -21,7 +21,7 @@ protocol PhotoViewModelInput {
 protocol PhotoViewModelOutput {
     var photoStream: Observable<Photo>! { get }
     var regularPhoto: Observable<String>! { get }
-    var photoSize: Observable<(Int, Int)>! { get }
+    var photoSize: Observable<(Double, Double)>! { get }
     var totalLikes: Observable<String>! { get }
     var likedByUser: Observable<Bool>! { get }
 }
@@ -131,7 +131,7 @@ class PhotoViewModel: PhotoViewModelType,
 
     // MARK: Output
     var regularPhoto: Observable<String>!
-    var photoSize: Observable<(Int, Int)>!
+    var photoSize: Observable<(Double, Double)>!
     var totalLikes: Observable<String>!
     var likedByUser: Observable<Bool>!
     var photoStream: Observable<Photo>!
@@ -160,8 +160,8 @@ class PhotoViewModel: PhotoViewModelType,
             .unwrap()
 
         photoSize = Observable.combineLatest(
-            photoStream.map { $0.width }.unwrap(),
-            photoStream.map { $0.height }.unwrap()
+            photoStream.map { $0.width }.unwrap().map { Double($0) },
+            photoStream.map { $0.height }.unwrap().map { Double($0) }
         )
 
         self.totalLikes = Observable.combineLatest(

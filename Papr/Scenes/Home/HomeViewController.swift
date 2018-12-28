@@ -20,25 +20,49 @@ class HomeViewController: UIViewController, BindableType {
 
     // MARK: Private
     private let disposeBag = DisposeBag()
-    private var dataSource: RxTableViewSectionedReloadDataSource<HomeSectionModel>!
-    private var tableView: UITableView!
+    private let collectionViewLayout: UICollectionViewLayout!
+    private var dataSource: RxCollectionViewSectionedReloadDataSource<HomeSectionModel>!
+    private var collectionView: UICollectionView!
     private var refreshControl: UIRefreshControl!
     private var navBarButton: UIButton!
     private var rightBarButtonItem: UIBarButtonItem!
-    private var tableViewDataSource: TableViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
-        return { _, tableView, indexPath, cellModel in
-            var cell = tableView.dequeueResuableCell(withCellType: HomeViewCell.self, forIndexPath: indexPath)
+    private var collectionViewDataSource: CollectionViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
+        return { _, collectionView, indexPath, cellModel in
+            var cell = collectionView.dequeueReusableCell(withCellType: HomeViewCell.self, forIndexPath: indexPath)
             cell.bind(to: cellModel)
+
+            if let pinterestLayout = collectionView.collectionViewLayout as? PinterestLayout {
+                cellModel.outputs.photoSize
+                    .map { (size) -> CGSize in
+                        let (width, height) = size
+                        let screenWidth = Double(UIScreen.main.bounds.width)
+                        let newHeight = (height * screenWidth / width).rounded()
+                        // FIX 😳: 115 is the size of top + bottom bar
+                        return CGSize(width: screenWidth, height: newHeight + 115.0)
+                    }
+                    .bind(to: pinterestLayout.rx.updateSize(indexPath))
+                    .disposed(by: self.disposeBag)
+            }
             return cell
         }
     }
 
     // MARK: Override
+    init(collectionViewLayout: UICollectionViewLayout) {
+        self.collectionViewLayout = collectionViewLayout
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureNavigationController()
-        configureTableView()
+        configureCollectionView()
         configureRefreshControl()
         refresh()
     }
@@ -88,10 +112,10 @@ class HomeViewController: UIViewController, BindableType {
         
         outputs.homeViewCellModelTypes
             .map { [HomeSectionModel(model: "", items: $0)] }
-            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
-        tableView.rx.reachedBottom()
+        collectionView.rx.reachedBottom()
             .skipUntil(outputs.isRefreshing)
             .bind(to: inputs.loadMore)
             .disposed(by: disposeBag)
@@ -107,22 +131,19 @@ class HomeViewController: UIViewController, BindableType {
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
 
-    private func configureTableView() {
-        tableView = UITableView(frame: .zero)
-        tableView.separatorColor = .clear
-        tableView.add(to: view).pinToEdges()
-        tableView.register(cellType: HomeViewCell.self)
-        tableView.estimatedRowHeight = 400
-
-        dataSource = RxTableViewSectionedReloadDataSource<HomeSectionModel>(
-            configureCell:  tableViewDataSource
+    private func configureCollectionView() {
+        collectionView.backgroundColor = .white
+        collectionView.add(to: view).pinToEdges()
+        collectionView.register(cellType: HomeViewCell.self)
+        dataSource = RxCollectionViewSectionedReloadDataSource<HomeSectionModel>(
+            configureCell:  collectionViewDataSource
         )
     }
 
     private func configureRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        tableView.addSubview(refreshControl)
+        collectionView.addSubview(refreshControl)
     }
 
     @objc private func refresh() {

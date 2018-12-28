@@ -46,8 +46,8 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType, NibIdentifiab
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        collectionCoverImageView.roundCorners(withRadius: 10.0)
-        addToCollectionButton.roundCorners(withRadius: 10.0)
+        collectionCoverImageView.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
+        addToCollectionButton.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
     }
     // MARK: BindableType
     func bindViewModel() {

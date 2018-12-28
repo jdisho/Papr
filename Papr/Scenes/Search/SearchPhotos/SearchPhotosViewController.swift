@@ -19,9 +19,9 @@ class SearchPhotosViewController: UIViewController, BindableType {
     var viewModel: SearchPhotosViewModelType!
 
     // MARK: Privates
-    private let pinterestLayout = PinterestLayout()
     private let disposeBag = DisposeBag()
     private var collectionView: UICollectionView!
+    private var collectionViewLayout: UICollectionViewLayout!
     private var loadingView: LoadingView!
     private var dataSource: RxCollectionViewSectionedReloadDataSource<SearchPhotosSectionModel>!
     private var collectionViewDataSource: CollectionViewSectionedDataSource<SearchPhotosSectionModel>.ConfigureCell {
@@ -29,14 +29,25 @@ class SearchPhotosViewController: UIViewController, BindableType {
             var cell = collectionView.dequeueReusableCell(withCellType: SearchPhotosCell.self, forIndexPath: indexPath)
             cell.bind(to: cellModel)
 
-            cellModel.outputs.photoSize
-                .skip(1)
-                .map { CGSize(width: $0.width, height: $0.height) }
-                .bind(to: self.pinterestLayout.rx.updateSize(indexPath))
-                .disposed(by: self.disposeBag)
+            if let pinterestLayout = collectionView.collectionViewLayout as? PinterestLayout {
+                cellModel.outputs.photoSize
+                    .map { CGSize(width: $0.0, height: $0.1) }
+                    .bind(to: pinterestLayout.rx.updateSize(indexPath))
+                    .disposed(by: self.disposeBag)
+            }
 
             return cell
         }
+    }
+
+    init(collectionViewLayout: UICollectionViewLayout) {
+        self.collectionViewLayout = collectionViewLayout
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func viewDidLoad() {
@@ -74,7 +85,6 @@ class SearchPhotosViewController: UIViewController, BindableType {
     }
 
     private func configureCollectionView() {
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: pinterestLayout)
         collectionView.backgroundColor = .white
         collectionView.add(to: view).pinToEdges()
         collectionView.register(cellType: SearchPhotosCell.self)

@@ -77,7 +77,10 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         outputs.photoSize
-            .map { CGFloat($1 * Int(UIScreen.main.bounds.width) / $0) }
+            .map { size -> CGFloat in
+                let (width, height) = size
+                return CGFloat(height * Double(UIScreen.main.bounds.width) / width)
+            }
             .bind { [weak self] in
                 self?.configureContentSize(withHeight: $0)
             }

@@ -20,8 +20,8 @@ class PinterestLayout: UICollectionViewLayout {
     weak var delegate: PinterestLayoutDelegate?
 
     // MARK: Fileprivates
-    fileprivate let numberOfColumns = 2
     fileprivate let cellPadding: CGFloat = 1 / UIScreen.main.scale
+    fileprivate var numberOfColumns: Int = 0
     fileprivate var contentHeight: CGFloat = 0
     fileprivate var contentWidth: CGFloat {
         guard let collectionView = collectionView else { return 0 }
@@ -29,6 +29,15 @@ class PinterestLayout: UICollectionViewLayout {
         return collectionView.bounds.width - (insets.left + insets.right)
     }
     fileprivate var cache = [UICollectionViewLayoutAttributes]()
+
+    init(numberOfColumns: Int) {
+        self.numberOfColumns = numberOfColumns
+        super.init()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     // MARK: Overrides
     override var collectionViewContentSize: CGSize {

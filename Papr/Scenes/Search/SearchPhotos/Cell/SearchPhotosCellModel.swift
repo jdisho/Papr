@@ -9,13 +9,11 @@
 import Foundation
 import RxSwift
 
-protocol SearchPhotosCellModelInput {
-    func updateSize(width: Double, height: Double)
-}
+protocol SearchPhotosCellModelInput {}
 protocol SearchPhotosCellModelOutput {
     var smallPhotoURL: Observable<String> { get }
     var regularPhotoURL: Observable<String> { get }
-    var photoSize: Observable<(width: Double, height: Double)> { get }
+    var photoSize: Observable<(Double, Double)> { get }
 }
 
 protocol SearchPhotosCellModelType {
@@ -31,18 +29,10 @@ class SearchPhotosCellModel: SearchPhotosCellModelType,
     var inputs: SearchPhotosCellModelInput { return self }
     var outputs: SearchPhotosCellModelOutput { return self }
 
-    // MARK: Inputs
-    func updateSize(width: Double, height: Double) {
-        photoSizeProperty.onNext((width: width, height: height))
-    }
-    
     // MARK: Outputs
     let smallPhotoURL: Observable<String>
     let regularPhotoURL: Observable<String>
-    let photoSize: Observable<(width: Double, height: Double)>
-    
-    // MARK: Privates
-    private let photoSizeProperty = BehaviorSubject<(width: Double, height: Double)>(value: (width: 0, height: 0))
+    let photoSize: Observable<(Double, Double)>
 
     // MARK: Init
     init(photo: Photo) {
@@ -56,6 +46,9 @@ class SearchPhotosCellModel: SearchPhotosCellModelType,
             .map { $0.urls?.regular }
             .unwrap()
         
-        photoSize = photoSizeProperty.asObservable()
+        photoSize = Observable.combineLatest(
+            photoStream.map { $0.width }.unwrap().map { Double($0) },
+            photoStream.map { $0.height }.unwrap().map { Double($0) }
+        )
     }
 }
