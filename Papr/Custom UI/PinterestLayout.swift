@@ -20,7 +20,7 @@ class PinterestLayout: UICollectionViewLayout {
     weak var delegate: PinterestLayoutDelegate?
 
     // MARK: Fileprivates
-    fileprivate let numberOfColumns = 2
+    fileprivate let numberOfColumns = 1
     fileprivate let cellPadding: CGFloat = 1 / UIScreen.main.scale
     fileprivate var contentHeight: CGFloat = 0
     fileprivate var contentWidth: CGFloat {

@@ -13,7 +13,7 @@ import RxNuke
 import Photos
 import Hero
 
-class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdentifiable {
+class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassIdentifiable {
 
     // MARK: ViewModel
     var viewModel: HomeViewCellModelType!
@@ -24,7 +24,6 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
     @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var photoButton: UIButton!
-    @IBOutlet var photoHeightConstraint: NSLayoutConstraint!
     @IBOutlet var postedTimeLabel: UILabel!
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var likesNumberLabel: UILabel!
@@ -112,11 +111,6 @@ class HomeViewCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdenti
         
         outputs.username
             .bind(to: usernameLabel.rx.text)
-            .disposed(by: disposeBag)
-
-        outputs.photoSize
-            .map { CGFloat($1 * Int(UIScreen.main.bounds.width) / $0) }
-            .bind(to: photoHeightConstraint.rx.constant)
             .disposed(by: disposeBag)
 
         outputs.updated
