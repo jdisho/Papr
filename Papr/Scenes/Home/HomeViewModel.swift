@@ -55,7 +55,7 @@ protocol HomeViewModelOutput {
     var isRefreshing: Observable<Bool>! { get }
 
     /// Emits a boolean when the Curated option is chosen.
-    var curated: Observable<Bool>! { get }
+    var isCurated: Observable<Bool>! { get }
 
     /// Emits an OrderBy value when an OrderBy option is chosen.
     var orderBy: Observable<OrderBy>! { get }
@@ -89,7 +89,7 @@ class HomeViewModel: HomeViewModelType,
     
     lazy var showCuratedPhotosAction: CocoaAction = {
         CocoaAction { [unowned self] in
-            self.curatedProperty.onNext(true)
+            self.isCuratedProperty.onNext(true)
             self.refresh()
             return .empty()
         }
@@ -97,7 +97,7 @@ class HomeViewModel: HomeViewModelType,
     
     lazy var showLatestPhotosAction: CocoaAction = {
         CocoaAction { [unowned self] in
-            self.curatedProperty.onNext(false)
+            self.isCuratedProperty.onNext(false)
             self.refresh()
             return .empty()
         }
@@ -132,7 +132,7 @@ class HomeViewModel: HomeViewModelType,
     // MARK: Output
     var photos: Observable<[Photo]>!
     var isRefreshing: Observable<Bool>!
-    var curated: Observable<Bool>!
+    var isCurated: Observable<Bool>!
     var orderBy: Observable<OrderBy>!
     var navBarButtonName: Observable<NavBarTitle>!
 
@@ -159,7 +159,7 @@ class HomeViewModel: HomeViewModelType,
     private let sceneCoordinator: SceneCoordinatorType
     private let refreshProperty = BehaviorSubject<Bool>(value: true)
     private let orderByProperty = BehaviorSubject<OrderBy>(value: .latest)
-    private let curatedProperty = BehaviorSubject<Bool>(value: false)
+    private let isCuratedProperty = BehaviorSubject<Bool>(value: false)
     private let navBarButtonNameProperty = BehaviorSubject<NavBarTitle>(value: .new)
 
     // MARK: Init
@@ -175,12 +175,12 @@ class HomeViewModel: HomeViewModelType,
         var photoArray = [Photo]([])
     
         isRefreshing = refreshProperty.asObservable()
-        curated = curatedProperty.asObservable()
+        isCurated = isCuratedProperty.asObservable()
         orderBy = orderByProperty.asObservable()
         navBarButtonName = navBarButtonNameProperty.asObservable()
 
         let requestFirst = Observable
-            .combineLatest(isRefreshing, orderBy, curated)
+            .combineLatest(isRefreshing, orderBy, isCurated)
             .flatMap { isRefreshing, orderBy, curated -> Observable<[Photo]> in
                 guard isRefreshing else { return .empty() }
                 return service.photos(
@@ -205,7 +205,7 @@ class HomeViewModel: HomeViewModelType,
             })
 
         let requestNext = Observable
-            .combineLatest(loadMore, orderBy, curated)
+            .combineLatest(loadMore, orderBy, isCurated)
             .flatMap { loadMore, orderBy, curated -> Observable<[Photo]> in 
                 guard loadMore else { return .empty() }
                 currentPageNumber += 1

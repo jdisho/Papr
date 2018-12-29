@@ -24,7 +24,7 @@ class HomeViewController: UIViewController, BindableType {
     private var dataSource: RxCollectionViewSectionedReloadDataSource<HomeSectionModel>!
     private var collectionView: UICollectionView!
     private var refreshControl: UIRefreshControl!
-    private var navBarButton: UIButton!
+    private var segmentedControl: UISegmentedControl!
     private var rightBarButtonItem: UIBarButtonItem!
     private var collectionViewDataSource: CollectionViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
         return { _, collectionView, indexPath, cellModel in
@@ -72,12 +72,6 @@ class HomeViewController: UIViewController, BindableType {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
 
-        outputs.curated.subscribe { [unowned self] curated in
-            guard let curated = curated.element else { return }
-            self.navBarButton.rx.action = curated ? inputs.showLatestPhotosAction : inputs.showCuratedPhotosAction
-        }
-        .disposed(by: disposeBag)
-        
         outputs.orderBy.subscribe { [unowned self] orderBy in
             guard let orderBy = orderBy.element else { return }
             switch orderBy {
@@ -105,11 +99,6 @@ class HomeViewController: UIViewController, BindableType {
             .bind(to: rightBarButtonItem.rx.isEnabled)
             .disposed(by: disposeBag)
 
-        outputs.navBarButtonName
-            .map { $0.string }
-            .bind(to: navBarButton.rx.title())
-            .disposed(by: disposeBag)
-        
         outputs.homeViewCellModelTypes
             .map { [HomeSectionModel(model: "", items: $0)] }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
@@ -119,15 +108,27 @@ class HomeViewController: UIViewController, BindableType {
             .skipUntil(outputs.isRefreshing)
             .bind(to: inputs.loadMore)
             .disposed(by: disposeBag)
+
+        segmentedControl.rx.value
+            .map { index -> Bool in
+                return index == 0
+            }
+            .bind { isNew in
+                if isNew {
+                    inputs.showLatestPhotosAction.execute(())
+                } else {
+                    inputs.showCuratedPhotosAction.execute(())
+                }
+            }
+            .disposed(by: disposeBag)
     }
 
     // MARK: UI
     private func configureNavigationController() {
-        navBarButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 40))
-        navBarButton.setTitleColor(.black, for: .normal)
-        navBarButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        segmentedControl = UISegmentedControl(items: ["New", "Curated"])
+        segmentedControl.selectedSegmentIndex = 0
         rightBarButtonItem = UIBarButtonItem()
-        navigationItem.titleView = navBarButton
+        navigationItem.titleView = segmentedControl
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
 
