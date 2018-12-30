@@ -72,18 +72,11 @@ class HomeViewController: UIViewController, BindableType {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
 
-        outputs.orderBy.subscribe { [unowned self] orderBy in
-            guard let orderBy = orderBy.element else { return }
-            switch orderBy {
-            case .latest:
-                self.rightBarButtonItem.rx.action = inputs.orderByPopularityAction
-            case .popular:
-                self.rightBarButtonItem.rx.action = inputs.orderByFrequencyAction
-            case .oldest: 
-                self.rightBarButtonItem.rx.action = nil
+        outputs.orderBy
+            .bind { [weak self] in
+                self?.rightBarButtonItem.rx.bind(to: inputs.orderByAction, input: $0)
             }
-        }
-        .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
 
         outputs.orderBy
             .map { $0 == .popular ? #imageLiteral(resourceName: "hot") : #imageLiteral(resourceName: "up")}

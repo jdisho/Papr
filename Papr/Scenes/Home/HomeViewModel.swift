@@ -17,11 +17,8 @@ protocol HomeViewModelInput {
     /// Call when photos are invoked
     var showPhotosAction: Action<PhotosType, Void> { get }
     
-    /// Call when OrderBy-Popular is invoked
-    var orderByPopularityAction: CocoaAction { get }
-    
-    /// Call when OrderBy-Latest is invoked
-    var orderByFrequencyAction: CocoaAction { get }
+    /// Call when an OrderBy value is invoked
+    var orderByAction: Action<OrderBy, Void> { get }
     
     /// Call when an alert is invoked
     var alertAction: Action<String, Void> { get }
@@ -75,22 +72,16 @@ class HomeViewModel: HomeViewModelType,
         }
     }()
     
-    lazy var orderByPopularityAction: CocoaAction = {
-        CocoaAction { [unowned self] in
-            self.orderByProperty.onNext(.popular)
+    lazy var orderByAction: Action<OrderBy, Void> = {
+        Action<OrderBy, Void> { [unowned self] orderBy in
+            orderBy == .latest ?
+                self.orderByProperty.onNext(.popular) :
+                self.orderByProperty.onNext(.latest)
             self.refresh()
             return .empty()
         }
     }()
 
-    lazy var orderByFrequencyAction: CocoaAction = {
-        CocoaAction { [unowned self] in
-            self.orderByProperty.onNext(.latest)
-            self.refresh()
-            return .empty()
-        }
-    }()
-    
     lazy var alertAction: Action<String, Void> = {
         Action<String, Void> { [unowned self] message in
             let alertViewModel = AlertViewModel(
