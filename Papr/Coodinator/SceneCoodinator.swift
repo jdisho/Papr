@@ -88,31 +88,45 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
     
     @discardableResult
     func pop(animated: Bool) -> Observable<Void> {
-        let subject = PublishSubject<Void>()
+        var isDisposed = false
+        var currentObserver: AnyObserver<Void>?
+        let source = Observable.create { (observer: AnyObserver<Void>) in
+            currentObserver = observer
+            
+            return Disposables.create {
+                isDisposed = true
+            }
+        }
+        
+        
+        
         if let presentingViewController = currentViewController.presentingViewController {
             currentViewController.dismiss(animated: animated) {
-                self.currentViewController = SceneCoordinator.actualViewController(for: presentingViewController)
-                subject.onCompleted()
+                if !isDisposed {
+                    self.currentViewController = SceneCoordinator.actualViewController(for: presentingViewController)
+                    currentObserver?.on(.completed)
+                }
             }
         } else if let navigationController = currentViewController.navigationController {
-            
             _ = navigationController
                 .rx
                 .delegate
                 .sentMessage(#selector(UINavigationControllerDelegate.navigationController(_:didShow:animated:)))
                 .map { _ in }
-                .bind(to: subject)
+                .bind(to: currentObserver!)
             
             guard navigationController.popViewController(animated: animated) != nil else {
                 fatalError("can't navigate back from \(currentViewController)")
             }
             
-            currentViewController = SceneCoordinator.actualViewController(for: navigationController.viewControllers.last!)
+            if !isDisposed {
+                currentViewController = SceneCoordinator.actualViewController(for: navigationController.viewControllers.last!)
+            }
         } else {
             fatalError("Not a modal, no navigation controller: can't navigate back from \(currentViewController)")
         }
-        
-        return subject.asObservable()
+
+        return source
             .take(1)
             .ignoreAll()
     }
