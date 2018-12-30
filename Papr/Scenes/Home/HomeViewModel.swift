@@ -10,35 +10,15 @@ import Foundation
 import RxSwift
 import Action
 
-enum NavBarTitle {
-    case new
-    case curated
-
-    var string: String {
-        switch self {
-        case .new:
-            return "Newest 🎉"
-        case .curated:
-            return "Curated 👌"
-        }
-    }
-}
-
 protocol HomeViewModelInput {
     /// Call when the bottom of the list is reached
     var loadMore: BehaviorSubject<Bool> { get }
 
-    /// Call when show-curated-photos is invoked
-    var showCuratedPhotosAction: CocoaAction { get }
+    /// Call when photos are invoked
+    var showPhotosAction: Action<PhotosType, Void> { get }
     
-    /// Call when show-lastest-photos is invoked
-    var showLatestPhotosAction: CocoaAction { get }
-    
-    /// Call when OrderBy-Popular is invoked
-    var orderByPopularityAction: CocoaAction { get }
-    
-    /// Call when OrderBy-Latest is invoked
-    var orderByFrequencyAction: CocoaAction { get }
+    /// Call when an OrderBy value is invoked
+    var orderByAction: Action<OrderBy, Void> { get }
     
     /// Call when an alert is invoked
     var alertAction: Action<String, Void> { get }
@@ -54,14 +34,11 @@ protocol HomeViewModelOutput {
     /// Emits a boolean when the pull-to-refresh control is refreshing or not.
     var isRefreshing: Observable<Bool>! { get }
 
-    /// Emits a boolean when the Curated option is chosen.
-    var curated: Observable<Bool>! { get }
+    /// Emits a newest or curated photos when the option is chosen.
+    var photosType: Observable<PhotosType>! { get }
 
     /// Emits an OrderBy value when an OrderBy option is chosen.
     var orderBy: Observable<OrderBy>! { get }
-    
-     /// Emits the name of the navigation bar value when an OrderBy/Curated option is choosen.
-    var navBarButtonName: Observable<NavBarTitle>! { get }
 
     /// Emites the child viewModels
     var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> { get }
@@ -87,38 +64,24 @@ class HomeViewModel: HomeViewModelType,
         refreshProperty.onNext(true)
     }
     
-    lazy var showCuratedPhotosAction: CocoaAction = {
-        CocoaAction { [unowned self] in
-            self.curatedProperty.onNext(true)
+    lazy var showPhotosAction: Action<PhotosType, Void> = {
+        Action<PhotosType, Void> { [unowned self] type in
+            self.photosTypeProperty.onNext(type)
             self.refresh()
             return .empty()
         }
     }()
     
-    lazy var showLatestPhotosAction: CocoaAction = {
-        CocoaAction { [unowned self] in
-            self.curatedProperty.onNext(false)
-            self.refresh()
-            return .empty()
-        }
-    }()
-    
-    lazy var orderByPopularityAction: CocoaAction = {
-        CocoaAction { [unowned self] in
-            self.orderByProperty.onNext(.popular)
+    lazy var orderByAction: Action<OrderBy, Void> = {
+        Action<OrderBy, Void> { [unowned self] orderBy in
+            orderBy == .latest ?
+                self.orderByProperty.onNext(.popular) :
+                self.orderByProperty.onNext(.latest)
             self.refresh()
             return .empty()
         }
     }()
 
-    lazy var orderByFrequencyAction: CocoaAction = {
-        CocoaAction { [unowned self] in
-            self.orderByProperty.onNext(.latest)
-            self.refresh()
-            return .empty()
-        }
-    }()
-    
     lazy var alertAction: Action<String, Void> = {
         Action<String, Void> { [unowned self] message in
             let alertViewModel = AlertViewModel(
@@ -132,9 +95,8 @@ class HomeViewModel: HomeViewModelType,
     // MARK: Output
     var photos: Observable<[Photo]>!
     var isRefreshing: Observable<Bool>!
-    var curated: Observable<Bool>!
+    var photosType: Observable<PhotosType>!
     var orderBy: Observable<OrderBy>!
-    var navBarButtonName: Observable<NavBarTitle>!
 
     lazy var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> = {
         let cachedPhotos = (cache.collection() as Observable<[Photo]>)
@@ -159,8 +121,7 @@ class HomeViewModel: HomeViewModelType,
     private let sceneCoordinator: SceneCoordinatorType
     private let refreshProperty = BehaviorSubject<Bool>(value: true)
     private let orderByProperty = BehaviorSubject<OrderBy>(value: .latest)
-    private let curatedProperty = BehaviorSubject<Bool>(value: false)
-    private let navBarButtonNameProperty = BehaviorSubject<NavBarTitle>(value: .new)
+    private let photosTypeProperty = BehaviorSubject<PhotosType>(value: .newest)
 
     // MARK: Init
     init(cache: Cache = Cache.shared,
@@ -175,20 +136,18 @@ class HomeViewModel: HomeViewModelType,
         var photoArray = [Photo]([])
     
         isRefreshing = refreshProperty.asObservable()
-        curated = curatedProperty.asObservable()
+        photosType = photosTypeProperty.asObservable()
         orderBy = orderByProperty.asObservable()
-        navBarButtonName = navBarButtonNameProperty.asObservable()
 
         let requestFirst = Observable
-            .combineLatest(isRefreshing, orderBy, curated)
-            .flatMap { isRefreshing, orderBy, curated -> Observable<[Photo]> in
+            .combineLatest(isRefreshing, orderBy, photosType.map { $0 == .curated })
+            .flatMap { isRefreshing, orderBy, isCurated -> Observable<[Photo]> in
                 guard isRefreshing else { return .empty() }
                 return service.photos(
                     byPageNumber: 1,
                     orderBy: orderBy,
-                    curated: curated)
+                    curated: isCurated)
                     .flatMap { [unowned self] result -> Observable<[Photo]> in
-                        self.navBarButtonNameProperty.onNext(curated ? .curated : .new)
                         switch result {
                         case let .success(photos):
                             return .just(photos)
@@ -205,14 +164,14 @@ class HomeViewModel: HomeViewModelType,
             })
 
         let requestNext = Observable
-            .combineLatest(loadMore, orderBy, curated)
-            .flatMap { loadMore, orderBy, curated -> Observable<[Photo]> in 
+            .combineLatest(loadMore, orderBy, photosType.map { $0 == .curated })
+            .flatMap { loadMore, orderBy, isCurated -> Observable<[Photo]> in
                 guard loadMore else { return .empty() }
                 currentPageNumber += 1
                 return service.photos(
                     byPageNumber: currentPageNumber,
                     orderBy: orderBy,
-                    curated: curated)
+                    curated: isCurated)
                     .flatMap { [unowned self] result -> Observable<[Photo]> in
                         switch result {
                         case let .success(photos):
