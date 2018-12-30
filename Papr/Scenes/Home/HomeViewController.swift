@@ -110,22 +110,14 @@ class HomeViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         segmentedControl.rx.value
-            .map { index -> Bool in
-                return index == 0
-            }
-            .bind { isNew in
-                if isNew {
-                    inputs.showLatestPhotosAction.execute(())
-                } else {
-                    inputs.showCuratedPhotosAction.execute(())
-                }
-            }
+            .map { $0 == 0 ? .newest : .curated }
+            .bind(to: inputs.showPhotosAction.inputs)
             .disposed(by: disposeBag)
     }
 
     // MARK: UI
     private func configureNavigationController() {
-        segmentedControl = UISegmentedControl(items: ["New", "Curated"])
+        segmentedControl = UISegmentedControl(items: PhotosType.allCases.map { $0.rawValue })
         segmentedControl.selectedSegmentIndex = 0
         rightBarButtonItem = UIBarButtonItem()
         navigationItem.titleView = segmentedControl

@@ -287,6 +287,7 @@
 		DCBE008E202A1EB30065BEF3 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE008D202A1EB30065BEF3 /* String+Extensions.swift */; };
 		DCBE008F202A1EB30065BEF3 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE008D202A1EB30065BEF3 /* String+Extensions.swift */; };
 		DCBE0090202A1EB30065BEF3 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBE008D202A1EB30065BEF3 /* String+Extensions.swift */; };
+		DCC4BEDD21D932030094790E /* PhotosType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC4BEDC21D932030094790E /* PhotosType.swift */; };
 		DCC8CA072002BEE300F6C540 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA052002BEE300F6C540 /* HomeViewController.swift */; };
 		DCC8CA082002BEE300F6C540 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA052002BEE300F6C540 /* HomeViewController.swift */; };
 		DCC8CA092002BEE300F6C540 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA052002BEE300F6C540 /* HomeViewController.swift */; };
@@ -468,6 +469,7 @@
 		DCBB1B731FA8D597004E95F0 /* Unsplash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unsplash.swift; sourceTree = "<group>"; };
 		DCBE0089202A1A980065BEF3 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		DCBE008D202A1EB30065BEF3 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		DCC4BEDC21D932030094790E /* PhotosType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosType.swift; sourceTree = "<group>"; };
 		DCC8CA052002BEE300F6C540 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DCC8CA0D2002BEF100F6C540 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
@@ -597,6 +599,7 @@
 			children = (
 				DCBB1B731FA8D597004E95F0 /* Unsplash.swift */,
 				DC5AF7541FAD2EF900ADA2BB /* Scope.swift */,
+				DCC4BEDC21D932030094790E /* PhotosType.swift */,
 				DC5AF7581FAD2F1E00ADA2BB /* OrderBy.swift */,
 				DCCCFCC4203A52410024D417 /* Resolution.swift */,
 				DCBAEE6220363CD600561CBA /* Orientation.swift */,
@@ -1367,6 +1370,7 @@
 				DC66E65920A4CB4C005E5E31 /* SearchViewModel.swift in Sources */,
 				DC5AF7441FACEF2700ADA2BB /* Location.swift in Sources */,
 				DCEE1F141FC983920010BADE /* UIAlertController+Rx.swift in Sources */,
+				DCC4BEDD21D932030094790E /* PhotosType.swift in Sources */,
 				DC5AF7481FACEF5500ADA2BB /* ImageURLs.swift in Sources */,
 				DCBB1B221FA7B1BD004E95F0 /* AppDelegate.swift in Sources */,
 				DCF3961220A8E3C400F3906D /* PaprTabBarController.swift in Sources */,
