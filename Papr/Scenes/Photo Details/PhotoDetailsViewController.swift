@@ -106,7 +106,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
 
         Observable.combineLatest(outputs.likedByUser, outputs.photoStream)
             .bind { [weak self] in
-                self?.likeButton.rx.bind(to: $0 ? inputs.unlikePhotoAction :  inputs.likePhotoAction, input: $1)
+                self?.likeButton.rx.bind(to: $0 ? inputs.unlikePhotoAction : inputs.likePhotoAction, input: $1)
             }
             .disposed(by: disposeBag)
 
@@ -143,7 +143,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         configureScrollView()
         configurePhotoImageView()
         configureTapGestures()
-        configureDismissGesutures()
+        configureDismissGesture()
 
         view.bringSubviewToFront(dismissButton)
         view.bringSubviewToFront(statsContainerView)
@@ -201,12 +201,10 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         scrollView.contentSize = size
     }
     
-    private func configureDismissGesutures() {
+    private func configureDismissGesture() {
         dismissGesture = UIPanGestureRecognizer(target: self, action: #selector(dismissController))
-        
         view.addGestureRecognizer(dismissGesture)
     }
-
 
     private func zoomRect(forScale scale: CGFloat, withCenter center: CGPoint) -> CGRect {
         var zoomRect = CGRect.zero
@@ -218,7 +216,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         return zoomRect
     }
 
-    func centerScrollViewIfNeeded() {
+    private func centerScrollViewIfNeeded() {
         var inset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         if scrollView.contentSize.height < scrollView.bounds.height {
             let insetV = (scrollView.bounds.height - scrollView.contentSize.height)/2
@@ -254,7 +252,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         self.isTouched = true
     }
 
-    @objc func zoomInOut(gestureRecognizer: UITapGestureRecognizer) {
+    @objc private func zoomInOut(gestureRecognizer: UITapGestureRecognizer) {
         if scrollView.zoomScale == 1 {
             scrollView.zoom(
                 to: zoomRect(
@@ -266,11 +264,11 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         }
     }
 
-    @objc func zoomOut() {
+    @objc private func zoomOut() {
         scrollView.setZoomScale(1, animated: true)
     }
     
-    @objc func dismissController() {
+    @objc private func dismissController() {
         if scrollView.zoomScale > 1 { return }
         
         let translation = dismissGesture.translation(in: nil)

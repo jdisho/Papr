@@ -39,6 +39,7 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
             }
             controller = selectedViewController
         }
+
         if let navigationController = viewController as? UINavigationController {
             return navigationController.viewControllers.first!
         }
@@ -82,7 +83,8 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
             }
         }
         
-        return subject.asObservable()
+        return subject
+            .asObservable()
             .take(1)
     }
     
@@ -90,16 +92,13 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
     func pop(animated: Bool) -> Observable<Void> {
         var isDisposed = false
         var currentObserver: AnyObserver<Void>?
-        let source = Observable.create { (observer: AnyObserver<Void>) in
+        let source = Observable<Void>.create { observer in
             currentObserver = observer
-            
             return Disposables.create {
                 isDisposed = true
             }
         }
-        
-        
-        
+
         if let presentingViewController = currentViewController.presentingViewController {
             currentViewController.dismiss(animated: animated) {
                 if !isDisposed {
@@ -112,13 +111,13 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
                 .rx
                 .delegate
                 .sentMessage(#selector(UINavigationControllerDelegate.navigationController(_:didShow:animated:)))
-                .map { _ in }
+                .ignoreAll()
                 .bind(to: currentObserver!)
             
             guard navigationController.popViewController(animated: animated) != nil else {
                 fatalError("can't navigate back from \(currentViewController)")
             }
-            
+
             if !isDisposed {
                 currentViewController = SceneCoordinator.actualViewController(for: navigationController.viewControllers.last!)
             }

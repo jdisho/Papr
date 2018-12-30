@@ -38,7 +38,7 @@ class PhotoDetailsViewModel: PhotoViewModel,
     var outputs: PhotoDetailsViewModelOutput { return self }
     override var photoViewModelOutputs: PhotoViewModelOutput { return outputs }
 
-    var popCancelable:Disposable?
+    private var popCancelable: Disposable?
     
     // MARK: Inputs
     lazy var dismissAction: CocoaAction = {
