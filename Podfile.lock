@@ -17,8 +17,8 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
-  - TinyNetworking/Core (2.0.0)
-  - TinyNetworking/RxSwift (2.0.0):
+  - TinyNetworking/Core (2.1.0)
+  - TinyNetworking/RxSwift (2.1.0):
     - RxSwift (~> 4.0)
     - TinyNetworking/Core
   - VanillaConstraints (1.0.1)
@@ -57,7 +57,7 @@ SPEC CHECKSUMS:
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxNuke: 8be1b71b08b238608834e5ffac597bcafab1e66f
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
-  TinyNetworking: 7dae315793b47fd000c332935ac2d1a98728a693
+  TinyNetworking: a1d9df65811b7b7c8991aab6a866376c92802bd8
   VanillaConstraints: 79afbbd46076f7db75156fe89d73529beae99a9f
 
 PODFILE CHECKSUM: 7bb83ef22953fe01a8077c84b732c839ebdb4a78
