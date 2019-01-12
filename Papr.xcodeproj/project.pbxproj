@@ -1021,7 +1021,6 @@
 				DCBB1B1B1FA7B1BD004E95F0 /* Frameworks */,
 				DCBB1B1C1FA7B1BD004E95F0 /* Resources */,
 				0BD9448C5FCB6EFEF7E2B09F /* [CP] Embed Pods Frameworks */,
-				95E05D47A3B773055B927AF3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1040,8 +1039,6 @@
 				DCBB1B2E1FA7B1BD004E95F0 /* Sources */,
 				DCBB1B2F1FA7B1BD004E95F0 /* Frameworks */,
 				DCBB1B301FA7B1BD004E95F0 /* Resources */,
-				C1565686A30E30BE9A1E85D8 /* [CP] Embed Pods Frameworks */,
-				B29EE6EA45781263C5E8D5F4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1061,8 +1058,6 @@
 				DCBB1B391FA7B1BD004E95F0 /* Sources */,
 				DCBB1B3A1FA7B1BD004E95F0 /* Frameworks */,
 				DCBB1B3B1FA7B1BD004E95F0 /* Resources */,
-				9D0E52A2A6B4C943591E96F2 /* [CP] Embed Pods Frameworks */,
-				AE25BDE0C487C2C5D4930958 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1206,70 +1201,36 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Papr/Pods-Papr-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Papr/Pods-Papr-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Action/Action.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxNuke/RxNuke.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/TinyNetworking/TinyNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/VanillaConstraints/VanillaConstraints.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Action.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxNuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TinyNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VanillaConstraints.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Papr/Pods-Papr-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		95E05D47A3B773055B927AF3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Papr/Pods-Papr-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9D0E52A2A6B4C943591E96F2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PaprUITests/Pods-PaprUITests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Papr/Pods-Papr-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ACB1B207744BA4C855B53D15 /* [CP] Check Pods Manifest.lock */ = {
@@ -1288,51 +1249,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AE25BDE0C487C2C5D4930958 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PaprUITests/Pods-PaprUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B29EE6EA45781263C5E8D5F4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PaprTests/Pods-PaprTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C1565686A30E30BE9A1E85D8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PaprTests/Pods-PaprTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F798D865D49CA26F4996D71B /* [CP] Check Pods Manifest.lock */ = {
