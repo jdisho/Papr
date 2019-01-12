@@ -8,14 +8,14 @@
 
 import Foundation
 import RxSwift
-import Moya
+import TinyNetworking
 
 struct PhotoService: PhotoServiceType {
 
-    private let unsplash: MoyaProvider<Unsplash>
+    private let unsplash: TinyNetworking<Unsplash>
     private let cache: Cache
 
-    init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>(),
+    init(unsplash: TinyNetworking<Unsplash> = TinyNetworking<Unsplash>(),
          cache: Cache = Cache.shared) {
         self.unsplash = unsplash
         self.cache = cache
@@ -23,8 +23,8 @@ struct PhotoService: PhotoServiceType {
 
     func like(photo: Photo) ->  Observable<Result<Photo, NonPublicScopeError>> {
         return unsplash.rx
-            .request(.likePhoto(id: photo.id ?? ""))
-            .map(LikeUnlike.self)
+            .request(resource: .likePhoto(id: photo.id ?? ""))
+            .map(to: LikeUnlike.self)
             .map { $0.photo }
             .asObservable()
             .unwrap()
@@ -41,8 +41,8 @@ struct PhotoService: PhotoServiceType {
     
     func unlike(photo: Photo) ->  Observable<Result<Photo, NonPublicScopeError>> {
         return unsplash.rx
-            .request(.unlikePhoto(id: photo.id ?? ""))
-            .map(LikeUnlike.self)
+            .request(resource: .unlikePhoto(id: photo.id ?? ""))
+            .map(to: LikeUnlike.self)
             .map { $0.photo }
             .asObservable()
             .unwrap()
@@ -59,8 +59,8 @@ struct PhotoService: PhotoServiceType {
     
     func photo(withId id: String) -> Observable<Photo> {
         return unsplash.rx
-            .request(.photo(id: id, width: nil, height: nil, rect: nil))
-            .map(Photo.self)
+            .request(resource: .photo(id: id, width: nil, height: nil, rect: nil))
+            .map(to: Photo.self)
             .asObservable()
     }
     
@@ -76,8 +76,8 @@ struct PhotoService: PhotoServiceType {
             .curatedPhotos(page: pageNumber, perPage: Constants.photosPerPage, orderBy: orderBy) :
             .photos(page: pageNumber, perPage: Constants.photosPerPage, orderBy: orderBy)
 
-        return unsplash.rx.request(photos)
-            .map([Photo].self)
+        return unsplash.rx.request(resource: photos)
+            .map(to: [Photo].self)
             .asObservable()
             .flatMapIgnore { Observable.just(self.cache.set(values: $0)) }  // 👨‍👩‍👧‍👧 Populate the cache.
             .map(Result.success)
@@ -86,19 +86,19 @@ struct PhotoService: PhotoServiceType {
 
     func statistics(of photo: Photo) -> Observable<PhotoStatistics> {
          return unsplash.rx
-            .request(.photoStatistics(
+            .request(resource: .photoStatistics(
                 id: photo.id ?? "",
                 resolution: .days,
                 quantity: 30)
             )
-            .map(PhotoStatistics.self)
+            .map(to: PhotoStatistics.self)
             .asObservable()
     }
 
     func photoDownloadLink(withId id: String) ->  Observable<Result<String, String>> {
         return unsplash.rx
-            .request(.photoDownloadLink(id: id))
-            .map(Link.self)
+            .request(resource: .photoDownloadLink(id: id))
+            .map(to: Link.self)
             .map { $0.url }
             .asObservable()
             .unwrap()
@@ -108,8 +108,7 @@ struct PhotoService: PhotoServiceType {
     }
 
     func randomPhotos(from collections: [String], isFeatured: Bool, orientation: Orientation) -> Observable<[Photo]> {
-        return unsplash.rx.request(
-            .randomPhoto(
+        return unsplash.rx.request(resource: .randomPhoto(
                 collections: collections,
                 isFeatured: isFeatured,
                 username: nil,
@@ -119,7 +118,7 @@ struct PhotoService: PhotoServiceType {
                 orientation: orientation,
                 count: 30)
             )
-            .map([Photo].self)
+            .map(to: [Photo].self)
             .asObservable()
     }
 }

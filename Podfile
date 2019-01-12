@@ -12,7 +12,7 @@ target 'Papr' do
   pod 'Action'
   
   # Network
-  pod 'Moya/RxSwift'
+  pod 'TinyNetworking/RxSwift'
   
   # Image
   pod 'RxNuke'

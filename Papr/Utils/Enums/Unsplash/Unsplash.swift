@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Moya
+import TinyNetworking
 
 enum Unsplash {
 
@@ -196,7 +196,7 @@ enum Unsplash {
     // case updatePhoto(String)
 }
 
-extension Unsplash: TargetType  {
+extension Unsplash: ResourceType {
 
     var baseURL: URL {
         guard let url = URL(string: "https://api.unsplash.com") else {
@@ -205,115 +205,77 @@ extension Unsplash: TargetType  {
         return url
     }
     
-    var path: String {
+    var endpoint: Endpoint {
         switch self {
-        case .getMe, .updateMe:
-            return "/me"
+        case .getMe:
+            return .get(path: "/me")
+        case .updateMe:
+            return .put(path: "/me")
         case let .userProfile(param):
-            return "/users/\(param.username)"
+            return .get(path: "/users/\(param.username)")
         case let .userPortfolio(username):
-            return "/users/\(username)/portfolio"
+            return .get(path: "/users/\(username)/portfolio")
         case let .userPhotos(param):
-            return "/users/\(param.username)/photos"
+            return .get(path: "/users/\(param.username)/photos")
         case let .userLikedPhotos(param):
-            return "/users/\(param.username)/likes"
+            return .get(path: "/users/\(param.username)/likes")
         case let .userCollections(param):
-            return "/users/\(param.username)/collections"
+            return .get(path: "/users/\(param.username)/collections")
         case let .userStatistics(param):
-            return "/users/\(param.username)/statistics"
+            return .get(path: "/users/\(param.username)/statistics")
         case .photos:
-           return "/photos"
+            return .get(path: "/photos")
         case .curatedPhotos:
-            return "/photos/curated"
+            return .get(path: "/photos/curated")
         case let .photo(param):
-            return "/photos/\(param.id)"
+            return .get(path: "/photos/\(param.id)")
         case .randomPhoto:
-            return "/photos/random"
+            return .get(path: "/photos/random")
         case let .photoStatistics(param):
-            return "/photos/\(param.id)/statistics"
+            return .get(path: "/photos/\(param.id)/statistics")
         case let .photoDownloadLink(id):
-            return "/photos/\(id)/download"
+            return .get(path: "/photos/\(id)/download")
         case let .likePhoto(id):
-            return "/photos/\(id)/like"
+            return .post(path: "/photos/\(id)/like")
         case let .unlikePhoto(id):
-            return "/photos/\(id)/like"
+            return .delete(path: "/photos/\(id)/like")
         case .searchPhotos:
-          return "/search/photos"
+            return .get(path: "/search/photos")
         case .searchCollections:
-            return "/search/collections"
+            return .get(path: "/search/collections")
         case .searchUsers:
-            return "/search/users"
-        case .collections, .createCollection:
-            return "/collections"
+            return .get(path: "/search/users")
+        case .collections:
+            return .get(path: "/collections")
+        case .createCollection:
+            return .post(path: "/collections")
         case .featuredCollections:
-            return "/collections/featured"
+            return .get(path: "/collections/featured")
         case .curatedCollections:
-            return "/collections/curated"
+            return .get(path: "/collections/curated")
         case let .collection(id):
-            return "/collections/\(id)"
+            return .get(path: "/collections/\(id)")
         case let .curatedCollection(id):
-            return "/collections/curated\(id)"
+            return .get(path: "/collections/curated\(id)")
         case let .collectionPhotos(params):
-           return "/collections/\(params.id)/photos"
+            return .get(path: "/collections/\(params.id)/photos")
         case let .curatedCollectionPhotos(params):
-            return "/collections/curated/\(params.id)/photos"
+            return .get(path: "/collections/curated/\(params.id)/photos")
         case let .relatedCollections(id):
-            return "/collections/\(id)/related"
+            return .get(path: "/collections/\(id)/related")
         case let .updateCollection(params):
-            return "/collections\(params.id)"
+            return .put(path: "/collections\(params.id)")
         case let .deleteCollection(id):
-            return "/collections/\(id)"
+            return .delete(path: "/collections/\(id)")
         case let .addPhotoToCollection(params):
-            return "/collections/\(params.collectionID)/add"
+            return .post(path: "/collections/\(params.collectionID)/add")
         case let .removePhotoFromCollection(params):
-            return "/collections/\(params.collectionID)/remove"
-        }
-    }
-
-    var method: Moya.Method {
-        switch self {
-        case .getMe,
-             .userProfile,
-             .userPortfolio,
-             .userPhotos,
-             .userLikedPhotos,
-             .userCollections,
-             .userStatistics,
-             .photos,
-             .curatedPhotos,
-             .photo,
-             .randomPhoto,
-             .photoStatistics,
-             .photoDownloadLink,
-             .searchPhotos,
-             .searchCollections,
-             .searchUsers,
-             .collections,
-             .featuredCollections,
-             .curatedCollections,
-             .collection,
-             .curatedCollection,
-             .collectionPhotos,
-             .curatedCollectionPhotos,
-             .relatedCollections:
-            return .get
-        case .likePhoto,
-             .createCollection,
-             .addPhotoToCollection:
-            return .post
-        case .updateCollection,
-             .updateMe:
-            return .put
-        case .unlikePhoto,
-             .removePhotoFromCollection,
-             .deleteCollection:
-            return .delete
+            return .delete(path: "/collections/\(params.collectionID)/remove")
         }
     }
 
     var task: Task {
         let noBracketsAndLiteralBoolEncoding = URLEncoding(
-            destination: .queryString,
             arrayEncoding: .noBrackets,
             boolEncoding: .literal
         )
@@ -331,9 +293,7 @@ extension Unsplash: TargetType  {
             params["bio"] = value.bio
             params["instagram_username"] = value.instagramUsername
 
-            return .requestParameters(
-                parameters: params,
-                encoding: URLEncoding.default)
+            return .requestWithParameters(params, encoding: URLEncoding())
 
         case let .userProfile(value):
 
@@ -341,9 +301,7 @@ extension Unsplash: TargetType  {
             params["w"] = value.width
             params["h"] = value.height
 
-            return .requestParameters(
-                parameters: params,
-                encoding: URLEncoding.default)
+            return .requestWithParameters(params, encoding: URLEncoding())
 
         case let .userPhotos(value):
 
@@ -355,9 +313,7 @@ extension Unsplash: TargetType  {
             params["resolution"] = value.resolution?.rawValue
             params["quantity"] = value.quantity
 
-            return .requestParameters(
-                parameters: params,
-                encoding: URLEncoding.default)
+            return .requestWithParameters(params, encoding: URLEncoding())
 
         case let .userLikedPhotos(_, pageNumber, photosPerPage, orderBy),
              let .photos(pageNumber, photosPerPage, orderBy),
@@ -368,9 +324,7 @@ extension Unsplash: TargetType  {
             params["per_page"] = photosPerPage
             params["order_by"] = orderBy
 
-            return .requestParameters(
-                parameters: params,
-                encoding: URLEncoding.default)
+            return .requestWithParameters(params, encoding: URLEncoding())
 
         case let .photo(value):
 
@@ -379,9 +333,7 @@ extension Unsplash: TargetType  {
             params["h"] = value.height
             params["rect"] = value.rect
 
-            return .requestParameters(
-                parameters: params,
-                encoding: noBracketsAndLiteralBoolEncoding)
+            return .requestWithParameters(params, encoding: noBracketsAndLiteralBoolEncoding)
 
         case let .userStatistics(_, resolution, quantity),
              let .photoStatistics(_, resolution, quantity):
@@ -390,9 +342,7 @@ extension Unsplash: TargetType  {
             params["resolution"] = resolution?.rawValue
             params["quantity"] = quantity
 
-            return .requestParameters(
-                parameters: params,
-                encoding: URLEncoding.default)
+            return .requestWithParameters(params, encoding: URLEncoding())
 
         case let .randomPhoto(value):
 
@@ -406,9 +356,7 @@ extension Unsplash: TargetType  {
             params["orientation"] = value.orientation?.rawValue
             params["count"] = value.count
 
-            return .requestParameters(
-                parameters: params,
-                encoding: noBracketsAndLiteralBoolEncoding)
+            return .requestWithParameters(params, encoding: noBracketsAndLiteralBoolEncoding)
 
         case let .userCollections(_, pageNumber, photosPerPage),
              let .collections(pageNumber, photosPerPage),
@@ -421,9 +369,7 @@ extension Unsplash: TargetType  {
             params["page"] = pageNumber
             params["per_page"] = photosPerPage
 
-            return .requestParameters(
-                parameters: params,
-                encoding: URLEncoding.default)
+            return .requestWithParameters(params, encoding: URLEncoding())
 
         case let .searchCollections(value),
              let .searchUsers(value):
@@ -433,9 +379,7 @@ extension Unsplash: TargetType  {
             params["page"] = value.page
             params["per_page"] = value.perPage
 
-            return .requestParameters(
-                parameters: params,
-                encoding: URLEncoding.default)
+            return  .requestWithParameters(params, encoding: URLEncoding())
 
         case let .searchPhotos(value):
 
@@ -446,9 +390,7 @@ extension Unsplash: TargetType  {
             params["collections"] = value.collections
             params["orientation"] = value.orientation?.rawValue
 
-            return .requestParameters(
-                parameters: params,
-                encoding: noBracketsAndLiteralBoolEncoding)
+            return .requestWithParameters(params,encoding: noBracketsAndLiteralBoolEncoding)
 
         case let .createCollection(value):
 
@@ -457,9 +399,7 @@ extension Unsplash: TargetType  {
             params["description"] = value.description
             params["private"] = value.isPrivate
 
-            return .requestParameters(
-                parameters: params,
-                encoding: URLEncoding.default)
+            return .requestWithParameters(params, encoding: URLEncoding())
 
         case let .updateCollection(value):
 
@@ -468,38 +408,24 @@ extension Unsplash: TargetType  {
             params["description"] = value.description
             params["private"] = value.isPrivate
 
-            return .requestParameters(
-                parameters: params,
-                encoding: URLEncoding.default)
-
+            return .requestWithParameters(params, encoding: URLEncoding())
         case let .addPhotoToCollection(value),
              let .removePhotoFromCollection(value):
 
             var params: [String: Any] = [:]
             params["photo_id"] = value.photoID
 
-            return .requestParameters(
-                parameters: params,
-                encoding: URLEncoding.default)
-
+            return .requestWithParameters(params, encoding: URLEncoding())
         default:
-            return .requestPlain
+            return .requestWithParameters([:], encoding: URLEncoding())
         }
     }
 
-    var sampleData: Data {
-        return Data()
-    }
-
-    var headers: [String : String]? {
+    var headers: [String : String] {
         let clientID = Constants.UnsplashSettings.clientID
         guard let token = UserDefaults.standard.string(forKey: clientID) else {
             return ["Authorization": "Client-ID \(clientID)"]
         }
         return ["Authorization": "Bearer \(token)"]
-    }
-
-    var validationType: ValidationType {
-        return .successAndRedirectCodes
     }
 }

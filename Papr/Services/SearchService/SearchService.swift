@@ -8,44 +8,44 @@
 
 import Foundation
 import RxSwift
-import Moya
+import TinyNetworking
 
 struct SearchService: SearchServiceType {
-    private let unsplash: MoyaProvider<Unsplash>
+    private let unsplash: TinyNetworking<Unsplash>
 
-    init(unsplash: MoyaProvider<Unsplash> = MoyaProvider<Unsplash>()) {
+    init(unsplash: TinyNetworking<Unsplash> = TinyNetworking<Unsplash>()) {
         self.unsplash = unsplash
     }
 
     func searchPhotos(with query: String, pageNumber: Int) -> Observable<PhotosResult> {
-        return unsplash.rx.request(.searchPhotos(
+        return unsplash.rx.request(resource: .searchPhotos(
                 query: query,
                 page: pageNumber,
                 perPage: 10,
                 collections: nil,
                 orientation: nil)
             )
-            .map(PhotosResult.self)
+            .map(to: PhotosResult.self)
             .asObservable()
     }
 
     func searchCollections(with query: String, pageNumber: Int) -> Observable<PhotoCollectionsResult> {
-        return unsplash.rx.request(.searchCollections(
+        return unsplash.rx.request(resource: .searchCollections(
                 query: query,
                 page: pageNumber,
                 perPage: 10)
             )
-            .map(PhotoCollectionsResult.self)
+            .map(to: PhotoCollectionsResult.self)
             .asObservable()
     }
 
     func searchUsers(with query: String, pageNumber: Int) -> Observable<UsersResult> {
-        return unsplash.rx.request(.searchUsers(
+        return unsplash.rx.request(resource: .searchUsers(
                 query: query,
                 page: pageNumber,
                 perPage: 10)
             )
-            .map(UsersResult.self)
+            .map(to: UsersResult.self)
             .asObservable()
     }
 

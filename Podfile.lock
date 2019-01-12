@@ -2,17 +2,9 @@ PODS:
   - Action (3.9.1):
     - RxCocoa (~> 4.3)
     - RxSwift (~> 4.3)
-  - Alamofire (4.8.0)
   - Differentiator (3.1.0)
   - Hero (1.4.0)
-  - Moya/Core (12.0.1):
-    - Alamofire (~> 4.1)
-    - Result (~> 4.0)
-  - Moya/RxSwift (12.0.1):
-    - Moya/Core
-    - RxSwift (~> 4.0)
   - Nuke (7.5.1)
-  - Result (4.0.0)
   - RxAtomic (4.4.0)
   - RxCocoa (4.4.0):
     - RxSwift (~> 4.0)
@@ -25,33 +17,49 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
+  - TinyNetworking/Core (2.0.0)
+  - TinyNetworking/RxSwift (2.0.0):
+    - RxSwift (~> 4.0)
+    - TinyNetworking/Core
   - VanillaConstraints (1.0.1)
 
 DEPENDENCIES:
   - Action
   - Hero
-  - Moya/RxSwift
   - RxCocoa
   - RxDataSources
   - RxNuke
   - RxSwift
+  - TinyNetworking/RxSwift
   - VanillaConstraints
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Action
+    - Differentiator
+    - Hero
+    - Nuke
+    - RxAtomic
+    - RxCocoa
+    - RxDataSources
+    - RxNuke
+    - RxSwift
+    - TinyNetworking
+    - VanillaConstraints
 
 SPEC CHECKSUMS:
   Action: 2f461c203c480b17aa99b3bb166e4329ecff6908
-  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
-  Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
   Nuke: 3814db501e55f17951451839c726ffd91641e9a5
-  Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxNuke: 8be1b71b08b238608834e5ffac597bcafab1e66f
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
+  TinyNetworking: 7dae315793b47fd000c332935ac2d1a98728a693
   VanillaConstraints: 79afbbd46076f7db75156fe89d73529beae99a9f
 
-PODFILE CHECKSUM: 52dc7ac4bd4e6ec32df1c61bf27ba3d794efd418
+PODFILE CHECKSUM: 7bb83ef22953fe01a8077c84b732c839ebdb4a78
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.6.0.beta.2
