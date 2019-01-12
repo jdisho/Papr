@@ -4,7 +4,7 @@ PODS:
     - RxSwift (~> 4.3)
   - Differentiator (3.1.0)
   - Hero (1.4.0)
-  - Nuke (7.5.1)
+  - Nuke (7.5.2)
   - RxAtomic (4.4.0)
   - RxCocoa (4.4.0):
     - RxSwift (~> 4.0)
@@ -51,7 +51,7 @@ SPEC CHECKSUMS:
   Action: 2f461c203c480b17aa99b3bb166e4329ecff6908
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
-  Nuke: 3814db501e55f17951451839c726ffd91641e9a5
+  Nuke: 0350d346a688426e8f2331253ef28dc2fc4f6178
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
