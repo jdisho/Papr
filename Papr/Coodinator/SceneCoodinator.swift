@@ -103,8 +103,8 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
             currentViewController.dismiss(animated: animated) {
                 if !isDisposed {
                     self.currentViewController = SceneCoordinator.actualViewController(for: presentingViewController)
-                    currentObserver?.on(.completed)
                 }
+                currentObserver?.on(.completed)
             }
         } else if let navigationController = currentViewController.navigationController {
             _ = navigationController
