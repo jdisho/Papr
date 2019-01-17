@@ -38,10 +38,14 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
                 return tabBarController
             }
             controller = selectedViewController
+            
+            return actualViewController(for: controller)
         }
 
         if let navigationController = viewController as? UINavigationController {
-            return navigationController.viewControllers.first!
+            controller = navigationController.viewControllers.first!
+            
+            return actualViewController(for: controller)
         }
         return controller
     }
