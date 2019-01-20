@@ -12,6 +12,7 @@ import Action
 
 protocol SearchPhotosViewModelInput {
     var loadMore: BehaviorSubject<Bool> { get }
+    var photoDetailsAction: Action<Photo, Void> { get }
 }
 
 protocol SearchPhotosViewModelOutput {
@@ -36,6 +37,13 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
 
     // MARK: - Inputs
     let loadMore = BehaviorSubject<Bool>(value: false)
+
+    var photoDetailsAction: Action<Photo, Void> {
+        return Action<Photo, Void> { [unowned self] photo in
+            let viewModel = PhotoDetailsViewModel(photo: photo)
+            return self.sceneCoordinator.transition(to: Scene.photoDetails(viewModel))
+        }
+    }
 
     // MARK: - Outputs
     let navTitle: Observable<String>
