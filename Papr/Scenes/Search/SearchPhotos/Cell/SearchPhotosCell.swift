@@ -34,10 +34,15 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
         let outputs = viewModel.outputs
         let this = SearchPhotosCell.self
 
-        Observable.combineLatest(
-            outputs.smallPhotoURL,
-            outputs.regularPhotoURL
-            )
+       let smallPhotoURL = outputs.photo
+            .map { $0.urls?.small }
+            .unwrap()
+
+        let regularPhotoURL = outputs.photo
+            .map { $0.urls?.regular }
+            .unwrap()
+
+        Observable.combineLatest(smallPhotoURL, regularPhotoURL)
             .flatMap { small, regular -> Observable<ImageResponse> in
                 return Observable.concat(
                     this.imagePipeline.rx.loadImage(with: URL(string: small)!).asObservable(),

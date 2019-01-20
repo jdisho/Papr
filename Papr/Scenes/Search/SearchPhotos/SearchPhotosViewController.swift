@@ -76,6 +76,16 @@ class SearchPhotosViewController: UIViewController, BindableType {
         collectionView.rx.reachedBottom()
             .bind(to: inputs.loadMore)
             .disposed(by: disposeBag)
+
+        collectionView.rx.itemSelected
+            .flatMap { [weak self] indexPath -> Observable<SearchPhotosCell> in
+                guard let cell = self?.collectionView.cellForItem(at: indexPath) as? SearchPhotosCell
+                    else { return .empty() }
+                return .just(cell)
+            }
+            .flatMap { $0.viewModel.outputs.photo }
+            .bind(to: inputs.photoDetailsAction.inputs)
+            .disposed(by: disposeBag)
     }
 
     // MARK: UI
