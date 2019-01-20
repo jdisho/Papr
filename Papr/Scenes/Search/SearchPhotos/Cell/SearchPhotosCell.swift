@@ -34,6 +34,12 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
         let outputs = viewModel.outputs
         let this = SearchPhotosCell.self
 
+        outputs.photo
+            .map { $0.id }
+            .unwrap()
+            .bind(to: photoImageView.rx.heroId)
+            .disposed(by: disposeBag)
+
        let smallPhotoURL = outputs.photo
             .map { $0.urls?.small }
             .unwrap()
