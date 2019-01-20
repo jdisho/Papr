@@ -38,10 +38,14 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
                 return tabBarController
             }
             controller = selectedViewController
+            
+            return actualViewController(for: controller)
         }
 
         if let navigationController = viewController as? UINavigationController {
-            return navigationController.viewControllers.first!
+            controller = navigationController.viewControllers.first!
+            
+            return actualViewController(for: controller)
         }
         return controller
     }
@@ -103,8 +107,8 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
             currentViewController.dismiss(animated: animated) {
                 if !isDisposed {
                     self.currentViewController = SceneCoordinator.actualViewController(for: presentingViewController)
-                    currentObserver?.on(.completed)
                 }
+                currentObserver?.on(.completed)
             }
         } else if let navigationController = currentViewController.navigationController {
             _ = navigationController
