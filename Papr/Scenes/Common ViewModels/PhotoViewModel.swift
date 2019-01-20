@@ -46,7 +46,6 @@ class PhotoViewModel: PhotoViewModelType,
                 .flatMap { result -> Observable<Photo> in
                     switch result {
                     case let .success(photo):
-                        self.photoStreamProperty.onNext(photo)
                         return .just(photo)
                     case let .error(error):
                         switch error {
@@ -67,7 +66,6 @@ class PhotoViewModel: PhotoViewModelType,
                 .flatMap { result -> Observable<Photo> in
                     switch result {
                     case let .success(photo):
-                        self.photoStreamProperty.onNext(photo)
                         return .just(photo)
                     case let .error(error):
                         switch error {
@@ -136,20 +134,17 @@ class PhotoViewModel: PhotoViewModelType,
     var likedByUser: Observable<Bool>!
     var photoStream: Observable<Photo>!
 
+    let cache: Cache
     let service: PhotoServiceType
     let sceneCoordinator: SceneCoordinatorType
 
-    // MARK: Private
-
-    private let photoStreamProperty = BehaviorSubject<Photo?>(value: nil)
-
     // MARK: Init
     init(photo: Photo,
-         likedByUser: Bool? = nil,
-         totalLikes: Int? = nil,
+         cache: Cache = Cache.shared,
          service: PhotoServiceType = PhotoService(),
          sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
+        self.cache = cache
         self.service = service
         self.sceneCoordinator = sceneCoordinator
 
@@ -164,26 +159,15 @@ class PhotoViewModel: PhotoViewModelType,
             photoStream.map { $0.height }.unwrap().map { Double($0) }
         )
 
-        self.totalLikes = Observable.combineLatest(
-            photoStreamProperty.asObservable().map { $0?.likes },
-            Observable.just(totalLikes))
-            .map { serverLikes, cachedLikes -> Int? in
-                guard let serverLikes = serverLikes else { return cachedLikes }
-                return serverLikes
-            }
-            .unwrap()
-            .map { $0.abbreviated }
+        let cachedPhoto = cache.getObject(ofType: Photo.self, withId: photo.id ?? "").unwrap()
 
-
-        self.likedByUser = Observable.combineLatest(
-            photoStreamProperty.asObservable().map { $0?.likedByUser },
-            Observable.just(likedByUser))
-            .map { serverLikedByUser, cachedLikedByUser -> Bool? in
-                guard let serverLikedByUser = serverLikedByUser else { return cachedLikedByUser }
-                return serverLikedByUser
-            }
+        self.totalLikes = photoStream.merge(with: cachedPhoto)
+            .map { $0.likes?.abbreviated }
             .unwrap()
 
+        self.likedByUser = photoStream.merge(with: cachedPhoto)
+            .map { $0.likedByUser }
+            .unwrap()
     }
 
     // MARK: Helpers

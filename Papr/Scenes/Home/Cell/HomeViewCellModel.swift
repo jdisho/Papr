@@ -44,11 +44,7 @@ class HomeViewCellModel: PhotoViewModel,
     // MARK: Input
     lazy var photoDetailsAction: Action<Photo, Photo> = {
         return Action<Photo, Photo> { [unowned self] photo in
-            let viewModel = PhotoDetailsViewModel(
-                photo: photo,
-                likedByUser: self.isLikedByUser,
-                totalLikes: self.likesNumber
-            )
+            let viewModel = PhotoDetailsViewModel(photo: photo)
             self.sceneCoordinator.transition(to: Scene.photoDetails(viewModel))
             return .just(photo)
         }
@@ -56,7 +52,7 @@ class HomeViewCellModel: PhotoViewModel,
 
     lazy var userCollectionsAction: Action<Photo, Void> = {
         return Action<Photo, Void> { [unowned self] photo in
-           return self.userService.getMe().share()
+           return self.userService.getMe()
             .flatMap { result -> Observable<Void> in
                     switch result {
                     case let .success(user):
@@ -85,28 +81,18 @@ class HomeViewCellModel: PhotoViewModel,
 
     // MARK: Private
     private let userService: UserServiceType
-    private let isLikedByUser: Bool?
-    private let likesNumber: Int?
 
     // MARK: Init
     override init(
         photo: Photo,
-        likedByUser: Bool? = nil,
-        totalLikes: Int? = nil,
+        cache: Cache = Cache.shared,
         service: PhotoServiceType = PhotoService(),
         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared
         ) {
 
         self.userService = UserService()
-        isLikedByUser = likedByUser
-        likesNumber = totalLikes
 
-        super.init(
-            photo: photo,
-            likedByUser: likedByUser,
-            totalLikes: totalLikes,
-            service: service
-        )
+        super.init(photo: photo)
 
         userProfileImage = photoStream
             .map { $0.user?.profileImage?.medium }
@@ -128,10 +114,7 @@ class HomeViewCellModel: PhotoViewModel,
             .unwrap()
 
         updated = photoStream
-            .map { $0.updated }
+            .map { $0.updated?.toDate?.abbreviated }
             .unwrap()
-            .map { $0.toDate }
-            .unwrap()
-            .map { $0.abbreviated }
     }
 }

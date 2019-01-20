@@ -99,20 +99,18 @@ class HomeViewModel: HomeViewModelType,
     var orderBy: Observable<OrderBy>!
 
     lazy var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> = {
-        let cachedPhotos = (cache.collection() as Observable<[Photo]>)
-        return Observable.combineLatest(photos, cachedPhotos)
-            .map { serverPhotos, cachedPhotos -> [HomeViewCellModelType] in
-                var homeViewCellModelArray = [HomeViewCellModelType]()
-                for (serverPhoto, cachedPhoto) in zip(serverPhotos, cachedPhotos) {
-                    let homeViewCellModel = HomeViewCellModel(
-                        photo: serverPhoto,
-                        likedByUser: cachedPhoto.likedByUser ?? false,
-                        totalLikes: cachedPhoto.likes ?? 0
-                    )
-                    homeViewCellModelArray.append(homeViewCellModel)
+        return Observable.combineLatest(photos, cache.getAllObjects(ofType: Photo.self))
+            .map { photos, cachedPhotos -> [Photo] in
+                var photoArray = [Photo]()
+                for (photo, cachedPhoto) in zip(photos, cachedPhotos) {
+                    var copyPhoto = photo
+                    copyPhoto.likes = cachedPhoto.likes
+                    copyPhoto.likedByUser = cachedPhoto.likedByUser
+                    photoArray.append(copyPhoto)
                 }
-                return homeViewCellModelArray
-        }
+                return photoArray
+            }
+            .mapMany { HomeViewCellModel(photo: $0) }
     }()
 
     // MARK: Private
@@ -125,7 +123,7 @@ class HomeViewModel: HomeViewModelType,
 
     // MARK: Init
     init(cache: Cache = Cache.shared,
-        service: PhotoServiceType = PhotoService(),
+         service: PhotoServiceType = PhotoService(),
         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
         self.cache = cache
@@ -141,7 +139,7 @@ class HomeViewModel: HomeViewModelType,
 
         let requestFirst = Observable
             .combineLatest(isRefreshing, orderBy, photosType.map { $0 == .curated })
-            .flatMap { isRefreshing, orderBy, isCurated -> Observable<[Photo]> in
+            .flatMapLatest { isRefreshing, orderBy, isCurated -> Observable<[Photo]> in
                 guard isRefreshing else { return .empty() }
                 return service.photos(
                     byPageNumber: 1,
@@ -165,7 +163,7 @@ class HomeViewModel: HomeViewModelType,
 
         let requestNext = Observable
             .combineLatest(loadMore, orderBy, photosType.map { $0 == .curated })
-            .flatMap { loadMore, orderBy, isCurated -> Observable<[Photo]> in
+            .flatMapLatest { loadMore, orderBy, isCurated -> Observable<[Photo]> in
                 guard loadMore else { return .empty() }
                 currentPageNumber += 1
                 return service.photos(
@@ -192,6 +190,6 @@ class HomeViewModel: HomeViewModelType,
                 }
                 self.refreshProperty.onNext(false)
                 return photoArray
-            }.share(replay: 1)
+            }
     }
 }
