@@ -67,8 +67,8 @@ class PhotoDetailsViewModel: PhotoViewModel,
 
     override init(
         photo: Photo,
-        likedByUser: Bool,
-        totalLikes: Int,
+        likedByUser: Bool? = nil,
+        totalLikes: Int? = nil,
         service: PhotoServiceType = PhotoService(),
         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared
         ) {

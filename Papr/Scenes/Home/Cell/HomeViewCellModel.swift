@@ -85,14 +85,14 @@ class HomeViewCellModel: PhotoViewModel,
 
     // MARK: Private
     private let userService: UserServiceType
-    private let isLikedByUser: Bool
-    private let likesNumber: Int
+    private let isLikedByUser: Bool?
+    private let likesNumber: Int?
 
     // MARK: Init
     override init(
         photo: Photo,
-        likedByUser: Bool,
-        totalLikes: Int,
+        likedByUser: Bool? = nil,
+        totalLikes: Int? = nil,
         service: PhotoServiceType = PhotoService(),
         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared
         ) {

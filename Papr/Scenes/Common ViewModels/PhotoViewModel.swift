@@ -145,8 +145,8 @@ class PhotoViewModel: PhotoViewModelType,
 
     // MARK: Init
     init(photo: Photo,
-         likedByUser: Bool,
-         totalLikes: Int,
+         likedByUser: Bool? = nil,
+         totalLikes: Int? = nil,
          service: PhotoServiceType = PhotoService(),
          sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
@@ -167,19 +167,22 @@ class PhotoViewModel: PhotoViewModelType,
         self.totalLikes = Observable.combineLatest(
             photoStreamProperty.asObservable().map { $0?.likes },
             Observable.just(totalLikes))
-            .map { serverLikes, cachedLikes -> Int in
+            .map { serverLikes, cachedLikes -> Int? in
                 guard let serverLikes = serverLikes else { return cachedLikes }
                 return serverLikes
-            }.map { $0.abbreviated }
+            }
+            .unwrap()
+            .map { $0.abbreviated }
 
 
         self.likedByUser = Observable.combineLatest(
             photoStreamProperty.asObservable().map { $0?.likedByUser },
             Observable.just(likedByUser))
-            .map { serverLikedByUser, cachedLikedByUser -> Bool in
+            .map { serverLikedByUser, cachedLikedByUser -> Bool? in
                 guard let serverLikedByUser = serverLikedByUser else { return cachedLikedByUser }
                 return serverLikedByUser
             }
+            .unwrap()
 
     }
 
