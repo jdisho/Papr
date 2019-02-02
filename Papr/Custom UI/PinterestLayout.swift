@@ -45,6 +45,8 @@ class PinterestLayout: UICollectionViewLayout {
     }
     
     override func prepare() {
+        super.prepare()
+
         guard cache.isEmpty,
             let collectionView = collectionView,
             collectionView.numberOfSections > 0 else { return }
@@ -92,8 +94,9 @@ class PinterestLayout: UICollectionViewLayout {
     }
 
     override func invalidateLayout() {
-        cache.removeAll()
         super.invalidateLayout()
+        contentHeight = 0
+        cache.removeAll()
     }
 
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
