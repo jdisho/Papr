@@ -183,8 +183,7 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
     }()
 
     // MARK: Init
-    init(
-        photo: Photo,
+    init(photo: Photo,
         cache: Cache = Cache.shared,
         userService: UserServiceType = UserService(),
         photoService: PhotoServiceType = PhotoService(),

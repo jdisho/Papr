@@ -132,8 +132,7 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType, PhotoDetailsViewModelInp
         }
     }()
 
-    init(
-        photo: Photo,
+    init(photo: Photo,
         cache: Cache = Cache.shared,
         photoService: PhotoServiceType = PhotoService(),
         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
@@ -142,9 +141,9 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType, PhotoDetailsViewModelInp
         self.photoService = photoService
         self.sceneCoordinator = sceneCoordinator
 
-        photoStream = Observable.just(photo)
-
         let cachedPhotoStream = cache.getObject(ofType: Photo.self, withId: photo.id ?? "").unwrap()
+
+        photoStream = Observable.just(photo)
 
         regularPhoto = photoStream
             .map { $0.urls?.regular }
