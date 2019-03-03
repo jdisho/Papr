@@ -23,12 +23,9 @@ protocol HomeViewCellModelInput {
 protocol HomeViewCellModelOutput {
     var photoStream: Observable<Photo> { get }
     var userProfileImage: Observable<String> { get }
-    var fullname: Observable<String> { get }
-    var username: Observable<String> { get }
     var smallPhoto: Observable<String> { get }
     var regularPhoto: Observable<String> { get }
     var fullPhoto: Observable<String> { get }
-    var updated: Observable<String> { get }
     var photoSize: Observable<(Double, Double)> { get }
     var totalLikes: Observable<String> { get }
     var likedByUser: Observable<Bool> { get }
@@ -148,12 +145,9 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
     // MARK: Output
     let photoStream: Observable<Photo>
     let userProfileImage: Observable<String>
-    let fullname: Observable<String>
-    let username: Observable<String>
     let smallPhoto: Observable<String>
     let regularPhoto: Observable<String>
     let fullPhoto: Observable<String>
-    let updated: Observable<String>
     let photoSize: Observable<(Double, Double)>
     let totalLikes: Observable<String>
     let likedByUser: Observable<Bool>
@@ -204,13 +198,6 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
             .map { $0.user?.profileImage?.medium }
             .unwrap()
 
-        fullname = photoStream
-            .map { $0.user?.fullName }
-            .unwrap()
-
-        username = photoStream
-            .map { "@\($0.user?.username ?? "")" }
-
         smallPhoto = photoStream
             .map { $0.urls?.small }
             .unwrap()
@@ -221,10 +208,6 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
 
         fullPhoto = photoStream
             .map { $0.urls?.full }
-            .unwrap()
-
-        updated = photoStream
-            .map { $0.updated?.toDate?.abbreviated }
             .unwrap()
 
         photoSize = Observable.combineLatest(
