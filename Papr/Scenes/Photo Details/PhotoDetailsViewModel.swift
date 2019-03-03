@@ -10,37 +10,76 @@ import Foundation
 import RxSwift
 import Action
 
-protocol PhotoDetailsViewModelInput: PhotoViewModelInput {
+protocol PhotoDetailsViewModelInput {
+    var likePhotoAction: Action<Photo, Photo> { get }
+    var unlikePhotoAction: Action<Photo, Photo> { get }
     var dismissAction: CocoaAction { get }
     var revertAction: CocoaAction { get }
     var moreAction: Action<[Any], Void> { get }
 }
 
-protocol PhotoDetailsViewModelOutput: PhotoViewModelOutput {
-    var totalViews: Observable<String>! { get }
-    var totalDownloads: Observable<String>! { get }
+protocol PhotoDetailsViewModelOutput {
+    var photoStream: Observable<Photo> { get }
+    var regularPhoto: Observable<String> { get }
+    var photoSize: Observable<(Double, Double)> { get }
+    var totalLikes: Observable<String> { get }
+    var likedByUser: Observable<Bool> { get }
+    var totalViews: Observable<String> { get }
+    var totalDownloads: Observable<String> { get }
 }
 
-protocol PhotoDetailsViewModelType: PhotoViewModelType {
+protocol PhotoDetailsViewModelType {
     var inputs: PhotoDetailsViewModelInput { get }
     var outputs: PhotoDetailsViewModelOutput { get }
 }
 
-class PhotoDetailsViewModel: PhotoViewModel,
-                             PhotoDetailsViewModelType,
-                             PhotoDetailsViewModelInput,
-                             PhotoDetailsViewModelOutput {
+class PhotoDetailsViewModel: PhotoDetailsViewModelType, PhotoDetailsViewModelInput, PhotoDetailsViewModelOutput {
 
     // MARK: Inputs & Outputs
     var inputs: PhotoDetailsViewModelInput { return self }
-    override var photoViewModelInputs: PhotoViewModelInput { return inputs }
-
     var outputs: PhotoDetailsViewModelOutput { return self }
-    override var photoViewModelOutputs: PhotoViewModelOutput { return outputs }
 
-    private var popCancelable: Disposable?
-    
     // MARK: Inputs
+    lazy var likePhotoAction: Action<Photo, Photo> = {
+        Action<Photo, Photo> { [unowned self] photo in
+            return self.photoService.like(photo: photo)
+                .flatMap { [unowned self] result -> Observable<Photo> in
+                    switch result {
+                    case let .success(photo):
+                        return .just(photo)
+                    case let .error(error):
+                        switch error {
+                        case .noAccessToken:
+                            self.navigateToLogin.execute(())
+                        case let .error(message):
+                            self.alertAction.execute((title: "Upsss...", message: message))
+                        }
+                        return .empty()
+                    }
+            }
+        }
+    }()
+
+    lazy var unlikePhotoAction: Action<Photo, Photo> = {
+        Action<Photo, Photo> { [unowned self] photo in
+            return self.photoService.unlike(photo: photo)
+                .flatMap { [unowned self] result -> Observable<Photo> in
+                    switch result {
+                    case let .success(photo):
+                        return .just(photo)
+                    case let .error(error):
+                        switch error {
+                        case .noAccessToken:
+                            self.navigateToLogin.execute(())
+                        case let .error(message):
+                            self.alertAction.execute((title: "Upsss...", message: message))
+                        }
+                        return .empty()
+                    }
+            }
+        }
+    }()
+
     lazy var dismissAction: CocoaAction = {
         CocoaAction { [unowned self] _ in
             self.popCancelable = self.sceneCoordinator.pop(animated: true).subscribe()
@@ -62,24 +101,74 @@ class PhotoDetailsViewModel: PhotoViewModel,
     }()
 
     // MARK: Outputs
-    var totalViews: Observable<String>!
-    var totalDownloads: Observable<String>!
+    let regularPhoto: Observable<String>
+    let photoSize: Observable<(Double, Double)>
+    let totalLikes: Observable<String>
+    let likedByUser: Observable<Bool>
+    let photoStream: Observable<Photo>
+    let totalViews: Observable<String>
+    let totalDownloads: Observable<String>
 
-    override init(
+    // MARK: Privates
+    private let cache: Cache
+    private let photoService: PhotoServiceType
+    private let sceneCoordinator: SceneCoordinatorType
+    private var popCancelable: Disposable?
+
+    private lazy var alertAction: Action<(title: String, message: String), Void> = {
+        Action<(title: String, message: String), Void> { [unowned self] (title, message) in
+            let alertViewModel = AlertViewModel(
+                title: title,
+                message: message,
+                mode: .ok)
+            return self.sceneCoordinator.transition(to: Scene.alert(alertViewModel))
+        }
+    }()
+
+    private lazy var navigateToLogin: CocoaAction = {
+        CocoaAction { [unowned self] message in
+            let viewModel = LoginViewModel()
+            return self.sceneCoordinator.transition(to: Scene.login(viewModel))
+        }
+    }()
+
+    init(
         photo: Photo,
         cache: Cache = Cache.shared,
-        service: PhotoServiceType = PhotoService(),
-        sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared
-        ) {
+        photoService: PhotoServiceType = PhotoService(),
+        sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
-        super.init(photo: photo)
+        self.cache = cache
+        self.photoService = photoService
+        self.sceneCoordinator = sceneCoordinator
 
-        totalViews = service.photo(withId: photo.id ?? "")
+        photoStream = Observable.just(photo)
+
+        let cachedPhotoStream = cache.getObject(ofType: Photo.self, withId: photo.id ?? "").unwrap()
+
+        regularPhoto = photoStream
+            .map { $0.urls?.regular }
+            .unwrap()
+
+        photoSize = Observable.combineLatest(
+            photoStream.map { $0.width }.unwrap().map { Double($0) },
+            photoStream.map { $0.height }.unwrap().map { Double($0) }
+        )
+
+        totalLikes = photoStream.merge(with: cachedPhotoStream)
+            .map { $0.likes?.abbreviated }
+            .unwrap()
+
+        likedByUser = photoStream.merge(with: cachedPhotoStream)
+            .map { $0.likedByUser }
+            .unwrap()
+
+        totalViews = photoService.photo(withId: photo.id ?? "")
             .map { $0.views?.abbreviated }
             .unwrap()
             .catchErrorJustReturn("0")
 
-        totalDownloads = service.photo(withId: photo.id ?? "")
+        totalDownloads = photoService.photo(withId: photo.id ?? "")
             .map { $0.downloads?.abbreviated }
             .unwrap()
             .catchErrorJustReturn("0")
