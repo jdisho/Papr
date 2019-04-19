@@ -111,24 +111,6 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         outputs.photoStream
-            .bind { [weak self] in
-                self?.downloadButton.rx.bind(to: inputs.downloadPhotoAction, input: $0)
-            }
-            .disposed(by: disposeBag)
-
-        inputs.downloadPhotoAction.elements
-            .subscribe { [unowned self] result in
-                guard let linkString = result.element,
-                    let url = URL(string: linkString) else { return }
-
-                Nuke.loadImage(with: url, into: self.dummyImageView) { response, _ in
-                    guard let image = response?.image else { return }
-                    inputs.writeImageToPhotosAlbumAction.execute(image)
-                }
-            }
-            .disposed(by: disposeBag)
-
-        outputs.photoStream
             .map { $0.links?.html }
             .unwrap()
             .bind { [weak self] in

@@ -105,15 +105,18 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
 
-        outputs.fullname
+        outputs.photoStream
+            .map { $0.user?.fullName }
             .bind(to: fullNameLabel.rx.text)
             .disposed(by: disposeBag)
         
-        outputs.username
+        outputs.photoStream
+            .map { "@\($0.user?.username ?? "")" }
             .bind(to: usernameLabel.rx.text)
             .disposed(by: disposeBag)
 
-        outputs.updated
+        outputs.photoStream
+            .map { $0.updated?.toDate?.abbreviated }
             .bind(to: postedTimeLabel.rx.text)
             .disposed(by: disposeBag)
 
