@@ -49,15 +49,12 @@ public final class Cache  {
     public init() { }
 
     public func set<T: Cachable>(value: T) {
-        populate(storage: &storage, with: value)
+        storage.insert(value)
         storageStream.onNext(storage)
     }
 
     public func set<T: Cachable>(values: [T]) {
-        for value in values {
-            populate(storage: &storage, with: value)
-        }
-
+        values.forEach { storage.insert($0) }
         storageStream.onNext(storage)
     }
 
@@ -71,20 +68,24 @@ public final class Cache  {
     }
 
     public func clear() {
-        if !storage.isEmpty {
-            print("Cache is cleared 🧻")
-            storage.removeAll()
-            storageStream.onNext(storage)
-        }
+        guard !storage.isEmpty else { return }
+        print("🚽: Cache is cleared")
+        storage.removeAll()
+        storageStream.onNext(storage)
     }
 
-    private func populate<T: Cachable>(storage: inout [(key: CacheKey, value: Any)], with value: T) {
-        let values = storage.map { $0.value as? T }.compactMap { $0 }
+}
+
+private extension Array where Element == (key: CacheKey, value: Any) {
+
+    mutating func insert<T: Cachable>(_ value: T) {
+        let values = map { $0.value as? T }.compactMap { $0 }
+
         if let foundedValue = values.first(where: { $0.cacheKey.id == value.cacheKey.id }),
             let index = values.firstIndex(of: foundedValue) {
-            storage[index] = (key: value.cacheKey, value: value)
+            self[index] = (key: value.cacheKey, value: value)
         } else {
-            storage.append((key: value.cacheKey, value: value))
+            append((key: value.cacheKey, value: value))
         }
     }
 }
