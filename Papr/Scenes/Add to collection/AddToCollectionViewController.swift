@@ -53,8 +53,8 @@ class AddToCollectionViewController: UIViewController, BindableType {
             .mapToURL()
             .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
             .map { $0.image }
-            .flatMapIgnore { [unowned self] _ in
-                Observable.just(self.photoActivityIndicator.stopAnimating())
+            .execute { [unowned self] _ in
+                self.photoActivityIndicator.stopAnimating()
             }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
@@ -62,8 +62,8 @@ class AddToCollectionViewController: UIViewController, BindableType {
 
         outputs.collectionCellModelTypes
             .map { [AddToCollectionSectionModel(model: "", items: $0)] }
-            .flatMapIgnore { [unowned self] _ in
-                Observable.just(self.collectionViewActivityIndicator.stopAnimating())
+            .execute { [unowned self] _ in
+                self.collectionViewActivityIndicator.stopAnimating()
             }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)

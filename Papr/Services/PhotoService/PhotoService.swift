@@ -28,7 +28,7 @@ struct PhotoService: PhotoServiceType {
             .map { $0.photo }
             .asObservable()
             .unwrap()
-            .flatMapIgnore { Observable.just(self.cache.set(value: $0)) } // 🎡 Update cache
+            .execute { self.cache.set(value: $0) }
             .map(Result.success)
             .catchError { _ in
                 let accessToken = UserDefaults.standard.string(forKey: Constants.UnsplashSettings.clientID)
@@ -46,7 +46,7 @@ struct PhotoService: PhotoServiceType {
             .map { $0.photo }
             .asObservable()
             .unwrap()
-            .flatMapIgnore { Observable.just(self.cache.set(value: $0)) } // 🎡 Update cache
+            .execute { self.cache.set(value: $0) } // 🎡 Update cache
             .map(Result.success)
             .catchError { _ in
                 let accessToken = UserDefaults.standard.string(forKey: Constants.UnsplashSettings.clientID)
@@ -79,7 +79,7 @@ struct PhotoService: PhotoServiceType {
         return unsplash.rx.request(resource: photos)
             .map(to: [Photo].self)
             .asObservable()
-            .flatMapIgnore { Observable.just(self.cache.set(values: $0)) }  // 👨‍👩‍👧‍👧 Populate the cache.
+            .execute { self.cache.set(values: $0) }  // 👨‍👩‍👧‍👧 Populate the cache.
             .map(Result.success)
             .catchError { .just(.error($0.localizedDescription)) }
     }

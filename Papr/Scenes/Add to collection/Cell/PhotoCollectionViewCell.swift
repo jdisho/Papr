@@ -67,8 +67,8 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType, NibIdentifiab
             .mapToURL()
             .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
             .map { $0.image }
-            .flatMapIgnore { [unowned self] _ in
-                Observable.just(self.activityIndicator.stopAnimating())
+            .execute { [unowned self] _ in
+                self.activityIndicator.stopAnimating()
             }
             .bind(to: collectionCoverImageView.rx.image)
             .disposed(by: disposeBag)

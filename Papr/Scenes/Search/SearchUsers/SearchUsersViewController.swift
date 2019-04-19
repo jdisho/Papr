@@ -46,8 +46,8 @@ class SearchUsersViewController: UIViewController, BindableType {
 
         outputs.usersViewModel
             .map { [SearchUsersSectionModel(model: "", items: $0)] }
-            .flatMapIgnore { [unowned self] _ in
-                Observable.just(self.loadingView.stopAnimating())
+            .execute { [unowned self] _ in
+                self.loadingView.stopAnimating()
             }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)

@@ -56,8 +56,8 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
                 )
             }
             .map { $0.image }
-            .flatMapIgnore { [unowned self] image -> Observable<Void> in
-                return(.just(self.activityIndicator.stopAnimating()))
+            .execute { [unowned self] _ in
+                self.activityIndicator.stopAnimating()
             }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)

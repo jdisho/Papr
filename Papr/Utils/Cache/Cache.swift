@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-public struct CacheKey: Equatable, Hashable {
+struct CacheKey: Equatable, Hashable {
 
     let typeName: String
     let id: String
@@ -23,11 +23,11 @@ public struct CacheKey: Equatable, Hashable {
     }
 }
 
-public protocol Identifiable {
+protocol Identifiable {
     var identifier: String { get }
 }
 
-public protocol Cachable: Identifiable, Equatable { }
+protocol Cachable: Identifiable, Equatable { }
 
 private extension Cachable {
     static var typeName: String {
@@ -39,35 +39,35 @@ private extension Cachable {
     }
 }
 
-public final class Cache  {
+final class Cache  {
 
-    public static let shared = Cache()
+    static let shared = Cache()
 
     private let storageStream = PublishSubject<[(key: CacheKey, value: Any)]>()
     private var storage = [(key: CacheKey, value: Any)]()
 
-    public init() { }
+    init() { }
 
-    public func set<T: Cachable>(value: T) {
+    func set<T: Cachable>(value: T) {
         storage.insert(value)
         storageStream.onNext(storage)
     }
 
-    public func set<T: Cachable>(values: [T]) {
+    func set<T: Cachable>(values: [T]) {
         values.forEach { storage.insert($0) }
         storageStream.onNext(storage)
     }
 
-    public func getObject<T>(ofType type: T.Type, withId id: String) -> Observable<T?> where T: Cachable {
+    func getObject<T>(ofType type: T.Type, withId id: String) -> Observable<T?> where T: Cachable {
         let cacheKey = CacheKey(typeName: type.typeName, id: id)
         return storageStream.map { $0.first(where: { $0.key == cacheKey }).flatMap { $0.value as? T } }
     }
 
-    public func getAllObjects<T: Cachable>(ofType type: T.Type) -> Observable<[T]> {
+    func getAllObjects<T: Cachable>(ofType type: T.Type) -> Observable<[T]> {
         return storageStream.map { $0.map { $0.value as? T }.compactMap { $0 }}
     }
 
-    public func clear() {
+    func clear() {
         guard !storage.isEmpty else { return }
         print("🚽: Cache is cleared")
         storage.removeAll()
