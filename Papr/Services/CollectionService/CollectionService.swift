@@ -13,9 +13,11 @@ import TinyNetworking
 struct CollectionService: CollectionServiceType {
 
     private let unsplash: TinyNetworking<Unsplash>
+    private let cache: Cache
 
-    init(unsplash: TinyNetworking<Unsplash> = TinyNetworking<Unsplash>()) {
+    init(unsplash: TinyNetworking<Unsplash> = TinyNetworking<Unsplash>(), cache: Cache = .shared) {
         self.unsplash = unsplash
+        self.cache = cache
     }
 
     func collection(withID id: Int) -> Observable<PhotoCollection> {
@@ -47,6 +49,7 @@ struct CollectionService: CollectionServiceType {
         return unsplash.rx.request(resource: .collectionPhotos(id: id, page: pageNumber, perPage: 10))
             .map(to: [Photo].self)
             .asObservable()
+            .execute { self.cache.set(values: $0) }  // 👨‍👩‍👧‍👧 Populate the cache.
     }
 
     func addPhotoToCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, String>> {
