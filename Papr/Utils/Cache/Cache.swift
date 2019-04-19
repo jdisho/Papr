@@ -10,17 +10,8 @@ import Foundation
 import RxSwift
 
 struct CacheKey: Equatable, Hashable {
-
     let typeName: String
     let id: String
-
-    public static func == (lhs: CacheKey, rhs: CacheKey) -> Bool {
-        return lhs.typeName == rhs.typeName && lhs.id == rhs.id
-    }
-
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(typeName.hashValue ^ id.hashValue)
-    }
 }
 
 protocol Identifiable {
@@ -58,7 +49,7 @@ final class Cache  {
         storageStream.onNext(storage)
     }
 
-    func getObject<T>(ofType type: T.Type, withId id: String) -> Observable<T?> where T: Cachable {
+    func getObject<T: Cachable>(ofType type: T.Type, withId id: String) -> Observable<T?> {
         let cacheKey = CacheKey(typeName: type.typeName, id: id)
         return storageStream.map { $0.first(where: { $0.key == cacheKey }).flatMap { $0.value as? T } }
     }
