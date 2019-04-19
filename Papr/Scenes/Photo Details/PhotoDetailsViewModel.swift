@@ -162,12 +162,14 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType, PhotoDetailsViewModelInp
             .map { $0.likedByUser }
             .unwrap()
 
-        totalViews = photoService.photo(withId: photo.id ?? "")
+        let photo = photoService.photo(withId: photo.id ?? "").share()
+
+        totalViews = photo
             .map { $0.views?.abbreviated }
             .unwrap()
             .catchErrorJustReturn("0")
 
-        totalDownloads = photoService.photo(withId: photo.id ?? "")
+        totalDownloads = photo
             .map { $0.downloads?.abbreviated }
             .unwrap()
             .catchErrorJustReturn("0")
