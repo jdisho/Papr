@@ -18,8 +18,8 @@ public struct CacheKey: Equatable, Hashable {
         return lhs.typeName == rhs.typeName && lhs.id == rhs.id
     }
 
-    public var hashValue: Int {
-        return typeName.hashValue ^ id.hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(typeName.hashValue ^ id.hashValue)
     }
 }
 
