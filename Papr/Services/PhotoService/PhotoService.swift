@@ -70,8 +70,6 @@ struct PhotoService: PhotoServiceType {
         curated: Bool = false
         ) -> Observable<Result<[Photo], String>> {
 
-        if pageNumber == 1 { cache.clear() }
-        
         let photos: Unsplash = curated ?
             .curatedPhotos(page: pageNumber, perPage: Constants.photosPerPage, orderBy: orderBy) :
             .photos(page: pageNumber, perPage: Constants.photosPerPage, orderBy: orderBy)
