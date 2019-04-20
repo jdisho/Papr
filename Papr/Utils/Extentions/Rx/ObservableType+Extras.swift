@@ -20,12 +20,11 @@ extension ObservableType {
         return filter { $0 != nil }.map { $0! }
     }
 
-    func flatMapIgnore<O: ObservableConvertibleType>(_ selector: @escaping (E) throws -> O) -> Observable<E> {
-        return flatMap { result -> Observable<E> in
-            let ignoredObservable = try selector(result)
-
-            return ignoredObservable.asObservable()
-                .flatMap { _ in Observable.just(result) }
+    func execute(_ selector: @escaping (E) -> Void) -> Observable<E> {
+        return flatMap { result in
+             return Observable
+                .just(selector(result))
+                .map { _ in result }
                 .take(1)
         }
     }

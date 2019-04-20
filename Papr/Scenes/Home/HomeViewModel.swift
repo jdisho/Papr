@@ -99,18 +99,18 @@ class HomeViewModel: HomeViewModelType,
     var orderBy: Observable<OrderBy>!
 
     lazy var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> = {
-        return Observable.combineLatest(photos, cache.getAllObjects(ofType: Photo.self))
-            .map { photos, cachedPhotos -> [Photo] in
-                var photoArray = [Photo]()
-                for (photo, cachedPhoto) in zip(photos, cachedPhotos) {
-                    var copyPhoto = photo
-                    copyPhoto.likes = cachedPhoto.likes
-                    copyPhoto.likedByUser = cachedPhoto.likedByUser
-                    photoArray.append(copyPhoto)
-                }
-                return photoArray
+        return Observable.combineLatest(photos, cache.getAllObjects(ofType: Photo.self)).map { photos, cachedPhotos -> [Photo] in
+            let cachedPhotos = cachedPhotos.filter { cachedPhoto in
+                photos.map { $0.identifier == cachedPhoto.identifier }.contains(true)
             }
-            .mapMany { HomeViewCellModel(photo: $0) }
+            return zip(photos, cachedPhotos).map { photo, cachedPhoto -> Photo in
+                var copyPhoto = photo
+                copyPhoto.likes = cachedPhoto.likes
+                copyPhoto.likedByUser = cachedPhoto.likedByUser
+                return copyPhoto
+            }
+        }
+        .mapMany { HomeViewCellModel(photo: $0) }
     }()
 
     // MARK: Private
@@ -124,7 +124,7 @@ class HomeViewModel: HomeViewModelType,
     // MARK: Init
     init(cache: Cache = Cache.shared,
          service: PhotoServiceType = PhotoService(),
-        sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
         self.cache = cache
         self.service = service
@@ -136,6 +136,8 @@ class HomeViewModel: HomeViewModelType,
         isRefreshing = refreshProperty.asObservable()
         photosType = photosTypeProperty.asObservable()
         orderBy = orderByProperty.asObservable()
+
+
 
         let requestFirst = Observable
             .combineLatest(isRefreshing, orderBy, photosType.map { $0 == .curated })
@@ -156,10 +158,10 @@ class HomeViewModel: HomeViewModelType,
                         }
                     }
             }
-            .do (onNext: { _ in
+            .execute { _ in
                 photoArray = []
                 currentPageNumber = 1
-            })
+            }
 
         let requestNext = Observable
             .combineLatest(loadMore, orderBy, photosType.map { $0 == .curated })

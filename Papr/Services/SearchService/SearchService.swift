@@ -12,9 +12,11 @@ import TinyNetworking
 
 struct SearchService: SearchServiceType {
     private let unsplash: TinyNetworking<Unsplash>
+    private let cache: Cache
 
-    init(unsplash: TinyNetworking<Unsplash> = TinyNetworking<Unsplash>()) {
+    init(unsplash: TinyNetworking<Unsplash> = TinyNetworking<Unsplash>(), cache: Cache = .shared) {
         self.unsplash = unsplash
+        self.cache = cache
     }
 
     func searchPhotos(with query: String, pageNumber: Int) -> Observable<PhotosResult> {
@@ -27,6 +29,7 @@ struct SearchService: SearchServiceType {
             )
             .map(to: PhotosResult.self)
             .asObservable()
+            .execute { self.cache.set(values: $0.results ?? []) }
     }
 
     func searchCollections(with query: String, pageNumber: Int) -> Observable<PhotoCollectionsResult> {

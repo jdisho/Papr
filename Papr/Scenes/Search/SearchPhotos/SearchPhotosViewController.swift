@@ -67,8 +67,8 @@ class SearchPhotosViewController: UIViewController, BindableType {
 
         outputs.searchPhotosCellModelType
             .map { [SearchPhotosSectionModel(model: "", items: $0)] }
-            .flatMapIgnore { [unowned self] _ in
-                Observable.just(self.loadingView.stopAnimating())
+            .execute { [unowned self] _ in
+                self.loadingView.stopAnimating()
             }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)

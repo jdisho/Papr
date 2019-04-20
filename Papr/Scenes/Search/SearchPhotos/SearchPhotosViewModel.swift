@@ -48,16 +48,31 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
     // MARK: - Outputs
     let navTitle: Observable<String>
     lazy var searchPhotosCellModelType: Observable<[SearchPhotosCellModelType]> = {
-        return photos.mapMany { SearchPhotosCellModel(photo: $0) }
+        return Observable.combineLatest(photos, cache.getAllObjects(ofType: Photo.self)).map { photos, cachedPhotos -> [Photo] in
+            let cachedPhotos = cachedPhotos.filter { cachedPhoto in
+                photos.map { $0.identifier == cachedPhoto.identifier }.contains(true)
+            }
+            return zip(photos, cachedPhotos).map { photo, cachedPhoto -> Photo in
+                var copyPhoto = photo
+                copyPhoto.likes = cachedPhoto.likes
+                copyPhoto.likedByUser = cachedPhoto.likedByUser
+                return copyPhoto
+            }
+        }
+        .mapMany { SearchPhotosCellModel(photo: $0) }
     }()
 
     // MARK: - Private
     private var photos: Observable<[Photo]>!
+    private let cache: Cache
     private let sceneCoordinator: SceneCoordinatorType
     // MARK: - Init
 
-    init(type: SearchType, sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
+    init(type: SearchType,
+         cache: Cache = .shared,
+         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
+        self.cache = cache
         self.sceneCoordinator = sceneCoordinator
 
         var photoArray = [Photo]([])
@@ -80,7 +95,7 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
 
 
             requestNext = loadMore.asObservable()
-                .flatMap { loadMore -> Observable<[Photo]> in
+                .flatMapLatest { loadMore -> Observable<[Photo]> in
                     guard loadMore else { return .empty() }
                     currentPageNumber += 1
                     return searchService
@@ -99,7 +114,7 @@ class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInp
             requestFirst = collectionService.photos(fromCollectionId: collectionID, pageNumber: 1)
 
             requestNext = loadMore.asObservable()
-                .flatMap { loadMore -> Observable<[Photo]> in
+                .flatMapLatest { loadMore -> Observable<[Photo]> in
                     guard loadMore else { return .empty() }
                     currentPageNumber += 1
                     return collectionService.photos(fromCollectionId: collectionID, pageNumber: currentPageNumber)

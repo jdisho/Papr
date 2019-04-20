@@ -99,8 +99,8 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
                 )
             }
             .map { $0.image }
-            .flatMapIgnore { [unowned self] _ in
-                Observable.just(self.activityIndicator.stopAnimating())
+            .execute { [unowned self] _ in
+                self.activityIndicator.stopAnimating()
             }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)

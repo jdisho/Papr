@@ -81,8 +81,8 @@ class SearchViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         tableView.rx.itemSelected
-            .flatMapIgnore { [unowned self] _ in
-                Observable.just(self.searchBar.endEditing(true))
+            .execute { [unowned self] _ in
+                self.searchBar.endEditing(true)
             }
             .map { $0.row }
             .bind(to: inputs.searchTrigger)
