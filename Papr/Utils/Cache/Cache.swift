@@ -51,11 +51,15 @@ final class Cache  {
 
     func getObject<T: Cachable>(ofType type: T.Type, withId id: String) -> Observable<T?> {
         let cacheKey = CacheKey(typeName: type.typeName, id: id)
-        return storageStream.map { $0.first(where: { $0.key == cacheKey }).flatMap { $0.value as? T } }
+        return storageStream
+            .map { $0.first(where: { $0.key == cacheKey }).flatMap { $0.value as? T } }
+            .startWith(nil)
     }
 
     func getAllObjects<T: Cachable>(ofType type: T.Type) -> Observable<[T]> {
-        return storageStream.map { $0.map { $0.value as? T }.compactMap { $0 }}
+        return storageStream
+            .map { $0.map { $0.value as? T }.compactMap { $0 } }
+            .startWith([])
     }
 
     func clear() {
