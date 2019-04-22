@@ -30,6 +30,7 @@ class CollectionsViewController: UIViewController, BindableType {
 
         title = "Explore 🌄"
 
+        view.backgroundColor = .white
         configureCollectionView()
         configureRefreshControl()
     }
@@ -47,8 +48,7 @@ class CollectionsViewController: UIViewController, BindableType {
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
-        collectionView.rx.reachedBottom()
-            .skipUntil(output.isRefreshing)
+        collectionView.rx.reachedBottom(direction: .horizontal)
             .bind(to: input.loadMore)
             .disposed(by: disposeBag)
 
@@ -67,16 +67,16 @@ class CollectionsViewController: UIViewController, BindableType {
     private func configureCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.backgroundColor = .white
-        collectionView.add(to: view).pinToEdges()
+        collectionView
+            .add(to: view)
+            .top(to: \.topAnchor)
+            .size(CGSize(width: view.frame.width, height: 50.0))
 
         guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
 
-        let spacing = (1 / UIScreen.main.scale) + 16
-        let cellWidth = (UIScreen.main.bounds.width / 2) - spacing
-
-        flowLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
-        flowLayout.sectionInset = UIEdgeInsets(top: 16.0, left: 8.0, bottom: 0, right: 8.0)
-        flowLayout.minimumLineSpacing = spacing
+        flowLayout.estimatedItemSize = CGSize(width: 1.0, height: 30.0)
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.sectionInset = UIEdgeInsets(top: 0.0, left: 8.0, bottom: 0.0, right: 8.0)
 
         collectionView.register(cellType: CollectionCell.self)
         dataSource = RxCollectionViewSectionedReloadDataSource<CollectionsSectionModel>(

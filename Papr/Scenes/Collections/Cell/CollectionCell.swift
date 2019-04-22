@@ -10,76 +10,42 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Nuke
+import VanillaConstraints
 
-class CollectionCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassIdentifiable {
+class CollectionCell: UICollectionViewCell, BindableType, ClassIdentifiable {
 
-    // MARK: ViewModel
     var viewModel: CollectionCellViewModelType!
+    private let titleLabel = UILabel()
 
-    // MARK: IBOutlets
-
-    @IBOutlet var photoCollectionImagePreview: UIImageView!
-    @IBOutlet var photoCollectionTitleLabel: UILabel!
-    @IBOutlet var photoCollectionAuthorLabel: UILabel!
-
-    // MARK: Privates
     private static let imagePipeline = Nuke.ImagePipeline.shared
     private var disposeBag = DisposeBag()
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        photoCollectionImagePreview.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
-        photoCollectionImagePreview.dim(withAlpha: 0.2)
-    }
-
     override func prepareForReuse() {
         super.prepareForReuse()
-        photoCollectionImagePreview.image = nil
         disposeBag = DisposeBag()
     }
 
     func bindViewModel() {
-        let output = viewModel.output
-        let this = CollectionCell.self
-
-        output.photoCollection
+        viewModel.output.photoCollection
             .map { $0.title }
             .unwrap()
-            .bind(to: photoCollectionTitleLabel.rx.text)
+            .bind(to: titleLabel.rx.text)
             .disposed(by: disposeBag)
 
-        output.photoCollection
-            .map { ($0.user?.firstName ?? "") + " " + ($0.user?.lastName ?? "") }
-            .bind(to: photoCollectionAuthorLabel.rx.text)
-            .disposed(by: disposeBag)
+         configureUI()
 
-        output.photoCollection
-            .map { $0.coverPhoto?.color }
-            .unwrap()
-            .map { UIColor(hexString: $0) }
-            .unwrap()
-            .map { $0.toImage() }
-            .unwrap()
-            .bind(to: photoCollectionImagePreview.rx.image)
-            .disposed(by: disposeBag)
+    }
 
-        let smallPhotoURL = output.photoCollection
-            .map { $0.coverPhoto?.urls?.small }
-            .unwrap()
+    private func configureUI() {
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor.groupTableViewBackground.cgColor
+        layer.cornerRadius = Constants.Appearance.Style.imageCornersRadius
+        backgroundColor = .white
 
-        let regularPhotoURL = output.photoCollection
-            .map { $0.coverPhoto?.urls?.regular }
-            .unwrap()
-
-        Observable.combineLatest(smallPhotoURL, regularPhotoURL)
-            .flatMap { small, regular -> Observable<ImageResponse> in
-                return Observable.concat(
-                    this.imagePipeline.rx.loadImage(with: URL(string: small)!).asObservable(),
-                    this.imagePipeline.rx.loadImage(with: URL(string: regular)!).asObservable()
-                )
-            }
-            .map { $0.image }
-            .bind(to: photoCollectionImagePreview.rx.image)
-            .disposed(by: disposeBag)
+        titleLabel.add(to: contentView)
+            .top(to: \.topAnchor, constant: 8.0)
+            .right(to: \.rightAnchor, constant: 16.0)
+            .bottom(to: \.bottomAnchor, constant: 8.0)
+            .left(to: \.leftAnchor, constant: 16.0)
     }
 }
