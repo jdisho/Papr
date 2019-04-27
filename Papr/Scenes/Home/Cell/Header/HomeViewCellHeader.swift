@@ -10,22 +10,42 @@ import UIKit
 import RxSwift
 import Nuke
 
-class HomeViewCellHeader: UIViewController, BindableType {
+class HomeViewCellHeader: UIView, BindableType {
 
-    var viewModel: HomeViewCellHeaderModelType!
+    var viewModel: HomeViewCellHeaderModelType! {
+        didSet {
+            configureUI()
+        }
+    }
 
     private let profileImageView = UIImageView()
     private let stackView = UIStackView()
-    private let fullNameLabel = UILabel()
-    private let userNameLabel = UILabel()
-    private let updatedTimeLabel = UILabel()
+
+    private let fullNameLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 17.0, weight: .medium)
+        return label
+    }()
+
+    private let userNameLabel : UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 15.0)
+        label.textColor = .darkGray
+        return label
+    }()
+
+    private lazy var updatedTimeLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .right
+        label.font = .systemFont(ofSize: 15.0)
+        label.textColor = .darkGray
+        return label
+    }()
 
     private static let imagePipeline = Nuke.ImagePipeline.shared
     private let disposeBag = DisposeBag()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 
     func bindViewModel() {
         let outputs = viewModel.outputs
@@ -54,22 +74,28 @@ class HomeViewCellHeader: UIViewController, BindableType {
         profileImageView.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
 
         stackView.axis = .vertical
-        stackView.spacing = 8.0
+        stackView.spacing = 4.0
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+
         stackView.addArrangedSubview(fullNameLabel)
         stackView.addArrangedSubview(userNameLabel)
 
-        profileImageView.add(to: view)
-            .left(to: \.leftAnchor)
+        profileImageView.add(to: self)
+            .left(to: \.leftAnchor, constant: 16.0)
             .centerY(to: \.centerYAnchor)
-            .size(CGSize(width: 40.0, height: 40.0))
+            .size(CGSize(width: 45.0, height: 45.0))
 
-        updatedTimeLabel.add(to: view)
-            .right(to: \.rightAnchor)
+        stackView.add(to: self)
+            .top(to: \.topAnchor, of: profileImageView)
+            .bottom(to: \.bottomAnchor, of: profileImageView)
+            .left(to: \.rightAnchor, of: profileImageView, constant: 16.0)
             .centerY(to: \.centerYAnchor)
 
-        stackView.add(to: view)
-            .left(to: \.leftAnchor, of: profileImageView)
+        updatedTimeLabel.add(to: self)
+            .width(80.0)
+            .right(to: \.rightAnchor, constant: 16.0)
             .centerY(to: \.centerYAnchor)
-            .right(to: \.leftAnchor, of: updatedTimeLabel, constant: 8.0)
+            .left(to: \.rightAnchor, of: stackView, constant: 8.0)
     }
 }
