@@ -112,6 +112,7 @@
                 <outlet property="activityIndicator" destination="sUg-8C-vt0" id="9XL-gP-1LI"/>
                 <outlet property="collectPhotoButton" destination="y39-OL-OrF" id="3mw-c5-kmN"/>
                 <outlet property="downloadPhotoButton" destination="DGS-5p-efm" id="yrl-gu-nYE"/>
+                <outlet property="headerViewContainer" destination="lQp-JW-puM" id="YlV-Uz-zzC"/>
                 <outlet property="likeButton" destination="i1J-If-coq" id="zrI-dS-KhN"/>
                 <outlet property="likesNumberLabel" destination="el9-pR-TY5" id="C4w-zk-z2S"/>
                 <outlet property="photoButton" destination="vis-8C-vui" id="cX6-ys-Mws"/>
