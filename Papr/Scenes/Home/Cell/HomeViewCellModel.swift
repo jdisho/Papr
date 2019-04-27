@@ -28,6 +28,7 @@ protocol HomeViewCellModelOutput {
     var photoSize: Observable<(Double, Double)> { get }
     var totalLikes: Observable<String> { get }
     var likedByUser: Observable<Bool> { get }
+    var headerViewModelType: HomeViewCellHeaderModelType { get }
 }
 
 protocol HomeViewCellModelType {
@@ -150,7 +151,12 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
     let totalLikes: Observable<String>
     let likedByUser: Observable<Bool>
 
+    lazy var headerViewModelType: HomeViewCellHeaderModelType = {
+        return HomeViewCellHeaderModel(photo: photo)
+    }()
+
     // MARK: Private
+    private let photo: Photo
     private let cache: Cache
     private let userService: UserServiceType
     private let photoService: PhotoServiceType
@@ -182,6 +188,7 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
         photoLibrary: PHPhotoLibrary = PHPhotoLibrary.shared(),
         sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
 
+        self.photo = photo
         self.cache = cache
         self.photoService = photoService
         self.userService = userService
