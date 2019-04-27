@@ -19,13 +19,16 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
     var viewModel: HomeViewCellModelType!
 
     // MARK: IBOutlets
-    @IBOutlet var photoImageView: UIImageView!
-    @IBOutlet var photoButton: UIButton!
-    @IBOutlet var likeButton: UIButton!
-    @IBOutlet var likesNumberLabel: UILabel!
-    @IBOutlet var collectPhotoButton: UIButton!
-    @IBOutlet var downloadPhotoButton: UIButton!
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private var headerViewContainer: UIView!
+    @IBOutlet private var photoImageView: UIImageView!
+    @IBOutlet private var photoButton: UIButton!
+    @IBOutlet private var likeButton: UIButton!
+    @IBOutlet private var likesNumberLabel: UILabel!
+    @IBOutlet private var collectPhotoButton: UIButton!
+    @IBOutlet private var downloadPhotoButton: UIButton!
+    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
+
+    private var header = HomeViewCellHeader()
 
     // MARK: Private
     private static let imagePipeline = Nuke.ImagePipeline.shared
@@ -37,6 +40,7 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
         super.awakeFromNib()
 
         photoButton.isExclusiveTouch = true
+        header.add(to: headerViewContainer).pinToEdges()
     }
 
     override func prepareForReuse() {
@@ -54,6 +58,8 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
         let this = HomeViewCell.self
+
+        header.bind(to: outputs.headerViewModelType)
 
         outputs.photoStream
             .map { $0.id }
@@ -106,7 +112,6 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
                 self?.downloadPhotoButton.rx.bind(to: inputs.downloadPhotoAction, input: $0)
             }
             .disposed(by: disposeBag)
-
 
         inputs.downloadPhotoAction.elements
             .subscribe { [unowned self] result in
