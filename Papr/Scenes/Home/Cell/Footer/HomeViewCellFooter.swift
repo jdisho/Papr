@@ -7,10 +7,6 @@
 //
 
 import UIKit
+import VanillaConstraints
 
-class HomeViewCellFooter: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-}
+class HomeViewCellFooter: UIViewController {}

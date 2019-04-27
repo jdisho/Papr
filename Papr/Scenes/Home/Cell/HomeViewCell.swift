@@ -19,12 +19,8 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
     var viewModel: HomeViewCellModelType!
 
     // MARK: IBOutlets
-    @IBOutlet var userImageView: UIImageView!
-    @IBOutlet var fullNameLabel: UILabel!
-    @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var photoButton: UIButton!
-    @IBOutlet var postedTimeLabel: UILabel!
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var likesNumberLabel: UILabel!
     @IBOutlet var collectPhotoButton: UIButton!
@@ -40,14 +36,12 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        userImageView.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
         photoButton.isExclusiveTouch = true
     }
 
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        userImageView.image = nil
         photoImageView.image = nil
         dummyImageView.image = nil
         likeButton.rx.action = nil
@@ -80,13 +74,6 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
             }
             .disposed(by: disposeBag)
 
-        outputs.userProfileImage
-            .mapToURL()
-            .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
-            .map { $0.image }
-            .bind(to: userImageView.rx.image)
-            .disposed(by: disposeBag)
-
         Observable.combineLatest(
             outputs.smallPhoto,
             outputs.regularPhoto,
@@ -103,21 +90,6 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
                 self.activityIndicator.stopAnimating()
             }
             .bind(to: photoImageView.rx.image)
-            .disposed(by: disposeBag)
-
-        outputs.photoStream
-            .map { $0.user?.fullName }
-            .bind(to: fullNameLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        outputs.photoStream
-            .map { "@\($0.user?.username ?? "")" }
-            .bind(to: usernameLabel.rx.text)
-            .disposed(by: disposeBag)
-
-        outputs.photoStream
-            .map { $0.updated?.toDate?.abbreviated }
-            .bind(to: postedTimeLabel.rx.text)
             .disposed(by: disposeBag)
 
         outputs.totalLikes

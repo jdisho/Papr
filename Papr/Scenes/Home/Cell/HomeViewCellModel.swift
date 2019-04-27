@@ -22,7 +22,6 @@ protocol HomeViewCellModelInput {
 
 protocol HomeViewCellModelOutput {
     var photoStream: Observable<Photo> { get }
-    var userProfileImage: Observable<String> { get }
     var smallPhoto: Observable<String> { get }
     var regularPhoto: Observable<String> { get }
     var fullPhoto: Observable<String> { get }
@@ -144,7 +143,6 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
 
     // MARK: Output
     let photoStream: Observable<Photo>
-    let userProfileImage: Observable<String>
     let smallPhoto: Observable<String>
     let regularPhoto: Observable<String>
     let fullPhoto: Observable<String>
@@ -193,10 +191,6 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
         let cachedPhotoStream = cache.getObject(ofType: Photo.self, withId: photo.id ?? "").unwrap()
 
         photoStream = Observable.just(photo)
-
-        userProfileImage = photoStream
-            .map { $0.user?.profileImage?.medium }
-            .unwrap()
 
         smallPhoto = photoStream
             .map { $0.urls?.small }
