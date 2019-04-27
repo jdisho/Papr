@@ -51,3 +51,12 @@ extension BindableType where Self: UICollectionViewCell {
     }
     
 }
+
+extension BindableType where Self: UIView {
+
+    mutating func bind(to viewModel: Self.ViewModelType) {
+        self.viewModel = viewModel
+        bindViewModel()
+    }
+
+}
