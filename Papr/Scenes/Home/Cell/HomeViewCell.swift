@@ -82,7 +82,7 @@ class HomeViewCell: UICollectionViewCell, BindableType,  ClassIdentifiable {
 
     private func configureUI() {
 
-        let headerViewHeight: CGFloat = 60.0
+        let headerViewHeight: CGFloat = 80.0
         let footerViewHeight: CGFloat = 60.0
 
         stackView.add(to: contentView).pinToEdges()

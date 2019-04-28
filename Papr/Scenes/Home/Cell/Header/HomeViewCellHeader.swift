@@ -39,7 +39,7 @@ class HomeViewCellHeader: UIView, BindableType {
     private lazy var updatedTimeLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .right
-        label.font = .systemFont(ofSize: 15.0)
+        label.font = .systemFont(ofSize: 16.0)
         label.textColor = .darkGray
         return label
     }()
@@ -84,7 +84,7 @@ class HomeViewCellHeader: UIView, BindableType {
         profileImageView.add(to: self)
             .left(to: \.leftAnchor, constant: 16.0)
             .centerY(to: \.centerYAnchor)
-            .size(CGSize(width: 45.0, height: 45.0))
+            .size(CGSize(width: 48.0, height: 48.0))
 
         stackView.add(to: self)
             .top(to: \.topAnchor, of: profileImageView)

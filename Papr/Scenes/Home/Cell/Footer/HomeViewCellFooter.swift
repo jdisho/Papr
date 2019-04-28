@@ -41,7 +41,7 @@ class HomeViewCellFooter: UIView, BindableType {
             .size(CGSize(width: 32.0, height: 32.0))
 
         likesNumberLabel.add(to: view)
-            .left(to: \.rightAnchor, of: likeButton, constant: 16.0)
+            .left(to: \.rightAnchor, of: likeButton, constant: 8.0)
             .centerY(to: \.centerYAnchor)
 
         return view
@@ -64,7 +64,11 @@ class HomeViewCellFooter: UIView, BindableType {
     }()
 
     private lazy var likeButton = UIButton()
-    private lazy var likesNumberLabel = UILabel()
+    private lazy var likesNumberLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        return label
+    }()
 
     private lazy var saveButton: UIButton = {
         let button = UIButton()

@@ -52,7 +52,7 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
     let regularPhoto: Observable<String>
     let fullPhoto: Observable<String>
     let photoSize: Observable<(Double, Double)>
-    let extraHeight = Observable<Double>.just(60.0)
+    let extraHeight = Observable<Double>.just(70.0)
 
     lazy var headerViewModelType: HomeViewCellHeaderModelType = {
         return HomeViewCellHeaderModel(photo: photo)
