@@ -21,6 +21,7 @@ protocol HomeViewCellModelOutput {
     var photoSize: Observable<(Double, Double)> { get }
     var extraHeight: Observable<Double> { get }
     var headerViewModelType: HomeViewCellHeaderModelType { get }
+    var footerViewModelType: HomeViewCellFooterModelType { get }
 }
 
 protocol HomeViewCellModelType {
@@ -54,6 +55,10 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
 
     lazy var headerViewModelType: HomeViewCellHeaderModelType = {
         return HomeViewCellHeaderModel(photo: photo)
+    }()
+
+    lazy var footerViewModelType: HomeViewCellFooterModelType = {
+        return HomeViewCellFooterModel(photo: photo)
     }()
 
     // MARK: Private

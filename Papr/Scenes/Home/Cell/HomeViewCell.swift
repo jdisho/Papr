@@ -54,6 +54,7 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
         let this = HomeViewCell.self
 
         headerView.bind(to: outputs.headerViewModelType)
+        footerView.bind(to: outputs.footerViewModelType)
 
         outputs.extraHeight
             .map { CGFloat($0) }
