@@ -18,17 +18,17 @@ class HomeViewCellHeader: UIView, BindableType {
         }
     }
 
-    private let profileImageView = UIImageView()
-    private let stackView = UIStackView()
+    private lazy var profileImageView = UIImageView()
+    private lazy var stackView = UIStackView()
 
-    private let fullNameLabel: UILabel = {
+    private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 17.0, weight: .medium)
         return label
     }()
 
-    private let userNameLabel : UILabel = {
+    private lazy var userNameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 15.0)

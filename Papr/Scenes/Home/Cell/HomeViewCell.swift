@@ -13,30 +13,26 @@ import RxNuke
 import Photos
 import Hero
 
-class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassIdentifiable {
+class HomeViewCell: UICollectionViewCell, BindableType,  ClassIdentifiable {
 
     // MARK: ViewModel
-    var viewModel: HomeViewCellModelType!
-
-    // MARK: IBOutlets
-    @IBOutlet private var headerView: HomeViewCellHeader!
-    @IBOutlet private var headerViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet private var photoImageView: UIImageView!
-    @IBOutlet private var photoButton: UIButton!
-    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet private var footerView: HomeViewCellFooter!
-    @IBOutlet private var footerViewHeightConstraint: NSLayoutConstraint!
+    var viewModel: HomeViewCellModelType! {
+        didSet {
+            configureUI()
+        }
+    }
 
     // MARK: Private
+    private let stackView = UIStackView()
+    private var headerView = HomeViewCellHeader()
+    private var photoButton = UIButton()
+    private let photoImageView = UIImageView()
+    private var footerView = HomeViewCellFooter()
+
     private static let imagePipeline = Nuke.ImagePipeline.shared
     private var disposeBag = DisposeBag()
 
     // MARK: Overrides
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        photoButton.isExclusiveTouch = true
-    }
 
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -56,16 +52,6 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
         headerView.bind(to: outputs.headerViewModelType)
         footerView.bind(to: outputs.footerViewModelType)
 
-        outputs.extraHeight
-            .map { CGFloat($0) }
-            .bind(to: headerViewHeightConstraint.rx.constant)
-            .disposed(by: disposeBag)
-
-        outputs.extraHeight
-            .map { CGFloat($0) }
-            .bind(to: footerViewHeightConstraint.rx.constant)
-            .disposed(by: disposeBag)
-
         outputs.photoStream
             .map { $0.id }
             .unwrap()
@@ -77,7 +63,6 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
                 self?.photoButton.rx.bind(to: inputs.photoDetailsAction, input: $0)
             }
             .disposed(by: disposeBag)
-
 
         Observable.combineLatest(
             outputs.smallPhoto,
@@ -91,10 +76,35 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
                 )
             }
             .map { $0.image }
-            .execute { [unowned self] _ in
-                self.activityIndicator.stopAnimating()
-            }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
+    }
+
+    private func configureUI() {
+
+        let headerViewHeight: CGFloat = 60.0
+        let footerViewHeight: CGFloat = 60.0
+
+        stackView.add(to: contentView).pinToEdges()
+
+        photoButton.add(to: contentView)
+            .top(to: \.topAnchor, constant: headerViewHeight)
+            .bottom(to: \.bottomAnchor, constant: footerViewHeight)
+            .left(to: \.leftAnchor)
+            .right(to: \.rightAnchor)
+
+        headerView.height(headerViewHeight)
+        footerView.height(footerViewHeight)
+
+        photoButton.isExclusiveTouch = true
+
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 0.0
+
+        stackView.addArrangedSubview(headerView)
+        stackView.addArrangedSubview(photoImageView)
+        stackView.addArrangedSubview(footerView)
     }
 }

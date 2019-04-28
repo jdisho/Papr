@@ -298,9 +298,6 @@
 		DCC8CA132002CC2700F6C540 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */; };
 		DCC8CA142002CC2700F6C540 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */; };
 		DCC8CA152002CC2700F6C540 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */; };
-		DCC8CA162002CC2700F6C540 /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */; };
-		DCC8CA172002CC2700F6C540 /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */; };
-		DCC8CA182002CC2700F6C540 /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */; };
 		DCC8CA1A2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */; };
 		DCC8CA1B2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */; };
 		DCC8CA1C2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */; };
@@ -477,7 +474,6 @@
 		DCC8CA052002BEE300F6C540 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DCC8CA0D2002BEF100F6C540 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
-		DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewCell.xib; sourceTree = "<group>"; };
 		DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellModel.swift; sourceTree = "<group>"; };
 		DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Extras.swift"; sourceTree = "<group>"; };
 		DCCCFCBC203A45DE0024D417 /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
@@ -974,7 +970,6 @@
 				DC594CCA2274E3FE006059C0 /* Footer */,
 				DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */,
 				DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */,
-				DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1143,7 +1138,6 @@
 				C09D7657216CC91E0035F54D /* UserProfileViewController.xib in Resources */,
 				DC658D88208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
 				DCB915B820BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */,
-				DCC8CA162002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DC3917A82096683600492F62 /* CreateCollectionViewController.xib in Resources */,
 				DC66E66920A4D7D6005E5E31 /* SearchViewController.xib in Resources */,
 				DCBB1B271FA7B1BD004E95F0 /* Main.storyboard in Resources */,
@@ -1157,7 +1151,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCC8CA172002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DCBB1B641FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 				DCB915B920BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */,
 				DC3917A92096683600492F62 /* CreateCollectionViewController.xib in Resources */,
@@ -1175,7 +1168,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCC8CA182002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DCBB1B651FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 				DCB915BA20BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */,
 				DC3917AA2096683600492F62 /* CreateCollectionViewController.xib in Resources */,

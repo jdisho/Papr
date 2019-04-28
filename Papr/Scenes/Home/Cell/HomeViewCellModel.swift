@@ -13,6 +13,7 @@ import Action
 protocol HomeViewCellModelInput {
     var photoDetailsAction: Action<Photo, Photo> { get }
 }
+
 protocol HomeViewCellModelOutput {
     var photoStream: Observable<Photo> { get }
     var smallPhoto: Observable<String> { get }
