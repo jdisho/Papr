@@ -106,5 +106,6 @@ class HomeViewCell: UICollectionViewCell, BindableType,  ClassIdentifiable {
         stackView.addArrangedSubview(headerView)
         stackView.addArrangedSubview(photoImageView)
         stackView.addArrangedSubview(footerView)
+        
     }
 }

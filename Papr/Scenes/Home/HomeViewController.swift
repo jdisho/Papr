@@ -19,13 +19,10 @@ class HomeViewController: UIViewController, BindableType {
     var viewModel: HomeViewModelType!
 
     // MARK: Private
-    private let disposeBag = DisposeBag()
+
+    private var collectionView: UICollectionView!
     private let collectionViewLayout: UICollectionViewLayout!
     private var dataSource: RxCollectionViewSectionedReloadDataSource<HomeSectionModel>!
-    private var collectionView: UICollectionView!
-    private var refreshControl: UIRefreshControl!
-    private var segmentedControl: UISegmentedControl!
-    private var rightBarButtonItem: UIBarButtonItem!
     private var collectionViewDataSource: CollectionViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
         return { _, collectionView, indexPath, cellModel in
             var cell = collectionView.dequeueReusableCell(withCellType: HomeViewCell.self, forIndexPath: indexPath)
@@ -40,6 +37,13 @@ class HomeViewController: UIViewController, BindableType {
             return cell
         }
     }
+
+    private let refreshControl = UIRefreshControl()
+    private let segmentedControl = UISegmentedControl(items: PhotosType.allCases.map { $0.rawValue })
+    private let orderByBarButtonItem = UIBarButtonItem()
+    private let moreBarButtonItem = UIBarButtonItem()
+    private let disposeBag = DisposeBag()
+
 
     // MARK: Override
     init(collectionViewLayout: UICollectionViewLayout) {
@@ -68,13 +72,13 @@ class HomeViewController: UIViewController, BindableType {
 
         outputs.orderBy
             .bind { [weak self] in
-                self?.rightBarButtonItem.rx.bind(to: inputs.orderByAction, input: $0)
+                self?.orderByBarButtonItem.rx.bind(to: inputs.orderByAction, input: $0)
             }
             .disposed(by: disposeBag)
 
         outputs.orderBy
             .map { $0 == .popular ? #imageLiteral(resourceName: "hot") : #imageLiteral(resourceName: "up")}
-            .bind(to: rightBarButtonItem.rx.image)
+            .bind(to: orderByBarButtonItem.rx.image)
             .disposed(by: disposeBag)
 
         outputs.isRefreshing
@@ -83,7 +87,7 @@ class HomeViewController: UIViewController, BindableType {
 
         outputs.isRefreshing
             .negate()
-            .bind(to: rightBarButtonItem.rx.isEnabled)
+            .bind(to: orderByBarButtonItem.rx.isEnabled)
             .disposed(by: disposeBag)
 
         outputs.homeViewCellModelTypes
@@ -104,11 +108,10 @@ class HomeViewController: UIViewController, BindableType {
 
     // MARK: UI
     private func configureNavigationController() {
-        segmentedControl = UISegmentedControl(items: PhotosType.allCases.map { $0.rawValue })
         segmentedControl.selectedSegmentIndex = 0
-        rightBarButtonItem = UIBarButtonItem()
+        moreBarButtonItem.image = UIImage(named: "more-horizontal-black")
         navigationItem.titleView = segmentedControl
-        navigationItem.rightBarButtonItem = rightBarButtonItem
+        navigationItem.rightBarButtonItems = [moreBarButtonItem, orderByBarButtonItem]
     }
 
     private func configureCollectionView() {
@@ -121,7 +124,6 @@ class HomeViewController: UIViewController, BindableType {
     }
 
     private func configureRefreshControl() {
-        refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         collectionView.addSubview(refreshControl)
     }
