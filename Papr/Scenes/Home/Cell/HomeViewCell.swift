@@ -22,16 +22,12 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
     @IBOutlet private var headerView: HomeViewCellHeader!
     @IBOutlet private var photoImageView: UIImageView!
     @IBOutlet private var photoButton: UIButton!
-    @IBOutlet private var likeButton: UIButton!
-    @IBOutlet private var likesNumberLabel: UILabel!
-    @IBOutlet private var collectPhotoButton: UIButton!
-    @IBOutlet private var downloadPhotoButton: UIButton!
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
-
+    @IBOutlet var footerView: HomeViewCellFooter!
+    
     // MARK: Private
     private static let imagePipeline = Nuke.ImagePipeline.shared
     private var disposeBag = DisposeBag()
-    private let dummyImageView = UIImageView()
 
     // MARK: Overrides
     override func awakeFromNib() {
@@ -44,9 +40,8 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
         super.prepareForReuse()
 
         photoImageView.image = nil
-        dummyImageView.image = nil
-        likeButton.rx.action = nil
         photoButton.rx.action = nil
+
         disposeBag = DisposeBag()
     }
 
@@ -64,18 +59,12 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
             .bind(to: photoImageView.rx.heroId)
             .disposed(by: disposeBag)
 
-        Observable.combineLatest(outputs.likedByUser, outputs.photoStream)
-            .bind { [weak self] in
-                self?.likeButton.rx.bind(to: $0 ? inputs.unlikePhotoAction: inputs.likePhotoAction, input: $1)
-            }
-            .disposed(by: disposeBag)
-
         outputs.photoStream
             .bind { [weak self] in
                 self?.photoButton.rx.bind(to: inputs.photoDetailsAction, input: $0)
-                self?.collectPhotoButton.rx.bind(to: inputs.userCollectionsAction, input: $0)
             }
             .disposed(by: disposeBag)
+
 
         Observable.combineLatest(
             outputs.smallPhoto,
@@ -93,33 +82,6 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
                 self.activityIndicator.stopAnimating()
             }
             .bind(to: photoImageView.rx.image)
-            .disposed(by: disposeBag)
-
-        outputs.totalLikes
-            .bind(to: likesNumberLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        outputs.likedByUser
-            .map { $0 ? #imageLiteral(resourceName: "favorite-black") : #imageLiteral(resourceName: "favorite-border-black") }
-            .bind(to: likeButton.rx.image())
-            .disposed(by: disposeBag)
-
-        outputs.photoStream
-            .bind { [weak self] in
-                self?.downloadPhotoButton.rx.bind(to: inputs.downloadPhotoAction, input: $0)
-            }
-            .disposed(by: disposeBag)
-
-        inputs.downloadPhotoAction.elements
-            .subscribe { [unowned self] result in
-                guard let linkString = result.element,
-                    let url = URL(string: linkString) else { return }
-
-                Nuke.loadImage(with: url, into: self.dummyImageView) { response, _ in
-                    guard let image = response?.image else { return }
-                    inputs.writeImageToPhotosAlbumAction.execute(image)
-                }
-            }
             .disposed(by: disposeBag)
     }
 }

@@ -44,6 +44,7 @@
 		DC594CCC2274E478006059C0 /* HomeViewCellFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC594CCB2274E478006059C0 /* HomeViewCellFooter.swift */; };
 		DC594CCE2274E48C006059C0 /* HomeViewCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC594CCD2274E48C006059C0 /* HomeViewCellHeader.swift */; };
 		DC594CD02274E97A006059C0 /* HomeViewCellHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC594CCF2274E97A006059C0 /* HomeViewCellHeaderModel.swift */; };
+		DC594CD22275C013006059C0 /* HomeViewCellFooterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC594CD12275C013006059C0 /* HomeViewCellFooterModel.swift */; };
 		DC5AF72B1FACCBF300ADA2BB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF72A1FACCBF300ADA2BB /* User.swift */; };
 		DC5AF72C1FACCBF300ADA2BB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF72A1FACCBF300ADA2BB /* User.swift */; };
 		DC5AF72D1FACCBF300ADA2BB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF72A1FACCBF300ADA2BB /* User.swift */; };
@@ -392,6 +393,7 @@
 		DC594CCB2274E478006059C0 /* HomeViewCellFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellFooter.swift; sourceTree = "<group>"; };
 		DC594CCD2274E48C006059C0 /* HomeViewCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellHeader.swift; sourceTree = "<group>"; };
 		DC594CCF2274E97A006059C0 /* HomeViewCellHeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellHeaderModel.swift; sourceTree = "<group>"; };
+		DC594CD12275C013006059C0 /* HomeViewCellFooterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellFooterModel.swift; sourceTree = "<group>"; };
 		DC5AF72A1FACCBF300ADA2BB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		DC5AF73F1FACE6A300ADA2BB /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -633,6 +635,7 @@
 			isa = PBXGroup;
 			children = (
 				DC594CCB2274E478006059C0 /* HomeViewCellFooter.swift */,
+				DC594CD12275C013006059C0 /* HomeViewCellFooterModel.swift */,
 			);
 			path = Footer;
 			sourceTree = "<group>";
@@ -1365,6 +1368,7 @@
 				C0CD244E213FEBC10053A802 /* CollectionCell.swift in Sources */,
 				DC73734120A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */,
 				DCCCFCC5203A52410024D417 /* Resolution.swift in Sources */,
+				DC594CD22275C013006059C0 /* HomeViewCellFooterModel.swift in Sources */,
 				DCBE008E202A1EB30065BEF3 /* String+Extensions.swift in Sources */,
 				DC7CF5821FC464BF006E0A39 /* URL.swift in Sources */,
 				DC73732920A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */,
