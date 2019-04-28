@@ -33,13 +33,7 @@ class HomeViewController: UIViewController, BindableType {
 
             if let pinterestLayout = collectionView.collectionViewLayout as? PinterestLayout {
                 cellModel.outputs.photoSize
-                    .map { (size) -> CGSize in
-                        let (width, height) = size
-                        let screenWidth = Double(UIScreen.main.bounds.width)
-                        let newHeight = (height * screenWidth / width).rounded()
-                        // FIX 😳: 115 is the size of top + bottom bar
-                        return CGSize(width: screenWidth, height: newHeight + 115.0)
-                    }
+                    .map { CGSize(width: $0, height: $1) }
                     .bind(to: pinterestLayout.rx.updateSize(indexPath))
                     .disposed(by: self.disposeBag)
             }

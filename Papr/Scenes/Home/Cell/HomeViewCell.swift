@@ -20,11 +20,13 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
 
     // MARK: IBOutlets
     @IBOutlet private var headerView: HomeViewCellHeader!
+    @IBOutlet private var headerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private var photoImageView: UIImageView!
     @IBOutlet private var photoButton: UIButton!
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet var footerView: HomeViewCellFooter!
-    
+    @IBOutlet private var footerView: HomeViewCellFooter!
+    @IBOutlet private var footerViewHeightConstraint: NSLayoutConstraint!
+
     // MARK: Private
     private static let imagePipeline = Nuke.ImagePipeline.shared
     private var disposeBag = DisposeBag()
@@ -52,6 +54,16 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
         let this = HomeViewCell.self
 
         headerView.bind(to: outputs.headerViewModelType)
+
+        outputs.extraHeight
+            .map { CGFloat($0) }
+            .bind(to: headerViewHeightConstraint.rx.constant)
+            .disposed(by: disposeBag)
+
+        outputs.extraHeight
+            .map { CGFloat($0) }
+            .bind(to: footerViewHeightConstraint.rx.constant)
+            .disposed(by: disposeBag)
 
         outputs.photoStream
             .map { $0.id }

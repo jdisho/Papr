@@ -19,6 +19,7 @@ protocol HomeViewCellModelOutput {
     var regularPhoto: Observable<String> { get }
     var fullPhoto: Observable<String> { get }
     var photoSize: Observable<(Double, Double)> { get }
+    var extraHeight: Observable<Double> { get }
     var headerViewModelType: HomeViewCellHeaderModelType { get }
 }
 
@@ -49,6 +50,7 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
     let regularPhoto: Observable<String>
     let fullPhoto: Observable<String>
     let photoSize: Observable<(Double, Double)>
+    let extraHeight = Observable<Double>.just(60.0)
 
     lazy var headerViewModelType: HomeViewCellHeaderModelType = {
         return HomeViewCellHeaderModel(photo: photo)
@@ -81,9 +83,19 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
             .map { $0.urls?.full }
             .unwrap()
 
-        photoSize = Observable.combineLatest(
-            photoStream.map { $0.width }.unwrap().map { Double($0) },
-            photoStream.map { $0.height }.unwrap().map { Double($0) }
-        )
+        let height = photoStream
+            .map { $0.height }
+            .unwrap()
+            .map { Double($0) }
+            .map { $0 * Double(UIScreen.main.bounds.width)}
+
+        let width = photoStream
+            .map { $0.width }
+            .unwrap()
+            .map { Double($0) }
+
+        photoSize = Observable.combineLatest(width, height, extraHeight).map { width, height, extraHeight in
+            return (Double(UIScreen.main.bounds.width), height / width + 2 * extraHeight)
+        }
     }
 }

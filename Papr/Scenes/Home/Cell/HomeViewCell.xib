@@ -70,7 +70,9 @@
             <connections>
                 <outlet property="activityIndicator" destination="sUg-8C-vt0" id="9XL-gP-1LI"/>
                 <outlet property="footerView" destination="Fj9-vV-NgQ" id="sAc-Ii-TL7"/>
+                <outlet property="footerViewHeightConstraint" destination="BzB-9S-NN0" id="w59-8D-rWI"/>
                 <outlet property="headerView" destination="lQp-JW-puM" id="T5o-bG-wri"/>
+                <outlet property="headerViewHeightConstraint" destination="7kV-FL-vOr" id="FWh-6e-6Y6"/>
                 <outlet property="photoButton" destination="vis-8C-vui" id="cX6-ys-Mws"/>
                 <outlet property="photoImageView" destination="LDX-1G-ZHE" id="8iP-d7-eNZ"/>
             </connections>
