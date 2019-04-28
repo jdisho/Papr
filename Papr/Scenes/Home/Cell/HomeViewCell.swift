@@ -19,7 +19,7 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
     var viewModel: HomeViewCellModelType!
 
     // MARK: IBOutlets
-    @IBOutlet private var headerViewContainer: UIView!
+    @IBOutlet private var headerView: HomeViewCellHeader!
     @IBOutlet private var photoImageView: UIImageView!
     @IBOutlet private var photoButton: UIButton!
     @IBOutlet private var likeButton: UIButton!
@@ -27,8 +27,6 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
     @IBOutlet private var collectPhotoButton: UIButton!
     @IBOutlet private var downloadPhotoButton: UIButton!
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
-
-    private var header = HomeViewCellHeader()
 
     // MARK: Private
     private static let imagePipeline = Nuke.ImagePipeline.shared
@@ -40,7 +38,6 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
         super.awakeFromNib()
 
         photoButton.isExclusiveTouch = true
-        header.add(to: headerViewContainer).pinToEdges()
     }
 
     override func prepareForReuse() {
@@ -59,7 +56,7 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
         let outputs = viewModel.outputs
         let this = HomeViewCell.self
 
-        header.bind(to: outputs.headerViewModelType)
+        headerView.bind(to: outputs.headerViewModelType)
 
         outputs.photoStream
             .map { $0.id }

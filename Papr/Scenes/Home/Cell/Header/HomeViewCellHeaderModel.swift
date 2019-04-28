@@ -39,7 +39,7 @@ struct HomeViewCellHeaderModel: HomeViewCellHeaderModelInput,
         let photoStream = Observable.just(photo)
 
         profileImageURL = photoStream
-            .map {  $0.user?.profileImage?.medium }
+            .map {  $0.user?.profileImage?.large }
             .unwrap()
             .mapToURL()
 
