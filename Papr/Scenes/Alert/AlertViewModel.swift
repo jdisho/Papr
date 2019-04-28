@@ -11,7 +11,7 @@ import RxSwift
 import Action
 
 enum AlertMode {
-    case ok
+    case cancel
     case yesNo
 }
 

@@ -25,19 +25,19 @@ class AlertViewController: UIAlertController, BindableType {
         let outputs = viewModel.outputs
         
         outputs.title
-            .bind(to: self.rx.title)
+            .bind(to: rx.title)
             .disposed(by: disposeBag)
         
         outputs.message
-            .bind(to: self.rx.message)
+            .bind(to: rx.message)
             .disposed(by: disposeBag)
         
         outputs.mode.subscribe { mode in
             guard let mode = mode.element else { return }
             switch mode {
-            case .ok:
+            case .cancel:
                 let alertAction = UIAlertAction(
-                    title: "Ok",
+                    title: "Cancel",
                     style: .cancel,
                     handler: { _ in  inputs.closeAction.execute(()) })
                 self.addAction(alertAction)

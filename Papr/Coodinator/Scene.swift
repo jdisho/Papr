@@ -22,6 +22,7 @@ enum Scene {
     case papr
     case login(LoginViewModel)
     case alert(AlertViewModel)
+    case actionSheet(AlertViewModel, actions: [UIAlertAction])
     case activity([Any])
     case photoDetails(PhotoDetailsViewModel)
     case addToCollection(AddToCollectionViewModel)
@@ -87,6 +88,11 @@ extension Scene: TargetScene {
             return .present(vc)
         case let .alert(viewModel):
             var vc = AlertViewController(title: nil, message: nil, preferredStyle: .alert)
+            vc.bind(to: viewModel)
+            return .alert(vc)
+        case let .actionSheet(viewModel, actions):
+            var vc = AlertViewController(title: nil, message: nil, preferredStyle: .actionSheet)
+            actions.forEach { vc.addAction($0) }
             vc.bind(to: viewModel)
             return .alert(vc)
         case let .activity(items):

@@ -145,7 +145,7 @@ class HomeViewCellFooterModel: HomeViewCellFooterModelInput,
             let alertViewModel = AlertViewModel(
                 title: title,
                 message: message,
-                mode: .ok)
+                mode: .cancel)
             return self.sceneCoordinator.transition(to: Scene.alert(alertViewModel))
         }
     }()

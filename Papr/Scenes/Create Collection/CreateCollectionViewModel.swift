@@ -74,7 +74,7 @@ class CreateCollectionViewModel: CreateCollectionViewModelInput,
             let alertViewModel = AlertViewModel(
                 title: "Upsss...",
                 message: message,
-                mode: .ok)
+                mode: .cancel)
             return self.sceneCoordinator.transition(to: Scene.alert(alertViewModel))
         }
     }()
