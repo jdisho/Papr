@@ -41,6 +41,10 @@
 		DC487F452104F0D80042DBBC /* UITableView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F442104F0D80042DBBC /* UITableView+Identifiable.swift */; };
 		DC487F472104F0FF0042DBBC /* UICollectionView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F462104F0FF0042DBBC /* UICollectionView+Identifiable.swift */; };
 		DC487F4A2104FCB00042DBBC /* BouncyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F482104FCB00042DBBC /* BouncyView.swift */; };
+		DC594CCC2274E478006059C0 /* HomeViewCellFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC594CCB2274E478006059C0 /* HomeViewCellFooter.swift */; };
+		DC594CCE2274E48C006059C0 /* HomeViewCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC594CCD2274E48C006059C0 /* HomeViewCellHeader.swift */; };
+		DC594CD02274E97A006059C0 /* HomeViewCellHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC594CCF2274E97A006059C0 /* HomeViewCellHeaderModel.swift */; };
+		DC594CD22275C013006059C0 /* HomeViewCellFooterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC594CD12275C013006059C0 /* HomeViewCellFooterModel.swift */; };
 		DC5AF72B1FACCBF300ADA2BB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF72A1FACCBF300ADA2BB /* User.swift */; };
 		DC5AF72C1FACCBF300ADA2BB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF72A1FACCBF300ADA2BB /* User.swift */; };
 		DC5AF72D1FACCBF300ADA2BB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5AF72A1FACCBF300ADA2BB /* User.swift */; };
@@ -294,9 +298,6 @@
 		DCC8CA132002CC2700F6C540 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */; };
 		DCC8CA142002CC2700F6C540 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */; };
 		DCC8CA152002CC2700F6C540 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */; };
-		DCC8CA162002CC2700F6C540 /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */; };
-		DCC8CA172002CC2700F6C540 /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */; };
-		DCC8CA182002CC2700F6C540 /* HomeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */; };
 		DCC8CA1A2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */; };
 		DCC8CA1B2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */; };
 		DCC8CA1C2002CC3D00F6C540 /* HomeViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */; };
@@ -386,6 +387,10 @@
 		DC487F442104F0D80042DBBC /* UITableView+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Identifiable.swift"; sourceTree = "<group>"; };
 		DC487F462104F0FF0042DBBC /* UICollectionView+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Identifiable.swift"; sourceTree = "<group>"; };
 		DC487F482104FCB00042DBBC /* BouncyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyView.swift; sourceTree = "<group>"; };
+		DC594CCB2274E478006059C0 /* HomeViewCellFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellFooter.swift; sourceTree = "<group>"; };
+		DC594CCD2274E48C006059C0 /* HomeViewCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellHeader.swift; sourceTree = "<group>"; };
+		DC594CCF2274E97A006059C0 /* HomeViewCellHeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellHeaderModel.swift; sourceTree = "<group>"; };
+		DC594CD12275C013006059C0 /* HomeViewCellFooterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellFooterModel.swift; sourceTree = "<group>"; };
 		DC5AF72A1FACCBF300ADA2BB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DC5AF72E1FACCE5200ADA2BB /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		DC5AF73F1FACE6A300ADA2BB /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -469,7 +474,6 @@
 		DCC8CA052002BEE300F6C540 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DCC8CA0D2002BEF100F6C540 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
-		DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewCell.xib; sourceTree = "<group>"; };
 		DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellModel.swift; sourceTree = "<group>"; };
 		DCC8CA1D2002D4C900F6C540 /* ObservableType+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableType+Extras.swift"; sourceTree = "<group>"; };
 		DCCCFCBC203A45DE0024D417 /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
@@ -612,6 +616,24 @@
 				DC487F462104F0FF0042DBBC /* UICollectionView+Identifiable.swift */,
 			);
 			path = Indentifiable;
+			sourceTree = "<group>";
+		};
+		DC594CC92274E3C2006059C0 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				DC594CCD2274E48C006059C0 /* HomeViewCellHeader.swift */,
+				DC594CCF2274E97A006059C0 /* HomeViewCellHeaderModel.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		DC594CCA2274E3FE006059C0 /* Footer */ = {
+			isa = PBXGroup;
+			children = (
+				DC594CCB2274E478006059C0 /* HomeViewCellFooter.swift */,
+				DC594CD12275C013006059C0 /* HomeViewCellFooterModel.swift */,
+			);
+			path = Footer;
 			sourceTree = "<group>";
 		};
 		DC5AF7531FAD2EE400ADA2BB /* Enums */ = {
@@ -944,9 +966,10 @@
 		DCC8CA042002BECB00F6C540 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				DC594CC92274E3C2006059C0 /* Header */,
+				DC594CCA2274E3FE006059C0 /* Footer */,
 				DCC8CA112002CC2700F6C540 /* HomeViewCell.swift */,
 				DCC8CA192002CC3D00F6C540 /* HomeViewCellModel.swift */,
-				DCC8CA122002CC2700F6C540 /* HomeViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1115,7 +1138,6 @@
 				C09D7657216CC91E0035F54D /* UserProfileViewController.xib in Resources */,
 				DC658D88208CEEE500FEBC31 /* AddToCollectionViewController.xib in Resources */,
 				DCB915B820BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */,
-				DCC8CA162002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DC3917A82096683600492F62 /* CreateCollectionViewController.xib in Resources */,
 				DC66E66920A4D7D6005E5E31 /* SearchViewController.xib in Resources */,
 				DCBB1B271FA7B1BD004E95F0 /* Main.storyboard in Resources */,
@@ -1129,7 +1151,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCC8CA172002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DCBB1B641FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 				DCB915B920BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */,
 				DC3917A92096683600492F62 /* CreateCollectionViewController.xib in Resources */,
@@ -1147,7 +1168,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCC8CA182002CC2700F6C540 /* HomeViewCell.xib in Resources */,
 				DCBB1B651FA8BA22004E95F0 /* LoginViewController.xib in Resources */,
 				DCB915BA20BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */,
 				DC3917AA2096683600492F62 /* CreateCollectionViewController.xib in Resources */,
@@ -1267,6 +1287,7 @@
 				DCBE008A202A1A980065BEF3 /* Date+Extensions.swift in Sources */,
 				DCAF6BBF204D465E002B7F00 /* Int+Extensions.swift in Sources */,
 				DCBB1B601FA8BA22004E95F0 /* LoginViewController.swift in Sources */,
+				DC594CCC2274E478006059C0 /* HomeViewCellFooter.swift in Sources */,
 				DC658D9A208CFE1700FEBC31 /* PhotoCollectionCellModel.swift in Sources */,
 				DCDDF32A2027DA5F00E1EB81 /* UIView+Extensions.swift in Sources */,
 				DC66E65920A4CB4C005E5E31 /* SearchViewModel.swift in Sources */,
@@ -1296,6 +1317,7 @@
 				DC658D85208CEEE500FEBC31 /* AddToCollectionViewController.swift in Sources */,
 				DC3917AC2096684800492F62 /* CreateCollectionViewModel.swift in Sources */,
 				DC72A4D220C305D7001550D1 /* UserCell.swift in Sources */,
+				DC594CD02274E97A006059C0 /* HomeViewCellHeaderModel.swift in Sources */,
 				DCEE1F0F1FC97CE80010BADE /* AlertViewModel.swift in Sources */,
 				DC71C3021FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				C0F79DF12167A58C0051232D /* PinterestLayout+Rx.swift in Sources */,
@@ -1333,10 +1355,12 @@
 				DC66E66120A4D003005E5E31 /* SearchServiceType.swift in Sources */,
 				DC2E76F8203B6DB90023A173 /* LikeUnlike.swift in Sources */,
 				DC9147942082B9AD00781B65 /* Hero+Rx.swift in Sources */,
+				DC594CCE2274E48C006059C0 /* HomeViewCellHeader.swift in Sources */,
 				DCBAEE6320363CD600561CBA /* Orientation.swift in Sources */,
 				C0CD244E213FEBC10053A802 /* CollectionCell.swift in Sources */,
 				DC73734120A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */,
 				DCCCFCC5203A52410024D417 /* Resolution.swift in Sources */,
+				DC594CD22275C013006059C0 /* HomeViewCellFooterModel.swift in Sources */,
 				DCBE008E202A1EB30065BEF3 /* String+Extensions.swift in Sources */,
 				DC7CF5821FC464BF006E0A39 /* URL.swift in Sources */,
 				DC73732920A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */,

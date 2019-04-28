@@ -13,45 +13,33 @@ import RxNuke
 import Photos
 import Hero
 
-class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassIdentifiable {
+class HomeViewCell: UICollectionViewCell, BindableType,  ClassIdentifiable {
 
     // MARK: ViewModel
-    var viewModel: HomeViewCellModelType!
-
-    // MARK: IBOutlets
-    @IBOutlet var userImageView: UIImageView!
-    @IBOutlet var fullNameLabel: UILabel!
-    @IBOutlet var usernameLabel: UILabel!
-    @IBOutlet var photoImageView: UIImageView!
-    @IBOutlet var photoButton: UIButton!
-    @IBOutlet var postedTimeLabel: UILabel!
-    @IBOutlet var likeButton: UIButton!
-    @IBOutlet var likesNumberLabel: UILabel!
-    @IBOutlet var collectPhotoButton: UIButton!
-    @IBOutlet var downloadPhotoButton: UIButton!
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    var viewModel: HomeViewCellModelType! {
+        didSet {
+            configureUI()
+        }
+    }
 
     // MARK: Private
+    private let stackView = UIStackView()
+    private var headerView = HomeViewCellHeader()
+    private var photoButton = UIButton()
+    private let photoImageView = UIImageView()
+    private var footerView = HomeViewCellFooter()
+
     private static let imagePipeline = Nuke.ImagePipeline.shared
     private var disposeBag = DisposeBag()
-    private let dummyImageView = UIImageView()
 
     // MARK: Overrides
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        userImageView.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
-        photoButton.isExclusiveTouch = true
-    }
 
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        userImageView.image = nil
         photoImageView.image = nil
-        dummyImageView.image = nil
-        likeButton.rx.action = nil
         photoButton.rx.action = nil
+
         disposeBag = DisposeBag()
     }
 
@@ -61,30 +49,19 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
         let outputs = viewModel.outputs
         let this = HomeViewCell.self
 
+        headerView.bind(to: outputs.headerViewModelType)
+        footerView.bind(to: outputs.footerViewModelType)
+
         outputs.photoStream
             .map { $0.id }
             .unwrap()
             .bind(to: photoImageView.rx.heroId)
             .disposed(by: disposeBag)
 
-        Observable.combineLatest(outputs.likedByUser, outputs.photoStream)
-            .bind { [weak self] in
-                self?.likeButton.rx.bind(to: $0 ? inputs.unlikePhotoAction: inputs.likePhotoAction, input: $1)
-            }
-            .disposed(by: disposeBag)
-
         outputs.photoStream
             .bind { [weak self] in
                 self?.photoButton.rx.bind(to: inputs.photoDetailsAction, input: $0)
-                self?.collectPhotoButton.rx.bind(to: inputs.userCollectionsAction, input: $0)
             }
-            .disposed(by: disposeBag)
-
-        outputs.userProfileImage
-            .mapToURL()
-            .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
-            .map { $0.image }
-            .bind(to: userImageView.rx.image)
             .disposed(by: disposeBag)
 
         Observable.combineLatest(
@@ -99,53 +76,35 @@ class HomeViewCell: UICollectionViewCell, BindableType, NibIdentifiable & ClassI
                 )
             }
             .map { $0.image }
-            .execute { [unowned self] _ in
-                self.activityIndicator.stopAnimating()
-            }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
+    }
 
-        outputs.photoStream
-            .map { $0.user?.fullName }
-            .bind(to: fullNameLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        outputs.photoStream
-            .map { "@\($0.user?.username ?? "")" }
-            .bind(to: usernameLabel.rx.text)
-            .disposed(by: disposeBag)
+    private func configureUI() {
 
-        outputs.photoStream
-            .map { $0.updated?.toDate?.abbreviated }
-            .bind(to: postedTimeLabel.rx.text)
-            .disposed(by: disposeBag)
+        let headerViewHeight: CGFloat = 60.0
+        let footerViewHeight: CGFloat = 60.0
 
-        outputs.totalLikes
-            .bind(to: likesNumberLabel.rx.text)
-            .disposed(by: disposeBag)
-        
-        outputs.likedByUser
-            .map { $0 ? #imageLiteral(resourceName: "favorite-black") : #imageLiteral(resourceName: "favorite-border-black") }
-            .bind(to: likeButton.rx.image())
-            .disposed(by: disposeBag)
+        stackView.add(to: contentView).pinToEdges()
 
-        outputs.photoStream
-            .bind { [weak self] in
-                self?.downloadPhotoButton.rx.bind(to: inputs.downloadPhotoAction, input: $0)
-            }
-            .disposed(by: disposeBag)
+        photoButton.add(to: contentView)
+            .top(to: \.topAnchor, constant: headerViewHeight)
+            .bottom(to: \.bottomAnchor, constant: footerViewHeight)
+            .left(to: \.leftAnchor)
+            .right(to: \.rightAnchor)
 
+        headerView.height(headerViewHeight)
+        footerView.height(footerViewHeight)
 
-        inputs.downloadPhotoAction.elements
-            .subscribe { [unowned self] result in
-                guard let linkString = result.element,
-                    let url = URL(string: linkString) else { return }
+        photoButton.isExclusiveTouch = true
 
-                Nuke.loadImage(with: url, into: self.dummyImageView) { response, _ in
-                    guard let image = response?.image else { return }
-                    inputs.writeImageToPhotosAlbumAction.execute(image)
-                }
-            }
-            .disposed(by: disposeBag)
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 0.0
+
+        stackView.addArrangedSubview(headerView)
+        stackView.addArrangedSubview(photoImageView)
+        stackView.addArrangedSubview(footerView)
     }
 }
