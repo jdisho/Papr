@@ -11,7 +11,7 @@ import RxSwift
 
 class UserProfileViewController: UIViewController, BindableType {
 
-    @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var logoutButton: ButtonRounded!
     
     var viewModel: UserProfileViewModel!
     
@@ -19,6 +19,10 @@ class UserProfileViewController: UIViewController, BindableType {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        logoutButton.configure(type: .border)
+        
+        title = "User profile"
     }
 
     func bindViewModel() {

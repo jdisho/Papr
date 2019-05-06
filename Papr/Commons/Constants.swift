@@ -20,6 +20,7 @@ struct Constants {
 
         struct Style {
             static let imageCornersRadius: CGFloat = 8.0
+            static let imageCornersRadiusWidth: CGFloat = 3.0
         }
     }
 
