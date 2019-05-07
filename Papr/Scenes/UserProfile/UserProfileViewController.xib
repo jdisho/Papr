@@ -1,36 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserProfileViewController" customModule="Papr" customModuleProvider="target">
             <connections>
+                <outlet property="logoutButton" destination="FVq-Z3-qKZ" id="3dE-ar-YNL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UserProfile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAS-DG-yI9">
-                    <rect key="frame" x="16" y="333" width="343" height="21"/>
+                    <rect key="frame" x="16" y="283.5" width="288" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FVq-Z3-qKZ" customClass="ButtonRounded" customModule="Papr" customModuleProvider="target">
+                    <rect key="frame" x="24" y="496" width="272" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="fUB-pd-MMd"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                    <state key="normal" title="Log out">
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="FVq-Z3-qKZ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="4cE-f9-dfX"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FVq-Z3-qKZ" secondAttribute="bottom" constant="24" id="GAi-de-TAY"/>
                 <constraint firstItem="wAS-DG-yI9" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="ULU-NX-HrU"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FVq-Z3-qKZ" secondAttribute="trailing" constant="24" id="YKr-7R-vH9"/>
                 <constraint firstItem="wAS-DG-yI9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="aek-Lf-LsA"/>
+                <constraint firstItem="FVq-Z3-qKZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="hyO-dG-Ejb"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wAS-DG-yI9" secondAttribute="trailing" constant="16" id="iek-82-xAH"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
