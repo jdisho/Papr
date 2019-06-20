@@ -1,22 +1,20 @@
 PODS:
-  - Action (3.9.1):
-    - RxCocoa (~> 4.3)
-    - RxSwift (~> 4.3)
+  - Action (3.11.0):
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
   - Differentiator (3.1.0)
   - Hero (1.4.0)
-  - Nuke (7.5.2)
-  - RxAtomic (4.4.0)
-  - RxCocoa (4.4.0):
-    - RxSwift (~> 4.0)
+  - Nuke (7.6.3)
+  - RxCocoa (4.5.0):
+    - RxSwift (>= 4.4.2, ~> 4.4)
   - RxDataSources (3.1.0):
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxNuke (0.7):
+  - RxNuke (0.8.1):
     - Nuke (~> 7.0)
     - RxSwift (~> 4.0)
-  - RxSwift (4.4.0):
-    - RxAtomic (~> 4.4)
+  - RxSwift (4.5.0)
   - TinyNetworking/Core (2.1.0)
   - TinyNetworking/RxSwift (2.1.0):
     - RxSwift (~> 4.0)
@@ -39,7 +37,6 @@ SPEC REPOS:
     - Differentiator
     - Hero
     - Nuke
-    - RxAtomic
     - RxCocoa
     - RxDataSources
     - RxNuke
@@ -48,18 +45,17 @@ SPEC REPOS:
     - VanillaConstraints
 
 SPEC CHECKSUMS:
-  Action: 2f461c203c480b17aa99b3bb166e4329ecff6908
+  Action: 689181e4c3f6566844178d8a7da6fef39a9597fc
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
-  Nuke: 0350d346a688426e8f2331253ef28dc2fc4f6178
-  RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
-  RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
+  Nuke: 44130e95e09463f8773ae4b96b90de1eba6b3350
+  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
-  RxNuke: 8be1b71b08b238608834e5ffac597bcafab1e66f
-  RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
+  RxNuke: 3ae4a88cb661f913363a1a1208e11eda03e2c1ba
+  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   TinyNetworking: a1d9df65811b7b7c8991aab6a866376c92802bd8
   VanillaConstraints: 79afbbd46076f7db75156fe89d73529beae99a9f
 
 PODFILE CHECKSUM: 7bb83ef22953fe01a8077c84b732c839ebdb4a78
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.7.1
