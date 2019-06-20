@@ -20,14 +20,3 @@ extension Reactive where Base: UIBarButtonItem {
     }
 }
 
-extension Reactive where Base: UIButton {
-
-    /// Bindable sink for `backgroundColor` property.
-    public var backgroundColor: Binder<UIColor> {
-        return Binder(base) { button, color in
-            button.backgroundColor = color
-        }
-    }
-}
-
-

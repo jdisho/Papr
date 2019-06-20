@@ -45,8 +45,7 @@ class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewMode
     private lazy var searchAction: Action<Int, Void> = {
         return Action<Int, Void> { [weak self] row in
             guard let `self` = self,
-                let searchStringValue = try? self.searchString.value(),
-                let query = searchStringValue else { return .empty() }
+                let query = try? self.searchString.value() else { return .empty() }
             switch row {
             case 0:
                 let viewModel = SearchPhotosViewModel(type: .searchPhotos(searchQuery: query, searchService: SearchService()))
