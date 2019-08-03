@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 import Action
 import SafariServices
+import AuthenticationServices
 
 enum LoginState {
     case idle
@@ -64,9 +65,9 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     private let sceneCoordinator: SceneCoordinatorType
     private var _authSession: Any?
     @available(iOS 11.0, *)
-    private var authSession: SFAuthenticationSession? {
+    private var authSession: ASWebAuthenticationSession? {
         get {
-            return _authSession as? SFAuthenticationSession
+            return _authSession as? ASWebAuthenticationSession
         }
         set {
             _authSession = newValue
@@ -117,13 +118,13 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
     
     private func authenticate() -> Observable<Void> {        
         if #available(iOS 11.0, *) {
-            self.authSession = SFAuthenticationSession(
+            self.authSession = ASWebAuthenticationSession(
                 url: authManager.authURL,
                 callbackURLScheme: Constants.UnsplashSettings.callbackURLScheme,
                 completionHandler: { [weak self] (callbackUrl, error) in
                 guard error == nil, let callbackUrl = callbackUrl else {
                     switch error {
-                    case SFAuthenticationError.canceledLogin?: break
+                    case ASWebAuthenticationSessionError.Code.canceledLogin?: break
                     default: fatalError()
                     }
                     return

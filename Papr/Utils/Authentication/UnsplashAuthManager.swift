@@ -13,7 +13,7 @@ protocol UnsplashSessionListener {
      func didReceiveRedirect(code: String)
 }
 
-enum UnsplashAuthorization: ResourceType {
+enum UnsplashAuthorization: Resource {
 
     case accessToken(withCode: String)
 
@@ -45,6 +45,10 @@ enum UnsplashAuthorization: ResourceType {
 
     var headers: [String : String] {
         return [:]
+    }
+
+    var cachePolicy: URLRequest.CachePolicy {
+        return .useProtocolCachePolicy
     }
 }
 
@@ -120,7 +124,7 @@ class UnsplashAuthManager {
                     UserDefaults.standard.set(token, forKey: self.clientID)
                     completion(token, nil)
                 }
-            case let .error(error):
+            case let .failure(error):
                 completion(nil, error)
             }
         }

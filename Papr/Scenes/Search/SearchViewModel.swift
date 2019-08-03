@@ -12,7 +12,7 @@ import Action
 
 protocol SearchViewModelInput {
     var searchString: BehaviorSubject<String?> { get }
-    var searchTrigger: InputSubject<Int>! { get }
+    var searchTrigger: AnyObserver<Int>! { get }
 }
 
 protocol SearchViewModelOutput {
@@ -31,7 +31,7 @@ class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewMode
 
     // MARK: - Inputs
     var searchString = BehaviorSubject<String?>(value: nil)
-    var searchTrigger: InputSubject<Int>!
+    var searchTrigger: AnyObserver<Int>!
 
     // MARK: - Outputs
     lazy var searchResultCellModel: Observable<[SearchResultCellModelType]> = {

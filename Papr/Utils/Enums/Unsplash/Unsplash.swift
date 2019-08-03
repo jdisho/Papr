@@ -196,7 +196,7 @@ enum Unsplash {
     // case updatePhoto(String)
 }
 
-extension Unsplash: ResourceType {
+extension Unsplash: Resource {
 
     var baseURL: URL {
         guard let url = URL(string: "https://api.unsplash.com") else {
@@ -427,5 +427,9 @@ extension Unsplash: ResourceType {
             return ["Authorization": "Client-ID \(clientID)"]
         }
         return ["Authorization": "Bearer \(token)"]
+    }
+
+    var cachePolicy: URLRequest.CachePolicy {
+        return .useProtocolCachePolicy
     }
 }

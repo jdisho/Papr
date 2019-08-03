@@ -22,7 +22,7 @@ PODS:
   - TinyNetworking/RxSwift (3.0.0):
     - RxSwift (~> 5.0)
     - TinyNetworking/Core
-  - VanillaConstraints (1.0.1)
+  - VanillaConstraints (1.0.4)
 
 DEPENDENCIES:
   - Action
@@ -59,7 +59,7 @@ SPEC CHECKSUMS:
   RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
   RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
   TinyNetworking: 8e10bcb748c1f3cf8593bbf5891c36e9b2c3b2fb
-  VanillaConstraints: 79afbbd46076f7db75156fe89d73529beae99a9f
+  VanillaConstraints: 72ceb6f087b4467b22209d078e43819d8d331bf5
 
 PODFILE CHECKSUM: 7bb83ef22953fe01a8077c84b732c839ebdb4a78
 
