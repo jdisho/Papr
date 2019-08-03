@@ -1,23 +1,26 @@
 PODS:
-  - Action (3.11.0):
-    - RxCocoa (~> 4.0)
-    - RxSwift (~> 4.0)
-  - Differentiator (3.1.0)
+  - Action (4.0.0):
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - Differentiator (4.0.1)
   - Hero (1.4.0)
   - Nuke (7.6.3)
-  - RxCocoa (4.5.0):
-    - RxSwift (>= 4.4.2, ~> 4.4)
-  - RxDataSources (3.1.0):
-    - Differentiator (~> 3.0)
-    - RxCocoa (~> 4.0)
-    - RxSwift (~> 4.0)
-  - RxNuke (0.8.1):
+  - RxCocoa (5.0.0):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxDataSources (4.0.1):
+    - Differentiator (~> 4.0)
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxNuke (0.9):
     - Nuke (~> 7.0)
-    - RxSwift (~> 4.0)
-  - RxSwift (4.5.0)
-  - TinyNetworking/Core (2.1.0)
-  - TinyNetworking/RxSwift (2.1.0):
-    - RxSwift (~> 4.0)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.0.0):
+    - RxSwift (~> 5)
+  - RxSwift (5.0.0)
+  - TinyNetworking/Core (3.0.0)
+  - TinyNetworking/RxSwift (3.0.0):
+    - RxSwift (~> 5.0)
     - TinyNetworking/Core
   - VanillaConstraints (1.0.1)
 
@@ -40,22 +43,24 @@ SPEC REPOS:
     - RxCocoa
     - RxDataSources
     - RxNuke
+    - RxRelay
     - RxSwift
     - TinyNetworking
     - VanillaConstraints
 
 SPEC CHECKSUMS:
-  Action: 689181e4c3f6566844178d8a7da6fef39a9597fc
-  Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
+  Action: 0d14986aad0f1330aa27ce65d0cdeaacbb63d91c
+  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   Nuke: 44130e95e09463f8773ae4b96b90de1eba6b3350
-  RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
-  RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
-  RxNuke: 3ae4a88cb661f913363a1a1208e11eda03e2c1ba
-  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
-  TinyNetworking: a1d9df65811b7b7c8991aab6a866376c92802bd8
+  RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
+  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
+  RxNuke: ca1e591c523f7bff6ffb9119bb4360121e4fda9d
+  RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
+  RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
+  TinyNetworking: 8e10bcb748c1f3cf8593bbf5891c36e9b2c3b2fb
   VanillaConstraints: 79afbbd46076f7db75156fe89d73529beae99a9f
 
 PODFILE CHECKSUM: 7bb83ef22953fe01a8077c84b732c839ebdb4a78
 
-COCOAPODS: 1.7.1
+COCOAPODS: 1.7.5
