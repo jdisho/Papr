@@ -77,6 +77,7 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
 
             navigationController.pushViewController(SceneCoordinator.actualViewController(for: viewController), animated: true)
         case let .present(viewController):
+            viewController.modalPresentationStyle = .fullScreen
             currentViewController.present(viewController, animated: true) {
                 subject.onCompleted()
             }
