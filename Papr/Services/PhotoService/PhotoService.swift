@@ -71,8 +71,8 @@ struct PhotoService: PhotoServiceType {
         ) -> Observable<Result<[Photo], String>> {
 
         let photos: Unsplash = curated ?
-            .curatedPhotos(page: pageNumber, perPage: Constants.photosPerPage, orderBy: orderBy) :
-            .photos(page: pageNumber, perPage: Constants.photosPerPage, orderBy: orderBy)
+            .curatedPhotos(page: pageNumber, perPage: nil, orderBy: orderBy) :
+            .photos(page: pageNumber, perPage: nil, orderBy: orderBy)
 
         return unsplash.rx.request(resource: photos)
             .map(to: [Photo].self)
