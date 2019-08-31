@@ -34,7 +34,7 @@ protocol LoginViewModelType {
     var outputs: LoginViewModelOuput { get }
 }
 
-class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelType   {
+class LoginViewModel: NSObject, LoginViewModelInput, LoginViewModelOuput, LoginViewModelType   {
 
     // MARK: Inputs & Outputs
     var inputs: LoginViewModelInput { return self }
@@ -94,6 +94,8 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
         // ⛓ 311028: https://unsplash.com/collections/311028/autumn
         randomPhotos = photoService.randomPhotos(from: ["311028"], isFeatured: true, orientation: .portrait)
 
+        super.init()
+
         self.authManager.delegate = self
     }
     
@@ -115,25 +117,29 @@ class LoginViewModel: LoginViewModelInput, LoginViewModelOuput, LoginViewModelTy
         }
     }()
 
-    
+
     private func authenticate() -> Observable<Void> {        
         if #available(iOS 11.0, *) {
             self.authSession = ASWebAuthenticationSession(
                 url: authManager.authURL,
                 callbackURLScheme: Constants.UnsplashSettings.callbackURLScheme,
                 completionHandler: { [weak self] (callbackUrl, error) in
-                guard error == nil, let callbackUrl = callbackUrl else {
-                    switch error {
-                    case ASWebAuthenticationSessionError.Code.canceledLogin?: break
-                    default: fatalError()
-                    }
-                    return
-                }
+                guard let callbackUrl = callbackUrl else { return }
                 self?.authManager.receivedCodeRedirect(url: callbackUrl)
             })
+            if #available(iOS 13.0, *) {
+                self.authSession?.presentationContextProvider = self
+
+            }
             self.authSession?.start()
         }
         return .empty()
+    }
+}
+
+extension LoginViewModel: ASWebAuthenticationPresentationContextProviding {
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        return ASPresentationAnchor()
     }
 }
 

@@ -29,7 +29,7 @@ class LoginViewController: UIViewController, BindableType {
     override func viewDidLoad() {
         super.viewDidLoad()
         loginButton.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
-        imageView.dim(withAlpha: 0.3)
+        imageView.dim(withAlpha: 0.1)
         imageView.image = nil
         imageView.image = UIImage(named: "placeholder_wallpaper")
     }
