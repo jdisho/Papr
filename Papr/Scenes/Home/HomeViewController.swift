@@ -78,12 +78,20 @@ class HomeViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         outputs.isRefreshing
+            .execute { [weak self] isRefreshing in
+                if isRefreshing {
+                    self?.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                    self?.collectionView.setContentOffset(CGPoint(x: 0.0, y: -(self?.refreshControl.frame.height ?? 0.0)), animated: true)
+                } else {
+                    self?.collectionView.setContentOffset(.zero, animated: true)
+                }
+            }
             .bind(to: refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
 
         outputs.isRefreshing
             .negate()
-            .bind(to: rightBarButtonItem.rx.isEnabled)
+            .bind(to: rightBarButtonItem.rx.isEnabled, segmentedControl.rx.isEnabled)
             .disposed(by: disposeBag)
 
         outputs.homeViewCellModelTypes
@@ -92,7 +100,6 @@ class HomeViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         collectionView.rx.reachedBottom()
-            .skipUntil(outputs.isRefreshing)
             .bind(to: inputs.loadMore)
             .disposed(by: disposeBag)
 
