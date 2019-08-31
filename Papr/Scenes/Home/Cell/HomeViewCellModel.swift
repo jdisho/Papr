@@ -64,15 +64,12 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
 
     // MARK: Private
     private let photo: Photo
-    private let photoService: PhotoServiceType
     private let sceneCoordinator: SceneCoordinatorType
 
     // MARK: Init
     init(photo: Photo,
-         photoService: PhotoServiceType = PhotoService(),
          sceneCoordinator: SceneCoordinatorType = SceneCoordinator.shared) {
         self.photo = photo
-        self.photoService = photoService
         self.sceneCoordinator = sceneCoordinator
         
         photoStream = Observable.just(photo)
