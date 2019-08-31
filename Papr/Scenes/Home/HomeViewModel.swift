@@ -137,8 +137,6 @@ class HomeViewModel: HomeViewModelType,
         photosType = photosTypeProperty.asObservable()
         orderBy = orderByProperty.asObservable()
 
-
-
         let requestFirst = Observable
             .combineLatest(isRefreshing, orderBy, photosType.map { $0 == .curated })
             .flatMapLatest { isRefreshing, orderBy, isCurated -> Observable<[Photo]> in
@@ -158,7 +156,8 @@ class HomeViewModel: HomeViewModelType,
                         }
                     }
             }
-            .execute { _ in
+            .execute { [unowned self] _ in
+                self.refreshProperty.onNext(false)
                 photoArray = []
                 currentPageNumber = 1
             }
@@ -186,11 +185,8 @@ class HomeViewModel: HomeViewModelType,
 
         photos = requestFirst
             .merge(with: requestNext)
-            .map { [unowned self] photos -> [Photo] in
-                photos.forEach { photo in
-                    photoArray.append(photo)
-                }
-                self.refreshProperty.onNext(false)
+            .map { photos -> [Photo] in
+                photos.forEach { photoArray.append($0) }
                 return photoArray
             }
     }
