@@ -19,6 +19,7 @@ class CreateCollectionViewController: UIViewController, BindableType {
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var descriptionTextField: UITextField!
     @IBOutlet var privateSwitch: UISwitch!
+    @IBOutlet var isPrivateLabel: UILabel!
 
     // MARK: Private
     private let disposeBag = DisposeBag()
@@ -31,6 +32,16 @@ class CreateCollectionViewController: UIViewController, BindableType {
         super.viewDidLoad()
 
         nameTextField.becomeFirstResponder()
+        nameTextField.backgroundColor = Constants.Appearance.Color.systemBackground
+        nameTextField.textColor = Constants.Appearance.Color.label
+
+        descriptionTextField.backgroundColor = Constants.Appearance.Color.systemBackground
+        descriptionTextField.textColor = Constants.Appearance.Color.label
+
+        isPrivateLabel.textColor = Constants.Appearance.Color.label
+
+        view.backgroundColor = Constants.Appearance.Color.systemBackground
+
         configureNavigationBar()
     }
 
@@ -92,7 +103,8 @@ class CreateCollectionViewController: UIViewController, BindableType {
 
         navigationItem.leftBarButtonItem = cancelBarButton
         navigationItem.rightBarButtonItem = saveBarButton
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = Constants.Appearance.Color.label
+        navigationController?.navigationBar.isTranslucent = false
     }
 
 }

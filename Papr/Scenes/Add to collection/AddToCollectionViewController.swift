@@ -35,7 +35,7 @@ class AddToCollectionViewController: UIViewController, BindableType {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        view.backgroundColor = Constants.Appearance.Color.systemBackground
         photoImageView.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
         configureNavigationBar()
         configureCollectionViewActivityIndicator()
@@ -90,11 +90,13 @@ class AddToCollectionViewController: UIViewController, BindableType {
         )
         navigationItem.leftBarButtonItem = cancelBarButton
         navigationItem.rightBarButtonItem = addToCollectionBarButton
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = Constants.Appearance.Color.label
+        navigationController?.navigationBar.isTranslucent = false
     }
 
     private func configureCollectionViewActivityIndicator() {
         collectionViewActivityIndicator = UIActivityIndicatorView(style: .gray)
+        collectionViewActivityIndicator.tintColor = Constants.Appearance.Color.label
         collectionView.addSubview(collectionViewActivityIndicator)
         collectionViewActivityIndicator.center = CGPoint(x: collectionView.frame.width/2, y: collectionView.frame.height/2)
         collectionViewActivityIndicator.startAnimating()
@@ -102,6 +104,7 @@ class AddToCollectionViewController: UIViewController, BindableType {
     }
 
     private func configureCollectionView() {
+        collectionView.backgroundColor = Constants.Appearance.Color.systemBackground
         collectionView.register(cellType: PhotoCollectionViewCell.self)
         guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
         flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
