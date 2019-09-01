@@ -16,6 +16,30 @@ enum Constants {
         enum Color {
             static let iron = UIColor(red: 94.0/255.0, green: 94.0/255.0, blue: 94.0/255.0, alpha: 1.0)
             static let yellowZ = UIColor(red: 252.0/255.0, green: 197.0/255.0, blue: 6.0/255.0, alpha: 1.0)
+
+            static var label: UIColor {
+                if #available(iOS 13.0, *) {
+                    return .label
+                } else {
+                    return .black
+                }
+            }
+
+            static var secondaryLabel: UIColor {
+                if #available(iOS 13.0, *) {
+                    return .secondaryLabel
+                } else {
+                    return .darkGray
+                }
+            }
+
+            static var systemBackground: UIColor {
+                if #available(iOS 13.0, *) {
+                    return .systemBackground
+                } else {
+                    return .white
+                }
+            }
         }
 
         enum Style {
@@ -95,21 +119,27 @@ enum Constants {
 
             static var magnifyingGlass: UIImage {
                 if #available(iOS 13.0, *) {
-                    return UIImage(systemName: "magnifyingglass", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium))!
+                    return UIImage(
+                        systemName: "magnifyingglass",
+                        withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium))!
                 }
                 return UIImage(imageLiteralResourceName: "search-white")
             }
 
             static var photo: UIImage {
                 if #available(iOS 13.0, *) {
-                    return UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium))!
+                    return UIImage(
+                        systemName: "photo",
+                        withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium))!
                 }
                 return UIImage(imageLiteralResourceName: "photo-white")
             }
 
             static var rectangleGrid2x2Fill: UIImage {
                 if #available(iOS 13.0, *) {
-                    return UIImage(systemName: "rectangle.grid.2x2.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium))!
+                    return UIImage(
+                        systemName: "rectangle.grid.2x2.fill",
+                        withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium))!
                 }
                 return UIImage(imageLiteralResourceName: "collections-white")
             }
