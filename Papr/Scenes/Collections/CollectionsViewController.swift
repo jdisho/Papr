@@ -65,7 +65,7 @@ class CollectionsViewController: UIViewController, BindableType {
 
     private func configureCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = Constants.Appearance.Color.systemBackground
         collectionView.add(to: view).pinToEdges()
 
         guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }

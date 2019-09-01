@@ -59,7 +59,7 @@ class PaprNavigationController: UINavigationController {
     // MARK: Helpers
 
     private func configureNavigationBar() {
-        navigationBar.tintColor = .black
+        navigationBar.tintColor = Constants.Appearance.Color.label
         navigationBar.isTranslucent = false
 
         let profileImage = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))

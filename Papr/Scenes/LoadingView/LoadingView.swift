@@ -12,12 +12,13 @@ import VanillaConstraints
 
 class LoadingView: UIView {
 
-    private let activityIndicatorView = UIActivityIndicatorView(style: .gray)
+    private let activityIndicatorView = UIActivityIndicatorView(style: .white)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = .white
+        activityIndicatorView.tintColor = Constants.Appearance.Color.label
+        backgroundColor = Constants.Appearance.Color.systemBackground
 
         activityIndicatorView
             .add(to: self)

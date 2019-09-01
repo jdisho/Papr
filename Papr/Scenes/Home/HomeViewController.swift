@@ -81,7 +81,13 @@ class HomeViewController: UIViewController, BindableType {
             .execute { [weak self] isRefreshing in
                 if isRefreshing {
                     self?.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
-                    self?.collectionView.setContentOffset(CGPoint(x: 0.0, y: -(self?.refreshControl.frame.height ?? 0.0)), animated: true)
+                    self?.collectionView.setContentOffset(
+                        CGPoint(
+                            x: 0.0,
+                            y: -(self?.refreshControl.frame.height ?? 0.0)
+                        ),
+                        animated: true
+                    )
                 } else {
                     self?.collectionView.setContentOffset(.zero, animated: true)
                 }
@@ -114,12 +120,13 @@ class HomeViewController: UIViewController, BindableType {
         segmentedControl = UISegmentedControl(items: PhotosType.allCases.map { $0.rawValue })
         segmentedControl.selectedSegmentIndex = 0
         rightBarButtonItem = UIBarButtonItem()
+        rightBarButtonItem.tintColor = Constants.Appearance.Color.label
         navigationItem.titleView = segmentedControl
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
 
     private func configureCollectionView() {
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = Constants.Appearance.Color.systemBackground
         collectionView.add(to: view).pinToEdges()
         collectionView.register(cellType: HomeViewCell.self)
         dataSource = RxCollectionViewSectionedReloadDataSource<HomeSectionModel>(
@@ -129,6 +136,7 @@ class HomeViewController: UIViewController, BindableType {
 
     private func configureRefreshControl() {
         refreshControl = UIRefreshControl()
+        refreshControl.tintColor = Constants.Appearance.Color.label
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         collectionView.addSubview(refreshControl)
     }

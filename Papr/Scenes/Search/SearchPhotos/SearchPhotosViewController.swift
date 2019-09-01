@@ -95,7 +95,7 @@ class SearchPhotosViewController: UIViewController, BindableType {
     }
 
     private func configureCollectionView() {
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = Constants.Appearance.Color.systemBackground
         collectionView.add(to: view).pinToEdges()
         collectionView.register(cellType: SearchPhotosCell.self)
         dataSource = RxCollectionViewSectionedReloadDataSource<SearchPhotosSectionModel>(
