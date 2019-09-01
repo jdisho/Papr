@@ -25,6 +25,7 @@ class HomeViewCellHeader: UIView, BindableType {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 17.0, weight: .regular)
+        label.textColor = Constants.Appearance.Color.label
         return label
     }()
 
@@ -32,7 +33,7 @@ class HomeViewCellHeader: UIView, BindableType {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 15.0, weight: .regular)
-        label.textColor = .darkGray
+        label.textColor = Constants.Appearance.Color.secondaryLabel
         return label
     }()
 
@@ -40,7 +41,7 @@ class HomeViewCellHeader: UIView, BindableType {
         let label = UILabel()
         label.textAlignment = .right
         label.font = .systemFont(ofSize: 15.0, weight: .regular)
-        label.textColor = .darkGray
+        label.textColor = Constants.Appearance.Color.secondaryLabel
         return label
     }()
 
@@ -71,6 +72,8 @@ class HomeViewCellHeader: UIView, BindableType {
     }
 
     private func configureUI() {
+
+        backgroundColor = Constants.Appearance.Color.systemBackground
         profileImageView.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
 
         stackView.axis = .vertical
