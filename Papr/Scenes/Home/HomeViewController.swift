@@ -73,7 +73,7 @@ class HomeViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         outputs.orderBy
-            .map { $0 == .popular ? #imageLiteral(resourceName: "hot") : #imageLiteral(resourceName: "up")}
+            .map { $0 == .popular ? Constants.Appearance.Icon.flame : Constants.Appearance.Icon.arrowUpRight }
             .bind(to: rightBarButtonItem.rx.image)
             .disposed(by: disposeBag)
 

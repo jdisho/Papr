@@ -56,23 +56,29 @@ extension Scene: TargetScene {
             let rootCollectionVC = PaprNavigationController(rootViewController: collectionsVC)
             collectionsVC.bind(to: collectionViewModel)
 
-            rootHomeVC.tabBarItem = UITabBarItem(
+            let photosTabBarItem = UITabBarItem(
                 title: "Photos",
-                image: UIImage(named: "photo-white"),
+                image: Constants.Appearance.Icon.photo,
                 tag: 0
             )
-
-            rootCollectionVC.tabBarItem = UITabBarItem(
+            let collectionsTabBarItem = UITabBarItem(
                 title: "Collections",
-                image: UIImage(named: "collections-white"),
+                image: Constants.Appearance.Icon.rectangleGrid2x2Fill,
                 tag: 1
             )
-
-            rootSearchVC.tabBarItem = UITabBarItem(
+            let searchTabBarItem = UITabBarItem(
                 title: "Search",
-                image: UIImage(named: "search-white"),
+                image: Constants.Appearance.Icon.magnifyingGlass,
                 tag: 2
             )
+
+            collectionsTabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 2)
+            photosTabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 2)
+            searchTabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 2)
+
+            rootHomeVC.tabBarItem = photosTabBarItem
+            rootCollectionVC.tabBarItem = collectionsTabBarItem
+            rootSearchVC.tabBarItem = searchTabBarItem
 
             paprTabBarController.viewControllers = [
                 rootHomeVC,

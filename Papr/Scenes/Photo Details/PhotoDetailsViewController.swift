@@ -20,10 +20,12 @@ class PhotoDetailsViewController: UIViewController, BindableType {
 
     // MARK: IBOutlets
     @IBOutlet var dismissButton: UIButton!
+    @IBOutlet var totalViewsImageView: UIImageView!
     @IBOutlet var totalViewsLabel: UILabel!
     @IBOutlet var totalLikesLabel: UILabel!
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var totalDownloadsLabel: UILabel!
+    @IBOutlet var downloadImageView: UIImageView!
     @IBOutlet var downloadButton: UIButton!
     @IBOutlet var moreButton: UIButton!
     @IBOutlet var statsContainerView: UIView!
@@ -88,7 +90,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         outputs.likedByUser
-            .map { $0 ? #imageLiteral(resourceName: "favorite-white") : #imageLiteral(resourceName: "favorite-border-white") }
+            .map { $0 ? Constants.Appearance.Icon.heartFillSmall : Constants.Appearance.Icon.heartSmall }
             .bind(to: likeButton.rx.image())
             .disposed(by: disposeBag)
 
@@ -122,6 +124,13 @@ class PhotoDetailsViewController: UIViewController, BindableType {
 
     // MARK: UI
     private func configureAll() {
+        likeButton.tintColor = .white
+        totalViewsImageView.tintColor = .white
+        downloadImageView.tintColor = .white
+
+        totalViewsImageView.image = Constants.Appearance.Icon.eyeFillSmall
+        downloadImageView.image = Constants.Appearance.Icon.squareAndArrowDownSmall
+        
         configureScrollView()
         configurePhotoImageView()
         configureTapGestures()

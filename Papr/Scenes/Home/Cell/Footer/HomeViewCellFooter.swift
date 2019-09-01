@@ -38,10 +38,10 @@ class HomeViewCellFooter: UIView, BindableType {
         likeButton.add(to: view)
             .left(to: \.leftAnchor, constant: 16.0)
             .centerY(to: \.centerYAnchor)
-            .size(CGSize(width: 32.0, height: 32.0))
+            .size(CGSize(width: 30.0, height: 30.0))
 
         likesNumberLabel.add(to: view)
-            .left(to: \.rightAnchor, of: likeButton, constant: 8.0)
+            .left(to: \.rightAnchor, of: likeButton, constant: 4.0)
             .centerY(to: \.centerYAnchor)
 
         return view
@@ -53,32 +53,39 @@ class HomeViewCellFooter: UIView, BindableType {
         saveButton.add(to: view)
             .right(to: \.rightAnchor, constant: 16.0)
             .centerY(to: \.centerYAnchor)
-            .size(CGSize(width: 32.0, height: 32.0))
+            .size(CGSize(width: 30.0, height: 30.0))
 
         downloadButton.add(to: view)
             .right(to: \.leftAnchor, of: saveButton, constant: 16.0)
             .centerY(to: \.centerYAnchor)
-            .size(CGSize(width: 32.0, height: 32.0))
+            .size(CGSize(width: 30.0, height: 30.0))
 
         return view
     }()
 
-    private lazy var likeButton = UIButton()
+    private lazy var likeButton: UIButton = {
+        let button = UIButton()
+        button.tintColor = .black
+        return button
+    }()
+
     private lazy var likesNumberLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.font = .systemFont(ofSize: 17, weight: .regular)
         return label
     }()
 
     private lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "bookmark-border-black"), for: .normal)
+        button.tintColor = .black
+        button.setImage(Constants.Appearance.Icon.bookmark, for: .normal)
         return button
     }()
 
     private lazy var downloadButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "down-black"), for: .normal)
+        button.tintColor = .black
+        button.setImage(Constants.Appearance.Icon.squareAndArrowDownMedium, for: .normal)
         return button
     }()
 
@@ -127,7 +134,7 @@ class HomeViewCellFooter: UIView, BindableType {
             .disposed(by: disposeBag)
 
         outputs.isLikedByUser
-            .map { $0 ? #imageLiteral(resourceName: "favorite-black") : #imageLiteral(resourceName: "favorite-border-black") }
+            .map { $0 ? Constants.Appearance.Icon.heartFillMedium : Constants.Appearance.Icon.heartMedium }
             .bind(to: likeButton.rx.image())
             .disposed(by: disposeBag)
     }
