@@ -65,26 +65,27 @@ class HomeViewCellFooter: UIView, BindableType {
 
     private lazy var likeButton: UIButton = {
         let button = UIButton()
-        button.tintColor = .black
+        button.tintColor = Constants.Appearance.Color.label
         return button
     }()
 
     private lazy var likesNumberLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 17, weight: .regular)
+        label.textColor = Constants.Appearance.Color.label
         return label
     }()
 
     private lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.tintColor = .black
+        button.tintColor = Constants.Appearance.Color.label
         button.setImage(Constants.Appearance.Icon.bookmark, for: .normal)
         return button
     }()
 
     private lazy var downloadButton: UIButton = {
         let button = UIButton()
-        button.tintColor = .black
+        button.tintColor = Constants.Appearance.Color.label
         button.setImage(Constants.Appearance.Icon.squareAndArrowDownMedium, for: .normal)
         return button
     }()
@@ -140,6 +141,7 @@ class HomeViewCellFooter: UIView, BindableType {
     }
 
     private func configureUI() {
+        backgroundColor = Constants.Appearance.Color.systemBackground
         stackViewContainer.add(to: self).pinToEdges()
     }
 }
