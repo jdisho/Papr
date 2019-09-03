@@ -41,8 +41,7 @@ class SearchViewController: UIViewController, BindableType {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = Constants.Appearance.Color.systemBackground
-        tableView.backgroundColor = Constants.Appearance.Color.systemBackground
+        view.backgroundColor = Constants.Appearance.Color.customAccent1
 
         configureSearchBar()
         configureTableView()
@@ -96,17 +95,12 @@ class SearchViewController: UIViewController, BindableType {
 
     private func configureSearchBar() {
         searchBar = UISearchBar()
-        searchBar.searchBarStyle = .default
         searchBar.placeholder = "Search Unsplash"
         navigationItem.titleView = searchBar
-
-        if #available(iOS 11.0, *) {
-            searchBar.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        }
+        searchBar.heightAnchor.constraint(equalToConstant: 44).isActive = true
     }
 
     private func configureTableView() {
-        tableView.tableFooterView = UIView()
         tableView.rowHeight = 56
         tableView.register(cellType: SearchResultCell.self)
         dataSource = RxTableViewSectionedReloadDataSource<SearchSectionModel>(

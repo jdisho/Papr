@@ -16,10 +16,13 @@ class CreateCollectionViewController: UIViewController, BindableType {
     var viewModel: CreateCollectionViewModelType!
 
     // MARK: IBOutlets
-    @IBOutlet var nameTextField: UITextField!
-    @IBOutlet var descriptionTextField: UITextField!
-    @IBOutlet var privateSwitch: UISwitch!
-    @IBOutlet var isPrivateLabel: UILabel!
+    @IBOutlet private var nameTextField: UITextField!
+    @IBOutlet private var nameTextFieldContainerView: UIView!
+    @IBOutlet private var descriptionTextField: UITextField!
+    @IBOutlet private var descriptionTextFieldContainerView: UIView!
+    @IBOutlet private var privateSwitch: UISwitch!
+    @IBOutlet private var isPrivateLabel: UILabel!
+    @IBOutlet private var isPrivateLabelContainerView: UIView!
 
     // MARK: Private
     private let disposeBag = DisposeBag()
@@ -32,15 +35,19 @@ class CreateCollectionViewController: UIViewController, BindableType {
         super.viewDidLoad()
 
         nameTextField.becomeFirstResponder()
-        nameTextField.backgroundColor = Constants.Appearance.Color.systemBackground
+
+        nameTextFieldContainerView.backgroundColor = Constants.Appearance.Color.customAccent
+        nameTextField.backgroundColor = Constants.Appearance.Color.customAccent
         nameTextField.textColor = Constants.Appearance.Color.label
 
-        descriptionTextField.backgroundColor = Constants.Appearance.Color.systemBackground
+        descriptionTextFieldContainerView.backgroundColor = Constants.Appearance.Color.customAccent
+        descriptionTextField.backgroundColor = Constants.Appearance.Color.customAccent
         descriptionTextField.textColor = Constants.Appearance.Color.label
 
         isPrivateLabel.textColor = Constants.Appearance.Color.label
+        isPrivateLabelContainerView.backgroundColor = Constants.Appearance.Color.customAccent
 
-        view.backgroundColor = Constants.Appearance.Color.systemBackground
+        view.backgroundColor = Constants.Appearance.Color.customAccent1
 
         configureNavigationBar()
     }

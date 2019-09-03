@@ -14,6 +14,8 @@ class UserProfileViewController: UIViewController, BindableType {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        view.backgroundColor = Constants.Appearance.Color.systemBackground
     }
 
     func bindViewModel() {}

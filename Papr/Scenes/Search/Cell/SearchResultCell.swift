@@ -12,7 +12,11 @@ import RxSwift
 class SearchResultCell: UITableViewCell, BindableType, ClassIdentifiable {
 
     // MARK: ViewModel
-    var viewModel: SearchResultCellModelType!
+    var viewModel: SearchResultCellModelType! {
+        didSet {
+            configureUI()
+        }
+    }
 
     // MARK: Private
     private var disposeBag = DisposeBag()
@@ -21,12 +25,16 @@ class SearchResultCell: UITableViewCell, BindableType, ClassIdentifiable {
         super.prepareForReuse()
         disposeBag = DisposeBag()
     }
-
+ 
     // MARK: BindableType
     func bindViewModel() {
         viewModel.outputs.searchResult
             .map { $0.description }
             .bind(to: textLabel!.rx.text)
             .disposed(by: disposeBag)
+    }
+
+    private func configureUI() {
+        backgroundColor = Constants.Appearance.Color.customAccent
     }
 }

@@ -40,6 +40,34 @@ enum Constants {
                     return .white
                 }
             }
+
+            static var customAccent: UIColor {
+                if #available(iOS 13, *) {
+                    return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+                        if traitCollection.userInterfaceStyle == .dark {
+                            return .secondarySystemBackground // grayish dark
+                        } else {
+                            return .systemBackground // true white
+                        }
+                    }
+                } else {
+                    return .white
+                }
+            }
+
+            static var customAccent1: UIColor {
+                if #available(iOS 13, *) {
+                    return UIColor { (traitCollection: UITraitCollection) -> UIColor in
+                        if traitCollection.userInterfaceStyle == .dark {
+                            return .systemBackground // true dark
+                        } else {
+                            return .secondarySystemBackground
+                        }
+                    }
+                } else {
+                    return .white
+                }
+            }
         }
 
         enum Style {
