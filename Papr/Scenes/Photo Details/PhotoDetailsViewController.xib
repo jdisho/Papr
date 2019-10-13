@@ -51,7 +51,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uiq-Gd-u7t">
                             <rect key="frame" x="24" y="0.0" width="61" height="42"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eye-white" translatesAutoresizingMaskIntoConstraints="NO" id="De6-lC-yd6">
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eye.fill" translatesAutoresizingMaskIntoConstraints="NO" id="De6-lC-yd6">
                                     <rect key="frame" x="0.0" y="0.0" width="25" height="42"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="25" id="Mcz-Pg-WEM"/>
@@ -79,14 +79,14 @@
                             <rect key="frame" x="125" y="0.0" width="61" height="42"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8H-Jh-wT2">
-                                    <rect key="frame" x="52" y="12.5" width="13" height="17"/>
+                                    <rect key="frame" x="21" y="12.5" width="13" height="17"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aj9-a9-vc9">
-                                    <rect key="frame" x="0.0" y="-3" width="48" height="48"/>
-                                    <state key="normal" image="favorite-border-white"/>
+                                    <rect key="frame" x="0.0" y="10" width="17" height="22"/>
+                                    <state key="normal" image="heart"/>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -177,7 +177,7 @@
         <image name="arrow.down" width="13" height="16"/>
         <image name="close" width="14" height="14"/>
         <image name="ellipsis" width="16" height="4"/>
-        <image name="eye-white" width="24" height="24"/>
-        <image name="favorite-border-white" width="24" height="24"/>
+        <image name="eye.fill" width="23" height="14"/>
+        <image name="heart" width="17" height="16"/>
     </resources>
 </document>
