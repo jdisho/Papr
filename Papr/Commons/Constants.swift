@@ -138,7 +138,7 @@ enum Constants {
 
             static var addSmall: UIImage {
                 if #available(iOS 13.0, *) {
-                    return UIImage(systemName: "plus", withConfiguration: symbolConfigurationSmall)!.withTintColor(.white)
+                    return UIImage(systemName: "plus", withConfiguration: symbolConfigurationMedium)!.withTintColor(.white)
                 }
                 return UIImage(imageLiteralResourceName: "plus")
             }
