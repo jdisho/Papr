@@ -83,7 +83,7 @@ class AddToCollectionViewController: UIViewController, BindableType {
             action: nil
         )
         addToCollectionBarButton = UIBarButtonItem(
-            image: #imageLiteral(resourceName: "add-black"),
+            image: Constants.Appearance.Icon.addMedium,
             style: .plain,
             target: self,
             action: nil

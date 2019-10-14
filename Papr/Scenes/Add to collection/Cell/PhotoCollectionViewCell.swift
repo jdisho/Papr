@@ -86,7 +86,7 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType, NibIdentifiab
             .bind(to: addToCollectionButton.rx.alpha)
             .disposed(by: disposeBag)
 
-        outputs.isPhotoInCollection.map { $0 ? #imageLiteral(resourceName: "done-white") : nil }
+        outputs.isPhotoInCollection.map { $0 ? Constants.Appearance.Icon.doneWhiteSmall : nil }
             .bind(to: addToCollectionButton.rx.image())
             .disposed(by: disposeBag)
 

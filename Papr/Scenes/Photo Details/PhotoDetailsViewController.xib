@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14865.1" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14819.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -40,6 +40,7 @@
                         <constraint firstAttribute="width" constant="40" id="7bd-KG-X6l"/>
                         <constraint firstAttribute="height" constant="40" id="GzZ-Jf-Uq1"/>
                     </constraints>
+                    <color key="tintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <state key="normal" image="close">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
@@ -50,7 +51,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uiq-Gd-u7t">
                             <rect key="frame" x="24" y="0.0" width="61" height="42"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eye-white" translatesAutoresizingMaskIntoConstraints="NO" id="De6-lC-yd6">
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eye.fill" translatesAutoresizingMaskIntoConstraints="NO" id="De6-lC-yd6">
                                     <rect key="frame" x="0.0" y="0.0" width="25" height="42"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="25" id="Mcz-Pg-WEM"/>
@@ -78,14 +79,14 @@
                             <rect key="frame" x="125" y="0.0" width="61" height="42"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8H-Jh-wT2">
-                                    <rect key="frame" x="28" y="12.5" width="13" height="17"/>
+                                    <rect key="frame" x="21" y="12.5" width="13" height="17"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aj9-a9-vc9">
-                                    <rect key="frame" x="0.0" y="9" width="24" height="24"/>
-                                    <state key="normal" image="favorite-border-white"/>
+                                    <rect key="frame" x="0.0" y="10" width="17" height="22"/>
+                                    <state key="normal" image="heart"/>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -100,8 +101,9 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q3z-VE-50B">
                             <rect key="frame" x="210" y="0.0" width="61" height="42"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-white" translatesAutoresizingMaskIntoConstraints="NO" id="U2J-FL-KwH">
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.down" translatesAutoresizingMaskIntoConstraints="NO" id="U2J-FL-KwH">
                                     <rect key="frame" x="0.0" y="0.0" width="25" height="42"/>
+                                    <color key="tintColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="25" id="gwg-Bx-Ohy"/>
                                     </constraints>
@@ -136,7 +138,8 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="BPI-5N-6gK"/>
                             </constraints>
-                            <state key="normal" image="more-white"/>
+                            <color key="tintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <state key="normal" image="ellipsis"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -171,10 +174,10 @@
         </view>
     </objects>
     <resources>
-        <image name="close" width="24" height="24"/>
-        <image name="down-white" width="24" height="24"/>
-        <image name="eye-white" width="24" height="24"/>
-        <image name="favorite-border-white" width="24" height="24"/>
-        <image name="more-white" width="24" height="24"/>
+        <image name="arrow.down" width="13" height="16"/>
+        <image name="close" width="14" height="14"/>
+        <image name="ellipsis" width="16" height="4"/>
+        <image name="eye.fill" width="23" height="14"/>
+        <image name="heart" width="17" height="16"/>
     </resources>
 </document>

@@ -38,14 +38,14 @@ enum Constants {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "arrow.up.right", withConfiguration: symbolConfigurationMedium)!
                 }
-                return UIImage(imageLiteralResourceName: "up")
+                return UIImage(imageLiteralResourceName: "arrow.up.right")
             }
 
             static var bookmark: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "bookmark", withConfiguration: symbolConfigurationMedium)!
                 }
-                return UIImage(imageLiteralResourceName: "bookmark-border-black")
+                return UIImage(imageLiteralResourceName: "bookmark")
             }
 
             @available(iOS 13.0, *)
@@ -55,56 +55,56 @@ enum Constants {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "eye.fill", withConfiguration: symbolConfigurationSmall)!
                 }
-                return UIImage(imageLiteralResourceName: "eye-white")
+                return UIImage(imageLiteralResourceName: "eye.fill")
             }
 
             static var flame: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "flame", withConfiguration: symbolConfigurationMedium)!
                 }
-                return UIImage(imageLiteralResourceName: "hot")
+                return UIImage(imageLiteralResourceName: "flame")
             }
 
             static var heartSmall: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "heart", withConfiguration: symbolConfigurationSmall)!
                 }
-                return UIImage(imageLiteralResourceName: "favorite-border-black")
+                return UIImage(imageLiteralResourceName: "heart")
             }
 
             static var heartFillSmall: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "heart.fill", withConfiguration: symbolConfigurationSmall)!
                 }
-                return UIImage(imageLiteralResourceName: "favorite-black")
+                return UIImage(imageLiteralResourceName: "heart.fill")
             }
 
             static var heartMedium: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "heart", withConfiguration: symbolConfigurationMedium)!
                 }
-                return UIImage(imageLiteralResourceName: "favorite-border-black")
+                return UIImage(imageLiteralResourceName: "heart")
             }
 
             static var heartFillMedium: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "heart.fill", withConfiguration: symbolConfigurationMedium)!
                 }
-                return UIImage(imageLiteralResourceName: "favorite-black")
+                return UIImage(imageLiteralResourceName: "heart.fill")
             }
 
             static var magnifyingGlass: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "magnifyingglass", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium))!
                 }
-                return UIImage(imageLiteralResourceName: "search-white")
+                return UIImage(imageLiteralResourceName: "magnifyingglass")
             }
 
             static var photo: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium))!
                 }
-                return UIImage(imageLiteralResourceName: "photo-white")
+                return UIImage(imageLiteralResourceName: "photo")
             }
 
             static var rectangleGrid2x2Fill: UIImage {
@@ -117,16 +117,30 @@ enum Constants {
 
             static var squareAndArrowDownMedium: UIImage {
                 if #available(iOS 13.0, *) {
-                    return UIImage(systemName: "square.and.arrow.down", withConfiguration: symbolConfigurationMedium)!
+                    return UIImage(systemName: "arrow.down", withConfiguration: symbolConfigurationMedium)!
                 }
-                return UIImage(imageLiteralResourceName: "down-black")
+                return UIImage(imageLiteralResourceName: "arrow.down")
             }
 
             static var squareAndArrowDownSmall: UIImage {
                 if #available(iOS 13.0, *) {
-                    return UIImage(systemName: "square.and.arrow.down", withConfiguration: symbolConfigurationSmall)!
+                    return UIImage(systemName: "arrow.down", withConfiguration: symbolConfigurationSmall)!
                 }
-                return UIImage(imageLiteralResourceName: "down-black")
+                return UIImage(imageLiteralResourceName: "arrow.down")
+            }
+
+            static var doneWhiteSmall: UIImage {
+                if #available(iOS 13.0, *) {
+                    return UIImage(systemName: "checkmark", withConfiguration: symbolConfigurationSmall)!
+                }
+                return UIImage(imageLiteralResourceName: "done")
+            }
+
+            static var addMedium: UIImage {
+                if #available(iOS 13.0, *) {
+                    return UIImage(systemName: "plus", withConfiguration: symbolConfigurationMedium)!
+                }
+                return UIImage(imageLiteralResourceName: "plus")
             }
         }
 
