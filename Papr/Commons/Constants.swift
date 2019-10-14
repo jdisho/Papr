@@ -131,14 +131,14 @@ enum Constants {
 
             static var doneWhiteSmall: UIImage {
                 if #available(iOS 13.0, *) {
-                    return UIImage(systemName: "checkmark", withConfiguration: symbolConfigurationSmall)!.withTintColor(.white)
+                    return UIImage(systemName: "checkmark", withConfiguration: symbolConfigurationSmall)!
                 }
                 return UIImage(imageLiteralResourceName: "done")
             }
 
-            static var addSmall: UIImage {
+            static var addMedium: UIImage {
                 if #available(iOS 13.0, *) {
-                    return UIImage(systemName: "plus", withConfiguration: symbolConfigurationMedium)!.withTintColor(.white)
+                    return UIImage(systemName: "plus", withConfiguration: symbolConfigurationMedium)!
                 }
                 return UIImage(imageLiteralResourceName: "plus")
             }
