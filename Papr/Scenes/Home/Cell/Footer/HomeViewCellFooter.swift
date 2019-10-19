@@ -82,8 +82,8 @@ class HomeViewCellFooter: UIView, BindableType {
         return button
     }()
 
-    private lazy var downloadButton: UIButton = {
-        let button = UIButton()
+    private lazy var downloadButton: LoadingButton = {
+        let button = LoadingButton()
         button.tintColor = .black
         button.setImage(Constants.Appearance.Icon.squareAndArrowDownMedium, for: .normal)
         return button
@@ -109,6 +109,11 @@ class HomeViewCellFooter: UIView, BindableType {
                     inputs.writeImageToPhotosAlbumAction.execute(image)
                 }
             }
+            .disposed(by: disposeBag)
+        
+        inputs.writeImageToPhotosAlbumAction.executing
+            .skip(1)
+            .bind(to: downloadButton.rx.isLoading)
             .disposed(by: disposeBag)
 
         Observable.combineLatest(outputs.isLikedByUser, outputs.photo)

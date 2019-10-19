@@ -114,17 +114,14 @@ class HomeViewCellFooterModel: HomeViewCellFooterModelInput,
     }()
 
     lazy var writeImageToPhotosAlbumAction: Action<UIImage, Void> = {
-        Action<UIImage, Void> { image in
-            PHPhotoLibrary.requestAuthorization { [unowned self] authorizationStatus in
-                if authorizationStatus == .authorized {
-                    self.creationRequestForAsset(from: image)
-                } else if authorizationStatus == .denied {
-                    self.alertAction.execute((
-                        title: "Upsss...",
-                        message: "Photo can't be saved! Photo Libray access is denied ⚠️"))
-                }
+        Action<UIImage, Void> { [unowned self] image in
+            self.photoLibrary.rx.authorizationStatus()
+                .flatMap { status -> Observable<Void> in
+                    guard status == .authorized else {
+                        return .error(PhotoError.unauthorized)
+                    }
+                    return self.creationRequestForAsset(from: image)
             }
-            return .empty()
         }
     }()
 
@@ -139,6 +136,7 @@ class HomeViewCellFooterModel: HomeViewCellFooterModelInput,
     private let photoService: PhotoServiceType
     private let photoLibrary: PHPhotoLibrary
     private let sceneCoordinator: SceneCoordinatorType
+    private let bag = DisposeBag()
 
     private lazy var alertAction: Action<(title: String, message: String), Void> = {
         Action<(title: String, message: String), Void> { [unowned self] (title, message) in
@@ -182,25 +180,38 @@ class HomeViewCellFooterModel: HomeViewCellFooterModelInput,
             .unwrap()
     }
 
-    private func creationRequestForAsset(from image: UIImage) {
-        photoLibrary.performChanges({
+    private func creationRequestForAsset(from image: UIImage) -> Observable<Void> {
+        let change = photoLibrary.rx.performChanges {
             PHAssetChangeRequest.creationRequestForAsset(from: image)
-        }, completionHandler: { [unowned self] success, error in
-            if success {
-                self.alertAction.execute((
-                    title: "Saved to Photos 🎉",
-                    message: "" ))
+        }.share()
+        
+        // error case
+        change.materialize()
+            .map { event -> Error? in
+                switch event {
+                case .error(let error): return error
+                default: return nil
             }
-            else if let error = error {
-                self.alertAction.execute((
-                    title: "Upsss...",
-                    message: error.localizedDescription + "😕"))
-            }
-            else {
-                self.alertAction.execute((
-                    title: "Upsss...",
-                    message: "Unknown error 😱"))
-            }
-        })
+        }.unwrap()
+            .map { error -> (String, String) in
+                switch error {
+                case PhotoError.unauthorized:
+                    return (title: "Upsss...",
+                    message: "Photo can't be saved! Photo Libray access is denied ⚠️")
+                default:
+                    return (title: "Upsss...",
+                    message: error.localizedDescription + "😕")
+                }
+        }.bind(to: alertAction.inputs)
+        .disposed(by: bag)
+        
+        // success case
+        change.map {
+            (title: "Saved to Photos 🎉",
+            message: "" )
+        }.bind(to: alertAction.inputs)
+        .disposed(by: bag)
+        
+        return change
     }
 }
