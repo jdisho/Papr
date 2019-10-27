@@ -124,12 +124,24 @@ class PhotoDetailsViewController: UIViewController, BindableType {
 
     // MARK: UI
     private func configureAll() {
+        likeButton.setImage(Constants.Appearance.Icon.heartSmall, for: .normal)
+        likeButton.imageView?.contentMode = .scaleAspectFit
         likeButton.tintColor = .white
+
+        let eyeImage = Constants.Appearance.Icon.eyeFillSmall
+        let downloadImage = Constants.Appearance.Icon.squareAndArrowDownSmall
+        totalViewsImageView.image = eyeImage
+        downloadImageView.image = downloadImage
+        if #available(iOS 13.0, *) {} else {
+            totalViewsImageView.image = eyeImage.withRenderingMode(.alwaysTemplate)
+            downloadImageView.image = downloadImage.withRenderingMode(.alwaysTemplate)
+        }
         totalViewsImageView.tintColor = .white
         downloadImageView.tintColor = .white
 
-        totalViewsImageView.image = Constants.Appearance.Icon.eyeFillSmall
-        downloadImageView.image = Constants.Appearance.Icon.squareAndArrowDownSmall
+        moreButton.setImage(Constants.Appearance.Icon.ellipsis, for: .normal)
+        dismissButton.setImage(Constants.Appearance.Icon.close, for: .normal)
+        dismissButton.imageView?.contentMode = .scaleAspectFit
         
         configureScrollView()
         configurePhotoImageView()

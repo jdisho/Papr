@@ -79,12 +79,14 @@ class HomeViewCellFooter: UIView, BindableType {
         let button = UIButton()
         button.tintColor = .black
         button.setImage(Constants.Appearance.Icon.bookmark, for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
 
     private lazy var downloadButton: UIButton = {
         let button = UIButton()
         button.tintColor = .black
+        button.imageView?.contentMode = .scaleAspectFit
         button.setImage(Constants.Appearance.Icon.squareAndArrowDownMedium, for: .normal)
         return button
     }()

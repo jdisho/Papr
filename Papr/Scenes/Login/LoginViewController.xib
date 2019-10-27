@@ -49,7 +49,7 @@
                         <constraint firstAttribute="height" constant="40" id="cbX-Bj-2uL"/>
                     </constraints>
                     <color key="tintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    <state key="normal" image="close">
+                    <state key="normal">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                 </button>
@@ -90,7 +90,6 @@
         </view>
     </objects>
     <resources>
-        <image name="close" width="14" height="14"/>
         <image name="placeholder_wallpaper" width="3437" height="4931"/>
     </resources>
 </document>

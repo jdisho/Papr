@@ -45,103 +45,115 @@ enum Constants {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "bookmark", withConfiguration: symbolConfigurationMedium)!
                 }
-                return UIImage(imageLiteralResourceName: "bookmark")
+                return UIImage(imageLiteralResourceName: "bookmark.regular.medium")
             }
-
-            @available(iOS 13.0, *)
-            static let ellipsis = UIImage(systemName: "ellipsis")!
 
             static var eyeFillSmall: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "eye.fill", withConfiguration: symbolConfigurationSmall)!
                 }
-                return UIImage(imageLiteralResourceName: "eye.fill")
+                return UIImage(imageLiteralResourceName: "eye.fill.regular.small")
             }
 
             static var flame: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "flame", withConfiguration: symbolConfigurationMedium)!
                 }
-                return UIImage(imageLiteralResourceName: "flame")
+                return UIImage(imageLiteralResourceName: "flame.regular.medium")
             }
 
             static var heartSmall: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "heart", withConfiguration: symbolConfigurationSmall)!
                 }
-                return UIImage(imageLiteralResourceName: "heart")
+                return UIImage(imageLiteralResourceName: "heart.regular.small")
             }
 
             static var heartFillSmall: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "heart.fill", withConfiguration: symbolConfigurationSmall)!
                 }
-                return UIImage(imageLiteralResourceName: "heart.fill")
+                return UIImage(imageLiteralResourceName: "heart.fill.regular.small")
             }
 
             static var heartMedium: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "heart", withConfiguration: symbolConfigurationMedium)!
                 }
-                return UIImage(imageLiteralResourceName: "heart")
+                return UIImage(imageLiteralResourceName: "heart.regular.medium")
             }
 
             static var heartFillMedium: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "heart.fill", withConfiguration: symbolConfigurationMedium)!
                 }
-                return UIImage(imageLiteralResourceName: "heart.fill")
+                return UIImage(imageLiteralResourceName: "heart.fill.regular.medium")
             }
 
             static var magnifyingGlass: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "magnifyingglass", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium))!
                 }
-                return UIImage(imageLiteralResourceName: "magnifyingglass")
+                return UIImage(imageLiteralResourceName: "magnifyingglass.medium.small")
             }
 
             static var photo: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium))!
                 }
-                return UIImage(imageLiteralResourceName: "photo")
+                return UIImage(imageLiteralResourceName: "photo.medium.small")
             }
 
             static var rectangleGrid2x2Fill: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "rectangle.grid.2x2.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .medium))!
                 }
-                return UIImage(imageLiteralResourceName: "collections-white")
+                return UIImage(imageLiteralResourceName: "rectangle.grid.2x2.fill.medium.small")
             }
 
 
             static var squareAndArrowDownMedium: UIImage {
                 if #available(iOS 13.0, *) {
-                    return UIImage(systemName: "arrow.down", withConfiguration: symbolConfigurationMedium)!
+                    return UIImage(systemName: "square.and.arrow.down", withConfiguration: symbolConfigurationMedium)!
                 }
-                return UIImage(imageLiteralResourceName: "arrow.down")
+                return UIImage(imageLiteralResourceName: "square.and.arrow.down.regular.medium")
             }
 
             static var squareAndArrowDownSmall: UIImage {
                 if #available(iOS 13.0, *) {
-                    return UIImage(systemName: "arrow.down", withConfiguration: symbolConfigurationSmall)!
+                    return UIImage(systemName: "square.and.arrow.down", withConfiguration: symbolConfigurationSmall)!
                 }
-                return UIImage(imageLiteralResourceName: "arrow.down")
+                return UIImage(imageLiteralResourceName: "square.and.arrow.down.regular.small")
             }
 
             static var doneWhiteSmall: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "checkmark", withConfiguration: symbolConfigurationSmall)!
                 }
-                return UIImage(imageLiteralResourceName: "done")
+                return UIImage(imageLiteralResourceName: "checkmark.regular.small")
             }
 
             static var addMedium: UIImage {
                 if #available(iOS 13.0, *) {
                     return UIImage(systemName: "plus", withConfiguration: symbolConfigurationMedium)!
                 }
-                return UIImage(imageLiteralResourceName: "plus")
+                return UIImage(imageLiteralResourceName: "plus.regular.medium")
             }
+
+            static var close: UIImage {
+                if #available(iOS 13.0, *) {
+                    return UIImage(systemName: "xmark", withConfiguration: symbolConfigurationMedium)!
+                }
+                return UIImage(imageLiteralResourceName: "xmark.regular.medium")
+            }
+
+            static var ellipsis: UIImage {
+                if #available(iOS 13.0, *) {
+                    return UIImage(systemName: "ellipsis", withConfiguration: symbolConfigurationMedium)!
+                }
+                return UIImage(imageLiteralResourceName: "ellipsis.regular.medium")
+            }
+
         }
 
     }

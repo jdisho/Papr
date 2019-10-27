@@ -32,6 +32,7 @@ class LoginViewController: UIViewController, BindableType {
         imageView.dim(withAlpha: 0.1)
         imageView.image = nil
         imageView.image = UIImage(named: "placeholder_wallpaper")
+        closeButton.setImage(Constants.Appearance.Icon.close, for: .normal)
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
