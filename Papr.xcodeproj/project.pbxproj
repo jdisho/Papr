@@ -21,7 +21,6 @@
 		C0D52CB12181DA7700FB0517 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D52CB02181DA7700FB0517 /* Cache.swift */; };
 		C0F79DEF2167A5080051232D /* RxPinterestLayoutDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F79DEE2167A5080051232D /* RxPinterestLayoutDelegateProxy.swift */; };
 		C0F79DF12167A58C0051232D /* PinterestLayout+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F79DF02167A58C0051232D /* PinterestLayout+Rx.swift */; };
-		CBEDD29778BCF9269C6CDB95 /* Pods_PaprUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D59E6B0C5E02E5657E3FA6EA /* Pods_PaprUITests.framework */; };
 		DC2576F52093D38B00369B7D /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2576F42093D38B00369B7D /* Result.swift */; };
 		DC2E76F8203B6DB90023A173 /* LikeUnlike.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2E76F7203B6DB90023A173 /* LikeUnlike.swift */; };
 		DC3917A52096683600492F62 /* CreateCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3917A32096683600492F62 /* CreateCollectionViewController.swift */; };
@@ -60,7 +59,6 @@
 		DC66E66520A4D016005E5E31 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E66420A4D016005E5E31 /* SearchService.swift */; };
 		DC66E66920A4D7D6005E5E31 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC66E66820A4D7D6005E5E31 /* SearchViewController.xib */; };
 		DC66E66A20A4D7D6005E5E31 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC66E66820A4D7D6005E5E31 /* SearchViewController.xib */; };
-		DC66E66B20A4D7D6005E5E31 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC66E66820A4D7D6005E5E31 /* SearchViewController.xib */; };
 		DC66E67020A4DA0F005E5E31 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E66E20A4DA0F005E5E31 /* SearchResultCell.swift */; };
 		DC66E67720A4DA25005E5E31 /* SearchResultCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC66E67620A4DA25005E5E31 /* SearchResultCellModel.swift */; };
 		DC6CC644204CBD5300050589 /* PhotoStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6CC643204CBD5300050589 /* PhotoStatistics.swift */; };
@@ -70,14 +68,12 @@
 		DC72A4D220C305D7001550D1 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC72A4D020C305D7001550D1 /* UserCell.swift */; };
 		DC72A4D520C305D7001550D1 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC72A4D120C305D7001550D1 /* UserCell.xib */; };
 		DC72A4D620C305D7001550D1 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC72A4D120C305D7001550D1 /* UserCell.xib */; };
-		DC72A4D720C305D7001550D1 /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC72A4D120C305D7001550D1 /* UserCell.xib */; };
 		DC72A4D920C305E8001550D1 /* UserCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC72A4D820C305E8001550D1 /* UserCellModel.swift */; };
 		DC73732920A796C900922AE4 /* SearchPhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732420A796C900922AE4 /* SearchPhotosViewModel.swift */; };
 		DC73733220A7970400922AE4 /* SearchCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73732F20A7970400922AE4 /* SearchCollectionsViewController.swift */; };
 		DC73733520A7970400922AE4 /* SearchCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733020A7970400922AE4 /* SearchCollectionsViewModel.swift */; };
 		DC73733820A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC73733120A7970400922AE4 /* SearchCollectionsViewController.xib */; };
 		DC73733920A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC73733120A7970400922AE4 /* SearchCollectionsViewController.xib */; };
-		DC73733A20A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC73733120A7970400922AE4 /* SearchCollectionsViewController.xib */; };
 		DC73733E20A7974C00922AE4 /* SearchUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733B20A7974C00922AE4 /* SearchUsersViewController.swift */; };
 		DC73734120A7974C00922AE4 /* SearchUsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC73733C20A7974C00922AE4 /* SearchUsersViewModel.swift */; };
 		DC7CF5821FC464BF006E0A39 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7CF5811FC464BF006E0A39 /* URL.swift */; };
@@ -89,7 +85,6 @@
 		DCA09D002015F68200E6EBB7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA09CFF2015F68200E6EBB7 /* Constants.swift */; };
 		DCAF6BBF204D465E002B7F00 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAF6BBE204D465E002B7F00 /* Int+Extensions.swift */; };
 		DCAF6BC2204D990A002B7F00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCBB1B281FA7B1BD004E95F0 /* Assets.xcassets */; };
-		DCAF6BC3204D990A002B7F00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCBB1B281FA7B1BD004E95F0 /* Assets.xcassets */; };
 		DCB433C8204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB433C6204B5BAD00C6C80C /* PhotoDetailsViewController.swift */; };
 		DCB433CB204B5BAD00C6C80C /* PhotoDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB433C7204B5BAD00C6C80C /* PhotoDetailsViewController.xib */; };
 		DCB433CF204B5BBB00C6C80C /* PhotoDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB433CE204B5BBB00C6C80C /* PhotoDetailsViewModel.swift */; };
@@ -98,7 +93,6 @@
 		DCB915B520BB1A9A003D1069 /* SearchPhotosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915B320BB1A9A003D1069 /* SearchPhotosCell.swift */; };
 		DCB915B820BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB915B420BB1A9A003D1069 /* SearchPhotosCell.xib */; };
 		DCB915B920BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB915B420BB1A9A003D1069 /* SearchPhotosCell.xib */; };
-		DCB915BA20BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB915B420BB1A9A003D1069 /* SearchPhotosCell.xib */; };
 		DCB915BC20BB1AA9003D1069 /* SearchPhotosCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB915BB20BB1AA9003D1069 /* SearchPhotosCellModel.swift */; };
 		DCBAEE6320363CD600561CBA /* Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAEE6220363CD600561CBA /* Orientation.swift */; };
 		DCBB1B221FA7B1BD004E95F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B211FA7B1BD004E95F0 /* AppDelegate.swift */; };
@@ -107,7 +101,6 @@
 		DCBB1B291FA7B1BD004E95F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCBB1B281FA7B1BD004E95F0 /* Assets.xcassets */; };
 		DCBB1B2C1FA7B1BD004E95F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCBB1B2A1FA7B1BD004E95F0 /* LaunchScreen.storyboard */; };
 		DCBB1B371FA7B1BD004E95F0 /* PaprTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B361FA7B1BD004E95F0 /* PaprTests.swift */; };
-		DCBB1B421FA7B1BD004E95F0 /* PaprUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B411FA7B1BD004E95F0 /* PaprUITests.swift */; };
 		DCBB1B551FA8B814004E95F0 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B541FA8B814004E95F0 /* Scene.swift */; };
 		DCBB1B571FA8B823004E95F0 /* SceneCoodinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B561FA8B823004E95F0 /* SceneCoodinatorType.swift */; };
 		DCBB1B591FA8B82F004E95F0 /* SceneCoodinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBB1B581FA8B82E004E95F0 /* SceneCoodinator.swift */; };
@@ -141,13 +134,6 @@
 
 /* Begin PBXContainerItemProxy section */
 		DCBB1B331FA7B1BD004E95F0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DCBB1B161FA7B1BD004E95F0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DCBB1B1D1FA7B1BD004E95F0;
-			remoteInfo = Papr;
-		};
-		DCBB1B3E1FA7B1BD004E95F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DCBB1B161FA7B1BD004E95F0 /* Project object */;
 			proxyType = 1;
@@ -257,9 +243,6 @@
 		DCBB1B321FA7B1BD004E95F0 /* PaprTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaprTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCBB1B361FA7B1BD004E95F0 /* PaprTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaprTests.swift; sourceTree = "<group>"; };
 		DCBB1B381FA7B1BD004E95F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DCBB1B3D1FA7B1BD004E95F0 /* PaprUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaprUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DCBB1B411FA7B1BD004E95F0 /* PaprUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaprUITests.swift; sourceTree = "<group>"; };
-		DCBB1B431FA7B1BD004E95F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCBB1B541FA8B814004E95F0 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		DCBB1B561FA8B823004E95F0 /* SceneCoodinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoodinatorType.swift; sourceTree = "<group>"; };
 		DCBB1B581FA8B82E004E95F0 /* SceneCoodinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoodinator.swift; sourceTree = "<group>"; };
@@ -307,14 +290,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				63CC2B27C8EE9499B1D6C702 /* Pods_PaprTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DCBB1B3A1FA7B1BD004E95F0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CBEDD29778BCF9269C6CDB95 /* Pods_PaprUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,7 +575,6 @@
 			children = (
 				DCBB1B201FA7B1BD004E95F0 /* Papr */,
 				DCBB1B351FA7B1BD004E95F0 /* PaprTests */,
-				DCBB1B401FA7B1BD004E95F0 /* PaprUITests */,
 				DCBB1B1F1FA7B1BD004E95F0 /* Products */,
 				E48B3CBD8883657E132143BC /* Pods */,
 				6954C9EA61357885A2378727 /* Frameworks */,
@@ -612,7 +586,6 @@
 			children = (
 				DCBB1B1E1FA7B1BD004E95F0 /* Papr.app */,
 				DCBB1B321FA7B1BD004E95F0 /* PaprTests.xctest */,
-				DCBB1B3D1FA7B1BD004E95F0 /* PaprUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -645,15 +618,6 @@
 				DCBB1B381FA7B1BD004E95F0 /* Info.plist */,
 			);
 			path = PaprTests;
-			sourceTree = "<group>";
-		};
-		DCBB1B401FA7B1BD004E95F0 /* PaprUITests */ = {
-			isa = PBXGroup;
-			children = (
-				DCBB1B411FA7B1BD004E95F0 /* PaprUITests.swift */,
-				DCBB1B431FA7B1BD004E95F0 /* Info.plist */,
-			);
-			path = PaprUITests;
 			sourceTree = "<group>";
 		};
 		DCBB1B4F1FA8B774004E95F0 /* Scenes */ = {
@@ -862,25 +826,6 @@
 			productReference = DCBB1B321FA7B1BD004E95F0 /* PaprTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		DCBB1B3C1FA7B1BD004E95F0 /* PaprUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DCBB1B4C1FA7B1BD004E95F0 /* Build configuration list for PBXNativeTarget "PaprUITests" */;
-			buildPhases = (
-				0933EC37BA16D3E6DFBD4387 /* [CP] Check Pods Manifest.lock */,
-				DCBB1B391FA7B1BD004E95F0 /* Sources */,
-				DCBB1B3A1FA7B1BD004E95F0 /* Frameworks */,
-				DCBB1B3B1FA7B1BD004E95F0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DCBB1B3F1FA7B1BD004E95F0 /* PBXTargetDependency */,
-			);
-			name = PaprUITests;
-			productName = PaprUITests;
-			productReference = DCBB1B3D1FA7B1BD004E95F0 /* PaprUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -896,12 +841,6 @@
 						ProvisioningStyle = Automatic;
 					};
 					DCBB1B311FA7B1BD004E95F0 = {
-						CreatedOnToolsVersion = 9.0.1;
-						LastSwiftMigration = 1020;
-						ProvisioningStyle = Automatic;
-						TestTargetID = DCBB1B1D1FA7B1BD004E95F0;
-					};
-					DCBB1B3C1FA7B1BD004E95F0 = {
 						CreatedOnToolsVersion = 9.0.1;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
@@ -924,7 +863,6 @@
 			targets = (
 				DCBB1B1D1FA7B1BD004E95F0 /* Papr */,
 				DCBB1B311FA7B1BD004E95F0 /* PaprTests */,
-				DCBB1B3C1FA7B1BD004E95F0 /* PaprUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -963,39 +901,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DCBB1B3B1FA7B1BD004E95F0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DCB915BA20BB1A9A003D1069 /* SearchPhotosCell.xib in Resources */,
-				DC66E66B20A4D7D6005E5E31 /* SearchViewController.xib in Resources */,
-				DC73733A20A7970400922AE4 /* SearchCollectionsViewController.xib in Resources */,
-				DCAF6BC3204D990A002B7F00 /* Assets.xcassets in Resources */,
-				DC72A4D720C305D7001550D1 /* UserCell.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0933EC37BA16D3E6DFBD4387 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PaprUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		0BD9448C5FCB6EFEF7E2B09F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1189,14 +1097,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DCBB1B391FA7B1BD004E95F0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DCBB1B421FA7B1BD004E95F0 /* PaprUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1204,11 +1104,6 @@
 			isa = PBXTargetDependency;
 			target = DCBB1B1D1FA7B1BD004E95F0 /* Papr */;
 			targetProxy = DCBB1B331FA7B1BD004E95F0 /* PBXContainerItemProxy */;
-		};
-		DCBB1B3F1FA7B1BD004E95F0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DCBB1B1D1FA7B1BD004E95F0 /* Papr */;
-			targetProxy = DCBB1B3E1FA7B1BD004E95F0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1419,40 +1314,6 @@
 			};
 			name = Release;
 		};
-		DCBB1B4D1FA7B1BD004E95F0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 05991E5B148D044C15815E17 /* Pods-PaprUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YLLL7FKAFL;
-				INFOPLIST_FILE = PaprUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = disho.PaprUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Papr;
-			};
-			name = Debug;
-		};
-		DCBB1B4E1FA7B1BD004E95F0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7ADA4A068C8B3E3A9F491B6C /* Pods-PaprUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = YLLL7FKAFL;
-				INFOPLIST_FILE = PaprUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = disho.PaprUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Papr;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1479,15 +1340,6 @@
 			buildConfigurations = (
 				DCBB1B4A1FA7B1BD004E95F0 /* Debug */,
 				DCBB1B4B1FA7B1BD004E95F0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DCBB1B4C1FA7B1BD004E95F0 /* Build configuration list for PBXNativeTarget "PaprUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DCBB1B4D1FA7B1BD004E95F0 /* Debug */,
-				DCBB1B4E1FA7B1BD004E95F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

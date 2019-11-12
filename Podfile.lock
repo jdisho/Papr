@@ -3,23 +3,23 @@ PODS:
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
   - Differentiator (4.0.1)
-  - Hero (1.4.0)
-  - Nuke (7.6.3)
-  - RxCocoa (5.0.0):
+  - Hero (1.5.0)
+  - Nuke (8.3.1)
+  - RxCocoa (5.0.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
   - RxDataSources (4.0.1):
     - Differentiator (~> 4.0)
     - RxCocoa (~> 5.0)
     - RxSwift (~> 5.0)
-  - RxNuke (0.9):
-    - Nuke (~> 7.0)
+  - RxNuke (0.11.0):
+    - Nuke (~> 8.0)
     - RxSwift (~> 5.0)
-  - RxRelay (5.0.0):
+  - RxRelay (5.0.1):
     - RxSwift (~> 5)
-  - RxSwift (5.0.0)
-  - TinyNetworking/Core (3.0.0)
-  - TinyNetworking/RxSwift (3.0.0):
+  - RxSwift (5.0.1)
+  - TinyNetworking/Core (4.0.0)
+  - TinyNetworking/RxSwift (4.0.0):
     - RxSwift (~> 5.0)
     - TinyNetworking/Core
   - VanillaConstraints (1.0.4)
@@ -35,7 +35,7 @@ DEPENDENCIES:
   - VanillaConstraints
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Action
     - Differentiator
     - Hero
@@ -51,16 +51,16 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Action: 0d14986aad0f1330aa27ce65d0cdeaacbb63d91c
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
-  Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
-  Nuke: 44130e95e09463f8773ae4b96b90de1eba6b3350
-  RxCocoa: fcf32050ac00d801f34a7f71d5e8e7f23026dcd8
+  Hero: b7385b75e7259da62f4f85462f59a5082d66b058
+  Nuke: 85fb80f8df0cb26c28d2f4e0cb7fb93bcd6548d3
+  RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
-  RxNuke: ca1e591c523f7bff6ffb9119bb4360121e4fda9d
-  RxRelay: 4f7409406a51a55cd88483f21ed898c234d60f18
-  RxSwift: 8b0671caa829a763bbce7271095859121cbd895f
-  TinyNetworking: 8e10bcb748c1f3cf8593bbf5891c36e9b2c3b2fb
+  RxNuke: 7c56f40f26bc3ec715cff5f5355119ca7989b010
+  RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
+  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
+  TinyNetworking: f373ddd43edc5320ff98059ff484591970fbfb17
   VanillaConstraints: 72ceb6f087b4467b22209d078e43819d8d331bf5
 
-PODFILE CHECKSUM: 7bb83ef22953fe01a8077c84b732c839ebdb4a78
+PODFILE CHECKSUM: f1e07f045c2c8e0c921b48f2659735a2cba721c5
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.8.4

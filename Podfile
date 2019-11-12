@@ -30,9 +30,4 @@ target 'Papr' do
     # Pods for testing
   end
 
-  target 'PaprUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
 end

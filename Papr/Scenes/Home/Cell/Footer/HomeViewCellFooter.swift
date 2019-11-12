@@ -103,12 +103,10 @@ class HomeViewCellFooter: UIView, BindableType {
 
         inputs.downloadPhotoAction.elements
             .subscribe { [unowned self] result in
-                guard let linkString = result.element,
-                    let url = URL(string: linkString) else { return }
-
-                Nuke.loadImage(with: url, into: self.dummyImageView) { response, _ in
-                    guard let image = response?.image else { return }
-                    inputs.writeImageToPhotosAlbumAction.execute(image)
+                guard let linkString = result.element, let url = URL(string: linkString) else { return }
+                Nuke.loadImage(with: url, into: self.dummyImageView) { result in
+                    guard case let .success(response) = result else { return }
+                    inputs.writeImageToPhotosAlbumAction.execute(response.image)
                 }
             }
             .disposed(by: disposeBag)
