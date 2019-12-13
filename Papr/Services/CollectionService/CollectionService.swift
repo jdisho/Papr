@@ -33,10 +33,8 @@ struct CollectionService: CollectionServiceType {
                 .asObservable()
     }
 
-    func collections(byPageNumber page: Int, curated: Bool) -> Observable<Result<[PhotoCollection], String>> {
-        let collections: Unsplash = curated ?
-            .curatedCollections(page: page, perPage: 20) :
-            .featuredCollections(page: page, perPage: 20)
+    func collections(byPageNumber page: Int) -> Observable<Result<[PhotoCollection], String>> {
+        let collections: Unsplash = .featuredCollections(page: page, perPage: 20)
 
         return unsplash.rx.request(resource: collections)
             .map(to: [PhotoCollection].self)
