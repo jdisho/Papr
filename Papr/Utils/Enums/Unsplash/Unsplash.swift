@@ -70,12 +70,6 @@ enum Unsplash {
         perPage: Int?,
         orderBy: OrderBy?)
 
-    /// Get the list of the curated photos
-    case curatedPhotos(
-        page: Int?,
-        perPage: Int?,
-        orderBy: OrderBy?)
-
     /// Retrieve a single photo.
     case photo(
         id: String,
@@ -225,8 +219,6 @@ extension Unsplash: Resource {
             return .get(path: "/users/\(param.username)/statistics")
         case .photos:
             return .get(path: "/photos")
-        case .curatedPhotos:
-            return .get(path: "/photos/curated")
         case let .photo(param):
             return .get(path: "/photos/\(param.id)")
         case .randomPhoto:
@@ -316,8 +308,7 @@ extension Unsplash: Resource {
             return .requestWithParameters(params, encoding: URLEncoding())
 
         case let .userLikedPhotos(_, pageNumber, photosPerPage, orderBy),
-             let .photos(pageNumber, photosPerPage, orderBy),
-             let .curatedPhotos(pageNumber, photosPerPage, orderBy):
+             let .photos(pageNumber, photosPerPage, orderBy):
 
             var params: [String: Any] = [:]
             params["page"] = pageNumber
