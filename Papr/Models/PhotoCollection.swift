@@ -11,7 +11,6 @@ import RxDataSources
 struct PhotoCollection: Codable {
     let id: Int?
     let coverPhoto: Photo?
-    let isCurated: Bool?
     let isFeatured: Bool?
     let title: String?
     let description: String?
@@ -25,7 +24,6 @@ struct PhotoCollection: Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case coverPhoto = "cover_photo"
-        case isCurated = "curated"
         case isFeatured = "featured"
         case title
         case description

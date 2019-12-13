@@ -24,7 +24,6 @@ class HomeViewController: UIViewController, BindableType {
     private var dataSource: RxCollectionViewSectionedReloadDataSource<HomeSectionModel>!
     private var collectionView: UICollectionView!
     private var refreshControl: UIRefreshControl!
-    private var segmentedControl: UISegmentedControl!
     private var rightBarButtonItem: UIBarButtonItem!
     private var collectionViewDataSource: CollectionViewSectionedDataSource<HomeSectionModel>.ConfigureCell {
         return { _, collectionView, indexPath, cellModel in
@@ -91,7 +90,7 @@ class HomeViewController: UIViewController, BindableType {
 
         outputs.isRefreshing
             .negate()
-            .bind(to: rightBarButtonItem.rx.isEnabled, segmentedControl.rx.isEnabled)
+            .bind(to: rightBarButtonItem.rx.isEnabled)
             .disposed(by: disposeBag)
 
         outputs.homeViewCellModelTypes
@@ -102,19 +101,12 @@ class HomeViewController: UIViewController, BindableType {
         collectionView.rx.reachedBottom()
             .bind(to: inputs.loadMore)
             .disposed(by: disposeBag)
-
-        segmentedControl.rx.value
-            .map { $0 == 0 ? .newest : .curated }
-            .bind(to: inputs.showPhotosAction.inputs)
-            .disposed(by: disposeBag)
     }
 
     // MARK: UI
     private func configureNavigationController() {
-        segmentedControl = UISegmentedControl(items: PhotosType.allCases.map { $0.rawValue })
-        segmentedControl.selectedSegmentIndex = 0
         rightBarButtonItem = UIBarButtonItem()
-        navigationItem.titleView = segmentedControl
+        navigationItem.title = "Home"
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
 
