@@ -133,28 +133,14 @@ enum Unsplash {
         page: Int?,
         perPage: Int?)
 
-    /// Get a list of curated collections
-    case curatedCollections(
-        page: Int?,
-        perPage: Int?)
-
     /// Retrieve a collection
     case collection(id: Int)
-
-    /// Retrieve a curated collection
-    case curatedCollection(id: Int)
 
     /// Retrieve a related collection
     case relatedCollections(id: Int)
 
     /// Retrieve a collection’s photos
     case collectionPhotos(
-        id: Int,
-        page: Int?,
-        perPage: Int?)
-
-    /// Retrieve a curated collection’s photos
-    case curatedCollectionPhotos(
         id: Int,
         page: Int?,
         perPage: Int?)
@@ -243,16 +229,10 @@ extension Unsplash: Resource {
             return .post(path: "/collections")
         case .featuredCollections:
             return .get(path: "/collections/featured")
-        case .curatedCollections:
-            return .get(path: "/collections/curated")
         case let .collection(id):
             return .get(path: "/collections/\(id)")
-        case let .curatedCollection(id):
-            return .get(path: "/collections/curated\(id)")
         case let .collectionPhotos(params):
             return .get(path: "/collections/\(params.id)/photos")
-        case let .curatedCollectionPhotos(params):
-            return .get(path: "/collections/curated/\(params.id)/photos")
         case let .relatedCollections(id):
             return .get(path: "/collections/\(id)/related")
         case let .updateCollection(params):
@@ -352,9 +332,7 @@ extension Unsplash: Resource {
         case let .userCollections(_, pageNumber, photosPerPage),
              let .collections(pageNumber, photosPerPage),
              let .featuredCollections(pageNumber, photosPerPage),
-             let .curatedCollections(pageNumber, photosPerPage),
-             let .collectionPhotos(_, pageNumber, photosPerPage),
-             let .curatedCollectionPhotos(_, pageNumber, photosPerPage):
+             let .collectionPhotos(_, pageNumber, photosPerPage):
 
             var params: [String: Any] = [:]
             params["page"] = pageNumber

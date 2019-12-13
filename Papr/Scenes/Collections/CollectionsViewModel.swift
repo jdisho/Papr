@@ -88,7 +88,7 @@ class CollectionsViewModel: CollectionsViewModelType,
             .flatMapLatest { isRefreshing -> Observable<[PhotoCollection]> in
                 guard isRefreshing else { return .empty() }
                 return service
-                    .collections(byPageNumber: 1, curated: false)
+                    .collections(byPageNumber: 1)
                     .flatMap { [unowned self] result -> Observable<[PhotoCollection]> in
                         switch result {
                         case let .success(photoCollections):
@@ -109,7 +109,7 @@ class CollectionsViewModel: CollectionsViewModelType,
                 guard isLoadingMore else { return .empty() }
                 currentPageNumber += 1
                 return service
-                    .collections(byPageNumber: currentPageNumber, curated: false)
+                    .collections(byPageNumber: currentPageNumber)
                     .flatMap { [unowned self] result -> Observable<[PhotoCollection]> in
                         switch result {
                         case let .success(photoCollections):
