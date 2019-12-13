@@ -14,9 +14,6 @@ protocol HomeViewModelInput {
     /// Call when the bottom of the list is reached
     var loadMore: BehaviorSubject<Bool> { get }
 
-    /// Call when photos are invoked
-    var showPhotosAction: Action<PhotosType, Void> { get }
-    
     /// Call when an OrderBy value is invoked
     var orderByAction: Action<OrderBy, Void> { get }
     
@@ -33,9 +30,6 @@ protocol HomeViewModelOutput {
 
     /// Emits a boolean when the pull-to-refresh control is refreshing or not.
     var isRefreshing: Observable<Bool>! { get }
-
-    /// Emits a newest or curated photos when the option is chosen.
-    var photosType: Observable<PhotosType>! { get }
 
     /// Emits an OrderBy value when an OrderBy option is chosen.
     var orderBy: Observable<OrderBy>! { get }
@@ -64,14 +58,6 @@ class HomeViewModel: HomeViewModelType,
         refreshProperty.onNext(true)
     }
     
-    lazy var showPhotosAction: Action<PhotosType, Void> = {
-        Action<PhotosType, Void> { [unowned self] type in
-            self.photosTypeProperty.onNext(type)
-            self.refresh()
-            return .empty()
-        }
-    }()
-    
     lazy var orderByAction: Action<OrderBy, Void> = {
         Action<OrderBy, Void> { [unowned self] orderBy in
             orderBy == .latest ?
@@ -95,7 +81,6 @@ class HomeViewModel: HomeViewModelType,
     // MARK: Output
     var photos: Observable<[Photo]>!
     var isRefreshing: Observable<Bool>!
-    var photosType: Observable<PhotosType>!
     var orderBy: Observable<OrderBy>!
 
     lazy var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> = {
@@ -119,7 +104,6 @@ class HomeViewModel: HomeViewModelType,
     private let sceneCoordinator: SceneCoordinatorType
     private let refreshProperty = BehaviorSubject<Bool>(value: true)
     private let orderByProperty = BehaviorSubject<OrderBy>(value: .latest)
-    private let photosTypeProperty = BehaviorSubject<PhotosType>(value: .newest)
 
     // MARK: Init
     init(cache: Cache = Cache.shared,
@@ -134,12 +118,11 @@ class HomeViewModel: HomeViewModelType,
         var photoArray = [Photo]([])
     
         isRefreshing = refreshProperty.asObservable()
-        photosType = photosTypeProperty.asObservable()
         orderBy = orderByProperty.asObservable()
 
         let requestFirst = Observable
-            .combineLatest(isRefreshing, orderBy, photosType.map { $0 == .curated })
-            .flatMapLatest { isRefreshing, orderBy, isCurated -> Observable<[Photo]> in
+            .combineLatest(isRefreshing, orderBy)
+            .flatMapLatest { isRefreshing, orderBy -> Observable<[Photo]> in
                 guard isRefreshing else { return .empty() }
                 return service.photos(
                     byPageNumber: 1,
@@ -162,8 +145,8 @@ class HomeViewModel: HomeViewModelType,
             }
 
         let requestNext = Observable
-            .combineLatest(loadMore, orderBy, photosType.map { $0 == .curated })
-            .flatMapLatest { loadMore, orderBy, isCurated -> Observable<[Photo]> in
+            .combineLatest(loadMore, orderBy)
+            .flatMapLatest { loadMore, orderBy -> Observable<[Photo]> in
                 guard loadMore else { return .empty() }
                 currentPageNumber += 1
                 return service.photos(
