@@ -143,8 +143,7 @@ class HomeViewModel: HomeViewModelType,
                 guard isRefreshing else { return .empty() }
                 return service.photos(
                     byPageNumber: 1,
-                    orderBy: orderBy,
-                    curated: isCurated)
+                    orderBy: orderBy)
                     .flatMap { [unowned self] result -> Observable<[Photo]> in
                         switch result {
                         case let .success(photos):
@@ -169,8 +168,7 @@ class HomeViewModel: HomeViewModelType,
                 currentPageNumber += 1
                 return service.photos(
                     byPageNumber: currentPageNumber,
-                    orderBy: orderBy,
-                    curated: isCurated)
+                    orderBy: orderBy)
                     .flatMap { [unowned self] result -> Observable<[Photo]> in
                         switch result {
                         case let .success(photos):
