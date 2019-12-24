@@ -31,6 +31,8 @@
 		DC487F452104F0D80042DBBC /* UITableView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F442104F0D80042DBBC /* UITableView+Identifiable.swift */; };
 		DC487F472104F0FF0042DBBC /* UICollectionView+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F462104F0FF0042DBBC /* UICollectionView+Identifiable.swift */; };
 		DC487F4A2104FCB00042DBBC /* BouncyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F482104FCB00042DBBC /* BouncyView.swift */; };
+		DC524CB223B28A7100F0E05E /* Papr+Unsplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC524CB123B28A7000F0E05E /* Papr+Unsplash.swift */; };
+		DC524CB423B28A9900F0E05E /* Papr+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC524CB323B28A9900F0E05E /* Papr+Appearance.swift */; };
 		DC594CCC2274E478006059C0 /* HomeViewCellFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC594CCB2274E478006059C0 /* HomeViewCellFooter.swift */; };
 		DC594CCE2274E48C006059C0 /* HomeViewCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC594CCD2274E48C006059C0 /* HomeViewCellHeader.swift */; };
 		DC594CD02274E97A006059C0 /* HomeViewCellHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC594CCF2274E97A006059C0 /* HomeViewCellHeaderModel.swift */; };
@@ -81,7 +83,7 @@
 		DC922309203F95C300C9D14F /* UIBarButtonItem+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC922308203F95C300C9D14F /* UIBarButtonItem+Rx.swift */; };
 		DC99FB8E2003A7CC001195FD /* PhotoServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC99FB8D2003A7CC001195FD /* PhotoServiceType.swift */; };
 		DC99FB922003A7DB001195FD /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC99FB912003A7DB001195FD /* PhotoService.swift */; };
-		DCA09D002015F68200E6EBB7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA09CFF2015F68200E6EBB7 /* Constants.swift */; };
+		DCA09D002015F68200E6EBB7 /* Papr.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA09CFF2015F68200E6EBB7 /* Papr.swift */; };
 		DCAF6BBF204D465E002B7F00 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAF6BBE204D465E002B7F00 /* Int+Extensions.swift */; };
 		DCAF6BC2204D990A002B7F00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCBB1B281FA7B1BD004E95F0 /* Assets.xcassets */; };
 		DCB433C8204B5BAD00C6C80C /* PhotoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB433C6204B5BAD00C6C80C /* PhotoDetailsViewController.swift */; };
@@ -172,6 +174,8 @@
 		DC487F442104F0D80042DBBC /* UITableView+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Identifiable.swift"; sourceTree = "<group>"; };
 		DC487F462104F0FF0042DBBC /* UICollectionView+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Identifiable.swift"; sourceTree = "<group>"; };
 		DC487F482104FCB00042DBBC /* BouncyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyView.swift; sourceTree = "<group>"; };
+		DC524CB123B28A7000F0E05E /* Papr+Unsplash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Papr+Unsplash.swift"; sourceTree = "<group>"; };
+		DC524CB323B28A9900F0E05E /* Papr+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Papr+Appearance.swift"; sourceTree = "<group>"; };
 		DC594CCB2274E478006059C0 /* HomeViewCellFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellFooter.swift; sourceTree = "<group>"; };
 		DC594CCD2274E48C006059C0 /* HomeViewCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellHeader.swift; sourceTree = "<group>"; };
 		DC594CCF2274E97A006059C0 /* HomeViewCellHeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellHeaderModel.swift; sourceTree = "<group>"; };
@@ -219,7 +223,7 @@
 		DC922308203F95C300C9D14F /* UIBarButtonItem+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Rx.swift"; sourceTree = "<group>"; };
 		DC99FB8D2003A7CC001195FD /* PhotoServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoServiceType.swift; sourceTree = "<group>"; };
 		DC99FB912003A7DB001195FD /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
-		DCA09CFF2015F68200E6EBB7 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		DCA09CFF2015F68200E6EBB7 /* Papr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Papr.swift; sourceTree = "<group>"; };
 		DCAF6BBE204D465E002B7F00 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		DCB433C6204B5BAD00C6C80C /* PhotoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewController.swift; sourceTree = "<group>"; };
 		DCB433C7204B5BAD00C6C80C /* PhotoDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoDetailsViewController.xib; sourceTree = "<group>"; };
@@ -351,7 +355,9 @@
 		DC0EDE95205B20B2004CD808 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
-				DCA09CFF2015F68200E6EBB7 /* Constants.swift */,
+				DCA09CFF2015F68200E6EBB7 /* Papr.swift */,
+				DC524CB123B28A7000F0E05E /* Papr+Unsplash.swift */,
+				DC524CB323B28A9900F0E05E /* Papr+Appearance.swift */,
 				DCBB1B211FA7B1BD004E95F0 /* AppDelegate.swift */,
 			);
 			path = Commons;
@@ -993,10 +999,12 @@
 				DCBB1B221FA7B1BD004E95F0 /* AppDelegate.swift in Sources */,
 				DCF3961220A8E3C400F3906D /* PaprTabBarController.swift in Sources */,
 				DCC8CA1E2002D4C900F6C540 /* ObservableType+Extras.swift in Sources */,
+				DC524CB423B28A9900F0E05E /* Papr+Appearance.swift in Sources */,
 				DC66E65620A4CB4C005E5E31 /* SearchViewController.swift in Sources */,
 				DC66E67020A4DA0F005E5E31 /* SearchResultCell.swift in Sources */,
 				DC6CC644204CBD5300050589 /* PhotoStatistics.swift in Sources */,
-				DCA09D002015F68200E6EBB7 /* Constants.swift in Sources */,
+				DCA09D002015F68200E6EBB7 /* Papr.swift in Sources */,
+				DC524CB223B28A7100F0E05E /* Papr+Unsplash.swift in Sources */,
 				DC5AF7551FAD2EF900ADA2BB /* Scope.swift in Sources */,
 				DCEE1F0B1FC97CDC0010BADE /* AlertViewController.swift in Sources */,
 				DCBB1B591FA8B82F004E95F0 /* SceneCoodinator.swift in Sources */,
