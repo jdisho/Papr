@@ -63,11 +63,11 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
     private var sceneCoordinator: SceneCoordinatorType!
     private var myCollectionsStream: Observable<[PhotoCollection]>!
 
-    lazy var alertAction: Action<String, Void> = {
-        Action<String, Void> { [unowned self] message in
+    lazy var alertAction: Action<Error, Void> = {
+        Action<Error, Void> { [unowned self] error in
             let alertViewModel = AlertViewModel(
                 title: "Upsss...",
-                message: message,
+                message: error.errorDescription,
                 mode: .ok)
             return self.sceneCoordinator.transition(to: Scene.alert(alertViewModel))
         }
@@ -88,17 +88,18 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
         var myCollections = [PhotoCollection]()
 
         myCollectionsStream = service.collections(withUsername: loggedInUser.username ?? "")
-            .map { collections -> [PhotoCollection] in
-                collections.forEach { collection in
-                    myCollections.append(collection)
+            .map { result in
+                switch result {
+                case let .success(collections):
+                    collections.forEach { collection in
+                        myCollections.append(collection)
+                    }
+                    return myCollections
+                case let .failure(error):
+                    self.alertAction.execute(error)
+                    return myCollections
                 }
-                return myCollections
             }
-            .catchError({ [unowned self] error in
-                self.alertAction.execute(error.localizedDescription)
-                return Observable.just(myCollections)
-            })
-
-    }
+        }
 
 }

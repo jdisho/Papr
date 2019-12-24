@@ -69,11 +69,11 @@ class CreateCollectionViewModel: CreateCollectionViewModelInput,
     private let service: CollectionServiceType
     private let sceneCoordinator: SceneCoordinatorType
 
-    private lazy var alertAction: Action<String, Void> = {
-        Action<String, Void> { [unowned self] message in
+    private lazy var alertAction: Action<Error, Void> = {
+        Action<Error, Void> { [unowned self] error in
             let alertViewModel = AlertViewModel(
                 title: "Upsss...",
-                message: message,
+                message: error.errorDescription,
                 mode: .ok)
             return self.sceneCoordinator.transition(to: Scene.alert(alertViewModel))
         }
@@ -102,7 +102,7 @@ class CreateCollectionViewModel: CreateCollectionViewModelInput,
                     self.sceneCoordinator.pop(animated: true)
                     return .just(photo)
                 case let .failure(error):
-                    self.alertAction.execute(error.message)
+                    self.alertAction.execute(error)
                     return .empty()
                 }
             }
@@ -115,7 +115,7 @@ class CreateCollectionViewModel: CreateCollectionViewModelInput,
                 case let .success(collection):
                     return .just(collection)
                 case let .failure(error):
-                    self.alertAction.execute(error.message)
+                    self.alertAction.execute(error)
                     return .empty()
                 }
         }

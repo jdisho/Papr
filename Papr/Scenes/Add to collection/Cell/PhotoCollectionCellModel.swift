@@ -91,7 +91,7 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
         Action<Error, Void> { [unowned self] error in
             let alertViewModel = AlertViewModel(
                 title: "Upsss...",
-                message: error.message,
+                message: error.errorDescription,
                 mode: .ok)
             return self.sceneCoordinator.transition(to: Scene.alert(alertViewModel))
         }

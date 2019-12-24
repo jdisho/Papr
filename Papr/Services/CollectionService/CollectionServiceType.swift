@@ -9,11 +9,11 @@
 import Foundation
 import RxSwift
 
-enum Error: Swift.Error {
+enum Error: LocalizedError {
     case noAccessToken
     case other(message: String)
-    
-    var message: String {
+
+    var errorDescription: String {
         switch self {
         case .noAccessToken:
             return "Please provide the access token."
@@ -26,7 +26,7 @@ enum Error: Swift.Error {
 protocol CollectionServiceType {
     func collection(withID id: Int) -> Observable<PhotoCollection>
     
-    func collections(withUsername username: String) -> Observable<[PhotoCollection]>
+    func collections(withUsername username: String) -> Observable<Result<[PhotoCollection], Error>>
 
     func collections(byPageNumber page: Int) -> Observable<Result<[PhotoCollection], Error>>
 

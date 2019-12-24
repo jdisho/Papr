@@ -26,11 +26,13 @@ struct CollectionService: CollectionServiceType {
             .asObservable()
     }
 
-    func collections(withUsername username: String) -> Observable<[PhotoCollection]> {
+    func collections(withUsername username: String) -> Observable<Result<[PhotoCollection], Error>> {
             return self.unsplash.rx
                 .request(resource: .userCollections(username: username, page: 1, perPage: 20))
                 .map(to: [PhotoCollection].self)
                 .asObservable()
+                .map(Result.success)
+                .catchError { .just(.failure(.other(message: $0.localizedDescription))) }
     }
 
     func collections(byPageNumber page: Int) -> Observable<Result<[PhotoCollection], Error>> {

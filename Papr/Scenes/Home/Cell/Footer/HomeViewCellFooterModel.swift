@@ -85,7 +85,7 @@ class HomeViewCellFooterModel: HomeViewCellFooterModelInput,
                     case let .success(link):
                         return .just(link)
                     case let .failure(error):
-                        self.alertAction.execute((title: "Upsss...", message: error.message))
+                        self.alertAction.execute((title: "Upsss...", message: error.errorDescription))
                         return .empty()
                     }
             }
