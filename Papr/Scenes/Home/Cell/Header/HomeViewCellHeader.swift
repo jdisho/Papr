@@ -71,7 +71,7 @@ class HomeViewCellHeader: UIView, BindableType {
     }
 
     private func configureUI() {
-        profileImageView.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
+        profileImageView.roundCorners(withRadius: Papr.Appearance.Style.imageCornersRadius)
 
         stackView.axis = .vertical
         stackView.spacing = 4.0

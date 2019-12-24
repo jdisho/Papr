@@ -122,7 +122,7 @@ class LoginViewModel: NSObject, LoginViewModelInput, LoginViewModelOuput, LoginV
         if #available(iOS 11.0, *) {
             self.authSession = ASWebAuthenticationSession(
                 url: authManager.authURL,
-                callbackURLScheme: Constants.UnsplashSettings.callbackURLScheme,
+                callbackURLScheme: Papr.Unsplash.callbackURLScheme,
                 completionHandler: { [weak self] (callbackUrl, error) in
                 guard let callbackUrl = callbackUrl else { return }
                 self?.authManager.receivedCodeRedirect(url: callbackUrl)

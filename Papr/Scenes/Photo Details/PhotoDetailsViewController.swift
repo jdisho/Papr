@@ -90,7 +90,7 @@ class PhotoDetailsViewController: UIViewController, BindableType {
             .disposed(by: disposeBag)
 
         outputs.likedByUser
-            .map { $0 ? Constants.Appearance.Icon.heartFillSmall : Constants.Appearance.Icon.heartSmall }
+            .map { $0 ? Papr.Appearance.Icon.heartFillSmall : Papr.Appearance.Icon.heartSmall }
             .bind(to: likeButton.rx.image())
             .disposed(by: disposeBag)
 
@@ -124,12 +124,12 @@ class PhotoDetailsViewController: UIViewController, BindableType {
 
     // MARK: UI
     private func configureAll() {
-        likeButton.setImage(Constants.Appearance.Icon.heartSmall, for: .normal)
+        likeButton.setImage(Papr.Appearance.Icon.heartSmall, for: .normal)
         likeButton.imageView?.contentMode = .scaleAspectFit
         likeButton.tintColor = .white
 
-        let eyeImage = Constants.Appearance.Icon.eyeFillSmall
-        let downloadImage = Constants.Appearance.Icon.squareAndArrowDownSmall
+        let eyeImage = Papr.Appearance.Icon.eyeFillSmall
+        let downloadImage = Papr.Appearance.Icon.squareAndArrowDownSmall
         totalViewsImageView.image = eyeImage
         downloadImageView.image = downloadImage
         if #available(iOS 13.0, *) {} else {
@@ -139,8 +139,8 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         totalViewsImageView.tintColor = .white
         downloadImageView.tintColor = .white
 
-        moreButton.setImage(Constants.Appearance.Icon.ellipsis, for: .normal)
-        dismissButton.setImage(Constants.Appearance.Icon.close, for: .normal)
+        moreButton.setImage(Papr.Appearance.Icon.ellipsis, for: .normal)
+        dismissButton.setImage(Papr.Appearance.Icon.close, for: .normal)
         dismissButton.imageView?.contentMode = .scaleAspectFit
         
         configureScrollView()

@@ -58,17 +58,17 @@ extension Scene: TargetScene {
 
             let photosTabBarItem = UITabBarItem(
                 title: "Photos",
-                image: Constants.Appearance.Icon.photo,
+                image: Papr.Appearance.Icon.photo,
                 tag: 0
             )
             let collectionsTabBarItem = UITabBarItem(
                 title: "Collections",
-                image: Constants.Appearance.Icon.rectangleGrid2x2Fill,
+                image: Papr.Appearance.Icon.rectangleGrid2x2Fill,
                 tag: 1
             )
             let searchTabBarItem = UITabBarItem(
                 title: "Search",
-                image: Constants.Appearance.Icon.magnifyingGlass,
+                image: Papr.Appearance.Icon.magnifyingGlass,
                 tag: 2
             )
 
