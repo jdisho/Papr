@@ -36,7 +36,7 @@ class AddToCollectionViewController: UIViewController, BindableType {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        photoImageView.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
+        photoImageView.roundCorners(withRadius: Papr.Appearance.Style.imageCornersRadius)
         configureNavigationBar()
         configureCollectionViewActivityIndicator()
         configureCollectionView()
@@ -83,7 +83,7 @@ class AddToCollectionViewController: UIViewController, BindableType {
             action: nil
         )
         addToCollectionBarButton = UIBarButtonItem(
-            image: Constants.Appearance.Icon.addMedium,
+            image: Papr.Appearance.Icon.addMedium,
             style: .plain,
             target: self,
             action: nil

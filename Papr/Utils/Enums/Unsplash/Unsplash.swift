@@ -391,7 +391,7 @@ extension Unsplash: Resource {
     }
 
     var headers: [String : String] {
-        let clientID = Constants.UnsplashSettings.clientID
+        let clientID = Papr.Unsplash.clientID
         guard let token = UserDefaults.standard.string(forKey: clientID) else {
             return ["Authorization": "Client-ID \(clientID)"]
         }

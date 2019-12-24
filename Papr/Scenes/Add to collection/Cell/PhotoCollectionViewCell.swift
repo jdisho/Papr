@@ -46,8 +46,8 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType, NibIdentifiab
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        collectionCoverImageView.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
-        addToCollectionButton.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
+        collectionCoverImageView.roundCorners(withRadius: Papr.Appearance.Style.imageCornersRadius)
+        addToCollectionButton.roundCorners(withRadius: Papr.Appearance.Style.imageCornersRadius)
     }
     // MARK: BindableType
     func bindViewModel() {
@@ -86,7 +86,7 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType, NibIdentifiab
             .bind(to: addToCollectionButton.rx.alpha)
             .disposed(by: disposeBag)
 
-        outputs.isPhotoInCollection.map { $0 ? Constants.Appearance.Icon.doneWhiteSmall : nil }
+        outputs.isPhotoInCollection.map { $0 ? Papr.Appearance.Icon.doneWhiteSmall : nil }
             .bind(to: addToCollectionButton.rx.image())
             .disposed(by: disposeBag)
 

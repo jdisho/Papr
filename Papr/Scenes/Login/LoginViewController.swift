@@ -28,11 +28,11 @@ class LoginViewController: UIViewController, BindableType {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loginButton.roundCorners(withRadius: Constants.Appearance.Style.imageCornersRadius)
+        loginButton.roundCorners(withRadius: Papr.Appearance.Style.imageCornersRadius)
         imageView.dim(withAlpha: 0.1)
         imageView.image = nil
         imageView.image = UIImage(named: "placeholder_wallpaper")
-        closeButton.setImage(Constants.Appearance.Icon.close, for: .normal)
+        closeButton.setImage(Papr.Appearance.Icon.close, for: .normal)
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {

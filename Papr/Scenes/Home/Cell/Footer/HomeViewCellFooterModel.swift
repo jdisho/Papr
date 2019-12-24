@@ -44,11 +44,11 @@ class HomeViewCellFooterModel: HomeViewCellFooterModelInput,
                     switch result {
                     case let .success(photo):
                         return .just(photo)
-                    case let .error(error):
+                    case let .failure(error):
                         switch error {
                         case .noAccessToken:
                             self.navigateToLogin.execute(())
-                        case let .error(message):
+                        case let .other(message):
                             self.alertAction.execute((title: "Upsss...", message: message))
                         }
                         return .empty()
@@ -64,11 +64,11 @@ class HomeViewCellFooterModel: HomeViewCellFooterModelInput,
                     switch result {
                     case let .success(photo):
                         return .just(photo)
-                    case let .error(error):
+                    case let .failure(error):
                         switch error {
                         case .noAccessToken:
                             self.navigateToLogin.execute(())
-                        case let .error(message):
+                        case let .other(message):
                             self.alertAction.execute((title: "Upsss...", message: message))
                         }
                         return .empty()
@@ -84,8 +84,8 @@ class HomeViewCellFooterModel: HomeViewCellFooterModelInput,
                     switch result {
                     case let .success(link):
                         return .just(link)
-                    case let.error(message):
-                        self.alertAction.execute((title: "Upsss...", message: message))
+                    case let .failure(error):
+                        self.alertAction.execute((title: "Upsss...", message: error.errorDescription))
                         return .empty()
                     }
             }
@@ -100,11 +100,11 @@ class HomeViewCellFooterModel: HomeViewCellFooterModelInput,
                     case let .success(user):
                         let viewModel = AddToCollectionViewModel(loggedInUser: user, photo: photo)
                         return self.sceneCoordinator.transition(to: Scene.addToCollection(viewModel))
-                    case let .error(error):
+                    case let .failure(error):
                         switch error {
                         case .noAccessToken:
                             self.navigateToLogin.execute(())
-                        case let .error(message):
+                        case let .other(message):
                             self.alertAction.execute((title: "Upsss...", message: message))
                         }
                         return .empty()

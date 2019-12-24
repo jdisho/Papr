@@ -26,21 +26,23 @@ struct CollectionService: CollectionServiceType {
             .asObservable()
     }
 
-    func collections(withUsername username: String) -> Observable<[PhotoCollection]> {
+    func collections(withUsername username: String) -> Observable<Result<[PhotoCollection], Papr.Error>> {
             return self.unsplash.rx
                 .request(resource: .userCollections(username: username, page: 1, perPage: 20))
                 .map(to: [PhotoCollection].self)
                 .asObservable()
+                .map(Result.success)
+                .catchError { .just(.failure(.other(message: $0.localizedDescription))) }
     }
 
-    func collections(byPageNumber page: Int) -> Observable<Result<[PhotoCollection], String>> {
+    func collections(byPageNumber page: Int) -> Observable<Result<[PhotoCollection], Papr.Error>> {
         let collections: Unsplash = .featuredCollections(page: page, perPage: 20)
 
         return unsplash.rx.request(resource: collections)
             .map(to: [PhotoCollection].self)
             .asObservable()
             .map(Result.success)
-            .catchError { .just(.error($0.localizedDescription)) }
+            .catchError { .just(.failure(.other(message: $0.localizedDescription))) }
     }
 
     func photos(fromCollectionId id: Int, pageNumber: Int) -> Observable<[Photo]> {
@@ -50,31 +52,31 @@ struct CollectionService: CollectionServiceType {
             .execute { self.cache.set(values: $0) }  // 👨‍👩‍👧‍👧 Populate the cache.
     }
 
-    func addPhotoToCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, String>> {
+    func addPhotoToCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, Papr.Error>> {
         return unsplash.rx.request(resource: .addPhotoToCollection(collectionID: id, photoID: photoId))
             .map(to: CollectionResponse.self)
             .map { $0.photo }
             .asObservable()
             .unwrap()
             .map(Result.success)
-            .catchError { _ in .just(.error("Failed to add photo to the collection")) }
+            .catchError { _ in .just(.failure(.other(message: "Failed to add photo to the collection"))) }
     }
 
-    func removePhotoFromCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, String>> {
+    func removePhotoFromCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, Papr.Error>> {
         return unsplash.rx.request(resource: .removePhotoFromCollection(collectionID: id, photoID: photoId))
             .map(to: CollectionResponse.self)
             .map { $0.photo }
             .asObservable()
             .unwrap()
             .map(Result.success)
-            .catchError { _ in .just(.error("Failed to remove photo from the collection")) }
+            .catchError { _ in .just(.failure(.other(message: "Failed to remove photo from the collection"))) }
     }
 
     func createCollection(
         with title: String,
         description: String,
         isPrivate: Bool
-        ) -> Observable<Result<PhotoCollection, String>> {
+    ) -> Observable<Result<PhotoCollection, Papr.Error>> {
 
         return unsplash.rx.request(resource: .createCollection(
             title: title,
@@ -83,7 +85,7 @@ struct CollectionService: CollectionServiceType {
             .map(to: PhotoCollection.self)
             .asObservable()
             .map (Result.success)
-            .catchError { _ in .just(.error("Failed to create the collection")) }
+            .catchError { _ in .just(.failure(.other(message: "Failed to create the collection"))) }
     }
 
     

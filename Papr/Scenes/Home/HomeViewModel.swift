@@ -18,7 +18,7 @@ protocol HomeViewModelInput {
     var orderByAction: Action<OrderBy, Void> { get }
     
     /// Call when an alert is invoked
-    var alertAction: Action<String, Void> { get }
+    var alertAction: Action<Papr.Error, Void> { get }
     
     /// Call when pull-to-refresh is invoked
     func refresh()
@@ -68,11 +68,11 @@ class HomeViewModel: HomeViewModelType,
         }
     }()
 
-    lazy var alertAction: Action<String, Void> = {
-        Action<String, Void> { [unowned self] message in
+    lazy var alertAction: Action<Papr.Error, Void> = {
+        Action<Papr.Error, Void> { [unowned self] error in
             let alertViewModel = AlertViewModel(
                 title: "Upsss...",
-                message: message,
+                message: error.errorDescription,
                 mode: .ok)
             return self.sceneCoordinator.transition(to: Scene.alert(alertViewModel))
         }
@@ -131,7 +131,7 @@ class HomeViewModel: HomeViewModelType,
                         switch result {
                         case let .success(photos):
                             return .just(photos)
-                        case let .error(error):
+                        case let .failure(error):
                             self.alertAction.execute(error)
                             self.refreshProperty.onNext(false)
                             return .empty()
@@ -156,7 +156,7 @@ class HomeViewModel: HomeViewModelType,
                         switch result {
                         case let .success(photos):
                             return .just(photos)
-                        case let .error(error):
+                        case let .failure(error):
                             self.alertAction.execute(error)
                             self.refreshProperty.onNext(false)
                             return .empty()

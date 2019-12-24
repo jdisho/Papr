@@ -78,7 +78,7 @@ class HomeViewCellFooter: UIView, BindableType {
     private lazy var saveButton: UIButton = {
         let button = UIButton()
         button.tintColor = .black
-        button.setImage(Constants.Appearance.Icon.bookmark, for: .normal)
+        button.setImage(Papr.Appearance.Icon.bookmark, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
@@ -87,7 +87,7 @@ class HomeViewCellFooter: UIView, BindableType {
         let button = UIButton()
         button.tintColor = .black
         button.imageView?.contentMode = .scaleAspectFit
-        button.setImage(Constants.Appearance.Icon.squareAndArrowDownMedium, for: .normal)
+        button.setImage(Papr.Appearance.Icon.squareAndArrowDownMedium, for: .normal)
         return button
     }()
 
@@ -134,7 +134,7 @@ class HomeViewCellFooter: UIView, BindableType {
             .disposed(by: disposeBag)
 
         outputs.isLikedByUser
-            .map { $0 ? Constants.Appearance.Icon.heartFillMedium : Constants.Appearance.Icon.heartMedium }
+            .map { $0 ? Papr.Appearance.Icon.heartFillMedium : Papr.Appearance.Icon.heartMedium }
             .bind(to: likeButton.rx.image())
             .disposed(by: disposeBag)
     }

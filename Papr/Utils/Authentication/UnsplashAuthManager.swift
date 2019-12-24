@@ -34,9 +34,9 @@ enum UnsplashAuthorization: Resource {
             var params: [String: Any] = [:]
 
             params["grant_type"] = "authorization_code"
-            params["client_id"] = Constants.UnsplashSettings.clientID
-            params["client_secret"] = Constants.UnsplashSettings.clientSecret
-            params["redirect_uri"] = Constants.UnsplashSettings.redirectURL
+            params["client_id"] = Papr.Unsplash.clientID
+            params["client_secret"] = Papr.Unsplash.clientSecret
+            params["redirect_uri"] = Papr.Unsplash.redirectURL
             params["code"] = code
 
             return .requestWithParameters(params, encoding: URLEncoding())
@@ -58,8 +58,8 @@ class UnsplashAuthManager {
 
     static var shared: UnsplashAuthManager {
         return UnsplashAuthManager(
-            clientID: Constants.UnsplashSettings.clientID,
-            clientSecret: Constants.UnsplashSettings.clientSecret, 
+            clientID: Papr.Unsplash.clientID,
+            clientSecret: Papr.Unsplash.clientSecret,
             scopes: Scope.allCases
         )
     }
@@ -83,7 +83,7 @@ class UnsplashAuthManager {
     public var authURL: URL {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = Constants.UnsplashSettings.host
+        components.host = Papr.Unsplash.host
         components.path = "/oauth/authorize"
 
         var params: [String: String] = [:]
@@ -104,7 +104,7 @@ class UnsplashAuthManager {
          unsplash:  TinyNetworking<UnsplashAuthorization> = TinyNetworking<UnsplashAuthorization>()) {
         self.clientID = clientID
         self.clientSecret = clientSecret
-        self.redirectURL = URL(string: Constants.UnsplashSettings.redirectURL)!
+        self.redirectURL = URL(string: Papr.Unsplash.redirectURL)!
         self.scopes = scopes
         self.unplash = unsplash
     }
@@ -115,18 +115,19 @@ class UnsplashAuthManager {
         delegate.didReceiveRedirect(code: code)
     }
     
-    public func accessToken(with code: String, completion: @escaping (String?, Error?) -> Void) {
-        unplash.request(resource: .accessToken(withCode: code)) { [unowned self] response in
-            switch response {
-            case let .success(result):
-                if let accessTokenObject = try? result.map(to: UnsplashAccessToken.self) {
-                    let token = accessTokenObject.accessToken
-                    UserDefaults.standard.set(token, forKey: self.clientID)
-                    completion(token, nil)
+    public func accessToken(with code: String, completion: @escaping (Result<Void, Papr.Error>) -> Void) {
+        unplash.request(resource: .accessToken(withCode: code)) { [unowned self] result in
+            let result = result
+            .map { response -> Void in
+                if let accessTokenObject = try? response.map(to: UnsplashAccessToken.self) {
+                    UserDefaults.standard.set(accessTokenObject.accessToken, forKey: self.clientID)
                 }
-            case let .failure(error):
-                completion(nil, error)
             }
+            .mapError { error -> Papr.Error in
+                return .other(message: error.localizedDescription)
+            }
+            
+            completion(result)
         }
     }
 
@@ -134,7 +135,7 @@ class UnsplashAuthManager {
     private func accessTokenURL(with code: String) -> URL {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = Constants.UnsplashSettings.host
+        components.host = Papr.Unsplash.host
         components.path = "/oauth/token"
 
         var params: [String: String] = [:]

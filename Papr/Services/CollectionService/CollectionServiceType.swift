@@ -9,23 +9,18 @@
 import Foundation
 import RxSwift
 
-enum NonPublicScopeError {
-    case noAccessToken
-    case error(withMessage: String)
-}
-
 protocol CollectionServiceType {
     func collection(withID id: Int) -> Observable<PhotoCollection>
     
-    func collections(withUsername username: String) -> Observable<[PhotoCollection]>
+    func collections(withUsername username: String) -> Observable<Result<[PhotoCollection], Papr.Error>>
 
-    func collections(byPageNumber page: Int) -> Observable<Result<[PhotoCollection], String>>
+    func collections(byPageNumber page: Int) -> Observable<Result<[PhotoCollection], Papr.Error>>
 
     func photos(fromCollectionId id: Int, pageNumber: Int) -> Observable<[Photo]>
     
-    func addPhotoToCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, String>>
+    func addPhotoToCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, Papr.Error>>
 
-    func removePhotoFromCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, String>>
+    func removePhotoFromCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, Papr.Error>>
 
-    func createCollection(with title: String, description: String, isPrivate: Bool) -> Observable<Result<PhotoCollection, String>>
+    func createCollection(with title: String, description: String, isPrivate: Bool) -> Observable<Result<PhotoCollection, Papr.Error>>
 }
