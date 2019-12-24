@@ -33,6 +33,7 @@
 		DC487F4A2104FCB00042DBBC /* BouncyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC487F482104FCB00042DBBC /* BouncyView.swift */; };
 		DC524CB223B28A7100F0E05E /* Papr+Unsplash.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC524CB123B28A7000F0E05E /* Papr+Unsplash.swift */; };
 		DC524CB423B28A9900F0E05E /* Papr+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC524CB323B28A9900F0E05E /* Papr+Appearance.swift */; };
+		DC524CB623B28B1F00F0E05E /* Papr+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC524CB523B28B1F00F0E05E /* Papr+Error.swift */; };
 		DC594CCC2274E478006059C0 /* HomeViewCellFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC594CCB2274E478006059C0 /* HomeViewCellFooter.swift */; };
 		DC594CCE2274E48C006059C0 /* HomeViewCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC594CCD2274E48C006059C0 /* HomeViewCellHeader.swift */; };
 		DC594CD02274E97A006059C0 /* HomeViewCellHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC594CCF2274E97A006059C0 /* HomeViewCellHeaderModel.swift */; };
@@ -176,6 +177,7 @@
 		DC487F482104FCB00042DBBC /* BouncyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyView.swift; sourceTree = "<group>"; };
 		DC524CB123B28A7000F0E05E /* Papr+Unsplash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Papr+Unsplash.swift"; sourceTree = "<group>"; };
 		DC524CB323B28A9900F0E05E /* Papr+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Papr+Appearance.swift"; sourceTree = "<group>"; };
+		DC524CB523B28B1F00F0E05E /* Papr+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Papr+Error.swift"; sourceTree = "<group>"; };
 		DC594CCB2274E478006059C0 /* HomeViewCellFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellFooter.swift; sourceTree = "<group>"; };
 		DC594CCD2274E48C006059C0 /* HomeViewCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellHeader.swift; sourceTree = "<group>"; };
 		DC594CCF2274E97A006059C0 /* HomeViewCellHeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCellHeaderModel.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 				DCA09CFF2015F68200E6EBB7 /* Papr.swift */,
 				DC524CB123B28A7000F0E05E /* Papr+Unsplash.swift */,
 				DC524CB323B28A9900F0E05E /* Papr+Appearance.swift */,
+				DC524CB523B28B1F00F0E05E /* Papr+Error.swift */,
 				DCBB1B211FA7B1BD004E95F0 /* AppDelegate.swift */,
 			);
 			path = Commons;
@@ -1024,6 +1027,7 @@
 				DC71C3021FBD9B7200C8E41A /* UnsplashAuthManager.swift in Sources */,
 				C0F79DF12167A58C0051232D /* PinterestLayout+Rx.swift in Sources */,
 				DC5AF74C1FACF18600ADA2BB /* Exif.swift in Sources */,
+				DC524CB623B28B1F00F0E05E /* Papr+Error.swift in Sources */,
 				C0D52CB12181DA7700FB0517 /* Cache.swift in Sources */,
 				DCCD04142059C19D00670B70 /* UserServiceType.swift in Sources */,
 				DCBB1B571FA8B823004E95F0 /* SceneCoodinatorType.swift in Sources */,

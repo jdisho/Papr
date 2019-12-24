@@ -18,7 +18,7 @@ protocol HomeViewModelInput {
     var orderByAction: Action<OrderBy, Void> { get }
     
     /// Call when an alert is invoked
-    var alertAction: Action<Error, Void> { get }
+    var alertAction: Action<Papr.Error, Void> { get }
     
     /// Call when pull-to-refresh is invoked
     func refresh()
@@ -68,8 +68,8 @@ class HomeViewModel: HomeViewModelType,
         }
     }()
 
-    lazy var alertAction: Action<Error, Void> = {
-        Action<Error, Void> { [unowned self] error in
+    lazy var alertAction: Action<Papr.Error, Void> = {
+        Action<Papr.Error, Void> { [unowned self] error in
             let alertViewModel = AlertViewModel(
                 title: "Upsss...",
                 message: error.errorDescription,

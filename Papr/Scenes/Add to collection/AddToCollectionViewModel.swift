@@ -63,8 +63,8 @@ class AddToCollectionViewModel: AddToCollectionViewModelInput,
     private var sceneCoordinator: SceneCoordinatorType!
     private var myCollectionsStream: Observable<[PhotoCollection]>!
 
-    lazy var alertAction: Action<Error, Void> = {
-        Action<Error, Void> { [unowned self] error in
+    lazy var alertAction: Action<Papr.Error, Void> = {
+        Action<Papr.Error, Void> { [unowned self] error in
             let alertViewModel = AlertViewModel(
                 title: "Upsss...",
                 message: error.errorDescription,

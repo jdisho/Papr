@@ -69,8 +69,8 @@ class CreateCollectionViewModel: CreateCollectionViewModelInput,
     private let service: CollectionServiceType
     private let sceneCoordinator: SceneCoordinatorType
 
-    private lazy var alertAction: Action<Error, Void> = {
-        Action<Error, Void> { [unowned self] error in
+    private lazy var alertAction: Action<Papr.Error, Void> = {
+        Action<Papr.Error, Void> { [unowned self] error in
             let alertViewModel = AlertViewModel(
                 title: "Upsss...",
                 message: error.errorDescription,

@@ -115,7 +115,7 @@ class UnsplashAuthManager {
         delegate.didReceiveRedirect(code: code)
     }
     
-    public func accessToken(with code: String, completion: @escaping (Result<Void, Error>) -> Void) {
+    public func accessToken(with code: String, completion: @escaping (Result<Void, Papr.Error>) -> Void) {
         unplash.request(resource: .accessToken(withCode: code)) { [unowned self] result in
             let result = result
             .map { response -> Void in
@@ -123,7 +123,7 @@ class UnsplashAuthManager {
                     UserDefaults.standard.set(accessTokenObject.accessToken, forKey: self.clientID)
                 }
             }
-            .mapError { error -> Error in
+            .mapError { error -> Papr.Error in
                 return .other(message: error.localizedDescription)
             }
             

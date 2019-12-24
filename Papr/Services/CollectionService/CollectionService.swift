@@ -26,7 +26,7 @@ struct CollectionService: CollectionServiceType {
             .asObservable()
     }
 
-    func collections(withUsername username: String) -> Observable<Result<[PhotoCollection], Error>> {
+    func collections(withUsername username: String) -> Observable<Result<[PhotoCollection], Papr.Error>> {
             return self.unsplash.rx
                 .request(resource: .userCollections(username: username, page: 1, perPage: 20))
                 .map(to: [PhotoCollection].self)
@@ -35,7 +35,7 @@ struct CollectionService: CollectionServiceType {
                 .catchError { .just(.failure(.other(message: $0.localizedDescription))) }
     }
 
-    func collections(byPageNumber page: Int) -> Observable<Result<[PhotoCollection], Error>> {
+    func collections(byPageNumber page: Int) -> Observable<Result<[PhotoCollection], Papr.Error>> {
         let collections: Unsplash = .featuredCollections(page: page, perPage: 20)
 
         return unsplash.rx.request(resource: collections)
@@ -52,7 +52,7 @@ struct CollectionService: CollectionServiceType {
             .execute { self.cache.set(values: $0) }  // 👨‍👩‍👧‍👧 Populate the cache.
     }
 
-    func addPhotoToCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, Error>> {
+    func addPhotoToCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, Papr.Error>> {
         return unsplash.rx.request(resource: .addPhotoToCollection(collectionID: id, photoID: photoId))
             .map(to: CollectionResponse.self)
             .map { $0.photo }
@@ -62,7 +62,7 @@ struct CollectionService: CollectionServiceType {
             .catchError { _ in .just(.failure(.other(message: "Failed to add photo to the collection"))) }
     }
 
-    func removePhotoFromCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, Error>> {
+    func removePhotoFromCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, Papr.Error>> {
         return unsplash.rx.request(resource: .removePhotoFromCollection(collectionID: id, photoID: photoId))
             .map(to: CollectionResponse.self)
             .map { $0.photo }
@@ -76,7 +76,7 @@ struct CollectionService: CollectionServiceType {
         with title: String,
         description: String,
         isPrivate: Bool
-        ) -> Observable<Result<PhotoCollection, Error>> {
+    ) -> Observable<Result<PhotoCollection, Papr.Error>> {
 
         return unsplash.rx.request(resource: .createCollection(
             title: title,

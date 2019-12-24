@@ -10,5 +10,5 @@ import Foundation
 import RxSwift
 
 protocol UserServiceType {
-    func getMe() -> Observable<Result<User, Error>>
+    func getMe() -> Observable<Result<User, Papr.Error>>
 }

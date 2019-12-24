@@ -21,7 +21,7 @@ struct PhotoService: PhotoServiceType {
         self.cache = cache
     }
 
-    func like(photo: Photo) ->  Observable<Result<Photo, Error>> {
+    func like(photo: Photo) ->  Observable<Result<Photo, Papr.Error>> {
         return unsplash.rx
             .request(resource: .likePhoto(id: photo.id ?? ""))
             .map(to: LikeUnlike.self)
@@ -39,7 +39,7 @@ struct PhotoService: PhotoServiceType {
             }
     }
     
-    func unlike(photo: Photo) ->  Observable<Result<Photo, Error>> {
+    func unlike(photo: Photo) ->  Observable<Result<Photo, Papr.Error>> {
         return unsplash.rx
             .request(resource: .unlikePhoto(id: photo.id ?? ""))
             .map(to: LikeUnlike.self)
@@ -67,7 +67,7 @@ struct PhotoService: PhotoServiceType {
     func photos(
         byPageNumber pageNumber: Int = 1,
         orderBy: OrderBy = .latest
-        ) -> Observable<Result<[Photo], Error>> {
+        ) -> Observable<Result<[Photo], Papr.Error>> {
 
         let photos: Unsplash = .photos(page: pageNumber, perPage: nil, orderBy: orderBy)
 
@@ -90,7 +90,7 @@ struct PhotoService: PhotoServiceType {
             .asObservable()
     }
 
-    func photoDownloadLink(withId id: String) ->  Observable<Result<String, Error>> {
+    func photoDownloadLink(withId id: String) ->  Observable<Result<String, Papr.Error>> {
         return unsplash.rx
             .request(resource: .photoDownloadLink(id: id))
             .map(to: Link.self)

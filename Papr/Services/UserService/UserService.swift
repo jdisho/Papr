@@ -18,7 +18,7 @@ struct UserService: UserServiceType {
         self.unsplash = unsplash
     }
 
-    func getMe() -> Observable<Result<User, Error>> {
+    func getMe() -> Observable<Result<User, Papr.Error>> {
         return unsplash.rx
             .request(resource: .getMe)
             .map(to: User.self)
