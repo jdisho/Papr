@@ -47,11 +47,11 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType, PhotoDetailsViewModelInp
                     switch result {
                     case let .success(photo):
                         return .just(photo)
-                    case let .error(error):
+                    case let .failure(error):
                         switch error {
                         case .noAccessToken:
                             self.navigateToLogin.execute(())
-                        case let .error(message):
+                        case let .other(message):
                             self.alertAction.execute((title: "Upsss...", message: message))
                         }
                         return .empty()
@@ -67,11 +67,11 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType, PhotoDetailsViewModelInp
                     switch result {
                     case let .success(photo):
                         return .just(photo)
-                    case let .error(error):
+                    case let .failure(error):
                         switch error {
                         case .noAccessToken:
                             self.navigateToLogin.execute(())
-                        case let .error(message):
+                        case let .other(message):
                             self.alertAction.execute((title: "Upsss...", message: message))
                         }
                         return .empty()

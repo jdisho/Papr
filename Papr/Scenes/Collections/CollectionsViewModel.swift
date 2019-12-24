@@ -93,7 +93,7 @@ class CollectionsViewModel: CollectionsViewModelType,
                         switch result {
                         case let .success(photoCollections):
                             return .just(photoCollections)
-                        case .error(_):
+                        case .failure(_):
                             self.refreshProperty.onNext(false)
                             return .empty()
                         }
@@ -114,7 +114,7 @@ class CollectionsViewModel: CollectionsViewModelType,
                         switch result {
                         case let .success(photoCollections):
                             return .just(photoCollections)
-                        case .error(_):
+                        case .failure(_):
                             self.refreshProperty.onNext(false)
                             return .empty()
                         }

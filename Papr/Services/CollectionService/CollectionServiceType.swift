@@ -9,9 +9,18 @@
 import Foundation
 import RxSwift
 
-enum NonPublicScopeError {
+enum Error: Swift.Error {
     case noAccessToken
-    case error(withMessage: String)
+    case other(message: String)
+    
+    var message: String {
+        switch self {
+        case .noAccessToken:
+            return "Please provide the access token."
+        case let .other(message: message):
+            return message
+        }
+    }
 }
 
 protocol CollectionServiceType {
@@ -19,13 +28,13 @@ protocol CollectionServiceType {
     
     func collections(withUsername username: String) -> Observable<[PhotoCollection]>
 
-    func collections(byPageNumber page: Int) -> Observable<Result<[PhotoCollection], String>>
+    func collections(byPageNumber page: Int) -> Observable<Result<[PhotoCollection], Error>>
 
     func photos(fromCollectionId id: Int, pageNumber: Int) -> Observable<[Photo]>
     
-    func addPhotoToCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, String>>
+    func addPhotoToCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, Error>>
 
-    func removePhotoFromCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, String>>
+    func removePhotoFromCollection(withId id: Int, photoId: String) -> Observable<Result<Photo, Error>>
 
-    func createCollection(with title: String, description: String, isPrivate: Bool) -> Observable<Result<PhotoCollection, String>>
+    func createCollection(with title: String, description: String, isPrivate: Bool) -> Observable<Result<PhotoCollection, Error>>
 }

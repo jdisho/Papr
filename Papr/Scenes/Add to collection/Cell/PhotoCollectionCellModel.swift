@@ -48,7 +48,7 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
                     switch result {
                     case let .success(photo):
                         self.photoProperty.onNext(photo)
-                    case let .error(error):
+                    case let .failure(error):
                         self.alertAction.execute(error)
                     }
                     return .empty()
@@ -66,7 +66,7 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
                     switch result {
                     case let .success(photo):
                         self.photoProperty.onNext(photo)
-                    case let .error(error):
+                    case let .failure(error):
                         self.alertAction.execute(error)
                     }
                     return .empty()
@@ -87,11 +87,11 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
     private let sceneCoordinator: SceneCoordinatorType
     private let photoProperty = BehaviorSubject<Photo?>(value: nil)
 
-    private lazy var alertAction: Action<String, Void> = {
-        Action<String, Void> { [unowned self] message in
+    private lazy var alertAction: Action<Error, Void> = {
+        Action<Error, Void> { [unowned self] error in
             let alertViewModel = AlertViewModel(
                 title: "Upsss...",
-                message: message,
+                message: error.message,
                 mode: .ok)
             return self.sceneCoordinator.transition(to: Scene.alert(alertViewModel))
         }

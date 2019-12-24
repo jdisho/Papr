@@ -115,7 +115,7 @@ class UnsplashAuthManager {
         delegate.didReceiveRedirect(code: code)
     }
     
-    public func accessToken(with code: String, completion: @escaping (String?, Error?) -> Void) {
+    public func accessToken(with code: String, completion: @escaping (String?, Swift.Error?) -> Void) {
         unplash.request(resource: .accessToken(withCode: code)) { [unowned self] response in
             switch response {
             case let .success(result):

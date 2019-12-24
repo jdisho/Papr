@@ -101,8 +101,8 @@ class CreateCollectionViewModel: CreateCollectionViewModelInput,
                 case let .success(photo):
                     self.sceneCoordinator.pop(animated: true)
                     return .just(photo)
-                case let .error(error):
-                    self.alertAction.execute(error)
+                case let .failure(error):
+                    self.alertAction.execute(error.message)
                     return .empty()
                 }
             }
@@ -114,8 +114,8 @@ class CreateCollectionViewModel: CreateCollectionViewModelInput,
                 switch result {
                 case let .success(collection):
                     return .just(collection)
-                case let .error(error):
-                    self.alertAction.execute(error)
+                case let .failure(error):
+                    self.alertAction.execute(error.message)
                     return .empty()
                 }
         }

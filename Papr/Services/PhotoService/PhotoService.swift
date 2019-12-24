@@ -21,7 +21,7 @@ struct PhotoService: PhotoServiceType {
         self.cache = cache
     }
 
-    func like(photo: Photo) ->  Observable<Result<Photo, NonPublicScopeError>> {
+    func like(photo: Photo) ->  Observable<Result<Photo, Error>> {
         return unsplash.rx
             .request(resource: .likePhoto(id: photo.id ?? ""))
             .map(to: LikeUnlike.self)
@@ -33,13 +33,13 @@ struct PhotoService: PhotoServiceType {
             .catchError { _ in
                 let accessToken = UserDefaults.standard.string(forKey: Constants.UnsplashSettings.clientID)
                 guard accessToken == nil else {
-                    return .just(.error(.error(withMessage: "Failed to like")))
+                    return .just(.failure(.other(message: "Failed to like")))
                 }
-                return .just(.error(.noAccessToken))
+                return .just(.failure(.noAccessToken))
             }
     }
     
-    func unlike(photo: Photo) ->  Observable<Result<Photo, NonPublicScopeError>> {
+    func unlike(photo: Photo) ->  Observable<Result<Photo, Error>> {
         return unsplash.rx
             .request(resource: .unlikePhoto(id: photo.id ?? ""))
             .map(to: LikeUnlike.self)
@@ -51,9 +51,9 @@ struct PhotoService: PhotoServiceType {
             .catchError { _ in
                 let accessToken = UserDefaults.standard.string(forKey: Constants.UnsplashSettings.clientID)
                 guard accessToken == nil else {
-                    return .just(.error(.error(withMessage: "Failed to like")))
+                    return .just(.failure(.other(message: "Failed to like")))
                 }
-                return .just(.error(.noAccessToken))
+                return .just(.failure(.noAccessToken))
         }
     }
     
@@ -67,7 +67,7 @@ struct PhotoService: PhotoServiceType {
     func photos(
         byPageNumber pageNumber: Int = 1,
         orderBy: OrderBy = .latest
-        ) -> Observable<Result<[Photo], String>> {
+        ) -> Observable<Result<[Photo], Error>> {
 
         let photos: Unsplash = .photos(page: pageNumber, perPage: nil, orderBy: orderBy)
 
@@ -76,7 +76,7 @@ struct PhotoService: PhotoServiceType {
             .asObservable()
             .execute { self.cache.set(values: $0) }  // 👨‍👩‍👧‍👧 Populate the cache.
             .map(Result.success)
-            .catchError { .just(.error($0.localizedDescription)) }
+            .catchError { .just(.failure(.other(message: $0.localizedDescription))) }
     }
 
     func statistics(of photo: Photo) -> Observable<PhotoStatistics> {
@@ -90,7 +90,7 @@ struct PhotoService: PhotoServiceType {
             .asObservable()
     }
 
-    func photoDownloadLink(withId id: String) ->  Observable<Result<String, String>> {
+    func photoDownloadLink(withId id: String) ->  Observable<Result<String, Error>> {
         return unsplash.rx
             .request(resource: .photoDownloadLink(id: id))
             .map(to: Link.self)
@@ -98,7 +98,7 @@ struct PhotoService: PhotoServiceType {
             .asObservable()
             .unwrap()
             .map(Result.success)
-            .catchError { _ in return .just(.error("Failed to download photo")) }
+            .catchError { _ in return .just(.failure(.other(message: "Failed to download photo"))) }
 
     }
 
