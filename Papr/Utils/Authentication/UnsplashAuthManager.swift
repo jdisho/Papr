@@ -34,9 +34,9 @@ enum UnsplashAuthorization: Resource {
             var params: [String: Any] = [:]
 
             params["grant_type"] = "authorization_code"
-            params["client_id"] = Constants.UnsplashSettings.clientID
-            params["client_secret"] = Constants.UnsplashSettings.clientSecret
-            params["redirect_uri"] = Constants.UnsplashSettings.redirectURL
+            params["client_id"] = Papr.UnsplashSettings.clientID
+            params["client_secret"] = Papr.UnsplashSettings.clientSecret
+            params["redirect_uri"] = Papr.UnsplashSettings.redirectURL
             params["code"] = code
 
             return .requestWithParameters(params, encoding: URLEncoding())
@@ -58,8 +58,8 @@ class UnsplashAuthManager {
 
     static var shared: UnsplashAuthManager {
         return UnsplashAuthManager(
-            clientID: Constants.UnsplashSettings.clientID,
-            clientSecret: Constants.UnsplashSettings.clientSecret, 
+            clientID: Papr.UnsplashSettings.clientID,
+            clientSecret: Papr.UnsplashSettings.clientSecret,
             scopes: Scope.allCases
         )
     }
@@ -83,7 +83,7 @@ class UnsplashAuthManager {
     public var authURL: URL {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = Constants.UnsplashSettings.host
+        components.host = Papr.UnsplashSettings.host
         components.path = "/oauth/authorize"
 
         var params: [String: String] = [:]
@@ -104,7 +104,7 @@ class UnsplashAuthManager {
          unsplash:  TinyNetworking<UnsplashAuthorization> = TinyNetworking<UnsplashAuthorization>()) {
         self.clientID = clientID
         self.clientSecret = clientSecret
-        self.redirectURL = URL(string: Constants.UnsplashSettings.redirectURL)!
+        self.redirectURL = URL(string: Papr.UnsplashSettings.redirectURL)!
         self.scopes = scopes
         self.unplash = unsplash
     }
@@ -135,7 +135,7 @@ class UnsplashAuthManager {
     private func accessTokenURL(with code: String) -> URL {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = Constants.UnsplashSettings.host
+        components.host = Papr.UnsplashSettings.host
         components.path = "/oauth/token"
 
         var params: [String: String] = [:]

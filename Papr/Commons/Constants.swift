@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-enum Constants {
+enum Papr {
     static let photosPerPage = 10
 
     enum Appearance {
