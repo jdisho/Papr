@@ -107,11 +107,11 @@ class LoginViewModel: NSObject, LoginViewModelInput, LoginViewModelOuput, LoginV
         }
     }()
 
-    private lazy var alertAction: Action<String, Void> = {
-        Action<String, Void> { [unowned self] message in
+    private lazy var alertAction: Action<Error, Void> = {
+        Action<Error, Void> { [unowned self] error in
             let alertViewModel = AlertViewModel(
                 title: "Upsss...",
-                message: message,
+                message: error.errorDescription,
                 mode: .ok)
             return self.sceneCoordinator.transition(to: Scene.alert(alertViewModel))
         }
@@ -148,11 +148,12 @@ extension LoginViewModel: UnsplashSessionListener {
     func didReceiveRedirect(code: String) {
         loginStateProperty.onNext(.tokenIsFetched)
         buttonNameProperty.onNext("Please wait ...")
-        self.authManager.accessToken(with: code) { [unowned self] _, error in
-            if let error = error {
-                self.alertAction.execute(error.localizedDescription)
-            } else {
+        self.authManager.accessToken(with: code) { [unowned self] result in
+            switch result {
+            case .success:
                 self.navigateToTabBarAction.execute(())
+            case let .failure(error):
+                self.alertAction.execute(error)
             }
         }
     }

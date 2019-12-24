@@ -115,18 +115,19 @@ class UnsplashAuthManager {
         delegate.didReceiveRedirect(code: code)
     }
     
-    public func accessToken(with code: String, completion: @escaping (String?, Swift.Error?) -> Void) {
-        unplash.request(resource: .accessToken(withCode: code)) { [unowned self] response in
-            switch response {
-            case let .success(result):
-                if let accessTokenObject = try? result.map(to: UnsplashAccessToken.self) {
-                    let token = accessTokenObject.accessToken
-                    UserDefaults.standard.set(token, forKey: self.clientID)
-                    completion(token, nil)
+    public func accessToken(with code: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        unplash.request(resource: .accessToken(withCode: code)) { [unowned self] result in
+            let result = result
+            .map { response -> Void in
+                if let accessTokenObject = try? response.map(to: UnsplashAccessToken.self) {
+                    UserDefaults.standard.set(accessTokenObject.accessToken, forKey: self.clientID)
                 }
-            case let .failure(error):
-                completion(nil, error)
             }
+            .mapError { error -> Error in
+                return .other(message: error.localizedDescription)
+            }
+            
+            completion(result)
         }
     }
 
