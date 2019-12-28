@@ -45,11 +45,8 @@ extension ObservableType {
     
 }
 extension Observable where Element == String {
-
     func mapToURL() -> Observable<URL> {
-        return map { URL(string: $0) }
-            .filter { $0 != nil }
-            .map { $0! }
+        return map { URL(string: $0) }.compactMap { $0 }
     }
 }
 extension Observable where Element == Data {
