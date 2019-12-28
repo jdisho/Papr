@@ -34,25 +34,17 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
         let outputs = viewModel.outputs
         let this = SearchPhotosCell.self
 
-        outputs.photo
+        outputs.photoStream
             .map { $0.id }
             .unwrap()
             .bind(to: photoImageView.rx.heroId)
             .disposed(by: disposeBag)
 
-       let smallPhotoURL = outputs.photo
-            .map { $0.urls?.small }
-            .unwrap()
-
-        let regularPhotoURL = outputs.photo
-            .map { $0.urls?.regular }
-            .unwrap()
-
-        Observable.combineLatest(smallPhotoURL, regularPhotoURL)
-            .flatMap { small, regular -> Observable<ImageResponse> in
+        Observable.combineLatest(outputs.smallPhotoURL, outputs.regularPhotoURL)
+            .flatMap { smallPhotoURL, regularPhotoURL -> Observable<ImageResponse> in
                 return Observable.concat(
-                    this.imagePipeline.rx.loadImage(with: URL(string: small)!).asObservable(),
-                    this.imagePipeline.rx.loadImage(with: URL(string: regular)!).asObservable()
+                    this.imagePipeline.rx.loadImage(with: smallPhotoURL).asObservable(),
+                    this.imagePipeline.rx.loadImage(with: regularPhotoURL).asObservable()
                 )
             }
             .map { $0.image }
