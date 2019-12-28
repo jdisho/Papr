@@ -16,8 +16,8 @@ extension ObservableType {
         return map { _ in }
     }
     
-    func unwrap<T>() -> Observable<T> where Element == Optional<T> {
-        return filter { $0 != nil }.map { $0! }
+    func unwrap<T>() -> Observable<T> where Element == T? {
+        return compactMap { $0 }
     }
 
     func execute(_ selector: @escaping (Element) -> Void) -> Observable<Element> {
