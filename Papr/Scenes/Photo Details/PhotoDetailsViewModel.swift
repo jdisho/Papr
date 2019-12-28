@@ -33,7 +33,7 @@ protocol PhotoDetailsViewModelType {
     var outputs: PhotoDetailsViewModelOutput { get }
 }
 
-class PhotoDetailsViewModel: PhotoDetailsViewModelType, PhotoDetailsViewModelInput, PhotoDetailsViewModelOutput {
+final class PhotoDetailsViewModel: PhotoDetailsViewModelType, PhotoDetailsViewModelInput, PhotoDetailsViewModelOutput {
 
     // MARK: Inputs & Outputs
     var inputs: PhotoDetailsViewModelInput { return self }

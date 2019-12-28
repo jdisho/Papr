@@ -24,7 +24,7 @@ protocol SearchViewModelType {
     var outputs: SearchViewModelOutput { get }
 }
 
-class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewModelOutput {
+final class SearchViewModel: SearchViewModelType, SearchViewModelInput, SearchViewModelOutput {
 
     var inputs: SearchViewModelInput { return self }
     var outputs: SearchViewModelOutput { return self }

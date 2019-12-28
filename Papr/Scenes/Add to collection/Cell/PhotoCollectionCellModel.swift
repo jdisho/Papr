@@ -28,7 +28,7 @@ protocol PhotoCollectionCellModelType {
     var outputs: PhotoCollectionCellModelOutput { get }
 }
 
-class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
+final class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
                                 PhotoCollectionCellModelOutput,
                                 PhotoCollectionCellModelType {
 

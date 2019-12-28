@@ -26,7 +26,7 @@ protocol SearchUsersViewModelType {
     var output: SearchUsersViewModelOutput { get }
 }
 
-class SearchUsersViewModel: SearchUsersViewModelType, SearchUsersViewModelInput, SearchUsersViewModelOutput {
+final class SearchUsersViewModel: SearchUsersViewModelType, SearchUsersViewModelInput, SearchUsersViewModelOutput {
 
     var input: SearchUsersViewModelInput { return self }
     var output: SearchUsersViewModelOutput { return self }

@@ -9,6 +9,6 @@
 import Foundation
 import RxSwift
 
-class UserProfileViewModel {
+final class UserProfileViewModel {
     
 }

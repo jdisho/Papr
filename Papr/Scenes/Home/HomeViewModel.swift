@@ -43,9 +43,7 @@ protocol HomeViewModelType {
     var outputs: HomeViewModelOutput { get }
 }
 
-class HomeViewModel: HomeViewModelType, 
-                     HomeViewModelInput, 
-                     HomeViewModelOutput {
+final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelOutput {
 
     // MARK: Inputs & Outputs
     var inputs: HomeViewModelInput { return self }

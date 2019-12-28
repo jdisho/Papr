@@ -20,7 +20,7 @@ protocol SearchPhotosCellModelType {
     var outputs: SearchPhotosCellModelOutput { get }
 }
 
-class SearchPhotosCellModel: SearchPhotosCellModelType,
+final class SearchPhotosCellModel: SearchPhotosCellModelType,
                             SearchPhotosCellModelInput,
                             SearchPhotosCellModelOutput {
     

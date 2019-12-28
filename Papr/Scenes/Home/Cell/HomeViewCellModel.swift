@@ -30,7 +30,7 @@ protocol HomeViewCellModelType {
     var outputs: HomeViewCellModelOutput { get }
 }
 
-class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeViewCellModelOutput {
+final class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeViewCellModelOutput {
 
     // MARK: Inputs & Outputs
     var inputs: HomeViewCellModelInput { return self }

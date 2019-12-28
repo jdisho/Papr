@@ -20,7 +20,7 @@ protocol UserCellModelType {
     var outputs: UserCellModelOutput { get }
 }
 
-class UserCellModel: UserCellModelType, UserCellModelInput, UserCellModelOutput {
+final class UserCellModel: UserCellModelType, UserCellModelInput, UserCellModelOutput {
 
     // MARK: Inputs & Outputs
     var inputs: UserCellModelInput { return self }
