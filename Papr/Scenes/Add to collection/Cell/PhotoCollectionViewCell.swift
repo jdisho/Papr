@@ -64,7 +64,6 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType, NibIdentifiab
             .disposed(by: disposeBag)
         
         outputs.coverPhotoURL
-            .mapToURL()
             .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
             .map { $0.image }
             .execute { [unowned self] _ in

@@ -36,7 +36,7 @@ protocol AlertViewModelType {
     var outputs: AlertViewModelOutput { get }
 }
 
-class AlertViewModel: AlertViewModelType, AlertViewModelInput, AlertViewModelOutput {
+final class AlertViewModel: AlertViewModelType, AlertViewModelInput, AlertViewModelOutput {
     
     // MARK: Inputs & Outputs
     var inputs: AlertViewModelInput { return self }

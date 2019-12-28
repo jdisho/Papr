@@ -34,7 +34,7 @@ protocol LoginViewModelType {
     var outputs: LoginViewModelOuput { get }
 }
 
-class LoginViewModel: NSObject, LoginViewModelInput, LoginViewModelOuput, LoginViewModelType   {
+final class LoginViewModel: NSObject, LoginViewModelInput, LoginViewModelOuput, LoginViewModelType   {
 
     // MARK: Inputs & Outputs
     var inputs: LoginViewModelInput { return self }

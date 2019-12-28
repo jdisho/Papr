@@ -63,16 +63,16 @@ class HomeViewCell: UICollectionViewCell, BindableType,  ClassIdentifiable {
                 self?.photoButton.rx.bind(to: inputs.photoDetailsAction, input: $0)
             }
             .disposed(by: disposeBag)
-
+        
         Observable.combineLatest(
-            outputs.smallPhoto,
-            outputs.regularPhoto,
-            outputs.fullPhoto)
-            .flatMap { small, regular, full -> Observable<ImageResponse> in
+            outputs.smallPhotoURL,
+            outputs.regularPhotoURL,
+            outputs.fullPhotoURL)
+            .flatMap { smallPhotoURL, regularPhotoURL, fullPhotoURL -> Observable<ImageResponse> in
                 return Observable.concat(
-                    this.imagePipeline.rx.loadImage(with: URL(string: small)!).asObservable(),
-                    this.imagePipeline.rx.loadImage(with: URL(string: regular)!).asObservable(),
-                    this.imagePipeline.rx.loadImage(with: URL(string: full)!).asObservable()
+                    this.imagePipeline.rx.loadImage(with: smallPhotoURL).asObservable(),
+                    this.imagePipeline.rx.loadImage(with: regularPhotoURL).asObservable(),
+                    this.imagePipeline.rx.loadImage(with: fullPhotoURL).asObservable()
                 )
             }
             .map { $0.image }

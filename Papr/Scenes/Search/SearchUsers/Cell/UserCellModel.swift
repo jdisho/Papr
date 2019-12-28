@@ -12,7 +12,7 @@ import RxSwift
 protocol UserCellModelInput {}
 protocol UserCellModelOutput {
     var fullName: Observable<NSAttributedString> { get }
-    var profilePhotoURL: Observable<String> { get }
+    var profilePhotoURL: Observable<URL> { get }
 }
 
 protocol UserCellModelType {
@@ -20,7 +20,7 @@ protocol UserCellModelType {
     var outputs: UserCellModelOutput { get }
 }
 
-class UserCellModel: UserCellModelType, UserCellModelInput, UserCellModelOutput {
+final class UserCellModel: UserCellModelType, UserCellModelInput, UserCellModelOutput {
 
     // MARK: Inputs & Outputs
     var inputs: UserCellModelInput { return self }
@@ -28,7 +28,7 @@ class UserCellModel: UserCellModelType, UserCellModelInput, UserCellModelOutput 
 
     // MARK: Outputs
     let fullName: Observable<NSAttributedString>
-    let profilePhotoURL: Observable<String>
+    let profilePhotoURL: Observable<URL>
 
     // MARK: Init
     init(user: User, searchQuery: String) {
@@ -41,6 +41,7 @@ class UserCellModel: UserCellModelType, UserCellModelInput, UserCellModelOutput 
         profilePhotoURL = userStream
             .map { $0.profileImage?.medium }
             .unwrap()
+            .mapToURL()
     }
 }
 

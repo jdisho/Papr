@@ -16,8 +16,8 @@ extension ObservableType {
         return map { _ in }
     }
     
-    func unwrap<T>() -> Observable<T> where Element == Optional<T> {
-        return filter { $0 != nil }.map { $0! }
+    func unwrap<T>() -> Observable<T> where Element == T? {
+        return compactMap { $0 }
     }
 
     func execute(_ selector: @escaping (Element) -> Void) -> Observable<Element> {
@@ -45,11 +45,8 @@ extension ObservableType {
     
 }
 extension Observable where Element == String {
-
     func mapToURL() -> Observable<URL> {
-        return map { URL(string: $0) }
-            .filter { $0 != nil }
-            .map { $0! }
+        return map { URL(string: $0) }.compactMap { $0 }
     }
 }
 extension Observable where Element == Data {

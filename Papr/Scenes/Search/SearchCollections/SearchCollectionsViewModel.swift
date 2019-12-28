@@ -21,7 +21,7 @@ protocol SearchCollectionsViewModelType {
     var output: SearchCollectionsViewModelOutput { get }
 }
 
-class SearchCollectionsViewModel: SearchCollectionsViewModelType, SearchCollectionsViewModelInput, SearchCollectionsViewModelOutput {
+final class SearchCollectionsViewModel: SearchCollectionsViewModelType, SearchCollectionsViewModelInput, SearchCollectionsViewModelOutput {
 
     var input: SearchCollectionsViewModelInput { return self }
     var output: SearchCollectionsViewModelOutput { return self }

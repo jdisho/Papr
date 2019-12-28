@@ -83,7 +83,7 @@ class SearchPhotosViewController: UIViewController, BindableType {
                     else { return .empty() }
                 return .just(cell)
             }
-            .flatMap { $0.viewModel.outputs.photo }
+            .flatMap { $0.viewModel.outputs.photoStream }
             .bind(to: inputs.photoDetailsAction.inputs)
             .disposed(by: disposeBag)
     }

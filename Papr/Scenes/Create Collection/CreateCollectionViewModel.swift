@@ -27,7 +27,7 @@ protocol CreateCollectionViewModelType {
     var outputs: CreateCollectionViewModelOutput {  get}
 }
 
-class CreateCollectionViewModel: CreateCollectionViewModelInput,
+final class CreateCollectionViewModel: CreateCollectionViewModelInput,
                                 CreateCollectionViewModelOutput,
                                 CreateCollectionViewModelType  {
 

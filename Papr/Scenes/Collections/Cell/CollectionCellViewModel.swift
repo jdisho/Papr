@@ -18,7 +18,7 @@ protocol CollectionCellViewModelType {
     var output: CollectionCellViewModelOutput { get }
 }
 
-class CollectionCellViewModel: CollectionCellViewModelType,
+final class CollectionCellViewModel: CollectionCellViewModelType,
                                 CollectionCellViewModelInput,
                                 CollectionCellViewModelOutput {
 

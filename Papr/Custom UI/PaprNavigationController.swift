@@ -76,11 +76,16 @@ class PaprNavigationController: UINavigationController {
         topViewController?.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
 
         service.getMe()
-            .flatMap { result -> Observable<User> in
-                guard case let .success(user) = result else { return .empty() }
-                profileImage.isHidden = false
-                return .just(user)
+            .map { result -> User? in
+                switch result {
+                case let .success(user):
+                    profileImage.isHidden = false
+                    return user
+                case .failure:
+                    return nil
+                }
             }
+            .unwrap()
             .map { $0.profileImage?.medium }
             .unwrap()
             .mapToURL()

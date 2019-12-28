@@ -25,7 +25,7 @@ protocol AddToCollectionViewModelType {
     var outputs: AddToCollectionViewModelOutput { get }
 }
 
-class AddToCollectionViewModel: AddToCollectionViewModelInput,
+final class AddToCollectionViewModel: AddToCollectionViewModelInput,
                                 AddToCollectionViewModelOutput,
                                 AddToCollectionViewModelType  {
 

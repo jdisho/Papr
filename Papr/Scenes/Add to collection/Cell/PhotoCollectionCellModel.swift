@@ -16,7 +16,7 @@ protocol PhotoCollectionCellModelInput {
 }
 
 protocol PhotoCollectionCellModelOutput {
-    var coverPhotoURL: Observable<String> { get }
+    var coverPhotoURL: Observable<URL> { get }
     var collectionName: Observable<String> { get }
     var isCollectionPrivate: Observable<Bool> { get }
     var isPhotoInCollection: Observable<Bool> { get }
@@ -28,7 +28,7 @@ protocol PhotoCollectionCellModelType {
     var outputs: PhotoCollectionCellModelOutput { get }
 }
 
-class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
+final class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
                                 PhotoCollectionCellModelOutput,
                                 PhotoCollectionCellModelType {
 
@@ -75,7 +75,7 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
     }()
 
     // MARK: Outputs
-    let coverPhotoURL: Observable<String>
+    let coverPhotoURL: Observable<URL>
     let collectionName: Observable<String>
     let isCollectionPrivate: Observable<Bool>
     let isPhotoInCollection: Observable<Bool>
@@ -114,6 +114,7 @@ class PhotoCollectionCellModel: PhotoCollectionCellModelInput,
         coverPhotoURL = photoCollectionStream
             .map { $0.coverPhoto?.urls?.thumb }
             .unwrap()
+            .mapToURL()
 
         collectionName = photoCollectionStream
             .map { $0.title }

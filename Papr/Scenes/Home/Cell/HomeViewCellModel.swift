@@ -16,9 +16,9 @@ protocol HomeViewCellModelInput {
 
 protocol HomeViewCellModelOutput {
     var photoStream: Observable<Photo> { get }
-    var smallPhoto: Observable<String> { get }
-    var regularPhoto: Observable<String> { get }
-    var fullPhoto: Observable<String> { get }
+    var smallPhotoURL: Observable<URL> { get }
+    var regularPhotoURL: Observable<URL> { get }
+    var fullPhotoURL: Observable<URL> { get }
     var photoSize: Observable<(Double, Double)> { get }
     var extraHeight: Observable<Double> { get }
     var headerViewModelType: HomeViewCellHeaderModelType { get }
@@ -30,7 +30,7 @@ protocol HomeViewCellModelType {
     var outputs: HomeViewCellModelOutput { get }
 }
 
-class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeViewCellModelOutput {
+final class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeViewCellModelOutput {
 
     // MARK: Inputs & Outputs
     var inputs: HomeViewCellModelInput { return self }
@@ -48,9 +48,9 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
 
     // MARK: Output
     let photoStream: Observable<Photo>
-    let smallPhoto: Observable<String>
-    let regularPhoto: Observable<String>
-    let fullPhoto: Observable<String>
+    let smallPhotoURL: Observable<URL>
+    let regularPhotoURL: Observable<URL>
+    let fullPhotoURL: Observable<URL>
     let photoSize: Observable<(Double, Double)>
     let extraHeight = Observable<Double>.just(70.0)
 
@@ -74,17 +74,20 @@ class HomeViewCellModel: HomeViewCellModelType, HomeViewCellModelInput, HomeView
         
         photoStream = Observable.just(photo)
 
-        smallPhoto = photoStream
+        smallPhotoURL = photoStream
             .map { $0.urls?.small }
             .unwrap()
+            .mapToURL()
 
-        regularPhoto = photoStream
+        regularPhotoURL = photoStream
             .map { $0.urls?.regular }
             .unwrap()
+            .mapToURL()
 
-        fullPhoto = photoStream
+        fullPhotoURL = photoStream
             .map { $0.urls?.full }
             .unwrap()
+            .mapToURL()
 
         let height = photoStream
             .map { $0.height }

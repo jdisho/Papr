@@ -32,7 +32,7 @@ protocol CollectionsViewModelType {
     var output: CollectionsViewModelOutput { get }
 }
 
-class CollectionsViewModel: CollectionsViewModelType,
+final class CollectionsViewModel: CollectionsViewModelType,
                             CollectionsViewModelInput,
                             CollectionsViewModelOutput {
     // MARK: Inputs & Outputs

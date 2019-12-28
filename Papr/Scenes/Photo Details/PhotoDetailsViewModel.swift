@@ -20,7 +20,7 @@ protocol PhotoDetailsViewModelInput {
 
 protocol PhotoDetailsViewModelOutput {
     var photoStream: Observable<Photo> { get }
-    var regularPhoto: Observable<String> { get }
+    var regularPhotoURL: Observable<URL> { get }
     var photoSize: Observable<(Double, Double)> { get }
     var totalLikes: Observable<String> { get }
     var likedByUser: Observable<Bool> { get }
@@ -33,7 +33,7 @@ protocol PhotoDetailsViewModelType {
     var outputs: PhotoDetailsViewModelOutput { get }
 }
 
-class PhotoDetailsViewModel: PhotoDetailsViewModelType, PhotoDetailsViewModelInput, PhotoDetailsViewModelOutput {
+final class PhotoDetailsViewModel: PhotoDetailsViewModelType, PhotoDetailsViewModelInput, PhotoDetailsViewModelOutput {
 
     // MARK: Inputs & Outputs
     var inputs: PhotoDetailsViewModelInput { return self }
@@ -101,7 +101,7 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType, PhotoDetailsViewModelInp
     }()
 
     // MARK: Outputs
-    let regularPhoto: Observable<String>
+    let regularPhotoURL: Observable<URL>
     let photoSize: Observable<(Double, Double)>
     let totalLikes: Observable<String>
     let likedByUser: Observable<Bool>
@@ -145,9 +145,10 @@ class PhotoDetailsViewModel: PhotoDetailsViewModelType, PhotoDetailsViewModelInp
 
         photoStream = Observable.just(photo)
 
-        regularPhoto = photoStream
+        regularPhotoURL = photoStream
             .map { $0.urls?.regular }
             .unwrap()
+            .mapToURL()
 
         photoSize = Observable.combineLatest(
             photoStream.map { $0.width }.unwrap().map { Double($0) },

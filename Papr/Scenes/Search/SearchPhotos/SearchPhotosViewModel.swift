@@ -25,7 +25,7 @@ protocol SearchPhotosViewModelType {
     var outputs: SearchPhotosViewModelOutput { get }
 }
 
-class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInput, SearchPhotosViewModelOutput {
+final class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewModelInput, SearchPhotosViewModelOutput {
 
     var inputs: SearchPhotosViewModelInput { return self }
     var outputs: SearchPhotosViewModelOutput { return self }

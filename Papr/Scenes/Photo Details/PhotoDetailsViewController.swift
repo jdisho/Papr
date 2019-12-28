@@ -68,12 +68,12 @@ class PhotoDetailsViewController: UIViewController, BindableType {
         dismissButton.rx.action = inputs.dismissAction
 
         outputs.photoStream
-            .map { $0.id ?? "" }
+            .map { $0.id }
+            .unwrap()
             .bind(to: photoImageView.rx.heroId)
             .disposed(by: disposeBag)
         
-        outputs.regularPhoto
-            .mapToURL()
+        outputs.regularPhotoURL
             .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
             .map { $0.image }
             .bind(to: photoImageView.rx.image)

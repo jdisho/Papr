@@ -41,7 +41,7 @@ protocol SearchResultCellModelType {
     var outputs: SearchResultCellModelOutput { get }
 }
 
-class SearchResultCellModel: SearchResultCellModelType,
+final class SearchResultCellModel: SearchResultCellModelType,
                             SearchResultCellModelInput,
                             SearchResultCellModelOutput {
     // MARK: Inputs & Outputs
