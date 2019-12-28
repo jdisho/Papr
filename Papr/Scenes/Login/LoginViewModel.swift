@@ -64,7 +64,7 @@ final class LoginViewModel: NSObject, LoginViewModelInput, LoginViewModelOuput, 
     private let photoService: PhotoServiceType
     private let sceneCoordinator: SceneCoordinatorType
     private var _authSession: Any?
-    @available(iOS 11.0, *)
+   
     private var authSession: ASWebAuthenticationSession? {
         get {
             return _authSession as? ASWebAuthenticationSession
@@ -91,8 +91,8 @@ final class LoginViewModel: NSObject, LoginViewModelInput, LoginViewModelOuput, 
         loginState = loginStateProperty.asObservable()
         buttonName = buttonNameProperty.asObservable()
 
-        // ⛓ 311028: https://unsplash.com/collections/311028/autumn
-        randomPhotos = photoService.randomPhotos(from: ["311028"], isFeatured: true, orientation: .portrait)
+        // ⛓ 446755: https://unsplash.com/collections/446755/baby-its-cold-outside
+        randomPhotos = photoService.randomPhotos(from: ["446755"], isFeatured: true, orientation: .portrait)
 
         super.init()
 
@@ -119,20 +119,17 @@ final class LoginViewModel: NSObject, LoginViewModelInput, LoginViewModelOuput, 
 
 
     private func authenticate() -> Observable<Void> {        
-        if #available(iOS 11.0, *) {
-            self.authSession = ASWebAuthenticationSession(
-                url: authManager.authURL,
-                callbackURLScheme: Papr.Unsplash.callbackURLScheme,
-                completionHandler: { [weak self] (callbackUrl, error) in
-                guard let callbackUrl = callbackUrl else { return }
-                self?.authManager.receivedCodeRedirect(url: callbackUrl)
-            })
-            if #available(iOS 13.0, *) {
-                self.authSession?.presentationContextProvider = self
-
-            }
-            self.authSession?.start()
+        self.authSession = ASWebAuthenticationSession(
+            url: authManager.authURL,
+            callbackURLScheme: Papr.Unsplash.callbackURLScheme,
+            completionHandler: { [weak self] (callbackUrl, error) in
+            guard let callbackUrl = callbackUrl else { return }
+            self?.authManager.receivedCodeRedirect(url: callbackUrl)
+        })
+        if #available(iOS 13.0, *) {
+            self.authSession?.presentationContextProvider = self
         }
+        self.authSession?.start()
         return .empty()
     }
 }
