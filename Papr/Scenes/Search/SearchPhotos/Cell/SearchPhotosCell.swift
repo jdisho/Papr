@@ -55,6 +55,7 @@ class SearchPhotosCell: UICollectionViewCell, BindableType, NibIdentifiable & Cl
                     this.imagePipeline.rx.loadImage(with: URL(string: regular)!).asObservable()
                 )
             }
+            .orEmpty()
             .map { $0.image }
             .execute { [unowned self] _ in
                 self.activityIndicator.stopAnimating()

@@ -75,10 +75,7 @@ class HomeViewCell: UICollectionViewCell, BindableType,  ClassIdentifiable {
                     this.imagePipeline.rx.loadImage(with: URL(string: full)!).asObservable()
                 )
         }
-            .catchError {
-                debugPrint($0.localizedDescription)
-                return .empty()
-            }
+            .orEmpty()
             .map { $0.image }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)

@@ -68,7 +68,9 @@ class LoginViewController: UIViewController, BindableType {
         
         outputs.randomPhotos
             .map { $0.compactMap { $0.urls?.regular } }
-            .mapMany { this.imagePipeline.rx.loadImage(with: URL(string: $0)!).asObservable() }
+            .mapMany {
+                this.imagePipeline.rx.loadImage(with: URL(string: $0)!).asObservable().orEmpty()
+        }
             .mapMany { $0.map { $0.image } }
             .flatMap(Observable.combineLatest)
             .map { UIImage.animatedImage(with: $0, duration: 60.0) }

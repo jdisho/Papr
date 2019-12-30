@@ -66,6 +66,7 @@ class PhotoCollectionViewCell: UICollectionViewCell, BindableType, NibIdentifiab
         outputs.coverPhotoURL
             .mapToURL()
             .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
+            .orEmpty()
             .map { $0.image }
             .execute { [unowned self] _ in
                 self.activityIndicator.stopAnimating()

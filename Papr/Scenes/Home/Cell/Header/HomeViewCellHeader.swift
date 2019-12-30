@@ -53,6 +53,7 @@ class HomeViewCellHeader: UIView, BindableType {
 
         outputs.profileImageURL
             .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
+            .orEmpty()
             .map { $0.image }
             .bind(to: profileImageView.rx.image)
             .disposed(by: disposeBag)

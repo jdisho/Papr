@@ -49,6 +49,7 @@ class UserCell: UITableViewCell, BindableType, NibIdentifiable & ClassIdentifiab
         outputs.profilePhotoURL
             .mapToURL()
             .flatMap { this.imagePipeline.rx.loadImage(with: $0) }
+            .orEmpty()
             .map { $0.image }
             .bind(to: profilePhotoImageView.rx.image)
             .disposed(by: disposeBag)
