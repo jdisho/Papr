@@ -25,9 +25,6 @@ protocol HomeViewModelInput {
 }
 
 protocol HomeViewModelOutput {
-    /// Emits an array of photos for the collectionView
-    var photos: Observable<[Photo]>! { get }
-
     /// Emits a boolean when the pull-to-refresh control is refreshing or not.
     var isRefreshing: Observable<Bool>! { get }
 
@@ -77,7 +74,6 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
     }()
 
     // MARK: Output
-    var photos: Observable<[Photo]>!
     var isRefreshing: Observable<Bool>!
     var orderBy: Observable<OrderBy>!
 
@@ -101,6 +97,7 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
     private let sceneCoordinator: SceneCoordinatorType
     private let refreshProperty = BehaviorSubject<Bool>(value: true)
     private let orderByProperty = BehaviorSubject<OrderBy>(value: .latest)
+    private var photos: Observable<[Photo]>!
 
     // MARK: Init
     init(cache: Cache = Cache.shared,
@@ -119,50 +116,37 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
 
         let requestFirst = Observable
             .combineLatest(isRefreshing, orderBy)
-            .flatMapLatest { isRefreshing, orderBy -> Observable<[Photo]> in
+            .flatMapLatest { isRefreshing, orderBy -> Observable<Result<[Photo], Papr.Error>> in
                 guard isRefreshing else { return .empty() }
-                return service.photos(
-                    byPageNumber: 1,
-                    orderBy: orderBy)
-                    .flatMap { [unowned self] result -> Observable<[Photo]> in
-                        switch result {
-                        case let .success(photos):
-                            return .just(photos)
-                        case let .failure(error):
-                            self.alertAction.execute(error)
-                            self.refreshProperty.onNext(false)
-                            return .empty()
-                        }
-                    }
+                return service.photos(byPageNumber: 1, orderBy: orderBy)
             }
-            .execute { [unowned self] _ in
-                self.refreshProperty.onNext(false)
+            .execute { [weak self] _ in
                 photoArray = []
                 currentPageNumber = 1
+                self?.refreshProperty.onNext(false)
             }
 
         let requestNext = Observable
             .combineLatest(loadMore, orderBy)
-            .flatMapLatest { loadMore, orderBy -> Observable<[Photo]> in
-                guard loadMore else { return .empty() }
+            .flatMapLatest { isLoading, orderBy -> Observable<Result<[Photo], Papr.Error>> in
+                guard isLoading else { return .empty() }
                 currentPageNumber += 1
-                return service.photos(
-                    byPageNumber: currentPageNumber,
-                    orderBy: orderBy)
-                    .flatMap { [unowned self] result -> Observable<[Photo]> in
-                        switch result {
-                        case let .success(photos):
-                            return .just(photos)
-                        case let .failure(error):
-                            self.alertAction.execute(error)
-                            self.refreshProperty.onNext(false)
-                            return .empty()
-                        }
-                    }
+                return service.photos(byPageNumber: currentPageNumber, orderBy: orderBy)
             }
 
         photos = requestFirst
             .merge(with: requestNext)
+            .map { [weak self] result -> [Photo]? in
+                switch result {
+                case let .success(photos):
+                    return photos
+                case let .failure(error):
+                    self?.alertAction.execute(error)
+                    self?.refreshProperty.onNext(false)
+                    return nil
+                }
+            }
+            .unwrap()
             .map { photos -> [Photo] in
                 photos.forEach { photoArray.append($0) }
                 return photoArray
