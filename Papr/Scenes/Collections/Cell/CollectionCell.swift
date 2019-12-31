@@ -79,6 +79,7 @@ class CollectionCell: UICollectionViewCell, BindableType, NibIdentifiable & Clas
                     this.imagePipeline.rx.loadImage(with: URL(string: regular)!).asObservable()
                 )
             }
+            .orEmpty()
             .map { $0.image }
             .bind(to: photoCollectionImagePreview.rx.image)
             .disposed(by: disposeBag)

@@ -90,6 +90,7 @@ class PaprNavigationController: UINavigationController {
             .unwrap()
             .mapToURL()
             .flatMap { PaprNavigationController.imagePipeline.rx.loadImage(with: $0) }
+            .orEmpty()
             .map { $0.image }
             .bind(to: profileImage.rx.image)
             .disposed(by: disposeBag)

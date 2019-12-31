@@ -43,6 +43,12 @@ extension ObservableType {
         return Observable.merge(self.asObservable(), other)
     }
     
+    func orEmpty() -> Observable<Element> {
+        return catchError { _ in
+            return .empty()
+        }
+    }
+    
 }
 extension Observable where Element == String {
     func mapToURL() -> Observable<URL> {

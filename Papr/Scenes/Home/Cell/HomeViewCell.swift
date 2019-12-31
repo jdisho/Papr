@@ -74,7 +74,8 @@ class HomeViewCell: UICollectionViewCell, BindableType,  ClassIdentifiable {
                     this.imagePipeline.rx.loadImage(with: regularPhotoURL).asObservable(),
                     this.imagePipeline.rx.loadImage(with: fullPhotoURL).asObservable()
                 )
-            }
+        }
+            .orEmpty()
             .map { $0.image }
             .bind(to: photoImageView.rx.image)
             .disposed(by: disposeBag)
