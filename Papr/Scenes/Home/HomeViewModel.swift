@@ -82,18 +82,17 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
     var orderBy: Observable<OrderBy>!
 
     lazy var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> = {
-        return Observable.combineLatest(photos, cache.getAllObjects(ofType: Photo.self)).map { photos, cachedPhotos -> [Photo] in
-            let cachedPhotos = cachedPhotos.filter { cachedPhoto in
-                photos.map { $0.identifier == cachedPhoto.identifier }.contains(true)
+        return Observable.combineLatest(photos, cache.getAllObjects(ofType: Photo.self))
+            .map { photos, cachedPhotos -> [Photo] in
+                let cachedPhotos = cachedPhotos.filter { photos.contains($0) }
+                return zip(photos, cachedPhotos).map { photo, cachedPhoto -> Photo in
+                    var photo = photo
+                    photo.likes = cachedPhoto.likes
+                    photo.likedByUser = cachedPhoto.likedByUser
+                    return photo
+                }
             }
-            return zip(photos, cachedPhotos).map { photo, cachedPhoto -> Photo in
-                var copyPhoto = photo
-                copyPhoto.likes = cachedPhoto.likes
-                copyPhoto.likedByUser = cachedPhoto.likedByUser
-                return copyPhoto
-            }
-        }
-        .mapMany { HomeViewCellModel(photo: $0) }
+            .mapMany { HomeViewCellModel(photo: $0) }
     }()
 
     // MARK: Private

@@ -48,18 +48,17 @@ final class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewMo
     // MARK: - Outputs
     let navTitle: Observable<String>
     lazy var searchPhotosCellModelType: Observable<[SearchPhotosCellModelType]> = {
-        return Observable.combineLatest(photos, cache.getAllObjects(ofType: Photo.self)).map { photos, cachedPhotos -> [Photo] in
-            let cachedPhotos = cachedPhotos.filter { cachedPhoto in
-                photos.map { $0.identifier == cachedPhoto.identifier }.contains(true)
+        return Observable.combineLatest(photos, cache.getAllObjects(ofType: Photo.self))
+            .map { photos, cachedPhotos -> [Photo] in
+                let cachedPhotos = cachedPhotos.filter { photos.contains($0) }
+                return zip(photos, cachedPhotos).map { photo, cachedPhoto -> Photo in
+                    var photo = photo
+                    photo.likes = cachedPhoto.likes
+                    photo.likedByUser = cachedPhoto.likedByUser
+                    return photo
+                }
             }
-            return zip(photos, cachedPhotos).map { photo, cachedPhoto -> Photo in
-                var copyPhoto = photo
-                copyPhoto.likes = cachedPhoto.likes
-                copyPhoto.likedByUser = cachedPhoto.likedByUser
-                return copyPhoto
-            }
-        }
-        .mapMany { SearchPhotosCellModel(photo: $0) }
+            .mapMany { SearchPhotosCellModel(photo: $0) }
     }()
 
     // MARK: - Private
@@ -92,7 +91,6 @@ final class SearchPhotosViewModel: SearchPhotosViewModelType, SearchPhotosViewMo
                 .searchPhotos(with: searchQuery, pageNumber: 1)
                 .map { $0.results }
                 .unwrap()
-
 
             requestNext = loadMore.asObservable()
                 .flatMapLatest { loadMore -> Observable<[Photo]> in

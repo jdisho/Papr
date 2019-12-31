@@ -50,26 +50,29 @@ struct Photo: Codable {
     }
 }
 
+extension Photo: Equatable {
+    static func ==(lhs: Photo, rhs: Photo) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
 extension Photo: IdentifiableType {
     typealias Identity = String
     
     var identity: Identity {
-        guard id != nil else { return "" }
-        return id!
-    }
-}
-
-extension Photo: Equatable {
-    static func ==(lhs: Photo, rhs: Photo) -> Bool {
-        return lhs.id == rhs.id && 
-                lhs.created == rhs.created && 
-                lhs.user?.id == rhs.user?.id
+       guard let id = id else {
+            fatalError("The photo id shouldn't be nil")
+        }
+        return id
     }
 }
 
 extension Photo: Cachable {
     var identifier: String {
-        return id ?? ""
+        guard let id = id else {
+            fatalError("The photo id shouldn't be nil")
+        }
+        return id
     }
 }
 
