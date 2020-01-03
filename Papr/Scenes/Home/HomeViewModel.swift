@@ -26,10 +26,10 @@ protocol HomeViewModelInput {
 
 protocol HomeViewModelOutput {
     /// Emits a boolean when the pull-to-refresh control is refreshing or not.
-    var isRefreshing: Observable<Bool>! { get }
+    var isRefreshing: Observable<Bool> { get }
 
     /// Emits an OrderBy value when an OrderBy option is chosen.
-    var orderBy: Observable<OrderBy>! { get }
+    var orderBy: Observable<OrderBy> { get }
 
     /// Emites the child viewModels
     var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> { get }
@@ -74,8 +74,8 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
     }()
 
     // MARK: Output
-    var isRefreshing: Observable<Bool>!
-    var orderBy: Observable<OrderBy>!
+    let isRefreshing: Observable<Bool>
+    let orderBy: Observable<OrderBy>
 
     lazy var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> = {
         return Observable.combineLatest(photos, cache.getAllObjects(ofType: Photo.self))
