@@ -17,9 +17,6 @@ protocol HomeViewModelInput {
     /// Call when an OrderBy value is invoked
     var orderByAction: Action<OrderBy, Void> { get }
     
-    /// Call when an alert is invoked
-    var alertAction: Action<Papr.Error, Void> { get }
-    
     /// Call when pull-to-refresh is invoked
     func refresh()
 }
@@ -60,16 +57,6 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
                 self.orderByProperty.onNext(.latest)
             self.refresh()
             return .empty()
-        }
-    }()
-
-    lazy var alertAction: Action<Papr.Error, Void> = {
-        Action<Papr.Error, Void> { [unowned self] error in
-            let alertViewModel = AlertViewModel(
-                title: "Upsss...",
-                message: error.errorDescription,
-                mode: .ok)
-            return self.sceneCoordinator.transition(to: Scene.alert(alertViewModel))
         }
     }()
 
@@ -141,7 +128,11 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
                 case let .success(photos):
                     return photos
                 case let .failure(error):
-                    self?.alertAction.execute(error)
+                    let alertViewModel = AlertViewModel(
+                        title: "Upsss...",
+                        message: error.errorDescription,
+                        mode: .ok)
+                    sceneCoordinator.transition(to: Scene.alert(alertViewModel))
                     self?.refreshProperty.onNext(false)
                     return nil
                 }
