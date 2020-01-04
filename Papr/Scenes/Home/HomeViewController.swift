@@ -88,18 +88,18 @@ class HomeViewController: UIViewController, BindableType {
             .bind(to: refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
 
-        outputs.isRefreshing
+        Observable.merge(outputs.isRefreshing, outputs.isLoadingMore)
             .negate()
             .bind(to: rightBarButtonItem.rx.isEnabled)
             .disposed(by: disposeBag)
-
+        
         outputs.homeViewCellModelTypes
             .map { [HomeSectionModel(model: "", items: $0)] }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
 
         collectionView.rx.reachedBottom()
-            .bind(to: inputs.loadMore)
+            .bind(to: inputs.loadMoreProperty)
             .disposed(by: disposeBag)
     }
 

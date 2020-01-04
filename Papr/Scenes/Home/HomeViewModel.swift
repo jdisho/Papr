@@ -12,7 +12,7 @@ import Action
 
 protocol HomeViewModelInput {
     /// Call when the bottom of the list is reached
-    var loadMore: BehaviorSubject<Bool> { get }
+    var loadMoreProperty: BehaviorSubject<Bool> { get }
 
     /// Call when an OrderBy value is invoked
     var orderByAction: Action<OrderBy, Void> { get }
@@ -24,6 +24,9 @@ protocol HomeViewModelInput {
 protocol HomeViewModelOutput {
     /// Emits a boolean when the pull-to-refresh control is refreshing or not.
     var isRefreshing: Observable<Bool> { get }
+    
+    /// Emits a boolean when the content is loading or not.
+    var isLoadingMore: Observable<Bool> { get }
 
     /// Emits an OrderBy value when an OrderBy option is chosen.
     var orderBy: Observable<OrderBy> { get }
@@ -44,7 +47,7 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
     var outputs: HomeViewModelOutput { return self }
 
     // MARK: Input
-    let loadMore = BehaviorSubject<Bool>(value: false)
+    let loadMoreProperty = BehaviorSubject<Bool>(value: false)
 
     func refresh() {
         refreshProperty.onNext(true)
@@ -62,6 +65,7 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
 
     // MARK: Output
     let isRefreshing: Observable<Bool>
+    let isLoadingMore: Observable<Bool>
     let orderBy: Observable<OrderBy>
 
     lazy var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> = {
@@ -98,8 +102,9 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
         var currentPageNumber = 1
         var photoArray = [Photo]([])
     
-        isRefreshing = refreshProperty.asObservable()
-        orderBy = orderByProperty.asObservable()
+        isRefreshing = refreshProperty
+        isLoadingMore = loadMoreProperty
+        orderBy = orderByProperty
 
         let requestFirst = Observable
             .combineLatest(isRefreshing, orderBy)
@@ -114,9 +119,9 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
             }
 
         let requestNext = Observable
-            .combineLatest(loadMore, orderBy)
-            .flatMapLatest { isLoading, orderBy -> Observable<Result<[Photo], Papr.Error>> in
-                guard isLoading else { return .empty() }
+            .combineLatest(isLoadingMore, orderBy)
+            .flatMapLatest { isLoadingMore, orderBy -> Observable<Result<[Photo], Papr.Error>> in
+                guard isLoadingMore else { return .empty() }
                 currentPageNumber += 1
                 return service.photos(byPageNumber: currentPageNumber, orderBy: orderBy)
             }
