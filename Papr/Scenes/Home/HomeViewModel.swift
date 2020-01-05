@@ -11,14 +11,14 @@ import RxSwift
 import Action
 
 protocol HomeViewModelInput {
+    /// Call when the pull-to-refresh is invoked
+    var refreshProperty: BehaviorSubject<Bool> { get }
+    
     /// Call when the bottom of the list is reached
     var loadMoreProperty: BehaviorSubject<Bool> { get }
 
     /// Call when an OrderBy value is invoked
-    var orderByAction: Action<OrderBy, Void> { get }
-    
-    /// Call when pull-to-refresh is invoked
-    func refresh()
+    var orderByProperty: BehaviorSubject<OrderBy> { get }
 }
 
 protocol HomeViewModelOutput {
@@ -27,9 +27,12 @@ protocol HomeViewModelOutput {
     
     /// Emits a boolean when the content is loading or not.
     var isLoadingMore: Observable<Bool> { get }
-
-    /// Emits an OrderBy value when an OrderBy option is chosen.
-    var orderBy: Observable<OrderBy> { get }
+    
+    /// Emits an OrderBy value when an OrderBy option is chosen
+    var isOrderBy: Observable<OrderBy> { get }
+    
+    /// Emits a boolean  when the first page is loaded
+    var isFirstPageLoaded: Observable<Bool> { get }
 
     /// Emites the child viewModels
     var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> { get }
@@ -47,48 +50,21 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
     var outputs: HomeViewModelOutput { return self }
 
     // MARK: Input
+    let refreshProperty = BehaviorSubject<Bool>(value: true)
     let loadMoreProperty = BehaviorSubject<Bool>(value: false)
-
-    func refresh() {
-        refreshProperty.onNext(true)
-    }
-    
-    lazy var orderByAction: Action<OrderBy, Void> = {
-        Action<OrderBy, Void> { [unowned self] orderBy in
-            orderBy == .latest ?
-                self.orderByProperty.onNext(.popular) :
-                self.orderByProperty.onNext(.latest)
-            self.refresh()
-            return .empty()
-        }
-    }()
+    let orderByProperty = BehaviorSubject<OrderBy>(value: .latest)
 
     // MARK: Output
     let isRefreshing: Observable<Bool>
     let isLoadingMore: Observable<Bool>
-    let orderBy: Observable<OrderBy>
-
-    lazy var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> = {
-        return Observable.combineLatest(photos, cache.getAllObjects(ofType: Photo.self))
-            .map { photos, cachedPhotos -> [Photo] in
-                let cachedPhotos = cachedPhotos.filter { photos.contains($0) }
-                return zip(photos, cachedPhotos).map { photo, cachedPhoto -> Photo in
-                    var photo = photo
-                    photo.likes = cachedPhoto.likes
-                    photo.likedByUser = cachedPhoto.likedByUser
-                    return photo
-                }
-            }
-            .mapMany { HomeViewCellModel(photo: $0) }
-    }()
+    let isOrderBy: Observable<OrderBy>
+    let isFirstPageLoaded: Observable<Bool>
+    let homeViewCellModelTypes: Observable<[HomeViewCellModelType]>
 
     // MARK: Private
     private let cache: Cache
     private let service: PhotoServiceType
     private let sceneCoordinator: SceneCoordinatorType
-    private let refreshProperty = BehaviorSubject<Bool>(value: true)
-    private let orderByProperty = BehaviorSubject<OrderBy>(value: .latest)
-    private var photos: Observable<[Photo]>!
 
     // MARK: Init
     init(cache: Cache = Cache.shared,
@@ -101,34 +77,31 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
 
         var currentPageNumber = 1
         var photoArray = [Photo]([])
-    
-        isRefreshing = refreshProperty
-        isLoadingMore = loadMoreProperty
-        orderBy = orderByProperty
 
-        let requestFirst = Observable
-            .combineLatest(isRefreshing, orderBy)
+        let firstResult = Observable
+            .combineLatest(refreshProperty, orderByProperty)
             .flatMapLatest { isRefreshing, orderBy -> Observable<Result<[Photo], Papr.Error>> in
                 guard isRefreshing else { return .empty() }
-                return service.photos(byPageNumber: 1, orderBy: orderBy)
+                return service.photos(byPageNumber: nil, orderBy: orderBy)
             }
-            .execute { [weak self] _ in
+            .execute { _ in
                 photoArray = []
                 currentPageNumber = 1
-                self?.refreshProperty.onNext(false)
             }
+            .share()
 
-        let requestNext = Observable
-            .combineLatest(isLoadingMore, orderBy)
+        let nextResult = Observable
+            .combineLatest(loadMoreProperty, orderByProperty)
             .flatMapLatest { isLoadingMore, orderBy -> Observable<Result<[Photo], Papr.Error>> in
                 guard isLoadingMore else { return .empty() }
                 currentPageNumber += 1
                 return service.photos(byPageNumber: currentPageNumber, orderBy: orderBy)
             }
+            .share()
 
-        photos = requestFirst
-            .merge(with: requestNext)
-            .map { [weak self] result -> [Photo]? in
+        let requestedPhotos = firstResult
+            .merge(with: nextResult)
+            .map { result -> [Photo]? in
                 switch result {
                 case let .success(photos):
                     return photos
@@ -138,7 +111,6 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
                         message: error.errorDescription,
                         mode: .ok)
                     sceneCoordinator.transition(to: Scene.alert(alertViewModel))
-                    self?.refreshProperty.onNext(false)
                     return nil
                 }
             }
@@ -147,5 +119,22 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
                 photos.forEach { photoArray.append($0) }
                 return photoArray
             }
+        
+        isRefreshing = refreshProperty
+        isLoadingMore = loadMoreProperty
+        isOrderBy = orderByProperty
+        isFirstPageLoaded = firstResult.map { _ in true }
+        
+        homeViewCellModelTypes = Observable.combineLatest(requestedPhotos, cache.getAllObjects(ofType: Photo.self))
+            .map { photos, cachedPhotos -> [Photo] in
+                let cachedPhotos = cachedPhotos.filter { photos.contains($0) }
+                return zip(photos, cachedPhotos).map { photo, cachedPhoto -> Photo in
+                    var photo = photo
+                    photo.likes = cachedPhoto.likes
+                    photo.likedByUser = cachedPhoto.likedByUser
+                    return photo
+                }
+            }
+            .mapMany { HomeViewCellModel(photo: $0) }
     }
 }

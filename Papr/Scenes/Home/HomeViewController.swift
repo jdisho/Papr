@@ -57,49 +57,55 @@ class HomeViewController: UIViewController, BindableType {
         configureNavigationController()
         configureCollectionView()
         configureRefreshControl()
-        refresh()
     }
 
     // MARK: BindableType
     func bindViewModel() {
         let inputs = viewModel.inputs
         let outputs = viewModel.outputs
-
-        outputs.orderBy
-            .bind { [weak self] in
-                self?.rightBarButtonItem.rx.bind(to: inputs.orderByAction, input: $0)
+        let rightBarButtonItemTap = rightBarButtonItem.rx.tap.share()
+        
+        rightBarButtonItemTap
+            .count()
+            .map { _, count -> OrderBy in
+                return count % 2 == 0 ? .latest : .popular
             }
+            .bind(to: inputs.orderByProperty)
             .disposed(by: disposeBag)
 
-        outputs.orderBy
+        rightBarButtonItemTap
+            .merge(with: refreshControl.rx.controlEvent(.valueChanged).asObservable())
+            .map { _ in true }
+            .bind(to: inputs.refreshProperty)
+            .disposed(by: disposeBag)
+        
+        collectionView.rx.reachedBottom()
+            .bind(to: inputs.loadMoreProperty)
+            .disposed(by: disposeBag)
+        
+        outputs.isOrderBy
             .map { $0 == .popular ? Papr.Appearance.Icon.flame : Papr.Appearance.Icon.arrowUpRight }
             .bind(to: rightBarButtonItem.rx.image)
             .disposed(by: disposeBag)
-
-        outputs.isRefreshing
-            .execute { [weak self] isRefreshing in
-                if isRefreshing {
-                    self?.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
-                    self?.collectionView.setContentOffset(CGPoint(x: 0.0, y: -(self?.refreshControl.frame.height ?? 0.0)), animated: true)
-                } else {
-                    self?.collectionView.setContentOffset(.zero, animated: true)
-                }
-            }
-            .bind(to: refreshControl.rx.isRefreshing)
+        
+        outputs.isFirstPageLoaded
+            .negate()
+            .bind(to: inputs.refreshProperty)
             .disposed(by: disposeBag)
 
-        Observable.merge(outputs.isRefreshing, outputs.isLoadingMore)
+        outputs.isRefreshing
+            .merge(with: outputs.isLoadingMore)
             .negate()
             .bind(to: rightBarButtonItem.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        outputs.isRefreshing
+            .bind(to: refreshControl.rx.isRefreshing(in: collectionView))
             .disposed(by: disposeBag)
         
         outputs.homeViewCellModelTypes
             .map { [HomeSectionModel(model: "", items: $0)] }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
-
-        collectionView.rx.reachedBottom()
-            .bind(to: inputs.loadMoreProperty)
             .disposed(by: disposeBag)
     }
 
@@ -115,17 +121,12 @@ class HomeViewController: UIViewController, BindableType {
         collectionView.add(to: view).pinToEdges()
         collectionView.register(cellType: HomeViewCell.self)
         dataSource = RxCollectionViewSectionedReloadDataSource<HomeSectionModel>(
-            configureCell:  collectionViewDataSource
+            configureCell: collectionViewDataSource
         )
     }
 
     private func configureRefreshControl() {
         refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         collectionView.addSubview(refreshControl)
-    }
-
-    @objc private func refresh() {
-        viewModel.inputs.refresh()
     }
 }
