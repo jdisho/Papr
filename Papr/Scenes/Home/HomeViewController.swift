@@ -66,9 +66,8 @@ class HomeViewController: UIViewController, BindableType {
         let rightBarButtonItemTap = rightBarButtonItem.rx.tap.share()
         
         rightBarButtonItemTap
-            .count()
-            .map { _, count -> OrderBy in
-                return count % 2 == 0 ? .latest : .popular
+            .scan(into: OrderBy.latest) { result, _ in
+                result = (result == .latest) ? .popular : .latest
             }
             .bind(to: inputs.orderByProperty)
             .disposed(by: disposeBag)
