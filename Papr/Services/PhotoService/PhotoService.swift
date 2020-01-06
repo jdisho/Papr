@@ -65,12 +65,12 @@ struct PhotoService: PhotoServiceType {
     }
     
     func photos(
-        byPageNumber pageNumber: Int = 1,
-        orderBy: OrderBy = .latest
+        byPageNumber pageNumber: Int? = nil,
+        orderBy: OrderBy? = nil
         ) -> Observable<Result<[Photo], Papr.Error>> {
 
         let photos: Unsplash = .photos(page: pageNumber, perPage: nil, orderBy: orderBy)
-
+        
         return unsplash.rx.request(resource: photos)
             .map(to: [Photo].self)
             .asObservable()

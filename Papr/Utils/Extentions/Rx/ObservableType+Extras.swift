@@ -49,6 +49,10 @@ extension ObservableType {
         }
     }
     
+    func map<T>(to value: T) -> Observable<T> {
+        return map { _ in value }
+    }
+    
 }
 extension Observable where Element == String {
     func mapToURL() -> Observable<URL> {

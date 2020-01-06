@@ -37,7 +37,7 @@ final class Cache  {
     private let storageStream = PublishSubject<[(key: CacheKey, value: Any)]>()
     private var storage = [(key: CacheKey, value: Any)]()
 
-    init() { }
+    private init() {}
 
     func set<T: Cachable>(value: T) {
         storage.insert(value)

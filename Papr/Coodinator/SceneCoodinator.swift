@@ -72,7 +72,7 @@ class SceneCoordinator: NSObject, SceneCoordinatorType {
 
             _ = navigationController.rx.delegate
                 .sentMessage(#selector(UINavigationControllerDelegate.navigationController(_:didShow:animated:)))
-                .map { _ in }
+                .ignoreAll()
                 .bind(to: subject)
 
             navigationController.pushViewController(SceneCoordinator.actualViewController(for: viewController), animated: true)
