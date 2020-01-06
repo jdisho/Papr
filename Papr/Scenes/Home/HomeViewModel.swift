@@ -123,7 +123,7 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
         isRefreshing = refreshProperty
         isLoadingMore = loadMoreProperty
         isOrderBy = orderByProperty
-        isFirstPageLoaded = firstResult.map { _ in true }
+        isFirstPageLoaded = firstResult.map(to: true)
         
         homeViewCellModelTypes = Observable.combineLatest(requestedPhotos, cache.getAllObjects(ofType: Photo.self))
             .map { photos, cachedPhotos -> [Photo] in

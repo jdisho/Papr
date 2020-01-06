@@ -75,7 +75,7 @@ class HomeViewController: UIViewController, BindableType {
 
         rightBarButtonItemTap
             .merge(with: refreshControl.rx.controlEvent(.valueChanged).asObservable())
-            .map { _ in true }
+            .map(to: true)
             .bind(to: inputs.refreshProperty)
             .disposed(by: disposeBag)
         

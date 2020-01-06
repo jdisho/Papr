@@ -844,7 +844,7 @@
 				TargetAttributes = {
 					DCBB1B1D1FA7B1BD004E95F0 = {
 						CreatedOnToolsVersion = 9.0.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					DCBB1B311FA7B1BD004E95F0 = {
 						CreatedOnToolsVersion = 9.0.1;
@@ -1254,7 +1254,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Papr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -1273,7 +1273,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Papr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
