@@ -31,8 +31,8 @@ protocol HomeViewModelOutput {
     /// Emits an OrderBy value when an OrderBy option is chosen
     var isOrderBy: Observable<OrderBy> { get }
     
-    /// Emits a boolean  when the first page is loaded
-    var isFirstPageLoaded: Observable<Bool> { get }
+    /// Emits a boolean  when the first page is requested
+    var isFirstPageRequested: Observable<Bool> { get }
 
     /// Emites the child viewModels
     var homeViewCellModelTypes: Observable<[HomeViewCellModelType]> { get }
@@ -58,7 +58,7 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
     let isRefreshing: Observable<Bool>
     let isLoadingMore: Observable<Bool>
     let isOrderBy: Observable<OrderBy>
-    let isFirstPageLoaded: Observable<Bool>
+    let isFirstPageRequested: Observable<Bool>
     let homeViewCellModelTypes: Observable<[HomeViewCellModelType]>
 
     // MARK: Private
@@ -123,7 +123,7 @@ final class HomeViewModel: HomeViewModelType, HomeViewModelInput, HomeViewModelO
         isRefreshing = refreshProperty
         isLoadingMore = loadMoreProperty
         isOrderBy = orderByProperty
-        isFirstPageLoaded = firstResult.map(to: true)
+        isFirstPageRequested = firstResult.map(to: true)
         
         homeViewCellModelTypes = Observable.combineLatest(requestedPhotos, cache.getAllObjects(ofType: Photo.self))
             .map { photos, cachedPhotos -> [Photo] in

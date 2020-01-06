@@ -87,7 +87,7 @@ class HomeViewController: UIViewController, BindableType {
             .bind(to: rightBarButtonItem.rx.image)
             .disposed(by: disposeBag)
         
-        outputs.isFirstPageLoaded
+        outputs.isFirstPageRequested
             .negate()
             .bind(to: inputs.refreshProperty)
             .disposed(by: disposeBag)
